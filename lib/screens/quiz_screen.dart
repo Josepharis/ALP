@@ -152,7 +152,6 @@ class _QuizScreenState extends State<QuizScreen>
           ),
           margin: const EdgeInsets.all(16),
           duration: const Duration(seconds: 3),
-          elevation: 6,
           animation: CurvedAnimation(
             parent: const AlwaysStoppedAnimation(1),
             curve: Curves.easeOutCirc,
@@ -839,35 +838,73 @@ class _QuizScreenState extends State<QuizScreen>
     final int totalQuestions = widget.questions.length;
     final double percentage = (totalScore / totalQuestions) * 100;
 
-    // Quiz'i tamamla
-    _quizService.completeQuiz(
-      widget.categoryName,
-      totalScore,
-      totalQuestions,
-      quizId: widget.quizId,
+    print(
+      'Quiz tamamlandı: Skor=$totalScore/$totalQuestions, Başarı=%${percentage.toStringAsFixed(0)}',
     );
 
-    if (widget.isMistakesMode) {
-      // Eksikler modunda quiz tamamlandığında direkt geri dön
-      Navigator.pop(context);
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Pratik tamamlandı!'),
-          backgroundColor: Colors.green,
-        ),
+    // Quiz'i tamamla
+    _onCompleteQuiz();
+  }
+
+  // Quiz tamamlandığında yapılacak işlemler
+  Future<void> _onCompleteQuiz() async {
+    try {
+      print(
+        'Quiz tamamlanıyor: kategori=${widget.categoryName}, skor=$score/${widget.questions.length}',
       );
-    } else {
-      // Normal quiz modunda sonuç sayfasına git
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder:
-              (context) => QuizResultScreen(
-                categoryName: widget.categoryName,
-                score: totalScore,
-                totalQuestions: totalQuestions,
-              ),
-        ),
+      final result = await _quizService.completeQuiz(
+        widget.categoryName,
+        score,
+        widget.questions.length,
+        quizId: widget.quizId,
+      );
+
+      if (!mounted) return;
+
+      if (result) {
+        print('Quiz başarıyla tamamlandı ve veritabanına kaydedildi');
+
+        // EventBus ile bildirim gönder (ana sayfayı yenilemek için)
+        EventBus().fireMistakesUpdated(true);
+        print("Quiz tamamlandı bildirimi gönderildi - Ana sayfa yenilenecek");
+
+        if (widget.isMistakesMode) {
+          // Eksikler modunda direkt geri dön
+          Navigator.pop(context);
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Pratik tamamlandı!'),
+              backgroundColor: Colors.green,
+            ),
+          );
+        } else {
+          // Normal quiz modunda sonuç sayfasına git
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder:
+                  (context) => QuizResultScreen(
+                    categoryName: widget.categoryName,
+                    score: score,
+                    totalQuestions: widget.questions.length,
+                  ),
+            ),
+          );
+        }
+      } else {
+        print('HATA: Quiz tamamlanamadı veya veritabanına kaydedilemedi');
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Quiz tamamlanırken bir hata oluştu'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    } catch (e) {
+      print('_onCompleteQuiz hatası: $e');
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Hata: $e'), backgroundColor: Colors.red),
       );
     }
   }

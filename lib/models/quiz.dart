@@ -14,6 +14,7 @@ class Quiz {
   final List<Question>? questions;
   final int? currentQuestionIndex;
   final int? score;
+  final double? successRate;
 
   Quiz({
     required this.id,
@@ -28,6 +29,7 @@ class Quiz {
     this.questions,
     this.currentQuestionIndex,
     this.score,
+    this.successRate,
   });
 
   factory Quiz.fromFirestore(
@@ -50,6 +52,7 @@ class Quiz {
       questions: questionsList,
       currentQuestionIndex: data['currentQuestionIndex'],
       score: data['score'],
+      successRate: data['successRate'],
     );
   }
 
@@ -66,6 +69,7 @@ class Quiz {
           createdAt != null ? Timestamp.fromDate(createdAt!) : Timestamp.now(),
       'currentQuestionIndex': currentQuestionIndex,
       'score': score,
+      'successRate': successRate,
     };
   }
 

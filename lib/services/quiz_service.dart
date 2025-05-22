@@ -273,39 +273,123 @@ class QuizService {
     try {
       final userId = _authService.currentUser?.uid;
       if (userId == null) {
-        throw Exception('Kullanıcı giriş yapmamış');
+        print('getCompletedQuizzes hatası: Kullanıcı giriş yapmamış');
+        return [];
       }
+
+      print('Tamamlanan quizler getiriliyor...');
+
+      // Öncelikle doğrudan user_completed_quizzes koleksiyonundan verileri çekelim
+      print('user_completed_quizzes koleksiyonundan veriler alınıyor...');
+      final querySnapshot =
+          await _firestore
+              .collection('user_completed_quizzes')
+              .where('userId', isEqualTo: userId)
+              .orderBy(
+                'completedAt',
+                descending: true,
+              ) // En son tamamlananlar önce
+              .get();
+
+      print('Sorgu sonucu belge sayısı: ${querySnapshot.docs.length}');
+
+      List<Quiz> completedQuizzes = [];
+
+      if (querySnapshot.docs.isNotEmpty) {
+        print('user_completed_quizzes koleksiyonunda veriler bulundu');
+
+        for (var doc in querySnapshot.docs) {
+          final data = doc.data();
+          print('Belge: ${doc.id}, Data: $data');
+
+          final quizId = data['quizId'] as String? ?? '';
+          final categoryName = data['categoryName'] as String? ?? 'Quiz';
+          final completedAt =
+              (data['completedAt'] as Timestamp?)?.toDate() ?? DateTime.now();
+          final score = data['score'] as int? ?? 0;
+          final totalQuestions = data['totalQuestions'] as int? ?? 0;
+          final successRate = data['successRate'] as num? ?? 0;
+
+          // Quiz nesnesini oluştur
+          final quiz = Quiz(
+            id: quizId,
+            name: categoryName,
+            totalQuestions: totalQuestions,
+            score: score,
+            successRate: successRate.toDouble(),
+            currentQuestionIndex:
+                totalQuestions, // Tamamlandığı için tüm sorular tamamlanmış
+            createdAt: completedAt,
+          );
+
+          completedQuizzes.add(quiz);
+        }
+
+        print(
+          'Tamamlanan quizler başarıyla yüklendi: ${completedQuizzes.length}',
+        );
+        return completedQuizzes;
+      }
+
+      // Eğer user_completed_quizzes koleksiyonunda veri bulunamazsa, eski yöntemle devam et
+      print(
+        'user_completed_quizzes koleksiyonunda veri bulunamadı, eski yönteme geçiliyor...',
+      );
 
       final userActivityDoc =
           await _firestore.collection('userActivities').doc(userId).get();
 
       if (!userActivityDoc.exists) {
+        print('userActivities belgesinde de veri bulunamadı');
         return [];
       }
 
       final userActivity = UserActivity.fromFirestore(userActivityDoc);
 
-      List<Quiz> completedQuizzes = [];
       for (var entry in userActivity.quizProgress.entries) {
         final quizId = entry.key;
         final progress = entry.value;
 
         // Sadece tamamlanmış quizleri getir
         if (progress.isCompleted) {
-          final quizDoc =
-              await _firestore.collection('quizzes').doc(quizId).get();
+          print('QuizProgress içinde tamamlanmış quiz bulundu: $quizId');
 
-          if (quizDoc.exists) {
-            final quiz = Quiz.fromFirestore(
-              quizDoc,
-              totalQuestions: progress.totalQuestions,
-            );
-
-            completedQuizzes.add(quiz);
+          // Quiz nesnesini oluşturma - quizId'den kategori adını çıkar
+          String categoryName = 'Quiz';
+          if (quizId.contains('_')) {
+            // quizId formatı: kategori_timestamp şeklinde olabilir
+            final parts = quizId.split('_');
+            if (parts.isNotEmpty) {
+              categoryName = parts[0].replaceAll('_', ' ');
+              // İlk harfi büyük yap
+              categoryName =
+                  categoryName[0].toUpperCase() + categoryName.substring(1);
+            }
           }
+
+          final quiz = Quiz(
+            id: quizId,
+            name: categoryName,
+            totalQuestions: progress.totalQuestions,
+            score: progress.correctAnswersCount,
+            successRate: progress.successRate,
+            currentQuestionIndex:
+                progress.totalQuestions, // Tamamlandığı için tüm sorular
+            createdAt: progress.lastUpdated,
+          );
+
+          completedQuizzes.add(quiz);
         }
       }
 
+      // Tamamlanma tarihine göre sırala (en son tamamlanan en üstte)
+      completedQuizzes.sort(
+        (a, b) => (b.createdAt ?? DateTime.now()).compareTo(
+          a.createdAt ?? DateTime.now(),
+        ),
+      );
+
+      print('Toplam tamamlanan quiz sayısı: ${completedQuizzes.length}');
       return completedQuizzes;
     } catch (e) {
       print('getCompletedQuizzes hatası: $e');
@@ -831,10 +915,14 @@ class QuizService {
           quizId ??
           '${categoryName.toLowerCase().replaceAll(' ', '_')}_${DateTime.now().millisecondsSinceEpoch}';
 
+      print('Quiz tamamlanıyor: $finalQuizId, Skor: $score/$totalQuestions');
+
       // Kullanıcı aktivitesini güncelle
       final userActivityRef = _firestore
           .collection('userActivities')
           .doc(userId);
+
+      final successRate = (score / totalQuestions) * 100; // Başarı oranı
 
       // Quiz ilerlemesini tamamlandı olarak işaretle
       await userActivityRef.set({
@@ -847,7 +935,7 @@ class QuizService {
             'score': score,
             'isCompleted': true,
             'progressPercentage': 1.0, // %100 tamamlandı
-            'successRate': (score / totalQuestions) * 100, // Başarı oranı
+            'successRate': successRate, // Başarı oranı
             'lastUpdatedAt': Timestamp.now(),
           },
         },
@@ -855,6 +943,25 @@ class QuizService {
           score * 10,
         ), // Her doğru cevap için 10 puan
       }, SetOptions(merge: true));
+
+      // Tamamlanan quizi user_completed_quizzes koleksiyonuna da kaydet
+      final now = DateTime.now();
+      final completedQuizId = '${userId}_${finalQuizId}';
+
+      print('Tamamlanan quiz kaydediliyor: $completedQuizId');
+
+      await _firestore
+          .collection('user_completed_quizzes')
+          .doc(completedQuizId)
+          .set({
+            'userId': userId,
+            'quizId': finalQuizId,
+            'categoryName': categoryName,
+            'score': score,
+            'totalQuestions': totalQuestions,
+            'successRate': successRate,
+            'completedAt': Timestamp.fromDate(now),
+          });
 
       // Devam eden quizlerden sil
       if (quizId != null) {
@@ -864,7 +971,9 @@ class QuizService {
             .delete();
       }
 
-      print('Quiz tamamlandı: $finalQuizId, Skor: $score/$totalQuestions');
+      print(
+        'Quiz tamamlandı ve kaydedildi: $finalQuizId, Skor: $score/$totalQuestions',
+      );
       return true;
     } catch (e) {
       print('completeQuiz hatası: $e');

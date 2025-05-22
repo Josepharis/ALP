@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
 import 'package:page_transition/page_transition.dart';
 import 'dart:ui';
+import 'dart:async';
 
 import '../services/auth_service.dart';
 import '../services/quiz_service.dart';
@@ -23,6 +24,7 @@ import '../data/cardiovascular_questions.dart';
 import '../data/cardiovascular_questions_2.dart';
 import '../widgets/interactive_tutorial.dart';
 import '../widgets/features_showcase.dart';
+import '../utils/event_bus.dart';
 
 import 'leaderboard_screen.dart';
 import 'profile_screen.dart';
@@ -532,16 +534,35 @@ class _HomeContentState extends State<HomeContent> {
   List<Quiz> _completedQuizzes = [];
   List<Quiz> _popularQuizzes = [];
   bool _isLoading = true;
+  late StreamSubscription _mistakesSubscription;
 
   @override
   void initState() {
     super.initState();
     _loadData();
 
+    // EventBus dinleyicisi ekle - quiz tamamlandığında veya yanlış cevap kaydedildiğinde
+    // ana sayfayı yenile
+    _mistakesSubscription = EventBus().mistakesUpdatedStream.listen((event) {
+      print(
+        "EventBus: Eksikler veya Quiz güncellendi, ana sayfa yenileniyor...",
+      );
+      if (mounted) {
+        _loadData();
+      }
+    });
+
     // Tanıtımı göster
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _checkAndShowTutorial();
     });
+  }
+
+  @override
+  void dispose() {
+    // EventBus dinleyicisini temizle
+    _mistakesSubscription.cancel();
+    super.dispose();
   }
 
   Future<void> _checkAndShowTutorial() async {
@@ -680,7 +701,18 @@ class _HomeContentState extends State<HomeContent> {
       final ongoingQuizzes = await _quizService.getOngoingQuizzes();
 
       // Tamamlanan quizleri getir
+      print('Tamamlanan quizler yükleniyor...');
       final completedQuizzes = await _quizService.getCompletedQuizzes();
+      print('Tamamlanan quiz sayısı: ${completedQuizzes.length}');
+      if (completedQuizzes.isNotEmpty) {
+        for (int i = 0; i < completedQuizzes.length; i++) {
+          print(
+            'Quiz $i: ${completedQuizzes[i].name}, ID: ${completedQuizzes[i].id}, SuccessRate: ${completedQuizzes[i].successRate}',
+          );
+        }
+      } else {
+        print('UYARI: Tamamlanan quizler listesi boş!');
+      }
 
       // Popüler quizleri getir
       final popularQuizzes = await _quizService.getPopularQuizzes();
@@ -693,6 +725,9 @@ class _HomeContentState extends State<HomeContent> {
           _popularQuizzes = popularQuizzes;
           _isLoading = false;
         });
+        print(
+          'setState tamamlandı, completedQuizzes: ${_completedQuizzes.length}',
+        );
       }
     } catch (e) {
       print('Veri yükleme hatası: $e');
@@ -714,16 +749,24 @@ class _HomeContentState extends State<HomeContent> {
                 onRefresh: _loadData,
                 child: SingleChildScrollView(
                   physics: const AlwaysScrollableScrollPhysics(),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      _buildHeader(context),
-                      _buildDailyStreak(),
-                      _buildDailyQuestion(context),
-                      _buildOngoingQuiz(),
-                      _buildPopularQuizzes(context),
-                      _buildFinishedQuiz(),
-                    ],
+                  child: LayoutBuilder(
+                    builder: (context, constraints) {
+                      // Ekran boyutuna göre responsive tasarım
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          _buildHeader(context),
+                          _buildDailyStreak(),
+                          _buildDailyQuestion(context),
+                          _buildOngoingQuiz(),
+                          _buildPopularQuizzes(context),
+                          _buildFinishedQuiz(),
+                          const SizedBox(
+                            height: 80,
+                          ), // Bottom Navigation Bar için boşluk
+                        ],
+                      );
+                    },
                   ),
                 ),
               ),
@@ -849,14 +892,15 @@ class _HomeContentState extends State<HomeContent> {
       weeklyStatus[todayIndex] = true;
     }
 
-    print('Günlük katılım durumu: $weeklyStatus');
-    print(
-      'Bugünün haftanın günü: $todayWeekday (${weekdayNames[todayWeekday - 1]})',
-    );
-
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-      padding: const EdgeInsets.all(16),
+      margin: const EdgeInsets.symmetric(
+        horizontal: 12,
+        vertical: 4,
+      ), // Margin azaltıldı
+      padding: const EdgeInsets.symmetric(
+        horizontal: 16,
+        vertical: 10,
+      ), // Padding azaltıldı
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [Colors.blue.shade800, Colors.purple.shade900],
@@ -875,19 +919,23 @@ class _HomeContentState extends State<HomeContent> {
         children: [
           Row(
             children: [
-              const Icon(Icons.local_fire_department, color: Colors.orange),
+              const Icon(
+                Icons.local_fire_department,
+                color: Colors.orange,
+                size: 18,
+              ), // Icon küçültüldü
               const SizedBox(width: 8),
               Text(
                 '${_userActivity?.dailyStreak ?? 1} Günlük Katılım!',
                 style: const TextStyle(
-                  fontSize: 18,
+                  fontSize: 16, // Font size küçültüldü
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 12), // Boşluk azaltıldı
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: List.generate(7, (index) {
@@ -901,8 +949,8 @@ class _HomeContentState extends State<HomeContent> {
               return Column(
                 children: [
                   Container(
-                    width: 34,
-                    height: 34,
+                    width: 28, // Boyutlar küçültüldü
+                    height: 28,
                     decoration: BoxDecoration(
                       color:
                           isCompleted
@@ -918,12 +966,12 @@ class _HomeContentState extends State<HomeContent> {
                               ? const Icon(
                                 Icons.check,
                                 color: Colors.white,
-                                size: 18,
+                                size: 14, // Icon boyutu küçültüldü
                               )
                               : Text(
                                 dayName,
                                 style: TextStyle(
-                                  fontSize: 12,
+                                  fontSize: 10, // Font size küçültüldü
                                   fontWeight: FontWeight.bold,
                                   color:
                                       isToday
@@ -933,11 +981,11 @@ class _HomeContentState extends State<HomeContent> {
                               ),
                     ),
                   ),
-                  const SizedBox(height: 4),
+                  const SizedBox(height: 2), // Boşluk azaltıldı
                   Text(
                     dayName,
                     style: TextStyle(
-                      fontSize: 10,
+                      fontSize: 8, // Font size küçültüldü
                       color:
                           isToday
                               ? Colors.white
@@ -955,8 +1003,11 @@ class _HomeContentState extends State<HomeContent> {
 
   Widget _buildDailyQuestion(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-      padding: const EdgeInsets.all(12),
+      margin: const EdgeInsets.symmetric(
+        horizontal: 12,
+        vertical: 4,
+      ), // Margin azaltıldı
+      padding: const EdgeInsets.all(10), // Padding azaltıldı
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [Colors.orange.shade800, Colors.red.shade900],
@@ -984,14 +1035,14 @@ class _HomeContentState extends State<HomeContent> {
                 child: const Icon(
                   Icons.lightbulb,
                   color: Colors.yellow,
-                  size: 16,
+                  size: 14, // Icon boyutu küçültüldü
                 ),
               ),
               const SizedBox(width: 6),
               const Text(
                 'Günün Sorusu',
                 style: TextStyle(
-                  fontSize: 14,
+                  fontSize: 12, // Font size küçültüldü
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),
@@ -1008,23 +1059,25 @@ class _HomeContentState extends State<HomeContent> {
                   style: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
-                    fontSize: 9,
+                    fontSize: 8, // Font size küçültüldü
                   ),
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 6), // Boşluk azaltıldı
           Text(
             _dailyQuestion?.question.question ??
                 'Anestezide propofol hangi reseptör üzerinden etki gösterir?',
             style: const TextStyle(
-              fontSize: 14,
+              fontSize: 12, // Font size küçültüldü
               fontWeight: FontWeight.w500,
               color: Colors.white,
             ),
+            maxLines: 2, // Maksimum satır sayısı eklendi
+            overflow: TextOverflow.ellipsis,
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: 8), // Boşluk azaltıldı
           Row(
             children: [
               Expanded(
@@ -1038,12 +1091,21 @@ class _HomeContentState extends State<HomeContent> {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white.withOpacity(0.2),
                     foregroundColor: Colors.white,
-                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 6,
+                    ), // Padding azaltıldı
+                    minimumSize: const Size(
+                      double.infinity,
+                      28,
+                    ), // Minimum boyut ayarlandı
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
                   ),
-                  child: const Text('Cevapla', style: TextStyle(fontSize: 12)),
+                  child: const Text(
+                    'Cevapla',
+                    style: TextStyle(fontSize: 10),
+                  ), // Font size küçültüldü
                 ),
               ),
             ],
@@ -1147,7 +1209,10 @@ class _HomeContentState extends State<HomeContent> {
   Widget _buildOngoingQuiz() {
     if (_ongoingQuizzes.isEmpty) {
       return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+        padding: const EdgeInsets.symmetric(
+          horizontal: 20,
+          vertical: 4,
+        ), // Padding azaltıldı
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -1156,23 +1221,29 @@ class _HomeContentState extends State<HomeContent> {
               children: [
                 Text(
                   'Devam Eden',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ), // Font size küçültüldü
                 ),
-                Text('Tümünü Gör', style: TextStyle(color: Colors.blue)),
+                Text(
+                  'Tümünü Gör',
+                  style: TextStyle(color: Colors.blue, fontSize: 12),
+                ), // Font size küçültüldü
               ],
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 8), // Boşluk azaltıldı
             Container(
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.all(12), // Padding azaltıldı
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   colors: [Colors.purple.shade900, Colors.blue.shade900],
                 ),
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(16),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.purple.withOpacity(0.2),
-                    blurRadius: 10,
+                    blurRadius: 8,
                     spreadRadius: 2,
                   ),
                 ],
@@ -1180,7 +1251,10 @@ class _HomeContentState extends State<HomeContent> {
               child: const Center(
                 child: Text(
                   'Henüz devam eden quiz bulunmamaktadır.',
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 12,
+                  ), // Font size küçültüldü
                 ),
               ),
             ),
@@ -1195,17 +1269,11 @@ class _HomeContentState extends State<HomeContent> {
             ? _ongoingQuizzes.sublist(0, 3)
             : _ongoingQuizzes;
 
-    print('Ana sayfada gösterilen quiz sayısı: ${quizzesToShow.length}');
-
-    // Debug: quizlerin id'lerini yazdır
-    for (int i = 0; i < quizzesToShow.length; i++) {
-      print(
-        'Quiz $i - ID: ${quizzesToShow[i].id} - Name: ${quizzesToShow[i].name}',
-      );
-    }
-
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+      padding: const EdgeInsets.symmetric(
+        horizontal: 20,
+        vertical: 4,
+      ), // Padding azaltıldı
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -1214,30 +1282,42 @@ class _HomeContentState extends State<HomeContent> {
             children: [
               const Text(
                 'Devam Eden',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ), // Font size küçültüldü
               ),
               TextButton(
                 onPressed: () => _showAllOngoingQuizzes(context),
                 child: const Row(
                   children: [
-                    Text('Tümü'),
+                    Text(
+                      'Tümü',
+                      style: TextStyle(fontSize: 12),
+                    ), // Font size küçültüldü
                     SizedBox(width: 4),
-                    Icon(Icons.arrow_forward, size: 16),
+                    Icon(
+                      Icons.arrow_forward,
+                      size: 14,
+                    ), // Icon boyutu küçültüldü
                   ],
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: 8), // Boşluk azaltıldı
           // Yatay kaydırmalı quiz kartları
           SizedBox(
-            height: 160, // Kart yüksekliği 190'dan 160'a düşürüldü
+            height: 130, // Kart yüksekliği daha da azaltıldı
             child:
                 quizzesToShow.isEmpty
                     ? Center(
                       child: Text(
                         'Henüz devam eden quiz bulunmamaktadır',
-                        style: TextStyle(color: Colors.grey[400]),
+                        style: TextStyle(
+                          color: Colors.grey[400],
+                          fontSize: 12,
+                        ), // Font size küçültüldü
                       ),
                     )
                     : ListView.builder(
@@ -1253,14 +1333,16 @@ class _HomeContentState extends State<HomeContent> {
                                 : 0.25;
 
                         return Container(
-                          width: 260, // Genişlik de 280'den 260'a düşürüldü
-                          margin: const EdgeInsets.only(right: 16),
+                          width: 220, // Genişlik daha da azaltıldı
+                          margin: const EdgeInsets.only(
+                            right: 12,
+                          ), // Margin azaltıldı
                           child: GestureDetector(
                             onTap: () => _continueQuiz(quiz),
                             child: Container(
                               padding: const EdgeInsets.all(
-                                12,
-                              ), // Padding 16'dan 12'ye düşürüldü
+                                8,
+                              ), // Padding daha da azaltıldı
                               decoration: BoxDecoration(
                                 gradient: LinearGradient(
                                   colors: [
@@ -1269,17 +1351,15 @@ class _HomeContentState extends State<HomeContent> {
                                   ],
                                 ),
                                 borderRadius: BorderRadius.circular(
-                                  16,
-                                ), // Border radius 20'den 16'ya düşürüldü
+                                  14,
+                                ), // Border radius azaltıldı
                                 boxShadow: [
                                   BoxShadow(
                                     color: _getQuizColor(
                                       index,
                                     ).withOpacity(0.2),
-                                    blurRadius:
-                                        8, // Blur radius 10'dan 8'e düşürüldü
-                                    spreadRadius:
-                                        1, // Spread radius 2'den 1'e düşürüldü
+                                    blurRadius: 6, // Blur radius azaltıldı
+                                    spreadRadius: 1,
                                   ),
                                 ],
                               ),
@@ -1290,24 +1370,23 @@ class _HomeContentState extends State<HomeContent> {
                                     children: [
                                       Container(
                                         padding: const EdgeInsets.all(
-                                          8,
-                                        ), // Padding 10'dan 8'e düşürüldü
+                                          6,
+                                        ), // Padding azaltıldı
                                         decoration: BoxDecoration(
                                           color: Colors.white.withOpacity(0.2),
                                           borderRadius: BorderRadius.circular(
-                                            10, // Border radius 12'den 10'a düşürüldü
-                                          ),
+                                            8,
+                                          ), // Border radius azaltıldı
                                         ),
                                         child: Icon(
                                           _getQuizIcon(quiz.name),
                                           color: Colors.white,
-                                          size:
-                                              20, // Icon size 24'ten 20'ye düşürüldü
+                                          size: 16, // Icon boyutu azaltıldı
                                         ),
                                       ),
                                       const SizedBox(
-                                        width: 10,
-                                      ), // Spacing 12'den 10'a düşürüldü
+                                        width: 8,
+                                      ), // Boşluk azaltıldı
                                       Expanded(
                                         child: Column(
                                           crossAxisAlignment:
@@ -1317,10 +1396,11 @@ class _HomeContentState extends State<HomeContent> {
                                               quiz.name,
                                               style: const TextStyle(
                                                 fontSize:
-                                                    16, // Font size 18'den 16'ya düşürüldü
+                                                    14, // Font size azaltıldı
                                                 fontWeight: FontWeight.bold,
                                                 color: Colors.white,
                                               ),
+                                              overflow: TextOverflow.ellipsis,
                                             ),
                                             Text(
                                               '${quiz.totalQuestions} sorudan ${quiz.currentQuestionIndex ?? 0} soru tamamlandı',
@@ -1329,8 +1409,9 @@ class _HomeContentState extends State<HomeContent> {
                                                   0.8,
                                                 ),
                                                 fontSize:
-                                                    12, // Font size eklendi
+                                                    10, // Font size azaltıldı
                                               ),
+                                              overflow: TextOverflow.ellipsis,
                                             ),
                                           ],
                                         ),
@@ -1338,8 +1419,8 @@ class _HomeContentState extends State<HomeContent> {
                                     ],
                                   ),
                                   const SizedBox(
-                                    height: 16,
-                                  ), // Spacing 24'ten 16'ya düşürüldü
+                                    height: 10,
+                                  ), // Boşluk azaltıldı
                                   Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
@@ -1349,13 +1430,13 @@ class _HomeContentState extends State<HomeContent> {
                                         style: TextStyle(
                                           color: Colors.white.withOpacity(0.9),
                                           fontWeight: FontWeight.w500,
-                                          fontSize: 12, // Font size eklendi
+                                          fontSize: 10, // Font size azaltıldı
                                         ),
                                       ),
                                       Container(
                                         padding: const EdgeInsets.all(
-                                          6,
-                                        ), // Padding 8'den 6'ya düşürüldü
+                                          4,
+                                        ), // Padding azaltıldı
                                         decoration: BoxDecoration(
                                           color: Colors.white.withOpacity(0.2),
                                           shape: BoxShape.circle,
@@ -1363,19 +1444,16 @@ class _HomeContentState extends State<HomeContent> {
                                         child: const Icon(
                                           Icons.play_arrow,
                                           color: Colors.white,
-                                          size:
-                                              16, // Icon size 20'den 16'ya düşürüldü
+                                          size: 12, // Icon boyutu azaltıldı
                                         ),
                                       ),
                                     ],
                                   ),
-                                  const SizedBox(
-                                    height: 12,
-                                  ), // Spacing 16'dan 12'ye düşürüldü
+                                  const SizedBox(height: 8), // Boşluk azaltıldı
                                   ClipRRect(
                                     borderRadius: BorderRadius.circular(
-                                      8,
-                                    ), // Border radius 10'dan 8'e düşürüldü
+                                      6,
+                                    ), // Border radius azaltıldı
                                     child: LinearProgressIndicator(
                                       value: progressValue,
                                       backgroundColor: Colors.white.withOpacity(
@@ -1385,8 +1463,7 @@ class _HomeContentState extends State<HomeContent> {
                                           const AlwaysStoppedAnimation<Color>(
                                             Colors.white,
                                           ),
-                                      minHeight:
-                                          6, // Height 8'den 6'ya düşürüldü
+                                      minHeight: 4, // Height azaltıldı
                                     ),
                                   ),
                                 ],
@@ -1570,28 +1647,6 @@ class _HomeContentState extends State<HomeContent> {
                                                 ],
                                               ),
                                             ),
-                                            Container(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                    horizontal: 8,
-                                                    vertical: 4,
-                                                  ),
-                                              decoration: BoxDecoration(
-                                                color: Colors.blue.withOpacity(
-                                                  0.2,
-                                                ),
-                                                borderRadius:
-                                                    BorderRadius.circular(20),
-                                              ),
-                                              child: Text(
-                                                '%${(progressValue * 100).toInt()}',
-                                                style: const TextStyle(
-                                                  color: Colors.blue,
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                            ),
                                           ],
                                         ),
                                         const SizedBox(height: 12),
@@ -1733,7 +1788,10 @@ class _HomeContentState extends State<HomeContent> {
             children: [
               const Text(
                 'Popüler Quizler',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ), // Font size küçültüldü
               ),
               TextButton(
                 onPressed: () {
@@ -1745,18 +1803,24 @@ class _HomeContentState extends State<HomeContent> {
                 },
                 child: const Row(
                   children: [
-                    Text('Tümü'),
+                    Text(
+                      'Tümü',
+                      style: TextStyle(fontSize: 12),
+                    ), // Font size küçültüldü
                     SizedBox(width: 4),
-                    Icon(Icons.arrow_forward, size: 16),
+                    Icon(
+                      Icons.arrow_forward,
+                      size: 14,
+                    ), // Icon boyutu küçültüldü
                   ],
                 ),
               ),
             ],
           ),
         ),
-        const SizedBox(height: 16),
+        const SizedBox(height: 8), // Boşluk azaltıldı
         SizedBox(
-          height: 140,
+          height: 110, // Kart yüksekliği azaltıldı
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -1789,42 +1853,49 @@ class _HomeContentState extends State<HomeContent> {
     return GestureDetector(
       onTap: () => _startCategoryQuiz(categoryName),
       child: Container(
-        width: 160,
-        margin: const EdgeInsets.only(right: 16),
+        width: 120, // Genişlik azaltıldı
+        margin: const EdgeInsets.only(right: 12), // Boşluk azaltıldı
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [color.withOpacity(0.8), color.withOpacity(0.4)],
           ),
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(16),
           border: Border.all(color: color.withOpacity(0.3), width: 1),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              padding: const EdgeInsets.all(12),
+              padding: const EdgeInsets.all(8), // Padding azaltıldı
               decoration: BoxDecoration(
                 color: Colors.white.withOpacity(0.2),
                 shape: BoxShape.circle,
               ),
-              child: Icon(icon, color: Colors.white, size: 30),
+              child: Icon(
+                icon,
+                color: Colors.white,
+                size: 24,
+              ), // Icon boyutu azaltıldı
             ),
-            const SizedBox(height: 12),
+            const SizedBox(height: 8), // Boşluk azaltıldı
             Text(
               title,
               textAlign: TextAlign.center,
               style: const TextStyle(
-                fontSize: 14,
+                fontSize: 12, // Font size azaltıldı
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
               ),
             ),
-            const SizedBox(height: 4),
+            const SizedBox(height: 2), // Boşluk azaltıldı
             Text(
               popularity,
-              style: TextStyle(fontSize: 12, color: Colors.grey[300]),
+              style: TextStyle(
+                fontSize: 10,
+                color: Colors.grey[300],
+              ), // Font size azaltıldı
             ),
           ],
         ),
@@ -1935,20 +2006,26 @@ class _HomeContentState extends State<HomeContent> {
   Widget _buildFinishedQuiz() {
     if (_completedQuizzes.isEmpty) {
       return Padding(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.symmetric(
+          horizontal: 20,
+          vertical: 4,
+        ), // Padding azaltıldı
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
               'Tamamlanan Quizler',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ), // Font size küçültüldü
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 8), // Boşluk azaltıldı
             Container(
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.all(12), // Padding azaltıldı
               decoration: BoxDecoration(
                 color: Colors.white.withOpacity(0.1),
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(16),
                 border: Border.all(
                   color: Colors.grey.withOpacity(0.2),
                   width: 1,
@@ -1957,7 +2034,10 @@ class _HomeContentState extends State<HomeContent> {
               child: const Center(
                 child: Text(
                   'Henüz tamamlanan quiz bulunmamaktadır.',
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 12,
+                  ), // Font size küçültüldü
                 ),
               ),
             ),
@@ -1966,81 +2046,415 @@ class _HomeContentState extends State<HomeContent> {
       );
     }
 
-    // Tamamlanan quiz varsa göster
-    final quiz = _completedQuizzes.first;
-    final progress = _userActivity?.quizProgress[quiz.id];
-    final successRate = progress?.successRate.toStringAsFixed(0) ?? '0';
-
+    // Tamamlanan quizler varsa
     return Padding(
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.symmetric(
+        horizontal: 20,
+        vertical: 4,
+      ), // Padding azaltıldı
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            'Tamamlanan Quizler',
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(height: 16),
-          Container(
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.1),
-              borderRadius: BorderRadius.circular(20),
-              border: Border.all(color: Colors.grey.withOpacity(0.2), width: 1),
-            ),
-            child: Row(
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    color: Colors.green.withOpacity(0.2),
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  child: const Icon(Icons.star, color: Colors.yellow),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text(
+                'Tamamlanan Quizler',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+              TextButton(
+                onPressed: () {
+                  // Tüm tamamlanan quizleri göster
+                  _showAllCompletedQuizzes(context);
+                },
+                child: const Row(
+                  children: [
+                    Text('Tümü', style: TextStyle(fontSize: 12)),
+                    SizedBox(width: 4),
+                    Icon(Icons.arrow_forward, size: 14),
+                  ],
                 ),
-                const SizedBox(width: 16),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        quiz.name,
-                        style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        'Tamamlandı • ${quiz.totalQuestions}/${quiz.totalQuestions}',
-                        style: const TextStyle(color: Colors.grey),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          // Yatay listede göster
+          SizedBox(
+            height: 130, // Kart yüksekliği
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: _completedQuizzes.length,
+              itemBuilder: (context, index) {
+                final quiz = _completedQuizzes[index];
+                final successRate = quiz.successRate?.toInt() ?? 0;
+
+                // Tamamlanma tarihini formatla
+                String completedDate = 'Tamamlandı';
+                if (quiz.createdAt != null) {
+                  final date = quiz.createdAt!;
+                  completedDate = '${date.day}.${date.month}.${date.year}';
+                }
+
+                return Container(
+                  width: 200,
+                  margin: const EdgeInsets.only(right: 12),
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        _getQuizColor(index),
+                        _getQuizColor(index).withOpacity(0.7),
+                      ],
+                    ),
+                    borderRadius: BorderRadius.circular(14),
+                    boxShadow: [
+                      BoxShadow(
+                        color: _getQuizColor(index).withOpacity(0.2),
+                        blurRadius: 6,
+                        spreadRadius: 1,
                       ),
                     ],
                   ),
-                ),
-                Row(
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 12,
-                        vertical: 6,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.green.withOpacity(0.2),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Text(
-                        '$successRate%',
-                        style: const TextStyle(color: Colors.green),
-                      ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(12),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.all(6),
+                              decoration: BoxDecoration(
+                                color: Colors.white.withOpacity(0.2),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: Icon(
+                                _getQuizIcon(quiz.name),
+                                color: Colors.white,
+                                size: 16,
+                              ),
+                            ),
+                            const SizedBox(width: 8),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    quiz.name,
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 4),
+                                  Text(
+                                    completedDate,
+                                    style: TextStyle(
+                                      color: Colors.white.withOpacity(0.8),
+                                      fontSize: 10,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 10),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Doğru: ${quiz.score}/${quiz.totalQuestions}',
+                              style: TextStyle(
+                                color: Colors.white.withOpacity(0.9),
+                                fontWeight: FontWeight.w500,
+                                fontSize: 10,
+                              ),
+                            ),
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 8,
+                                vertical: 4,
+                              ),
+                              decoration: BoxDecoration(
+                                color: _getSuccessRateColor(
+                                  successRate,
+                                ).withOpacity(0.2),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: Text(
+                                '%$successRate',
+                                style: TextStyle(
+                                  color: _getSuccessRateColor(successRate),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 8),
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(6),
+                          child: LinearProgressIndicator(
+                            value: successRate / 100,
+                            backgroundColor: Colors.white.withOpacity(0.2),
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                              _getSuccessRateColor(successRate),
+                            ),
+                            minHeight: 4,
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-              ],
+                  ),
+                );
+              },
             ),
           ),
         ],
       ),
+    );
+  }
+
+  // Başarı oranına göre renk döndürür
+  Color _getSuccessRateColor(int successRate) {
+    if (successRate >= 80) {
+      return Colors.green;
+    } else if (successRate >= 60) {
+      return Colors.lime;
+    } else if (successRate >= 40) {
+      return Colors.amber;
+    } else if (successRate >= 20) {
+      return Colors.orange;
+    } else {
+      return Colors.red;
+    }
+  }
+
+  // Tüm tamamlanan quizleri göster
+  void _showAllCompletedQuizzes(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      isScrollControlled: true,
+      builder:
+          (context) => Container(
+            height: MediaQuery.of(context).size.height * 0.75,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [Colors.indigo.shade900, Colors.black],
+              ),
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(30),
+                topRight: Radius.circular(30),
+              ),
+              boxShadow: [
+                BoxShadow(color: Colors.black.withOpacity(0.5), blurRadius: 15),
+              ],
+            ),
+            child: Column(
+              children: [
+                // Üst başlık bölümü
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        Colors.indigo.shade800,
+                        Colors.deepPurple.shade800,
+                      ],
+                    ),
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(30),
+                      topRight: Radius.circular(30),
+                    ),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              color: Colors.white.withOpacity(0.1),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: const Icon(
+                              Icons.check_circle,
+                              color: Colors.white,
+                            ),
+                          ),
+                          const SizedBox(width: 12),
+                          const Text(
+                            'Tamamlanan Quizler',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.close, color: Colors.white),
+                        onPressed: () => Navigator.pop(context),
+                      ),
+                    ],
+                  ),
+                ),
+
+                // Quiz listesi
+                Expanded(
+                  child:
+                      _completedQuizzes.isEmpty
+                          ? const Center(
+                            child: Text(
+                              'Henüz tamamlanan quiz bulunmamaktadır.',
+                              style: TextStyle(color: Colors.white70),
+                            ),
+                          )
+                          : ListView.builder(
+                            padding: const EdgeInsets.all(16),
+                            itemCount: _completedQuizzes.length,
+                            itemBuilder: (context, index) {
+                              final quiz = _completedQuizzes[index];
+                              final successRate =
+                                  quiz.successRate?.toInt() ?? 0;
+
+                              // Tamamlanma tarihini formatla
+                              String completedDate = 'Tamamlandı';
+                              if (quiz.createdAt != null) {
+                                final date = quiz.createdAt!;
+                                completedDate =
+                                    '${date.day}.${date.month}.${date.year}';
+                              }
+
+                              return Container(
+                                margin: const EdgeInsets.only(bottom: 16),
+                                padding: const EdgeInsets.all(16),
+                                decoration: BoxDecoration(
+                                  color: Colors.white.withOpacity(0.05),
+                                  borderRadius: BorderRadius.circular(16),
+                                  border: Border.all(
+                                    color: Colors.white.withOpacity(0.1),
+                                    width: 1,
+                                  ),
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Container(
+                                          padding: const EdgeInsets.all(10),
+                                          decoration: BoxDecoration(
+                                            color: _getQuizColor(
+                                              index,
+                                            ).withOpacity(0.2),
+                                            shape: BoxShape.circle,
+                                          ),
+                                          child: Icon(
+                                            _getQuizIcon(quiz.name),
+                                            color: _getQuizColor(index),
+                                            size: 20,
+                                          ),
+                                        ),
+                                        const SizedBox(width: 10),
+                                        Expanded(
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                quiz.name,
+                                                style: const TextStyle(
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.white,
+                                                ),
+                                              ),
+                                              const SizedBox(height: 4),
+                                              Text(
+                                                completedDate,
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                  color: Colors.grey[400],
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Container(
+                                          padding: const EdgeInsets.symmetric(
+                                            horizontal: 8,
+                                            vertical: 4,
+                                          ),
+                                          decoration: BoxDecoration(
+                                            color: _getSuccessRateColor(
+                                              successRate,
+                                            ).withOpacity(0.2),
+                                            borderRadius: BorderRadius.circular(
+                                              20,
+                                            ),
+                                          ),
+                                          child: Text(
+                                            '%$successRate',
+                                            style: TextStyle(
+                                              color: _getSuccessRateColor(
+                                                successRate,
+                                              ),
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(height: 12),
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                          child: ClipRRect(
+                                            borderRadius: BorderRadius.circular(
+                                              8,
+                                            ),
+                                            child: LinearProgressIndicator(
+                                              value: successRate / 100,
+                                              backgroundColor: Colors.grey[800],
+                                              valueColor:
+                                                  AlwaysStoppedAnimation<Color>(
+                                                    _getSuccessRateColor(
+                                                      successRate,
+                                                    ),
+                                                  ),
+                                              minHeight: 6,
+                                            ),
+                                          ),
+                                        ),
+                                        const SizedBox(width: 12),
+                                        Text(
+                                          '${quiz.score}/${quiz.totalQuestions}',
+                                          style: const TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
+                          ),
+                ),
+              ],
+            ),
+          ),
     );
   }
 }

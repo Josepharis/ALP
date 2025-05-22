@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:confetti/confetti.dart';
+// import 'package:confetti/confetti.dart';
 import 'dart:math';
 
 class QuizResultScreen extends StatefulWidget {
@@ -21,7 +21,7 @@ class QuizResultScreen extends StatefulWidget {
 }
 
 class _QuizResultScreenState extends State<QuizResultScreen> {
-  late ConfettiController _confettiController;
+  // late ConfettiController _confettiController;
   late int finalScore;
   late int totalQuestions;
   late double percentage;
@@ -29,22 +29,22 @@ class _QuizResultScreenState extends State<QuizResultScreen> {
   @override
   void initState() {
     super.initState();
-    _confettiController = ConfettiController(
-      duration: const Duration(seconds: 3),
-    );
+    // _confettiController = ConfettiController(
+    //   duration: const Duration(seconds: 3),
+    // );
     finalScore = widget.score;
     totalQuestions = widget.totalQuestions;
     percentage = (finalScore / totalQuestions) * 100;
 
     // Skoru hesapla ve konfeti efektini başlat
-    Future.delayed(const Duration(milliseconds: 500), () {
-      _confettiController.play();
-    });
+    // Future.delayed(const Duration(milliseconds: 500), () {
+    //   _confettiController.play();
+    // });
   }
 
   @override
   void dispose() {
-    _confettiController.dispose();
+    // _confettiController.dispose();
     super.dispose();
   }
 
@@ -62,25 +62,26 @@ class _QuizResultScreenState extends State<QuizResultScreen> {
         child: Stack(
           alignment: Alignment.center,
           children: [
-            Align(
-              alignment: Alignment.topCenter,
-              child: ConfettiWidget(
-                confettiController: _confettiController,
-                blastDirectionality: BlastDirectionality.explosive,
-                particleDrag: 0.05,
-                emissionFrequency: 0.05,
-                numberOfParticles: 50,
-                gravity: 0.1,
-                colors: const [
-                  Colors.green,
-                  Colors.blue,
-                  Colors.pink,
-                  Colors.orange,
-                  Colors.purple,
-                ],
-                createParticlePath: drawStar,
-              ),
-            ),
+            // Konfeti animasyonunu kaldırıldı
+            // Align(
+            //   alignment: Alignment.topCenter,
+            //   child: ConfettiWidget(
+            //     confettiController: _confettiController,
+            //     blastDirectionality: BlastDirectionality.explosive,
+            //     particleDrag: 0.05,
+            //     emissionFrequency: 0.05,
+            //     numberOfParticles: 50,
+            //     gravity: 0.1,
+            //     colors: const [
+            //       Colors.green,
+            //       Colors.blue,
+            //       Colors.pink,
+            //       Colors.orange,
+            //       Colors.purple,
+            //     ],
+            //     createParticlePath: drawStar,
+            //   ),
+            // ),
             SafeArea(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -145,96 +146,97 @@ class _QuizResultScreenState extends State<QuizResultScreen> {
         ],
         border: Border.all(color: Colors.white.withOpacity(0.2), width: 1),
       ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(20),
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-          child: Padding(
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
+      // Blur efekti kaldırıldı
+      // child: ClipRRect(
+      //   borderRadius: BorderRadius.circular(20),
+      //   child: BackdropFilter(
+      //     filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // Kategori bilgisi
+            Text(
+              widget.categoryName,
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 24,
+                color: Colors.white,
+              ),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              'Quiz Tamamlandı',
+              style: TextStyle(color: Colors.grey[300], fontSize: 16),
+            ),
+            const SizedBox(height: 32),
+            // Skor yüzdesi
+            Stack(
+              alignment: Alignment.center,
               children: [
-                // Kategori bilgisi
-                Text(
-                  widget.categoryName,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 24,
-                    color: Colors.white,
+                SizedBox(
+                  width: 150,
+                  height: 150,
+                  child: CircularProgressIndicator(
+                    value: scorePercentage / 100,
+                    valueColor: AlwaysStoppedAnimation<Color>(statusColor),
+                    backgroundColor: Colors.grey.withOpacity(0.2),
+                    strokeWidth: 12,
                   ),
                 ),
-                const SizedBox(height: 8),
-                Text(
-                  'Quiz Tamamlandı',
-                  style: TextStyle(color: Colors.grey[300], fontSize: 16),
-                ),
-                const SizedBox(height: 32),
-                // Skor yüzdesi
-                Stack(
-                  alignment: Alignment.center,
+                Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
-                    SizedBox(
-                      width: 150,
-                      height: 150,
-                      child: CircularProgressIndicator(
-                        value: scorePercentage / 100,
-                        valueColor: AlwaysStoppedAnimation<Color>(statusColor),
-                        backgroundColor: Colors.grey.withOpacity(0.2),
-                        strokeWidth: 12,
+                    Text(
+                      '${scorePercentage.toInt()}%',
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 32,
+                        color: Colors.white,
                       ),
                     ),
-                    Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          '${scorePercentage.toInt()}%',
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 32,
-                            color: Colors.white,
-                          ),
-                        ),
-                        Text(
-                          resultMessage,
-                          style: TextStyle(
-                            fontWeight: FontWeight.w500,
-                            fontSize: 16,
-                            color: statusColor,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 32),
-                // Skor detayları
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    _buildStatItem(
-                      'Toplam',
-                      '$totalQuestions',
-                      Icons.quiz,
-                      Colors.blue,
-                    ),
-                    _buildStatItem(
-                      'Doğru',
-                      '$finalScore',
-                      Icons.check_circle,
-                      Colors.green,
-                    ),
-                    _buildStatItem(
-                      'Yanlış',
-                      '${totalQuestions - finalScore}',
-                      Icons.close,
-                      Colors.red,
+                    Text(
+                      resultMessage,
+                      style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16,
+                        color: statusColor,
+                      ),
                     ),
                   ],
                 ),
               ],
             ),
-          ),
+            const SizedBox(height: 32),
+            // Skor detayları
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                _buildStatItem(
+                  'Toplam',
+                  '$totalQuestions',
+                  Icons.quiz,
+                  Colors.blue,
+                ),
+                _buildStatItem(
+                  'Doğru',
+                  '$finalScore',
+                  Icons.check_circle,
+                  Colors.green,
+                ),
+                _buildStatItem(
+                  'Yanlış',
+                  '${totalQuestions - finalScore}',
+                  Icons.close,
+                  Colors.red,
+                ),
+              ],
+            ),
+          ],
         ),
+        //   ),
+        // ),
       ),
     );
   }
@@ -312,31 +314,31 @@ class _QuizResultScreenState extends State<QuizResultScreen> {
     );
   }
 
-  // Konfeti şekli için yıldız çiz
-  Path drawStar(Size size) {
-    double degToRad(double deg) => deg * (pi / 180.0);
+  // Konfeti için yıldız çizme fonksiyonu artık kullanılmıyor
+  // Path drawStar(Size size) {
+  //   double degToRad(double deg) => deg * (pi / 180.0);
 
-    const numberOfPoints = 5;
-    final halfWidth = size.width / 2;
-    final externalRadius = halfWidth;
-    final internalRadius = halfWidth / 2.5;
-    final degreesPerStep = degToRad(360 / numberOfPoints);
-    final halfDegreesPerStep = degreesPerStep / 2;
-    final path = Path();
-    final fullAngle = degToRad(360);
-    path.moveTo(halfWidth, 0);
+  //   const numberOfPoints = 5;
+  //   final halfWidth = size.width / 2;
+  //   final externalRadius = halfWidth;
+  //   final internalRadius = halfWidth / 2.5;
+  //   final degreesPerStep = degToRad(360 / numberOfPoints);
+  //   final halfDegreesPerStep = degreesPerStep / 2;
+  //   final path = Path();
+  //   final fullAngle = degToRad(360);
+  //   path.moveTo(halfWidth, 0);
 
-    for (double step = 0; step < fullAngle; step += degreesPerStep) {
-      path.lineTo(
-        halfWidth + externalRadius * cos(step),
-        halfWidth + externalRadius * sin(step),
-      );
-      path.lineTo(
-        halfWidth + internalRadius * cos(step + halfDegreesPerStep),
-        halfWidth + internalRadius * sin(step + halfDegreesPerStep),
-      );
-    }
-    path.close();
-    return path;
-  }
+  //   for (double step = 0; step < fullAngle; step += degreesPerStep) {
+  //     path.lineTo(
+  //       halfWidth + externalRadius * cos(step),
+  //       halfWidth + externalRadius * sin(step),
+  //     );
+  //     path.lineTo(
+  //       halfWidth + internalRadius * cos(step + halfDegreesPerStep),
+  //       halfWidth + internalRadius * sin(step + halfDegreesPerStep),
+  //     );
+  //   }
+  //   path.close();
+  //   return path;
+  // }
 }
