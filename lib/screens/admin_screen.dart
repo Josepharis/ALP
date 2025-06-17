@@ -13,6 +13,9 @@ import '../data/anesthesia_workstation_questions.dart';
 import '../data/preoperative_assessment_questions.dart';
 import '../questions/airway_management_questions.dart';
 import '../questions/cardiovascular_physiology_questions.dart';
+import '../questions/cardiovascular_surgery_questions.dart';
+import '../questions/respiratory_diseases_questions.dart';
+import '../questions/respiratory_physiology_questions.dart';
 
 import 'add_question_screen.dart';
 
@@ -602,6 +605,8 @@ class _AdminScreenState extends State<AdminScreen>
         'Preoperatif Değerlendirme',
         'Bölüm 19 - Havayolu Yönetimi',
         'Kardiyovasküler Fizyoloji ve Anestezi',
+        'Kardiyovasküler Cerrahide Anestezi',
+        'Solunum Hastalıklarında Anestezi',
       ];
 
       // Ana quizzes koleksiyonunda quizleri oluşturalım
@@ -877,6 +882,86 @@ class _AdminScreenState extends State<AdminScreen>
         print(
           "Kardiyovasküler Fizyoloji ve Anestezi quizi için sorular aktarıldı",
         );
+      }
+
+      // Kardiyovasküler Cerrahide Anestezi soruları
+      if (cardiovascularSurgeryQuestions.isNotEmpty) {
+        print(
+          "Kardiyovasküler Cerrahide Anestezi quizi için sorular aktarılıyor: ${cardiovascularSurgeryQuestions.length} soru",
+        );
+        for (var question in cardiovascularSurgeryQuestions) {
+          await FirebaseFirestore.instance
+              .collection('quizzes')
+              .doc('Kardiyovasküler Cerrahide Anestezi')
+              .collection('questions')
+              .add({
+                'question': question.question,
+                'options': question.options,
+                'correctAnswerIndex': question.correctAnswerIndex,
+                'explanation': question.explanation,
+                'premises': question.premises,
+                'references': question.references,
+                'category': question.category,
+                'difficulty': question.difficulty,
+                'createdAt': FieldValue.serverTimestamp(),
+              });
+          totalQuestions++;
+        }
+        print(
+          "Kardiyovasküler Cerrahide Anestezi quizi için sorular aktarıldı",
+        );
+      }
+
+      // Solunum Hastalıklarında Anestezi soruları
+      if (respiratoryDiseasesQuestions.isNotEmpty) {
+        print(
+          "Solunum Hastalıklarında Anestezi quizi için sorular aktarılıyor: ${respiratoryDiseasesQuestions.length} soru",
+        );
+        for (var question in respiratoryDiseasesQuestions) {
+          await FirebaseFirestore.instance
+              .collection('quizzes')
+              .doc('Solunum Hastalıklarında Anestezi')
+              .collection('questions')
+              .add({
+                'question': question.question,
+                'options': question.options,
+                'correctAnswerIndex': question.correctAnswerIndex,
+                'explanation': question.explanation,
+                'premises': question.premises,
+                'references': question.references,
+                'category': question.category,
+                'difficulty': question.difficulty,
+                'createdAt': FieldValue.serverTimestamp(),
+              });
+          totalQuestions++;
+        }
+        print("Solunum Hastalıklarında Anestezi quizi için sorular aktarıldı");
+      }
+
+      // Solunum Fizyolojisi ve Anestezi soruları
+      if (respiratoryPhysiologyQuestions.isNotEmpty) {
+        print(
+          "Solunum Fizyolojisi quizi için sorular aktarılıyor: ${respiratoryPhysiologyQuestions.length} soru",
+        );
+        for (var question in respiratoryPhysiologyQuestions) {
+          await FirebaseFirestore.instance
+              .collection('quizzes')
+              .doc('Solunum Fizyolojisi')
+              .collection('questions')
+              .add({
+                'question': question.question,
+                'options': question.options,
+                'correctAnswerIndex': question.correctAnswerIndex,
+                'explanation': question.explanation,
+                'premises': question.premises,
+                'references': question.references,
+                'category': question.category,
+                'difficulty': question.difficulty,
+                'createdAt': FieldValue.serverTimestamp(),
+              });
+          totalQuestions++;
+        }
+        print("Solunum Fizyolojisi quizi için sorular aktarıldı");
       }
 
       // Yükleme tamamlandı, kategorileri yenile

@@ -25,6 +25,9 @@ import '../data/auxiliary_drugs_questions.dart';
 import '../data/preoperative_assessment_questions.dart';
 import '../questions/airway_management_questions.dart';
 import '../questions/cardiovascular_physiology_questions.dart';
+import '../questions/cardiovascular_surgery_questions.dart';
+import '../questions/respiratory_diseases_questions.dart';
+import '../questions/respiratory_physiology_questions.dart';
 
 class QuizService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -616,6 +619,15 @@ class QuizService {
       case 'kardiyovasküler fizyoloji ve anestezi':
       case 'kardiyovasküler fizyoloji':
         return cardiovascularPhysiologyQuestions;
+      case 'kardiyovasküler cerrahide anestezi':
+      case 'kardiyovasküler cerrahi':
+        return cardiovascularSurgeryQuestions;
+      case 'solunum hastalıklarında anestezi':
+      case 'solunum hastalıkları':
+        return respiratoryDiseasesQuestions;
+      case 'solunum fizyolojisi':
+      case 'solunum fizyolojisi ve anestezi':
+        return respiratoryPhysiologyQuestions;
       case 'lokal anestezikler':
       case 'lokal anestezi':
       case 'lokal anesteziği':

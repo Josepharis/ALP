@@ -36,6 +36,9 @@ import '../data/local_anesthetics_questions.dart';
 import '../data/auxiliary_drugs_questions.dart';
 import '../questions/airway_management_questions.dart';
 import '../questions/cardiovascular_physiology_questions.dart';
+import '../questions/cardiovascular_surgery_questions.dart';
+import '../questions/respiratory_diseases_questions.dart';
+import '../questions/respiratory_physiology_questions.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -409,41 +412,12 @@ class QuizListScreen extends StatelessWidget {
         'color': Colors.red.shade700,
       },
       {
-        'title': 'Klinik Farmakoloji',
-        'icon': Icons.medication,
-        'questions': <Question>[], // Boş liste, veriler eklenmeli
-        'color': Colors.green.shade700,
+        'title': 'Kardiyovasküler Cerrahide Anestezi',
+        'icon': Icons.medical_services,
+        'questions': cardiovascularSurgeryQuestions,
+        'color': Colors.purple.shade700,
       },
-      {
-        'title': 'Anestezi Yönetimi',
-        'icon': Icons.masks,
-        'questions': [], // Boş liste, veriler eklenmeli
-        'color': Colors.amber.shade700,
-      },
-      {
-        'title': 'Bölgesel Anestezi ve Ağrı Yönetimi',
-        'icon': Icons.healing,
-        'questions': [], // Boş liste, veriler eklenmeli
-        'color': Colors.deepOrange.shade700,
-      },
-      {
-        'title': 'Perioperatif ve Yoğun Bakım Tıbbı',
-        'icon': Icons.emergency,
-        'questions': [], // Boş liste, veriler eklenmeli
-        'color': Colors.cyan.shade700,
-      },
-      {
-        'title': 'Solunum Sistemleri',
-        'icon': Icons.air_rounded,
-        'questions': [], // Boş liste, veriler eklenmeli
-        'color': Colors.lightBlue.shade700,
-      },
-      {
-        'title': 'Kardiyovasküler Monitörizasyon',
-        'icon': Icons.monitor_heart_outlined,
-        'questions': [], // Boş liste, veriler eklenmeli
-        'color': Colors.redAccent.shade700,
-      },
+
       {
         'title': 'Kardiyovasküler Dışı Monitörizasyon',
         'icon': Icons.sensors,
@@ -517,7 +491,6 @@ class QuizListScreen extends StatelessWidget {
         'questions': auxiliaryDrugsQuestions,
         'color': Colors.orange.shade700,
       },
-      // Anestezi Yönetimi kategorileri
       {
         'title': 'Preoperatif Değerlendirme',
         'icon': Icons.assessment,
@@ -525,252 +498,16 @@ class QuizListScreen extends StatelessWidget {
         'color': Colors.blueGrey.shade700,
       },
       {
-        'title': 'Havayolu Yönetimi',
-        'icon': Icons.air,
-        'questions': [], // Boş liste, veriler eklenmeli
-        'color': Colors.lightBlue.shade700,
-      },
-      {
-        'title': 'Kardiyovasküler Fizyoloji',
-        'icon': Icons.favorite_border,
-        'questions': [], // Boş liste, veriler eklenmeli
-        'color': Colors.red.shade700,
-      },
-      {
-        'title': 'Kardiyovasküler Hastalıklarda Anestezi',
-        'icon': Icons.favorite,
-        'questions': [], // Boş liste, veriler eklenmeli
-        'color': Colors.redAccent.shade700,
-      },
-      {
-        'title': 'Kardiyovasküler Cerrahi Anestezisi',
-        'icon': Icons.monitor_heart,
-        'questions': [], // Boş liste, veriler eklenmeli
-        'color': Colors.deepOrange.shade700,
-      },
-      {
-        'title': 'Solunum Fizyolojisi',
+        'title': 'Solunum Fizyolojisi ve Anestezi',
         'icon': Icons.air_rounded,
-        'questions': [], // Boş liste, veriler eklenmeli
+        'questions': respiratoryPhysiologyQuestions,
         'color': Colors.teal.shade700,
       },
       {
         'title': 'Solunum Hastalıklarında Anestezi',
         'icon': Icons.air_sharp,
-        'questions': [], // Boş liste, veriler eklenmeli
+        'questions': respiratoryDiseasesQuestions,
         'color': Colors.cyan.shade700,
-      },
-      {
-        'title': 'Torasik Cerrahi Anestezisi',
-        'icon': Icons.airline_seat_flat,
-        'questions': [], // Boş liste, veriler eklenmeli
-        'color': Colors.blue.shade700,
-      },
-      {
-        'title': 'Nörofizyoloji',
-        'icon': Icons.psychology,
-        'questions': [], // Boş liste, veriler eklenmeli
-        'color': Colors.indigo.shade700,
-      },
-      {
-        'title': 'Nöroşirürji Anestezisi',
-        'icon': Icons.psychology_alt,
-        'questions': [], // Boş liste, veriler eklenmeli
-        'color': Colors.purple.shade700,
-      },
-      {
-        'title': 'Nörolojik Hastalıklarda Anestezi',
-        'icon': Icons.bubble_chart,
-        'questions': [], // Boş liste, veriler eklenmeli
-        'color': Colors.deepPurple.shade700,
-      },
-      {
-        'title': 'Nöromüsküler Hastalıklarda Anestezi',
-        'icon': Icons.accessibility,
-        'questions': [], // Boş liste, veriler eklenmeli
-        'color': Colors.blueGrey.shade700,
-      },
-      {
-        'title': 'Böbrek Fizyolojisi',
-        'icon': Icons.water_drop,
-        'questions': [], // Boş liste, veriler eklenmeli
-        'color': Colors.blue.shade700,
-      },
-      {
-        'title': 'Böbrek Hastalıklarında Anestezi',
-        'icon': Icons.water_drop_outlined,
-        'questions': [], // Boş liste, veriler eklenmeli
-        'color': Colors.cyan.shade700,
-      },
-      {
-        'title': 'Genitoüriner Cerrahi Anestezisi',
-        'icon': Icons.water,
-        'questions': [], // Boş liste, veriler eklenmeli
-        'color': Colors.lightBlue.shade700,
-      },
-      {
-        'title': 'Karaciğer Fizyolojisi',
-        'icon': Icons.spa,
-        'questions': [], // Boş liste, veriler eklenmeli
-        'color': Colors.amber.shade700,
-      },
-      {
-        'title': 'Karaciğer Hastalıklarında Anestezi',
-        'icon': Icons.spa_outlined,
-        'questions': [], // Boş liste, veriler eklenmeli
-        'color': Colors.orange.shade700,
-      },
-      {
-        'title': 'Endokrin Hastalıklarda Anestezi',
-        'icon': Icons.biotech,
-        'questions': [], // Boş liste, veriler eklenmeli
-        'color': Colors.green.shade700,
-      },
-      {
-        'title': 'Oftalmik Cerrahi Anestezisi',
-        'icon': Icons.visibility,
-        'questions': [], // Boş liste, veriler eklenmeli
-        'color': Colors.indigo.shade700,
-      },
-      {
-        'title': 'KBB Cerrahisi Anestezisi',
-        'icon': Icons.hearing,
-        'questions': [], // Boş liste, veriler eklenmeli
-        'color': Colors.purple.shade700,
-      },
-      {
-        'title': 'Ortopedik Cerrahi Anestezisi',
-        'icon': Icons.medical_services,
-        'questions': [], // Boş liste, veriler eklenmeli
-        'color': Colors.blueGrey.shade700,
-      },
-      {
-        'title': 'Travma ve Acil Cerrahi Anestezisi',
-        'icon': Icons.emergency,
-        'questions': [], // Boş liste, veriler eklenmeli
-        'color': Colors.red.shade700,
-      },
-      {
-        'title': 'Maternal ve Fetal Fizyoloji',
-        'icon': Icons.pregnant_woman,
-        'questions': [], // Boş liste, veriler eklenmeli
-        'color': Colors.pink.shade700,
-      },
-      {
-        'title': 'Obstetrik Anestezi',
-        'icon': Icons.child_friendly,
-        'questions': [], // Boş liste, veriler eklenmeli
-        'color': Colors.pinkAccent.shade700,
-      },
-      {
-        'title': 'Pediatrik Anestezi',
-        'icon': Icons.child_care,
-        'questions': [], // Boş liste, veriler eklenmeli
-        'color': Colors.lightBlue.shade700,
-      },
-      {
-        'title': 'Geriatrik Anestezi',
-        'icon': Icons.elderly,
-        'questions': [], // Boş liste, veriler eklenmeli
-        'color': Colors.grey.shade700,
-      },
-      {
-        'title': 'Ameliyathane Dışı Anestezi',
-        'icon': Icons.home_work,
-        'questions': [], // Boş liste, veriler eklenmeli
-        'color': Colors.teal.shade700,
-      },
-      // Bölgesel Anestezi & Ağrı kategorileri
-      {
-        'title': 'Spinal ve Epidural Bloklar',
-        'icon': Icons.straight,
-        'questions': [], // Boş liste, veriler eklenmeli
-        'color': Colors.indigo.shade700,
-      },
-      {
-        'title': 'Periferik Sinir Blokları',
-        'icon': Icons.device_hub,
-        'questions': [], // Boş liste, veriler eklenmeli
-        'color': Colors.deepPurple.shade700,
-      },
-      {
-        'title': 'Kronik Ağrı Yönetimi',
-        'icon': Icons.healing,
-        'questions': [], // Boş liste, veriler eklenmeli
-        'color': Colors.red.shade700,
-      },
-      {
-        'title': 'Postoperatif İyileşme Protokolleri',
-        'icon': Icons.health_and_safety,
-        'questions': [], // Boş liste, veriler eklenmeli
-        'color': Colors.green.shade700,
-      },
-      // Perioperatif & Yoğun Bakım kategorileri
-      {
-        'title': 'Sıvı-Elektrolit Bozuklukları',
-        'icon': Icons.water_drop,
-        'questions': [], // Boş liste, veriler eklenmeli
-        'color': Colors.blue.shade700,
-      },
-      {
-        'title': 'Asit-Baz Dengesi',
-        'icon': Icons.balance,
-        'questions': [], // Boş liste, veriler eklenmeli
-        'color': Colors.amber.shade700,
-      },
-      {
-        'title': 'Sıvı Yönetimi ve Kan Ürünleri',
-        'icon': Icons.bloodtype,
-        'questions': [], // Boş liste, veriler eklenmeli
-        'color': Colors.red.shade700,
-      },
-      {
-        'title': 'Termoregülasyon',
-        'icon': Icons.thermostat,
-        'questions': [], // Boş liste, veriler eklenmeli
-        'color': Colors.orange.shade700,
-      },
-      {
-        'title': 'Perioperatif Beslenme',
-        'icon': Icons.restaurant_menu,
-        'questions': [], // Boş liste, veriler eklenmeli
-        'color': Colors.green.shade700,
-      },
-      {
-        'title': 'Anestezi Komplikasyonları',
-        'icon': Icons.warning,
-        'questions': [], // Boş liste, veriler eklenmeli
-        'color': Colors.deepOrange.shade700,
-      },
-      {
-        'title': 'Kardiyopulmoner Resüsitasyon',
-        'icon': Icons.favorite_border,
-        'questions': [], // Boş liste, veriler eklenmeli
-        'color': Colors.red.shade700,
-      },
-      {
-        'title': 'Postanestezi Bakımı',
-        'icon': Icons.hotel,
-        'questions': [], // Boş liste, veriler eklenmeli
-        'color': Colors.indigo.shade700,
-      },
-      {
-        'title': 'Yoğun Bakımda Klinik Sorunlar',
-        'icon': Icons.local_hospital,
-        'questions': [], // Boş liste, veriler eklenmeli
-        'color': Colors.blue.shade700,
-      },
-      {
-        'title': 'Mekanik Ventilasyon',
-        'icon': Icons.air,
-        'questions': [], // Boş liste, veriler eklenmeli
-        'color': Colors.cyan.shade700,
-      },
-      {
-        'title': 'Hasta Güvenliği ve Kalite',
-        'icon': Icons.verified_user,
-        'questions': [], // Boş liste, veriler eklenmeli
-        'color': Colors.green.shade700,
       },
     ];
 
