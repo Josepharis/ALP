@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
-import '../data/anesthesia_questions.dart';
+
 import '../models/question.dart';
 import 'question_detail_screen.dart';
 import '../services/quiz_service.dart';

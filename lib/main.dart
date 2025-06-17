@@ -9,8 +9,7 @@ import 'screens/home_screen.dart';
 import 'screens/achievements_screen.dart';
 
 import 'theme/app_theme.dart';
-import 'data/respiratory_questions.dart';
-import 'data/anesthesia_station_questions.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

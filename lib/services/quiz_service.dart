@@ -5,12 +5,26 @@ import '../models/quiz.dart';
 import '../models/question.dart';
 import '../models/user_activity.dart';
 import 'auth_service.dart';
-import '../data/anesthesia_questions.dart';
-import '../data/operating_room_questions.dart';
-import '../data/respiratory_questions.dart';
-import '../data/anesthesia_station_questions.dart';
-import '../data/cardiovascular_questions.dart';
-import '../data/cardiovascular_questions_2.dart';
+import '../data/anesthesia_application_questions.dart';
+import '../data/respiratory_system_questions.dart';
+import '../data/cardiovascular_monitoring_questions.dart';
+import '../data/pharmacological_principles_questions.dart';
+import '../data/operating_room_environment_questions.dart';
+import '../data/non_cardiovascular_monitoring_questions.dart';
+import '../data/anesthesia_workstation_questions.dart';
+import '../data/inhalation_anesthetics_questions.dart';
+import '../data/intravenous_anesthetics_questions.dart';
+import '../data/analgesic_agents_questions.dart';
+import '../data/neuromuscular_blocking_agents_questions.dart';
+import '../data/cholinesterase_inhibitors_questions.dart';
+import '../data/anticholinergic_drugs_questions.dart';
+import '../data/adrenergic_drugs_questions.dart';
+// import '../data/hypotensive_agents_questions.dart'; // Geçici olarak kaldırıldı
+import '../data/local_anesthetics_questions.dart';
+import '../data/auxiliary_drugs_questions.dart';
+import '../data/preoperative_assessment_questions.dart';
+import '../questions/airway_management_questions.dart';
+import '../questions/cardiovascular_physiology_questions.dart';
 
 class QuizService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -554,32 +568,70 @@ class QuizService {
   Future<List<Question>> getCategoryQuestions(String categoryName) async {
     // Kategori adına göre uygun soru listesini döndür
     switch (categoryName.toLowerCase()) {
-      case 'anestezi':
-        return anesthesiaQuestions;
-      case 'ameliyathane':
-        return operatingRoomQuestions;
-      case 'solunum':
-        return respiratoryQuestions;
-      case 'anestezi i̇stasyonu':
-      case 'anestezi istasyonu':
-        return anesthesiaStationQuestions;
-      case 'kardiyovasküler 1':
-      case 'kardiyovasküler':
-        return cardiovascularQuestions;
-      case 'kardiyovasküler 2':
-        return cardiovascularQuestions2;
-      case 'temel anestezi':
-        return anesthesiaQuestions;
-      case 'i̇laç etkileşimleri':
-      case 'ilaç etkileşimleri':
-        return anesthesiaQuestions.take(15).toList(); // İlk 15 soru
-      case 'ameliyat sonrası':
-        return operatingRoomQuestions.take(10).toList(); // İlk 10 soru
-      case 'acil anestezi':
-        return anesthesiaQuestions.reversed.take(12).toList(); // Son 12 soru
+      case 'anestezi uygulama':
+      case 'anestezi uygulaması':
+        return anesthesiaApplicationQuestions;
+      case 'solunum sistemleri':
+        return respiratorySystemQuestions;
+      case 'kardiyovasküler monitörizasyon':
+        return cardiovascularMonitoringQuestions;
+      case 'farmakolojik prensipler':
+        return pharmacologicalPrinciplesQuestions;
+      case 'ameliyathane ortamı':
+        return operatingRoomEnvironmentQuestions;
+      case 'kardiyovasküler dışı monitörizasyon':
+        return nonCardiovascularMonitoringQuestions;
+      case 'anestezi iş istasyonu':
+        return anesthesiaWorkstationQuestions;
+      case 'inhalasyon anestezikleri':
+      case 'i̇nhalasyon anestezikleri':
+        return inhalationAnestheticsQuestions;
+      case 'intravenöz anestezikler':
+      case 'i̇ntravenöz anestezikler':
+        return intravenousAnestheticsQuestions;
+      case 'analjezik ajanlar':
+      case 'analjezik ajanları':
+        return analgesicAgentsQuestions;
+      case 'nöromüsküler blokaj ajanları':
+      case 'nöromüsküler bloker ajanlar':
+        return neuromuscularBlockingAgentsQuestions;
+      case 'kolinesteraz inhibitörleri':
+      case 'kolinesteraz inhibitörü':
+        return cholinesteraseInhibitorsQuestions;
+      case 'antikolinerjik ilaçlar':
+      case 'antikolinerjik':
+        return anticholinergicDrugsQuestions;
+      case 'adrenerjik agonistler ve antagonistler':
+      case 'adrenerjik agonist':
+      case 'adrenerjik antagonist':
+      case 'adrenerjik':
+        return adrenergicDrugsQuestions;
+      case 'hipotansif ajanlar':
+      case 'hipotansif':
+      case 'kontrollü hipotansiyon':
+        return localAnestheticsQuestions;
+      case 'havayolu yönetimi':
+      case 'bölüm 19 - havayolu yönetimi':
+        return airwayManagementQuestions;
+      case 'kardiyovasküler fizyoloji ve anestezi':
+      case 'kardiyovasküler fizyoloji':
+        return cardiovascularPhysiologyQuestions;
+      case 'lokal anestezikler':
+      case 'lokal anestezi':
+      case 'lokal anesteziği':
+        return localAnestheticsQuestions;
+      case 'yardımcı ilaçlar':
+      case 'anestezide yardımcı ilaçlar':
+      case 'antiemetikler':
+      case 'premedikasyon':
+        return auxiliaryDrugsQuestions;
+      case 'bölüm 18 - ameliyat öncesi değerlendirme':
+      case 'ameliyat öncesi değerlendirme':
+      case 'preoperatif değerlendirme':
+      case 'preoperatif':
+        return preoperativeAssessmentQuestions;
       default:
-        // Eğer eşleşen kategori bulunamazsa, anestezi sorularını döndür
-        return anesthesiaQuestions;
+        return [];
     }
   }
 

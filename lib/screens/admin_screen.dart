@@ -2,12 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../services/auth_service.dart';
 import '../theme/app_theme.dart';
-import '../data/respiratory_questions.dart';
-import '../data/anesthesia_station_questions.dart';
-import '../data/anesthesia_questions.dart';
-import '../data/operating_room_questions.dart';
-import '../data/cardiovascular_questions.dart';
-import '../data/cardiovascular_questions_2.dart';
+
+import '../data/anesthesia_application_questions.dart';
+import '../data/respiratory_system_questions.dart';
+import '../data/cardiovascular_monitoring_questions.dart';
+import '../data/pharmacological_principles_questions.dart';
+import '../data/operating_room_environment_questions.dart';
+import '../data/non_cardiovascular_monitoring_questions.dart';
+import '../data/anesthesia_workstation_questions.dart';
+import '../data/preoperative_assessment_questions.dart';
+import '../questions/airway_management_questions.dart';
+import '../questions/cardiovascular_physiology_questions.dart';
+
 import 'add_question_screen.dart';
 
 class AdminScreen extends StatefulWidget {
@@ -585,12 +591,17 @@ class _AdminScreenState extends State<AdminScreen>
       int totalQuestions = 0;
 
       // Her quiz için bir belge oluşturalım
-      final quizzes = [
-        'Solunum',
-        'Anestezi İstasyonu',
-        'Anestezi',
-        'Ameliyathane',
-        'Kardiyovasküler',
+      final List<String> quizzes = [
+        'Anestezi Uygulaması',
+        'Solunum Sistemleri',
+        'Kardiyovasküler Monitörizasyon',
+        'Farmakolojik Prensipler',
+        'Ameliyathane Ortamı',
+        'Kardiyovasküler Dışı Monitörizasyon',
+        'Anestezi İş İstasyonu',
+        'Preoperatif Değerlendirme',
+        'Bölüm 19 - Havayolu Yönetimi',
+        'Kardiyovasküler Fizyoloji ve Anestezi',
       ];
 
       // Ana quizzes koleksiyonunda quizleri oluşturalım
@@ -602,137 +613,270 @@ class _AdminScreenState extends State<AdminScreen>
         });
       }
 
-      // Şimdi her kategori için soruları ekleyelim
-      // Solunum soruları
-      if (respiratoryQuestions.isNotEmpty) {
+      // Şimda her kategori için soruları ekleyelim
+
+      // Anestezi Uygulaması soruları
+      if (anesthesiaApplicationQuestions.isNotEmpty) {
         print(
-          "Solunum quizi için sorular aktarılıyor: ${respiratoryQuestions.length} soru",
+          "Anestezi Uygulaması quizi için sorular aktarılıyor: ${anesthesiaApplicationQuestions.length} soru",
         );
-        for (var question in respiratoryQuestions) {
+        for (var question in anesthesiaApplicationQuestions) {
           await FirebaseFirestore.instance
               .collection('quizzes')
-              .doc('Solunum')
+              .doc('Anestezi Uygulaması')
               .collection('questions')
               .add({
                 'question': question.question,
                 'options': question.options,
                 'correctAnswerIndex': question.correctAnswerIndex,
                 'explanation': question.explanation,
+                'premises': question.premises,
+                'references': question.references,
+                'category': question.category,
+                'difficulty': question.difficulty,
                 'createdAt': FieldValue.serverTimestamp(),
               });
           totalQuestions++;
         }
-        print("Solunum quizi için sorular aktarıldı");
+        print("Anestezi Uygulaması quizi için sorular aktarıldı");
       }
 
-      // Anestezi İstasyonu soruları
-      if (anesthesiaStationQuestions.isNotEmpty) {
+      // Solunum Sistemleri soruları
+      if (respiratorySystemQuestions.isNotEmpty) {
         print(
-          "Anestezi İstasyonu quizi için sorular aktarılıyor: ${anesthesiaStationQuestions.length} soru",
+          "Solunum Sistemleri quizi için sorular aktarılıyor: ${respiratorySystemQuestions.length} soru",
         );
-        for (var question in anesthesiaStationQuestions) {
+        for (var question in respiratorySystemQuestions) {
           await FirebaseFirestore.instance
               .collection('quizzes')
-              .doc('Anestezi İstasyonu')
+              .doc('Solunum Sistemleri')
               .collection('questions')
               .add({
                 'question': question.question,
                 'options': question.options,
                 'correctAnswerIndex': question.correctAnswerIndex,
                 'explanation': question.explanation,
+                'premises': question.premises,
+                'references': question.references,
+                'category': question.category,
+                'difficulty': question.difficulty,
                 'createdAt': FieldValue.serverTimestamp(),
               });
           totalQuestions++;
         }
-        print("Anestezi İstasyonu quizi için sorular aktarıldı");
+        print("Solunum Sistemleri quizi için sorular aktarıldı");
       }
 
-      // Anestezi soruları
-      if (anesthesiaQuestions.isNotEmpty) {
+      // Kardiyovasküler Monitörizasyon soruları
+      if (cardiovascularMonitoringQuestions.isNotEmpty) {
         print(
-          "Anestezi quizi için sorular aktarılıyor: ${anesthesiaQuestions.length} soru",
+          "Kardiyovasküler Monitörizasyon quizi için sorular aktarılıyor: ${cardiovascularMonitoringQuestions.length} soru",
         );
-        for (var question in anesthesiaQuestions) {
+        for (var question in cardiovascularMonitoringQuestions) {
           await FirebaseFirestore.instance
               .collection('quizzes')
-              .doc('Anestezi')
+              .doc('Kardiyovasküler Monitörizasyon')
               .collection('questions')
               .add({
                 'question': question.question,
                 'options': question.options,
                 'correctAnswerIndex': question.correctAnswerIndex,
                 'explanation': question.explanation,
+                'premises': question.premises,
+                'references': question.references,
+                'category': question.category,
+                'difficulty': question.difficulty,
                 'createdAt': FieldValue.serverTimestamp(),
               });
           totalQuestions++;
         }
-        print("Anestezi quizi için sorular aktarıldı");
+        print("Kardiyovasküler Monitörizasyon quizi için sorular aktarıldı");
       }
 
-      // Ameliyathane soruları
-      if (operatingRoomQuestions.isNotEmpty) {
+      // Farmakolojik Prensipler soruları
+      if (pharmacologicalPrinciplesQuestions.isNotEmpty) {
         print(
-          "Ameliyathane quizi için sorular aktarılıyor: ${operatingRoomQuestions.length} soru",
+          "Farmakolojik Prensipler quizi için sorular aktarılıyor: ${pharmacologicalPrinciplesQuestions.length} soru",
         );
-        for (var question in operatingRoomQuestions) {
+        for (var question in pharmacologicalPrinciplesQuestions) {
           await FirebaseFirestore.instance
               .collection('quizzes')
-              .doc('Ameliyathane')
+              .doc('Farmakolojik Prensipler')
               .collection('questions')
               .add({
                 'question': question.question,
                 'options': question.options,
                 'correctAnswerIndex': question.correctAnswerIndex,
                 'explanation': question.explanation,
+                'premises': question.premises,
+                'references': question.references,
+                'category': question.category,
+                'difficulty': question.difficulty,
                 'createdAt': FieldValue.serverTimestamp(),
               });
           totalQuestions++;
         }
-        print("Ameliyathane quizi için sorular aktarıldı");
+        print("Farmakolojik Prensipler quizi için sorular aktarıldı");
       }
 
-      // Kardiyovasküler soruları
-      if (cardiovascularQuestions.isNotEmpty) {
+      // Ameliyathane Ortamı soruları
+      if (operatingRoomEnvironmentQuestions.isNotEmpty) {
         print(
-          "Kardiyovasküler quizi için sorular aktarılıyor: ${cardiovascularQuestions.length} soru",
+          "Ameliyathane Ortamı quizi için sorular aktarılıyor: ${operatingRoomEnvironmentQuestions.length} soru",
         );
-        for (var question in cardiovascularQuestions) {
+        for (var question in operatingRoomEnvironmentQuestions) {
           await FirebaseFirestore.instance
               .collection('quizzes')
-              .doc('Kardiyovasküler')
+              .doc('Ameliyathane Ortamı')
               .collection('questions')
               .add({
                 'question': question.question,
                 'options': question.options,
                 'correctAnswerIndex': question.correctAnswerIndex,
                 'explanation': question.explanation,
+                'premises': question.premises,
+                'references': question.references,
+                'category': question.category,
+                'difficulty': question.difficulty,
                 'createdAt': FieldValue.serverTimestamp(),
               });
           totalQuestions++;
         }
-        print("Kardiyovasküler quizi için sorular aktarıldı");
+        print("Ameliyathane Ortamı quizi için sorular aktarıldı");
       }
 
-      // Kardiyovasküler 2 soruları
-      if (cardiovascularQuestions2.isNotEmpty) {
+      // Kardiyovasküler Dışı Monitörizasyon soruları
+      if (nonCardiovascularMonitoringQuestions.isNotEmpty) {
         print(
-          "Kardiyovasküler quizi için ek sorular aktarılıyor: ${cardiovascularQuestions2.length} soru",
+          "Kardiyovasküler Dışı Monitörizasyon quizi için sorular aktarılıyor: ${nonCardiovascularMonitoringQuestions.length} soru",
         );
-        for (var question in cardiovascularQuestions2) {
+        for (var question in nonCardiovascularMonitoringQuestions) {
           await FirebaseFirestore.instance
               .collection('quizzes')
-              .doc('Kardiyovasküler')
+              .doc('Kardiyovasküler Dışı Monitörizasyon')
               .collection('questions')
               .add({
                 'question': question.question,
                 'options': question.options,
                 'correctAnswerIndex': question.correctAnswerIndex,
                 'explanation': question.explanation,
+                'premises': question.premises,
+                'references': question.references,
+                'category': question.category,
+                'difficulty': question.difficulty,
                 'createdAt': FieldValue.serverTimestamp(),
               });
           totalQuestions++;
         }
-        print("Kardiyovasküler quizi için ek sorular aktarıldı");
+        print(
+          "Kardiyovasküler Dışı Monitörizasyon quizi için sorular aktarıldı",
+        );
+      }
+
+      // Anestezi İş İstasyonu soruları
+      if (anesthesiaWorkstationQuestions.isNotEmpty) {
+        print(
+          "Anestezi İş İstasyonu quizi için sorular aktarılıyor: ${anesthesiaWorkstationQuestions.length} soru",
+        );
+        for (var question in anesthesiaWorkstationQuestions) {
+          await FirebaseFirestore.instance
+              .collection('quizzes')
+              .doc('Anestezi İş İstasyonu')
+              .collection('questions')
+              .add({
+                'question': question.question,
+                'options': question.options,
+                'correctAnswerIndex': question.correctAnswerIndex,
+                'explanation': question.explanation,
+                'premises': question.premises,
+                'references': question.references,
+                'category': question.category,
+                'difficulty': question.difficulty,
+                'createdAt': FieldValue.serverTimestamp(),
+              });
+          totalQuestions++;
+        }
+        print("Anestezi İş İstasyonu quizi için sorular aktarıldı");
+      }
+
+      // Preoperative Assessment soruları
+      if (preoperativeAssessmentQuestions.isNotEmpty) {
+        print(
+          "Preoperatif Değerlendirme quizi için sorular aktarılıyor: ${preoperativeAssessmentQuestions.length} soru",
+        );
+        for (var question in preoperativeAssessmentQuestions) {
+          await FirebaseFirestore.instance
+              .collection('quizzes')
+              .doc('Preoperatif Değerlendirme')
+              .collection('questions')
+              .add({
+                'question': question.question,
+                'options': question.options,
+                'correctAnswerIndex': question.correctAnswerIndex,
+                'explanation': question.explanation,
+                'premises': question.premises,
+                'references': question.references,
+                'category': question.category,
+                'difficulty': question.difficulty,
+                'createdAt': FieldValue.serverTimestamp(),
+              });
+          totalQuestions++;
+        }
+        print("Preoperatif Değerlendirme quizi için sorular aktarıldı");
+      }
+
+      // Bölüm 19 - Havayolu Yönetimi soruları
+      if (airwayManagementQuestions.isNotEmpty) {
+        print(
+          "Bölüm 19 - Havayolu Yönetimi quizi için sorular aktarılıyor: ${airwayManagementQuestions.length} soru",
+        );
+        for (var question in airwayManagementQuestions) {
+          await FirebaseFirestore.instance
+              .collection('quizzes')
+              .doc('Bölüm 19 - Havayolu Yönetimi')
+              .collection('questions')
+              .add({
+                'question': question.question,
+                'options': question.options,
+                'correctAnswerIndex': question.correctAnswerIndex,
+                'explanation': question.explanation,
+                'premises': question.premises,
+                'references': question.references,
+                'category': question.category,
+                'difficulty': question.difficulty,
+                'createdAt': FieldValue.serverTimestamp(),
+              });
+          totalQuestions++;
+        }
+        print("Bölüm 19 - Havayolu Yönetimi quizi için sorular aktarıldı");
+      }
+
+      // Kardiyovasküler Fizyoloji ve Anestezi soruları
+      if (cardiovascularPhysiologyQuestions.isNotEmpty) {
+        print(
+          "Kardiyovasküler Fizyoloji ve Anestezi quizi için sorular aktarılıyor: ${cardiovascularPhysiologyQuestions.length} soru",
+        );
+        for (var question in cardiovascularPhysiologyQuestions) {
+          await FirebaseFirestore.instance
+              .collection('quizzes')
+              .doc('Kardiyovasküler Fizyoloji ve Anestezi')
+              .collection('questions')
+              .add({
+                'question': question.question,
+                'options': question.options,
+                'correctAnswerIndex': question.correctAnswerIndex,
+                'explanation': question.explanation,
+                'premises': question.premises,
+                'references': question.references,
+                'category': question.category,
+                'difficulty': question.difficulty,
+                'createdAt': FieldValue.serverTimestamp(),
+              });
+          totalQuestions++;
+        }
+        print(
+          "Kardiyovasküler Fizyoloji ve Anestezi quizi için sorular aktarıldı",
+        );
       }
 
       // Yükleme tamamlandı, kategorileri yenile

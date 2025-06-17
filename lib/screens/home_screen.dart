@@ -1,33 +1,41 @@
-import 'package:anestezi/screens/mistakes_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:provider/provider.dart';
 import 'package:page_transition/page_transition.dart';
 import 'dart:ui';
 import 'dart:async';
 
-import '../services/auth_service.dart';
-import '../services/quiz_service.dart';
-import '../services/tutorial_service.dart';
+import '../models/question.dart';
 import '../models/user_activity.dart';
 import '../models/daily_question.dart';
 import '../models/quiz.dart';
-import '../models/question.dart';
-import '../screens/quiz_screen.dart';
-import '../screens/achievements_screen.dart';
-import '../theme/app_theme.dart';
-import '../data/anesthesia_questions.dart';
-import '../data/operating_room_questions.dart';
-import '../data/respiratory_questions.dart';
-import '../data/anesthesia_station_questions.dart';
-import '../data/cardiovascular_questions.dart';
-import '../data/cardiovascular_questions_2.dart';
-import '../widgets/interactive_tutorial.dart';
-import '../widgets/features_showcase.dart';
+import '../services/quiz_service.dart';
+import '../services/auth_service.dart';
+import '../services/tutorial_service.dart';
 import '../utils/event_bus.dart';
-
-import 'leaderboard_screen.dart';
-import 'profile_screen.dart';
+import '../widgets/features_showcase.dart';
+import '../widgets/interactive_tutorial.dart';
+import '../screens/quiz_screen.dart';
+import '../screens/mistakes_screen.dart';
+import '../screens/leaderboard_screen.dart';
+import '../screens/profile_screen.dart';
+import '../data/anesthesia_application_questions.dart';
+import '../data/respiratory_system_questions.dart';
+import '../data/cardiovascular_monitoring_questions.dart';
+import '../data/operating_room_environment_questions.dart';
+import '../data/anesthesia_workstation_questions.dart';
+import '../data/preoperative_assessment_questions.dart';
+import '../data/non_cardiovascular_monitoring_questions.dart';
+import '../data/pharmacological_principles_questions.dart';
+import '../data/inhalation_anesthetics_questions.dart';
+import '../data/intravenous_anesthetics_questions.dart';
+import '../data/analgesic_agents_questions.dart';
+import '../data/neuromuscular_blocking_agents_questions.dart';
+import '../data/cholinesterase_inhibitors_questions.dart';
+import '../data/anticholinergic_drugs_questions.dart';
+import '../data/adrenergic_drugs_questions.dart';
+import '../data/local_anesthetics_questions.dart';
+import '../data/auxiliary_drugs_questions.dart';
+import '../questions/airway_management_questions.dart';
+import '../questions/cardiovascular_physiology_questions.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -353,40 +361,416 @@ class QuizListScreen extends StatelessWidget {
   Widget _buildQuizList(BuildContext context) {
     final List<Map<String, dynamic>> quizCategories = [
       {
-        'title': 'Anestezi',
-        'icon': Icons.health_and_safety,
-        'questions': anesthesiaQuestions,
-        'color': Colors.blue.shade700,
+        'title': 'Anestezi Uygulaması',
+        'icon': Icons.medical_information,
+        'questions': anesthesiaApplicationQuestions,
+        'color': Colors.orange.shade700,
       },
       {
-        'title': 'Anestezi İstasyonu',
-        'icon': Icons.medical_services,
-        'questions': anesthesiaStationQuestions,
-        'color': Colors.purple.shade700,
-      },
-      {
-        'title': 'Kardiyovasküler 1',
-        'icon': Icons.favorite,
-        'questions': cardiovascularQuestions,
-        'color': Colors.red.shade700,
-      },
-      {
-        'title': 'Kardiyovasküler 2',
-        'icon': Icons.monitor_heart,
-        'questions': cardiovascularQuestions2,
-        'color': Colors.pink.shade700,
-      },
-      {
-        'title': 'Solunum',
+        'title': 'Solunum Sistemleri',
         'icon': Icons.air,
-        'questions': respiratoryQuestions,
+        'questions': respiratorySystemQuestions,
         'color': Colors.teal.shade700,
       },
       {
-        'title': 'Ameliyathane',
+        'title': 'Kardiyovasküler Monitörizasyon',
+        'icon': Icons.monitor_heart,
+        'questions': cardiovascularMonitoringQuestions,
+        'color': Colors.red.shade700,
+      },
+      {
+        'title': 'Ameliyathane Ortamı',
         'icon': Icons.local_hospital,
-        'questions': operatingRoomQuestions,
+        'questions': operatingRoomEnvironmentQuestions,
+        'color': Colors.deepPurple.shade700,
+      },
+      {
+        'title': 'Anestezi İş İstasyonu',
+        'icon': Icons.settings,
+        'questions': anesthesiaWorkstationQuestions,
         'color': Colors.indigo.shade700,
+      },
+      {
+        'title': 'Bölüm 18 - Ameliyat Öncesi Değerlendirme',
+        'icon': Icons.assignment_turned_in,
+        'questions': preoperativeAssessmentQuestions,
+        'color': Colors.green.shade700,
+      },
+      {
+        'title': 'Bölüm 19 - Havayolu Yönetimi',
+        'icon': Icons.masks,
+        'questions': airwayManagementQuestions,
+        'color': Colors.amber.shade700,
+      },
+      {
+        'title': 'Kardiyovasküler Fizyoloji ve Anestezi',
+        'icon': Icons.favorite,
+        'questions': cardiovascularPhysiologyQuestions,
+        'color': Colors.red.shade700,
+      },
+      {
+        'title': 'Klinik Farmakoloji',
+        'icon': Icons.medication,
+        'questions': <Question>[], // Boş liste, veriler eklenmeli
+        'color': Colors.green.shade700,
+      },
+      {
+        'title': 'Anestezi Yönetimi',
+        'icon': Icons.masks,
+        'questions': [], // Boş liste, veriler eklenmeli
+        'color': Colors.amber.shade700,
+      },
+      {
+        'title': 'Bölgesel Anestezi ve Ağrı Yönetimi',
+        'icon': Icons.healing,
+        'questions': [], // Boş liste, veriler eklenmeli
+        'color': Colors.deepOrange.shade700,
+      },
+      {
+        'title': 'Perioperatif ve Yoğun Bakım Tıbbı',
+        'icon': Icons.emergency,
+        'questions': [], // Boş liste, veriler eklenmeli
+        'color': Colors.cyan.shade700,
+      },
+      {
+        'title': 'Solunum Sistemleri',
+        'icon': Icons.air_rounded,
+        'questions': [], // Boş liste, veriler eklenmeli
+        'color': Colors.lightBlue.shade700,
+      },
+      {
+        'title': 'Kardiyovasküler Monitörizasyon',
+        'icon': Icons.monitor_heart_outlined,
+        'questions': [], // Boş liste, veriler eklenmeli
+        'color': Colors.redAccent.shade700,
+      },
+      {
+        'title': 'Kardiyovasküler Dışı Monitörizasyon',
+        'icon': Icons.sensors,
+        'questions': nonCardiovascularMonitoringQuestions,
+        'color': Colors.orange.shade700,
+      },
+      {
+        'title': 'Farmakolojik Prensipler',
+        'icon': Icons.science,
+        'questions': pharmacologicalPrinciplesQuestions,
+        'color': Colors.lightGreen.shade700,
+      },
+      {
+        'title': 'İnhalasyon Anestezikleri',
+        'icon': Icons.air_rounded,
+        'questions': inhalationAnestheticsQuestions,
+        'color': Colors.teal.shade700,
+      },
+      {
+        'title': 'İntravenöz Anestezikler',
+        'icon': Icons.local_hospital_outlined,
+        'questions': intravenousAnestheticsQuestions,
+        'color': Colors.indigo.shade700,
+      },
+      {
+        'title': 'Analjezik Ajanlar',
+        'icon': Icons.healing,
+        'questions': analgesicAgentsQuestions,
+        'color': Colors.brown.shade700,
+      },
+      {
+        'title': 'Nöromüsküler Blokaj Ajanları',
+        'icon': Icons.accessibility_new,
+        'questions': neuromuscularBlockingAgentsQuestions,
+        'color': Colors.blueGrey.shade700,
+      },
+      {
+        'title': 'Kolinesteraz İnhibitörleri',
+        'icon': Icons.science_outlined,
+        'questions': cholinesteraseInhibitorsQuestions,
+        'color': Colors.deepPurple.shade700,
+      },
+      {
+        'title': 'Antikolinerjik İlaçlar',
+        'icon': Icons.medication_liquid,
+        'questions': anticholinergicDrugsQuestions,
+        'color': Colors.lime.shade700,
+      },
+      {
+        'title': 'Adrenerjik Agonistler ve Antagonistler',
+        'icon': Icons.medication_outlined,
+        'questions': adrenergicDrugsQuestions,
+        'color': Colors.amber.shade700,
+      },
+      {
+        'title': 'Hipotansif Ajanlar',
+        'icon': Icons.trending_down,
+        'questions':
+            localAnestheticsQuestions, // Geçici olarak lokal anestezi sorularını kullan
+        'color': Colors.red.shade700,
+      },
+      {
+        'title': 'Lokal Anestezikler',
+        'icon': Icons.pin_drop,
+        'questions': localAnestheticsQuestions,
+        'color': Colors.green.shade700,
+      },
+      {
+        'title': 'Anestezide Yardımcı İlaçlar',
+        'icon': Icons.medication_liquid_outlined,
+        'questions': auxiliaryDrugsQuestions,
+        'color': Colors.orange.shade700,
+      },
+      // Anestezi Yönetimi kategorileri
+      {
+        'title': 'Preoperatif Değerlendirme',
+        'icon': Icons.assessment,
+        'questions': preoperativeAssessmentQuestions,
+        'color': Colors.blueGrey.shade700,
+      },
+      {
+        'title': 'Havayolu Yönetimi',
+        'icon': Icons.air,
+        'questions': [], // Boş liste, veriler eklenmeli
+        'color': Colors.lightBlue.shade700,
+      },
+      {
+        'title': 'Kardiyovasküler Fizyoloji',
+        'icon': Icons.favorite_border,
+        'questions': [], // Boş liste, veriler eklenmeli
+        'color': Colors.red.shade700,
+      },
+      {
+        'title': 'Kardiyovasküler Hastalıklarda Anestezi',
+        'icon': Icons.favorite,
+        'questions': [], // Boş liste, veriler eklenmeli
+        'color': Colors.redAccent.shade700,
+      },
+      {
+        'title': 'Kardiyovasküler Cerrahi Anestezisi',
+        'icon': Icons.monitor_heart,
+        'questions': [], // Boş liste, veriler eklenmeli
+        'color': Colors.deepOrange.shade700,
+      },
+      {
+        'title': 'Solunum Fizyolojisi',
+        'icon': Icons.air_rounded,
+        'questions': [], // Boş liste, veriler eklenmeli
+        'color': Colors.teal.shade700,
+      },
+      {
+        'title': 'Solunum Hastalıklarında Anestezi',
+        'icon': Icons.air_sharp,
+        'questions': [], // Boş liste, veriler eklenmeli
+        'color': Colors.cyan.shade700,
+      },
+      {
+        'title': 'Torasik Cerrahi Anestezisi',
+        'icon': Icons.airline_seat_flat,
+        'questions': [], // Boş liste, veriler eklenmeli
+        'color': Colors.blue.shade700,
+      },
+      {
+        'title': 'Nörofizyoloji',
+        'icon': Icons.psychology,
+        'questions': [], // Boş liste, veriler eklenmeli
+        'color': Colors.indigo.shade700,
+      },
+      {
+        'title': 'Nöroşirürji Anestezisi',
+        'icon': Icons.psychology_alt,
+        'questions': [], // Boş liste, veriler eklenmeli
+        'color': Colors.purple.shade700,
+      },
+      {
+        'title': 'Nörolojik Hastalıklarda Anestezi',
+        'icon': Icons.bubble_chart,
+        'questions': [], // Boş liste, veriler eklenmeli
+        'color': Colors.deepPurple.shade700,
+      },
+      {
+        'title': 'Nöromüsküler Hastalıklarda Anestezi',
+        'icon': Icons.accessibility,
+        'questions': [], // Boş liste, veriler eklenmeli
+        'color': Colors.blueGrey.shade700,
+      },
+      {
+        'title': 'Böbrek Fizyolojisi',
+        'icon': Icons.water_drop,
+        'questions': [], // Boş liste, veriler eklenmeli
+        'color': Colors.blue.shade700,
+      },
+      {
+        'title': 'Böbrek Hastalıklarında Anestezi',
+        'icon': Icons.water_drop_outlined,
+        'questions': [], // Boş liste, veriler eklenmeli
+        'color': Colors.cyan.shade700,
+      },
+      {
+        'title': 'Genitoüriner Cerrahi Anestezisi',
+        'icon': Icons.water,
+        'questions': [], // Boş liste, veriler eklenmeli
+        'color': Colors.lightBlue.shade700,
+      },
+      {
+        'title': 'Karaciğer Fizyolojisi',
+        'icon': Icons.spa,
+        'questions': [], // Boş liste, veriler eklenmeli
+        'color': Colors.amber.shade700,
+      },
+      {
+        'title': 'Karaciğer Hastalıklarında Anestezi',
+        'icon': Icons.spa_outlined,
+        'questions': [], // Boş liste, veriler eklenmeli
+        'color': Colors.orange.shade700,
+      },
+      {
+        'title': 'Endokrin Hastalıklarda Anestezi',
+        'icon': Icons.biotech,
+        'questions': [], // Boş liste, veriler eklenmeli
+        'color': Colors.green.shade700,
+      },
+      {
+        'title': 'Oftalmik Cerrahi Anestezisi',
+        'icon': Icons.visibility,
+        'questions': [], // Boş liste, veriler eklenmeli
+        'color': Colors.indigo.shade700,
+      },
+      {
+        'title': 'KBB Cerrahisi Anestezisi',
+        'icon': Icons.hearing,
+        'questions': [], // Boş liste, veriler eklenmeli
+        'color': Colors.purple.shade700,
+      },
+      {
+        'title': 'Ortopedik Cerrahi Anestezisi',
+        'icon': Icons.medical_services,
+        'questions': [], // Boş liste, veriler eklenmeli
+        'color': Colors.blueGrey.shade700,
+      },
+      {
+        'title': 'Travma ve Acil Cerrahi Anestezisi',
+        'icon': Icons.emergency,
+        'questions': [], // Boş liste, veriler eklenmeli
+        'color': Colors.red.shade700,
+      },
+      {
+        'title': 'Maternal ve Fetal Fizyoloji',
+        'icon': Icons.pregnant_woman,
+        'questions': [], // Boş liste, veriler eklenmeli
+        'color': Colors.pink.shade700,
+      },
+      {
+        'title': 'Obstetrik Anestezi',
+        'icon': Icons.child_friendly,
+        'questions': [], // Boş liste, veriler eklenmeli
+        'color': Colors.pinkAccent.shade700,
+      },
+      {
+        'title': 'Pediatrik Anestezi',
+        'icon': Icons.child_care,
+        'questions': [], // Boş liste, veriler eklenmeli
+        'color': Colors.lightBlue.shade700,
+      },
+      {
+        'title': 'Geriatrik Anestezi',
+        'icon': Icons.elderly,
+        'questions': [], // Boş liste, veriler eklenmeli
+        'color': Colors.grey.shade700,
+      },
+      {
+        'title': 'Ameliyathane Dışı Anestezi',
+        'icon': Icons.home_work,
+        'questions': [], // Boş liste, veriler eklenmeli
+        'color': Colors.teal.shade700,
+      },
+      // Bölgesel Anestezi & Ağrı kategorileri
+      {
+        'title': 'Spinal ve Epidural Bloklar',
+        'icon': Icons.straight,
+        'questions': [], // Boş liste, veriler eklenmeli
+        'color': Colors.indigo.shade700,
+      },
+      {
+        'title': 'Periferik Sinir Blokları',
+        'icon': Icons.device_hub,
+        'questions': [], // Boş liste, veriler eklenmeli
+        'color': Colors.deepPurple.shade700,
+      },
+      {
+        'title': 'Kronik Ağrı Yönetimi',
+        'icon': Icons.healing,
+        'questions': [], // Boş liste, veriler eklenmeli
+        'color': Colors.red.shade700,
+      },
+      {
+        'title': 'Postoperatif İyileşme Protokolleri',
+        'icon': Icons.health_and_safety,
+        'questions': [], // Boş liste, veriler eklenmeli
+        'color': Colors.green.shade700,
+      },
+      // Perioperatif & Yoğun Bakım kategorileri
+      {
+        'title': 'Sıvı-Elektrolit Bozuklukları',
+        'icon': Icons.water_drop,
+        'questions': [], // Boş liste, veriler eklenmeli
+        'color': Colors.blue.shade700,
+      },
+      {
+        'title': 'Asit-Baz Dengesi',
+        'icon': Icons.balance,
+        'questions': [], // Boş liste, veriler eklenmeli
+        'color': Colors.amber.shade700,
+      },
+      {
+        'title': 'Sıvı Yönetimi ve Kan Ürünleri',
+        'icon': Icons.bloodtype,
+        'questions': [], // Boş liste, veriler eklenmeli
+        'color': Colors.red.shade700,
+      },
+      {
+        'title': 'Termoregülasyon',
+        'icon': Icons.thermostat,
+        'questions': [], // Boş liste, veriler eklenmeli
+        'color': Colors.orange.shade700,
+      },
+      {
+        'title': 'Perioperatif Beslenme',
+        'icon': Icons.restaurant_menu,
+        'questions': [], // Boş liste, veriler eklenmeli
+        'color': Colors.green.shade700,
+      },
+      {
+        'title': 'Anestezi Komplikasyonları',
+        'icon': Icons.warning,
+        'questions': [], // Boş liste, veriler eklenmeli
+        'color': Colors.deepOrange.shade700,
+      },
+      {
+        'title': 'Kardiyopulmoner Resüsitasyon',
+        'icon': Icons.favorite_border,
+        'questions': [], // Boş liste, veriler eklenmeli
+        'color': Colors.red.shade700,
+      },
+      {
+        'title': 'Postanestezi Bakımı',
+        'icon': Icons.hotel,
+        'questions': [], // Boş liste, veriler eklenmeli
+        'color': Colors.indigo.shade700,
+      },
+      {
+        'title': 'Yoğun Bakımda Klinik Sorunlar',
+        'icon': Icons.local_hospital,
+        'questions': [], // Boş liste, veriler eklenmeli
+        'color': Colors.blue.shade700,
+      },
+      {
+        'title': 'Mekanik Ventilasyon',
+        'icon': Icons.air,
+        'questions': [], // Boş liste, veriler eklenmeli
+        'color': Colors.cyan.shade700,
+      },
+      {
+        'title': 'Hasta Güvenliği ve Kalite',
+        'icon': Icons.verified_user,
+        'questions': [], // Boş liste, veriler eklenmeli
+        'color': Colors.green.shade700,
       },
     ];
 
@@ -397,7 +781,9 @@ class QuizListScreen extends StatelessWidget {
       itemCount: quizCategories.length,
       itemBuilder: (context, index) {
         final category = quizCategories[index];
-        final questionCount = (category['questions'] as List<Question>).length;
+        final questions = category['questions'] as List<dynamic>;
+        final questionCount =
+            questions is List<Question> ? questions.length : 0;
 
         return Container(
           margin: const EdgeInsets.only(bottom: 16.0),
@@ -464,7 +850,6 @@ class QuizListScreen extends StatelessWidget {
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           ),
-                          const SizedBox(height: 2),
                           Text(
                             '$questionCount Soru',
                             style: TextStyle(
@@ -1693,6 +2078,16 @@ class _HomeContentState extends State<HomeContent> {
         return Icons.local_hospital;
       case 'anestezi istasyonu':
         return Icons.medical_services;
+      case 'anestezi uygulaması':
+        return Icons.medical_information;
+      case 'solunum sistemleri':
+        return Icons.air;
+      case 'kardiyovasküler monitörizasyon':
+        return Icons.monitor_heart;
+      case 'farmakolojik prensipler':
+        return Icons.science;
+      case 'ameliyathane ortamı':
+        return Icons.local_hospital;
       default:
         return Icons.quiz;
     }
@@ -1937,24 +2332,27 @@ class _HomeContentState extends State<HomeContent> {
       List<Question> questions = [];
 
       switch (categoryName.toLowerCase()) {
-        case 'anestezi':
-          questions = anesthesiaQuestions;
+        case 'anestezi uygulaması':
+          questions = anesthesiaApplicationQuestions;
           break;
-        case 'kardiyovasküler':
-        case 'kardiyovasküler 1':
-          questions = cardiovascularQuestions;
+        case 'solunum sistemleri':
+          questions = respiratorySystemQuestions;
           break;
-        case 'kardiyovasküler 2':
-          questions = cardiovascularQuestions2;
+        case 'kardiyovasküler monitörizasyon':
+          questions = cardiovascularMonitoringQuestions;
           break;
-        case 'solunum':
-          questions = respiratoryQuestions;
+        case 'farmakolojik prensipler':
+          questions = pharmacologicalPrinciplesQuestions;
           break;
-        case 'ameliyathane':
-          questions = operatingRoomQuestions;
+        case 'ameliyathane ortamı':
+          questions = operatingRoomEnvironmentQuestions;
           break;
-        case 'anestezi istasyonu':
-          questions = anesthesiaStationQuestions;
+        case 'preoperatif değerlendirme':
+        case 'bölüm 18 - ameliyat öncesi değerlendirme':
+          questions = preoperativeAssessmentQuestions;
+          break;
+        default:
+          questions = anesthesiaApplicationQuestions;
           break;
       }
 
@@ -2386,30 +2784,6 @@ class _HomeContentState extends State<HomeContent> {
                                                 ),
                                               ),
                                             ],
-                                          ),
-                                        ),
-                                        Container(
-                                          padding: const EdgeInsets.symmetric(
-                                            horizontal: 8,
-                                            vertical: 4,
-                                          ),
-                                          decoration: BoxDecoration(
-                                            color: _getSuccessRateColor(
-                                              successRate,
-                                            ).withOpacity(0.2),
-                                            borderRadius: BorderRadius.circular(
-                                              20,
-                                            ),
-                                          ),
-                                          child: Text(
-                                            '%$successRate',
-                                            style: TextStyle(
-                                              color: _getSuccessRateColor(
-                                                successRate,
-                                              ),
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.bold,
-                                            ),
                                           ),
                                         ),
                                       ],
