@@ -232,20 +232,20 @@ class _LoginScreenState extends State<LoginScreen>
                           children: [
                             // Arka plan ışıltıları
                             Container(
-                              width: 130,
-                              height: 130,
+                              width: 250,
+                              height: 250,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 gradient: RadialGradient(
                                   colors: [
-                                    Colors.blue.withOpacity(0.2),
+                                    Colors.cyan.withOpacity(0.15),
                                     Colors.transparent,
                                   ],
                                 ),
                               ),
                             ),
 
-                            // Logo
+                            // Logo - ALP Logosu
                             TweenAnimationBuilder<double>(
                               tween: Tween(begin: 0.8, end: 1.0),
                               duration: const Duration(seconds: 2),
@@ -254,32 +254,82 @@ class _LoginScreenState extends State<LoginScreen>
                                 return Transform.scale(
                                   scale: value,
                                   child: Container(
-                                    padding: const EdgeInsets.all(3),
+                                    width: 220,
+                                    height: 220,
                                     decoration: BoxDecoration(
                                       shape: BoxShape.circle,
-                                      gradient: LinearGradient(
-                                        colors: [
-                                          Colors.purple.shade500,
-                                          Colors.blue,
-                                        ],
-                                        begin: Alignment.topLeft,
-                                        end: Alignment.bottomRight,
-                                      ),
+                                      color: Colors.white,
                                       boxShadow: [
                                         BoxShadow(
-                                          color: Colors.purple.withOpacity(0.3),
-                                          blurRadius: 15,
-                                          spreadRadius: 2,
+                                          color: Colors.cyan.withOpacity(0.3),
+                                          blurRadius: 20,
+                                          spreadRadius: 5,
+                                        ),
+                                        BoxShadow(
+                                          color: Colors.blue.withOpacity(0.2),
+                                          blurRadius: 30,
+                                          spreadRadius: 10,
                                         ),
                                       ],
                                     ),
-                                    child: CircleAvatar(
-                                      radius: 48,
-                                      backgroundColor: Colors.grey[900],
-                                      child: const Icon(
-                                        Icons.quiz,
-                                        color: Colors.white,
-                                        size: 52,
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(110),
+                                      child: Image.asset(
+                                        'assets/images/logo.png',
+                                        width: 220,
+                                        height: 220,
+                                        fit: BoxFit.cover,
+                                        errorBuilder: (
+                                          context,
+                                          error,
+                                          stackTrace,
+                                        ) {
+                                          return Container(
+                                            width: 220,
+                                            height: 220,
+                                            decoration: BoxDecoration(
+                                              gradient: LinearGradient(
+                                                begin: Alignment.topLeft,
+                                                end: Alignment.bottomRight,
+                                                colors: [
+                                                  const Color(0xFF1E88E5),
+                                                  const Color(0xFF26C6DA),
+                                                  const Color(0xFF0D47A1),
+                                                ],
+                                                stops: const [0.0, 0.5, 1.0],
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(110),
+                                            ),
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Icon(
+                                                  Icons.favorite,
+                                                  color: Colors.red.shade400,
+                                                  size: 36,
+                                                ),
+                                                const SizedBox(height: 8),
+                                                const Text(
+                                                  'ALP',
+                                                  style: TextStyle(
+                                                    fontSize: 32,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Colors.white,
+                                                    letterSpacing: 3,
+                                                  ),
+                                                ),
+                                                const SizedBox(height: 4),
+                                                Icon(
+                                                  Icons.medical_services,
+                                                  color: Colors.green.shade400,
+                                                  size: 24,
+                                                ),
+                                              ],
+                                            ),
+                                          );
+                                        },
                                       ),
                                     ),
                                   ),
@@ -291,36 +341,7 @@ class _LoginScreenState extends State<LoginScreen>
 
                         const SizedBox(height: 24),
 
-                        // Başlık metni
-                        ShaderMask(
-                          shaderCallback:
-                              (bounds) => LinearGradient(
-                                colors: [
-                                  Colors.purple.shade400,
-                                  Colors.blue.shade400,
-                                ],
-                                begin: Alignment.topLeft,
-                                end: Alignment.bottomRight,
-                              ).createShader(bounds),
-                          child: const Text(
-                            'Quiz Uygulaması',
-                            style: TextStyle(
-                              fontSize: 28,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-
-                        const SizedBox(height: 8),
-
-                        const Text(
-                          'Bilgini test et, arkadaşlarınla yarış',
-                          style: TextStyle(fontSize: 14, color: Colors.grey),
-                          textAlign: TextAlign.center,
-                        ),
-
-                        const SizedBox(height: 30),
+                        const SizedBox(height: 40),
 
                         // Form alanı
                         Container(
