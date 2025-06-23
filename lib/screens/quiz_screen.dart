@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'dart:math';
 
 import '../models/question.dart';
@@ -7,6 +8,7 @@ import '../services/quiz_service.dart';
 import '../models/quiz.dart';
 import 'quiz_result_screen.dart';
 import '../utils/event_bus.dart';
+import '../utils/snackbar_utils.dart';
 
 class QuizScreen extends StatefulWidget {
   final String categoryName;
@@ -87,76 +89,14 @@ class _QuizScreenState extends State<QuizScreen>
       // Quiz ilerlemesini kaydet
       await _quizService.saveQuizProgress(quiz);
 
+      // Ana sayfayı yenilemek için EventBus bildirimi gönder
+      EventBus().fireMistakesUpdated(true);
+      print("Quiz ilerleme kaydedildi - Ana sayfa yenilenecek");
+
       // Başarılı mesajı (opsiyonel)
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Container(
-            padding: const EdgeInsets.symmetric(vertical: 12),
-            child: Row(
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [Colors.green.shade400, Colors.green.shade600],
-                    ),
-                    shape: BoxShape.circle,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.green.withOpacity(0.3),
-                        blurRadius: 8,
-                        offset: const Offset(0, 2),
-                      ),
-                    ],
-                  ),
-                  child: const Icon(
-                    Icons.check_rounded,
-                    color: Colors.white,
-                    size: 22,
-                  ),
-                ),
-                const SizedBox(width: 16),
-                const Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        'Başarıyla Kaydedildi',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                          letterSpacing: 0.3,
-                        ),
-                      ),
-                      SizedBox(height: 2),
-                      Text(
-                        'Quiz ilerlemeniz kaydedilmiştir',
-                        style: TextStyle(
-                          color: Colors.white70,
-                          fontSize: 13,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-          backgroundColor: Color(0xFF1a237e),
-          behavior: SnackBarBehavior.floating,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
-          ),
-          margin: const EdgeInsets.all(16),
-          duration: const Duration(seconds: 3),
-          animation: CurvedAnimation(
-            parent: const AlwaysStoppedAnimation(1),
-            curve: Curves.easeOutCirc,
-          ),
-        ),
+      SnackBarUtils.showSuccessSnackBar(
+        context,
+        'Quiz ilerlemeniz kaydedilmiştir',
       );
     } catch (e) {
       print('Quiz ilerleme kaydetme hatası: $e');
@@ -871,12 +811,7 @@ class _QuizScreenState extends State<QuizScreen>
         if (widget.isMistakesMode) {
           // Eksikler modunda direkt geri dön
           Navigator.pop(context);
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Pratik tamamlandı!'),
-              backgroundColor: Colors.green,
-            ),
-          );
+          SnackBarUtils.showSuccessSnackBar(context, 'Pratik tamamlandı!');
         } else {
           // Normal quiz modunda sonuç sayfasına git
           Navigator.pushReplacement(
@@ -893,19 +828,15 @@ class _QuizScreenState extends State<QuizScreen>
         }
       } else {
         print('HATA: Quiz tamamlanamadı veya veritabanına kaydedilemedi');
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Quiz tamamlanırken bir hata oluştu'),
-            backgroundColor: Colors.red,
-          ),
+        SnackBarUtils.showErrorSnackBar(
+          context,
+          'Quiz tamamlanırken bir hata oluştu',
         );
       }
     } catch (e) {
       print('_onCompleteQuiz hatası: $e');
       if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Hata: $e'), backgroundColor: Colors.red),
-      );
+      SnackBarUtils.showErrorSnackBar(context, 'Hata: $e');
     }
   }
 }

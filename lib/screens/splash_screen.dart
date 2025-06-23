@@ -570,7 +570,7 @@ class _SplashScreenState extends State<SplashScreen>
         const SizedBox(width: 20),
         // Yükleniyor yazısı
         Text(
-          'Sistem hazırlanıyor...',
+          'Anestezi bilgileriniz yükleniyor...',
           style: TextStyle(
             color: Colors.white.withOpacity(0.8),
             fontSize: 14,

@@ -37,13 +37,6 @@ class TutorialService {
         icon: Icons.play_circle_filled,
         color: Colors.green,
       ),
-      TutorialStep(
-        title: 'Rozet Sistemi',
-        description:
-            'Quizleri tamamlayarak ve özel görevleri yerine getirerek rozetler kazanın ve profilinizi zenginleştirin.',
-        icon: Icons.diamond,
-        color: Colors.amber,
-      ),
     ];
   }
 
@@ -120,30 +113,51 @@ class TutorialService {
 
   // Tanıtımın gösterilip gösterilmediğini kontrol et
   Future<bool> shouldShowTutorial() async {
-    final prefs = await SharedPreferences.getInstance();
-    return !(prefs.getBool(_tutorialShownKey) ?? false);
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final hasShown = prefs.getBool(_tutorialShownKey) ?? false;
+      print('shouldShowTutorial: $hasShown');
+      return !hasShown;
+    } catch (e) {
+      print('shouldShowTutorial error: $e');
+      return true; // Hata durumunda tanıtımı göster
+    }
   }
 
   // Tanıtımın gösterildiğini kaydet
   Future<void> markTutorialAsShown() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool(_tutorialShownKey, true);
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setBool(_tutorialShownKey, true);
+      print('Tutorial marked as shown');
+    } catch (e) {
+      print('markTutorialAsShown error: $e');
+    }
   }
 
   // Özellik gösterimlerinin durumunu kontrol et
   Future<bool> shouldShowFeature(String featureKey) async {
-    final prefs = await SharedPreferences.getInstance();
-    final featuresShown = prefs.getStringList(_featuresShownKey) ?? [];
-    return !featuresShown.contains(featureKey);
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final featuresShown = prefs.getStringList(_featuresShownKey) ?? [];
+      return !featuresShown.contains(featureKey);
+    } catch (e) {
+      print('shouldShowFeature error: $e');
+      return true; // Hata durumunda özelliği göster
+    }
   }
 
   // Özellik gösterimini kaydet
   Future<void> markFeatureAsShown(String featureKey) async {
-    final prefs = await SharedPreferences.getInstance();
-    final featuresShown = prefs.getStringList(_featuresShownKey) ?? [];
-    if (!featuresShown.contains(featureKey)) {
-      featuresShown.add(featureKey);
-      await prefs.setStringList(_featuresShownKey, featuresShown);
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final featuresShown = prefs.getStringList(_featuresShownKey) ?? [];
+      if (!featuresShown.contains(featureKey)) {
+        featuresShown.add(featureKey);
+        await prefs.setStringList(_featuresShownKey, featuresShown);
+      }
+    } catch (e) {
+      print('markFeatureAsShown error: $e');
     }
   }
 

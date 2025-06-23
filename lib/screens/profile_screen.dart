@@ -10,9 +10,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import '../services/leaderboard_service.dart';
+import 'dart:math' as math;
+import '../utils/snackbar_utils.dart';
 
 import 'login_screen.dart';
-import 'achievements_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -33,26 +34,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
   StreamSubscription? _rankSubscription;
   int _currentRank = 0;
 
-  bool _isLoading = true;
+  bool _isLoading = false;
   bool _isUploading = false;
   Map<String, dynamic>? _userProfile;
   UserActivity? _userActivity;
-  List<Map<String, dynamic>> _userActivities = [];
   File? _imageFile;
-
-  // Gerçek zamanlı veri izleyici - otomatik güncelleme
-  Stream<DocumentSnapshot> _getUserActivityStream() {
-    final userId = _authService.currentUser?.uid;
-    if (userId != null) {
-      return _firestore.collection('userActivities').doc(userId).snapshots();
-    }
-    // Eğer kullanıcı girişi yoksa boş stream döndür
-    return Stream.empty();
-  }
 
   @override
   void initState() {
     super.initState();
+    _isLoading = false;
     _loadUserData();
     _subscribeToRank();
   }
@@ -78,207 +69,271 @@ class _ProfileScreenState extends State<ProfileScreen> {
     super.dispose();
   }
 
-  // Kullanıcı verilerini yükle
   Future<void> _loadUserData() async {
-    setState(() {
-      _isLoading = true;
-    });
-
     try {
-      // Varsayılan profil ayarlarını oluştur
-      await _userService.createDefaultUserSettings();
+      // Kullanıcı profil bilgilerini getir
+      final userDoc =
+          await _firestore
+              .collection('users')
+              .doc(_authService.currentUser!.uid)
+              .get();
 
-      // Kullanıcı profilini getir
-      final userProfile = await _userService.getUserProfile();
+      if (userDoc.exists) {
+        _userProfile = userDoc.data();
+      }
 
-      // Kullanıcı aktivitesini getir
-      final userActivity = await _quizService.getUserActivity();
+      // Kullanıcı aktivite bilgilerini getir
+      final userActivityDoc =
+          await _firestore
+              .collection('userActivities')
+              .doc(_authService.currentUser!.uid)
+              .get();
 
-      // Son aktiviteleri getir
-      final userActivities = await _userService.getUserActivities();
+      if (userActivityDoc.exists) {
+        try {
+          _userActivity = UserActivity.fromFirestore(userActivityDoc);
+        } catch (e) {
+          print('UserActivity dönüştürme hatası: $e');
+        }
+      }
 
-      setState(() {
-        _userProfile = userProfile;
-        _userActivity = userActivity;
-        _userActivities = userActivities;
-        _isLoading = false;
-      });
+      if (mounted) {
+        setState(() {});
+      }
     } catch (e) {
-      print('Kullanıcı verilerini yükleme hatası: $e');
-      setState(() {
-        _isLoading = false;
-      });
+      print('Kullanıcı verileri yükleme hatası: $e');
     }
   }
 
   Future<void> _pickImage() async {
     try {
-      setState(() {
-        _isLoading = true;
-      });
-
-      // Galeri ve kamera seçeneklerini göster
-      showModalBottomSheet(
+      // Ekran ortasında dialog göster - Tüm cihazlarda çalışacak
+      final result = await showDialog<String>(
         context: context,
-        backgroundColor: Colors.transparent,
+        barrierDismissible: true,
         builder: (context) {
           final size = MediaQuery.of(context).size;
-          final bottomPadding = MediaQuery.of(context).viewPadding.bottom;
+          final isTablet = size.shortestSide >= 600;
 
-          return Container(
-            height: size.height * 0.28 + bottomPadding,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [Colors.indigo.shade900, Colors.black],
-              ),
-              borderRadius: const BorderRadius.vertical(
-                top: Radius.circular(30),
-              ),
-            ),
-            child: Column(
-              children: [
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 20,
-                    vertical: 16,
-                  ),
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [Colors.indigo.shade800, Colors.purple.shade900],
-                    ),
-                    borderRadius: const BorderRadius.vertical(
-                      top: Radius.circular(30),
-                    ),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        'Profil Fotoğrafı',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
-                      IconButton(
-                        icon: const Icon(
-                          Icons.close,
-                          color: Colors.white,
-                          size: 22,
-                        ),
-                        onPressed: () => Navigator.pop(context),
-                        padding: EdgeInsets.zero,
-                        constraints: const BoxConstraints(),
-                      ),
-                    ],
-                  ),
+          // Responsive sizing
+          final dialogWidth =
+              isTablet
+                  ? math.min(size.width * 0.5, 400.0)
+                  : math.min(size.width * 0.85, 320.0);
+          final dialogHeight = isTablet ? 280.0 : 240.0;
+
+          return Dialog(
+            backgroundColor: Colors.transparent,
+            child: Container(
+              width: dialogWidth,
+              height: dialogHeight,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [Colors.indigo.shade900, Colors.purple.shade900],
                 ),
-                Expanded(
-                  child: Padding(
-                    padding: EdgeInsets.fromLTRB(
-                      16,
-                      16,
-                      16,
-                      16 + bottomPadding,
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.3),
+                    blurRadius: 20,
+                    spreadRadius: 5,
+                  ),
+                ],
+              ),
+              child: Column(
+                children: [
+                  // Header
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 16,
+                    ),
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [
+                          Colors.indigo.shade800,
+                          Colors.purple.shade800,
+                        ],
+                      ),
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(20),
+                        topRight: Radius.circular(20),
+                      ),
                     ),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        _buildImageOption(
-                          icon: Icons.photo_library,
-                          title: 'Galeriden\nSeç',
-                          onTap: () async {
-                            Navigator.pop(context);
-                            final XFile? image = await _imagePicker.pickImage(
-                              source: ImageSource.gallery,
-                              maxWidth: 800,
-                              maxHeight: 800,
-                              imageQuality: 85,
-                            );
-                            if (image != null) {
-                              setState(() {
-                                _imageFile = File(image.path);
-                              });
-                              await _uploadImage();
-                            }
-                          },
-                          size: size,
+                        const Text(
+                          'Profil Fotoğrafı',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
                         ),
-                        _buildImageOption(
-                          icon: Icons.camera_alt,
-                          title: 'Fotoğraf\nÇek',
-                          onTap: () async {
-                            Navigator.pop(context);
-                            final XFile? image = await _imagePicker.pickImage(
-                              source: ImageSource.camera,
-                              maxWidth: 800,
-                              maxHeight: 800,
-                              imageQuality: 85,
-                            );
-                            if (image != null) {
-                              setState(() {
-                                _imageFile = File(image.path);
-                              });
-                              await _uploadImage();
-                            }
-                          },
-                          size: size,
+                        GestureDetector(
+                          onTap: () => Navigator.pop(context),
+                          child: Container(
+                            padding: const EdgeInsets.all(4),
+                            decoration: BoxDecoration(
+                              color: Colors.white.withOpacity(0.2),
+                              shape: BoxShape.circle,
+                            ),
+                            child: const Icon(
+                              Icons.close,
+                              color: Colors.white,
+                              size: 18,
+                            ),
+                          ),
                         ),
                       ],
                     ),
                   ),
-                ),
-              ],
+                  // Content
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              _buildImageOptionDialog(
+                                icon: Icons.photo_library,
+                                title: 'Galeriden\nSeç',
+                                onTap: () => Navigator.pop(context, 'gallery'),
+                                isTablet: isTablet,
+                              ),
+                              _buildImageOptionDialog(
+                                icon: Icons.camera_alt,
+                                title: 'Fotoğraf\nÇek',
+                                onTap: () => Navigator.pop(context, 'camera'),
+                                isTablet: isTablet,
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           );
         },
       );
+
+      // Dialog kapandıktan sonra seçimi işle
+      if (result != null && mounted) {
+        setState(() {
+          _isLoading = true;
+        });
+
+        try {
+          XFile? image;
+          if (result == 'gallery') {
+            image = await _imagePicker.pickImage(
+              source: ImageSource.gallery,
+              maxWidth: 800,
+              maxHeight: 800,
+              imageQuality: 85,
+            );
+          } else if (result == 'camera') {
+            image = await _imagePicker.pickImage(
+              source: ImageSource.camera,
+              maxWidth: 800,
+              maxHeight: 800,
+              imageQuality: 85,
+            );
+          }
+
+          if (image != null && mounted) {
+            setState(() {
+              _imageFile = File(image!.path);
+            });
+            await _uploadImage();
+          }
+        } catch (e) {
+          print('Görsel seçme hatası: $e');
+          if (mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: const Text('Görsel seçilirken bir hata oluştu'),
+                backgroundColor: Colors.red.shade700,
+              ),
+            );
+          }
+        } finally {
+          if (mounted) {
+            setState(() {
+              _isLoading = false;
+            });
+          }
+        }
+      }
     } catch (e) {
-      print('Görsel seçme hatası: $e');
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Görsel seçilirken bir hata oluştu')),
-      );
-    } finally {
-      setState(() {
-        _isLoading = false;
-      });
+      print('Dialog açma hatası: $e');
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: const Text('Bir hata oluştu, tekrar deneyin'),
+            backgroundColor: Colors.red.shade700,
+          ),
+        );
+      }
     }
   }
 
-  Widget _buildImageOption({
+  Widget _buildImageOptionDialog({
     required IconData icon,
     required String title,
     required VoidCallback onTap,
-    required Size size,
+    required bool isTablet,
   }) {
-    final buttonWidth = size.width * 0.35;
-    final buttonHeight = size.height * 0.12;
+    // Dialog için optimize edilmiş boyutlar
+    final buttonWidth = isTablet ? 140.0 : 110.0;
+    final buttonHeight = isTablet ? 120.0 : 100.0;
+    final iconSize = isTablet ? 32.0 : 28.0;
+    final fontSize = isTablet ? 13.0 : 11.0;
 
     return GestureDetector(
       onTap: onTap,
       child: Container(
         width: buttonWidth,
         height: buttonHeight,
-        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
         decoration: BoxDecoration(
-          color: Colors.white.withOpacity(0.1),
+          color: Colors.white.withOpacity(0.15),
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: Colors.white.withOpacity(0.2)),
+          border: Border.all(color: Colors.white.withOpacity(0.3), width: 1.5),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.2),
+              blurRadius: 8,
+              offset: const Offset(0, 2),
+            ),
+          ],
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icon, color: Colors.white, size: buttonHeight * 0.3),
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.2),
+                shape: BoxShape.circle,
+              ),
+              child: Icon(icon, color: Colors.white, size: iconSize),
+            ),
             const SizedBox(height: 8),
             Text(
               title,
               style: TextStyle(
                 color: Colors.white,
-                fontSize: buttonHeight * 0.13,
-                fontWeight: FontWeight.w500,
+                fontSize: fontSize,
+                fontWeight: FontWeight.w600,
               ),
               textAlign: TextAlign.center,
             ),
@@ -289,15 +344,28 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Future<void> _uploadImage() async {
-    if (_imageFile == null) return;
+    if (_imageFile == null) {
+      // Eğer dosya yoksa loading'i kapat
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
+      }
+      return;
+    }
 
     try {
-      setState(() {
-        _isLoading = true;
-      });
+      // Loading zaten _pickImage'de true yapıldı, tekrar yapmaya gerek yok
 
       final user = _auth.currentUser;
-      if (user == null) return;
+      if (user == null) {
+        if (mounted) {
+          setState(() {
+            _isLoading = false;
+          });
+        }
+        return;
+      }
 
       // Eski profil fotoğrafını sil
       if (user.photoURL != null) {
@@ -327,27 +395,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
         'lastUpdated': FieldValue.serverTimestamp(),
       });
 
-      // Aktivite ekle
-      await _userService.addActivity(
-        type: 'profile_update',
-        title: 'Profil fotoğrafınız güncellendi',
-      );
-
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Profil fotoğrafı güncellendi')),
-      );
-
       // Kullanıcı verilerini yeniden yükle
       await _loadUserData();
+
+      print('DEBUG: Profil fotoğrafı başarıyla yüklendi');
     } catch (e) {
       print('Fotoğraf yükleme hatası: $e');
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Fotoğraf yüklenirken bir hata oluştu')),
-      );
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Fotoğraf yüklenirken bir hata oluştu')),
+        );
+      }
     } finally {
-      setState(() {
-        _isLoading = false;
-      });
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
+      }
     }
   }
 
@@ -382,47 +446,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
             const SizedBox(width: 8),
           ],
         ),
-        body: StreamBuilder<DocumentSnapshot>(
-          stream: _getUserActivityStream(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting &&
-                _isLoading) {
-              return const Center(child: CircularProgressIndicator());
-            }
-
-            if (snapshot.hasData &&
-                snapshot.data != null &&
-                snapshot.data!.exists) {
-              try {
-                _userActivity = UserActivity.fromFirestore(snapshot.data!);
-              } catch (e) {
-                print('UserActivity dönüştürme hatası: $e');
-              }
-            }
-
-            return LayoutBuilder(
-              builder: (context, constraints) {
-                return SingleChildScrollView(
-                  physics: const AlwaysScrollableScrollPhysics(),
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(
-                      minHeight: constraints.maxHeight,
-                    ),
-                    child: IntrinsicHeight(
-                      child: Padding(
-                        padding: EdgeInsets.only(bottom: bottomPadding + 80),
-                        child: Column(
-                          children: [
-                            _buildProfileHeader(),
-                            _buildStats(),
-                            Expanded(child: _buildAchievements()),
-                          ],
-                        ),
-                      ),
+        body: LayoutBuilder(
+          builder: (context, constraints) {
+            return SingleChildScrollView(
+              physics: const AlwaysScrollableScrollPhysics(),
+              child: ConstrainedBox(
+                constraints: BoxConstraints(minHeight: constraints.maxHeight),
+                child: IntrinsicHeight(
+                  child: Padding(
+                    padding: EdgeInsets.only(bottom: bottomPadding + 80),
+                    child: Column(
+                      children: [
+                        _buildProfileHeader(),
+                        _buildStats(),
+                        const SizedBox(height: 20),
+                      ],
                     ),
                   ),
-                );
-              },
+                ),
+              ),
             );
           },
         ),
@@ -674,12 +716,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                           // ignore: use_build_context_synchronously
                           if (success && context.mounted) {
-                            // Aktivite ekle
-                            await _userService.addActivity(
-                              type: 'profile_update',
-                              title: 'Profil bilgileriniz güncellendi',
-                            );
-
                             Navigator.pop(context);
                             _loadUserData();
                             ScaffoldMessenger.of(context).showSnackBar(
@@ -1042,7 +1078,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   shape: BoxShape.circle,
                 ),
                 child: GestureDetector(
-                  onTap: _isLoading ? null : _pickImage,
+                  onTap: _pickImage,
                   child: Stack(
                     alignment: Alignment.center,
                     children: [
@@ -1060,19 +1096,28 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     : null,
                             child:
                                 profileImageUrl == null
-                                    ? const Icon(Icons.person, size: 45)
+                                    ? const Icon(
+                                      Icons.person,
+                                      size: 45,
+                                      color: Colors.grey,
+                                    )
                                     : null,
                           ),
-                      if (_isLoading)
+                      // Loading overlay - sadece upload sırasında ve fotoğraf varsa göster
+                      if (_isLoading &&
+                          (profileImageUrl != null || _imageFile != null))
                         Container(
                           width: 90,
                           height: 90,
                           decoration: BoxDecoration(
-                            color: Colors.black.withOpacity(0.5),
+                            color: Colors.black.withOpacity(0.7),
                             shape: BoxShape.circle,
                           ),
                           child: const Center(
-                            child: CircularProgressIndicator(),
+                            child: CircularProgressIndicator(
+                              color: Colors.white,
+                              strokeWidth: 3,
+                            ),
                           ),
                         ),
                     ],
@@ -1083,14 +1128,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 bottom: 0,
                 right: 0,
                 child: GestureDetector(
-                  onTap: _isLoading ? null : _pickImage,
+                  onTap: _pickImage,
                   child: Container(
-                    padding: const EdgeInsets.all(4),
-                    decoration: const BoxDecoration(
-                      color: Colors.blue,
+                    padding: const EdgeInsets.all(6),
+                    decoration: BoxDecoration(
+                      color: Colors.indigo,
                       shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.3),
+                          blurRadius: 4,
+                          offset: const Offset(0, 2),
+                        ),
+                      ],
                     ),
-                    child: const Icon(Icons.camera_alt, size: 18),
+                    child: const Icon(
+                      Icons.camera_alt,
+                      size: 18,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ),
@@ -1232,115 +1288,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ],
           ),
           Text(value, style: const TextStyle(fontWeight: FontWeight.bold)),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildAchievements() {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text(
-                'Başarılar',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-              TextButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const AchievementsScreen(),
-                    ),
-                  );
-                },
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      'Tümünü Gör',
-                      style: TextStyle(
-                        color: Colors.blue.shade300,
-                        fontSize: 14,
-                      ),
-                    ),
-                    Icon(
-                      Icons.chevron_right,
-                      color: Colors.blue.shade300,
-                      size: 20,
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 12),
-          SizedBox(
-            height: 120,
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              physics: const AlwaysScrollableScrollPhysics(),
-              child: Row(
-                children: [
-                  _buildAchievementCard(
-                    'Uzman',
-                    '100 Quiz Tamamlandı',
-                    Icons.workspace_premium,
-                  ),
-                  _buildAchievementCard(
-                    'Hızlı',
-                    '30 saniyede quiz bitir',
-                    Icons.speed,
-                  ),
-                  _buildAchievementCard(
-                    'Mükemmel',
-                    '100% doğru cevap',
-                    Icons.star,
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildAchievementCard(
-    String title,
-    String description,
-    IconData icon,
-  ) {
-    return Container(
-      width: 140,
-      margin: const EdgeInsets.only(right: 8),
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [Colors.purple.shade900, Colors.blue.shade900],
-        ),
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(icon, color: Colors.yellow, size: 32),
-          const SizedBox(height: 8),
-          Text(
-            title,
-            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            description,
-            style: TextStyle(color: Colors.grey[400], fontSize: 11),
-            textAlign: TextAlign.center,
-          ),
         ],
       ),
     );

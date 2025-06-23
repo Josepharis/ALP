@@ -1,6 +1,9 @@
+import 'dart:async';
+import 'dart:math';
+
 import 'package:anestezi/models/daily_question.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'dart:math';
+import 'package:firebase_auth/firebase_auth.dart';
 import '../models/quiz.dart';
 import '../models/question.dart';
 import '../models/user_activity.dart';
@@ -28,6 +31,7 @@ import '../questions/cardiovascular_physiology_questions.dart';
 import '../questions/cardiovascular_surgery_questions.dart';
 import '../questions/respiratory_diseases_questions.dart';
 import '../questions/respiratory_physiology_questions.dart';
+import '../utils/event_bus.dart';
 
 class QuizService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -58,21 +62,35 @@ class QuizService {
         });
       }
 
-      // Yarım kalan quizi user_ongoing_quizzes koleksiyonuna kaydet
+      // Önce aynı quiz için devam eden kayıt var mı kontrol et
       final ongoingQuizRef = _firestore
           .collection('user_ongoing_quizzes')
           .doc('${userId}_${quiz.id}');
 
-      await ongoingQuizRef.set({
-        'userId': userId,
-        'quizId': quiz.id,
-        'quizName': quiz.name,
-        'currentQuestionIndex': quiz.currentQuestionIndex ?? 0,
-        'totalQuestions': quiz.totalQuestions,
-        'score': quiz.score ?? 0,
-        'updatedAt': Timestamp.now(),
-        'createdAt': Timestamp.now(),
-      });
+      final existingQuiz = await ongoingQuizRef.get();
+
+      // Eğer aynı quiz zaten devam ediyorsa, sadece güncelle
+      if (existingQuiz.exists) {
+        await ongoingQuizRef.update({
+          'currentQuestionIndex': quiz.currentQuestionIndex ?? 0,
+          'score': quiz.score ?? 0,
+          'updatedAt': Timestamp.now(),
+        });
+        print('Mevcut quiz güncellendiDuplicateID: ${quiz.id}');
+      } else {
+        // Yeni quiz kaydı oluştur
+        await ongoingQuizRef.set({
+          'userId': userId,
+          'quizId': quiz.id,
+          'quizName': quiz.name,
+          'currentQuestionIndex': quiz.currentQuestionIndex ?? 0,
+          'totalQuestions': quiz.totalQuestions,
+          'score': quiz.score ?? 0,
+          'updatedAt': Timestamp.now(),
+          'createdAt': Timestamp.now(),
+        });
+        print('Yeni quiz kaydı oluşturuldu: ${quiz.id}');
+      }
 
       // Sorunun ilerlemesini kaydet
       final progressPercentage =
@@ -167,6 +185,12 @@ class QuizService {
   // Popüler quizleri getir
   Future<List<Quiz>> getPopularQuizzes({int limit = 5}) async {
     try {
+      print('DEBUG: getPopularQuizzes başlıyor...');
+
+      // İlk kez çalışıyorsa temel popülarite değerlerini ayarla
+      await _initializePopularityCounts();
+
+      print('DEBUG: Popüler quizler sorgulanıyor...');
       final querySnapshot =
           await _firestore
               .collection('quizzes')
@@ -174,8 +198,14 @@ class QuizService {
               .limit(limit)
               .get();
 
+      print('DEBUG: Sorgu sonucu: ${querySnapshot.docs.length} quiz bulundu');
+
       List<Quiz> quizzes = [];
       for (var doc in querySnapshot.docs) {
+        print(
+          'DEBUG: Quiz işleniyor - ID: ${doc.id}, Name: ${doc.data()['name']}, PopularityCount: ${doc.data()['popularityCount']}',
+        );
+
         // Her quiz için soru sayısını getir
         final questionsSnapshot =
             await _firestore
@@ -190,12 +220,38 @@ class QuizService {
         );
 
         quizzes.add(quiz);
+        print(
+          'DEBUG: Quiz eklendi - Name: ${quiz.name}, PopularityCount: ${quiz.popularityCount}',
+        );
       }
 
+      print('DEBUG: Toplam ${quizzes.length} popüler quiz döndürülüyor');
       return quizzes;
     } catch (e) {
-      print('getPopularQuizzes hatası: $e');
+      print('DEBUG: getPopularQuizzes hatası: $e');
       return [];
+    }
+  }
+
+  // Başlangıç popülarite değerlerini ayarla
+  Future<void> _initializePopularityCounts() async {
+    try {
+      final quizzesSnapshot = await _firestore.collection('quizzes').get();
+
+      for (var doc in quizzesSnapshot.docs) {
+        final data = doc.data();
+        if (data['popularityCount'] == null) {
+          // Popülarite sayısı yoksa rastgele bir başlangıç değeri ata
+          final randomCount =
+              [5, 8, 12, 15, 20, 25, 30][DateTime.now().millisecond % 7];
+          await doc.reference.update({'popularityCount': randomCount});
+          print(
+            '${doc.id} için başlangıç popülarite değeri atandı: $randomCount',
+          );
+        }
+      }
+    } catch (e) {
+      print('Popülarite değerleri başlatma hatası: $e');
     }
   }
 
@@ -414,98 +470,192 @@ class QuizService {
     }
   }
 
-  // Günün sorusunu getir
+  // Günün sorusunu getir - Yeni sistem: Tüm kategorilerden rastgele
   Future<DailyQuestion?> getDailyQuestion() async {
     try {
+      print('DEBUG: Günün sorusu getiriliyor...');
+
       // Bugünün tarihini al
       final now = DateTime.now();
       final today = DateTime(now.year, now.month, now.day);
+      final todayString =
+          '${today.year}-${today.month.toString().padLeft(2, '0')}-${today.day.toString().padLeft(2, '0')}';
 
-      // Bugüne ait günün sorusunu getir
-      final querySnapshot =
-          await _firestore
-              .collection('dailyQuestions')
-              .where('date', isGreaterThanOrEqualTo: Timestamp.fromDate(today))
-              .where(
-                'date',
-                isLessThan: Timestamp.fromDate(today.add(Duration(days: 1))),
-              )
-              .limit(1)
-              .get();
+      print('DEBUG: Bugünün tarihi: $todayString');
 
-      if (querySnapshot.docs.isEmpty) {
-        // Bugün için bir soru henüz atanmamış, rastgele bir soru seç
-        final randomQuizSnapshot =
-            await _firestore.collection('quizzes').limit(1).get();
-
-        if (randomQuizSnapshot.docs.isEmpty) {
-          return null;
-        }
-
-        final randomQuizId = randomQuizSnapshot.docs.first.id;
-        final questionsSnapshot =
+      // Kullanıcının bugün günün sorusunu çözüp çözmediğini kontrol et
+      final userId = _authService.currentUser?.uid;
+      if (userId != null) {
+        final userAnswerDoc =
             await _firestore
-                .collection('quizzes')
-                .doc(randomQuizId)
-                .collection('questions')
-                .limit(1)
+                .collection('daily_question_answers')
+                .doc('${userId}_$todayString')
                 .get();
 
-        if (questionsSnapshot.docs.isEmpty) {
-          return null;
-        }
+        if (userAnswerDoc.exists) {
+          print('DEBUG: Kullanıcı bugün günün sorusunu zaten çözmüş');
+          // Kullanıcı bugün çözmüş, çözülmüş soruyu döndür
+          final answerData = userAnswerDoc.data()!;
+          final questionData = answerData['question'] as Map<String, dynamic>;
 
-        final questionDoc = questionsSnapshot.docs.first;
-        final questionData = Question.fromJson(questionDoc.data());
-
-        // Yeni günlük soru oluştur
-        final dailyQuestion = DailyQuestion(
-          id: questionDoc.id,
-          question: questionData,
-          date: today,
-          pointMultiplier: 2, // 2x puan
-        );
-
-        // Firestore'a kaydet
-        await _firestore
-            .collection('dailyQuestions')
-            .add(dailyQuestion.toFirestore());
-
-        return dailyQuestion;
-      } else {
-        // Mevcut günlük soruyu getir
-        final dailyQuestionDoc = querySnapshot.docs.first;
-        final data = dailyQuestionDoc.data();
-
-        // Sorunun ayrıntılarını almak için soru ID'sini kullan
-        final String questionId = data['questionId'];
-
-        // Tüm quizlerde bu soruyu ara
-        final quizzesSnapshot = await _firestore.collection('quizzes').get();
-
-        for (var quizDoc in quizzesSnapshot.docs) {
-          final questionsSnapshot =
-              await _firestore
-                  .collection('quizzes')
-                  .doc(quizDoc.id)
-                  .collection('questions')
-                  .where(FieldPath.documentId, isEqualTo: questionId)
-                  .limit(1)
-                  .get();
-
-          if (questionsSnapshot.docs.isNotEmpty) {
-            final questionDoc = questionsSnapshot.docs.first;
-            final questionData = Question.fromJson(questionDoc.data());
-
-            return DailyQuestion.fromFirestore(dailyQuestionDoc, questionData);
-          }
+          return DailyQuestion(
+            id: answerData['questionId'] ?? 'daily_${todayString}',
+            question: Question.fromJson(questionData),
+            date: today,
+            pointMultiplier: 10, // 20 puan (normal 2 puan * 10)
+            isAnswered: true,
+            userAnswer: answerData['userAnswer'],
+            isCorrect: answerData['isCorrect'],
+          );
         }
       }
 
-      return null;
+      // Bugün için günün sorusunu kontrol et
+      final dailyQuestionDoc =
+          await _firestore.collection('daily_questions').doc(todayString).get();
+
+      if (dailyQuestionDoc.exists) {
+        print('DEBUG: Bugün için günün sorusu zaten mevcut');
+        // Bugün için soru zaten seçilmiş
+        final data = dailyQuestionDoc.data()!;
+        final questionData = data['question'] as Map<String, dynamic>;
+
+        return DailyQuestion(
+          id: data['questionId'] ?? 'daily_${todayString}',
+          question: Question.fromJson(questionData),
+          date: today,
+          pointMultiplier: 10, // 20 puan
+          isAnswered: false,
+        );
+      }
+
+      print('DEBUG: Bugün için yeni günün sorusu seçiliyor...');
+
+      // Tüm kategorilerden rastgele bir soru seç
+      final allQuestionSets = [
+        anesthesiaApplicationQuestions,
+        respiratorySystemQuestions,
+        cardiovascularMonitoringQuestions,
+        pharmacologicalPrinciplesQuestions,
+        operatingRoomEnvironmentQuestions,
+        nonCardiovascularMonitoringQuestions,
+        anesthesiaWorkstationQuestions,
+        inhalationAnestheticsQuestions,
+        intravenousAnestheticsQuestions,
+        analgesicAgentsQuestions,
+        neuromuscularBlockingAgentsQuestions,
+        cholinesteraseInhibitorsQuestions,
+        anticholinergicDrugsQuestions,
+        adrenergicDrugsQuestions,
+        localAnestheticsQuestions,
+        auxiliaryDrugsQuestions,
+        preoperativeAssessmentQuestions,
+        airwayManagementQuestions,
+        cardiovascularPhysiologyQuestions,
+        cardiovascularSurgeryQuestions,
+        respiratoryDiseasesQuestions,
+        respiratoryPhysiologyQuestions,
+      ];
+
+      // Tüm soruları bir listede topla
+      List<Question> allQuestions = [];
+      for (var questionSet in allQuestionSets) {
+        allQuestions.addAll(questionSet);
+      }
+
+      if (allQuestions.isEmpty) {
+        print('DEBUG: Hiç soru bulunamadı!');
+        return null;
+      }
+
+      // Rastgele bir soru seç
+      final random = Random();
+      final selectedQuestion =
+          allQuestions[random.nextInt(allQuestions.length)];
+
+      print(
+        'DEBUG: Rastgele soru seçildi: ${selectedQuestion.question.substring(0, 50)}...',
+      );
+
+      // Günün sorusunu Firestore'a kaydet
+      final dailyQuestion = DailyQuestion(
+        id: 'daily_${todayString}',
+        question: selectedQuestion,
+        date: today,
+        pointMultiplier: 10, // 20 puan (normal 2 puan * 10)
+        isAnswered: false,
+      );
+
+      await _firestore.collection('daily_questions').doc(todayString).set({
+        'questionId': dailyQuestion.id,
+        'question': selectedQuestion.toJson(),
+        'date': Timestamp.fromDate(today),
+        'pointMultiplier': 10,
+        'createdAt': FieldValue.serverTimestamp(),
+      });
+
+      print('DEBUG: Günün sorusu Firestore\'a kaydedildi');
+      return dailyQuestion;
     } catch (e) {
-      print('getDailyQuestion hatası: $e');
+      print('DEBUG: getDailyQuestion hatası: $e');
       return null;
+    }
+  }
+
+  // Günün sorusunu yanıtla - Yeni sistem
+  Future<bool> answerDailyQuestion({
+    required String questionId,
+    required int userAnswer,
+    required bool isCorrect,
+    required Question question,
+  }) async {
+    try {
+      final userId = _authService.currentUser?.uid;
+      if (userId == null) {
+        print('DEBUG: Kullanıcı giriş yapmamış');
+        return false;
+      }
+
+      final now = DateTime.now();
+      final today = DateTime(now.year, now.month, now.day);
+      final todayString =
+          '${today.year}-${today.month.toString().padLeft(2, '0')}-${today.day.toString().padLeft(2, '0')}';
+
+      print('DEBUG: Günün sorusu yanıtlanıyor - Doğru: $isCorrect');
+
+      // Kullanıcının cevabını kaydet
+      await _firestore
+          .collection('daily_question_answers')
+          .doc('${userId}_$todayString')
+          .set({
+            'userId': userId,
+            'questionId': questionId,
+            'question': question.toJson(),
+            'userAnswer': userAnswer,
+            'isCorrect': isCorrect,
+            'points': isCorrect ? 20 : 0, // Doğruysa 20 puan
+            'answeredAt': FieldValue.serverTimestamp(),
+            'date': todayString,
+          });
+
+      // Doğruysa kullanıcıya puan ekle
+      if (isCorrect) {
+        await _firestore.collection('userActivities').doc(userId).update({
+          'totalPoints': FieldValue.increment(20),
+          'dailyQuestionsCorrect': FieldValue.increment(1),
+        });
+        print('DEBUG: Kullanıcıya 20 puan eklendi');
+      } else {
+        await _firestore.collection('userActivities').doc(userId).update({
+          'dailyQuestionsWrong': FieldValue.increment(1),
+        });
+        print('DEBUG: Yanlış cevap kaydedildi');
+      }
+
+      return true;
+    } catch (e) {
+      print('DEBUG: answerDailyQuestion hatası: $e');
+      return false;
     }
   }
 
@@ -569,81 +719,99 @@ class QuizService {
 
   // Kategori adına göre soruları getir
   Future<List<Question>> getCategoryQuestions(String categoryName) async {
-    // Kategori adına göre uygun soru listesini döndür
-    switch (categoryName.toLowerCase()) {
-      case 'anestezi uygulama':
-      case 'anestezi uygulaması':
-        return anesthesiaApplicationQuestions;
-      case 'solunum sistemleri':
-        return respiratorySystemQuestions;
-      case 'kardiyovasküler monitörizasyon':
-        return cardiovascularMonitoringQuestions;
-      case 'farmakolojik prensipler':
-        return pharmacologicalPrinciplesQuestions;
-      case 'ameliyathane ortamı':
-        return operatingRoomEnvironmentQuestions;
-      case 'kardiyovasküler dışı monitörizasyon':
-        return nonCardiovascularMonitoringQuestions;
-      case 'anestezi iş istasyonu':
-        return anesthesiaWorkstationQuestions;
-      case 'inhalasyon anestezikleri':
-      case 'i̇nhalasyon anestezikleri':
-        return inhalationAnestheticsQuestions;
-      case 'intravenöz anestezikler':
-      case 'i̇ntravenöz anestezikler':
-        return intravenousAnestheticsQuestions;
-      case 'analjezik ajanlar':
-      case 'analjezik ajanları':
-        return analgesicAgentsQuestions;
-      case 'nöromüsküler blokaj ajanları':
-      case 'nöromüsküler bloker ajanlar':
-        return neuromuscularBlockingAgentsQuestions;
-      case 'kolinesteraz inhibitörleri':
-      case 'kolinesteraz inhibitörü':
-        return cholinesteraseInhibitorsQuestions;
-      case 'antikolinerjik ilaçlar':
-      case 'antikolinerjik':
-        return anticholinergicDrugsQuestions;
-      case 'adrenerjik agonistler ve antagonistler':
-      case 'adrenerjik agonist':
-      case 'adrenerjik antagonist':
-      case 'adrenerjik':
-        return adrenergicDrugsQuestions;
-      case 'hipotansif ajanlar':
-      case 'hipotansif':
-      case 'kontrollü hipotansiyon':
-        return localAnestheticsQuestions;
-      case 'havayolu yönetimi':
-      case 'bölüm 19 - havayolu yönetimi':
-        return airwayManagementQuestions;
-      case 'kardiyovasküler fizyoloji ve anestezi':
-      case 'kardiyovasküler fizyoloji':
-        return cardiovascularPhysiologyQuestions;
-      case 'kardiyovasküler cerrahide anestezi':
-      case 'kardiyovasküler cerrahi':
-        return cardiovascularSurgeryQuestions;
-      case 'solunum hastalıklarında anestezi':
-      case 'solunum hastalıkları':
-        return respiratoryDiseasesQuestions;
-      case 'solunum fizyolojisi':
-      case 'solunum fizyolojisi ve anestezi':
-        return respiratoryPhysiologyQuestions;
-      case 'lokal anestezikler':
-      case 'lokal anestezi':
-      case 'lokal anesteziği':
-        return localAnestheticsQuestions;
-      case 'yardımcı ilaçlar':
-      case 'anestezide yardımcı ilaçlar':
-      case 'antiemetikler':
-      case 'premedikasyon':
-        return auxiliaryDrugsQuestions;
-      case 'bölüm 18 - ameliyat öncesi değerlendirme':
-      case 'ameliyat öncesi değerlendirme':
-      case 'preoperatif değerlendirme':
-      case 'preoperatif':
-        return preoperativeAssessmentQuestions;
-      default:
-        return [];
+    print('DEBUG: getCategoryQuestions çağrıldı - Kategori: "$categoryName"');
+    print('DEBUG: Lowercase kategori: "${categoryName.toLowerCase()}"');
+
+    // Kategori mapping - Firestore'dan gelen adları kod içindeki soru setleriyle eşleştir
+    final categoryMapping = {
+      // Anestezi kategorileri
+      'anestezi': anesthesiaApplicationQuestions,
+      'anestezi uygulama': anesthesiaApplicationQuestions,
+      'anestezi uygulaması': anesthesiaApplicationQuestions,
+      'anestezi uygulamasi': anesthesiaApplicationQuestions,
+
+      // Solunum kategorileri
+      'solunum': respiratorySystemQuestions,
+      'solunum sistemleri': respiratorySystemQuestions,
+      'solunum sistemi': respiratorySystemQuestions,
+
+      // Kardiyovasküler kategorileri
+      'kardiyovasküler': cardiovascularMonitoringQuestions,
+      'kardiyovasküler monitörizasyon': cardiovascularMonitoringQuestions,
+      'kardiyovasküler monitorizasyon': cardiovascularMonitoringQuestions,
+      'kardiyovaskuler monitörizasyon': cardiovascularMonitoringQuestions,
+
+      // Farmakoloji kategorileri
+      'farmakoloji': pharmacologicalPrinciplesQuestions,
+      'farmakolojik prensipler': pharmacologicalPrinciplesQuestions,
+      'farmakolojik prensip': pharmacologicalPrinciplesQuestions,
+
+      // Ameliyathane kategorileri
+      'ameliyathane': operatingRoomEnvironmentQuestions,
+      'ameliyathane ortamı': operatingRoomEnvironmentQuestions,
+
+      // Diğer kategoriler
+      'kardiyovasküler dışı monitörizasyon':
+          nonCardiovascularMonitoringQuestions,
+      'anestezi iş istasyonu': anesthesiaWorkstationQuestions,
+      'inhalasyon anestezikleri': inhalationAnestheticsQuestions,
+      'i̇nhalasyon anestezikleri': inhalationAnestheticsQuestions,
+      'intravenöz anestezikler': intravenousAnestheticsQuestions,
+      'i̇ntravenöz anestezikler': intravenousAnestheticsQuestions,
+      'analjezik ajanlar': analgesicAgentsQuestions,
+      'analjezik ajanları': analgesicAgentsQuestions,
+      'nöromüsküler blokaj ajanları': neuromuscularBlockingAgentsQuestions,
+      'nöromüsküler bloker ajanlar': neuromuscularBlockingAgentsQuestions,
+      'kolinesteraz inhibitörleri': cholinesteraseInhibitorsQuestions,
+      'kolinesteraz inhibitörü': cholinesteraseInhibitorsQuestions,
+      'antikolinerjik ilaçlar': anticholinergicDrugsQuestions,
+      'antikolinerjik': anticholinergicDrugsQuestions,
+      'adrenerjik agonistler ve antagonistler': adrenergicDrugsQuestions,
+      'adrenerjik agonist': adrenergicDrugsQuestions,
+      'adrenerjik antagonist': adrenergicDrugsQuestions,
+      'adrenerjik': adrenergicDrugsQuestions,
+      'hipotansif ajanlar': localAnestheticsQuestions,
+      'hipotansif': localAnestheticsQuestions,
+      'kontrollü hipotansiyon': localAnestheticsQuestions,
+      'havayolu yönetimi': airwayManagementQuestions,
+      'bölüm 19 - havayolu yönetimi': airwayManagementQuestions,
+      'kardiyovasküler fizyoloji ve anestezi':
+          cardiovascularPhysiologyQuestions,
+      'kardiyovasküler fizyoloji': cardiovascularPhysiologyQuestions,
+      'kardiyovasküler cerrahide anestezi': cardiovascularSurgeryQuestions,
+      'kardiyovasküler cerrahi': cardiovascularSurgeryQuestions,
+      'solunum hastalıklarında anestezi': respiratoryDiseasesQuestions,
+      'solunum hastalıkları': respiratoryDiseasesQuestions,
+      'solunum fizyolojisi': respiratoryPhysiologyQuestions,
+      'solunum fizyolojisi ve anestezi': respiratoryPhysiologyQuestions,
+      'lokal anestezikler': localAnestheticsQuestions,
+      'lokal anestezi': localAnestheticsQuestions,
+      'lokal anesteziği': localAnestheticsQuestions,
+      'yardımcı ilaçlar': auxiliaryDrugsQuestions,
+      'anestezide yardımcı ilaçlar': auxiliaryDrugsQuestions,
+      'antiemetikler': auxiliaryDrugsQuestions,
+      'premedikasyon': auxiliaryDrugsQuestions,
+      'bölüm 18 - ameliyat öncesi değerlendirme':
+          preoperativeAssessmentQuestions,
+      'ameliyat öncesi değerlendirme': preoperativeAssessmentQuestions,
+      'preoperatif değerlendirme': preoperativeAssessmentQuestions,
+      'preoperatif': preoperativeAssessmentQuestions,
+    };
+
+    final lowerCategoryName = categoryName.toLowerCase();
+    final questions = categoryMapping[lowerCategoryName];
+
+    if (questions != null) {
+      print('DEBUG: Kategori eşleşti! ${questions.length} soru bulundu');
+      return questions;
+    } else {
+      print(
+        'DEBUG: UYARI - Kategori eşleşmedi! "$categoryName" için boş liste döndürülüyor',
+      );
+      print(
+        'DEBUG: Kullanılabilir kategoriler: ${categoryMapping.keys.take(10).join(", ")}...',
+      );
+      return [];
     }
   }
 
@@ -1027,6 +1195,81 @@ class QuizService {
             'completedAt': Timestamp.fromDate(now),
           });
 
+      // POPÜLERLİK SAYISINI ARTIR - Sadece ilk tamamlamada
+      try {
+        print('DEBUG: Popülerlik sayısı artırılıyor - Kategori: $categoryName');
+
+        // Önce kullanıcının bu kategoriyi daha önce tamamlayıp tamamlamadığını kontrol et
+        final historyDoc =
+            await _firestore
+                .collection('user_quiz_history')
+                .doc(
+                  '${_authService.currentUser!.uid}_${categoryName.toLowerCase()}',
+                )
+                .get();
+
+        if (!historyDoc.exists) {
+          print('DEBUG: İlk tamamlama, popülerlik artırılacak');
+
+          // İlk tamamlama - popülerlik sayısını artır
+          // Firestore'da kategori adına göre doküman bul ve güncelle
+          final quizQuery =
+              await _firestore
+                  .collection('quizzes')
+                  .where('name', isEqualTo: categoryName)
+                  .limit(1)
+                  .get();
+
+          if (quizQuery.docs.isNotEmpty) {
+            final quizDoc = quizQuery.docs.first;
+            print('DEBUG: Quiz dokümanı bulundu: ${quizDoc.id}');
+
+            // Mevcut popülerlik sayısını al
+            final currentCount = quizDoc.data()['popularityCount'] ?? 0;
+            final newCount = currentCount + 1;
+
+            print('DEBUG: Mevcut sayı: $currentCount, Yeni sayı: $newCount');
+
+            // Popülerlik sayısını artır
+            await quizDoc.reference.update({'popularityCount': newCount});
+
+            print('DEBUG: Popülerlik sayısı güncellendi: $newCount');
+          } else {
+            print('DEBUG: Quiz dokümanı bulunamadı - Yeni oluşturuluyor');
+            // Eğer quiz dokümanı yoksa oluştur
+            await _firestore.collection('quizzes').add({
+              'name': categoryName,
+              'popularityCount': 1,
+              'createdAt': FieldValue.serverTimestamp(),
+            });
+          }
+
+          // Kullanıcı geçmişini kaydet
+          await _firestore
+              .collection('user_quiz_history')
+              .doc(
+                '${_authService.currentUser!.uid}_${categoryName.toLowerCase()}',
+              )
+              .set({
+                'userId': _authService.currentUser!.uid,
+                'categoryName': categoryName,
+                'completedAt': FieldValue.serverTimestamp(),
+                'totalCompletions': 1,
+              });
+        } else {
+          print('DEBUG: Daha önce tamamlanmış, popülerlik artırılmayacak');
+
+          // Sadece kullanıcı geçmişini güncelle
+          await historyDoc.reference.update({
+            'totalCompletions': FieldValue.increment(1),
+            'lastCompletedAt': FieldValue.serverTimestamp(),
+          });
+        }
+      } catch (e) {
+        print('DEBUG: HATA - Popülerlik güncelleme hatası: $e');
+        // Popülerlik güncellenemezse bile quiz tamamlanmış olarak devam et
+      }
+
       // Devam eden quizlerden sil
       if (quizId != null) {
         await _firestore
@@ -1035,9 +1278,9 @@ class QuizService {
             .delete();
       }
 
-      print(
-        'Quiz tamamlandı ve kaydedildi: $finalQuizId, Skor: $score/$totalQuestions',
-      );
+      // AKTIVITE KAYDET - Son aktiviteler için (KALDIRILDI)
+      // Aktivite sistemi kaldırıldığı için bu kısım artık gerekli değil
+
       return true;
     } catch (e) {
       print('completeQuiz hatası: $e');

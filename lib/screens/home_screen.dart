@@ -10,8 +10,9 @@ import '../models/quiz.dart';
 import '../services/quiz_service.dart';
 import '../services/auth_service.dart';
 import '../services/tutorial_service.dart';
+import '../services/user_service.dart';
 import '../utils/event_bus.dart';
-import '../widgets/features_showcase.dart';
+import '../utils/snackbar_utils.dart';
 import '../widgets/interactive_tutorial.dart';
 import '../screens/quiz_screen.dart';
 import '../screens/mistakes_screen.dart';
@@ -169,6 +170,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               child: BottomNavigationBar(
                 currentIndex: _currentIndex,
                 onTap: (index) {
+                  // Sayfa değişirken önceki SnackBar'ları temizle
+                  SnackBarUtils.clearAllSnackBars(context);
+
                   setState(() {
                     _currentIndex = index;
                   });
@@ -649,6 +653,7 @@ class _HomeContentState extends State<HomeContent> {
   final QuizService _quizService = QuizService();
   final AuthService _authService = AuthService();
   final TutorialService _tutorialService = TutorialService();
+  final UserService _userService = UserService();
   String _userName = 'Kullanıcı';
   UserActivity? _userActivity;
   DailyQuestion? _dailyQuestion;
@@ -688,7 +693,7 @@ class _HomeContentState extends State<HomeContent> {
   }
 
   Future<void> _checkAndShowTutorial() async {
-    // Ana tanıtımı kontrol et
+    // Ana tanıtımı kontrol et ve sadece o çalışsın
     final shouldShowTutorial = await _tutorialService.shouldShowTutorial();
     if (shouldShowTutorial) {
       if (!mounted) return;
@@ -705,98 +710,8 @@ class _HomeContentState extends State<HomeContent> {
           _tutorialService.markTutorialAsShown();
         },
       );
-    } else {
-      // Özellikleri kontrol et ve göster
-      await _checkAndShowFeatures();
     }
-  }
-
-  Future<void> _checkAndShowFeatures() async {
-    // Günün sorusu özelliklerini kontrol et
-    if (await _tutorialService.shouldShowFeature('daily_question')) {
-      if (!mounted) return;
-
-      // Bir süre bekle
-      await Future.delayed(const Duration(seconds: 2));
-
-      if (!mounted) return;
-
-      // Günün sorusu özelliklerini göster
-      _showDailyQuestionFeatures();
-    }
-  }
-
-  void _showDailyQuestionFeatures() {
-    showModalBottomSheet(
-      context: context,
-      backgroundColor: Colors.transparent,
-      builder: (context) {
-        return Container(
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [Colors.indigo.shade900, Colors.black],
-            ),
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(20),
-              topRight: Radius.circular(20),
-            ),
-          ),
-          child: FeaturesShowcase(
-            title: 'Günün Sorusu Özellikleri',
-            features: _tutorialService.getDailyQuestionFeatures(),
-            onClose: () {
-              Navigator.pop(context);
-              _tutorialService.markFeatureAsShown('daily_question');
-
-              // Biraz bekle ve quiz özelliklerini göster
-              Future.delayed(const Duration(seconds: 2), () {
-                if (mounted) {
-                  _checkQuizFeatures();
-                }
-              });
-            },
-          ),
-        );
-      },
-    );
-  }
-
-  Future<void> _checkQuizFeatures() async {
-    if (await _tutorialService.shouldShowFeature('quizzes')) {
-      if (!mounted) return;
-
-      showModalBottomSheet(
-        context: context,
-        backgroundColor: Colors.transparent,
-        builder: (context) {
-          return Container(
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [Colors.indigo.shade900, Colors.black],
-              ),
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(20),
-                topRight: Radius.circular(20),
-              ),
-            ),
-            child: FeaturesShowcase(
-              title: 'Quiz Özellikleri',
-              features: _tutorialService.getQuizFeatures(),
-              onClose: () {
-                Navigator.pop(context);
-                _tutorialService.markFeatureAsShown('quizzes');
-              },
-            ),
-          );
-        },
-      );
-    }
+    // Feature showcases kaldırıldı - sadece ana tutorial çalışacak
   }
 
   Future<void> _loadData() async {
@@ -837,7 +752,18 @@ class _HomeContentState extends State<HomeContent> {
       }
 
       // Popüler quizleri getir
+      print('DEBUG: Popüler quizler yükleniyor...');
       final popularQuizzes = await _quizService.getPopularQuizzes();
+      print('DEBUG: Popüler quiz sayısı: ${popularQuizzes.length}');
+      if (popularQuizzes.isNotEmpty) {
+        for (int i = 0; i < popularQuizzes.length; i++) {
+          print(
+            'DEBUG: Popüler Quiz $i: ${popularQuizzes[i].name}, Popülerlik: ${popularQuizzes[i].popularityCount}',
+          );
+        }
+      } else {
+        print('DEBUG: UYARI - Popüler quizler listesi boş!');
+      }
 
       if (mounted) {
         setState(() {
@@ -881,7 +807,6 @@ class _HomeContentState extends State<HomeContent> {
                           _buildDailyStreak(),
                           _buildDailyQuestion(context),
                           _buildOngoingQuiz(),
-                          _buildPopularQuizzes(context),
                           _buildFinishedQuiz(),
                           const SizedBox(
                             height: 80,
@@ -1170,21 +1095,66 @@ class _HomeContentState extends State<HomeContent> {
                 ),
               ),
               const Spacer(),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.2),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Text(
-                  '${_dailyQuestion?.pointMultiplier ?? 2}X Puan',
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 8, // Font size küçültüldü
+              // Çözülmüş durumunu göster
+              if (_dailyQuestion?.isAnswered == true)
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 6,
+                    vertical: 2,
+                  ),
+                  decoration: BoxDecoration(
+                    color:
+                        _dailyQuestion?.isCorrect == true
+                            ? Colors.green.withOpacity(
+                              0.8,
+                            ) // Sadece doğruysa yeşil
+                            : Colors.red.withOpacity(0.8), // Yanlışsa kırmızı
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(
+                        _dailyQuestion?.isCorrect == true
+                            ? Icons
+                                .check_circle // Doğruysa tik
+                            : Icons.cancel, // Yanlışsa X
+                        color: Colors.white,
+                        size: 12,
+                      ),
+                      const SizedBox(width: 4),
+                      Text(
+                        _dailyQuestion?.isCorrect == true
+                            ? 'Doğru!'
+                            : 'Yanlış!',
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 8,
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              else
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 6,
+                    vertical: 2,
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.2),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Text(
+                    '20 Puan', // Artık 20 puan
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 8,
+                    ),
                   ),
                 ),
-              ),
             ],
           ),
           const SizedBox(height: 6), // Boşluk azaltıldı
@@ -1204,30 +1174,46 @@ class _HomeContentState extends State<HomeContent> {
             children: [
               Expanded(
                 child: ElevatedButton(
-                  onPressed: () {
-                    // Günün sorusunu cevaplama ekranına git
-                    if (_dailyQuestion != null) {
-                      _showDailyQuestionDialog(context, _dailyQuestion!);
-                    }
-                  },
+                  onPressed:
+                      _dailyQuestion?.isAnswered == true
+                          ? null // Çözülmüşse butonu deaktif et
+                          : () {
+                            // Günün sorusunu cevaplama ekranına git
+                            if (_dailyQuestion != null) {
+                              _showDailyQuestionDialog(
+                                context,
+                                _dailyQuestion!,
+                              );
+                            }
+                          },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.white.withOpacity(0.2),
+                    backgroundColor:
+                        _dailyQuestion?.isAnswered == true
+                            ? Colors.grey.withOpacity(0.3) // Çözülmüşse gri
+                            : Colors.white.withOpacity(0.2),
                     foregroundColor: Colors.white,
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 6,
-                    ), // Padding azaltıldı
-                    minimumSize: const Size(
-                      double.infinity,
-                      28,
-                    ), // Minimum boyut ayarlandı
+                    padding: const EdgeInsets.symmetric(vertical: 6),
+                    minimumSize: const Size(double.infinity, 28),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
                   ),
-                  child: const Text(
-                    'Cevapla',
-                    style: TextStyle(fontSize: 10),
-                  ), // Font size küçültüldü
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      if (_dailyQuestion?.isAnswered == true)
+                        const Icon(Icons.check, size: 12)
+                      else
+                        const Icon(Icons.quiz, size: 12),
+                      const SizedBox(width: 4),
+                      Text(
+                        _dailyQuestion?.isAnswered == true
+                            ? 'Çözüldü'
+                            : 'Cevapla',
+                        style: const TextStyle(fontSize: 10),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
@@ -1268,11 +1254,7 @@ class _HomeContentState extends State<HomeContent> {
                       // Doğru cevap kontrolü
                       final isCorrect =
                           index == dailyQuestion.question.correctAnswerIndex;
-                      _showAnswerResultDialog(
-                        context,
-                        isCorrect,
-                        dailyQuestion,
-                      );
+                      _answerDailyQuestion(isCorrect, dailyQuestion, index);
                     },
                     activeColor: Colors.green,
                   ),
@@ -1283,49 +1265,155 @@ class _HomeContentState extends State<HomeContent> {
     );
   }
 
-  void _showAnswerResultDialog(
-    BuildContext context,
+  Future<void> _answerDailyQuestion(
     bool isCorrect,
     DailyQuestion dailyQuestion,
-  ) {
-    showDialog(
-      context: context,
-      builder:
-          (context) => AlertDialog(
-            backgroundColor:
-                isCorrect ? Colors.green.shade900 : Colors.red.shade900,
-            title: Text(
-              isCorrect ? 'Doğru Cevap!' : 'Yanlış Cevap!',
-              style: const TextStyle(color: Colors.white),
-            ),
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Doğru Cevap: ${dailyQuestion.question.options[dailyQuestion.question.correctAnswerIndex]}',
-                  style: const TextStyle(color: Colors.white),
-                ),
-                const SizedBox(height: 12),
-                if (dailyQuestion.question.explanation != null &&
-                    dailyQuestion.question.explanation!.isNotEmpty)
-                  Text(
-                    'Açıklama: ${dailyQuestion.question.explanation}',
-                    style: const TextStyle(color: Colors.white70),
+    int userAnswerIndex,
+  ) async {
+    // Loading kaldırıldı - hemen cevap gösterilecek
+    try {
+      final success = await _quizService.answerDailyQuestion(
+        questionId: dailyQuestion.id,
+        userAnswer: userAnswerIndex,
+        isCorrect: isCorrect,
+        question: dailyQuestion.question,
+      );
+
+      if (success) {
+        // Sonuç dialogunu hemen göster - Loading yok
+        showDialog(
+          context: context,
+          builder:
+              (context) => AlertDialog(
+                backgroundColor:
+                    Colors.grey.shade900, // App temasına uygun koyu renk
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                  side: BorderSide(
+                    color: isCorrect ? Colors.green : Colors.red,
+                    width: 2,
                   ),
-              ],
-            ),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.of(context).pop(),
-                child: const Text(
-                  'Tamam',
-                  style: TextStyle(color: Colors.white),
                 ),
+                title: Row(
+                  children: [
+                    Icon(
+                      isCorrect ? Icons.check_circle : Icons.cancel,
+                      color: isCorrect ? Colors.green : Colors.red,
+                      size: 28,
+                    ),
+                    const SizedBox(width: 8),
+                    Text(
+                      isCorrect ? 'Doğru Cevap!' : 'Yanlış Cevap',
+                      style: TextStyle(
+                        color: isCorrect ? Colors.green : Colors.red,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+                content: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: Colors.grey.shade800,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Text(
+                        'Doğru Cevap: ${dailyQuestion.question.options[dailyQuestion.question.correctAnswerIndex]}',
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                    Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color:
+                            isCorrect
+                                ? Colors.green.shade900
+                                : Colors.red.shade900,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Text(
+                        isCorrect
+                            ? '🎉 Tebrikler! 20 puan kazandınız!'
+                            : '😔 Yarın tekrar deneyin!',
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    if (dailyQuestion.question.explanation != null &&
+                        dailyQuestion.question.explanation!.isNotEmpty)
+                      Padding(
+                        padding: const EdgeInsets.only(top: 12),
+                        child: Container(
+                          padding: const EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                            color: Colors.indigo.shade900,
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                'Açıklama:',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              const SizedBox(height: 4),
+                              Text(
+                                dailyQuestion.question.explanation!,
+                                style: const TextStyle(color: Colors.white70),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                  ],
+                ),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                      // Veriyi dialog kapandıktan sonra yenile
+                      _loadData();
+                    },
+                    style: TextButton.styleFrom(
+                      backgroundColor: Colors.indigo,
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 24,
+                        vertical: 12,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                    child: const Text(
+                      'Tamam',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ],
               ),
-            ],
-          ),
-    );
+        );
+      }
+    } catch (e) {
+      print('Günün sorusu yanıtlama hatası: $e');
+      SnackBarUtils.showErrorSnackBar(
+        context,
+        'Bir hata oluştu, tekrar deneyin',
+      );
+    }
   }
 
   Widget _buildOngoingQuiz() {
@@ -1801,30 +1889,24 @@ class _HomeContentState extends State<HomeContent> {
   }
 
   // Quiz kategori adına göre ikon seç
-  IconData _getQuizIcon(String categoryName) {
-    switch (categoryName.toLowerCase()) {
+  IconData _getQuizIcon(String quizName) {
+    switch (quizName.toLowerCase()) {
+      case 'anestezi uygulaması':
       case 'anestezi':
         return Icons.health_and_safety;
+      case 'kardiyovasküler monitörizasyon':
       case 'kardiyovasküler':
-      case 'kardiyovasküler 1':
-      case 'kardiyovasküler 2':
         return Icons.favorite;
-      case 'solunum':
-        return Icons.air;
+      case 'ameliyathane ortamı':
       case 'ameliyathane':
         return Icons.local_hospital;
-      case 'anestezi istasyonu':
-        return Icons.medical_services;
-      case 'anestezi uygulaması':
-        return Icons.medical_information;
       case 'solunum sistemleri':
+      case 'solunum':
         return Icons.air;
-      case 'kardiyovasküler monitörizasyon':
-        return Icons.monitor_heart;
       case 'farmakolojik prensipler':
-        return Icons.science;
-      case 'ameliyathane ortamı':
-        return Icons.local_hospital;
+        return Icons.medical_services;
+      case 'preoperatif değerlendirme':
+        return Icons.assignment;
       default:
         return Icons.quiz;
     }
@@ -1869,271 +1951,13 @@ class _HomeContentState extends State<HomeContent> {
         });
       } else {
         // Soru bulunamadı
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Quiz soruları bulunamadı')),
-        );
+        SnackBarUtils.showWarningSnackBar(context, 'Quiz soruları bulunamadı');
       }
     } catch (e) {
       print('Quiz devam etme hatası: $e');
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Quiz devam ederken bir hata oluştu')),
-      );
-    }
-  }
-
-  Widget _buildPopularQuizzes(BuildContext context) {
-    // Popüler quizler için mevcut kategorileri kullanalım
-    List<Map<String, dynamic>> popularCategories = [
-      {
-        'name': 'Anestezi',
-        'icon': Icons.health_and_safety,
-        'popularity': 180,
-        'color': Colors.blue.shade700,
-      },
-      {
-        'name': 'Kardiyovasküler 1',
-        'icon': Icons.favorite,
-        'popularity': 145,
-        'color': Colors.purple.shade700,
-      },
-      {
-        'name': 'Ameliyathane',
-        'icon': Icons.local_hospital,
-        'popularity': 89,
-        'color': Colors.teal.shade700,
-      },
-      {
-        'name': 'Solunum',
-        'icon': Icons.air,
-        'popularity': 76,
-        'color': Colors.red.shade700,
-      },
-    ];
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text(
-                'Popüler Quizler',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ), // Font size küçültüldü
-              ),
-              TextButton(
-                onPressed: () {
-                  final homeScreenState =
-                      context.findAncestorStateOfType<_HomeScreenState>();
-                  if (homeScreenState != null) {
-                    homeScreenState.switchToTab(1); // 1: Quizler sekmesi
-                  }
-                },
-                child: const Row(
-                  children: [
-                    Text(
-                      'Tümü',
-                      style: TextStyle(fontSize: 12),
-                    ), // Font size küçültüldü
-                    SizedBox(width: 4),
-                    Icon(
-                      Icons.arrow_forward,
-                      size: 14,
-                    ), // Icon boyutu küçültüldü
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(height: 8), // Boşluk azaltıldı
-        SizedBox(
-          height: 110, // Kart yüksekliği azaltıldı
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            itemCount: popularCategories.length,
-            itemBuilder: (context, index) {
-              final category = popularCategories[index];
-              return _buildPopularQuizCard(
-                category['name'],
-                category['icon'],
-                '${category['popularity']}+ kişi çözdü',
-                category['color'],
-                context,
-                category['name'], // Quiz kategorisi adını geçir
-              );
-            },
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildPopularQuizCard(
-    String title,
-    IconData icon,
-    String popularity,
-    Color color,
-    BuildContext context,
-    String categoryName, // Kategori adı parametresi eklendi
-  ) {
-    return GestureDetector(
-      onTap: () => _startCategoryQuiz(categoryName),
-      child: Container(
-        width: 120, // Genişlik azaltıldı
-        margin: const EdgeInsets.only(right: 12), // Boşluk azaltıldı
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [color.withOpacity(0.8), color.withOpacity(0.4)],
-          ),
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: color.withOpacity(0.3), width: 1),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              padding: const EdgeInsets.all(8), // Padding azaltıldı
-              decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.2),
-                shape: BoxShape.circle,
-              ),
-              child: Icon(
-                icon,
-                color: Colors.white,
-                size: 24,
-              ), // Icon boyutu azaltıldı
-            ),
-            const SizedBox(height: 8), // Boşluk azaltıldı
-            Text(
-              title,
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                fontSize: 12, // Font size azaltıldı
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
-            ),
-            const SizedBox(height: 2), // Boşluk azaltıldı
-            Text(
-              popularity,
-              style: TextStyle(
-                fontSize: 10,
-                color: Colors.grey[300],
-              ), // Font size azaltıldı
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  // Kategori adına göre quiz başlat
-  void _startCategoryQuiz(String categoryName) async {
-    print('$categoryName kategorisi seçildi');
-
-    try {
-      setState(() {
-        _isLoading = true;
-      });
-
-      // Eğer bu kategoride devam eden bir quiz var mı kontrol et
-      final ongoingQuizForCategory =
-          _ongoingQuizzes
-              .where(
-                (quiz) => quiz.name.toLowerCase() == categoryName.toLowerCase(),
-              )
-              .toList();
-
-      if (ongoingQuizForCategory.isNotEmpty) {
-        // Devam eden bir quiz varsa, o quiz'e devam et
-        final ongoingQuiz = ongoingQuizForCategory.first;
-        print('Bu kategoride devam eden bir quiz bulundu: ${ongoingQuiz.id}');
-
-        setState(() {
-          _isLoading = false;
-        });
-
-        _continueQuiz(ongoingQuiz);
-        return;
-      }
-
-      // Kategori adına göre soruları getir
-      List<Question> questions = [];
-
-      switch (categoryName.toLowerCase()) {
-        case 'anestezi uygulaması':
-          questions = anesthesiaApplicationQuestions;
-          break;
-        case 'solunum sistemleri':
-          questions = respiratorySystemQuestions;
-          break;
-        case 'kardiyovasküler monitörizasyon':
-          questions = cardiovascularMonitoringQuestions;
-          break;
-        case 'farmakolojik prensipler':
-          questions = pharmacologicalPrinciplesQuestions;
-          break;
-        case 'ameliyathane ortamı':
-          questions = operatingRoomEnvironmentQuestions;
-          break;
-        case 'preoperatif değerlendirme':
-        case 'bölüm 18 - ameliyat öncesi değerlendirme':
-          questions = preoperativeAssessmentQuestions;
-          break;
-        default:
-          questions = anesthesiaApplicationQuestions;
-          break;
-      }
-
-      // Soruları karıştır
-      questions.shuffle();
-
-      setState(() {
-        _isLoading = false;
-      });
-
-      if (questions.isEmpty) {
-        print('$categoryName kategorisi için soru bulunamadı');
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('$categoryName kategorisi için soru bulunamadı'),
-            backgroundColor: Colors.red,
-          ),
-        );
-        return;
-      }
-
-      // Quiz ekranına git
-      Navigator.push(
+      SnackBarUtils.showErrorSnackBar(
         context,
-        MaterialPageRoute(
-          builder:
-              (context) =>
-                  QuizScreen(categoryName: categoryName, questions: questions),
-        ),
-      ).then((_) {
-        // Quiz tamamlandığında ana sayfanın verilerini yenile
-        _loadData();
-      });
-    } catch (e) {
-      print('Quiz başlatma hatası: $e');
-      setState(() {
-        _isLoading = false;
-      });
-
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Quiz başlatılırken bir hata oluştu: $e'),
-          backgroundColor: Colors.red,
-        ),
+        'Quiz devam ederken bir hata oluştu',
       );
     }
   }
@@ -2257,7 +2081,7 @@ class _HomeContentState extends State<HomeContent> {
                         Row(
                           children: [
                             Container(
-                              padding: const EdgeInsets.all(6),
+                              padding: const EdgeInsets.all(10),
                               decoration: BoxDecoration(
                                 color: Colors.white.withOpacity(0.2),
                                 borderRadius: BorderRadius.circular(12),
@@ -2268,7 +2092,7 @@ class _HomeContentState extends State<HomeContent> {
                                 size: 16,
                               ),
                             ),
-                            const SizedBox(width: 8),
+                            const SizedBox(width: 10),
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,

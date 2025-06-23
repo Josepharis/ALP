@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../services/leaderboard_service.dart';
+import '../utils/snackbar_utils.dart';
 import 'dart:math' as math;
 import 'dart:ui';
 import 'package:google_fonts/google_fonts.dart';
@@ -102,11 +103,9 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
           onError: (error) {
             if (mounted) {
               setState(() => _isLoading = false);
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text('Veriler yüklenirken bir hata oluştu: $error'),
-                  backgroundColor: Colors.red,
-                ),
+              SnackBarUtils.showErrorSnackBar(
+                context,
+                'Veriler yüklenirken bir hata oluştu: $error',
               );
             }
           },
@@ -146,7 +145,6 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
                       physics: const BouncingScrollPhysics(),
                       slivers: [
                         _buildHeader(),
-                        _buildUserCard(),
                         _buildTopThree(),
                         _buildLeaderboardList(),
                       ],
@@ -191,109 +189,6 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
     );
   }
 
-  Widget _buildUserCard() {
-    final userIndex = _leaderboardData.indexWhere(
-      (user) => user['isCurrentUser'] ?? false,
-    );
-    final actualRank = userIndex != -1 ? userIndex + 1 : _currentUserRank;
-
-    return SliverToBoxAdapter(
-      child: LayoutBuilder(
-        builder: (context, constraints) {
-          final maxWidth = constraints.maxWidth;
-          final cardHeight =
-              maxWidth *
-              0.15; // Kartın yüksekliği ekran genişliğine göre ayarlanır
-          final avatarSize =
-              cardHeight *
-              0.6; // Avatar boyutu kart yüksekliğine göre ayarlanır
-
-          return Container(
-            margin: EdgeInsets.symmetric(
-              horizontal: maxWidth * 0.05,
-              vertical: maxWidth * 0.02,
-            ),
-            padding: EdgeInsets.all(maxWidth * 0.03),
-            decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.1),
-              borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: Colors.white.withOpacity(0.1)),
-            ),
-            child: Row(
-              children: [
-                // Avatar
-                Container(
-                  width: avatarSize,
-                  height: avatarSize,
-                  decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.1),
-                    shape: BoxShape.circle,
-                  ),
-                  child: const Icon(Icons.person_outline, color: Colors.white),
-                ),
-                SizedBox(width: maxWidth * 0.03),
-                // Sıralama Bilgisi
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        'Mevcut Sıralaman',
-                        style: GoogleFonts.poppins(
-                          color: Colors.white70,
-                          fontSize: maxWidth * 0.03,
-                        ),
-                      ),
-                      Text(
-                        '$actualRank. Sırada',
-                        style: GoogleFonts.poppins(
-                          color: Colors.white,
-                          fontSize: maxWidth * 0.04,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                // İlerle Butonu
-                Container(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: maxWidth * 0.03,
-                    vertical: maxWidth * 0.015,
-                  ),
-                  decoration: BoxDecoration(
-                    color: Colors.blue.shade700,
-                    borderRadius: BorderRadius.circular(maxWidth * 0.02),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(
-                        Icons.trending_up,
-                        color: Colors.white,
-                        size: maxWidth * 0.035,
-                      ),
-                      SizedBox(width: maxWidth * 0.01),
-                      Text(
-                        'İlerle',
-                        style: GoogleFonts.poppins(
-                          color: Colors.white,
-                          fontSize: maxWidth * 0.03,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          );
-        },
-      ),
-    );
-  }
-
   Widget _buildTopThree() {
     if (_leaderboardData.length < 3) return const SliverToBoxAdapter();
 
@@ -333,23 +228,24 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
             ),
           ),
 
-          // Kartlar düzeni
+          // Kartlar düzeni - Hepsi aynı boyutta ve daha küçük
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 16), // 20'den 16'ya
             child: Column(
               children: [
-                // Birinci - Ortada
+                // Birinci - Ortada (diğerleriyle aynı boyut)
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    // Boş alan - sol kenar
-                    const Spacer(),
-
-                    // Birinci kart - ortada
-                    Expanded(
-                      flex: 2,
+                    // Birinci kart - diğerleriyle aynı boyut
+                    SizedBox(
+                      width:
+                          MediaQuery.of(context).size.width *
+                          0.35, // 0.4'ten 0.35'e küçültüldü
                       child: Container(
-                        margin: const EdgeInsets.only(bottom: 15),
+                        margin: const EdgeInsets.only(
+                          bottom: 8,
+                        ), // Daha az margin
                         child: _buildCard(
                           user: firstPlace,
                           color: Colors.amber.shade600,
@@ -358,39 +254,36 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
                         ),
                       ),
                     ),
-
-                    // Boş alan - sağ kenar
-                    const Spacer(),
                   ],
                 ),
 
-                // İkinci ve Üçüncü - Altta yan yana
+                // İkinci ve Üçüncü - Altta yan yana (birincisiyle aynı boyut)
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    // İkinci Kart
-                    Expanded(
-                      child: Container(
-                        margin: const EdgeInsets.only(right: 8),
-                        child: _buildCard(
-                          user: secondPlace,
-                          color: Colors.grey.shade500,
-                          label: 'İKİNCİ',
-                          position: 2,
-                        ),
+                    // İkinci Kart - birincisiyle aynı boyut
+                    SizedBox(
+                      width:
+                          MediaQuery.of(context).size.width *
+                          0.35, // 0.4'ten 0.35'e küçültüldü
+                      child: _buildCard(
+                        user: secondPlace,
+                        color: Colors.grey.shade500,
+                        label: 'İKİNCİ',
+                        position: 2,
                       ),
                     ),
 
-                    // Üçüncü Kart
-                    Expanded(
-                      child: Container(
-                        margin: const EdgeInsets.only(left: 8),
-                        child: _buildCard(
-                          user: thirdPlace,
-                          color: Colors.orange.shade700,
-                          label: 'ÜÇÜNCÜ',
-                          position: 3,
-                        ),
+                    // Üçüncü Kart - birincisiyle aynı boyut
+                    SizedBox(
+                      width:
+                          MediaQuery.of(context).size.width *
+                          0.35, // 0.4'ten 0.35'e küçültüldü
+                      child: _buildCard(
+                        user: thirdPlace,
+                        color: Colors.orange.shade700,
+                        label: 'ÜÇÜNCÜ',
+                        position: 3,
                       ),
                     ),
                   ],
@@ -399,7 +292,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
             ),
           ),
 
-          const SizedBox(height: 15),
+          const SizedBox(height: 8), // Daha az boşluk
         ],
       ),
     );
@@ -414,6 +307,11 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
     final displayName = user['displayName'] ?? 'İsimsiz';
     final initial = displayName.isNotEmpty ? displayName[0].toUpperCase() : 'A';
     final points = user['totalPoints'] ?? 0;
+
+    // Responsive sizing
+    final size = MediaQuery.of(context).size;
+    final isSmallScreen = size.width < 380;
+    final isTablet = size.shortestSide >= 600;
 
     // Konuma göre stil ve içerik belirleme
     Color mainColor;
@@ -447,6 +345,22 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
         rankEmoji = "🏆";
     }
 
+    // Responsive boyutlar - Tüm kartlar aynı boyutta ve daha küçük
+    final avatarSize =
+        isTablet ? 50.0 : (isSmallScreen ? 35.0 : 42.0); // Daha da küçültüldü
+    final innerAvatarSize =
+        isTablet ? 42.0 : (isSmallScreen ? 29.0 : 36.0); // Daha da küçültüldü
+    final fontSize =
+        isTablet ? 14.0 : (isSmallScreen ? 12.0 : 16.0); // Daha da küçültüldü
+    final nameSize =
+        isTablet ? 12.0 : (isSmallScreen ? 9.0 : 11.0); // Daha da küçültüldü
+    final pointsSize =
+        isTablet ? 11.0 : (isSmallScreen ? 8.0 : 10.0); // Daha da küçültüldü
+    final iconSize =
+        isTablet ? 10.0 : (isSmallScreen ? 6.0 : 8.0); // Daha da küçültüldü
+    final labelSize =
+        isTablet ? 11.0 : (isSmallScreen ? 8.0 : 10.0); // Daha da küçültüldü
+
     return Container(
       decoration: BoxDecoration(
         color: Colors.black.withOpacity(0.2),
@@ -474,21 +388,26 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
                 // Üst başlık
                 Container(
                   width: double.infinity,
-                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  padding: EdgeInsets.symmetric(
+                    vertical: isSmallScreen ? 4 : 6,
+                  ),
                   decoration: BoxDecoration(color: mainColor),
                   child: Center(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(rankEmoji, style: const TextStyle(fontSize: 16)),
-                        const SizedBox(width: 8),
+                        Text(
+                          rankEmoji,
+                          style: TextStyle(fontSize: isSmallScreen ? 12 : 14),
+                        ),
+                        const SizedBox(width: 6),
                         Text(
                           label,
                           style: GoogleFonts.poppins(
                             color: Colors.white,
-                            fontSize: 14,
+                            fontSize: labelSize,
                             fontWeight: FontWeight.bold,
-                            letterSpacing: 1,
+                            letterSpacing: 0.5,
                           ),
                         ),
                       ],
@@ -498,11 +417,11 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
 
                 // İçerik
                 Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 12,
-                    horizontal: 16,
+                  padding: EdgeInsets.symmetric(
+                    vertical: isSmallScreen ? 6 : 8,
+                    horizontal: isSmallScreen ? 8 : 12,
                   ),
-                  child: Row(
+                  child: Column(
                     children: [
                       // Avatar
                       Stack(
@@ -510,8 +429,8 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
                         children: [
                           // Dış çember
                           Container(
-                            width: 60,
-                            height: 60,
+                            width: avatarSize,
+                            height: avatarSize,
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               gradient: LinearGradient(
@@ -523,8 +442,8 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
                           ),
                           // İç avatar
                           Container(
-                            width: 50,
-                            height: 50,
+                            width: innerAvatarSize,
+                            height: innerAvatarSize,
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               gradient: LinearGradient(
@@ -538,7 +457,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
                                 initial,
                                 style: GoogleFonts.poppins(
                                   color: Colors.black87,
-                                  fontSize: 24,
+                                  fontSize: fontSize,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -549,79 +468,72 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
                             bottom: 0,
                             right: 0,
                             child: Container(
-                              padding: const EdgeInsets.all(3),
+                              padding: const EdgeInsets.all(2),
                               decoration: BoxDecoration(
                                 color: mainColor,
                                 shape: BoxShape.circle,
                                 border: Border.all(
                                   color: Colors.white,
-                                  width: 1.5,
+                                  width: 1.0,
                                 ),
                               ),
                               child: Icon(
                                 trophyIcon,
                                 color: Colors.white,
-                                size: 12,
+                                size: iconSize,
                               ),
                             ),
                           ),
                         ],
                       ),
 
-                      const SizedBox(width: 15),
+                      SizedBox(height: isSmallScreen ? 6 : 8),
 
-                      // İsim ve puan
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                      // İsim
+                      Text(
+                        displayName,
+                        style: GoogleFonts.poppins(
+                          color: Colors.white,
+                          fontSize: nameSize,
+                          fontWeight: FontWeight.w600,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.center,
+                      ),
+
+                      SizedBox(height: isSmallScreen ? 3 : 4),
+
+                      // Puan - Daha kompakt container
+                      Container(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: isSmallScreen ? 6 : 8,
+                          vertical: isSmallScreen ? 2 : 3,
+                        ),
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            colors: [shimmerColor, mainColor],
+                          ),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
                           children: [
+                            Icon(
+                              Icons.star,
+                              color: Colors.white,
+                              size: isSmallScreen ? 10 : 12,
+                            ),
+                            SizedBox(width: isSmallScreen ? 2 : 3),
                             Text(
-                              displayName,
+                              '$points',
                               style: GoogleFonts.poppins(
                                 color: Colors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
+                                fontSize: pointsSize,
+                                fontWeight: FontWeight.bold,
                               ),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                            const SizedBox(height: 5),
-                            Row(
-                              children: [
-                                Container(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 10,
-                                    vertical: 4,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    gradient: LinearGradient(
-                                      begin: Alignment.topLeft,
-                                      end: Alignment.bottomRight,
-                                      colors: [shimmerColor, mainColor],
-                                    ),
-                                    borderRadius: BorderRadius.circular(12),
-                                  ),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Icon(
-                                        Icons.star,
-                                        color: Colors.white,
-                                        size: 14,
-                                      ),
-                                      const SizedBox(width: 4),
-                                      Text(
-                                        '$points',
-                                        style: GoogleFonts.poppins(
-                                          color: Colors.white,
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
                             ),
                           ],
                         ),
@@ -642,100 +554,175 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
       return const SliverToBoxAdapter();
     }
 
-    return SliverList(
-      delegate: SliverChildBuilderDelegate((context, index) {
-        final itemIndex = index + 3;
-        if (itemIndex >= _leaderboardData.length) return null;
+    // Kullanıcının pozisyonunu bul
+    final userIndex = _leaderboardData.indexWhere(
+      (user) => user['isCurrentUser'] ?? false,
+    );
 
-        final user = _leaderboardData[itemIndex];
-        final rank = itemIndex + 1;
-        final displayName = user['displayName'] ?? 'İsimsiz';
-        final points = user['totalPoints'] ?? 0;
-        final isCurrentUser = user['isCurrentUser'] ?? false;
+    if (userIndex == -1 || userIndex < 3) {
+      // Kullanıcı bulunamadı veya zaten top 3'te ise normal listeyi göster
+      return SliverList(
+        delegate: SliverChildBuilderDelegate((context, index) {
+          final itemIndex = index + 3;
+          if (itemIndex >= _leaderboardData.length) return null;
 
-        return Container(
-          margin: const EdgeInsets.fromLTRB(20, 0, 20, 12),
-          padding: const EdgeInsets.all(12),
-          decoration: BoxDecoration(
-            color:
-                isCurrentUser
-                    ? Colors.blue.shade900.withOpacity(0.3)
-                    : Colors.white.withOpacity(0.05),
-            borderRadius: BorderRadius.circular(12),
-            border:
-                isCurrentUser ? Border.all(color: Colors.blue.shade300) : null,
-          ),
-          child: Row(
-            children: [
-              Container(
-                width: 32,
-                height: 32,
-                decoration: BoxDecoration(
-                  color:
-                      isCurrentUser
-                          ? Colors.blue.shade700
-                          : Colors.white.withOpacity(0.1),
-                  shape: BoxShape.circle,
-                ),
-                child: Center(
-                  child: Text(
-                    '$rank',
-                    style: GoogleFonts.poppins(
-                      color: Colors.white,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                    ),
+          final user = _leaderboardData[itemIndex];
+          final rank = itemIndex + 1;
+          final displayName = user['displayName'] ?? 'İsimsiz';
+          final points = user['totalPoints'] ?? 0;
+          final isCurrentUser = user['isCurrentUser'] ?? false;
+
+          return _buildLeaderboardItem(
+            user,
+            rank,
+            displayName,
+            points,
+            isCurrentUser,
+          );
+        }, childCount: _leaderboardData.length - 3),
+      );
+    }
+
+    // Kullanıcının etrafındaki 5 kişiyi göster (kendisi dahil)
+    final startIndex = (userIndex - 2).clamp(3, _leaderboardData.length - 1);
+    final endIndex = (userIndex + 2).clamp(
+      startIndex,
+      _leaderboardData.length - 1,
+    );
+    final usersToShow = _leaderboardData.sublist(startIndex, endIndex + 1);
+
+    return SliverToBoxAdapter(
+      child: Column(
+        children: [
+          // "Senin Çevren" başlığı
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            decoration: BoxDecoration(
+              color: Colors.blue.shade900,
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Icon(Icons.people_outline, color: Colors.white, size: 18),
+                const SizedBox(width: 8),
+                Text(
+                  'Senin Çevren',
+                  style: GoogleFonts.poppins(
+                    color: Colors.white,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
                   ),
+                ),
+              ],
+            ),
+          ),
+          // Kullanıcı çevresindeki listesi
+          ...usersToShow.asMap().entries.map((entry) {
+            final user = entry.value;
+            final rank = startIndex + entry.key + 1;
+            final displayName = user['displayName'] ?? 'İsimsiz';
+            final points = user['totalPoints'] ?? 0;
+            final isCurrentUser = user['isCurrentUser'] ?? false;
+
+            return _buildLeaderboardItem(
+              user,
+              rank,
+              displayName,
+              points,
+              isCurrentUser,
+            );
+          }).toList(),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildLeaderboardItem(
+    Map<String, dynamic> user,
+    int rank,
+    String displayName,
+    int points,
+    bool isCurrentUser,
+  ) {
+    return Container(
+      margin: const EdgeInsets.fromLTRB(20, 0, 20, 12),
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color:
+            isCurrentUser
+                ? Colors.blue.shade900.withOpacity(0.3)
+                : Colors.white.withOpacity(0.05),
+        borderRadius: BorderRadius.circular(12),
+        border: isCurrentUser ? Border.all(color: Colors.blue.shade300) : null,
+      ),
+      child: Row(
+        children: [
+          Container(
+            width: 32,
+            height: 32,
+            decoration: BoxDecoration(
+              color:
+                  isCurrentUser
+                      ? Colors.blue.shade700
+                      : Colors.white.withOpacity(0.1),
+              shape: BoxShape.circle,
+            ),
+            child: Center(
+              child: Text(
+                '$rank',
+                style: GoogleFonts.poppins(
+                  color: Colors.white,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      displayName,
-                      style: GoogleFonts.poppins(
-                        color: Colors.white,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                      ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    Text(
-                      '$points puan',
-                      style: GoogleFonts.poppins(
-                        color: Colors.white70,
-                        fontSize: 12,
-                      ),
-                    ),
-                  ],
+            ),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  displayName,
+                  style: GoogleFonts.poppins(
+                    color: Colors.white,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                Text(
+                  '$points puan',
+                  style: GoogleFonts.poppins(
+                    color: Colors.white70,
+                    fontSize: 12,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          if (isCurrentUser)
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              decoration: BoxDecoration(
+                color: Colors.blue.shade700,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Text(
+                'SEN',
+                style: GoogleFonts.poppins(
+                  color: Colors.white,
+                  fontSize: 10,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
-              if (isCurrentUser)
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 8,
-                    vertical: 4,
-                  ),
-                  decoration: BoxDecoration(
-                    color: Colors.blue.shade700,
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Text(
-                    'SEN',
-                    style: GoogleFonts.poppins(
-                      color: Colors.white,
-                      fontSize: 10,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ),
-            ],
-          ),
-        );
-      }, childCount: _leaderboardData.length - 3),
+            ),
+        ],
+      ),
     );
   }
 

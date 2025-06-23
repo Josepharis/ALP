@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:math';
 import '../models/question.dart';
 import '../services/quiz_service.dart';
+import '../utils/snackbar_utils.dart';
 import 'quiz_screen.dart';
 import 'question_detail_screen.dart';
 import 'personalized_quiz_generator_sheet.dart';
@@ -438,12 +439,7 @@ class _CategoryMistakesScreenState extends State<CategoryMistakesScreen> {
       final success = await _quizService.removeWrongAnswer(questionId);
 
       if (success) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Soru başarıyla kaldırıldı'),
-            backgroundColor: Colors.green,
-          ),
-        );
+        SnackBarUtils.showSuccessSnackBar(context, 'Soru başarıyla kaldırıldı');
 
         // Listeyi güncelle
         setState(() {
@@ -458,11 +454,9 @@ class _CategoryMistakesScreenState extends State<CategoryMistakesScreen> {
           ); // Kategoriye ait tüm sorular silindi, geri dön
         }
       } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Soru kaldırılırken bir hata oluştu'),
-            backgroundColor: Colors.red,
-          ),
+        SnackBarUtils.showErrorSnackBar(
+          context,
+          'Soru kaldırılırken bir hata oluştu',
         );
 
         setState(() {
@@ -471,11 +465,9 @@ class _CategoryMistakesScreenState extends State<CategoryMistakesScreen> {
       }
     } catch (e) {
       print('Soru kaldırma hatası: $e');
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Soru kaldırılırken bir hata oluştu'),
-          backgroundColor: Colors.red,
-        ),
+      SnackBarUtils.showErrorSnackBar(
+        context,
+        'Soru kaldırılırken bir hata oluştu',
       );
 
       setState(() {

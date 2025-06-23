@@ -6,12 +6,18 @@ class DailyQuestion {
   final Question question;
   final DateTime date;
   final int pointMultiplier;
+  final bool isAnswered;
+  final int? userAnswer;
+  final bool? isCorrect;
 
   DailyQuestion({
     required this.id,
     required this.question,
     required this.date,
     this.pointMultiplier = 1,
+    this.isAnswered = false,
+    this.userAnswer,
+    this.isCorrect,
   });
 
   factory DailyQuestion.fromFirestore(
@@ -25,6 +31,9 @@ class DailyQuestion {
       question: questionData,
       date: (data['date'] as Timestamp).toDate(),
       pointMultiplier: data['pointMultiplier'] ?? 1,
+      isAnswered: data['isAnswered'] ?? false,
+      userAnswer: data['userAnswer'],
+      isCorrect: data['isCorrect'],
     );
   }
 
@@ -33,6 +42,9 @@ class DailyQuestion {
       'questionId': question.id,
       'date': Timestamp.fromDate(date),
       'pointMultiplier': pointMultiplier,
+      'isAnswered': isAnswered,
+      'userAnswer': userAnswer,
+      'isCorrect': isCorrect,
     };
   }
 
