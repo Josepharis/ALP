@@ -54,4 +54,24 @@ class DailyQuestion {
         date.month == now.month &&
         date.day == now.day;
   }
+
+  DailyQuestion copyWith({
+    String? id,
+    Question? question,
+    DateTime? date,
+    int? pointMultiplier,
+    bool? isAnswered,
+    int? userAnswer,
+    bool? isCorrect,
+  }) {
+    return DailyQuestion(
+      id: id ?? this.id,
+      question: question ?? this.question,
+      date: date ?? this.date,
+      pointMultiplier: pointMultiplier ?? this.pointMultiplier,
+      isAnswered: isAnswered ?? this.isAnswered,
+      userAnswer: userAnswer ?? this.userAnswer,
+      isCorrect: isCorrect ?? this.isCorrect,
+    );
+  }
 }

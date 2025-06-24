@@ -10,31 +10,55 @@ class MistakesUpdatedEvent {
 // EventBus sınıfı - Singleton pattern
 class EventBus {
   // Singleton instance
-  static final EventBus _instance = EventBus._internal();
+  static EventBus? _instance;
 
   // Singleton factory constructor
   factory EventBus() {
-    return _instance;
+    _instance ??= EventBus._internal();
+    return _instance!;
   }
 
   // Private constructor
   EventBus._internal();
 
   // Eksikler sayfası için özel event controller
-  final StreamController<MistakesUpdatedEvent> _mistakesUpdatedController =
-      StreamController<MistakesUpdatedEvent>.broadcast();
+  StreamController<MistakesUpdatedEvent>? _mistakesUpdatedController;
+
+  // Controller'ı lazy initialization ile oluştur
+  StreamController<MistakesUpdatedEvent> get _controller {
+    _mistakesUpdatedController ??=
+        StreamController<MistakesUpdatedEvent>.broadcast();
+    return _mistakesUpdatedController!;
+  }
 
   // Dinleyici Stream'i getir
-  Stream<MistakesUpdatedEvent> get mistakesUpdatedStream =>
-      _mistakesUpdatedController.stream;
+  Stream<MistakesUpdatedEvent> get mistakesUpdatedStream => _controller.stream;
 
   // Yeni olay yayınla
   void fireMistakesUpdated(bool isUpdated) {
-    _mistakesUpdatedController.add(MistakesUpdatedEvent(isUpdated));
+    if (_mistakesUpdatedController != null &&
+        !_mistakesUpdatedController!.isClosed) {
+      _mistakesUpdatedController!.add(MistakesUpdatedEvent(isUpdated));
+    }
   }
 
   // Kaynakları temizle
   void dispose() {
-    _mistakesUpdatedController.close();
+    try {
+      if (_mistakesUpdatedController != null &&
+          !_mistakesUpdatedController!.isClosed) {
+        _mistakesUpdatedController!.close();
+        _mistakesUpdatedController = null;
+      }
+      _instance = null;
+      print('EventBus kaynakları temizlendi');
+    } catch (e) {
+      print('EventBus dispose hatası: $e');
+    }
   }
+
+  // EventBus'ın aktif olup olmadığını kontrol et
+  bool get isActive =>
+      _mistakesUpdatedController != null &&
+      !_mistakesUpdatedController!.isClosed;
 }

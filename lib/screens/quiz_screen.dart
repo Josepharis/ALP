@@ -793,16 +793,12 @@ class _QuizScreenState extends State<QuizScreen>
         'Quiz tamamlanıyor: kategori=${widget.categoryName}, skor=$score/${widget.questions.length}',
       );
 
-      // Önce sayfadan çık
-      Navigator.pop(context);
-
-      // EventBus ile bildirim gönder (ana sayfayı hemen yenilemek için)
+      // Önce EventBus ile bildirim gönder (ana sayfayı hemen yenilemek için)
       EventBus().fireMistakesUpdated(true);
       print(
         "Quiz tamamlandı bildirimi hemen gönderildi - Ana sayfa yenilenecek",
       );
 
-      // Arka planda veriyi kaydet
       final result = await _quizService.completeQuiz(
         widget.categoryName,
         score,
@@ -814,7 +810,16 @@ class _QuizScreenState extends State<QuizScreen>
 
       if (result) {
         print('Quiz başarıyla tamamlandı ve veritabanına kaydedildi');
-        SnackBarUtils.showSuccessSnackBar(context, 'Quiz tamamlandı!');
+
+        if (widget.isMistakesMode) {
+          // Eksikler modunda direkt geri dön
+          Navigator.pop(context);
+          SnackBarUtils.showSuccessSnackBar(context, 'Pratik tamamlandı!');
+        } else {
+          // Normal quiz modunda ana sayfaya dön
+          Navigator.pop(context);
+          SnackBarUtils.showSuccessSnackBar(context, 'Quiz tamamlandı!');
+        }
       } else {
         print('HATA: Quiz tamamlanamadı veya veritabanına kaydedilemedi');
         SnackBarUtils.showErrorSnackBar(

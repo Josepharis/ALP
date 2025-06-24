@@ -274,42 +274,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     });
     _tabController.animateTo(index);
   }
-
-  // Hızlı güncelleme fonksiyonu
-  Future<void> _quickUpdateQuizData() async {
-    try {
-      // Paralel olarak sadece quiz verilerini güncelle
-      final futures = await Future.wait([
-        _quizService.getOngoingQuizzes(),
-        _quizService.getCompletedQuizzes(),
-      ]);
-
-      if (mounted) {
-        setState(() {
-          _ongoingQuizzes = futures[0];
-          _completedQuizzes = futures[1];
-        });
-        print('Quiz verileri hızlıca güncellendi');
-      }
-    } catch (e) {
-      print('Hızlı güncelleme hatası: $e');
-    }
-  }
-
-  // Günün sorusu için hızlı güncelleme
-  Future<void> _quickUpdateDailyQuestion() async {
-    try {
-      final dailyQuestion = await _quizService.getDailyQuestion();
-      if (mounted) {
-        setState(() {
-          _dailyQuestion = dailyQuestion;
-        });
-        print('Günün sorusu hızlıca güncellendi');
-      }
-    } catch (e) {
-      print('Günün sorusu güncelleme hatası: $e');
-    }
-  }
 }
 
 enum TabItem { home, quizzes, mistakes, leaderboard, profile }
@@ -703,16 +667,32 @@ class _HomeContentState extends State<HomeContent> {
   void initState() {
     super.initState();
     _loadData();
-    // EventBus dinleyicisi ekle - quiz tamamlandığında veya yanlış cevap kaydedildiğinde
-    // ana sayfayı yenile
+
+    // EventBus dinleyicisi ekle - hızlı güncelleme için
     _mistakesSubscription = EventBus().mistakesUpdatedStream.listen((event) {
-      print(
-        "EventBus: Eksikler veya Quiz güncellendi, ana sayfa yenileniyor...",
-      );
+      print("EventBus: Ana sayfa hızlı güncelleniyor...");
       if (mounted) {
-        // Hızlı güncelleme için sadece gerekli verileri al
-        _quickUpdateQuizData();
+        // Kısa loading göster
+        setState(() {
+          _isLoading = true;
+        });
+
+        // 200ms sonra loading'i kapat ve verileri güncelle
+        Future.delayed(const Duration(milliseconds: 200), () {
+          if (mounted) {
+            setState(() {
+              _isLoading = false;
+            });
+            // Sonra arka planda verileri güncelle
+            _loadData();
+          }
+        });
       }
+    });
+
+    // Tanıtımı göster
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _checkAndShowTutorial();
     });
   }
 
@@ -746,42 +726,94 @@ class _HomeContentState extends State<HomeContent> {
   }
 
   Future<void> _loadData() async {
-    setState(() {
-      _isLoading = true;
-    });
+    if (!mounted) return;
 
     try {
-      // Hızlı başlangıç için kullanıcı bilgisini önce al
+      // Loading'i başlat
+      setState(() {
+        _isLoading = true;
+      });
+
+      // Minimum loading süresi için zamanlayıcı başlat
+      final minimumLoadingTime = Future.delayed(
+        const Duration(milliseconds: 400),
+      );
+
+      // 1. Aşama: Hızlı kullanıcı bilgisi yükleme
       final currentUser = _authService.currentUser;
       if (currentUser != null) {
-        setState(() {
-          _userName = currentUser.displayName ?? 'Kullanıcı';
-        });
+        _userName = currentUser.displayName ?? 'Kullanıcı';
       }
 
-      // Kritik olmayan verileri paralel olarak yükle
-      final futures = await Future.wait([
-        _quizService.updateUserActivity(),
-        _quizService.getDailyQuestion(),
-        _quizService.getOngoingQuizzes(),
-        _quizService.getCompletedQuizzes(),
-        _quizService.getPopularQuizzes(),
-      ], eagerError: false);
+      // 2. Aşama: Temel verileri paralel yükle
+      final basicFutures = <Future>[];
 
-      if (mounted) {
-        setState(() {
-          _userActivity = futures[0] as UserActivity?;
-          _dailyQuestion = futures[1] as DailyQuestion?;
-          _ongoingQuizzes = futures[2] as List<Quiz>;
-          _completedQuizzes = futures[3] as List<Quiz>;
-          _popularQuizzes = futures[4] as List<Quiz>;
-          _isLoading = false;
-        });
-
-        print(
-          'Tüm veriler paralel olarak yüklendi - completedQuizzes: ${_completedQuizzes.length}',
+      if (currentUser != null) {
+        basicFutures.add(
+          _quizService.updateUserActivity().then((userActivity) {
+            if (mounted) {
+              _userActivity = userActivity;
+            }
+          }),
         );
       }
+
+      basicFutures.add(
+        _quizService.getDailyQuestion().then((dailyQuestion) {
+          if (mounted) {
+            _dailyQuestion = dailyQuestion;
+          }
+        }),
+      );
+
+      // Temel verileri bekle
+      await Future.wait(basicFutures);
+
+      // Minimum loading süresini de bekle
+      await minimumLoadingTime;
+
+      // Loading'i kapat
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
+      }
+
+      // 3. Aşama: Quiz verilerini arka planda yükle (loading kapalıyken)
+      final quizFutures = <Future>[];
+
+      quizFutures.add(
+        _quizService.getOngoingQuizzes().then((ongoingQuizzes) {
+          if (mounted) {
+            setState(() {
+              _ongoingQuizzes = ongoingQuizzes;
+            });
+          }
+        }),
+      );
+
+      quizFutures.add(
+        _quizService.getCompletedQuizzes().then((completedQuizzes) {
+          if (mounted) {
+            setState(() {
+              _completedQuizzes = completedQuizzes;
+            });
+          }
+        }),
+      );
+
+      quizFutures.add(
+        _quizService.getPopularQuizzes().then((popularQuizzes) {
+          if (mounted) {
+            setState(() {
+              _popularQuizzes = popularQuizzes;
+            });
+          }
+        }),
+      );
+
+      // Quiz verilerini arka planda yükle
+      await Future.wait(quizFutures);
     } catch (e) {
       print('Veri yükleme hatası: $e');
       if (mounted) {
@@ -789,42 +821,6 @@ class _HomeContentState extends State<HomeContent> {
           _isLoading = false;
         });
       }
-    }
-  }
-
-  // Hızlı güncelleme fonksiyonu
-  Future<void> _quickUpdateQuizData() async {
-    try {
-      // Paralel olarak sadece quiz verilerini güncelle
-      final futures = await Future.wait([
-        _quizService.getOngoingQuizzes(),
-        _quizService.getCompletedQuizzes(),
-      ]);
-
-      if (mounted) {
-        setState(() {
-          _ongoingQuizzes = futures[0];
-          _completedQuizzes = futures[1];
-        });
-        print('Quiz verileri hızlıca güncellendi');
-      }
-    } catch (e) {
-      print('Hızlı güncelleme hatası: $e');
-    }
-  }
-
-  // Günün sorusu için hızlı güncelleme
-  Future<void> _quickUpdateDailyQuestion() async {
-    try {
-      final dailyQuestion = await _quizService.getDailyQuestion();
-      if (mounted) {
-        setState(() {
-          _dailyQuestion = dailyQuestion;
-        });
-        print('Günün sorusu hızlıca güncellendi');
-      }
-    } catch (e) {
-      print('Günün sorusu güncelleme hatası: $e');
     }
   }
 
@@ -1425,8 +1421,13 @@ class _HomeContentState extends State<HomeContent> {
                   TextButton(
                     onPressed: () {
                       Navigator.of(context).pop();
-                      // Veriyi dialog kapandıktan sonra yenile
-                      _loadData();
+                      // Hızlı güncelleme - sadece günün sorusunu güncelle
+                      setState(() {
+                        _dailyQuestion = _dailyQuestion?.copyWith(
+                          isAnswered: true,
+                          isCorrect: isCorrect,
+                        );
+                      });
                     },
                     style: TextButton.styleFrom(
                       backgroundColor: Colors.indigo,

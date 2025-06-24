@@ -1,0 +1,93 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Temel kimlik doğrulama kontrolü - oturum açmış herhangi bir kullanıcı
+    function isAuth() {
+      return request.auth != null;
+    }
+    
+    // Kullanıcılar koleksiyonu için kurallar
+    match /users/{userId} {
+      // Tüm kimliği doğrulanmış kullanıcılar okuyabilir, sadece kendi belgelerini yazabilir
+      allow read: if isAuth();
+      allow write: if isAuth() && request.auth.uid == userId;
+    }
+    
+    // Kullanıcı aktiviteleri için kurallar
+    match /userActivities/{docId} {
+      // Tüm kimliği doğrulanmış kullanıcılar okuyabilir ve yazabilir
+      // Uygulamanın çalışması için gerekli minimum izin
+      allow read, write: if isAuth();
+    }
+    
+    // Quiz verileri
+    match /quizzes/{quizId} {
+      allow read, write: if isAuth();
+    }
+    
+    // Sorular
+    match /questions/{questionId} {
+      allow read, write: if isAuth();
+    }
+    
+    // Liderlik tablosu
+    match /leaderboard/{docId} {
+      allow read, write: if isAuth();
+    }
+    
+    // Günlük sorular
+    match /dailyQuestions/{docId} {
+      allow read, write: if isAuth();
+    }
+    
+    // Başarımlar
+    match /achievements/{docId} {
+      allow read, write: if isAuth();
+    }
+    
+    // Kullanıcının devam eden quiz'leri
+    match /user_ongoing_quizzes/{document} {
+      allow read, write: if request.auth != null && 
+        request.auth.uid == resource.data.userId;
+      allow create: if request.auth != null && 
+        request.auth.uid == request.resource.data.userId;
+    }
+    
+    // Kullanıcının tamamlanan quiz'leri
+    match /user_completed_quizzes/{document} {
+      allow read, write: if request.auth != null && 
+        request.auth.uid == resource.data.userId;
+      allow create: if request.auth != null && 
+        request.auth.uid == request.resource.data.userId;
+    }
+    
+    // Kullanıcının yanlış soruları
+    match /user_mistakes/{userId}/questions/{questionId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+    
+    // Günlük soru cevapları
+    match /daily_question_answers/{document} {
+      allow read, write: if request.auth != null && 
+        request.auth.uid == resource.data.userId;
+      allow create: if request.auth != null && 
+        request.auth.uid == request.resource.data.userId;
+    }
+    
+    // Quiz kategorileri - herkese okuma izni
+    match /quiz_categories/{categoryId} {
+      allow read: if request.auth != null;
+      // Admin kontrol edecek şekilde
+      allow write: if request.auth != null && 
+        exists(/databases/$(database)/documents/users/$(request.auth.uid)) &&
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.isAdmin == true;
+    }
+    
+    // Diğer tüm koleksiyonlar için fallback kural
+    match /{document=**} {
+      allow read: if isAuth();
+      allow write: if isAuth();
+    }
+  }
+} 

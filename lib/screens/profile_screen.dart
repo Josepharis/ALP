@@ -49,18 +49,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
     _loadUserData();
     _subscribeToRank();
 
-    // EventBus dinleyicisi ekle - quiz tamamlandığında veya cevap verildiğinde profili güncelle
+    // EventBus dinleyicisi ekle - hızlı güncelleme için
     _mistakesSubscription = EventBus().mistakesUpdatedStream.listen((event) {
-      print("EventBus: Profil güncelleniyor...");
+      print("EventBus: Profil hızlı güncelleniyor...");
       if (mounted) {
+        // Hemen setState yaparak loading'i kapat
+        setState(() {
+          _isLoading = false;
+        });
+        // Sonra arka planda verileri güncelle
         _loadUserData();
-        _subscribeToRank(); // Sıralamayı da güncelle
       }
     });
   }
 
   void _subscribeToRank() {
-    _rankSubscription?.cancel(); // Önceki subscription'ı iptal et
     final userId = _auth.currentUser?.uid;
     if (userId != null) {
       _rankSubscription = _leaderboardService.getUserRankStream().listen((

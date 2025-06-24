@@ -199,23 +199,25 @@ class LeaderboardService {
 
     return _firestore
         .collection('userActivities')
-        .doc(userId)
+        .orderBy('totalPoints', descending: true)
         .snapshots()
-        .asyncMap((userDoc) async {
-          if (!userDoc.exists) return 0;
+        .map((snapshot) {
+          try {
+            // Tüm kullanıcıları puan sırasına göre al
+            for (int i = 0; i < snapshot.docs.length; i++) {
+              final doc = snapshot.docs[i];
+              final data = doc.data();
+              final docUserId = data['userId'] as String? ?? doc.id;
 
-          final userPoints = userDoc.data()?['totalPoints'] ?? 0;
-
-          // Kullanıcının puanından daha yüksek puana sahip kullanıcıları say
-          final higherRankedUsers =
-              await _firestore
-                  .collection('userActivities')
-                  .where('totalPoints', isGreaterThan: userPoints)
-                  .count()
-                  .get();
-
-          // Sıralama = daha yüksek puanlı kullanıcı sayısı + 1
-          return (higherRankedUsers.count ?? 0) + 1;
+              if (docUserId == userId) {
+                return i + 1; // Sıralama 1'den başlar
+              }
+            }
+            return 0; // Kullanıcı bulunamazsa
+          } catch (e) {
+            print('getUserRankStream hatası: $e');
+            return 0;
+          }
         });
   }
 }

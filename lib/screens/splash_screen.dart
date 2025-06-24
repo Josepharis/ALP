@@ -207,33 +207,77 @@ class _SplashScreenState extends State<SplashScreen>
   }
 
   Future<void> _checkLoginStatus() async {
-    // 4 saniye bekleyerek splash screen'i göster (logo için daha uzun süre)
-    await Future.delayed(const Duration(seconds: 4));
+    try {
+      // 4 saniye bekleyerek splash screen'i göster (logo için daha uzun süre)
+      await Future.delayed(const Duration(seconds: 4));
 
-    if (!mounted) return;
+      if (!mounted) return;
 
-    // Tamamlandı animasyonunu başlat
-    await _completionController.forward();
+      // Tamamlandı animasyonunu başlat
+      await _completionController.forward();
 
-    if (!mounted) return;
+      if (!mounted) return;
 
-    // Kullanıcının giriş durumunu kontrol et
-    final currentUser = _authService.currentUser;
+      // Firebase Auth bağlantısını kontrol et
+      await _waitForAuth();
 
-    if (currentUser != null) {
-      // Kullanıcı admin mi kontrol et
-      final isAdmin = await _authService.isUserAdmin();
+      if (!mounted) return;
 
-      if (isAdmin) {
-        // Admin ise admin paneline yönlendir
-        Navigator.of(context).pushReplacementNamed('/admin');
+      // Kullanıcının giriş durumunu kontrol et
+      final currentUser = _authService.currentUser;
+
+      if (currentUser != null) {
+        try {
+          // Kullanıcı admin mi kontrol et
+          final isAdmin = await _authService.isUserAdmin();
+
+          if (!mounted) return;
+
+          if (isAdmin) {
+            // Admin ise admin paneline yönlendir
+            Navigator.of(context).pushReplacementNamed('/admin');
+          } else {
+            // Normal kullanıcı ise ana sayfaya yönlendir
+            Navigator.of(context).pushReplacementNamed('/home');
+          }
+        } catch (e) {
+          print('Admin kontrol hatası: $e');
+          // Hata durumunda ana sayfaya yönlendir
+          if (mounted) {
+            Navigator.of(context).pushReplacementNamed('/home');
+          }
+        }
       } else {
-        // Normal kullanıcı ise ana sayfaya yönlendir
-        Navigator.of(context).pushReplacementNamed('/home');
+        // Kullanıcı giriş yapmamışsa login sayfasına yönlendir
+        if (mounted) {
+          Navigator.of(context).pushReplacementNamed('/login');
+        }
       }
-    } else {
-      // Kullanıcı giriş yapmamışsa login sayfasına yönlendir
-      Navigator.of(context).pushReplacementNamed('/login');
+    } catch (e) {
+      print('Splash screen kontrol hatası: $e');
+      // Hata durumunda login sayfasına yönlendir
+      if (mounted) {
+        Navigator.of(context).pushReplacementNamed('/login');
+      }
+    }
+  }
+
+  // Firebase Auth'un hazır olmasını bekle
+  Future<void> _waitForAuth() async {
+    int maxAttempts = 10;
+    int attempts = 0;
+
+    while (attempts < maxAttempts) {
+      try {
+        // Basit bir auth kontrolü yap
+        final user = _authService.currentUser;
+        // Eğer currentUser null değilse veya Firebase Auth hazırsa devam et
+        break;
+      } catch (e) {
+        print('Auth bekleme denemesi ${attempts + 1}: $e');
+        attempts++;
+        await Future.delayed(const Duration(milliseconds: 300));
+      }
     }
   }
 

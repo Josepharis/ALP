@@ -192,132 +192,71 @@ class _CategoryMistakesScreenState extends State<CategoryMistakesScreen> {
       backgroundColor: Colors.transparent,
       isScrollControlled: true,
       builder:
-          (context) => Container(
-            height: MediaQuery.of(context).size.height * 0.8,
-            padding: const EdgeInsets.all(20),
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [
-                  _getCategoryColor(widget.category),
-                  _getCategoryColor(widget.category).withOpacity(0.8),
-                ],
-              ),
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(20),
-                topRight: Radius.circular(20),
-              ),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: [
-                        Icon(
-                          _getCategoryIcon(widget.category),
-                          color: Colors.white,
-                        ),
-                        const SizedBox(width: 8),
-                        Text(
-                          widget.category,
-                          style: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
-                    ),
-                    IconButton(
-                      icon: const Icon(Icons.close, color: Colors.white),
-                      onPressed: () => Navigator.pop(context),
-                    ),
+          (context) => SafeArea(
+            child: Container(
+              height: MediaQuery.of(context).size.height * 0.8,
+              padding: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    _getCategoryColor(widget.category),
+                    _getCategoryColor(widget.category).withOpacity(0.8),
                   ],
                 ),
-                const Divider(color: Colors.white30),
-                Expanded(
-                  child: SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const SizedBox(height: 16),
-                        Text(
-                          question.question,
-                          style: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(20),
+                  topRight: Radius.circular(20),
+                ),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          Icon(
+                            _getCategoryIcon(widget.category),
                             color: Colors.white,
                           ),
-                        ),
-                        const SizedBox(height: 24),
-                        const Text(
-                          'Seçenekler:',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white70,
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        ...List.generate(
-                          question.options.length,
-                          (index) => Container(
-                            margin: const EdgeInsets.only(bottom: 8),
-                            padding: const EdgeInsets.all(12),
-                            decoration: BoxDecoration(
-                              color:
-                                  index == question.correctAnswerIndex
-                                      ? Colors.green.withOpacity(0.3)
-                                      : Colors.white.withOpacity(0.1),
-                              borderRadius: BorderRadius.circular(8),
-                              border: Border.all(
-                                color:
-                                    index == question.correctAnswerIndex
-                                        ? Colors.green
-                                        : Colors.white.withOpacity(0.1),
-                                width: 1,
-                              ),
-                            ),
-                            child: Row(
-                              children: [
-                                index == question.correctAnswerIndex
-                                    ? const Icon(
-                                      Icons.check_circle,
-                                      color: Colors.green,
-                                    )
-                                    : Icon(
-                                      Icons.circle_outlined,
-                                      color: Colors.white.withOpacity(0.7),
-                                    ),
-                                const SizedBox(width: 12),
-                                Expanded(
-                                  child: Text(
-                                    question.options[index],
-                                    style: TextStyle(
-                                      color:
-                                          index == question.correctAnswerIndex
-                                              ? Colors.white
-                                              : Colors.white.withOpacity(0.8),
-                                      fontWeight:
-                                          index == question.correctAnswerIndex
-                                              ? FontWeight.bold
-                                              : FontWeight.normal,
-                                    ),
-                                  ),
-                                ),
-                              ],
+                          const SizedBox(width: 8),
+                          Text(
+                            widget.category,
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
                             ),
                           ),
-                        ),
-                        if (question.explanation != null &&
-                            question.explanation!.isNotEmpty) ...[
+                        ],
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.close, color: Colors.white),
+                        onPressed: () => Navigator.pop(context),
+                      ),
+                    ],
+                  ),
+                  const Divider(color: Colors.white30),
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(height: 16),
+                          Text(
+                            question.question,
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
                           const SizedBox(height: 24),
                           const Text(
-                            'Açıklama:',
+                            'Seçenekler:',
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
@@ -325,53 +264,116 @@ class _CategoryMistakesScreenState extends State<CategoryMistakesScreen> {
                             ),
                           ),
                           const SizedBox(height: 8),
-                          Container(
-                            padding: const EdgeInsets.all(12),
-                            decoration: BoxDecoration(
-                              color: Colors.white.withOpacity(0.1),
-                              borderRadius: BorderRadius.circular(8),
+                          ...List.generate(
+                            question.options.length,
+                            (index) => Container(
+                              margin: const EdgeInsets.only(bottom: 8),
+                              padding: const EdgeInsets.all(12),
+                              decoration: BoxDecoration(
+                                color:
+                                    index == question.correctAnswerIndex
+                                        ? Colors.green.withOpacity(0.3)
+                                        : Colors.white.withOpacity(0.1),
+                                borderRadius: BorderRadius.circular(8),
+                                border: Border.all(
+                                  color:
+                                      index == question.correctAnswerIndex
+                                          ? Colors.green
+                                          : Colors.white.withOpacity(0.1),
+                                  width: 1,
+                                ),
+                              ),
+                              child: Row(
+                                children: [
+                                  index == question.correctAnswerIndex
+                                      ? const Icon(
+                                        Icons.check_circle,
+                                        color: Colors.green,
+                                      )
+                                      : Icon(
+                                        Icons.circle_outlined,
+                                        color: Colors.white.withOpacity(0.7),
+                                      ),
+                                  const SizedBox(width: 12),
+                                  Expanded(
+                                    child: Text(
+                                      question.options[index],
+                                      style: TextStyle(
+                                        color:
+                                            index == question.correctAnswerIndex
+                                                ? Colors.white
+                                                : Colors.white.withOpacity(0.8),
+                                        fontWeight:
+                                            index == question.correctAnswerIndex
+                                                ? FontWeight.bold
+                                                : FontWeight.normal,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
-                            child: Text(
-                              question.explanation!,
+                          ),
+                          if (question.explanation != null &&
+                              question.explanation!.isNotEmpty) ...[
+                            const SizedBox(height: 24),
+                            const Text(
+                              'Açıklama:',
                               style: TextStyle(
-                                color: Colors.white.withOpacity(0.9),
-                                fontSize: 14,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white70,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            Container(
+                              padding: const EdgeInsets.all(12),
+                              decoration: BoxDecoration(
+                                color: Colors.white.withOpacity(0.1),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Text(
+                                question.explanation!,
+                                style: TextStyle(
+                                  color: Colors.white.withOpacity(0.9),
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ),
+                          ],
+                          const SizedBox(height: 24),
+                          Padding(
+                            padding: EdgeInsets.only(
+                              bottom:
+                                  MediaQuery.of(context).padding.bottom + 16,
+                            ),
+                            child: SizedBox(
+                              width: double.infinity,
+                              child: ElevatedButton.icon(
+                                onPressed: () => _startPracticeQuiz(),
+                                icon: const Icon(Icons.refresh),
+                                label: const Text('Bu Kategoride Pratik Yap'),
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.white.withOpacity(
+                                    0.2,
+                                  ),
+                                  foregroundColor: Colors.white,
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: 12,
+                                  ),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                ),
                               ),
                             ),
                           ),
                         ],
-                        const SizedBox(height: 24),
-                        SizedBox(
-                          height: MediaQuery.of(context).padding.bottom + 24,
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(
-                            bottom: MediaQuery.of(context).padding.bottom + 16,
-                          ),
-                          child: SizedBox(
-                            width: double.infinity,
-                            child: ElevatedButton.icon(
-                              onPressed: () => _startPracticeQuiz(),
-                              icon: const Icon(Icons.refresh),
-                              label: const Text('Bu Kategoride Pratik Yap'),
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.white.withOpacity(0.2),
-                                foregroundColor: Colors.white,
-                                padding: const EdgeInsets.symmetric(
-                                  vertical: 12,
-                                ),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
     );
