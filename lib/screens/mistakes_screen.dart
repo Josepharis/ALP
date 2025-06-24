@@ -237,7 +237,7 @@ class _MistakesScreenState extends State<MistakesScreen> {
         children: [
           const Row(
             children: [
-              Icon(Icons.assignment_late, color: Colors.orange),
+              Icon(Icons.assignment_late, color: Colors.blue),
               SizedBox(width: 8),
               Text(
                 'Eksikleriniz',
@@ -407,20 +407,20 @@ class _MistakesScreenState extends State<MistakesScreen> {
   Color _getCategoryColor(String category) {
     switch (category.toLowerCase()) {
       case 'anestezi':
-        return Colors.blue.shade700;
+        return Colors.indigo.shade700;
       case 'kardiyovasküler':
       case 'kardiyovasküler 1':
-        return Colors.red.shade700;
+        return Colors.blue.shade700;
       case 'kardiyovasküler 2':
-        return Colors.pink.shade700;
-      case 'solunum':
-        return Colors.teal.shade700;
-      case 'ameliyathane':
-        return Colors.indigo.shade700;
-      case 'anestezi istasyonu':
         return Colors.purple.shade700;
+      case 'solunum':
+        return Colors.cyan.shade700;
+      case 'ameliyathane':
+        return Colors.indigo.shade600;
+      case 'anestezi istasyonu':
+        return Colors.blue.shade600;
       default:
-        return Colors.orange.shade700;
+        return Colors.indigo.shade600;
     }
   }
 }

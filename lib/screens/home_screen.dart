@@ -274,6 +274,42 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     });
     _tabController.animateTo(index);
   }
+
+  // Hızlı güncelleme fonksiyonu
+  Future<void> _quickUpdateQuizData() async {
+    try {
+      // Paralel olarak sadece quiz verilerini güncelle
+      final futures = await Future.wait([
+        _quizService.getOngoingQuizzes(),
+        _quizService.getCompletedQuizzes(),
+      ]);
+
+      if (mounted) {
+        setState(() {
+          _ongoingQuizzes = futures[0];
+          _completedQuizzes = futures[1];
+        });
+        print('Quiz verileri hızlıca güncellendi');
+      }
+    } catch (e) {
+      print('Hızlı güncelleme hatası: $e');
+    }
+  }
+
+  // Günün sorusu için hızlı güncelleme
+  Future<void> _quickUpdateDailyQuestion() async {
+    try {
+      final dailyQuestion = await _quizService.getDailyQuestion();
+      if (mounted) {
+        setState(() {
+          _dailyQuestion = dailyQuestion;
+        });
+        print('Günün sorusu hızlıca güncellendi');
+      }
+    } catch (e) {
+      print('Günün sorusu güncelleme hatası: $e');
+    }
+  }
 }
 
 enum TabItem { home, quizzes, mistakes, leaderboard, profile }
@@ -667,7 +703,6 @@ class _HomeContentState extends State<HomeContent> {
   void initState() {
     super.initState();
     _loadData();
-
     // EventBus dinleyicisi ekle - quiz tamamlandığında veya yanlış cevap kaydedildiğinde
     // ana sayfayı yenile
     _mistakesSubscription = EventBus().mistakesUpdatedStream.listen((event) {
@@ -675,13 +710,9 @@ class _HomeContentState extends State<HomeContent> {
         "EventBus: Eksikler veya Quiz güncellendi, ana sayfa yenileniyor...",
       );
       if (mounted) {
-        _loadData();
+        // Hızlı güncelleme için sadece gerekli verileri al
+        _quickUpdateQuizData();
       }
-    });
-
-    // Tanıtımı göster
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _checkAndShowTutorial();
     });
   }
 
@@ -720,61 +751,35 @@ class _HomeContentState extends State<HomeContent> {
     });
 
     try {
-      // Kullanıcı bilgisini al
+      // Hızlı başlangıç için kullanıcı bilgisini önce al
       final currentUser = _authService.currentUser;
       if (currentUser != null) {
-        // Kullanıcı giriş yapmış, aktiviteyi güncelleyelim
-        final userActivity = await _quizService.updateUserActivity();
         setState(() {
-          _userActivity = userActivity;
           _userName = currentUser.displayName ?? 'Kullanıcı';
         });
       }
 
-      // Günün sorusunu getir
-      final dailyQuestion = await _quizService.getDailyQuestion();
-
-      // Devam eden quizleri getir
-      final ongoingQuizzes = await _quizService.getOngoingQuizzes();
-
-      // Tamamlanan quizleri getir
-      print('Tamamlanan quizler yükleniyor...');
-      final completedQuizzes = await _quizService.getCompletedQuizzes();
-      print('Tamamlanan quiz sayısı: ${completedQuizzes.length}');
-      if (completedQuizzes.isNotEmpty) {
-        for (int i = 0; i < completedQuizzes.length; i++) {
-          print(
-            'Quiz $i: ${completedQuizzes[i].name}, ID: ${completedQuizzes[i].id}, SuccessRate: ${completedQuizzes[i].successRate}',
-          );
-        }
-      } else {
-        print('UYARI: Tamamlanan quizler listesi boş!');
-      }
-
-      // Popüler quizleri getir
-      print('DEBUG: Popüler quizler yükleniyor...');
-      final popularQuizzes = await _quizService.getPopularQuizzes();
-      print('DEBUG: Popüler quiz sayısı: ${popularQuizzes.length}');
-      if (popularQuizzes.isNotEmpty) {
-        for (int i = 0; i < popularQuizzes.length; i++) {
-          print(
-            'DEBUG: Popüler Quiz $i: ${popularQuizzes[i].name}, Popülerlik: ${popularQuizzes[i].popularityCount}',
-          );
-        }
-      } else {
-        print('DEBUG: UYARI - Popüler quizler listesi boş!');
-      }
+      // Kritik olmayan verileri paralel olarak yükle
+      final futures = await Future.wait([
+        _quizService.updateUserActivity(),
+        _quizService.getDailyQuestion(),
+        _quizService.getOngoingQuizzes(),
+        _quizService.getCompletedQuizzes(),
+        _quizService.getPopularQuizzes(),
+      ], eagerError: false);
 
       if (mounted) {
         setState(() {
-          _dailyQuestion = dailyQuestion;
-          _ongoingQuizzes = ongoingQuizzes;
-          _completedQuizzes = completedQuizzes;
-          _popularQuizzes = popularQuizzes;
+          _userActivity = futures[0] as UserActivity?;
+          _dailyQuestion = futures[1] as DailyQuestion?;
+          _ongoingQuizzes = futures[2] as List<Quiz>;
+          _completedQuizzes = futures[3] as List<Quiz>;
+          _popularQuizzes = futures[4] as List<Quiz>;
           _isLoading = false;
         });
+
         print(
-          'setState tamamlandı, completedQuizzes: ${_completedQuizzes.length}',
+          'Tüm veriler paralel olarak yüklendi - completedQuizzes: ${_completedQuizzes.length}',
         );
       }
     } catch (e) {
@@ -784,6 +789,42 @@ class _HomeContentState extends State<HomeContent> {
           _isLoading = false;
         });
       }
+    }
+  }
+
+  // Hızlı güncelleme fonksiyonu
+  Future<void> _quickUpdateQuizData() async {
+    try {
+      // Paralel olarak sadece quiz verilerini güncelle
+      final futures = await Future.wait([
+        _quizService.getOngoingQuizzes(),
+        _quizService.getCompletedQuizzes(),
+      ]);
+
+      if (mounted) {
+        setState(() {
+          _ongoingQuizzes = futures[0];
+          _completedQuizzes = futures[1];
+        });
+        print('Quiz verileri hızlıca güncellendi');
+      }
+    } catch (e) {
+      print('Hızlı güncelleme hatası: $e');
+    }
+  }
+
+  // Günün sorusu için hızlı güncelleme
+  Future<void> _quickUpdateDailyQuestion() async {
+    try {
+      final dailyQuestion = await _quizService.getDailyQuestion();
+      if (mounted) {
+        setState(() {
+          _dailyQuestion = dailyQuestion;
+        });
+        print('Günün sorusu hızlıca güncellendi');
+      }
+    } catch (e) {
+      print('Günün sorusu güncelleme hatası: $e');
     }
   }
 

@@ -157,10 +157,7 @@ class _CategoryMistakesScreenState extends State<CategoryMistakesScreen> {
                         question.explanation!.isNotEmpty)
                       Text(
                         'Açıklama mevcut',
-                        style: TextStyle(
-                          color: Colors.orange[300],
-                          fontSize: 13,
-                        ),
+                        style: TextStyle(color: Colors.blue[300], fontSize: 13),
                       ),
                     Row(
                       children: [
@@ -345,17 +342,27 @@ class _CategoryMistakesScreenState extends State<CategoryMistakesScreen> {
                         ],
                         const SizedBox(height: 24),
                         SizedBox(
-                          width: double.infinity,
-                          child: ElevatedButton.icon(
-                            onPressed: () => _startPracticeQuiz(),
-                            icon: const Icon(Icons.refresh),
-                            label: const Text('Bu Kategoride Pratik Yap'),
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.white.withOpacity(0.2),
-                              foregroundColor: Colors.white,
-                              padding: const EdgeInsets.symmetric(vertical: 12),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8),
+                          height: MediaQuery.of(context).padding.bottom + 24,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(
+                            bottom: MediaQuery.of(context).padding.bottom + 16,
+                          ),
+                          child: SizedBox(
+                            width: double.infinity,
+                            child: ElevatedButton.icon(
+                              onPressed: () => _startPracticeQuiz(),
+                              icon: const Icon(Icons.refresh),
+                              label: const Text('Bu Kategoride Pratik Yap'),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.white.withOpacity(0.2),
+                                foregroundColor: Colors.white,
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 12,
+                                ),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
                               ),
                             ),
                           ),
@@ -498,20 +505,20 @@ class _CategoryMistakesScreenState extends State<CategoryMistakesScreen> {
   Color _getCategoryColor(String category) {
     switch (category.toLowerCase()) {
       case 'anestezi':
-        return Colors.blue.shade700;
+        return Colors.indigo.shade700;
       case 'kardiyovasküler':
       case 'kardiyovasküler 1':
-        return Colors.red.shade700;
+        return Colors.blue.shade700;
       case 'kardiyovasküler 2':
-        return Colors.pink.shade700;
-      case 'solunum':
-        return Colors.teal.shade700;
-      case 'ameliyathane':
-        return Colors.indigo.shade700;
-      case 'anestezi istasyonu':
         return Colors.purple.shade700;
+      case 'solunum':
+        return Colors.cyan.shade700;
+      case 'ameliyathane':
+        return Colors.indigo.shade600;
+      case 'anestezi istasyonu':
+        return Colors.blue.shade600;
       default:
-        return Colors.orange.shade700;
+        return Colors.indigo.shade600;
     }
   }
 

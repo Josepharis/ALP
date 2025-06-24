@@ -12,6 +12,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import '../services/leaderboard_service.dart';
 import 'dart:math' as math;
 import '../utils/snackbar_utils.dart';
+import '../utils/event_bus.dart';
 
 import 'login_screen.dart';
 
@@ -32,6 +33,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final FirebaseStorage _storage = FirebaseStorage.instance;
   StreamSubscription? _rankSubscription;
+  StreamSubscription? _mistakesSubscription;
   int _currentRank = 0;
 
   bool _isLoading = false;
@@ -46,9 +48,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
     _isLoading = false;
     _loadUserData();
     _subscribeToRank();
+
+    // EventBus dinleyicisi ekle - quiz tamamlandığında veya cevap verildiğinde profili güncelle
+    _mistakesSubscription = EventBus().mistakesUpdatedStream.listen((event) {
+      print("EventBus: Profil güncelleniyor...");
+      if (mounted) {
+        _loadUserData();
+        _subscribeToRank(); // Sıralamayı da güncelle
+      }
+    });
   }
 
   void _subscribeToRank() {
+    _rankSubscription?.cancel(); // Önceki subscription'ı iptal et
     final userId = _auth.currentUser?.uid;
     if (userId != null) {
       _rankSubscription = _leaderboardService.getUserRankStream().listen((
@@ -66,6 +78,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   void dispose() {
     _rankSubscription?.cancel();
+    _mistakesSubscription?.cancel();
     super.dispose();
   }
 
