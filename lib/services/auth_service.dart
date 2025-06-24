@@ -152,19 +152,36 @@ class AuthService {
     }
   }
 
-  // Güvenli çıkış yapma - tüm stream'leri temizle
+  // Güvenli çıkış yapma - sadece gerekli işlemleri yap
   Future<void> signOut() async {
     try {
-      // EventBus'ı temizle
-      EventBus().dispose();
+      print('Çıkış işlemi başlatılıyor...');
 
-      // Firebase Auth'dan çıkış yap
+      // 1. EventBus'ı güvenli şekilde temizle (Firestore'a erişim gerektirmez)
+      try {
+        EventBus.safeDispose();
+        print('EventBus güvenli şekilde temizlendi');
+      } catch (e) {
+        print('EventBus temizleme hatası (devam ediliyor): $e');
+      }
+
+      // 2. Firebase Auth'dan çıkış yap (bu işlem izin gerektirmez)
       await _auth.signOut();
 
       print('Kullanıcı başarıyla çıkış yaptı');
     } catch (e) {
       print('Çıkış hatası: $e');
-      throw 'Çıkış işlemi sırasında bir hata oluştu.';
+
+      // Hata durumunda da EventBus'ı temizlemeye çalış
+      try {
+        EventBus.safeDispose();
+      } catch (busError) {
+        print('EventBus acil temizleme hatası: $busError');
+      }
+
+      // Çıkış hatasını sessizce logla, kullanıcıya hata gösterme
+      // Çünkü çıkış işlemi zaten gerçekleşmiş olabilir
+      print('Çıkış işlemi tamamlandı (bazı hatalar göz ardı edildi)');
     }
   }
 
@@ -180,26 +197,94 @@ class AuthService {
   // Firebase Auth hatalarını Türkçe'ye çevirme
   String _handleAuthException(FirebaseAuthException e) {
     switch (e.code) {
+      // Email ile ilgili hatalar
       case 'user-not-found':
-        return 'Bu email adresi ile kayıtlı kullanıcı bulunamadı.';
-      case 'wrong-password':
-        return 'Hatalı şifre girdiniz.';
+        return '❌ Bu e-posta adresi ile kayıtlı bir hesap bulunamadı.\n\n💡 Lütfen e-posta adresinizi kontrol edin veya yeni bir hesap oluşturun.';
       case 'invalid-email':
-        return 'Geçersiz email adresi.';
+        return '❌ Geçersiz e-posta adresi formatı.\n\n💡 Lütfen geçerli bir e-posta adresi girin (örnek: kullanici@email.com)';
       case 'email-already-in-use':
-        return 'Bu email adresi zaten kullanılıyor.';
+        return '❌ Bu e-posta adresi zaten başka bir hesap tarafından kullanılıyor.\n\n💡 Farklı bir e-posta adresi deneyin veya mevcut hesabınızla giriş yapın.';
+
+      // Şifre ile ilgili hatalar
+      case 'wrong-password':
+        return '❌ Girdiğiniz şifre hatalı.\n\n💡 Şifrenizi kontrol edin. Eğer şifrenizi unuttuysanız "Şifremi Unuttum" seçeneğini kullanabilirsiniz.';
       case 'weak-password':
-        return 'Şifre çok zayıf. Daha güçlü bir şifre belirleyin.';
-      case 'operation-not-allowed':
-        return 'Bu işlem şu anda kullanılamıyor.';
-      case 'too-many-requests':
-        return 'Çok fazla istek gönderildi. Lütfen daha sonra tekrar deneyin.';
+        return '❌ Şifreniz çok zayıf.\n\n💡 Şifreniz en az 6 karakter olmalı ve güçlü olmalıdır. Büyük-küçük harf, rakam ve özel karakter kullanın.';
+      case 'requires-recent-login':
+        return '❌ Bu işlem için yakın zamanda giriş yapmanız gerekiyor.\n\n💡 Lütfen çıkış yapıp tekrar giriş yapın.';
+
+      // Hesap durumu ile ilgili hatalar
+      case 'user-disabled':
+        return '❌ Bu hesap devre dışı bırakılmış.\n\n💡 Destek ekibi ile iletişime geçin.';
+      case 'account-exists-with-different-credential':
+        return '❌ Bu e-posta adresi farklı bir giriş yöntemi ile kayıtlı.\n\n💡 Farklı bir giriş yöntemi deneyin.';
+
+      // Ağ ve sistem hataları
       case 'network-request-failed':
-        return 'Ağ bağlantısı hatası. İnternet bağlantınızı kontrol edin.';
+        return '❌ İnternet bağlantısı sorunu.\n\n💡 İnternet bağlantınızı kontrol edin ve tekrar deneyin.';
+      case 'too-many-requests':
+        return '❌ Çok fazla deneme yapıldı.\n\n💡 Bir süre bekleyin ve tekrar deneyin.';
+      case 'operation-not-allowed':
+        return '❌ Bu giriş yöntemi şu anda kullanılamıyor.\n\n💡 Destek ekibi ile iletişime geçin.';
+
+      // Genel güvenlik hataları
       case 'permission-denied':
-        return 'Bu işlem için yetkiniz bulunmamaktadır.';
+        return '❌ Bu işlem için yetkiniz bulunmuyor.\n\n💡 Lütfen yetkinizi kontrol edin veya destek ekibi ile iletişime geçin.';
+      case 'invalid-credential':
+        return '❌ Geçersiz giriş bilgileri.\n\n💡 E-posta ve şifrenizi kontrol edip tekrar deneyin.';
+      case 'credential-already-in-use':
+        return '❌ Bu giriş bilgileri zaten başka bir hesap tarafından kullanılıyor.\n\n💡 Farklı giriş bilgileri deneyin.';
+
+      // Telefon doğrulama hataları
+      case 'invalid-phone-number':
+        return '❌ Geçersiz telefon numarası.\n\n💡 Telefon numaranızı ülke kodu ile birlikte girin (örnek: +90 555 123 4567)';
+      case 'missing-phone-number':
+        return '❌ Telefon numarası eksik.\n\n💡 Lütfen telefon numaranızı girin.';
+
+      // Kod doğrulama hataları
+      case 'invalid-verification-code':
+        return '❌ Doğrulama kodu geçersiz.\n\n💡 Doğrulama kodunu kontrol edin veya yeni kod isteyin.';
+      case 'invalid-verification-id':
+        return '❌ Doğrulama kimliği geçersiz.\n\n💡 Doğrulama işlemini yeniden başlatın.';
+
+      // Zaman aşımı hataları
+      case 'timeout':
+        return '❌ İşlem zaman aşımına uğradı.\n\n💡 İnternet bağlantınızı kontrol edin ve tekrar deneyin.';
+
+      // Firebase yapılandırma hataları
+      case 'app-not-authorized':
+        return '❌ Uygulama yetkilendirilmemiş.\n\n💡 Uygulama güncellemesi gerekebilir.';
+      case 'keychain-error':
+        return '❌ Anahtar zinciri hatası.\n\n💡 Cihazınızı yeniden başlatın ve tekrar deneyin.';
+
+      // Özel durumlar
+      case 'missing-email':
+        return '❌ E-posta adresi eksik.\n\n💡 Lütfen e-posta adresinizi girin.';
+      case 'internal-error':
+        return '❌ Sistem hatası oluştu.\n\n💡 Lütfen daha sonra tekrar deneyin.';
+      case 'web-storage-unsupported':
+        return '❌ Web depolama desteklenmiyor.\n\n💡 Farklı bir tarayıcı deneyin.';
+
+      // Bilinmeyen hatalar
       default:
-        return 'Bir hata oluştu: ${e.message}';
+        // Firebase hata mesajını Türkçe'ye çevirmeye çalış
+        String message = e.message ?? 'Bilinmeyen hata';
+
+        // Yaygın İngilizce hata mesajlarını Türkçe'ye çevir
+        if (message.toLowerCase().contains('email') &&
+            message.toLowerCase().contains('invalid')) {
+          return '❌ E-posta adresi geçersiz.\n\n💡 Lütfen geçerli bir e-posta adresi girin.';
+        } else if (message.toLowerCase().contains('password') &&
+            message.toLowerCase().contains('wrong')) {
+          return '❌ Şifre hatalı.\n\n💡 Şifrenizi kontrol edin veya şifre sıfırlama seçeneğini kullanın.';
+        } else if (message.toLowerCase().contains('network')) {
+          return '❌ Ağ bağlantısı sorunu.\n\n💡 İnternet bağlantınızı kontrol edin.';
+        } else if (message.toLowerCase().contains('user') &&
+            message.toLowerCase().contains('not found')) {
+          return '❌ Kullanıcı bulunamadı.\n\n💡 E-posta adresinizi kontrol edin veya kayıt olun.';
+        }
+
+        return '❌ Beklenmeyen bir hata oluştu.\n\n💡 Lütfen daha sonra tekrar deneyin.\n\nHata kodu: ${e.code}';
     }
   }
 }

@@ -45,15 +45,33 @@ class EventBus {
   // Kaynakları temizle
   void dispose() {
     try {
-      if (_mistakesUpdatedController != null &&
-          !_mistakesUpdatedController!.isClosed) {
-        _mistakesUpdatedController!.close();
+      if (_mistakesUpdatedController != null) {
+        if (!_mistakesUpdatedController!.isClosed) {
+          _mistakesUpdatedController!.close();
+        }
         _mistakesUpdatedController = null;
       }
-      _instance = null;
       print('EventBus kaynakları temizlendi');
     } catch (e) {
       print('EventBus dispose hatası: $e');
+    } finally {
+      // Hata olsa da instance'ı sıfırla
+      _mistakesUpdatedController = null;
+      _instance = null;
+    }
+  }
+
+  // Güvenli dispose - hata vermez
+  static void safeDispose() {
+    try {
+      if (_instance != null) {
+        _instance!.dispose();
+      }
+    } catch (e) {
+      print('EventBus güvenli dispose hatası: $e');
+    } finally {
+      // Her durumda instance'ı null yap
+      _instance = null;
     }
   }
 

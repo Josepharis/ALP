@@ -26,11 +26,11 @@ import '../data/adrenergic_drugs_questions.dart';
 import '../data/local_anesthetics_questions.dart';
 import '../data/auxiliary_drugs_questions.dart';
 import '../data/preoperative_assessment_questions.dart';
-import '../questions/airway_management_questions.dart';
-import '../questions/cardiovascular_physiology_questions.dart';
-import '../questions/cardiovascular_surgery_questions.dart';
-import '../questions/respiratory_diseases_questions.dart';
-import '../questions/respiratory_physiology_questions.dart';
+import '../data/airway_management_questions.dart';
+import '../data/cardiovascular_physiology_questions.dart';
+import '../data/cardiovascular_surgery_questions.dart';
+import '../data/respiratory_diseases_questions.dart';
+import '../data/respiratory_physiology_questions.dart';
 import '../utils/event_bus.dart';
 
 class QuizService {

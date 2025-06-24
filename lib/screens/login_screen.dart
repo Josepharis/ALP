@@ -403,12 +403,12 @@ class _LoginScreenState extends State<LoginScreen>
                                   keyboardType: TextInputType.emailAddress,
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
-                                      return 'Lütfen e-posta adresinizi girin';
+                                      return '❌ E-posta adresi boş bırakılamaz\n💡 Kayıt olduğunuz e-posta adresini girin';
                                     }
                                     if (!RegExp(
                                       r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
                                     ).hasMatch(value)) {
-                                      return 'Geçerli bir e-posta adresi girin';
+                                      return '❌ E-posta formatı geçersiz\n💡 Örnek: kullanici@example.com';
                                     }
                                     return null;
                                   },
@@ -438,7 +438,7 @@ class _LoginScreenState extends State<LoginScreen>
                                   ),
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
-                                      return 'Lütfen şifrenizi girin';
+                                      return '❌ Şifre alanı boş bırakılamaz\n💡 Kayıt olurken belirlediğiniz şifreyi girin';
                                     }
                                     return null;
                                   },
@@ -464,37 +464,97 @@ class _LoginScreenState extends State<LoginScreen>
 
                                 // Hata mesajı
                                 if (_errorMessage.isNotEmpty)
-                                  Container(
-                                    padding: const EdgeInsets.all(10),
-                                    decoration: BoxDecoration(
-                                      color: Colors.red.withOpacity(0.1),
-                                      borderRadius: BorderRadius.circular(8),
-                                      border: Border.all(
-                                        color: Colors.red.withOpacity(0.3),
-                                      ),
-                                    ),
-                                    child: Row(
-                                      children: [
-                                        const Icon(
-                                          Icons.error_outline,
-                                          color: Colors.red,
-                                          size: 20,
-                                        ),
-                                        const SizedBox(width: 10),
-                                        Expanded(
-                                          child: Text(
-                                            _errorMessage,
-                                            style: const TextStyle(
-                                              color: Colors.red,
-                                              fontSize: 14,
+                                  TweenAnimationBuilder<double>(
+                                    tween: Tween(begin: 0.0, end: 1.0),
+                                    duration: const Duration(milliseconds: 400),
+                                    curve: Curves.easeOut,
+                                    builder: (context, value, child) {
+                                      return Transform.scale(
+                                        scale: value,
+                                        child: Opacity(
+                                          opacity: value,
+                                          child: Container(
+                                            width: double.infinity,
+                                            padding: const EdgeInsets.all(16),
+                                            decoration: BoxDecoration(
+                                              gradient: LinearGradient(
+                                                colors: [
+                                                  Colors.red.withOpacity(0.1),
+                                                  Colors.red.withOpacity(0.05),
+                                                ],
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(12),
+                                              border: Border.all(
+                                                color: Colors.red.withOpacity(
+                                                  0.3,
+                                                ),
+                                                width: 1,
+                                              ),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.red.withOpacity(
+                                                    0.1,
+                                                  ),
+                                                  blurRadius: 8,
+                                                  offset: const Offset(0, 2),
+                                                ),
+                                              ],
+                                            ),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Row(
+                                                  children: [
+                                                    Container(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                            6,
+                                                          ),
+                                                      decoration: BoxDecoration(
+                                                        color: Colors.red
+                                                            .withOpacity(0.2),
+                                                        shape: BoxShape.circle,
+                                                      ),
+                                                      child: const Icon(
+                                                        Icons.warning_rounded,
+                                                        color: Colors.red,
+                                                        size: 18,
+                                                      ),
+                                                    ),
+                                                    const SizedBox(width: 12),
+                                                    const Expanded(
+                                                      child: Text(
+                                                        'Giriş Yapılamadı',
+                                                        style: TextStyle(
+                                                          color: Colors.red,
+                                                          fontSize: 16,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                const SizedBox(height: 8),
+                                                Text(
+                                                  _errorMessage,
+                                                  style: const TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 14,
+                                                    height: 1.4,
+                                                  ),
+                                                ),
+                                              ],
                                             ),
                                           ),
                                         ),
-                                      ],
-                                    ),
+                                      );
+                                    },
                                   ),
                                 if (_errorMessage.isNotEmpty)
-                                  const SizedBox(height: 10),
+                                  const SizedBox(height: 16),
 
                                 // Giriş yap butonu
                                 TweenAnimationBuilder<double>(

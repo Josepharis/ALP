@@ -192,7 +192,7 @@ class LeaderboardService {
         });
   }
 
-  // Kullanıcı sıralaması için stream
+  // Kullanıcı sıralaması için stream - güvenli versiyon
   Stream<int> getUserRankStream() {
     final userId = _auth.currentUser?.uid;
     if (userId == null) return Stream.value(0);
@@ -218,6 +218,11 @@ class LeaderboardService {
             print('getUserRankStream hatası: $e');
             return 0;
           }
+        })
+        .handleError((error) {
+          // Firestore permission hataları vs. için güvenli fallback
+          print('getUserRankStream Firestore hatası: $error');
+          return 0; // Hata durumunda sıfır döndür
         });
   }
 }

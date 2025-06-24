@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
 import 'dart:io';
 import 'package:flutter/foundation.dart' show kIsWeb;
+import '../services/organized_data_service.dart';
 
 class AddQuestionScreen extends StatefulWidget {
   final bool editMode;
@@ -31,6 +32,7 @@ class _AddQuestionScreenState extends State<AddQuestionScreen> {
   final _option4Controller = TextEditingController();
   final _explanationController = TextEditingController();
   final _quizNameController = TextEditingController();
+  final OrganizedDataService _organizedDataService = OrganizedDataService();
 
   int _correctAnswerIndex = 0;
   String _selectedQuizType = 'Mevcut Quiz';
@@ -38,7 +40,8 @@ class _AddQuestionScreenState extends State<AddQuestionScreen> {
   bool _isLoading = false;
   String _errorMessage = '';
   bool _isNewQuizSelected = false;
-  List<String> _availableQuizzes = [];
+  List<Map<String, String>> _availableQuizzes = []; // {id, displayName}
+  String _selectedQuizId = '';
 
   @override
   void initState() {
@@ -75,41 +78,65 @@ class _AddQuestionScreenState extends State<AddQuestionScreen> {
 
       print("Quiz'leri getirmeye başlıyorum...");
 
-      // Firestore bağlantısını kontrol et
-      final instance = FirebaseFirestore.instance;
-      print("Firestore bağlantısı sağlandı");
+      List<Map<String, String>> quizList = [];
 
-      // Koleksiyonları listele (hata ayıklama için)
-      final collections = await instance.collectionGroup('questions').get();
-      print("Toplam questions koleksiyonu sayısı: ${collections.docs.length}");
+      // 1. Organize veri yapısından kategorileri yükle (Admin screen'deki gibi)
+      try {
+        final organizedCategories =
+            await _organizedDataService.getOrganizedCategories();
+        print("✅ Organize kategoriler bulundu: ${organizedCategories.length}");
 
-      // Quizzes koleksiyonunu direkt getir
-      final querySnapshot = await instance.collection('quizzes').get();
+        if (organizedCategories.isNotEmpty) {
+          for (var category in organizedCategories) {
+            final displayName = category['displayName'] as String;
+            final collectionName = category['collectionName'] as String;
 
-      print("Firestore'dan cevap alındı. Belge sayısı: ${querySnapshot.size}");
-
-      if (querySnapshot.size == 0) {
-        print("⚠️ DİKKAT: Firestore'dan hiç quiz bulunamadı!");
+            quizList.add({'id': collectionName, 'displayName': displayName});
+            print("📋 Kategori: $displayName -> $collectionName");
+          }
+        }
+      } catch (e) {
+        print("⚠️ Organize kategoriler yüklenirken hata: $e");
       }
 
-      List<String> quizIds = [];
-      for (var doc in querySnapshot.docs) {
-        print("Bulunan quiz: ${doc.id}");
-        quizIds.add(doc.id);
+      // 2. Eğer organize veriler yoksa, fallback kullan
+      if (quizList.isEmpty) {
+        print("⚠️ Organize kategoriler bulunamadı, fallback deneniyor...");
+
+        final instance = FirebaseFirestore.instance;
+        final querySnapshot = await instance.collection('quizzes').get();
+        print("Legacy quizzes koleksiyonu bulundu: ${querySnapshot.size}");
+
+        for (var doc in querySnapshot.docs) {
+          final data = doc.data();
+          final displayName =
+              (data['name'] as String?) ?? _createDisplayNameFromId(doc.id);
+          quizList.add({'id': doc.id, 'displayName': displayName});
+          print("🔄 Legacy quiz: ${doc.id} -> $displayName");
+        }
+      }
+
+      // 3. Son durum: Hiçbir kategori bulunamadıysa
+      if (quizList.isEmpty) {
+        print("⚠️ Hiçbir kategori bulunamadı!");
       }
 
       setState(() {
-        _availableQuizzes = quizIds;
+        _availableQuizzes = quizList;
 
-        print(
-          "Mevcut Quizler (${_availableQuizzes.length}): $_availableQuizzes",
-        );
+        print("✅ TOPLAM QUIZ SAYISI: ${_availableQuizzes.length}");
+        print("📋 Quiz Listesi:");
+        for (var quiz in _availableQuizzes) {
+          print("   • ${quiz['displayName']} (ID: ${quiz['id']})");
+        }
 
         // İlk quiz varsa seç veya düzenleme modunda ise mevcut kategoriyi kullan
         if (widget.editMode && widget.category != null) {
           _selectedCategory = widget.category!;
+          _selectedQuizId = widget.category!;
         } else if (_availableQuizzes.isNotEmpty) {
-          _selectedCategory = _availableQuizzes.first;
+          _selectedCategory = _availableQuizzes.first['displayName']!;
+          _selectedQuizId = _availableQuizzes.first['id']!;
         }
 
         _isLoading = false;
@@ -117,6 +144,7 @@ class _AddQuestionScreenState extends State<AddQuestionScreen> {
 
       // Eğer quiz listesi boşsa, UI'da "yeni quiz" seçeneğine geçiş yapılmasını sağla
       if (_availableQuizzes.isEmpty) {
+        print("⚠️ Hiç quiz bulunamadı, yeni quiz moduna geçiliyor");
         setState(() {
           _isNewQuizSelected = true;
           _selectedQuizType = 'Yeni Quiz';
@@ -129,6 +157,45 @@ class _AddQuestionScreenState extends State<AddQuestionScreen> {
         _errorMessage = "Quiz'ler yüklenirken hata oluştu: $e";
       });
     }
+  }
+
+  // Collection ID'lerini anlamlı display name'lere çevir
+  String _createDisplayNameFromId(String id) {
+    // Bilinen collection pattern'larını kontrol et
+    Map<String, String> knownCollections = {
+      'anestezi_farmakolo': 'Anestezi Farmakolojisi',
+      'genel_anestezi': 'Genel Anestezi',
+      'rejyonal_anestezi': 'Rejyonal Anestezi',
+      'yoğun_bakım': 'Yoğun Bakım',
+      'ağrı_tedavisi': 'Ağrı Tedavisi',
+      'monitorizasyon': 'Monitörizasyon',
+      'solunum_sistemi': 'Solunum Sistemi',
+      'kardiyovasküler': 'Kardiyovasküler Sistem',
+      'nöroloji': 'Nöroloji',
+      'pediatrik_anestezi': 'Pediatrik Anestezi',
+      'obstetrik_anestezi': 'Obstetrik Anestezi',
+      'geriatrik_anestezi': 'Geriatrik Anestezi',
+      'ameliyathane': 'Ameliyathane',
+      'anestezi': 'Anestezi',
+    };
+
+    // Eğer bilinen bir collection ise, display name'ini döndür
+    String lowerCaseId = id.toLowerCase();
+    if (knownCollections.containsKey(lowerCaseId)) {
+      return knownCollections[lowerCaseId]!;
+    }
+
+    // Bilinen değilse, ID'yi güzelleştir
+    return id
+        .replaceAll('_', ' ')
+        .split(' ')
+        .map(
+          (word) =>
+              word.isNotEmpty
+                  ? word[0].toUpperCase() + word.substring(1).toLowerCase()
+                  : word,
+        )
+        .join(' ');
   }
 
   @override
@@ -448,15 +515,19 @@ class _AddQuestionScreenState extends State<AddQuestionScreen> {
                     dropdownColor: Colors.indigo.shade800,
                     style: const TextStyle(color: Colors.white),
                     value:
-                        _availableQuizzes.contains(_selectedCategory)
+                        _availableQuizzes.any(
+                              (q) => q['displayName'] == _selectedCategory,
+                            )
                             ? _selectedCategory
-                            : _availableQuizzes.first,
+                            : (_availableQuizzes.isNotEmpty
+                                ? _availableQuizzes.first['displayName']
+                                : null),
                     items:
                         _availableQuizzes
                             .map(
                               (quiz) => DropdownMenuItem(
-                                value: quiz,
-                                child: Text(quiz),
+                                value: quiz['displayName'],
+                                child: Text(quiz['displayName']!),
                               ),
                             )
                             .toList(),
@@ -465,8 +536,13 @@ class _AddQuestionScreenState extends State<AddQuestionScreen> {
                             ? null
                             : (value) {
                               if (value != null) {
+                                final selectedQuiz = _availableQuizzes
+                                    .firstWhere(
+                                      (q) => q['displayName'] == value,
+                                    );
                                 setState(() {
                                   _selectedCategory = value;
+                                  _selectedQuizId = selectedQuiz['id']!;
                                 });
                               }
                             },
@@ -737,8 +813,11 @@ class _AddQuestionScreenState extends State<AddQuestionScreen> {
               });
             }
           } else {
-            // Mevcut quiz'i kullan
-            targetCategory = _selectedCategory;
+            // Mevcut quiz'i kullan - Quiz ID'sini kullan, display name'i değil
+            targetCategory =
+                _selectedQuizId.isNotEmpty
+                    ? _selectedQuizId
+                    : _selectedCategory;
           }
 
           // Soruyu ekle

@@ -35,11 +35,11 @@ import '../data/anticholinergic_drugs_questions.dart';
 import '../data/adrenergic_drugs_questions.dart';
 import '../data/local_anesthetics_questions.dart';
 import '../data/auxiliary_drugs_questions.dart';
-import '../questions/airway_management_questions.dart';
-import '../questions/cardiovascular_physiology_questions.dart';
-import '../questions/cardiovascular_surgery_questions.dart';
-import '../questions/respiratory_diseases_questions.dart';
-import '../questions/respiratory_physiology_questions.dart';
+import '../data/airway_management_questions.dart';
+import '../data/cardiovascular_physiology_questions.dart';
+import '../data/cardiovascular_surgery_questions.dart';
+import '../data/respiratory_diseases_questions.dart';
+import '../data/respiratory_physiology_questions.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -99,14 +99,18 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               colors: [Colors.blue.shade900, Colors.black],
             ),
           ),
-          child: Stack(
-            children: [
-              _buildOffstageNavigator(0),
-              _buildOffstageNavigator(1),
-              _buildOffstageNavigator(2),
-              _buildOffstageNavigator(3),
-              _buildOffstageNavigator(4),
-            ],
+          child: SafeArea(
+            bottom:
+                false, // Bottom safe area'yı devre dışı bırak, navigation bar'da halledeceğiz
+            child: Stack(
+              children: [
+                _buildOffstageNavigator(0),
+                _buildOffstageNavigator(1),
+                _buildOffstageNavigator(2),
+                _buildOffstageNavigator(3),
+                _buildOffstageNavigator(4),
+              ],
+            ),
           ),
         ),
         bottomNavigationBar: _buildBottomNav(),
@@ -127,73 +131,98 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   Widget _buildBottomNav() {
     final screenHeight = MediaQuery.of(context).size.height;
     final bottomPadding = MediaQuery.of(context).padding.bottom;
+    final viewInsets = MediaQuery.of(context).viewInsets.bottom;
 
-    return Container(
-      height: screenHeight * 0.07 + bottomPadding,
-      margin: EdgeInsets.only(
-        left: 16,
-        right: 16,
-        bottom: bottomPadding > 0 ? 0 : 8,
-        top: 8,
-      ),
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            Colors.blue.shade900.withOpacity(0.95),
-            Colors.purple.shade900.withOpacity(0.95),
+    // Android navigation bar yüksekliğini hesapla
+    final systemNavigationBarHeight =
+        MediaQuery.of(context).systemGestureInsets.bottom;
+    final actualBottomPadding =
+        bottomPadding > 0 ? bottomPadding : systemNavigationBarHeight;
+
+    return SafeArea(
+      child: Container(
+        height:
+            screenHeight * 0.07 +
+            (actualBottomPadding * 0.3), // Sistem navigation bar'ı için ek alan
+        margin: EdgeInsets.only(
+          left: 16,
+          right: 16,
+          bottom: actualBottomPadding > 0 ? actualBottomPadding * 0.2 : 8,
+          top: 8,
+        ),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Colors.blue.shade900.withOpacity(0.95),
+              Colors.purple.shade900.withOpacity(0.95),
+            ],
+          ),
+          borderRadius: BorderRadius.circular(30),
+          border: Border.all(color: Colors.white.withOpacity(0.2), width: 1),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.3),
+              blurRadius: 15,
+              offset: const Offset(0, 5),
+            ),
           ],
         ),
-        borderRadius: BorderRadius.circular(30),
-        border: Border.all(color: Colors.white.withOpacity(0.2), width: 1),
-      ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(30),
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-          child: Container(
-            padding: EdgeInsets.only(bottom: bottomPadding),
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  Colors.white.withOpacity(0.1),
-                  Colors.white.withOpacity(0.05),
-                ],
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(30),
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+            child: Container(
+              padding: EdgeInsets.only(
+                bottom: actualBottomPadding > 0 ? 4 : 0,
+                top: 4,
               ),
-              borderRadius: BorderRadius.circular(30),
-            ),
-            child: Theme(
-              data: Theme.of(context).copyWith(canvasColor: Colors.transparent),
-              child: BottomNavigationBar(
-                currentIndex: _currentIndex,
-                onTap: (index) {
-                  // Sayfa değişirken önceki SnackBar'ları temizle
-                  SnackBarUtils.clearAllSnackBars(context);
-
-                  setState(() {
-                    _currentIndex = index;
-                  });
-                },
-                backgroundColor: Colors.transparent,
-                selectedItemColor: Colors.white,
-                unselectedItemColor: Colors.white.withOpacity(0.5),
-                type: BottomNavigationBarType.fixed,
-                selectedLabelStyle: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: screenHeight * 0.011,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Colors.white.withOpacity(0.1),
+                    Colors.white.withOpacity(0.05),
+                  ],
                 ),
-                unselectedLabelStyle: TextStyle(fontSize: screenHeight * 0.011),
-                elevation: 0,
-                items: [
-                  _buildNavItem(Icons.home_rounded, 'Ana Sayfa', 0),
-                  _buildNavItem(Icons.quiz_rounded, 'Quizler', 1),
-                  _buildNavItem(Icons.assignment_late_rounded, 'Eksikler', 2),
-                  _buildNavItem(Icons.leaderboard_rounded, 'Sıralama', 3),
-                  _buildNavItem(Icons.person_rounded, 'Profil', 4),
-                ],
+                borderRadius: BorderRadius.circular(30),
+              ),
+              child: Theme(
+                data: Theme.of(
+                  context,
+                ).copyWith(canvasColor: Colors.transparent),
+                child: BottomNavigationBar(
+                  currentIndex: _currentIndex,
+                  onTap: (index) {
+                    // Sayfa değişirken önceki SnackBar'ları temizle
+                    SnackBarUtils.clearAllSnackBars(context);
+
+                    setState(() {
+                      _currentIndex = index;
+                    });
+                  },
+                  backgroundColor: Colors.transparent,
+                  selectedItemColor: Colors.white,
+                  unselectedItemColor: Colors.white.withOpacity(0.5),
+                  type: BottomNavigationBarType.fixed,
+                  selectedLabelStyle: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: screenHeight * 0.011,
+                  ),
+                  unselectedLabelStyle: TextStyle(
+                    fontSize: screenHeight * 0.011,
+                  ),
+                  elevation: 0,
+                  items: [
+                    _buildNavItem(Icons.home_rounded, 'Ana Sayfa', 0),
+                    _buildNavItem(Icons.quiz_rounded, 'Quizler', 1),
+                    _buildNavItem(Icons.assignment_late_rounded, 'Eksikler', 2),
+                    _buildNavItem(Icons.leaderboard_rounded, 'Sıralama', 3),
+                    _buildNavItem(Icons.person_rounded, 'Profil', 4),
+                  ],
+                ),
               ),
             ),
           ),
@@ -845,9 +874,9 @@ class _HomeContentState extends State<HomeContent> {
                           _buildDailyQuestion(context),
                           _buildOngoingQuiz(),
                           _buildFinishedQuiz(),
-                          const SizedBox(
-                            height: 80,
-                          ), // Bottom Navigation Bar için boşluk
+                          SizedBox(
+                            height: MediaQuery.of(context).padding.bottom + 100,
+                          ), // Navigation bar ve Android sistem tuşları için dinamik boşluk
                         ],
                       );
                     },
