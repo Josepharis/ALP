@@ -1,10 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../utils/event_bus.dart';
+import 'device_service.dart';
+import '../models/device_info.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final DeviceService _deviceService = DeviceService();
 
   // Mevcut kullanıcı
   User? get currentUser => _auth.currentUser;
@@ -42,6 +45,14 @@ class AuthService {
           title,
           email,
         );
+
+        // Cihaz kaydını yap (ilk kayıt olduğu için limit kontrolü gerekli değil ama yine de yap)
+        try {
+          await _deviceService.registerOrUpdateDevice();
+          print('✅ Kayıt sonrası cihaz kaydı başarılı');
+        } catch (e) {
+          print('⚠️ Kayıt sonrası cihaz kaydı hatası (devam ediliyor): $e');
+        }
       }
 
       return userCredential.user;
@@ -67,6 +78,19 @@ class AuthService {
       // Giriş başarılıysa kullanıcı dokümanını kontrol et ve oluştur
       if (userCredential.user != null) {
         await _ensureUserDocument(userCredential.user!);
+        
+        // Cihaz kaydını yap (maksimum 2 cihaz kontrolü ile)
+        try {
+          await _deviceService.registerOrUpdateDevice();
+          print('✅ Cihaz kaydı başarılı');
+        } catch (e) {
+          if (e is DeviceLimitExceededException) {
+            // Cihaz limiti aşıldı, kullanıcıyı çıkış yap
+            await _auth.signOut();
+            throw e; // Exception'ı yukarı fırlat
+          }
+          print('⚠️ Cihaz kaydı hatası (devam ediliyor): $e');
+        }
       }
 
       return userCredential.user;

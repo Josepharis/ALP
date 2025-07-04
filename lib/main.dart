@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'firebase_options.dart';
+import 'services/device_service.dart';
+import 'services/notification_service.dart';
 
 import 'screens/splash_screen.dart';
 import 'screens/login_screen.dart';
@@ -10,6 +13,15 @@ import 'screens/home_screen.dart';
 import 'screens/admin_screen.dart';
 
 import 'theme/app_theme.dart';
+
+// Firebase background message handler
+@pragma('vm:entry-point')
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  print('📱 Background message alındı: ${message.messageId}');
+  print('📱 Başlık: ${message.notification?.title}');
+  print('📱 İçerik: ${message.notification?.body}');
+}
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -40,6 +52,19 @@ void main() async {
       options: DefaultFirebaseOptions.currentPlatform,
     );
     print('Firebase başarıyla başlatıldı');
+
+    // FCM background message handler'ı kur
+    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+    
+    // DeviceService'i initialize et
+    final deviceService = DeviceService();
+    deviceService.setupTokenRefreshListener();
+    
+    // NotificationService'i initialize et
+    final notificationService = NotificationService();
+    await notificationService.initialize();
+    
+    print('FCM ve bildirimler başarıyla yapılandırıldı');
   } catch (e) {
     print('Firebase başlatma hatası: $e');
   }

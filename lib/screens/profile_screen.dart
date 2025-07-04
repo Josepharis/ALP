@@ -13,6 +13,8 @@ import '../services/leaderboard_service.dart';
 import 'dart:math' as math;
 import '../utils/snackbar_utils.dart';
 import '../utils/event_bus.dart';
+import '../services/device_service.dart';
+import '../models/device_info.dart';
 
 import 'login_screen.dart';
 
@@ -28,6 +30,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   final QuizService _quizService = QuizService();
   final UserService _userService = UserService();
   final LeaderboardService _leaderboardService = LeaderboardService();
+  final DeviceService _deviceService = DeviceService();
   final ImagePicker _imagePicker = ImagePicker();
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -605,6 +608,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           Icons.notifications,
                           context,
                           onTap: () => _showNotificationsSettingsModal(context),
+                        ),
+                        _buildSettingItem(
+                          'Cihazlarım',
+                          Icons.devices,
+                          context,
+                          onTap: () => _showDeviceManagementModal(context),
                         ),
                         _buildSettingItem(
                           'Gizlilik',
@@ -1414,5 +1423,268 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ),
       ),
     );
+  }
+
+  // Cihaz yönetimi modalı
+  void _showDeviceManagementModal(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) => StatefulBuilder(
+        builder: (context, setState) => Container(
+          height: MediaQuery.of(context).size.height * 0.8,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [Colors.indigo.shade900, Colors.black],
+            ),
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(30),
+              topRight: Radius.circular(30),
+            ),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              children: [
+                const Text(
+                  'Cihazlarım',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  'En fazla 2 cihazdan giriş yapabilirsiniz',
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Colors.grey[400],
+                  ),
+                ),
+                const SizedBox(height: 20),
+                Expanded(
+                  child: FutureBuilder<List<DeviceInfo>>(
+                    future: _deviceService.getUserDevices(),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+
+                      if (snapshot.hasError) {
+                        return Center(
+                          child: Text(
+                            'Cihazlar yüklenirken hata oluştu:\n${snapshot.error}',
+                            style: const TextStyle(color: Colors.red),
+                            textAlign: TextAlign.center,
+                          ),
+                        );
+                      }
+
+                      final devices = snapshot.data ?? [];
+
+                      if (devices.isEmpty) {
+                        return const Center(
+                          child: Text(
+                            'Kayıtlı cihaz bulunamadı',
+                            style: TextStyle(color: Colors.grey),
+                          ),
+                        );
+                      }
+
+                      return ListView.builder(
+                        itemCount: devices.length,
+                        itemBuilder: (context, index) {
+                          final device = devices[index];
+                          return _buildDeviceCard(device, setState);
+                        },
+                      );
+                    },
+                  ),
+                ),
+                const SizedBox(height: 20),
+                TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: const Text('Kapat'),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildDeviceCard(DeviceInfo device, StateSetter setState) {
+    final isCurrentDevice = device.lastLoginAt.isAfter(DateTime.now().subtract(const Duration(minutes: 5)));
+
+    return Container(
+      margin: const EdgeInsets.only(bottom: 12),
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.white.withOpacity(0.1),
+        borderRadius: BorderRadius.circular(12),
+        border: isCurrentDevice 
+          ? Border.all(color: Colors.green, width: 2)
+          : null,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(
+                device.platform == 'android' 
+                  ? Icons.android 
+                  : device.platform == 'ios'
+                    ? Icons.phone_iphone
+                    : Icons.computer,
+                color: Colors.indigo.shade300,
+                size: 24,
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      device.deviceName,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                    Text(
+                      device.platform.toUpperCase(),
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: Colors.grey[400],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              if (isCurrentDevice)
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  decoration: BoxDecoration(
+                    color: Colors.green.withOpacity(0.2),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: const Text(
+                    'Bu Cihaz',
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Colors.green,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Kayıt: ${_formatDate(device.registeredAt)}',
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Colors.grey[400],
+                    ),
+                  ),
+                  Text(
+                    'Son Giriş: ${_formatDate(device.lastLoginAt)}',
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Colors.grey[400],
+                    ),
+                  ),
+                ],
+              ),
+              if (!isCurrentDevice)
+                TextButton(
+                  onPressed: () async {
+                    final confirm = await showDialog<bool>(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        title: const Text('Cihazı Kaldır'),
+                        content: Text(
+                          '${device.deviceName} cihazını kaldırmak istediğinizden emin misiniz?'
+                        ),
+                        actions: [
+                          TextButton(
+                            onPressed: () => Navigator.pop(context, false),
+                            child: const Text('İptal'),
+                          ),
+                          TextButton(
+                            onPressed: () => Navigator.pop(context, true),
+                            style: TextButton.styleFrom(
+                              foregroundColor: Colors.red,
+                            ),
+                            child: const Text('Kaldır'),
+                          ),
+                        ],
+                      ),
+                    );
+
+                    if (confirm == true) {
+                      final success = await _deviceService.removeDevice(device.deviceId);
+                      if (success) {
+                        setState(() {}); // Refresh the list
+                        if (mounted) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Cihaz başarıyla kaldırıldı'),
+                              backgroundColor: Colors.green,
+                            ),
+                          );
+                        }
+                      } else {
+                        if (mounted) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Cihaz kaldırılırken hata oluştu'),
+                              backgroundColor: Colors.red,
+                            ),
+                          );
+                        }
+                      }
+                    }
+                  },
+                  style: TextButton.styleFrom(
+                    foregroundColor: Colors.red,
+                  ),
+                  child: const Text('Kaldır'),
+                ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  String _formatDate(DateTime date) {
+    final now = DateTime.now();
+    final difference = now.difference(date);
+
+    if (difference.inMinutes < 60) {
+      return '${difference.inMinutes} dk önce';
+    } else if (difference.inHours < 24) {
+      return '${difference.inHours} saat önce';
+    } else if (difference.inDays < 7) {
+      return '${difference.inDays} gün önce';
+    } else {
+      return '${date.day}/${date.month}/${date.year}';
+    }
   }
 }
