@@ -648,119 +648,45 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             );
 
                             if (shouldSignOut == true) {
+                              print('🚪 Profile çıkış başlatılıyor...');
+
+                              // 1. ÖNCELİKLE stream'leri iptal et (Firebase token geçerli iken)
                               try {
-                                print(
-                                  'Profile screen: Çıkış işlemi başlatılıyor...',
-                                );
-
-                                // 1. Önce local subscriptions'ları HEMEN temizle (güvenli)
-                                try {
-                                  print(
-                                    'Profile screen: Subscription iptalleri başlatılıyor...',
-                                  );
-
-                                  // Rank subscription'ı iptal et (Firestore stream)
-                                  if (_rankSubscription != null) {
-                                    await _rankSubscription!.cancel();
-                                    _rankSubscription = null;
-                                    print('✅ Rank subscription iptal edildi');
-                                  }
-
-                                  // Mistakes subscription'ı iptal et (EventBus stream)
-                                  if (_mistakesSubscription != null) {
-                                    await _mistakesSubscription!.cancel();
-                                    _mistakesSubscription = null;
-                                    print(
-                                      '✅ Mistakes subscription iptal edildi',
-                                    );
-                                  }
-
-                                  print(
-                                    'Profile screen: Tüm subscriptions temizlendi',
-                                  );
-                                } catch (e) {
-                                  print(
-                                    'Local subscription temizleme hatası: $e',
-                                  );
+                                print('📡 Stream\'ler iptal ediliyor...');
+                                if (_rankSubscription != null) {
+                                  await _rankSubscription!.cancel();
+                                  _rankSubscription = null;
+                                  print('✅ Rank stream iptal edildi');
                                 }
-
-                                // 2. Herhangi bir Firestore listener'ı varsa temizle
-                                try {
-                                  // State'deki herhangi bir stream subscription'ı iptal et
-                                  // Bu kısımda ek temizlik gerekebilir
-                                  print(
-                                    'Profile screen: Ek temizlik işlemleri tamamlandı',
-                                  );
-                                } catch (e) {
-                                  print('Ek temizlik hatası: $e');
-                                }
-
-                                // 3. AuthService üzerinden güvenli çıkış yap
-                                await _authService.signOut();
-                                print(
-                                  'Profile screen: AuthService çıkış tamamlandı',
-                                );
-
-                                // 4. Başarılı çıkış sonrası navigasyon
-                                if (mounted) {
-                                  Navigator.of(
-                                    context,
-                                    rootNavigator: true,
-                                  ).pushNamedAndRemoveUntil(
-                                    '/login',
-                                    (route) => false,
-                                  );
-                                  print(
-                                    'Profile screen: Login sayfasına yönlendirildi',
-                                  );
+                                if (_mistakesSubscription != null) {
+                                  await _mistakesSubscription!.cancel();
+                                  _mistakesSubscription = null;
+                                  print('✅ Mistakes stream iptal edildi');
                                 }
                               } catch (e) {
-                                print('Profile screen çıkış hatası: $e');
+                                print(
+                                  '⚠️ Stream iptal hatası (devam ediliyor): $e',
+                                );
+                              }
 
-                                // Hata tipini kontrol et
-                                if (e.toString().contains(
-                                  'permission-denied',
-                                )) {
-                                  print(
-                                    '⚠️ Firestore izin hatası tespit edildi',
-                                  );
-                                  // İzin hatası durumunda sessizce devam et
-                                  if (mounted) {
-                                    Navigator.of(
-                                      context,
-                                      rootNavigator: true,
-                                    ).pushNamedAndRemoveUntil(
-                                      '/login',
-                                      (route) => false,
-                                    );
-                                  }
-                                } else {
-                                  // Diğer hatalar için kullanıcıya bilgi ver
-                                  if (mounted) {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                        content: Text(
-                                          '⚠️ Çıkış işlemi tamamlandı ancak bazı veriler temizlenemedi',
-                                        ),
-                                        backgroundColor: Colors.orange,
-                                        duration: const Duration(seconds: 2),
-                                      ),
-                                    );
+                              // 2. SONRA Firebase çıkış yap
+                              try {
+                                await _authService.signOut();
+                                print('✅ Firebase çıkış tamamlandı');
+                              } catch (e) {
+                                print('⚠️ Firebase çıkış hatası: $e');
+                              }
 
-                                    // Yine de login sayfasına yönlendir
-                                    try {
-                                      Navigator.of(
-                                        context,
-                                        rootNavigator: true,
-                                      ).pushNamedAndRemoveUntil(
-                                        '/login',
-                                        (route) => false,
-                                      );
-                                    } catch (navError) {
-                                      print('Navigator hatası: $navError');
-                                    }
-                                  }
-                                }
+                              // 3. Her durumda login'e yönlendir
+                              if (mounted) {
+                                Navigator.of(
+                                  context,
+                                  rootNavigator: true,
+                                ).pushNamedAndRemoveUntil(
+                                  '/login',
+                                  (route) => false,
+                                );
+                                print('✅ Login sayfasına yönlendirildi');
                               }
                             }
                           },

@@ -152,36 +152,27 @@ class AuthService {
     }
   }
 
-  // Güvenli çıkış yapma - sadece gerekli işlemleri yap
+  // Güvenli çıkış yapma - direkt Firebase çıkış
   Future<void> signOut() async {
     try {
-      print('Çıkış işlemi başlatılıyor...');
+      print('🚪 Çıkış işlemi başlatılıyor...');
 
-      // 1. EventBus'ı güvenli şekilde temizle (Firestore'a erişim gerektirmez)
-      try {
-        EventBus.safeDispose();
-        print('EventBus güvenli şekilde temizlendi');
-      } catch (e) {
-        print('EventBus temizleme hatası (devam ediliyor): $e');
-      }
-
-      // 2. Firebase Auth'dan çıkış yap (bu işlem izin gerektirmez)
+      // Sadece Firebase Auth'dan çıkış yap - hiç karmaşık işlem yapma
       await _auth.signOut();
+      print('✅ Firebase Auth çıkış tamamlandı');
 
-      print('Kullanıcı başarıyla çıkış yaptı');
-    } catch (e) {
-      print('Çıkış hatası: $e');
-
-      // Hata durumunda da EventBus'ı temizlemeye çalış
+      // EventBus'ı sonra temizle (isteğe bağlı)
       try {
         EventBus.safeDispose();
-      } catch (busError) {
-        print('EventBus acil temizleme hatası: $busError');
+        print('✅ EventBus temizlendi');
+      } catch (e) {
+        print('⚠️ EventBus temizleme hatası (önemli değil): $e');
       }
 
-      // Çıkış hatasını sessizce logla, kullanıcıya hata gösterme
-      // Çünkü çıkış işlemi zaten gerçekleşmiş olabilir
-      print('Çıkış işlemi tamamlandı (bazı hatalar göz ardı edildi)');
+      print('🎉 Çıkış işlemi başarıyla tamamlandı');
+    } catch (e) {
+      print('❌ Firebase çıkış hatası: $e');
+      // Hata olsa bile kullanıcı çıkmış sayılır, exception fırlatma
     }
   }
 
