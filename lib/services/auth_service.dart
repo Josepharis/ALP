@@ -181,31 +181,34 @@ class AuthService {
     }
   }
 
-  // Güvenli çıkış yapma - direkt Firebase çıkış
+  // Güvenli çıkış yapma
   Future<void> signOut() async {
     try {
-      // Cancel all notifications
-      final notificationService = NotificationService();
-      await notificationService.cancelAllNotifications();
-      
       print('🚪 Çıkış işlemi başlatılıyor...');
 
-      // Sadece Firebase Auth'dan çıkış yap - hiç karmaşık işlem yapma
+      // Önce bildirimleri iptal et
+      final notificationService = NotificationService();
+      await notificationService.cancelAllNotifications();
+      print('✅ Bildirimler iptal edildi');
+
+      // Cihaz kaydını sil
+      try {
+        await _deviceService.unregisterCurrentDevice();
+        print('✅ Cihaz kaydı silindi');
+      } catch (e) {
+        print('⚠️ Cihaz kaydı silme hatası (devam ediliyor): $e');
+      }
+
+      // Firebase Auth'dan çıkış yap
       await _auth.signOut();
       print('✅ Firebase Auth çıkış tamamlandı');
 
-      // EventBus'ı sonra temizle (isteğe bağlı)
-      try {
-        EventBus.safeDispose();
-        print('✅ EventBus temizlendi');
-      } catch (e) {
-        print('⚠️ EventBus temizleme hatası (önemli değil): $e');
-      }
-
-      print('🎉 Çıkış işlemi başarıyla tamamlandı');
+      // EventBus'ı temizle
+      EventBus.safeDispose();
+      print('✅ EventBus temizlendi');
     } catch (e) {
-      print('❌ Firebase çıkış hatası: $e');
-      // Hata olsa bile kullanıcı çıkmış sayılır, exception fırlatma
+      print('❌ Çıkış işlemi hatası: $e');
+      throw 'Çıkış yapılırken bir hata oluştu.';
     }
   }
 

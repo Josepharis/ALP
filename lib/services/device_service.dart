@@ -230,6 +230,46 @@ class DeviceService {
     }
   }
 
+  // Mevcut cihazın kaydını sil
+  Future<void> unregisterCurrentDevice() async {
+    final userId = _auth.currentUser?.uid;
+    if (userId == null) return; // Kullanıcı zaten çıkış yapmışsa bir şey yapma
+
+    try {
+      // Mevcut cihazın ID'sini al
+      final deviceId = await _generateDeviceId();
+      
+      // Cihaz kaydını sil
+      await _firestore.collection('users').doc(userId).update({
+        'registeredDevices.$deviceId': FieldValue.delete(),
+        'deviceCount': FieldValue.increment(-1),
+      });
+      
+      print('✅ Cihaz kaydı başarıyla silindi: $deviceId');
+    } catch (e) {
+      print('❌ Cihaz kaydı silme hatası: $e');
+      // Hata olsa bile devam et
+    }
+  }
+
+  // Belirli bir cihazın kaydını sil
+  Future<void> unregisterDevice(String deviceId) async {
+    final userId = _auth.currentUser?.uid;
+    if (userId == null) throw Exception('Kullanıcı giriş yapmamış');
+
+    try {
+      await _firestore.collection('users').doc(userId).update({
+        'registeredDevices.$deviceId': FieldValue.delete(),
+        'deviceCount': FieldValue.increment(-1),
+      });
+      
+      print('✅ Cihaz kaydı başarıyla silindi: $deviceId');
+    } catch (e) {
+      print('❌ Cihaz kaydı silme hatası: $e');
+      rethrow;
+    }
+  }
+
   // Kullanıcının tüm cihazlarının FCM token'larını al (bildirim gönderimi için)
   Future<List<String>> getUserFCMTokens() async {
     final devices = await getUserDevices();
