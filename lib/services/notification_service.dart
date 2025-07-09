@@ -3,6 +3,10 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:device_info_plus/device_info_plus.dart';
+import 'dart:io' show Platform;
+import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'device_service.dart';
 
 class NotificationService {
@@ -14,9 +18,26 @@ class NotificationService {
   final FlutterLocalNotificationsPlugin _localNotifications = FlutterLocalNotificationsPlugin();
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final DeviceService _deviceService = DeviceService();
+  
+  // Method channel
+  final _channel = const MethodChannel('com.example.anestezi/notifications');
 
   // Notification service'i initialize et
   Future<void> initialize() async {
+    // Method channel listener'ı kur
+    _channel.setMethodCallHandler((call) async {
+      switch (call.method) {
+        case 'onAPNSTokenReceived':
+          print('✅ APNS token received from native side: ${call.arguments.toString().substring(0, 10)}...');
+          // APNS token alındıktan sonra FCM token'ı almayı dene
+          await _getFCMToken();
+          break;
+        case 'onAPNSTokenError':
+          print('❌ APNS token error from native side: ${call.arguments}');
+          break;
+      }
+    });
+
     // Local notifications setup
     await _initializeLocalNotifications();
     
@@ -66,6 +87,7 @@ class NotificationService {
 
   // FCM permissions iste
   Future<void> _requestPermissions() async {
+    print('📱 Requesting FCM permissions...');
     final settings = await _messaging.requestPermission(
       alert: true,
       announcement: false,
@@ -77,6 +99,101 @@ class NotificationService {
     );
 
     print('📱 FCM Permission status: ${settings.authorizationStatus}');
+    print('📱 Alert permission: ${settings.alert}');
+    print('📱 Badge permission: ${settings.badge}');
+    print('📱 Sound permission: ${settings.sound}');
+    
+    // FCM token'ı al ve kaydet
+    await _saveFCMToken();
+  }
+  
+  // FCM token'ı al
+  Future<void> _getFCMToken() async {
+    try {
+      print('📱 Attempting to get FCM token...');
+      final token = await _messaging.getToken();
+      print('📱 Raw FCM token result: $token');
+      if (token != null) {
+        print('✅ FCM Token received (full token): $token');
+        await _saveTokenToFirestore(token);
+      } else {
+        print('❌ FCM Token is null - This might be because:');
+        print('   1. Running on simulator');
+        print('   2. APNS token not yet received');
+        print('   3. Firebase not properly configured');
+      }
+    } catch (e, stackTrace) {
+      print('❌ FCM token error:');
+      print('Error: $e');
+      print('Stack trace: $stackTrace');
+    }
+  }
+
+  // FCM token'ı kaydet
+  Future<void> _saveFCMToken() async {
+    try {
+      print('📱 Starting FCM token save process...');
+      
+      if (Platform.isIOS) {
+        final isSimulator = await _isSimulator();
+        print('📱 iOS device detected (Simulator: $isSimulator)');
+        if (isSimulator) {
+          print('⚠️ Running on simulator - FCM tokens may not work properly');
+        }
+        print('📱 Waiting for APNS token from native iOS side...');
+        // APNS token için bekliyoruz, token native taraftan gelecek
+        return;
+      }
+
+      await _getFCMToken();
+      
+      // Token yenilendiğinde
+      print('📱 Setting up token refresh listener...');
+      _messaging.onTokenRefresh.listen((newToken) async {
+        print('🔄 FCM Token refreshed (full token): $newToken');
+        await _saveTokenToFirestore(newToken);
+      });
+      print('✅ Token refresh listener setup complete');
+    } catch (e, stackTrace) {
+      print('❌ FCM token save process error:');
+      print('Error: $e');
+      print('Stack trace: $stackTrace');
+    }
+  }
+  
+  // Cihazın simulator olup olmadığını kontrol et
+  Future<bool> _isSimulator() async {
+    if (Platform.isIOS) {
+      try {
+        final deviceInfo = DeviceInfoPlugin();
+        final iosInfo = await deviceInfo.iosInfo;
+        return !iosInfo.isPhysicalDevice;
+      } catch (e) {
+        print('⚠️ Device info check error: $e');
+        return false;
+      }
+    }
+    return false;
+  }
+  
+  // Token'ı Firestore'a kaydet
+  Future<void> _saveTokenToFirestore(String token) async {
+    try {
+      print('💾 Saving FCM token to Firestore...');
+      final user = FirebaseAuth.instance.currentUser;
+      if (user != null) {
+        print('👤 User authenticated: ${user.uid}');
+        // DeviceService'in registerOrUpdateDevice methodunu kullan
+        await _deviceService.registerOrUpdateDevice();
+        print('✅ Device registered/updated in Firestore');
+      } else {
+        print('⚠️ No authenticated user found');
+      }
+    } catch (e, stackTrace) {
+      print('❌ Firestore save error:');
+      print('Error: $e');
+      print('Stack trace: $stackTrace');
+    }
   }
 
   // Message handler'ları kur

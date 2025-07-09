@@ -25,12 +25,14 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  print('🔄 Flutter binding initialized');
 
   // Android sistem UI ayarlarını yapılandır
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
+  print('📱 Device orientation set to portrait');
 
   // Sistem UI overlay stilini ayarla
   SystemChrome.setSystemUIOverlayStyle(
@@ -43,33 +45,40 @@ void main() async {
       systemNavigationBarDividerColor: Colors.transparent,
     ),
   );
-
-  // Sistem gezinme çubuğunun edge-to-edge olmasını sağla
-  SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+  print('🎨 System UI style configured');
 
   try {
+    print('🔥 Firebase initialization starting...');
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
     );
-    print('Firebase başarıyla başlatıldı');
+    print('✅ Firebase successfully initialized');
 
     // FCM background message handler'ı kur
+    print('📩 Setting up FCM background message handler...');
     FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+    print('✅ FCM background handler setup complete');
     
     // DeviceService'i initialize et
+    print('📱 Initializing DeviceService...');
     final deviceService = DeviceService();
     deviceService.setupTokenRefreshListener();
+    print('✅ DeviceService initialized');
     
     // NotificationService'i initialize et
+    print('🔔 Initializing NotificationService...');
     final notificationService = NotificationService();
     await notificationService.initialize();
+    print('✅ NotificationService initialized');
     
-    print('FCM ve bildirimler başarıyla yapılandırıldı');
-  } catch (e) {
-    print('Firebase başlatma hatası: $e');
+  } catch (e, stackTrace) {
+    print('❌ Firebase initialization error:');
+    print('Error: $e');
+    print('Stack trace: $stackTrace');
   }
 
   runApp(const MyApp());
+  print('📱 Application started');
 }
 
 class MyApp extends StatelessWidget {

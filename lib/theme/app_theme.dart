@@ -136,7 +136,7 @@ class AppTheme {
         bodyLarge: bodyStyle,
         bodyMedium: smallStyle,
       ),
-      cardTheme: CardTheme(
+      cardTheme: CardThemeData(
         color: Colors.white.withOpacity(0.05),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         elevation: 0,
