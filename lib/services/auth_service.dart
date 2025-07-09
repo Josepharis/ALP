@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../utils/event_bus.dart';
 import 'device_service.dart';
 import '../models/device_info.dart';
+import 'notification_service.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -74,7 +75,11 @@ class AuthService {
         email: email,
         password: password,
       );
-
+      
+      // Schedule daily notifications after successful login
+      final notificationService = NotificationService();
+      await notificationService.scheduleDailyNotification();
+      
       // Giriş başarılıysa kullanıcı dokümanını kontrol et ve oluştur
       if (userCredential.user != null) {
         await _ensureUserDocument(userCredential.user!);
@@ -179,6 +184,10 @@ class AuthService {
   // Güvenli çıkış yapma - direkt Firebase çıkış
   Future<void> signOut() async {
     try {
+      // Cancel all notifications
+      final notificationService = NotificationService();
+      await notificationService.cancelAllNotifications();
+      
       print('🚪 Çıkış işlemi başlatılıyor...');
 
       // Sadece Firebase Auth'dan çıkış yap - hiç karmaşık işlem yapma

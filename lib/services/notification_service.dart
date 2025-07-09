@@ -1,266 +1,129 @@
-import 'dart:convert';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:device_info_plus/device_info_plus.dart';
-import 'dart:io' show Platform;
-import 'package:flutter/foundation.dart';
-import 'package:flutter/services.dart';
-import 'device_service.dart';
+import 'package:timezone/timezone.dart' as tz;
+import 'package:timezone/data/latest.dart' as tz;
+import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class NotificationService {
-  static final NotificationService _instance = NotificationService._internal();
+  static final NotificationService _instance = NotificationService._();
   factory NotificationService() => _instance;
-  NotificationService._internal();
+  NotificationService._();
 
-  final FirebaseMessaging _messaging = FirebaseMessaging.instance;
-  final FlutterLocalNotificationsPlugin _localNotifications = FlutterLocalNotificationsPlugin();
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  final DeviceService _deviceService = DeviceService();
-  
-  // Method channel
-  final _channel = const MethodChannel('com.example.anestezi/notifications');
+  final FlutterLocalNotificationsPlugin _notifications = FlutterLocalNotificationsPlugin();
+  static const String NOTIFICATION_SCHEDULED_KEY = 'notification_scheduled';
 
-  // Notification service'i initialize et
-  Future<void> initialize() async {
-    // Method channel listener'ı kur
-    _channel.setMethodCallHandler((call) async {
-      switch (call.method) {
-        case 'onAPNSTokenReceived':
-          print('✅ APNS token received from native side: ${call.arguments.toString().substring(0, 10)}...');
-          // APNS token alındıktan sonra FCM token'ı almayı dene
-          await _getFCMToken();
-          break;
-        case 'onAPNSTokenError':
-          print('❌ APNS token error from native side: ${call.arguments}');
-          break;
-      }
-    });
+  // Bildirim saati için getter
+  tz.TZDateTime get _notificationTime {
+    final now = tz.TZDateTime.now(tz.local);
+    print('Şu anki zaman: $now');
+    
+    var scheduledDate = tz.TZDateTime(
+      tz.local,
+      now.year,
+      now.month,
+      now.day,
+      14, // Saat 14
+      42, // 42 dakika
+    );
 
-    // Local notifications setup
-    await _initializeLocalNotifications();
-    
-    // FCM permissions
-    await _requestPermissions();
-    
-    // Message handlers
-    _setupMessageHandlers();
-    
-    print('✅ NotificationService initialized');
+    // Eğer belirlenen saat geçtiyse, bir sonraki güne planla
+    if (scheduledDate.isBefore(now)) {
+      scheduledDate = scheduledDate.add(const Duration(days: 1));
+      print('Saat geçmiş, yarına planlanıyor: $scheduledDate');
+    } else {
+      print('Bugün için planlanıyor: $scheduledDate');
+    }
+
+    return scheduledDate;
   }
 
-  // Local notifications'ı initialize et
-  Future<void> _initializeLocalNotifications() async {
-    const androidSettings = AndroidInitializationSettings('@mipmap/ic_launcher');
+  Future<void> initialize() async {
+    print('Notification service başlatılıyor...');
+    tz.initializeTimeZones();
+
+    const androidSettings = AndroidInitializationSettings('@mipmap/launcher_icon');
     const iosSettings = DarwinInitializationSettings(
       requestAlertPermission: true,
       requestBadgePermission: true,
       requestSoundPermission: true,
     );
-    
-    const initSettings = InitializationSettings(
+
+    const settings = InitializationSettings(
       android: androidSettings,
       iOS: iosSettings,
     );
 
-    await _localNotifications.initialize(
-      initSettings,
-      onDidReceiveNotificationResponse: _onNotificationTapped,
+    await _notifications.initialize(
+      settings,
+      onDidReceiveNotificationResponse: (NotificationResponse response) {
+        print('Notification tapped: ${response.payload}');
+      },
     );
-  }
-
-  // Notification'a tıklandığında çalışacak fonksiyon
-  void _onNotificationTapped(NotificationResponse response) {
-    print('📱 Notification tapped: ${response.payload}');
     
-    if (response.payload != null) {
-      try {
-        final data = jsonDecode(response.payload!);
-        // TODO: Navigation logic here
-        print('📱 Navigation data: $data');
-      } catch (e) {
-        print('📱 Payload parse error: $e');
-      }
-    }
-  }
-
-  // FCM permissions iste
-  Future<void> _requestPermissions() async {
-    print('📱 Requesting FCM permissions...');
-    final settings = await _messaging.requestPermission(
-      alert: true,
-      announcement: false,
-      badge: true,
-      carPlay: false,
-      criticalAlert: false,
-      provisional: false,
-      sound: true,
-    );
-
-    print('📱 FCM Permission status: ${settings.authorizationStatus}');
-    print('📱 Alert permission: ${settings.alert}');
-    print('📱 Badge permission: ${settings.badge}');
-    print('📱 Sound permission: ${settings.sound}');
+    // İzinleri iste
+    await requestPermissions();
     
-    // FCM token'ı al ve kaydet
-    await _saveFCMToken();
-  }
-  
-  // FCM token'ı al
-  Future<void> _getFCMToken() async {
-    try {
-      print('📱 Attempting to get FCM token...');
-      final token = await _messaging.getToken();
-      print('📱 Raw FCM token result: $token');
-      if (token != null) {
-        print('✅ FCM Token received (full token): $token');
-        await _saveTokenToFirestore(token);
+    // Bildirimlerin planlanıp planlanmadığını kontrol et
+    final prefs = await SharedPreferences.getInstance();
+    final isScheduled = prefs.getBool(NOTIFICATION_SCHEDULED_KEY) ?? false;
+    
+    if (!isScheduled) {
+      // İlk kez planlanıyor
+      await scheduleDailyNotification();
+      await prefs.setBool(NOTIFICATION_SCHEDULED_KEY, true);
+      print('Bildirimler ilk kez planlandı');
+    } else {
+      // Planlanan bildirimleri kontrol et
+      final pendingNotifications = await _notifications.pendingNotificationRequests();
+      if (pendingNotifications.isEmpty) {
+        // Bildirimler silinmiş veya kaybolmuş, yeniden planla
+        await scheduleDailyNotification();
+        print('Bildirimler yeniden planlandı');
       } else {
-        print('❌ FCM Token is null - This might be because:');
-        print('   1. Running on simulator');
-        print('   2. APNS token not yet received');
-        print('   3. Firebase not properly configured');
-      }
-    } catch (e, stackTrace) {
-      print('❌ FCM token error:');
-      print('Error: $e');
-      print('Stack trace: $stackTrace');
-    }
-  }
-
-  // FCM token'ı kaydet
-  Future<void> _saveFCMToken() async {
-    try {
-      print('📱 Starting FCM token save process...');
-      
-      if (Platform.isIOS) {
-        final isSimulator = await _isSimulator();
-        print('📱 iOS device detected (Simulator: $isSimulator)');
-        if (isSimulator) {
-          print('⚠️ Running on simulator - FCM tokens may not work properly');
-        }
-        print('📱 Waiting for APNS token from native iOS side...');
-        // APNS token için bekliyoruz, token native taraftan gelecek
-        return;
-      }
-
-      await _getFCMToken();
-      
-      // Token yenilendiğinde
-      print('📱 Setting up token refresh listener...');
-      _messaging.onTokenRefresh.listen((newToken) async {
-        print('🔄 FCM Token refreshed (full token): $newToken');
-        await _saveTokenToFirestore(newToken);
-      });
-      print('✅ Token refresh listener setup complete');
-    } catch (e, stackTrace) {
-      print('❌ FCM token save process error:');
-      print('Error: $e');
-      print('Stack trace: $stackTrace');
-    }
-  }
-  
-  // Cihazın simulator olup olmadığını kontrol et
-  Future<bool> _isSimulator() async {
-    if (Platform.isIOS) {
-      try {
-        final deviceInfo = DeviceInfoPlugin();
-        final iosInfo = await deviceInfo.iosInfo;
-        return !iosInfo.isPhysicalDevice;
-      } catch (e) {
-        print('⚠️ Device info check error: $e');
-        return false;
+        print('Bildirimler zaten planlanmış. Aktif bildirim sayısı: ${pendingNotifications.length}');
       }
     }
-    return false;
+    
+    print('Notification service başlatıldı');
   }
-  
-  // Token'ı Firestore'a kaydet
-  Future<void> _saveTokenToFirestore(String token) async {
-    try {
-      print('💾 Saving FCM token to Firestore...');
-      final user = FirebaseAuth.instance.currentUser;
-      if (user != null) {
-        print('👤 User authenticated: ${user.uid}');
-        // DeviceService'in registerOrUpdateDevice methodunu kullan
-        await _deviceService.registerOrUpdateDevice();
-        print('✅ Device registered/updated in Firestore');
-      } else {
-        print('⚠️ No authenticated user found');
-      }
-    } catch (e, stackTrace) {
-      print('❌ Firestore save error:');
-      print('Error: $e');
-      print('Stack trace: $stackTrace');
+
+  Future<bool> requestPermissions() async {
+    print('Bildirim izinleri isteniyor...');
+    
+    // iOS için izinleri iste
+    if (await _notifications.resolvePlatformSpecificImplementation<IOSFlutterLocalNotificationsPlugin>() != null) {
+      final bool? result = await _notifications.resolvePlatformSpecificImplementation<IOSFlutterLocalNotificationsPlugin>()
+          ?.requestPermissions(
+        alert: true,
+        badge: true,
+        sound: true,
+      );
+      print('iOS bildirim izinleri sonucu: $result');
     }
-  }
 
-  // Message handler'ları kur
-  void _setupMessageHandlers() {
-    // Foreground messages
-    FirebaseMessaging.onMessage.listen(_handleForegroundMessage);
+    // Android 13 ve üzeri için izinleri iste
+    final AndroidFlutterLocalNotificationsPlugin? androidImplementation =
+        _notifications.resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>();
     
-    // Background message open
-    FirebaseMessaging.onMessageOpenedApp.listen(_handleMessageOpenedApp);
-    
-    // Terminated state'den açılan mesajlar
-    _handleInitialMessage();
-  }
-
-  // Foreground'da gelen mesajları handle et
-  Future<void> _handleForegroundMessage(RemoteMessage message) async {
-    print('📱 Foreground message: ${message.messageId}');
-    
-    // Local notification göster
-    await _showLocalNotification(message);
-  }
-
-  // Background'dan açılan mesajları handle et
-  void _handleMessageOpenedApp(RemoteMessage message) {
-    print('📱 Message opened app: ${message.messageId}');
-    _navigateBasedOnMessage(message);
-  }
-
-  // App terminated state'den açılan mesajlar
-  Future<void> _handleInitialMessage() async {
-    final initialMessage = await _messaging.getInitialMessage();
-    if (initialMessage != null) {
-      print('📱 Initial message: ${initialMessage.messageId}');
-      _navigateBasedOnMessage(initialMessage);
+    if (androidImplementation != null) {
+      final bool? granted = await androidImplementation.requestNotificationsPermission();
+      print('Android bildirim izinleri sonucu: $granted');
     }
+
+    return true;
   }
 
-  // Mesaja göre navigation
-  void _navigateBasedOnMessage(RemoteMessage message) {
-    final data = message.data;
-    final type = data['type'];
-    
-    switch (type) {
-      case 'daily_question':
-        // Navigate to daily question
-        break;
-      case 'quiz_reminder':
-        // Navigate to quiz screen
-        break;
-      case 'achievement':
-        // Navigate to profile/achievements
-        break;
-      default:
-        // Navigate to home
-        break;
-    }
-  }
+  Future<void> scheduleDailyNotification() async {
+    print('Günlük bildirim planlanıyor...');
+    // Önce tüm bildirimleri temizle
+    await cancelAllNotifications();
 
-  // Local notification göster
-  Future<void> _showLocalNotification(RemoteMessage message) async {
     const androidDetails = AndroidNotificationDetails(
-      'anestezi_channel',
-      'Anestezi Bildirimleri',
-      channelDescription: 'Anestezi uygulaması bildirimleri',
-      importance: Importance.high,
+      'daily_reminder',
+      'Günlük Hatırlatıcı',
+      channelDescription: 'Günlük quiz hatırlatıcısı',
+      importance: Importance.max,
       priority: Priority.high,
-      icon: '@mipmap/ic_launcher',
     );
 
     const iosDetails = DarwinNotificationDetails(
@@ -274,157 +137,34 @@ class NotificationService {
       iOS: iosDetails,
     );
 
-    await _localNotifications.show(
-      message.hashCode,
-      message.notification?.title ?? 'Anestezi',
-      message.notification?.body ?? 'Yeni bildirim',
+    final scheduledTime = _notificationTime;
+    await _notifications.zonedSchedule(
+      0,
+      'Günlük Quiz Zamanı! 📚',
+      'Bugünkü anestezi sorularını çözmeyi unutmayın!',
+      scheduledTime,
       details,
-      payload: jsonEncode(message.data),
+      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+      uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
+      matchDateTimeComponents: DateTimeComponents.time,
     );
-  }
 
-  // Belirli kullanıcılara bildirim gönder
-  Future<bool> sendNotificationToUsers({
-    required List<String> userIds,
-    required String title,
-    required String body,
-    Map<String, dynamic>? data,
-  }) async {
-    try {
-      // Her kullanıcının FCM token'larını al
-      final List<String> allTokens = [];
-      
-      for (final userId in userIds) {
-        final userDoc = await _firestore.collection('users').doc(userId).get();
-        if (userDoc.exists) {
-          final userData = userDoc.data();
-          final registeredDevices = userData?['registeredDevices'] as Map<String, dynamic>?;
-          
-          if (registeredDevices != null) {
-            for (final deviceData in registeredDevices.values) {
-              final fcmToken = deviceData['fcmToken'] as String?;
-              if (fcmToken != null && fcmToken.isNotEmpty) {
-                allTokens.add(fcmToken);
-              }
-            }
-          }
-        }
-      }
-
-      if (allTokens.isEmpty) {
-        print('⚠️ Gönderilecek FCM token bulunamadı');
-        return false;
-      }
-
-      // FCM ile bildirim gönder (Batch messaging)
-      // NOT: Bu işlem için Firebase Admin SDK veya Cloud Functions kullanılması önerilir
-      // Şimdilik client-side implementation yapıyoruz
-      
-      print('📤 ${allTokens.length} cihaza bildirim gönderiliyor...');
-      print('📤 Başlık: $title');
-      print('📤 İçerik: $body');
-      
-      // Bildirim kaydını Firestore'a ekle
-      await _firestore.collection('notifications').add({
-        'title': title,
-        'body': body,
-        'targetUsers': userIds,
-        'sentAt': FieldValue.serverTimestamp(),
-        'data': data ?? {},
-        'fcmTokens': allTokens,
-      });
-
-      return true;
-    } catch (e) {
-      print('❌ Bildirim gönderme hatası: $e');
-      return false;
+    print('Günlük bildirim planlandı: ${scheduledTime.toString()}');
+    
+    // Planlanan bildirimleri kontrol et
+    final pendingNotifications = await _notifications.pendingNotificationRequests();
+    print('Planlanan bildirim sayısı: ${pendingNotifications.length}');
+    for (var notification in pendingNotifications) {
+      print('Planlanan bildirim ID: ${notification.id}');
     }
   }
 
-  // Tüm kullanıcılara bildirim gönder
-  Future<bool> sendNotificationToAllUsers({
-    required String title,
-    required String body,
-    Map<String, dynamic>? data,
-  }) async {
-    try {
-      // Tüm kullanıcıları al
-      final usersSnapshot = await _firestore.collection('users').get();
-      final userIds = usersSnapshot.docs.map((doc) => doc.id).toList();
-      
-      return await sendNotificationToUsers(
-        userIds: userIds,
-        title: title,
-        body: body,
-        data: data,
-      );
-    } catch (e) {
-      print('❌ Tüm kullanıcılara bildirim gönderme hatası: $e');
-      return false;
-    }
-  }
-
-  // Günlük soru bildirimi
-  Future<bool> sendDailyQuestionNotification() async {
-    return await sendNotificationToAllUsers(
-      title: '📚 Günlük Soru Zamanı!',
-      body: 'Bugünün anestezi sorusu seni bekliyor. Bilgini test et!',
-      data: {
-        'type': 'daily_question',
-        'action': 'open_daily_question',
-      },
-    );
-  }
-
-  // Quiz hatırlatma bildirimi
-  Future<bool> sendQuizReminderNotification(List<String> userIds) async {
-    return await sendNotificationToUsers(
-      userIds: userIds,
-      title: '🎯 Quiz Zamanı!',
-      body: 'Henüz tamamlamadığın quizler var. Devam et!',
-      data: {
-        'type': 'quiz_reminder',
-        'action': 'open_quiz',
-      },
-    );
-  }
-
-  // Başarı bildirimi
-  Future<bool> sendAchievementNotification({
-    required List<String> userIds,
-    required String achievementName,
-  }) async {
-    return await sendNotificationToUsers(
-      userIds: userIds,
-      title: '🎉 Tebrikler!',
-      body: '$achievementName başarısını kazandın!',
-      data: {
-        'type': 'achievement',
-        'action': 'open_profile',
-        'achievement': achievementName,
-      },
-    );
-  }
-
-  // Bildirim geçmişini al
-  Future<List<Map<String, dynamic>>> getNotificationHistory() async {
-    try {
-      final snapshot = await _firestore
-          .collection('notifications')
-          .orderBy('sentAt', descending: true)
-          .limit(50)
-          .get();
-
-      return snapshot.docs.map((doc) {
-        final data = doc.data();
-        return {
-          'id': doc.id,
-          ...data,
-        };
-      }).toList();
-    } catch (e) {
-      print('❌ Bildirim geçmişi alma hatası: $e');
-      return [];
-    }
+  Future<void> cancelAllNotifications() async {
+    print('Tüm bildirimler iptal ediliyor...');
+    await _notifications.cancelAll();
+    // Bildirimlerin iptal edildiğini kaydet
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(NOTIFICATION_SCHEDULED_KEY, false);
+    print('Tüm bildirimler iptal edildi');
   }
 } 

@@ -69,6 +69,7 @@ void main() async {
     print('🔔 Initializing NotificationService...');
     final notificationService = NotificationService();
     await notificationService.initialize();
+    await notificationService.requestPermissions();
     print('✅ NotificationService initialized');
     
   } catch (e, stackTrace) {
