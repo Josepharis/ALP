@@ -1106,7 +1106,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                   ListTile(
                     leading: const Icon(
-                      Icons.description,
+                      Icons.description_outlined,
                       color: Colors.indigo,
                     ),
                     title: const Text('Kullanım Kılavuzu'),
@@ -1449,13 +1449,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
             padding: const EdgeInsets.all(20),
             child: Column(
               children: [
-                const Text(
-                  'Cihazlarım',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    IconButton(
+                      icon: const Icon(Icons.close, color: Colors.white),
+                      onPressed: () => Navigator.pop(context),
+                    ),
+                    const Text(
+                      'Cihazlarım',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                    const SizedBox(width: 40), // For balance
+                  ],
                 ),
                 const SizedBox(height: 8),
                 Text(
@@ -1612,15 +1622,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ],
               ),
               if (!isCurrentDevice)
-                TextButton(
+                IconButton(
+                  icon: const Icon(Icons.delete_outline, color: Colors.red),
                   onPressed: () async {
-                    final confirm = await showDialog<bool>(
+                    final confirmed = await showDialog<bool>(
                       context: context,
                       builder: (context) => AlertDialog(
-                        title: const Text('Cihazı Kaldır'),
-                        content: Text(
-                          '${device.deviceName} cihazını kaldırmak istediğinizden emin misiniz?'
-                        ),
+                        backgroundColor: Colors.indigo.shade900,
+                        title: const Text('Cihazı Sil'),
+                        content: const Text('Bu cihazı silmek istediğinize emin misiniz?'),
                         actions: [
                           TextButton(
                             onPressed: () => Navigator.pop(context, false),
@@ -1628,43 +1638,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                           TextButton(
                             onPressed: () => Navigator.pop(context, true),
-                            style: TextButton.styleFrom(
-                              foregroundColor: Colors.red,
-                            ),
-                            child: const Text('Kaldır'),
+                            child: const Text('Sil', style: TextStyle(color: Colors.red)),
                           ),
                         ],
                       ),
                     );
 
-                    if (confirm == true) {
-                      final success = await _deviceService.removeDevice(device.deviceId);
-                      if (success) {
-                        setState(() {}); // Refresh the list
-                        if (mounted) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Cihaz başarıyla kaldırıldı'),
-                              backgroundColor: Colors.green,
-                            ),
-                          );
-                        }
-                      } else {
-                        if (mounted) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Cihaz kaldırılırken hata oluştu'),
-                              backgroundColor: Colors.red,
-                            ),
-                          );
-                        }
-                      }
+                    if (confirmed == true) {
+                      await _deviceService.removeDevice(device.deviceId);
+                      setState(() {}); // Refresh the list
                     }
                   },
-                  style: TextButton.styleFrom(
-                    foregroundColor: Colors.red,
-                  ),
-                  child: const Text('Kaldır'),
                 ),
             ],
           ),

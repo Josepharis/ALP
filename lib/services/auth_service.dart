@@ -186,18 +186,10 @@ class AuthService {
     try {
       print('🚪 Çıkış işlemi başlatılıyor...');
 
-      // Önce bildirimleri iptal et
+      // Bildirimleri iptal et
       final notificationService = NotificationService();
       await notificationService.cancelAllNotifications();
       print('✅ Bildirimler iptal edildi');
-
-      // Cihaz kaydını sil
-      try {
-        await _deviceService.unregisterCurrentDevice();
-        print('✅ Cihaz kaydı silindi');
-      } catch (e) {
-        print('⚠️ Cihaz kaydı silme hatası (devam ediliyor): $e');
-      }
 
       // Firebase Auth'dan çıkış yap
       await _auth.signOut();
