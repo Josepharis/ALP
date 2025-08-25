@@ -1,14 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../utils/event_bus.dart';
-import 'device_service.dart';
-import '../models/device_info.dart';
+import 'device_service.dart' as device_service;
 import 'notification_service.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  final DeviceService _deviceService = DeviceService();
+  final device_service.DeviceService _deviceService = device_service.DeviceService();
 
   // Mevcut kullanıcı
   User? get currentUser => _auth.currentUser;
@@ -61,7 +60,15 @@ class AuthService {
       throw _handleAuthException(e);
     } catch (e) {
       print('Kayıt hatası: $e');
-      throw 'Kayıt işlemi sırasında bir hata oluştu.';
+      
+      // Ağ bağlantısı kontrolü
+      if (e.toString().toLowerCase().contains('network') || 
+          e.toString().toLowerCase().contains('connection') ||
+          e.toString().toLowerCase().contains('timeout')) {
+        throw '❌ İnternet Bağlantısı Sorunu\n\n💡 İnternet bağlantınızı kontrol edin ve tekrar deneyin.\n\nWi-Fi veya mobil verilerinizin açık olduğundan emin olun.';
+      }
+      
+      throw '❌ Kayıt İşlemi Başarısız\n\n💡 Beklenmeyen bir hata oluştu. Lütfen:\n• Bilgilerinizi kontrol edin\n• İnternet bağlantınızı kontrol edin\n• Birkaç dakika sonra tekrar deneyin\n\nSorun devam ederse destek ekibi ile iletişime geçin.';
     }
   }
 
@@ -89,12 +96,13 @@ class AuthService {
           await _deviceService.registerOrUpdateDevice();
           print('✅ Cihaz kaydı başarılı');
         } catch (e) {
-          if (e is DeviceLimitExceededException) {
+          if (e is device_service.DeviceLimitExceededException) {
             // Cihaz limiti aşıldı, kullanıcıyı çıkış yap
             await _auth.signOut();
-            throw e; // Exception'ı yukarı fırlat
+            throw '❌ Cihaz Limiti Aşıldı\n\n💡 Bu hesaba en fazla 2 cihazdan giriş yapabilirsiniz.\n\nYeni cihaz eklemek için profil ayarlarından mevcut cihazlardan birini kaldırın veya destek ekibi ile iletişime geçin.';
           }
           print('⚠️ Cihaz kaydı hatası (devam ediliyor): $e');
+          // Cihaz kaydı hatası olsa bile giriş işlemine devam et
         }
       }
 
@@ -103,7 +111,20 @@ class AuthService {
       throw _handleAuthException(e);
     } catch (e) {
       print('Giriş hatası: $e');
-      throw 'Giriş işlemi sırasında bir hata oluştu.';
+      
+      // Ağ bağlantısı kontrolü
+      if (e.toString().toLowerCase().contains('network') || 
+          e.toString().toLowerCase().contains('connection') ||
+          e.toString().toLowerCase().contains('timeout')) {
+        throw '❌ İnternet Bağlantısı Sorunu\n\n💡 İnternet bağlantınızı kontrol edin ve tekrar deneyin.\n\nWi-Fi veya mobil verilerinizin açık olduğundan emin olun.';
+      }
+      
+      // Cihaz limiti hatası zaten yukarıda yakalandı, diğer hatalar için genel mesaj
+      if (e.toString().contains('Cihaz Limiti Aşıldı')) {
+        rethrow; // Cihaz limiti hatasını olduğu gibi fırlat
+      }
+      
+      throw '❌ Giriş İşlemi Başarısız\n\n💡 Beklenmeyen bir hata oluştu. Lütfen:\n• E-posta ve şifrenizi kontrol edin\n• İnternet bağlantınızı kontrol edin\n• Birkaç dakika sonra tekrar deneyin\n\nSorun devam ederse destek ekibi ile iletişime geçin.';
     }
   }
 
@@ -186,21 +207,41 @@ class AuthService {
     try {
       print('🚪 Çıkış işlemi başlatılıyor...');
 
-      // Bildirimleri iptal et
+      // 1. Önce EventBus'ı temizle (tüm stream'leri iptal eder)
+      print('🧹 EventBus temizleniyor...');
+      EventBus.safeDispose();
+      print('✅ EventBus temizlendi');
+
+      // 2. Bildirimleri iptal et
+      print('🔔 Bildirimler iptal ediliyor...');
       final notificationService = NotificationService();
       await notificationService.cancelAllNotifications();
       print('✅ Bildirimler iptal edildi');
 
-      // Firebase Auth'dan çıkış yap
+      // 3. Tüm Firestore stream'lerini iptal et
+      print('📡 Firestore stream\'leri iptal ediliyor...');
+      await _firestore.terminate();
+      await _firestore.clearPersistence();
+      print('✅ Firestore stream\'leri iptal edildi');
+
+      // 4. Firebase Auth'dan çıkış yap
+      print('🔑 Firebase Auth\'dan çıkış yapılıyor...');
+      await Future.delayed(const Duration(milliseconds: 500)); // Kısa bir bekleme
       await _auth.signOut();
       print('✅ Firebase Auth çıkış tamamlandı');
 
-      // EventBus'ı temizle
-      EventBus.safeDispose();
-      print('✅ EventBus temizlendi');
+      print('✅ Tüm çıkış işlemleri başarıyla tamamlandı');
     } catch (e) {
       print('❌ Çıkış işlemi hatası: $e');
-      throw 'Çıkış yapılırken bir hata oluştu.';
+      
+      // Ağ bağlantısı kontrolü
+      if (e.toString().toLowerCase().contains('network') || 
+          e.toString().toLowerCase().contains('connection') ||
+          e.toString().toLowerCase().contains('timeout')) {
+        throw '❌ İnternet Bağlantısı Sorunu\n\n💡 Çıkış işlemi için internet bağlantısı gerekiyor.\n\nBağlantınızı kontrol edin ve tekrar deneyin.';
+      }
+      
+      throw '❌ Çıkış İşlemi Başarısız\n\n💡 Çıkış yapılırken bir sorun oluştu.\n\nUygulama yeniden başlatılabilir veya birkaç dakika sonra tekrar deneyin.';
     }
   }
 

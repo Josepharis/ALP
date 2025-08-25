@@ -16,7 +16,6 @@ class QuizScreen extends StatefulWidget {
   final int initialQuestionIndex;
   final int initialScore;
   final String? quizId;
-  final bool isMistakesMode;
 
   const QuizScreen({
     super.key,
@@ -25,7 +24,6 @@ class QuizScreen extends StatefulWidget {
     this.initialQuestionIndex = 0,
     this.initialScore = 0,
     this.quizId,
-    this.isMistakesMode = false,
   });
 
   @override
@@ -57,7 +55,12 @@ class _QuizScreenState extends State<QuizScreen>
     );
     _animation = Tween<double>(begin: 1, end: 0).animate(_animationController)
       ..addListener(() {
-        setState(() {});
+        setState(() {
+          // Süre bitti mi kontrol et
+          if (_animation.value <= 0 && !isAnswered) {
+            _handleTimeExpired();
+          }
+        });
       });
     _animationController.forward();
   }
@@ -299,25 +302,34 @@ class _QuizScreenState extends State<QuizScreen>
     return WillPopScope(
       onWillPop: _showExitConfirmationDialog,
       child: Scaffold(
-        backgroundColor: const Color(0xFF1A237E), // Koyu mavi arka plan
-        body: SafeArea(
-          child: Column(
-            children: [
-              _buildHeader(),
-              _buildProgressBar(),
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      _buildQuestion(),
-                      _buildPremises(),
-                      _buildOptions(),
-                    ],
+        extendBody: true,
+        body: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [Colors.blue.shade900, Colors.black],
+            ),
+          ),
+          child: SafeArea(
+            child: Column(
+              children: [
+                _buildHeader(),
+                _buildProgressBar(),
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        _buildQuestion(),
+                        _buildPremises(),
+                        _buildOptions(),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              _buildBottomButton(),
-            ],
+                _buildBottomButton(),
+              ],
+            ),
           ),
         ),
       ),
@@ -663,6 +675,39 @@ class _QuizScreenState extends State<QuizScreen>
     );
   }
 
+  // Süre bittiğinde çalışacak metod
+  void _handleTimeExpired() {
+    if (!isAnswered) {
+      print('SÜRE BİTTİ - Soru otomatik olarak yanlış sayılacak');
+      
+      // Soruyu yanlış olarak işaretle
+      setState(() {
+        isAnswered = true;
+        selectedAnswerIndex = -1; // Hiçbir seçenek seçilmedi
+      });
+
+      // Yanlış cevabı kaydet
+      _saveWrongAnswer();
+
+      // Cevap istatistiklerini güncelle
+      _quizService.updateAnswerStatistics(false, 0).then((success) {
+        if (!success) {
+          print('Süre bitimi - Cevap istatistiği kaydetme işlemi başarısız oldu');
+        }
+      });
+
+      // Animasyonu durdur
+      _animationController.stop();
+
+      // 2 saniye sonra otomatik olarak sonraki soruya geç
+      Future.delayed(const Duration(seconds: 2), () {
+        if (mounted) {
+          _nextQuestion();
+        }
+      });
+    }
+  }
+
   void _handleAnswer(int index) async {
     if (!isAnswered) {
       final isCorrect =
@@ -710,11 +755,7 @@ class _QuizScreenState extends State<QuizScreen>
     try {
       final currentQuestion = widget.questions[currentQuestionIndex];
 
-      // Eğer eksikler modundaysak kaydetme (zaten eksik olarak kaydedilmiş soru)
-      if (widget.isMistakesMode) {
-        print("Eksikler modunda olduğu için yanlış soru kaydedilmedi");
-        return;
-      }
+
 
       print("===== YANLIŞ CEVAP KAYIT İŞLEMİ BAŞLATILIYOR =====");
       print(
@@ -811,15 +852,9 @@ class _QuizScreenState extends State<QuizScreen>
       if (result) {
         print('Quiz başarıyla tamamlandı ve veritabanına kaydedildi');
 
-        if (widget.isMistakesMode) {
-          // Eksikler modunda direkt geri dön
-          Navigator.pop(context);
-          SnackBarUtils.showSuccessSnackBar(context, 'Pratik tamamlandı!');
-        } else {
-          // Normal quiz modunda ana sayfaya dön
-          Navigator.pop(context);
-          SnackBarUtils.showSuccessSnackBar(context, 'Quiz tamamlandı!');
-        }
+        // Quiz tamamlandı, ana sayfaya dön
+        Navigator.pop(context);
+        SnackBarUtils.showSuccessSnackBar(context, 'Quiz tamamlandı!');
       } else {
         print('HATA: Quiz tamamlanamadı veya veritabanına kaydedilemedi');
         SnackBarUtils.showErrorSnackBar(

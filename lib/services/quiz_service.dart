@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:math';
-
+ 
 import 'package:anestezi/models/daily_question.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -22,7 +22,7 @@ import '../data/neuromuscular_blocking_agents_questions.dart';
 import '../data/cholinesterase_inhibitors_questions.dart';
 import '../data/anticholinergic_drugs_questions.dart';
 import '../data/adrenergic_drugs_questions.dart';
-// import '../data/hypotensive_agents_questions.dart'; // Geçici olarak kaldırıldı
+import '../data/hypotensive_agents_questions.dart';
 import '../data/local_anesthetics_questions.dart';
 import '../data/auxiliary_drugs_questions.dart';
 import '../data/preoperative_assessment_questions.dart';
@@ -31,6 +31,39 @@ import '../data/cardiovascular_physiology_questions.dart';
 import '../data/cardiovascular_surgery_questions.dart';
 import '../data/respiratory_diseases_questions.dart';
 import '../data/respiratory_physiology_questions.dart';
+import '../data/pain_management_questions.dart';
+import '../data/neurological_psychiatric_anesthesia_questions.dart';
+import '../data/otolaryngology_head_neck_surgery_questions.dart';
+import '../data/endocrine_diseases_anesthesia_questions.dart';
+import '../data/neuromuscular_diseases_anesthesia_questions.dart';
+import '../data/geriatric_anesthesia_questions.dart';
+import '../data/trauma_emergency_anesthesia_questions.dart';
+import '../data/orthopedic_anesthesia_questions.dart';
+import '../data/enhanced_recovery_protocols_questions.dart'; // Added
+import '../data/anesthesia_complications_questions.dart'; // Added
+import '../data/genitourinary_anesthesia_questions.dart'; // Added
+import '../data/ophthalmic_anesthesia_questions.dart'; // Added
+import '../data/renal_physiology_anesthesia_questions.dart'; // Added
+import '../data/spinal_epidural_caudal_blocks_questions.dart'; // Added
+import '../data/safety_quality_performance_improvement_questions.dart'; // Added
+import '../data/fluid_management_blood_products_questions.dart'; // Added
+import '../data/maternal_fetal_physiology_anesthesia_questions.dart'; // Added
+import '../data/thoracic_surgery_anesthesia_questions.dart'; // Added
+import '../data/thermoregulation_hypothermia_malignant_hyperthermia_questions.dart'; // Added
+import '../data/outpatient_anesthesia_questions.dart'; // Added
+import '../data/cardiopulmonary_resuscitation_questions.dart'; // Added
+import '../data/intensive_care_problems_questions.dart'; // Added
+import '../data/postanesthetic_care_questions.dart'; // Added
+import '../data/pediatric_anesthesia_questions.dart'; // Added
+import '../data/chronic_pain_treatment_questions.dart'; // Added
+import '../data/postoperative_care_mechanical_ventilation_questions.dart'; // Added
+import '../data/hepatic_physiology_anesthesia_questions.dart'; // Added
+import '../data/obstetric_anesthesia_questions.dart'; // Added
+import '../data/acid_base_management_questions.dart'; // Added
+import '../data/liver_disease_anesthesia_questions.dart'; // Added
+import '../data/neurophysiology_anesthesia_questions.dart'; // Added
+import '../data/perioperative_intensive_care_nutrition_questions.dart'; // Added
+import '../data/fluid_electrolyte_imbalance_management_questions.dart'; // Added
 import '../utils/event_bus.dart';
 
 class QuizService {
@@ -547,6 +580,7 @@ class QuizService {
         cholinesteraseInhibitorsQuestions,
         anticholinergicDrugsQuestions,
         adrenergicDrugsQuestions,
+        hypotensiveAgentsQuestions,
         localAnestheticsQuestions,
         auxiliaryDrugsQuestions,
         preoperativeAssessmentQuestions,
@@ -555,6 +589,29 @@ class QuizService {
         cardiovascularSurgeryQuestions,
         respiratoryDiseasesQuestions,
         respiratoryPhysiologyQuestions,
+        painManagementQuestions,
+        neurologicalPsychiatricAnesthesiaQuestions,
+        otolaryngologyHeadNeckSurgeryQuestions,
+        endocrineDiseaseAnesthesiaQuestions,
+        neuromuscularDiseasesAnesthesiaQuestions,
+        geriatricAnesthesiaQuestions,
+        traumaEmergencyAnesthesiaQuestions,
+        orthopedicAnesthesiaQuestions,
+        enhancedRecoveryProtocolsQuestions,
+        anesthesiaComplicationsQuestions,
+        genitourinaryAnesthesiaQuestions,
+        ophthalmicAnesthesiaQuestions,
+        renalPhysiologyAnesthesiaQuestions,
+        spinalEpiduralCaudalBlocksQuestions,
+        fluidManagementBloodProductsQuestions,
+        thoracicSurgeryAnesthesiaQuestions,
+        thermoregulationHypothermiaMalignantHyperthermiaQuestions,
+        outpatientAnesthesiaQuestions,
+        cardiopulmonaryResuscitationQuestions,
+        intensiveCareProblemsQuestions,
+        postanestheticCareQuestions,
+        pediatricAnesthesiaQuestions,
+        safetyQualityPerformanceImprovementQuestions,
       ];
 
       // Tüm soruları bir listede topla
@@ -770,9 +827,9 @@ class QuizService {
       'adrenerjik agonist': adrenergicDrugsQuestions,
       'adrenerjik antagonist': adrenergicDrugsQuestions,
       'adrenerjik': adrenergicDrugsQuestions,
-      'hipotansif ajanlar': localAnestheticsQuestions,
-      'hipotansif': localAnestheticsQuestions,
-      'kontrollü hipotansiyon': localAnestheticsQuestions,
+      'hipotansif ajanlar': hypotensiveAgentsQuestions,
+      'hipotansif': hypotensiveAgentsQuestions,
+      'kontrollü hipotansiyon': hypotensiveAgentsQuestions,
       'havayolu yönetimi': airwayManagementQuestions,
       'bölüm 19 - havayolu yönetimi': airwayManagementQuestions,
       'kardiyovasküler fizyoloji ve anestezi':
@@ -796,7 +853,88 @@ class QuizService {
       'ameliyat öncesi değerlendirme': preoperativeAssessmentQuestions,
       'preoperatif değerlendirme': preoperativeAssessmentQuestions,
       'preoperatif': preoperativeAssessmentQuestions,
-    };
+      'algoloji': painManagementQuestions,
+      'ağrı yönetimi': painManagementQuestions,
+      'ağrı tedavisi': painManagementQuestions,
+      'pain management': painManagementQuestions,
+      'nörolojik ve psikiyatrik hastalığı olanlarda anestezi': neurologicalPsychiatricAnesthesiaQuestions,
+      'nörolojik hastalık anestezi': neurologicalPsychiatricAnesthesiaQuestions,
+      'psikiyatrik hastalık anestezi': neurologicalPsychiatricAnesthesiaQuestions,
+                'bölüm 28': neurologicalPsychiatricAnesthesiaQuestions,
+          'otolaringoloji': otolaryngologyHeadNeckSurgeryQuestions, // Added
+          'baş boyun cerrahisi': otolaryngologyHeadNeckSurgeryQuestions, // Added
+          'bölüm 37': otolaryngologyHeadNeckSurgeryQuestions,
+          'endokrin hastalıklarda anestezi': endocrineDiseaseAnesthesiaQuestions, // Added
+          'endokrin hastalıklar': endocrineDiseaseAnesthesiaQuestions, // Added
+          'bölüm 35': endocrineDiseaseAnesthesiaQuestions,
+          'nöromüsküler hastalığı olanlarda anestezi': neuromuscularDiseasesAnesthesiaQuestions, // Added
+          'nöromüsküler hastalıklar': neuromuscularDiseasesAnesthesiaQuestions, // Added
+          'bölüm 29': neuromuscularDiseasesAnesthesiaQuestions,
+          'geriatrik anestezi': geriatricAnesthesiaQuestions, // Added
+          'yaşlı anestezi': geriatricAnesthesiaQuestions, // Added
+          'bölüm 43': geriatricAnesthesiaQuestions,
+          'travma ve acil cerrahide anestezi': traumaEmergencyAnesthesiaQuestions, // Added
+          'travma anestezi': traumaEmergencyAnesthesiaQuestions, // Added
+          'acil cerrahi anestezi': traumaEmergencyAnesthesiaQuestions,
+          'bölüm 39': traumaEmergencyAnesthesiaQuestions,
+          'ortopedik cerrahide anestezi': orthopedicAnesthesiaQuestions, // Added
+          'ortopedik anestezi': orthopedicAnesthesiaQuestions, // Added
+          'kemik cerrahisi anestezi': orthopedicAnesthesiaQuestions,
+          'bölüm 38': orthopedicAnesthesiaQuestions,
+                      'geliştirilmiş iyileştirme protokolleri': enhancedRecoveryProtocolsQuestions, // Added
+            'eras protokolü': enhancedRecoveryProtocolsQuestions, // Added
+            'perioperatif sonuçların optimizasyonu': enhancedRecoveryProtocolsQuestions, // Added
+            'bölüm 48': enhancedRecoveryProtocolsQuestions, // Added
+            'anestezi komplikasyonları': anesthesiaComplicationsQuestions, // Added
+            'anestezi komplikasyonu': anesthesiaComplicationsQuestions, // Added
+            'bölüm 54': anesthesiaComplicationsQuestions, // Added
+            'genitoüriner cerrahide anestezi': genitourinaryAnesthesiaQuestions, // Added
+            'genitoüriner anestezi': genitourinaryAnesthesiaQuestions, // Added
+            'ürolojik anestezi': genitourinaryAnesthesiaQuestions, // Added
+            'bölüm 32': genitourinaryAnesthesiaQuestions, // Added
+                      'oftalmik cerrahide anestezi': ophthalmicAnesthesiaQuestions, // Added
+          'göz cerrahisi anestezi': ophthalmicAnesthesiaQuestions, // Added
+          'oküler anestezi': ophthalmicAnesthesiaQuestions, // Added
+          'bölüm 36': ophthalmicAnesthesiaQuestions, // Added
+          'böbrek fizyolojisi ve anestezi': renalPhysiologyAnesthesiaQuestions, // Added
+          'renal fizyoloji anestezi': renalPhysiologyAnesthesiaQuestions, // Added
+          'bölüm 30': renalPhysiologyAnesthesiaQuestions, // Added
+          'spinal epidural kaudal bloklar': spinalEpiduralCaudalBlocksQuestions, // Added
+          'bölüm 45': spinalEpiduralCaudalBlocksQuestions, // Added
+          'sıvı yönetimi ve kan ürünleri tedavisi': fluidManagementBloodProductsQuestions, // Added
+          'bölüm 51': fluidManagementBloodProductsQuestions, // Added
+          
+          'toraks cerrahisinde anestezi': thoracicSurgeryAnesthesiaQuestions, // Added
+          'bölüm 25': thoracicSurgeryAnesthesiaQuestions, // Added
+          'termoregülasyon hipotermi malign hipertermi': thermoregulationHypothermiaMalignantHyperthermiaQuestions, // Added
+          'bölüm 52': thermoregulationHypothermiaMalignantHyperthermiaQuestions, // Added
+          'günübirlik ve ameliyathane dışı anestezi': outpatientAnesthesiaQuestions, // Added
+          'günübirlik anestezi': outpatientAnesthesiaQuestions, // Added
+          'ameliyathane dışı anestezi': outpatientAnesthesiaQuestions, // Added
+          'nora': outpatientAnesthesiaQuestions, // Added
+          'bölüm 44': outpatientAnesthesiaQuestions, // Added
+          'kardiyopulmoner resüsitasyon': cardiopulmonaryResuscitationQuestions, // Added
+          'cpr': cardiopulmonaryResuscitationQuestions, // Added
+          'resüsitasyon': cardiopulmonaryResuscitationQuestions, // Added
+          'bölüm 55': cardiopulmonaryResuscitationQuestions, // Added
+          'yoğun bakım uygulamalarında karşılaşılan sorunlar': intensiveCareProblemsQuestions, // Added
+          'yoğun bakım sorunları': intensiveCareProblemsQuestions, // Added
+          'yoğun bakım': intensiveCareProblemsQuestions, // Added
+          'icu': intensiveCareProblemsQuestions, // Added
+          'bölüm 57': intensiveCareProblemsQuestions, // Added
+          'postanestezik bakım': postanestheticCareQuestions, // Added
+          'pacu': postanestheticCareQuestions, // Added
+          'postoperatif bakım': postanestheticCareQuestions, // Added
+          'anestezi sonrası bakım': postanestheticCareQuestions, // Added
+          'bölüm 56': postanestheticCareQuestions, // Added
+          'pediatrik anestezi': pediatricAnesthesiaQuestions, // Added
+          'çocuk anestezi': pediatricAnesthesiaQuestions, // Added
+          'yenidoğan anestezi': pediatricAnesthesiaQuestions, // Added
+          'infant anestezi': pediatricAnesthesiaQuestions, // Added
+          'bölüm 42': pediatricAnesthesiaQuestions, // Added
+          'güvenlik kalite performans iyileştirme': safetyQualityPerformanceImprovementQuestions, // Added
+          'bölüm 59': safetyQualityPerformanceImprovementQuestions, // Added
+        };
 
     final lowerCategoryName = categoryName.toLowerCase();
     final questions = categoryMapping[lowerCategoryName];
@@ -976,6 +1114,7 @@ class QuizService {
   // Kullanıcının yanlış cevapladığı soruları getir - yeni veri yapısıyla
   Future<List<Question>> getMistakeQuestions() async {
     List<Question> mistakeQuestions = [];
+    Set<String> seenQuestionIds = {}; // Tekrarlanan soruları önlemek için
 
     try {
       final user = _authService.currentUser;
@@ -1013,6 +1152,16 @@ class QuizService {
             continue;
           }
 
+          // Tekrarlanan soruları önle - soru metnini hash olarak kullan
+          final questionText = data['question'] ?? '';
+          final questionHash = _generateQuestionHash(questionText, data['options']);
+          
+          if (seenQuestionIds.contains(questionHash)) {
+            print('Tekrarlanan soru atlandı: ${questionText.substring(0, min(30, questionText.length))}...');
+            continue;
+          }
+          seenQuestionIds.add(questionHash);
+
           // Seçenekleri dönüştür
           final options = data['options'];
           List<String> optionsList;
@@ -1027,7 +1176,7 @@ class QuizService {
           // Question nesnesini oluştur
           final question = Question(
             id: doc.id,
-            question: data['question'] ?? '',
+            question: questionText,
             options: optionsList,
             correctAnswerIndex: data['correctAnswerIndex'] ?? 0,
             explanation: data['explanation'],
@@ -1043,11 +1192,45 @@ class QuizService {
         }
       }
 
-      print('Toplam ${mistakeQuestions.length} yanlış soru bulundu.');
+      print('Toplam ${mistakeQuestions.length} benzersiz yanlış soru bulundu.');
       return mistakeQuestions;
     } catch (e) {
       print('Yanlış soruları getirme hatası: $e');
       return [];
+    }
+  }
+
+  // Soru hash'i oluştur - tekrarları önlemek için
+  String _generateQuestionHash(String question, dynamic options) {
+    final optionsList = options is List ? options.map((e) => e.toString()).toList() : [];
+    final optionsText = optionsList.join('|');
+    return '${question.trim()}|$optionsText';
+  }
+
+  // Eksiklerden soru kaldır
+  Future<bool> removeMistakeQuestion(String questionId) async {
+    try {
+      final user = _authService.currentUser;
+      if (user == null) {
+        print('removeMistakeQuestion hatası: Kullanıcı giriş yapmamış');
+        return false;
+      }
+
+      print('Eksiklerden soru kaldırılıyor: $questionId');
+
+      // Firestore'dan soruyu kaldır
+      await _firestore
+          .collection('user_mistakes')
+          .doc(user.uid)
+          .collection('questions')
+          .doc(questionId)
+          .delete();
+
+      print('Soru başarıyla eksiklerden kaldırıldı: $questionId');
+      return true;
+    } catch (e) {
+      print('Eksiklerden soru kaldırma hatası: $e');
+      return false;
     }
   }
 

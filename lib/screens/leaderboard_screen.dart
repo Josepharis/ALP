@@ -52,11 +52,31 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
 
   @override
   void dispose() {
-    _leaderboardSubscription?.cancel();
-    _rankSubscription?.cancel();
+    print('Leaderboard screen dispose ediliyor...');
+    try {
+      if (_leaderboardSubscription != null) {
+        _leaderboardSubscription!.cancel();
+        _leaderboardSubscription = null;
+        print('✅ Leaderboard stream iptal edildi');
+      }
+    } catch (e) {
+      print('⚠️ Leaderboard stream iptal hatası: $e');
+    }
+
+    try {
+      if (_rankSubscription != null) {
+        _rankSubscription!.cancel();
+        _rankSubscription = null;
+        print('✅ Rank stream iptal edildi');
+      }
+    } catch (e) {
+      print('⚠️ Rank stream iptal hatası: $e');
+    }
+
     _animationController.dispose();
     _scrollController.dispose();
     WidgetsBinding.instance.removeObserver(this);
+    print('✅ Leaderboard screen dispose tamamlandı');
     super.dispose();
   }
 
@@ -126,32 +146,20 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
     final size = MediaQuery.of(context).size;
     final bottomPadding = MediaQuery.of(context).viewPadding.bottom;
 
-    return Scaffold(
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [Colors.blue.shade900, Colors.black],
-          ),
-        ),
-        child: SafeArea(
-          child:
-              _isLoading
-                  ? const _LoadingView()
-                  : RefreshIndicator(
-                    onRefresh: _loadLeaderboardData,
-                    child: CustomScrollView(
-                      physics: const BouncingScrollPhysics(),
-                      slivers: [
-                        _buildHeader(),
-                        _buildTopThree(),
-                        _buildLeaderboardList(),
-                      ],
-                    ),
-                  ),
-        ),
-      ),
+    return SafeArea(
+      child: _isLoading
+          ? const _LoadingView()
+          : RefreshIndicator(
+              onRefresh: _loadLeaderboardData,
+              child: CustomScrollView(
+                physics: const BouncingScrollPhysics(),
+                slivers: [
+                  _buildHeader(),
+                  _buildTopThree(),
+                  _buildLeaderboardList(),
+                ],
+              ),
+            ),
     );
   }
 

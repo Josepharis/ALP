@@ -723,4 +723,578 @@ final inhalationAnestheticsQuestions = <Question>[
     category: "İnhalasyon Anestezikleri",
     difficulty: 2,
   ),
+
+  Question(
+    question:
+        "Solunum havasına %1 oranında halotan verildiğinde, alveollerdeki halotan konsantrasyonunun artış hızı en çok aşağıdakilerden hangisine bağlıdır?",
+    options: [
+      "Ajanın lipid çözünürlüğü",
+      "Kardiyak output",
+      "Solunum sayısı",
+      "Kan/gaz çözünürlük katsayısı",
+      "Tidal volüm",
+    ],
+    correctAnswerIndex: 3,
+    explanation:
+        "Kan/gaz çözünürlük katsayısı ne kadar düşükse, alveol konsantrasyonu o kadar hızlı artar → indüksiyon hızlı olur.",
+    category: "İnhalasyon Anestezikleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Aşağıdaki ajanlardan hangisinin indüksiyon ve derlenme süresi en hızlıdır?",
+    options: ["Halotan", "Sevofluran", "İzofluran", "Desfluran", "Enfluran"],
+    correctAnswerIndex: 3,
+    explanation:
+        "Desfluran'ın kan/gaz çözünürlük katsayısı çok düşüktür (~0.42) → hızlı indüksiyon ve hızlı uyanma sağlar.",
+    category: "İnhalasyon Anestezikleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Aşağıdaki inhalasyon ajanlarından hangisi ateşli malignite riski ile en çok ilişkilidir?",
+    options: ["N₂O", "Sevofluran", "Halotan", "İzofluran", "Desfluran"],
+    correctAnswerIndex: 2,
+    explanation:
+        "Tüm volatil ajanlar (N2O ve Xenon hariç) MH riski taşır. En sık Halotan tetikler. Süksinilkolin ile kombine olursa risk artar.",
+    category: "İnhalasyon Anestezikleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Aşağıdaki inhalasyon anesteziklerinden hangisinin kalp debisi düşük olan bir hastada etki başlangıcı daha hızlıdır?",
+    options: ["Halotan", "İzofluran", "Sevofluran", "Desfluran", "N₂O"],
+    correctAnswerIndex: 3,
+    explanation:
+        "Düşük kardiyak outputta, akciğerden kana ilaç geçişi azalır → alveoler konsantrasyon daha hızlı artar → özellikle çözünürlüğü düşük ajanlarda (desfluran, sevofluran) etki hızlanır.",
+    category: "İnhalasyon Anestezikleri",
+    difficulty: 3,
+  ),
+
+  Question(
+    question:
+        "Aşağıdakilerden hangisi inhalasyon ajanları için tipik bir özellik değildir?",
+    options: [
+      "Pulmoner arter basıncını artırmaları",
+      "Beyin kan akımını artırmaları",
+      "Kas gevşetici etkileri",
+      "Solunum depresyonu yapmaları",
+      "MAC'ın yaşla değişmesi",
+    ],
+    correctAnswerIndex: 0,
+    explanation:
+        "Uçucu ajanlar genellikle sistemik vazodilatasyon yapar. Pulmoner vasküler direnç üzerinde belirgin etkileri yoktur (istisna: N₂O hafif artırabilir).",
+    category: "İnhalasyon Anestezikleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "N₂O'nun uzun süreli kullanımı aşağıdaki vitamin eksikliğine yol açabilir:",
+    options: [
+      "A vitamini",
+      "D vitamini",
+      "K vitamini",
+      "B₁₂ vitamini",
+      "Folik asit",
+    ],
+    correctAnswerIndex: 3,
+    explanation:
+        "N₂O, B₁₂'yi okside ederek metionin sentetaz enzimini inhibe eder → megaloblastik anemi ve nörolojik bulgular görülebilir.",
+    category: "İnhalasyon Anestezikleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Aşağıdakilerden hangisi yüksek akımda sevofluran kullanımıyla ilişkilidir?",
+    options: [
+      "Methemoglobinemi",
+      "Hepatik nekroz",
+      "Compound A oluşumu azalır",
+      "İntrakraniyal basınç artışı",
+      "Renal toksisite riski azalır",
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        "Sevofluran, düşük taze gaz akımı ve soda lime ile reaksiyona girerek compound A oluşturur. Yüksek akım → bu riski azaltır.",
+    category: "İnhalasyon Anestezikleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "İnhalasyon anestezik ajanların bronkodilatör etkisi en belirgin olanı hangisidir?",
+    options: ["Halotan", "İzofluran", "Sevofluran", "Desfluran", "N₂O"],
+    correctAnswerIndex: 2,
+    explanation:
+        "Sevofluran hem minimal irritan olması hem de bronkodilatör etkisi nedeniyle astımlı hastalarda sık tercih edilir.",
+    category: "İnhalasyon Anestezikleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Aşağıdaki ajanlardan hangisi yüksek çözünürlük katsayısı nedeniyle yavaş uyanma ile ilişkilidir?",
+    options: ["Halotan", "Sevofluran", "Desfluran", "N₂O", "Ketamin"],
+    correctAnswerIndex: 0,
+    explanation:
+        "Halotan'ın kan/gaz çözünürlük katsayısı yüksektir (~2.4) → kanda daha çok çözünür → derlenme süresi uzundur.",
+    category: "İnhalasyon Anestezikleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Aşağıdaki inhalasyon ajanlarından hangisi oda sıcaklığında en uçucu özellik gösterir?",
+    options: ["Halotan", "Sevofluran", "İzofluran", "Desfluran", "N₂O"],
+    correctAnswerIndex: 3,
+    explanation:
+        "Desfluran'ın buhar basıncı çok yüksektir (~669 mmHg) → buharlaştırıcısı özel olmalıdır ve oda sıcaklığına çok duyarlıdır. Bu nedenle standart vaporizatörlerle kullanılmaz, özel ısıtmalı vaporizatör gerekir.",
+    category: "İnhalasyon Anestezikleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Enfluran ve izofluranın farkı aşağıdakilerden hangisidir?",
+    options: [
+      "Her ikisi de epilepsiye yatkındır",
+      "İzofluran daha hızlı metabolize olur",
+      "İzofluran daha az serebral kan akımı artırır",
+      "Enfluranın buhar basıncı daha düşüktür",
+      "İzofluran Compound A üretir",
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        "İzofluran, serebral vazodilatasyon yapmasına rağmen enflurana göre daha az CBF artışı yapar ve daha stabil beyin perfüzyonu sağlar.",
+    category: "İnhalasyon Anestezikleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "İnert gazlardan biri olan nitröz oksitin vücuttaki farmakokinetik özelliği nedir?",
+    options: [
+      "Metabolize olur",
+      "Plazma proteinine bağlanır",
+      "Nefesle değişmeden atılır",
+      "Karaciğerde konjuge edilir",
+      "Renal atılım gösterir",
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        "N₂O metabolize olmaz, inerttir ve değişmeden akciğer yoluyla atılır.",
+    category: "İnhalasyon Anestezikleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Aşağıdaki inhalasyon ajanlarından hangisi en az metabolize olur?",
+    options: ["Halotan", "Sevofluran", "Desfluran", "Enfluran", "İzofluran"],
+    correctAnswerIndex: 2,
+    explanation:
+        "Desfluran, %0.02 gibi çok düşük oranda metabolize edilir; bu özelliğiyle hepatotoksisite riski en az olan ajanlardan biridir.",
+    category: "İnhalasyon Anestezikleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "İzofluranın tercih edilme nedenlerinden biri aşağıdakilerden hangisidir?",
+    options: [
+      "Hepatotoksik olması",
+      "Yüksek metabolizma oranı",
+      "Stabil kardiyovasküler etkiler",
+      "Nöbetleri tetiklemesi",
+      "İrritan kokuya sahip olması",
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        "İzofluran, sistemik vasküler direnci düşürerek kan basıncında hafif azalma yapar ama miyokard depresyonu azdır; kardiyovasküler olarak stabildir.",
+    category: "İnhalasyon Anestezikleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "İnhalasyon anesteziklerinin \"wash-in\" (alveole geçiş) hızını artıran faktör hangisidir?",
+    options: [
+      "Düşük inspiratuar konsantrasyon",
+      "Düşük ventilasyon",
+      "Yüksek kalp debisi",
+      "Düşük kan/gaz çözünürlük katsayısı",
+      "Yüksek solunumsal ölü boşluk",
+    ],
+    correctAnswerIndex: 3,
+    explanation:
+        "Düşük çözünürlük katsayısı olan ajanlar hızlıca kana geçemez, alveolde birikir ve beyne ulaşarak hızlı indüksiyon sağlar.",
+    category: "İnhalasyon Anestezikleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Desfluranın endokrin sistem üzerindeki olası etkisi nedir?",
+    options: [
+      "Kortizol düzeyini artırır",
+      "TSH düzeyini yükseltir",
+      "Glukozu artırabilir",
+      "Prolaktini artırır",
+      "İnsülin salgısını artırır",
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        "Desfluran, katekolamin düzeylerini etkileyerek glukoz düzeylerinde artışa yol açabilir.",
+    category: "İnhalasyon Anestezikleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Aşağıdaki inhalasyon ajanlarından hangisi \"non-irritan\" olması nedeniyle inhalasyon indüksiyonunda özellikle çocuklarda tercih edilir?",
+    options: ["Desfluran", "İzofluran", "Sevofluran", "Halotan", "Enfluran"],
+    correctAnswerIndex: 2,
+    explanation:
+        "Sevofluran kokusuz, solunum yollarını tahriş etmeyen bir ajan olup özellikle pediatrik hastalarda inhalasyon indüksiyonunda yaygın olarak kullanılır.",
+    category: "İnhalasyon Anestezikleri",
+    difficulty: 1,
+  ),
+
+  Question(
+    question:
+        "Aşağıdaki ajanlardan hangisinin CO₂ absorbanları ile reaksiyonu sonucu karbonmonoksit üretme potansiyeli en fazladır?",
+    options: ["Sevofluran", "İzofluran", "Halotan", "Desfluran", "Nitröz oksit"],
+    correctAnswerIndex: 3,
+    explanation:
+        "Desfluran, kuru soda lime ile reaksiyona girerek karbonmonoksit üretir; bu nedenle taze CO₂ absorbanı kullanımı önemlidir.",
+    category: "İnhalasyon Anestezikleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Volatil anesteziklerle ilgili olarak \"wake-up test\" sırasında tercih edilen ajan hangisidir?",
+    options: ["Halotan", "İzofluran", "Desfluran", "Sevofluran", "Enfluran"],
+    correctAnswerIndex: 2,
+    explanation:
+        "Desfluran düşük çözünürlüğü sayesinde hızlı uyanma sağlar; skolyoz cerrahilerinde wake-up testte tercih edilir.",
+    category: "İnhalasyon Anestezikleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Sevofluran ile ilgili aşağıdaki ifadelerden hangisi doğrudur?",
+    options: [
+      "Buhar basıncı çok yüksektir",
+      "Karbonmonoksit üretimi en fazladır",
+      "Compound A oluşum potansiyeli vardır",
+      "Yavaş indüksiyon sağlar",
+      "Sinir sistemi uyarıcı etkisi belirgindir",
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        "Sevofluran, kuru soda lime ile reaksiyona girerek Compound A oluşturabilir; bu madde nefrotoksiktir.",
+    category: "İnhalasyon Anestezikleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "İntrakraniyal cerrahilerde en az serebral vazodilatasyon yapan volatil ajan hangisidir?",
+    options: ["İzofluran", "Sevofluran", "Halotan", "Desfluran", "Enfluran"],
+    correctAnswerIndex: 0,
+    explanation:
+        "İzofluran, beyin cerrahisinde en sık kullanılan volatil ajandır çünkü CBF'yi fazla artırmadan anestezi sağlar.",
+    category: "İnhalasyon Anestezikleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Volatil anesteziklerin kan/gaz çözünürlük katsayısı neyi belirler?",
+    options: [
+      "Toksik doz aralığını",
+      "Solunum depresyonunu",
+      "Beyne geçiş süresini",
+      "Anestezik potensi",
+      "Buhar basıncını",
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        "Kan/gaz çözünürlük katsayısı düşük olan ajanlar daha hızlı alveolden beyne geçer; bu indüksiyon ve derlenme süresini etkiler.",
+    category: "İnhalasyon Anestezikleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Sevofluran kullanımında nefrotoksisite riskini azaltmak için hangisine dikkat edilmelidir?",
+    options: [
+      "CO₂ absorbanının kuru olmaması",
+      "Solunan gaz akışının düşük tutulması",
+      "Yüksek inspiratuar oksijen kullanımı",
+      "Nitrat içeren ilaçların verilmesi",
+      "Anestezi süresinin uzatılması",
+    ],
+    correctAnswerIndex: 0,
+    explanation:
+        "Sevofluran kuru soda kireci ile reaksiyona girerek nefrotoksik Compound A üretir. Bu nedenle absorban nemli olmalıdır.",
+    category: "İnhalasyon Anestezikleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Halotan anestezisi sonrası gelişen hepatotoksisitenin tipi nedir?",
+    options: [
+      "Doza bağımlı, hafif toksisite",
+      "Doza bağımsız, immünolojik hepatit",
+      "Kolestatik hepatopati",
+      "Direkt safra kanal hasarı",
+      "Periportal fibrozis",
+    ],
+    correctAnswerIndex: 1,
+    explanation:
+        "Halotan hepatiti genellikle ikinci maruziyetten sonra gelişir, doza bağlı değildir ve immünolojik kökenlidir.",
+    category: "İnhalasyon Anestezikleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "İzofluranın kardiyovasküler etkilerinden biri aşağıdakilerden hangisidir?",
+    options: [
+      "Miyokardiyal oksijen tüketimini artırır",
+      "Kalp hızını belirgin şekilde düşürür",
+      "Sistemik vasküler direnci azaltır",
+      "Kardiyak outputu artırır",
+      "QT aralığını uzatır",
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        "İzofluran sistemik vazodilatasyon yapar ve SVR'yi düşürür. Bu etkisiyle hafif hipotansiyona neden olabilir.",
+    category: "İnhalasyon Anestezikleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Aşağıdakilerden hangisi inhalasyon anesteziklerinin kardiyovasküler etkilerinden biri değildir?",
+    options: [
+      "Sistemik vasküler direnci azaltma",
+      "Myokard depresyonu",
+      "Baroreseptör refleksini inhibe etme",
+      "Koroner çalma sendromuna yol açma",
+      "Kalp hızını artırma (tüm ajanlarda)",
+    ],
+    correctAnswerIndex: 4,
+    explanation:
+        "Desfluran ve izofluran taşikardi yapabilirken, sevofluran kalp hızını genellikle değiştirmez.",
+    category: "İnhalasyon Anestezikleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Hangisi inhalasyon anesteziklerinin böbrek üzerine olumsuz etkilerinden biri değildir?",
+    options: [
+      "Renal kan akımını azaltma",
+      "Fluor iyonu üretimi (sevofluran)",
+      "Serum kreatinin düzeylerinde artış",
+      "Tubüler hasar (Compound A)",
+      "ADH salınımını inhibe etme",
+    ],
+    correctAnswerIndex: 4,
+    explanation:
+        "İnhalasyon anestezikleri ADH salınımını inhibe etmez. Aksine, cerrahi stres ADH artışına yol açar.",
+    category: "İnhalasyon Anestezikleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Hangi inhalasyon anestezik karbonmonoksit (CO) zehirlenmesi riski taşır?",
+    options: [
+      "Desfluran",
+      "Sevofluran",
+      "İzofluran",
+      "Halotan",
+      "Kuru CO2 absorbanda kullanılan tüm ajanlar",
+    ],
+    correctAnswerIndex: 0,
+    explanation:
+        "Desfluran, kuru baralim/sodalim ile reaksiyona girerek CO oluşturabilir. Bu nedenle anestezi makinelerinde absorbant nem kontrolü yapılmalıdır.",
+    category: "İnhalasyon Anestezikleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Aşağıdakilerden hangisi inhalasyon anesteziklerinin solunum sistemi üzerine etkilerinden biri değildir?",
+    options: [
+      "Solunum depresyonu",
+      "Bronkodilatasyon",
+      "Hipoksik pulmoner vazokonstrüksiyonu inhibe etme",
+      "Öksürük refleksini artırma",
+      "V/Q uyumsuzluğuna yol açma",
+    ],
+    correctAnswerIndex: 3,
+    explanation:
+        "İnhalasyon anestezikleri öksürük refleksini baskılar. Bu nedenle derin anestezide laringospazm riski azalır.",
+    category: "İnhalasyon Anestezikleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Aşağıdaki inhalasyon anesteziklerinden hangisi intraoperatif nöromonitorizasyon (örn. SSEP/MEP) sırasında en az etkiye sahiptir?",
+    options: [
+      "Halotan",
+      "İzofluran",
+      "Sevofluran",
+      "Desfluran",
+      "Nitröz oksit",
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        "Sevofluran, diğer volatil ajanlara kıyasla daha az amplitüd supresyonu yapar ve nöromonitorizasyonla daha uyumludur.",
+    category: "İnhalasyon Anestezikleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Aşağıdakilerden hangisi inhalasyon anesteziklerinin eliminasyon yollarından biri değildir?",
+    options: [
+      "Akciğerler yoluyla",
+      "Karaciğer metabolizması",
+      "Böbreklerden atılım",
+      "Deri yoluyla difüzyon",
+      "Biyotransformasyon",
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        "İnhalasyon anestezikleri böbreklerden atılmaz. Temel eliminasyon yolu akciğerlerdir; bazıları (halotan, sevofluran) karaciğerde metabolize olur.",
+    category: "İnhalasyon Anestezikleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Aşağıdakilerden hangisi sevofluranın metabolizması sırasında oluşan ve böbrek toksisitesine yol açabilen maddedir?",
+    options: [
+      "Fluor iyonu",
+      "Compound A",
+      "Karbonmonoksit",
+      "Metabolik asidoz",
+      "Siyanür",
+    ],
+    correctAnswerIndex: 1,
+    explanation:
+        "Sevofluran, düşük akımlı anestezi sırasında Compound A oluşturur ve bu madde tubüler nekroza neden olabilir.",
+    category: "İnhalasyon Anestezikleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Aşağıdakilerden hangisi inhalasyon anesteziklerinin karaciğer üzerindeki tipik etkilerinden biri değildir?",
+    options: [
+      "Hepatik kan akımında azalma",
+      "Metabolik yük oluşturma",
+      "Direkt hepatosit toksisitesi (özellikle halotan)",
+      "Portal ven akımında artış",
+      "İmmünolojik hepatit gelişimi",
+    ],
+    correctAnswerIndex: 3,
+    explanation:
+        "Volatil ajanlar genel olarak hepatik kan akımını azaltır. Portal ven akımı da azalır veya değişmez. Halotan ciddi hepatit yapabilir.",
+    category: "İnhalasyon Anestezikleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "İnhalasyon anestezikleriyle MAC değeri üzerine en az etkili faktör aşağıdakilerden hangisidir?",
+    options: [
+      "Yaş",
+      "Hipotermi",
+      "Opiat kullanımı",
+      "Hipovolemi",
+      "Vücut kitle indeksi (BMI)",
+    ],
+    correctAnswerIndex: 4,
+    explanation:
+        "MAC değeri yaş, vücut ısısı, ilaç kullanımı, elektrolit dengesi gibi birçok faktörden etkilenir; BMI genellikle etkili değildir.",
+    category: "İnhalasyon Anestezikleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Aşağıdakilerden hangisi ateşli malignite (malign hipertermi) riski taşımayan ajanlardan biridir?",
+    options: ["Sevofluran", "Desfluran", "Süksinilkolin", "N₂O", "İzofluran"],
+    correctAnswerIndex: 3,
+    explanation:
+        "N₂O MH ile ilişkilendirilmemiştir. Diğer uçucu ajanlar ve özellikle süksinilkolin MH tetikleyicilerindendir.",
+    category: "İnhalasyon Anestezikleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Desfluran ile anestezi uygulanan bir hastada ani taşikardi ve hipertansiyon gelişiyor. En olası neden nedir?",
+    options: [
+      "Hipovolemi",
+      "Yetersiz anestezi derinliği",
+      "Metabolik alkaloz",
+      "Ajanın yavaş artışı",
+      "Vagal bradikardiye karşı kompansasyon",
+    ],
+    correctAnswerIndex: 1,
+    explanation:
+        "Desfluran hızlı artarsa sempatik aktiviteyi tetikler → taşikardi ve hipertansiyon oluşabilir. Uygulama hızı önemlidir.",
+    category: "İnhalasyon Anestezikleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Aşağıdakilerden hangisi bir inhalasyon ajanı için ideal özelliklerden biri değildir?",
+    options: [
+      "Düşük kan/gaz çözünürlük katsayısı",
+      "Non-irritan olması",
+      "Stabil hemodinami",
+      "Toksik metabolit üretmemesi",
+      "Yüksek yağ/gaz çözünürlüğü",
+    ],
+    correctAnswerIndex: 4,
+    explanation:
+        "Yüksek yağ/gaz çözünürlüğü potensi artırır ama uyanmayı geciktirir. İdeal ajan düşük çözünürlük katsayısına sahip olmalıdır → hızlı derlenme sağlar.",
+    category: "İnhalasyon Anestezikleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Aşağıdakilerden hangisi inhalasyon anesteziklerinin malign hipertermi riskini artıran faktörlerden biri değildir?",
+    options: [
+      "Genetik yatkınlık",
+      "Süksinilkolin kullanımı",
+      "Volatil ajan kullanımı",
+      "Hipertermi öyküsü",
+      "Nitröz oksit kullanımı",
+    ],
+    correctAnswerIndex: 4,
+    explanation:
+        "Nitröz oksit malign hipertermi tetiklemez. Volatil ajanlar ve süksinilkolin MH tetikleyicileridir.",
+    category: "İnhalasyon Anestezikleri",
+    difficulty: 2,
+  ),
 ];

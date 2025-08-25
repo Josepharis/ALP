@@ -27,6 +27,41 @@ import '../data/cardiovascular_physiology_questions.dart';
 import '../data/cardiovascular_surgery_questions.dart';
 import '../data/respiratory_diseases_questions.dart';
 import '../data/respiratory_physiology_questions.dart';
+import '../data/chronic_pain_treatment_questions.dart';
+import '../data/postoperative_care_mechanical_ventilation_questions.dart';
+import '../data/hepatic_physiology_anesthesia_questions.dart';
+import '../data/obstetric_anesthesia_questions.dart';
+import '../data/acid_base_management_questions.dart';
+import '../data/liver_disease_anesthesia_questions.dart';
+import '../data/neurophysiology_anesthesia_questions.dart'; // Added
+import '../data/perioperative_intensive_care_nutrition_questions.dart'; // Added
+import '../data/fluid_electrolyte_imbalance_management_questions.dart'; // Added
+
+// Eksik 24 kategori import'ları
+import '../data/cardiopulmonary_resuscitation_questions.dart';
+import '../data/intensive_care_problems_questions.dart';
+import '../data/outpatient_anesthesia_questions.dart';
+import '../data/pediatric_anesthesia_questions.dart';
+import '../data/postanesthetic_care_questions.dart';
+import '../data/thermoregulation_hypothermia_malignant_hyperthermia_questions.dart';
+import '../data/thoracic_surgery_anesthesia_questions.dart';
+import '../data/fluid_management_blood_products_questions.dart';
+import '../data/spinal_epidural_caudal_blocks_questions.dart';
+import '../data/safety_quality_performance_improvement_questions.dart';
+import '../data/renal_physiology_anesthesia_questions.dart';
+import '../data/ophthalmic_anesthesia_questions.dart';
+import '../data/genitourinary_anesthesia_questions.dart';
+import '../data/anesthesia_complications_questions.dart';
+import '../data/enhanced_recovery_protocols_questions.dart';
+import '../data/orthopedic_anesthesia_questions.dart';
+import '../data/trauma_emergency_anesthesia_questions.dart';
+import '../data/geriatric_anesthesia_questions.dart';
+import '../data/endocrine_diseases_anesthesia_questions.dart';
+import '../data/neuromuscular_diseases_anesthesia_questions.dart';
+import '../data/neurological_psychiatric_anesthesia_questions.dart';
+import '../data/otolaryngology_head_neck_surgery_questions.dart';
+import '../data/pain_management_questions.dart';
+import '../data/hypotensive_agents_questions.dart';
 
 class OrganizedDataService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -150,6 +185,167 @@ class OrganizedDataService {
           'displayName': 'Solunumsal Fizyoloji',
           'collectionName': 'solunumsal-fizyoloji',
           'questions': respiratoryPhysiologyQuestions,
+        },
+        {
+          'displayName': 'Postoperatif Bakım ve Mekanik Ventilasyon',
+          'collectionName': 'postoperatif-bakim-mekanik-ventilasyon',
+          'questions': postoperativeCareMechanicalVentilationQuestions,
+        },
+        {
+          'displayName': 'Hepatik Fizyoloji ve Anestezi',
+          'collectionName': 'hepatik-fizyoloji-anestezi',
+          'questions': hepaticPhysiologyAnesthesiaQuestions,
+        },
+        {
+          'displayName': 'Obstetrik Anestezi',
+          'collectionName': 'obstetrik-anestezi',
+          'questions': obstetricAnesthesiaQuestions,
+        },
+        {
+          'displayName': 'Asit-Baz Yönetimi',
+          'collectionName': 'acid-base-management',
+          'questions': acidBaseManagementQuestions,
+        },
+        {
+          'displayName': 'Karaciğer Hastalığı Olan Hastalarda Anestezi',
+          'collectionName': 'liver-disease-anesthesia',
+          'questions': liverDiseaseAnesthesiaQuestions,
+        },
+        {
+          'displayName': 'Nörofizyoloji ve Anestezi',
+          'collectionName': 'neurophysiology-anesthesia',
+          'questions': neurophysiologyAnesthesiaQuestions,
+        },
+        {
+          'displayName': 'Perioperatif ve Yoğun Bakımda Beslenme',
+          'collectionName': 'perioperative-intensive-care-nutrition',
+          'questions': perioperativeIntensiveCareNutritionQuestions,
+        },
+        {
+          'displayName': 'Sıvı ve Elektrolit Dengesizlikleri Olan Hastaların Yönetimi',
+          'collectionName': 'fluid-electrolyte-imbalance-management',
+          'questions': fluidElectrolyteImbalanceManagementQuestions,
+        },
+        // Eksik 24 kategori
+        {
+          'displayName': 'Kardiyopulmoner Resüsitasyon',
+          'collectionName': 'cardiopulmonary-resuscitation',
+          'questions': cardiopulmonaryResuscitationQuestions,
+        },
+        {
+          'displayName': 'Yoğun Bakım Sorunları',
+          'collectionName': 'intensive-care-problems',
+          'questions': intensiveCareProblemsQuestions,
+        },
+        {
+          'displayName': 'Günübirlik Anestezi',
+          'collectionName': 'outpatient-anesthesia',
+          'questions': outpatientAnesthesiaQuestions,
+        },
+        {
+          'displayName': 'Pediatrik Anestezi',
+          'collectionName': 'pediatric-anesthesia',
+          'questions': pediatricAnesthesiaQuestions,
+        },
+        {
+          'displayName': 'Postanestezik Bakım',
+          'collectionName': 'postanesthetic-care',
+          'questions': postanestheticCareQuestions,
+        },
+        {
+          'displayName': 'Termoregülasyon ve Malign Hipertermi',
+          'collectionName': 'thermoregulation-hypothermia-malignant-hyperthermia',
+          'questions': thermoregulationHypothermiaMalignantHyperthermiaQuestions,
+        },
+        {
+          'displayName': 'Torasik Cerrahi Anestezi',
+          'collectionName': 'thoracic-surgery-anesthesia',
+          'questions': thoracicSurgeryAnesthesiaQuestions,
+        },
+        {
+          'displayName': 'Sıvı Yönetimi ve Kan Ürünleri',
+          'collectionName': 'fluid-management-blood-products',
+          'questions': fluidManagementBloodProductsQuestions,
+        },
+        {
+          'displayName': 'Spinal, Epidural ve Kaudal Bloklar',
+          'collectionName': 'spinal-epidural-caudal-blocks',
+          'questions': spinalEpiduralCaudalBlocksQuestions,
+        },
+        {
+          'displayName': 'Güvenlik ve Kalite İyileştirme',
+          'collectionName': 'safety-quality-performance-improvement',
+          'questions': safetyQualityPerformanceImprovementQuestions,
+        },
+        {
+          'displayName': 'Renal Fizyoloji ve Anestezi',
+          'collectionName': 'renal-physiology-anesthesia',
+          'questions': renalPhysiologyAnesthesiaQuestions,
+        },
+        {
+          'displayName': 'Oftalmik Anestezi',
+          'collectionName': 'ophthalmic-anesthesia',
+          'questions': ophthalmicAnesthesiaQuestions,
+        },
+        {
+          'displayName': 'Genitoüriner Anestezi',
+          'collectionName': 'genitourinary-anesthesia',
+          'questions': genitourinaryAnesthesiaQuestions,
+        },
+        {
+          'displayName': 'Anestezi Komplikasyonları',
+          'collectionName': 'anesthesia-complications',
+          'questions': anesthesiaComplicationsQuestions,
+        },
+        {
+          'displayName': 'Geliştirilmiş İyileşme Protokolleri',
+          'collectionName': 'enhanced-recovery-protocols',
+          'questions': enhancedRecoveryProtocolsQuestions,
+        },
+        {
+          'displayName': 'Ortopedik Anestezi',
+          'collectionName': 'orthopedic-anesthesia',
+          'questions': orthopedicAnesthesiaQuestions,
+        },
+        {
+          'displayName': 'Travma ve Acil Anestezi',
+          'collectionName': 'trauma-emergency-anesthesia',
+          'questions': traumaEmergencyAnesthesiaQuestions,
+        },
+        {
+          'displayName': 'Geriatrik Anestezi',
+          'collectionName': 'geriatric-anesthesia',
+          'questions': geriatricAnesthesiaQuestions,
+        },
+        {
+          'displayName': 'Endokrin Hastalıklar ve Anestezi',
+          'collectionName': 'endocrine-diseases-anesthesia',
+          'questions': endocrineDiseaseAnesthesiaQuestions,
+        },
+        {
+          'displayName': 'Nöromüsküler Hastalıklar ve Anestezi',
+          'collectionName': 'neuromuscular-diseases-anesthesia',
+          'questions': neuromuscularDiseasesAnesthesiaQuestions,
+        },
+        {
+          'displayName': 'Nörolojik ve Psikiyatrik Anestezi',
+          'collectionName': 'neurological-psychiatric-anesthesia',
+          'questions': neurologicalPsychiatricAnesthesiaQuestions,
+        },
+        {
+          'displayName': 'Otolaringoloji ve Baş-Boyun Cerrahisi',
+          'collectionName': 'otolaryngology-head-neck-surgery',
+          'questions': otolaryngologyHeadNeckSurgeryQuestions,
+        },
+        {
+          'displayName': 'Ağrı Yönetimi',
+          'collectionName': 'pain-management',
+          'questions': painManagementQuestions,
+        },
+        {
+          'displayName': 'Hipotansif Ajanlar',
+          'collectionName': 'hypotensive-agents',
+          'questions': hypotensiveAgentsQuestions,
         },
       ];
 

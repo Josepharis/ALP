@@ -22,8 +22,8 @@ class NotificationService {
       now.year,
       now.month,
       now.day,
-      14, // Saat 14
-      42, // 42 dakika
+      19, // Saat 19
+      0, // 0 dakika
     );
 
     // Eğer belirlenen saat geçtiyse, bir sonraki güne planla

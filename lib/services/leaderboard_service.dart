@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import '../models/user_activity.dart';
 
 class LeaderboardService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -92,8 +91,6 @@ class LeaderboardService {
 
   // Test verileri oluştur
   List<Map<String, dynamic>> _createTestLeaderboardData() {
-    final currentUserId = _auth.currentUser?.uid;
-
     List<Map<String, dynamic>> testData = [];
 
     // 10 test kullanıcısı oluştur
@@ -163,6 +160,13 @@ class LeaderboardService {
         .snapshots()
         .asyncMap((activitySnapshot) async {
           try {
+            // Auth durumunu kontrol et
+            final currentUser = _auth.currentUser;
+            if (currentUser == null) {
+              print('Kullanıcı çıkış yapmış, boş liste döndürülüyor');
+              return <Map<String, dynamic>>[];
+            }
+
             // Tüm kullanıcıları bir kerede getir
             final userDocs = await _firestore.collection('users').get();
             final userMap = {for (var doc in userDocs.docs) doc.id: doc.data()};
@@ -181,35 +185,43 @@ class LeaderboardService {
                 'totalCorrectAnswers': activityData['totalCorrectAnswers'] ?? 0,
                 'totalWrongAnswers': activityData['totalWrongAnswers'] ?? 0,
                 'dailyStreak': activityData['dailyStreak'] ?? 0,
-                'isCurrentUser': userId == _auth.currentUser?.uid,
+                'isCurrentUser': userId == currentUser.uid,
                 'rank': activitySnapshot.docs.indexOf(doc) + 1,
               };
             }).toList();
           } catch (e) {
             print('Leaderboard stream hatası: $e');
-            return [];
+            return <Map<String, dynamic>>[];
           }
+        })
+        .handleError((error) {
+          print('Leaderboard stream Firestore hatası: $error');
+          return <Map<String, dynamic>>[];
         });
   }
 
   // Kullanıcı sıralaması için stream - güvenli versiyon
   Stream<int> getUserRankStream() {
-    final userId = _auth.currentUser?.uid;
-    if (userId == null) return Stream.value(0);
-
     return _firestore
         .collection('userActivities')
         .orderBy('totalPoints', descending: true)
         .snapshots()
         .map((snapshot) {
           try {
+            // Auth durumunu kontrol et
+            final currentUserId = _auth.currentUser?.uid;
+            if (currentUserId == null) {
+              print('Kullanıcı çıkış yapmış, rank 0 döndürülüyor');
+              return 0;
+            }
+
             // Tüm kullanıcıları puan sırasına göre al
             for (int i = 0; i < snapshot.docs.length; i++) {
               final doc = snapshot.docs[i];
               final data = doc.data();
               final docUserId = data['userId'] as String? ?? doc.id;
 
-              if (docUserId == userId) {
+              if (docUserId == currentUserId) {
                 return i + 1; // Sıralama 1'den başlar
               }
             }

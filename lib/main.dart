@@ -34,10 +34,10 @@ void main() async {
   ]);
   print('📱 Device orientation set to portrait');
 
-  // Sistem UI overlay stilini ayarla
+  // Sistem UI overlay stilini ayarla (günün sorusu ekranı kendi rengini ayarlayacak)
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
+      statusBarColor: Colors.transparent, // Varsayılan şeffaf
       statusBarIconBrightness: Brightness.light,
       statusBarBrightness: Brightness.dark,
       systemNavigationBarColor: Colors.transparent,

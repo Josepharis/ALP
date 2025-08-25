@@ -5,7 +5,6 @@ import '../services/quiz_service.dart';
 import '../utils/snackbar_utils.dart';
 import 'quiz_screen.dart';
 import 'question_detail_screen.dart';
-import 'personalized_quiz_generator_sheet.dart';
 
 class CategoryMistakesScreen extends StatefulWidget {
   final String category;
@@ -28,53 +27,73 @@ class _CategoryMistakesScreenState extends State<CategoryMistakesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF1A237E),
+      backgroundColor: Colors.transparent,
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
-        title: Text(widget.category),
-        backgroundColor: const Color(0xFF1A237E),
-        elevation: 0,
-        actions: [
-          // Premium Beni Geliştir butonu
-          Padding(
-            padding: const EdgeInsets.only(right: 16.0),
-            child: ElevatedButton.icon(
-              icon: const Icon(
-                Icons.auto_awesome,
-                color: Colors.amber,
-                size: 18,
-              ),
-              label: const Text(
-                'BENİ GELİŞTİR',
+        titleSpacing: 0, // Geri butonu ile title arasındaki boşluğu kaldır
+        title: LayoutBuilder(
+          builder: (context, constraints) {
+            final screenWidth = MediaQuery.of(context).size.width;
+            final availableWidth = screenWidth - 80; // Geri butonu ve padding için alan bırak
+            
+            // Metin uzunluğuna göre font boyutunu ayarla
+            double fontSize = 16.0;
+            if (widget.category.length > 40) {
+              fontSize = 12.0;
+            } else if (widget.category.length > 35) {
+              fontSize = 13.0;
+            } else if (widget.category.length > 30) {
+              fontSize = 14.0;
+            } else if (widget.category.length > 25) {
+              fontSize = 15.0;
+            }
+            
+            return Container(
+              width: availableWidth,
+              alignment: Alignment.centerLeft,
+              padding: const EdgeInsets.only(left: 8),
+              child: Text(
+                widget.category,
                 style: TextStyle(
-                  color: Colors.white,
+                  fontSize: fontSize,
                   fontWeight: FontWeight.bold,
-                  fontSize: 12,
+                  color: Colors.white,
                 ),
+                maxLines: 2, // İki satıra kadar izin ver
+                overflow: TextOverflow.ellipsis,
               ),
-              onPressed: () => _showPersonalizedQuizGenerator(),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.deepPurple.shade700,
-                foregroundColor: Colors.white,
-                elevation: 3,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 10,
-                  vertical: 0,
-                ),
-                minimumSize: const Size(40, 32),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
-                ),
-              ),
+            );
+          },
+        ),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [Colors.blue.shade900, Colors.black],
             ),
           ),
-        ],
+        ),
+
       ),
-      body:
-          _isLoading
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [Colors.blue.shade900, Colors.black],
+          ),
+        ),
+        child: SafeArea(
+          child: _isLoading
               ? const Center(child: CircularProgressIndicator())
               : widget.questions.isEmpty
-              ? _buildEmptyView()
-              : _buildQuestionsList(),
+                  ? _buildEmptyView()
+                  : _buildQuestionsList(),
+        ),
+      ),
     );
   }
 
@@ -126,9 +145,23 @@ class _CategoryMistakesScreenState extends State<CategoryMistakesScreen> {
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.1),
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            Colors.blue.shade800.withOpacity(0.3),
+            Colors.blue.shade900.withOpacity(0.2),
+          ],
+        ),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.white.withOpacity(0.1), width: 1),
+        border: Border.all(color: Colors.white.withOpacity(0.15), width: 1),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.2),
+            blurRadius: 8,
+            offset: const Offset(0, 2),
+          ),
+        ],
       ),
       child: Material(
         color: Colors.transparent,
@@ -143,11 +176,13 @@ class _CategoryMistakesScreenState extends State<CategoryMistakesScreen> {
               children: [
                 Text(
                   question.question,
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.w500,
-                    fontSize: 15,
+                    fontSize: question.question.length > 150 ? 13 : 15,
                   ),
+                  maxLines: 3,
+                  overflow: TextOverflow.ellipsis,
                 ),
                 const SizedBox(height: 8),
                 Row(
@@ -161,6 +196,38 @@ class _CategoryMistakesScreenState extends State<CategoryMistakesScreen> {
                       ),
                     Row(
                       children: [
+                        // Eksiklerden Kaldır butonu
+                        GestureDetector(
+                          onTap: () => _showRemoveQuestionDialog(question),
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                            decoration: BoxDecoration(
+                              color: Colors.red.withOpacity(0.2),
+                              borderRadius: BorderRadius.circular(12),
+                              border: Border.all(color: Colors.red.withOpacity(0.5)),
+                            ),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Icon(
+                                  Icons.remove_circle_outline,
+                                  size: 14,
+                                  color: Colors.red.shade300,
+                                ),
+                                const SizedBox(width: 4),
+                                Text(
+                                  'Kaldır',
+                                  style: TextStyle(
+                                    color: Colors.red.shade300,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 12),
                         Icon(
                           Icons.touch_app,
                           size: 16,
@@ -193,21 +260,22 @@ class _CategoryMistakesScreenState extends State<CategoryMistakesScreen> {
       isScrollControlled: true,
       builder:
           (context) => SafeArea(
-            child: Container(
-              height: MediaQuery.of(context).size.height * 0.8,
-              padding: const EdgeInsets.all(20),
+                          child: Container(
+                height: MediaQuery.of(context).size.height,
+                padding: EdgeInsets.only(
+                  top: MediaQuery.of(context).padding.top + 20, // Reduced top padding
+                  left: 20,
+                  right: 20,
+                  bottom: 20,
+                ),
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                   colors: [
-                    _getCategoryColor(widget.category),
-                    _getCategoryColor(widget.category).withOpacity(0.8),
+                    Colors.blue.shade900,
+                    Colors.black,
                   ],
-                ),
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(20),
-                  topRight: Radius.circular(20),
                 ),
               ),
               child: Column(
@@ -216,22 +284,28 @@ class _CategoryMistakesScreenState extends State<CategoryMistakesScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Row(
-                        children: [
-                          Icon(
-                            _getCategoryIcon(widget.category),
-                            color: Colors.white,
-                          ),
-                          const SizedBox(width: 8),
-                          Text(
-                            widget.category,
-                            style: const TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
+                      Expanded(
+                        child: Row(
+                          children: [
+                            Icon(
+                              _getCategoryIcon(widget.category),
                               color: Colors.white,
                             ),
-                          ),
-                        ],
+                            const SizedBox(width: 8),
+                            Expanded(
+                              child: Text(
+                                widget.category,
+                                style: TextStyle(
+                                  fontSize: widget.category.length > 30 ? 16 : 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                       IconButton(
                         icon: const Icon(Icons.close, color: Colors.white),
@@ -248,8 +322,8 @@ class _CategoryMistakesScreenState extends State<CategoryMistakesScreen> {
                           const SizedBox(height: 16),
                           Text(
                             question.question,
-                            style: const TextStyle(
-                              fontSize: 18,
+                            style: TextStyle(
+                              fontSize: question.question.length > 200 ? 16 : 18,
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
                             ),
@@ -270,18 +344,33 @@ class _CategoryMistakesScreenState extends State<CategoryMistakesScreen> {
                               margin: const EdgeInsets.only(bottom: 8),
                               padding: const EdgeInsets.all(12),
                               decoration: BoxDecoration(
-                                color:
-                                    index == question.correctAnswerIndex
-                                        ? Colors.green.withOpacity(0.3)
-                                        : Colors.white.withOpacity(0.1),
+                                gradient: LinearGradient(
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                  colors: index == question.correctAnswerIndex
+                                      ? [
+                                          Colors.green.withOpacity(0.4),
+                                          Colors.green.withOpacity(0.2),
+                                        ]
+                                      : [
+                                          Colors.blue.shade800.withOpacity(0.2),
+                                          Colors.blue.shade900.withOpacity(0.1),
+                                        ],
+                                ),
                                 borderRadius: BorderRadius.circular(8),
                                 border: Border.all(
-                                  color:
-                                      index == question.correctAnswerIndex
-                                          ? Colors.green
-                                          : Colors.white.withOpacity(0.1),
+                                  color: index == question.correctAnswerIndex
+                                      ? Colors.green.withOpacity(0.6)
+                                      : Colors.white.withOpacity(0.15),
                                   width: 1,
                                 ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.1),
+                                    blurRadius: 4,
+                                    offset: const Offset(0, 1),
+                                  ),
+                                ],
                               ),
                               child: Row(
                                 children: [
@@ -307,6 +396,7 @@ class _CategoryMistakesScreenState extends State<CategoryMistakesScreen> {
                                             index == question.correctAnswerIndex
                                                 ? FontWeight.bold
                                                 : FontWeight.normal,
+                                        fontSize: question.options[index].length > 100 ? 13 : 14,
                                       ),
                                     ),
                                   ),
@@ -329,8 +419,26 @@ class _CategoryMistakesScreenState extends State<CategoryMistakesScreen> {
                             Container(
                               padding: const EdgeInsets.all(12),
                               decoration: BoxDecoration(
-                                color: Colors.white.withOpacity(0.1),
+                                gradient: LinearGradient(
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                  colors: [
+                                    Colors.blue.shade800.withOpacity(0.2),
+                                    Colors.blue.shade900.withOpacity(0.1),
+                                  ],
+                                ),
                                 borderRadius: BorderRadius.circular(8),
+                                border: Border.all(
+                                  color: Colors.white.withOpacity(0.15),
+                                  width: 1,
+                                ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.1),
+                                    blurRadius: 4,
+                                    offset: const Offset(0, 1),
+                                  ),
+                                ],
                               ),
                               child: Text(
                                 question.explanation!,
@@ -342,32 +450,7 @@ class _CategoryMistakesScreenState extends State<CategoryMistakesScreen> {
                             ),
                           ],
                           const SizedBox(height: 24),
-                          Padding(
-                            padding: EdgeInsets.only(
-                              bottom:
-                                  MediaQuery.of(context).padding.bottom + 16,
-                            ),
-                            child: SizedBox(
-                              width: double.infinity,
-                              child: ElevatedButton.icon(
-                                onPressed: () => _startPracticeQuiz(),
-                                icon: const Icon(Icons.refresh),
-                                label: const Text('Bu Kategoride Pratik Yap'),
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.white.withOpacity(
-                                    0.2,
-                                  ),
-                                  foregroundColor: Colors.white,
-                                  padding: const EdgeInsets.symmetric(
-                                    vertical: 12,
-                                  ),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
+
                         ],
                       ),
                     ),
@@ -379,23 +462,7 @@ class _CategoryMistakesScreenState extends State<CategoryMistakesScreen> {
     );
   }
 
-  void _startPracticeQuiz() {
-    // Kategoriye ait quizi başlat
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder:
-            (context) => QuizScreen(
-              categoryName: widget.category,
-              questions: widget.questions,
-              isMistakesMode: true,
-            ),
-      ),
-    ).then((_) {
-      // Verileri yenile
-      setState(() {}); // Ekranı yenile
-    });
-  }
+
 
   void _showRemoveQuestionDialog(Question question) {
     showDialog(
@@ -413,72 +480,76 @@ class _CategoryMistakesScreenState extends State<CategoryMistakesScreen> {
             ),
             actions: [
               TextButton(
-                onPressed: () => Navigator.of(context).pop(),
+                onPressed: () => Navigator.pop(context),
                 child: const Text(
                   'İptal',
                   style: TextStyle(color: Colors.white70),
                 ),
               ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+              TextButton(
                 onPressed: () async {
-                  Navigator.of(context).pop();
+                  Navigator.pop(context);
                   await _removeQuestion(question);
                 },
-                child: const Text('Kaldır'),
+                child: const Text(
+                  'Kaldır',
+                  style: TextStyle(color: Colors.red),
+                ),
               ),
             ],
           ),
     );
   }
 
+  // Soruyu eksiklerden kaldır
   Future<void> _removeQuestion(Question question) async {
     setState(() {
       _isLoading = true;
     });
 
     try {
-      // Null kontrol ekleyelim
-      final questionId =
-          question.id == null || question.id!.isEmpty
-              ? 'unknown_id_${DateTime.now().millisecondsSinceEpoch}'
-              : question.id!;
-
-      // Soruyu listeden kaldır
-      final success = await _quizService.removeWrongAnswer(questionId);
-
+      final success = await _quizService.removeMistakeQuestion(question.id ?? '');
+      
       if (success) {
-        SnackBarUtils.showSuccessSnackBar(context, 'Soru başarıyla kaldırıldı');
-
-        // Listeyi güncelle
+        // Soruyu yerel listeden kaldır
         setState(() {
-          widget.questions.removeWhere((q) => q.id == question.id);
-          _isLoading = false;
+          widget.questions.remove(question);
         });
-
-        // Eğer tüm sorular kaldırıldıysa geri dön
-        if (widget.questions.isEmpty) {
-          Navigator.pop(
-            context,
-          ); // Kategoriye ait tüm sorular silindi, geri dön
+        
+        // Başarı mesajı göster
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: const Text('Soru eksiklerden kaldırıldı'),
+              backgroundColor: Colors.green.shade600,
+              duration: const Duration(seconds: 2),
+            ),
+          );
         }
       } else {
-        SnackBarUtils.showErrorSnackBar(
-          context,
-          'Soru kaldırılırken bir hata oluştu',
-        );
-
-        setState(() {
-          _isLoading = false;
-        });
+        // Hata mesajı göster
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: const Text('Soru kaldırılırken hata oluştu'),
+              backgroundColor: Colors.red.shade600,
+              duration: const Duration(seconds: 2),
+            ),
+          );
+        }
       }
     } catch (e) {
       print('Soru kaldırma hatası: $e');
-      SnackBarUtils.showErrorSnackBar(
-        context,
-        'Soru kaldırılırken bir hata oluştu',
-      );
-
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: const Text('Soru kaldırılırken hata oluştu'),
+            backgroundColor: Colors.red.shade600,
+            duration: const Duration(seconds: 2),
+          ),
+        );
+      }
+    } finally {
       setState(() {
         _isLoading = false;
       });
@@ -524,17 +595,5 @@ class _CategoryMistakesScreenState extends State<CategoryMistakesScreen> {
     }
   }
 
-  void _showPersonalizedQuizGenerator() {
-    showModalBottomSheet(
-      context: context,
-      backgroundColor: Colors.transparent,
-      isScrollControlled: true,
-      builder:
-          (context) => PersonalizedQuizGeneratorSheet(
-            category: widget.category,
-            categoryColor: _getCategoryColor(widget.category),
-            questions: widget.questions,
-          ),
-    );
-  }
+
 }

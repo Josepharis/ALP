@@ -820,6 +820,697 @@ final List<Question> adrenergicDrugsQuestions = [
     correctAnswerIndex: 0,
     difficulty: 3,
     explanation:
-        "Glukagon, β reseptörlerinden bağımsız cAMP artışı sağlayarak kardiyac inotropiyi düzeltir.",
+        "Glukagon, β reseptörlerinden bağımsız cAMP artışı sağlayarak kardiyak inotropiyi düzeltir.",
+  ),
+
+  // Eksik sorular ekleniyor
+  Question(
+    question: "Aşağıdakilerden hangisi alfa-1 reseptör antagonisti olarak kullanılır?",
+    options: [
+      "Propranolol",
+      "Fenilefrin",
+      "Fentolamin",
+      "Atenolol",
+      "Metoprolol",
+    ],
+    correctAnswerIndex: 2,
+    difficulty: 2,
+    explanation:
+        "Fentolamin, alfa-1 ve alfa-2 reseptörleri bloklar → vazodilatasyon sağlar → feokromositoma krizinde kullanılır.",
+  ),
+
+  Question(
+    question: "Aşağıdaki beta blokerlerden hangisi seçici beta-1 antagonistidir?",
+    options: [
+      "Propranolol",
+      "Labetalol",
+      "Carvedilol",
+      "Atenolol",
+      "Timolol",
+    ],
+    correctAnswerIndex: 3,
+    difficulty: 2,
+    explanation:
+        "Atenolol, beta-1 selektif antagonistik etki gösterir → kalp üzerinde etkili, bronşlara daha az etkilidir → KOAH'ta daha güvenlidir.",
+  ),
+
+  Question(
+    question: "Beta bloker kullanan bir hastada bronkospazm gelişti. En olası neden nedir?",
+    options: [
+      "Aşırı doz",
+      "Beta-1 reseptör blokajı",
+      "Beta-2 reseptör blokajı",
+      "Parasempatik uyarı",
+      "Alfa-1 aktivasyonu",
+    ],
+    correctAnswerIndex: 2,
+    difficulty: 2,
+    explanation:
+        "Beta-2 reseptörler bronş düz kaslarında bulunur → blokajı bronkospazma neden olabilir → özellikle propranolol gibi non-selektif ajanlarda görülür.",
+  ),
+
+  Question(
+    question: "Aşağıdaki durumların hangisinde adrenalin kullanımı kontrendikedir veya dikkatli olunmalıdır?",
+    options: [
+      "Anaflaksi",
+      "Kardiyojenik şok",
+      "Glokom",
+      "Asistol",
+      "Lokal anestezikle birlikte kullanımı",
+    ],
+    correctAnswerIndex: 2,
+    difficulty: 2,
+    explanation:
+        "Adrenalin, göz içi basıncını artırabilir → glokomda kontrendikedir veya dikkatli kullanılmalıdır.",
+  ),
+
+  Question(
+    question: "Aşağıdaki ajanlardan hangisi alfa ve beta antagonistidir?",
+    options: [
+      "Atenolol",
+      "Propranolol",
+      "Labetalol",
+      "Esmolol",
+      "Timolol",
+    ],
+    correctAnswerIndex: 2,
+    difficulty: 2,
+    explanation:
+        "Labetalol, alfa-1 + beta-1 + beta-2 reseptörleri antagonize eder → hipertansif krizlerde ve preeklampside tercih edilir.",
+  ),
+
+  Question(
+    question: "Aşağıdaki ajanlardan hangisi yalnızca dopaminerjik reseptörlere etki eder?",
+    options: [
+      "Dopamin",
+      "Dobutamin",
+      "Fenoldopam",
+      "Adrenalin",
+      "Noradrenalin",
+    ],
+    correctAnswerIndex: 2,
+    difficulty: 3,
+    explanation:
+        "Fenoldopam, D₁ dopamin reseptör agonistidir → renal vazodilatasyon yapar, antihipertansif olarak kullanılır.",
+  ),
+
+  Question(
+    question: "Aşağıdaki ilaçlardan hangisi beta-1 selektif bir ajandır?",
+    options: [
+      "Propranolol",
+      "Labetalol",
+      "Metoprolol",
+      "Nadolol",
+      "Carvedilol",
+    ],
+    correctAnswerIndex: 2,
+    difficulty: 2,
+    explanation:
+        "Metoprolol, kalp üzerindeki beta-1 reseptörleri selektif olarak inhibe eder → kardiyoselektif beta bloker olarak bilinir.",
+  ),
+
+  Question(
+    question: "Beta bloker kullanımında hipoglisemi maskelenebilir. Bunun nedeni nedir?",
+    options: [
+      "Glukoz metabolizmasını artırması",
+      "Beta-2 reseptör blokajı ile tremorun azalması",
+      "Parasempatik aktiviteyi baskılaması",
+      "Kortizol salınımını artırması",
+      "Adrenalin salınımını uyarması",
+    ],
+    correctAnswerIndex: 1,
+    difficulty: 3,
+    explanation:
+        "Hipogliseminin adrenerjik semptomları (ör. tremor, taşikardi) beta-2 blokajı ile maskelenebilir → özellikle diyabetiklerde önemli.",
+  ),
+
+  Question(
+    question: "Beta-1 blokajı ile aşağıdaki hangi klinik etki görülür?",
+    options: [
+      "Kan basıncında artış",
+      "İnme hacminde artış",
+      "Renin salınımında azalma",
+      "Bronkodilatasyon",
+      "Kalp hızında artış",
+    ],
+    correctAnswerIndex: 2,
+    difficulty: 2,
+    explanation:
+        "Beta-1 blokajı, renin salınımını baskılar → bu da kan basıncının düşmesine katkıda bulunur.",
+  ),
+
+  Question(
+    question: "Aşağıdakilerden hangisi alfa-2 agonisti olarak santral etkili bir antihipertansiftir?",
+    options: [
+      "Deksmedetomidin",
+      "Fenilefrin",
+      "Terbutalin",
+      "Dobutamin",
+      "Fenoldopam",
+    ],
+    correctAnswerIndex: 0,
+    difficulty: 2,
+    explanation:
+        "Deksmedetomidin, alfa-2 agonisttir → santral sempatik tonusu baskılayarak sedasyon ve antihipertansif etki oluşturur.",
+  ),
+
+  Question(
+    question: "Beta blokerlerin antiaritmik etkisinin temel mekanizması nedir?",
+    options: [
+      "Na⁺ kanal blokajı",
+      "K⁺ kanal açılımı",
+      "AV nodal iletimi yavaşlatma",
+      "Alfa-1 antagonizması",
+      "QT süresini uzatma",
+    ],
+    correctAnswerIndex: 2,
+    difficulty: 2,
+    explanation:
+        "Beta blokerler, AV nodda iletimi yavaşlatarak supraventriküler taşiaritmileri kontrol altında tutar.",
+  ),
+
+  Question(
+    question: "Beta-1 selektif blokerlerden biri olan bisoprolol'ün avantajı nedir?",
+    options: [
+      "Hipoglisemi riskini artırması",
+      "Solunum sistemi yan etkisinin az olması",
+      "Daha fazla vazodilatör etki",
+      "Sempatik aktiviteyi artırması",
+      "Renin salınımını artırması",
+    ],
+    correctAnswerIndex: 1,
+    difficulty: 2,
+    explanation:
+        "Bisoprolol, beta-1 selektif olduğu için bronşlarda beta-2'ye daha az etki eder → KOAH gibi durumlarda daha güvenlidir.",
+  ),
+
+  Question(
+    question: "Adrenalin kullanımı sırasında sistolik basınç artarken diyastolik basınç düşüyorsa, bu durum hangi reseptör etkisine bağlıdır?",
+    options: [
+      "Alfa-1",
+      "Beta-1",
+      "Beta-2",
+      "Dopaminerjik",
+      "Alfa-2",
+    ],
+    correctAnswerIndex: 2,
+    difficulty: 2,
+    explanation:
+        "Beta-2 aktivasyonu, vazodilatasyon yapar → periferik direnç azalır → diyastolik basınç düşebilir.",
+  ),
+
+  Question(
+    question: "Beta blokerlerin migren profilaksisinde etkili olmasının nedeni nedir?",
+    options: [
+      "Vazokonstriksiyon sağlaması",
+      "Antikolinerjik etkileri",
+      "NMDA blokajı",
+      "Sempatik hiperaktiviteyi azaltması",
+      "Prostaglandin inhibisyonu",
+    ],
+    correctAnswerIndex: 3,
+    difficulty: 2,
+    explanation:
+        "Migrenin bazı formlarında sempatik hiperaktivite rol oynar → beta blokerler, bu yolu baskılayarak profilaktik etki gösterir.",
+  ),
+
+  Question(
+    question: "Aşağıdaki ilaçlardan hangisi uzun etkili non-selektif beta blokerdir?",
+    options: [
+      "Esmolol",
+      "Atenolol",
+      "Propranolol",
+      "Nadolol",
+      "Labetalol",
+    ],
+    correctAnswerIndex: 3,
+    difficulty: 2,
+    explanation:
+        "Nadolol, hem beta-1 hem beta-2 reseptörlerini uzun süreli bloklar → etkisi günlerce sürebilir.",
+  ),
+
+  Question(
+    question: "Labetalol'ün gebelikte tercih edilme nedeni nedir?",
+    options: [
+      "Sadece beta-1 blokajı yapması",
+      "Hem alfa hem beta blokajı yapması",
+      "Plasentadan geçmemesi",
+      "Tokolitik etki göstermesi",
+      "Kardiyotoksik olmaması",
+    ],
+    correctAnswerIndex: 1,
+    difficulty: 2,
+    explanation:
+        "Labetalol, alfa-1 ve beta reseptörlerini birlikte bloklar → gebelikteki hipertansiyonlarda ilk tercih edilen ajanlardandır.",
+  ),
+
+  Question(
+    question: "Beta blokerlerin en ciddi yan etkilerinden biri aşağıdakilerden hangisidir?",
+    options: [
+      "Bradikardi",
+      "Glukoz toleransında bozulma",
+      "Pulmoner ödem",
+      "AV Blok",
+      "Tremor",
+    ],
+    correctAnswerIndex: 3,
+    difficulty: 2,
+    explanation:
+        "AV blok (kalp bloğu), yüksek dozda veya hassas hastalarda beta blokerlerin ciddi yan etkisidir → EKG takibi önemlidir.",
+  ),
+
+  Question(
+    question: "Dopamin, renal perfüzyonu artırmak için hangi doz aralığında kullanılır?",
+    options: [
+      "0.5–2 mcg/kg/dk",
+      "2–5 mcg/kg/dk",
+      "5–10 mcg/kg/dk",
+      "10–20 mcg/kg/dk",
+      ">20 mcg/kg/dk",
+    ],
+    correctAnswerIndex: 0,
+    difficulty: 2,
+    explanation:
+        "Düşük doz dopamin (0.5–2 mcg/kg/dk), D₁ dopamin reseptörlerini uyararak renal vazodilatasyon sağlar → böbrek perfüzyonu artar.",
+  ),
+
+  Question(
+    question: "Beta-2 agonistlerin kaslar üzerindeki etkilerinden biri aşağıdakilerden hangisidir?",
+    options: [
+      "Kas tonusunu azaltma",
+      "Titreşim (tremor) oluşturma",
+      "Hipotoni yapma",
+      "Hyporefleksiye yol açma",
+      "Rigor mortis oluşturma",
+    ],
+    correctAnswerIndex: 1,
+    difficulty: 2,
+    explanation:
+        "Beta-2 agonistler, iskelet kaslarında tremora (ince kas titremesi) neden olabilir → özellikle salbutamol gibi ajanlarla görülür.",
+  ),
+
+  Question(
+    question: "Fenoldopam ile ilgili aşağıdaki ifadelerden hangisi doğrudur?",
+    options: [
+      "Beta-1 selektif antagonistik etkisi vardır",
+      "Sadece oral kullanılır",
+      "Akut hipertansif krizlerde kullanılabilir",
+      "Bronkodilatör etki gösterir",
+      "Kardiyak output'u artırır",
+    ],
+    correctAnswerIndex: 2,
+    difficulty: 2,
+    explanation:
+        "Fenoldopam, D₁ agonisti ve vazodilatördür → akut hipertansif acillerde IV yolla kullanılabilir.",
+  ),
+
+  Question(
+    question: "Beta-2 agonist kullanımında en sık görülen EKG bulgusu hangisidir?",
+    options: [
+      "ST elevasyonu",
+      "PR uzaması",
+      "QT uzaması",
+      "T dalgası düzleşmesi",
+      "U dalgası belirginliği",
+    ],
+    correctAnswerIndex: 4,
+    difficulty: 2,
+    explanation:
+        "Hipokalemi yapan beta-2 agonistler EKG'de U dalgası belirginliği, T dalgası düzleşmesi gibi bulgular yapabilir.",
+  ),
+
+  Question(
+    question: "Beta-1 agonist ajan aşağıdakilerden hangisidir?",
+    options: [
+      "Fenilefrin",
+      "Dopamin (düşük doz)",
+      "Dobutamin",
+      "Terbutalin",
+      "Fenoldopam",
+    ],
+    correctAnswerIndex: 2,
+    difficulty: 2,
+    explanation:
+        "Dobutamin, kardiyoselektif beta-1 agonisttir → kalp debisini artırmak için kullanılır.",
+  ),
+
+  Question(
+    question: "Aşağıdakilerden hangisi beta blokerler için kontrendikasyon değildir?",
+    options: [
+      "Bradikardi",
+      "AV blok",
+      "Astım",
+      "Hipotansiyon",
+      "Hipertiroidi",
+    ],
+    correctAnswerIndex: 4,
+    difficulty: 2,
+    explanation:
+        "Hipertiroidide beta blokerler (özellikle propranolol) semptomatik tedavide kullanılır → kontrendike değildir, hatta faydalıdır.",
+  ),
+
+  Question(
+    question: "Aşağıdaki durumların hangisinde beta-2 agonistler tercih edilmez?",
+    options: [
+      "Astım",
+      "Prematür doğum tehdidi",
+      "Akut bronkospazm",
+      "Hiperkalemi",
+      "Hipertansif kriz",
+    ],
+    correctAnswerIndex: 4,
+    difficulty: 2,
+    explanation:
+        "Beta-2 agonistler, sistemik vazodilatasyon ve taşikardi yaparak hipertansif krizi kötüleştirebilir, bu nedenle tercih edilmez.",
+  ),
+
+  Question(
+    question: "Aşağıdakilerden hangisi non-selektif alfa antagonisti olarak bilinir?",
+    options: [
+      "Tamsulosin",
+      "Fentolamin",
+      "Metoprolol",
+      "Doksazosin",
+      "Esmolol",
+    ],
+    correctAnswerIndex: 1,
+    difficulty: 2,
+    explanation:
+        "Fentolamin, alfa-1 ve alfa-2 reseptörlerini bloke eder → feokromositoma ve vazospazm tedavisinde kullanılır.",
+  ),
+
+  Question(
+    question: "Beta blokerlerin kalp dışı etkilerinden biri aşağıdakilerden hangisidir?",
+    options: [
+      "Bronkodilatasyon",
+      "Tirotoksik kriz baskılama",
+      "Kortizol salınımını artırma",
+      "Hiponatremi",
+      "İnsülin duyarlılığını artırma",
+    ],
+    correctAnswerIndex: 1,
+    difficulty: 2,
+    explanation:
+        "Propranolol, hipertiroidide periferik T4 → T3 dönüşümünü baskılar → tirotoksik kriz tedavisinde kullanılır.",
+  ),
+
+  Question(
+    question: "Beta-2 agonistlerin kas gevşetici etkisi en çok hangi kas tipi üzerinde etkilidir?",
+    options: [
+      "Kalp kası",
+      "Düz kas",
+      "İskelet kası",
+      "İntrakardiak kas",
+      "Papiller kas",
+    ],
+    correctAnswerIndex: 1,
+    difficulty: 2,
+    explanation:
+        "Beta-2 reseptörleri, bronş, uterus, damar gibi düz kaslarda gevşeme yapar → bu etkileriyle bronkodilatasyon ve tokolitik etki sağlar.",
+  ),
+
+  Question(
+    question: "Epinefrinin yüksek dozda (>0.1 mcg/kg/dk) baskın etkisi nedir?",
+    options: [
+      "α1-adrenerjik vazokonstriksiyon",
+      "β2-adrenerjik bronkodilatasyon",
+      "Dopaminerjik renal vazodilatasyon",
+      "Histamin salınımı",
+      "Parasempatik aktivasyon",
+    ],
+    correctAnswerIndex: 0,
+    difficulty: 2,
+    explanation:
+        "Doz arttıkça α etkileri baskınlaşır; düşük dozda β etkileri ön plandadır.",
+  ),
+
+  Question(
+    question: "Hangisi norepinefrinin temel klinik kullanım amacıdır?",
+    options: [
+      "Şiddetli hipotansiyon tedavisi",
+      "Bradikardi tedavisi",
+      "Astım atağı tedavisi",
+      "Anafilakside ilk seçenek",
+      "Hipertansiyon tedavisi",
+    ],
+    correctAnswerIndex: 0,
+    difficulty: 2,
+    explanation:
+        "Güçlü α agonisti olarak vazopresör etki gösterir; β1 etkisi ile kardiyak outputu artırır.",
+  ),
+
+  Question(
+    question: "Fenilefrinin özellikle tercih edildiği durum hangisidir?",
+    options: [
+      "Spinal anesteziye bağlı hipotansiyon",
+      "Kalp yetmezliği",
+      "Bronşiyal astım",
+      "Renal arter stenozu",
+      "Hipertiroidi",
+    ],
+    correctAnswerIndex: 0,
+    difficulty: 2,
+    explanation:
+        "Saf α1 agonistidir; refleks bradikardi yapabilir ancak kardiyak outputu etkilemez.",
+  ),
+
+  Question(
+    question: "Hangisi karvedilolün özelliğidir?",
+    options: [
+      "Non-selektif β+α1 blokaj yapması",
+      "Saf β1 selektif olması",
+      "İntrinsik sempatomimetik aktivite (ISA) göstermesi",
+      "Membran stabilize edici etki",
+      "Sadece parenteral kullanılması",
+    ],
+    correctAnswerIndex: 0,
+    difficulty: 2,
+    explanation:
+        "Kalp yetmezliğinde kullanılır; ek α1 blokajı ile vazodilatasyon yapar.",
+  ),
+
+  Question(
+    question: "Hangisi epinefrinin anafilaksi tedavisindeki rolünü açıklar?",
+    options: [
+      "α1 ile vazokonstriksiyon + β2 ile bronkodilatasyon",
+      "Sadece histamin salınımını inhibe etme",
+      "Kardiyak outputu azaltma",
+      "SSS depresyonu yapma",
+      "Koagülasyonu artırma",
+    ],
+    correctAnswerIndex: 0,
+    difficulty: 2,
+    explanation:
+        "Vasküler kaçağı ve bronkospazmı aynı anda düzeltir; IM 0.3-0.5 mg standart dozdur.",
+  ),
+
+  Question(
+    question: "Hangisi klonidinin mekanizmasını tanımlar?",
+    options: [
+      "Santral α2 agonizmi ile sempatik aktiviteyi baskılama",
+      "Periferik α1 blokajı",
+      "β reseptör downregülasyonu",
+      "Dopamin salınımını artırma",
+      "Asetilkolin esteraz inhibisyonu",
+    ],
+    correctAnswerIndex: 0,
+    difficulty: 2,
+    explanation:
+        "Hipertansiyon, opioid yoksunluk ve premedikasyonda kullanılır; sedasyon yapar.",
+  ),
+
+  Question(
+    question: "Hangisi adrenerjik agonistlerin yan etkilerinden değildir?",
+    options: [
+      "Hipoglisemi",
+      "Taşikardi",
+      "Miyokard iskemisi",
+      "Anksiyete",
+      "Tremor",
+    ],
+    correctAnswerIndex: 0,
+    difficulty: 2,
+    explanation:
+        "Adrenerjik agonistler glikojenoliz yaparak hiperglisemiye neden olur.",
+  ),
+
+  Question(
+    question: "Hangisi β blokerlerin oftalmik kullanım endikasyonudur?",
+    options: [
+      "Glokom tedavisi",
+      "Retinal dekolman",
+      "Katarakt",
+      "Konjonktivit",
+      "Üveit",
+    ],
+    correctAnswerIndex: 0,
+    difficulty: 2,
+    explanation:
+        "Timolol gibi topikal β blokerler göz içi basıncını azaltır.",
+  ),
+
+  Question(
+    question: "Hangisi esmololün özelliğidir?",
+    options: [
+      "Kısa etkili kardiyoselektif β1 bloker",
+      "Güçlü α blokaj etkisi",
+      "Oral kullanım",
+      "İntrinsik sempatomimetik aktivite",
+      "Bronkodilatör etki",
+    ],
+    correctAnswerIndex: 0,
+    difficulty: 2,
+    explanation:
+        "Yarı ömrü 9 dakikadır; intraoperatif taşikardi tedavisinde idealdir.",
+  ),
+
+  Question(
+    question: "Hangisi adrenerjik agonistlerin renal etkisidir?",
+    options: [
+      "Renin salınımını artırma",
+      "Diürezi artırma",
+      "ADH salınımını baskılama",
+      "Renal arter vazokonstriksiyonu",
+      "Proteinüri yapma",
+    ],
+    correctAnswerIndex: 0,
+    difficulty: 2,
+    explanation:
+        "β1 agonizmi juxtaglomerüler hücrelerden renin salınımını uyarır.",
+  ),
+
+  Question(
+    question: "Hangisi fenoksibenzaminin özelliğidir?",
+    options: [
+      "İrreversibl α blokaj yapması",
+      "β blokaj etkisi",
+      "Kısa etkili olması",
+      "Kardiyak outputu artırması",
+      "Bronkodilatasyon yapması",
+    ],
+    correctAnswerIndex: 0,
+    difficulty: 2,
+    explanation:
+        "Feokromositoma cerrahisi öncesi kullanılır; 24-48 saat süren etkisi vardır.",
+  ),
+
+  Question(
+    question: "Hangisi β blokerlerin kardiyoprotektif etki mekanizmasıdır?",
+    options: [
+      "Miyokard O₂ tüketimini azaltma",
+      "Koroner vazodilatasyon",
+      "Platelet inhibisyonu",
+      "Antiinflamatuar etki",
+      "Hipertrofiyi artırma",
+    ],
+    correctAnswerIndex: 0,
+    difficulty: 2,
+    explanation:
+        "Kalp hızı ve kontraktiliteyi düşürerek iskemiyi azaltır.",
+  ),
+
+  Question(
+    question: "Hangisi prazosinin özelliğidir?",
+    options: [
+      "Selektif α1 bloker",
+      "Non-selektif α bloker",
+      "β blokaj etkisi",
+      "ISA göstermesi",
+      "Renin salınımını artırması",
+    ],
+    correctAnswerIndex: 0,
+    difficulty: 2,
+    explanation:
+        "Hipertansiyon ve benign prostat hipertrofisinde kullanılır; 'ilk doz etkisi' yapar.",
+  ),
+
+  Question(
+    question: "Hangisi adrenerjik agonistlerin metabolik etkisidir?",
+    options: [
+      "Hiperglisemi",
+      "Hipokalemi",
+      "Lipoliz inhibisyonu",
+      "Protein sentezini artırma",
+      "Ürik asit atılımını azaltma",
+    ],
+    correctAnswerIndex: 0,
+    difficulty: 2,
+    explanation:
+        "β2 agonizmi glikojenoliz ve glukoneogenezi artırır; insülin salınımını inhibe eder.",
+  ),
+
+  Question(
+    question: "Hangisi β blokerlerin glokom tedavisindeki etki mekanizmasıdır?",
+    options: [
+      "Göz içi sıvı üretimini azaltma",
+      "Siliyer kas kontraksiyonu",
+      "Pupiller dilatasyon",
+      "Göz yaşı salınımını artırma",
+      "Korneal ödemi azaltma",
+    ],
+    correctAnswerIndex: 0,
+    difficulty: 2,
+    explanation:
+        "Timolol, siliyer cisimde β reseptörleri bloke ederek akuöz humor üretimini azaltır.",
+  ),
+
+  Question(
+    question: "Hangisi adrenerjik agonistlerin hematolojik etkisidir?",
+    options: [
+      "Platelet agregasyonunu artırma",
+      "Koagülasyon zamanını uzatma",
+      "Fibrinolizi artırma",
+      "Lökopeni",
+      "Anemi",
+    ],
+    correctAnswerIndex: 0,
+    difficulty: 2,
+    explanation:
+        "α2 agonizmi platelet agregasyonunu artırır; epinefrin hemostazı güçlendirir.",
+  ),
+
+  Question(
+    question: "Hangisi metildopanın özelliğidir?",
+    options: [
+      "Santral α2 agonisti",
+      "Periferik α1 bloker",
+      "β blokaj etkisi",
+      "Dopamin agonisti",
+      "ACE inhibitörü",
+    ],
+    correctAnswerIndex: 0,
+    difficulty: 2,
+    explanation:
+        "Gebelikte hipertansiyon tedavisinde güvenle kullanılır; hemolitik anemi yapabilir.",
+  ),
+
+  Question(
+    question: "Hangisi adrenerjik agonistlerin gastrointestinal etkisidir?",
+    options: [
+      "Motiliteyi azaltma",
+      "Asit sekresyonunu artırma",
+      "Safra kesesi kontraksiyonu",
+      "Pankreatik enzim salınımı",
+      "İshal",
+    ],
+    correctAnswerIndex: 0,
+    difficulty: 2,
+    explanation:
+        "α2 agonizmi barsak motilitesini azaltır; klonidin ile konstipasyon görülebilir.",
+  ),
+
+  Question(
+    question: "Hangisi β blokerlerin intoksikasyonunda kullanılan antidottur?",
+    options: [
+      "Glukagon",
+      "Fizostigmin",
+      "Nalokson",
+      "Flumazenil",
+      "Kalsiyum glukonat",
+    ],
+    correctAnswerIndex: 0,
+    difficulty: 2,
+    explanation:
+        "β reseptörlerinden bağımsız cAMP artışı sağlayarak kardiyak inotropiyi düzeltir.",
   ),
 ];

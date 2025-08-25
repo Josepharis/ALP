@@ -835,4 +835,389 @@ final List<Question> intravenousAnestheticsQuestions = [
     category: "intravenöz anestezikler",
     difficulty: 3,
   ),
+
+  // Eksik sorular ekleniyor
+  Question(
+    question: "Aşağıdaki intravenöz anesteziklerden hangisinin etki başlangıcı en hızlıdır?",
+    options: [
+      "Propofol",
+      "Tiyopental",
+      "Etomidat",
+      "Ketamin",
+      "Midazolam",
+    ],
+    correctAnswerIndex: 1,
+    explanation:
+        "Tiyopental, bir beyin dolaşım zamanında (10-15 saniye) etki başlatır. Yüksek lipofilik özelliği sayesinde hızla SSS'ne geçer.",
+    category: "intravenöz anestezikler",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Benzodiazepinlerin antagonisti olarak kullanılan ajan hangisidir?",
+    options: [
+      "Nalokson",
+      "Flumazenil",
+      "Neostigmin",
+      "Sugammadeks",
+      "Atropin",
+    ],
+    correctAnswerIndex: 1,
+    explanation:
+        "Flumazenil, GABA-A reseptörlerinde kompetitif antagonizm yaparak benzodiazepin etkilerini geri çevirir.",
+    category: "intravenöz anestezikler",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Hangi IV anestezik intraoperatif hatırlamayı (awareness) en çok önler?",
+    options: [
+      "Propofol",
+      "Tiyopental",
+      "Etomidat",
+      "Ketamin",
+      "Dexmedetomidin",
+    ],
+    correctAnswerIndex: 0,
+    explanation:
+        "Propofol, BIS (Bispectral Index) değerini güvenilir şekilde düşürerek intraoperatif farkındalık riskini azaltır.",
+    category: "intravenöz anestezikler",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "'Beyin koruyucu' etkisi en belirgin olan IV anestezik hangisidir?",
+    options: [
+      "Propofol",
+      "Tiyopental",
+      "Etomidat",
+      "Ketamin",
+      "Midazolam",
+    ],
+    correctAnswerIndex: 1,
+    explanation:
+        "Tiyopental, CMRO2'yi %50-60 oranında azaltarak nöroprotektif etki gösterir.",
+    category: "intravenöz anestezikler",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Hangisi dexmedetomidinin özelliklerinden biri değildir?",
+    options: [
+      "Alfa-2 adrenerjik agonist olması",
+      "Solunum depresyonu yapmaması",
+      "Analjezik etki göstermesi",
+      "Hipotansiyon yapması",
+      "Anksiyolitik etki",
+    ],
+    correctAnswerIndex: 3,
+    explanation:
+        "Dexmedetomidin, bradikardi yapabilir ancak hipotansiyon beklenmez (alfa-2 selektivitesi nedeniyle).",
+    category: "intravenöz anestezikler",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Aşağıdakilerden hangisi IV anesteziklerin eliminasyon yollarından biri değildir?",
+    options: [
+      "Karaciğer metabolizması",
+      "Böbreklerden atılım",
+      "Ekstrahepatik ester hidrolizi",
+      "Akciğerlerden ekshalasyon",
+      "Plazma esterazları",
+    ],
+    correctAnswerIndex: 3,
+    explanation:
+        "IV anestezikler akciğerlerden atılmaz. Remifentanil gibi bazıları plazma esterazlarıyla metabolize olur.",
+    category: "intravenöz anestezikler",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Hangisi remifentanilin özelliklerinden biri değildir?",
+    options: [
+      "Ultra-kısa etki süresi",
+      "Esterazlarla metabolizma",
+      "Kontekst-duyarsız yarı ömür",
+      "Postoperatif analjezi sağlaması",
+      "Hemodinamik stabilite",
+    ],
+    correctAnswerIndex: 3,
+    explanation:
+        "Remifentanil, hızlı metabolizması nedeniyle postop analjezi sağlamaz. Ek analjezi gereksinimi doğar.",
+    category: "intravenöz anestezikler",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Hangi intravenöz anestezik en belirgin kardiyovasküler depresyon yapar?",
+    options: [
+      "Ketamin",
+      "Propofol",
+      "Etomidat",
+      "Midazolam",
+      "Deksmedetomidin",
+    ],
+    correctAnswerIndex: 1,
+    explanation:
+        "Propofol, sistemik vasküler direnç ve kardiyak outputta belirgin düşüşe neden olarak en fazla kardiyovasküler depresyon yapan ajandır.",
+    category: "intravenöz anestezikler",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Aşağıdakilerden hangisi propofol infüzyon sendromunun özelliklerinden değildir?",
+    options: [
+      "Metabolik asidoz",
+      "Rabdomiyoliz",
+      "Hiperkalemi",
+      "Hepatik yetmezlik",
+      "Kardiyak disritmi",
+    ],
+    correctAnswerIndex: 3,
+    explanation:
+        "Propofol infüzyon sendromunda hepatik yetmezlik değil, hepatomegali görülebilir. Diğer bulgular tipiktir.",
+    category: "intravenöz anestezikler",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Hangi intravenöz anestezik bronkodilatasyon yapar?",
+    options: [
+      "Propofol",
+      "Tiyopental",
+      "Ketamin",
+      "Etomidat",
+      "Midazolam",
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        "Ketamin, sempatik sinir sistemi aktivasyonu yoluyla bronkodilatasyon yapar.",
+    category: "intravenöz anestezikler",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Hangi intravenöz anestezik en belirgin intrakraniyal basınç düşürücü etkiye sahiptir?",
+    options: [
+      "Ketamin",
+      "Propofol",
+      "Etomidat",
+      "Tiyopental",
+      "Midazolam",
+    ],
+    correctAnswerIndex: 3,
+    explanation:
+        "Tiyopental, beyin metabolik hızını en fazla azaltarak intrakraniyal basıncı belirgin düşürür.",
+    category: "intravenöz anestezikler",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Aşağıdaki ilaçlardan hangisi alfa-2 adrenerjik agonisttir?",
+    options: [
+      "Propofol",
+      "Ketamin",
+      "Etomidat",
+      "Deksmedetomidin",
+      "Midazolam",
+    ],
+    correctAnswerIndex: 3,
+    explanation:
+        "Deksmedetomidin selektif alfa-2 adrenerjik agonisttir.",
+    category: "intravenöz anestezikler",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Hangi intravenöz anestezik en düşük histamin salınımına neden olur?",
+    options: [
+      "Morfin",
+      "Tiyopental",
+      "Propofol",
+      "Ketamin",
+      "Etomidat",
+    ],
+    correctAnswerIndex: 4,
+    explanation:
+        "Etomidat, histamin salınımına en az neden olan ajandır.",
+    category: "intravenöz anestezikler",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Hangi intravenöz anestezik en fazla enjeksiyon ağrısı yapar?",
+    options: [
+      "Propofol",
+      "Tiyopental",
+      "Etomidat",
+      "Ketamin",
+      "Midazolam",
+    ],
+    correctAnswerIndex: 0,
+    explanation:
+        "Propofol, en fazla enjeksiyon ağrısı yapan ajandır.",
+    category: "intravenöz anestezikler",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Hangi intravenöz anestezik en fazla bulantı-kusmaya neden olur?",
+    options: [
+      "Propofol",
+      "Tiyopental",
+      "Etomidat",
+      "Ketamin",
+      "Midazolam",
+    ],
+    correctAnswerIndex: 3,
+    explanation:
+        "Ketamin, postoperatif bulantı-kusma insidansını artırır.",
+    category: "intravenöz anestezikler",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Aşağıdakilerden hangisi tiyopentalin farmakokinetik özelliklerinden değildir?",
+    options: [
+      "Yüksek protein bağlanma",
+      "Hızlı beyin penetrasyonu",
+      "Yağ dokusunda birikim",
+      "Böbrek yoluyla atılım",
+      "Yeniden dağılım",
+    ],
+    correctAnswerIndex: 3,
+    explanation:
+        "Tiyopental karaciğerde metabolize olur, böbrek yoluyla atılmaz.",
+    category: "intravenöz anestezikler",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Hangi intravenöz anestezik en fazla hipotansiyon yapar?",
+    options: [
+      "Propofol",
+      "Tiyopental",
+      "Etomidat",
+      "Ketamin",
+      "Midazolam",
+    ],
+    correctAnswerIndex: 0,
+    explanation:
+        "Propofol, sistemik vasküler direnci en fazla düşürerek belirgin hipotansiyon yapar.",
+    category: "intravenöz anestezikler",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Hangi intravenöz anestezik en az protein bağlanır?",
+    options: [
+      "Propofol",
+      "Tiyopental",
+      "Etomidat",
+      "Ketamin",
+      "Midazolam",
+    ],
+    correctAnswerIndex: 3,
+    explanation:
+        "Ketamin %20-30 protein bağlanma oranıyla en az bağlanan ajandır.",
+    category: "intravenöz anestezikler",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Aşağıdakilerden hangisi propofolün farmakokinetik özelliklerinden değildir?",
+    options: [
+      "Hızlı başlangıç",
+      "Kısa etki süresi",
+      "Karaciğer metabolizması",
+      "Ekstrahepatik eliminasyon",
+      "Aktif metabolit",
+    ],
+    correctAnswerIndex: 4,
+    explanation:
+        "Propofolün aktif metaboliti yoktur.",
+    category: "intravenöz anestezikler",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Hangi intravenöz anestezik en fazla nöroprotektif etkiye sahiptir?",
+    options: [
+      "Propofol",
+      "Tiyopental",
+      "Etomidat",
+      "Ketamin",
+      "Midazolam",
+    ],
+    correctAnswerIndex: 1,
+    explanation:
+        "Tiyopental, beyin metabolik hızını en fazla azaltarak nöroprotektif etki gösterir.",
+    category: "intravenöz anestezikler",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Aşağıdakilerden hangisi benzodiazepin zehirlenmesinde görülmez?",
+    options: [
+      "Solunum depresyonu",
+      "Hipotansiyon",
+      "Hipertansiyon",
+      "Koma",
+      "Konvülziyon",
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        "Benzodiazepin zehirlenmesinde hipertansiyon görülmez, hipotansiyon görülebilir.",
+    category: "intravenöz anestezikler",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Aşağıdakilerden hangisi propofol infüzyon sendromunun (PRIS) bir belirtisi değildir?",
+    options: [
+      "Metabolik asidoz",
+      "Bradikardi",
+      "Rabdomiyoliz",
+      "Hipotermi",
+      "Kalp yetmezliği",
+    ],
+    correctAnswerIndex: 3,
+    explanation:
+        "PRIS; metabolik asidoz, bradikardi, rabdomiyoliz, hiperpotasemi ve kardiyak yetmezlik gibi ciddi tablolarla karakterizedir. Hipotermi tipik değildir.",
+    category: "intravenöz anestezikler",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Etomidat ile anestezi indüksiyonu sırasında en çok karşılaşılan geçici hareket nedir?",
+    options: [
+      "Titreme",
+      "Fascikülasyon",
+      "Nistagmus",
+      "Myoklonus",
+      "Hıçkırık",
+    ],
+    correctAnswerIndex: 3,
+    explanation:
+        "Etomidat sık olarak myoklonik kasılmalara neden olur. Bu durum kısa süreli ve geçicidir.",
+    category: "intravenöz anestezikler",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Midazolam kullanımı sonrası gelişen paradoksal ajitasyon durumunda ne yapılmalıdır?",
+    options: [
+      "Nalokson verilmelidir",
+      "Ketamin ile devam edilir",
+      "Flumazenil uygulanmalıdır",
+      "Propofol başlanır",
+      "Deksametazon verilir",
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        "Benzodiazepin kaynaklı ajitasyon veya aşırı sedasyon gelişirse flumazenil antidot olarak kullanılabilir.",
+    category: "intravenöz anestezikler",
+    difficulty: 2,
+  ),
 ];

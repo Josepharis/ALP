@@ -628,4 +628,629 @@ final List<Question> cholinesteraseInhibitorsQuestions = [
     category: "kolinesteraz inhibitörleri",
     difficulty: 2,
   ),
+
+  // Eksik sorular ekleniyor
+  Question(
+    question: "Aşağıdaki ajanlardan hangisi muskarinik etkiler oluşturmaz?",
+    options: [
+      "Neostigmin",
+      "Edrofonyum",
+      "Fizyostigmin",
+      "Sugammadeks",
+      "Donepezil",
+    ],
+    correctAnswerIndex: 3,
+    explanation:
+        "Sugammadeks, kolinerjik sistemle etkileşmez → muskarinik reseptörleri etkilemediğinden bu tür yan etkiler oluşturmaz.",
+    category: "kolinesteraz inhibitörleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Neostigmin ile birlikte muskarinik etkileri azaltmak için kullanılan ajanlardan hangisi santral etki yapmaz?",
+    options: [
+      "Atropin",
+      "Skopolamin",
+      "Fizyostigmin",
+      "Glikopirolat",
+      "Rivastigmin",
+    ],
+    correctAnswerIndex: 3,
+    explanation:
+        "Glikopirolat, kuaterner amin yapısı sayesinde kan-beyin bariyerini geçemez, santral etki yapmaz.",
+    category: "kolinesteraz inhibitörleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Aşağıdaki kolinesteraz inhibitörlerinden hangisi Alzheimer tedavisinde kullanılır?",
+    options: [
+      "Neostigmin",
+      "Fizyostigmin",
+      "Rivastigmin",
+      "Edrofonyum",
+      "Glikopirolat",
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        "Rivastigmin, merkezi sinir sisteminde asetilkolin düzeyini artırarak Alzheimer hastalığında semptomatik iyileşme sağlayabilir.",
+    category: "kolinesteraz inhibitörleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Sugammadeks'in etki süresi aşağıdakilerden hangisine bağlıdır?",
+    options: [
+      "Plazma protein düzeyi",
+      "Asetilkolin düzeyi",
+      "Böbrek fonksiyonları",
+      "Karaciğer enzim aktivitesi",
+      "Plazma pH'sı",
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        "Sugammadeks, renal yolla atılır → böbrek fonksiyonu bozuk olan hastalarda eliminasyon süresi uzar.",
+    category: "kolinesteraz inhibitörleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Sugammadeks, aşağıdaki ajanlardan hangisinin etkisini en hızlı antagonize eder?",
+    options: [
+      "Cisatrakuryum",
+      "Atrakurium",
+      "Roküronyum",
+      "Süksinilkolin",
+      "Mivakuryum",
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        "Sugammadeks, özellikle roküronyum ile yüksek afiniteyle kompleks oluşturur → en hızlı antagonizmayı bu ajanla sağlar.",
+    category: "kolinesteraz inhibitörleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Kolinesteraz inhibitörlerinin nöromüsküler blokajı geri döndürme etkinliği hangi durumda azalır?",
+    options: [
+      "Hafif rezidüel blok",
+      "Derin blok (TOF = 0)",
+      "TOF oranı > 0.7",
+      "Minimal blok varlığı",
+      "Sugammadeks ile birlikte kullanım",
+    ],
+    correctAnswerIndex: 1,
+    explanation:
+        "Kolinesteraz inhibitörleri, TOF ≤2 olmadıkça etkili değildir → derin blokta beklenmelidir.",
+    category: "kolinesteraz inhibitörleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Sugammadeks kullanımına bağlı ilaç etkileşimi aşağıdaki ilaçlardan hangisiyle görülebilir?",
+    options: [
+      "Propofol",
+      "Deksametazon",
+      "Midazolam",
+      "Tiroksin",
+      "Etinil estradiol",
+    ],
+    correctAnswerIndex: 4,
+    explanation:
+        "Sugammadeks, etinil estradiol gibi steroid yapılı ilaçların etkisini azaltabilir → doğum kontrol etkisi azalabilir.",
+    category: "kolinesteraz inhibitörleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Kolinesteraz inhibitörleri, hangi durumda kontrendike olabilir?",
+    options: [
+      "Alzheimer hastalığı",
+      "Myastenia gravis",
+      "İleus",
+      "Sinüs taşikardisi",
+      "Atriyal fibrilasyon",
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        "Kolinesteraz inhibitörleri, GIS motilitesini artırır → ileus gibi durumlarda kullanımları kontrendikedir.",
+    category: "kolinesteraz inhibitörleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Sugammadeks kullanımından sonra doğum kontrol etkisinin azalması durumunda ne önerilmelidir?",
+    options: [
+      "Acil kontraseptif verilmesi",
+      "Uygulama tekrar edilmesi",
+      "Beta bloker eklenmesi",
+      "Yüksek doz östrojen başlanması",
+      "7 gün boyunca ek korunma yöntemi",
+    ],
+    correctAnswerIndex: 4,
+    explanation:
+        "Sugammadeks, etinil estradiol gibi ajanların plazma düzeyini azaltabilir → 7 gün ek korunma önerilir.",
+    category: "kolinesteraz inhibitörleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Neostigminin maksimum geri döndürme dozu kaç mg/kg'dır?",
+    options: [
+      "0.01",
+      "0.02",
+      "0.05",
+      "0.1",
+      "0.2",
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        "Neostigmin maksimum önerilen dozu: 0.05 mg/kg → fazlası kolinerjik yan etki riskini artırır.",
+    category: "kolinesteraz inhibitörleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Sugammadeksin önerilen standart dozu, TOF 2/4 seviyesindeki blokaj için nedir?",
+    options: [
+      "0.5 mg/kg",
+      "1 mg/kg",
+      "2 mg/kg",
+      "4 mg/kg",
+      "8 mg/kg",
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        "TOF 2/4 düzeyinde nöromüsküler blok için sugammadeks dozu 2 mg/kg olarak önerilir.",
+    category: "kolinesteraz inhibitörleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Aşağıdaki nedenlerden hangisi sugammadeksin klasik antimuskariniklerle birlikte kullanılmamasını açıklar?",
+    options: [
+      "Kolinerjik etki oluşturması",
+      "Muskarinik reseptörleri bloke etmemesi",
+      "Sadece pre-junksiyonel etkili olması",
+      "TOF'la uyumsuz olması",
+      "Atropin ile ilaç etkileşimine girmesi",
+    ],
+    correctAnswerIndex: 1,
+    explanation:
+        "Sugammadeks, muskarinik reseptörleri etkilemediği için, antimuskarinik ilaç eklenmesine gerek yoktur.",
+    category: "kolinesteraz inhibitörleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Sugammadeks, hangi durumda önerilmez ya da dikkatle kullanılmalıdır?",
+    options: [
+      "Renal yetmezlik",
+      "Gebelik",
+      "KOAH",
+      "Hipertansiyon",
+      "Hiponatremi",
+    ],
+    correctAnswerIndex: 0,
+    explanation:
+        "Sugammadeks, renal yolla atılır → böbrek yetmezliği olan hastalarda birikme riski vardır, dikkatli kullanılmalıdır.",
+    category: "kolinesteraz inhibitörleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Sugammadeks kullanımı sonrası anafilaksi şüphesinde ilk yapılması gereken işlem nedir?",
+    options: [
+      "Antihistaminik başlamak",
+      "Kortikosteroid başlamak",
+      "Adrenalin uygulamak",
+      "Beta bloker başlamak",
+      "İnfüzyonu artırmak",
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        "Anafilakside ilk ve en önemli müdahale: adrenalin uygulanmasıdır → yaşam kurtarıcıdır.",
+    category: "kolinesteraz inhibitörleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Neostigminin etki başlangıcı tipik olarak ne kadardır?",
+    options: [
+      "30 saniye",
+      "1–2 dakika",
+      "3–5 dakika",
+      "10–15 dakika",
+      "20–30 dakika",
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        "Neostigmin, IV verildiğinde etkisi 3–5 dakika içinde başlar, 20–30 dakika kadar sürebilir.",
+    category: "kolinesteraz inhibitörleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Aşağıdaki durumların hangisinde kolinesteraz inhibitörü kullanımı mutlak kontrendikedir?",
+    options: [
+      "Parkinson hastalığı",
+      "Glokom",
+      "GIS obstrüksiyonu",
+      "Myastenia gravis",
+      "Alzheimer hastalığı",
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        "GIS obstrüksiyonu varlığında kolinesteraz inhibitörleri motiliteyi artırarak perforasyon riski doğurur → kontrendikedir.",
+    category: "kolinesteraz inhibitörleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Sugammadeks, hangi sinir-kas blokajında en az etkilidir?",
+    options: [
+      "Hafif blok",
+      "TOF 2/4",
+      "Derin blok",
+      "Fazik blok",
+      "Süksinilkolin blokajı",
+    ],
+    correctAnswerIndex: 4,
+    explanation:
+        "Sugammadeks, süksinilkolin gibi depolarizan ajanları etkilemez → sadece steroid yapılı non-depolarizanları bağlar.",
+    category: "kolinesteraz inhibitörleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Aşağıdaki ajanlardan hangisi reversibl kolinesteraz inhibitörüdür?",
+    options: [
+      "Organofosfatlar",
+      "Neostigmin",
+      "Paration",
+      "Malation",
+      "Echothiophate",
+    ],
+    correctAnswerIndex: 1,
+    explanation:
+        "Neostigmin, reversibl (geri dönüşümlü) asetilkolinesteraz inhibitörüdür → organofosfatlar ise irreversibldir.",
+    category: "kolinesteraz inhibitörleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Sugammadeks kullanımı sonrası aşağıdaki durumlardan hangisinin gelişmesi beklenmez?",
+    options: [
+      "Kas gücünde hızlı toparlanma",
+      "Muskarinik etkilerin görülmesi",
+      "Veküronyum antagonizması",
+      "Reversibl ilaç bağlanması",
+      "TOF oranında hızlı düzelme",
+    ],
+    correctAnswerIndex: 1,
+    explanation:
+        "Sugammadeks, muskarinik reseptörlerle etkileşmediği için bu tür yan etkiler oluşturmaz.",
+    category: "kolinesteraz inhibitörleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Kolinesteraz inhibitörleri, aşağıdaki hangi durumla en fazla karıştırılabilir?",
+    options: [
+      "Antipsikotik yan etkileri",
+      "Sempatik kriz",
+      "Kolinerjik kriz",
+      "Beta-blokaj",
+      "Antimuskarinik sendrom",
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        "Fazla kolinesteraz inhibitörü kullanımı, kolinerjik krize neden olur → tedavi ile doz titrasyonu ayarlanmalıdır.",
+    category: "kolinesteraz inhibitörleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Sugammadeks, hangi reseptörle etkileşerek etkisini gösterir?",
+    options: [
+      "Nikotinik reseptör",
+      "Muskarinik reseptör",
+      "Dopamin reseptörü",
+      "Hiçbiri – plazma düzeyinde etki eder",
+      "NMDA reseptörü",
+    ],
+    correctAnswerIndex: 3,
+    explanation:
+        "Sugammadeks, nöromüsküler kavşakta reseptörle değil, ilaç molekülüyle doğrudan bağlanarak plazma düzeyinde etki gösterir.",
+    category: "kolinesteraz inhibitörleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Faz II blok (depolarizan blokun uzaması) geliştiyse aşağıdaki ajanlardan hangisi kontrendikedir?",
+    options: [
+      "Neostigmin",
+      "Atropin",
+      "Sugammadeks",
+      "Midazolam",
+      "Propofol",
+    ],
+    correctAnswerIndex: 0,
+    explanation:
+        "Faz II blokta, neostigmin gibi kolinesteraz inhibitörleri durumu kötüleştirebilir → verilmemelidir.",
+    category: "kolinesteraz inhibitörleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Aşağıdaki bulgulardan hangisi kolinerjik kriz için tipiktir?",
+    options: [
+      "Midriyazis, taşikardi",
+      "Kuru cilt, hipotansiyon",
+      "Bradikardi, bronkospazm, salivasyon",
+      "Kas zayıflığı, refleks artışı",
+      "Sistolik hipertansiyon",
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        "Kolinerjik kriz, muskarinik aşırı aktiviteyle karakterizedir → bradikardi, bronkospazm, GIS semptomları tipiktir.",
+    category: "kolinesteraz inhibitörleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Hangisi antikolinesterazların temel etki mekanizmasını tanımlar?",
+    options: [
+      "Asetilkolin reseptörlerini direkt aktive etme",
+      "Asetilkolin esteraz enzimini kompetitif inhibe etme",
+      "Kolin asetiltransferaz enzimini aktive etme",
+      "Muskarinik reseptörleri bloke etme",
+      "NMDA reseptörlerini inhibe etme",
+    ],
+    correctAnswerIndex: 1,
+    explanation:
+        "Antikolinesterazlar (neostigmin, edrofonyum, piridostigmin), asetilkolin esterazı inhibe ederek sinaptik aralıkta asetilkolin konsantrasyonunu artırır.",
+    category: "kolinesteraz inhibitörleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Hangisi sugammadeks kullanımı için doğru değildir?",
+    options: [
+      "Böbrek yetmezliğinde dikkatli kullanılmalıdır (CrCl <30 mL/dk)",
+      "Histamin salınımına neden olur",
+      "1:1 molar oranda roküronyumla bağlanır",
+      "Anafilaksi riski taşır",
+      "Organ bağımsız eliminasyonu vardır",
+    ],
+    correctAnswerIndex: 1,
+    explanation:
+        "Sugammadeks histamin salınımı yapmaz (neostigminden farkı). Böbrek yoluyla atılır, bu nedenle ciddi böbrek yetmezliğinde dikkatli kullanılmalıdır.",
+    category: "kolinesteraz inhibitörleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Hangisi antikolinesterazların faz II süksinilkolin blokunda kullanımını engelleyen durumdur?",
+    options: [
+      "Hiperkalemi",
+      "Hipermagnezemi",
+      "Faz I blok varlığı",
+      "TOF oranının 0,9'un altında olması",
+      "Malign hipertermi öyküsü",
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        "Faz I blokta (depolarizan blok) antikolinesterazlar bloku derinleştirir. Faz II blokta (non-depolarizan özellikler gösterdiğinde) antagonize edilebilir.",
+    category: "kolinesteraz inhibitörleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Hangisi piridostigminin neostigmine göre avantajıdır?",
+    options: [
+      "Daha güçlü nikotinik etki",
+      "Daha uzun etki süresi",
+      "Parenteral uygulamaya uygun olması",
+      "Muskarinik yan etkilerinin olmaması",
+      "Myastenia gravis tedavisinde kullanılamaması",
+    ],
+    correctAnswerIndex: 1,
+    explanation:
+        "Piridostigmin oral formda myastenia gravis tedavisinde kullanılır. Etki süresi 3-6 saat (neostigmin: 2-4 saat).",
+    category: "kolinesteraz inhibitörleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Hangisi sugammadeksin yan etkilerinden değildir?",
+    options: [
+      "Tat değişikliği",
+      "Anafilaksi",
+      "Hipertansiyon",
+      "Bulantı-kusma",
+      "Kardiyak aritmi",
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        "Sugammadeksin yan etkileri: Tat bozukluğu, anafilaksi, bulantı-kusma, QT uzaması. Hipertansiyon tipik değildir.",
+    category: "kolinesteraz inhibitörleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Hangisi antikolinesterazların klinik kullanım endikasyonlarından değildir?",
+    options: [
+      "Non-depolarizan nöromusküler blok antagonizması",
+      "Myastenia gravis tedavisi",
+      "Alzheimer hastalığı tedavisi",
+      "Postoperatif üriner retansiyon tedavisi",
+      "Akut glokom krizi",
+    ],
+    correctAnswerIndex: 3,
+    explanation:
+        "Antikolinesterazlar üriner retansiyona neden olur (parasempatik etki), tedavisinde kullanılmaz.",
+    category: "kolinesteraz inhibitörleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Hangisi organofosfat zehirlenmesinde kullanılan antidottur?",
+    options: [
+      "Neostigmin",
+      "Edrofonyum",
+      "Pralidoksim",
+      "Sugammadeks",
+      "Atropin",
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        "Pralidoksim, organofosfat zehirlenmesinde kolinesteraz enzimini reaktive eden spesifik antidottur.",
+    category: "kolinesteraz inhibitörleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Hangisi myastenia gravis tanısında kullanılan antikolinesteraz testidir?",
+    options: [
+      "Tensilon testi",
+      "Romberg testi",
+      "Tourniquet testi",
+      "Rinne testi",
+      "Weber testi",
+    ],
+    correctAnswerIndex: 0,
+    explanation:
+        "Tensilon testi (edrofonyum), myastenia gravis tanısında kullanılır. İV edrofonyum sonrası kas gücündeki geçici düzelme tanı koydurucudur.",
+    category: "kolinesteraz inhibitörleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Hangisi antikolinesterazların santral sinir sistemi yan etkilerindendir?",
+    options: [
+      "Hipertansiyon",
+      "Konfüzyon",
+      "Bradikardi",
+      "Bronkospazm",
+      "Hipersalivasyon",
+    ],
+    correctAnswerIndex: 1,
+    explanation:
+        "Antikolinesterazlar kan-beyin bariyerini geçerse (özellikle fizostigmin) konfüzyon, ajitasyon ve nöbet yapabilir.",
+    category: "kolinesteraz inhibitörleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Hangisi sugammadeksin roküronyumla oluşturduğu kompleksin özelliğidir?",
+    options: [
+      "Böbreklerden atılmaz",
+      "Biyolojik olarak inaktiftir",
+      "Karaciğerde metabolize olur",
+      "Histamin salınımına neden olur",
+      "Santral sinir sistemine geçer",
+    ],
+    correctAnswerIndex: 1,
+    explanation:
+        "Sugammadeks-roküronyum kompleksi biyolojik olarak inaktif ve böbreklerle atılır. Bu özellik, antagonizmanın etkinliğini açıklar.",
+    category: "kolinesteraz inhibitörleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Hangisi antikolinesterazların kontrendike olduğu durumlardan değildir?",
+    options: [
+      "Bronşiyal astım",
+      "İntestinal obstrüksiyon",
+      "Üriner retansiyon",
+      "Non-depolarizan nöromusküler blok",
+      "Peritonit",
+    ],
+    correctAnswerIndex: 3,
+    explanation:
+        "Antikolinesterazlar non-depolarizan blokları antagonize etmek için kullanılır (endikasyondur).",
+    category: "kolinesteraz inhibitörleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Hangisi antikolinesterazların etkisini azaltan faktördür?",
+    options: [
+      "Asidoz",
+      "Hipermagnezemi",
+      "Hipokalemi",
+      "Alkaloz",
+      "Hipernatremi",
+    ],
+    correctAnswerIndex: 1,
+    explanation:
+        "Hipermagnezemi, asetilkolin salınımını inhibe ederek antikolinesteraz etkinliğini azaltır.",
+    category: "kolinesteraz inhibitörleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Hangisi myastenia gravis krizinde kullanılmaz?",
+    options: [
+      "Neostigmin",
+      "Piridostigmin",
+      "Plazmaferez",
+      "Süksinilkolin",
+      "İVİG",
+    ],
+    correctAnswerIndex: 3,
+    explanation:
+        "Myastenia gravisli hastalar süksinilkoline dirençli, non-depolarizan blokörlere aşırı duyarlıdır.",
+    category: "kolinesteraz inhibitörleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Hangisi kolinerjik kriz bulgusudur?",
+    options: [
+      "Midriazis",
+      "Ağız kuruluğu",
+      "İshal",
+      "Taşikardi",
+      "İdrar retansiyonu",
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        "Kolinerjik kriz (aşırı muskarinik stimülasyon): İshal, bronkospazm, bradikardi, hipersalivasyon.",
+    category: "kolinesteraz inhibitörleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Hangisi fizostigminin özelliklerinden değildir?",
+    options: [
+      "Kan-beyin bariyerini geçer",
+      "Santral antikolinerjik sendromda kullanılır",
+      "Myastenia gravis tedavisinde tercih edilir",
+      "Glokom tedavisinde kullanılabilir",
+      "Trisiklik antidepresan intoksikasyonunda etkilidir",
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        "Fizostigmin santral etkili antikolinesterazdır, myastenia gravis tedavisinde kullanılmaz (periferik etkili olanlar tercih edilir).",
+    category: "kolinesteraz inhibitörleri",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Hangisi antikolinesterazların neden olduğu aritmidir?",
+    options: [
+      "Atriyal fibrilasyon",
+      "Ventriküler taşikardi",
+      "Sinüs bradikardisi",
+      "AV blok",
+      "Hepsi",
+    ],
+    correctAnswerIndex: 4,
+    explanation:
+        "Antikolinesterazlar parasempatik aktiviteyi artırarak sinüs bradikardisi, AV blok ve diğer aritmilere neden olabilir.",
+    category: "kolinesteraz inhibitörleri",
+    difficulty: 2,
+  ),
 ];

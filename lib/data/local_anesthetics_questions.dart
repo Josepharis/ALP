@@ -1247,4 +1247,106 @@ final List<Question> localAnestheticsQuestions = [
     difficulty: 2,
     category: 'Lokal Anestezikler',
   ),
+
+  Question(
+    id: 'la_080',
+    question:
+        'Aşağıdakilerden hangisi lokal anesteziklerin etkilediği bir iyon kanal değildir?',
+    options: ['Sodyum', 'Potasyum', 'Kalsiyum', 'Klor', 'Hidrojen'],
+    correctAnswerIndex: 4,
+    explanation:
+        'Lokal anestezikler öncelikle voltaj bağımlı sodyum kanallarını hedef alır. Ayrıca potasyum ve kalsiyum kanalları da dolaylı etkilenebilir, ancak hidrojen kanalı diye bir yapı bulunmaz.',
+    difficulty: 2,
+    category: 'Lokal Anestezikler',
+  ),
+
+  Question(
+    id: 'la_081',
+    question:
+        'Aşağıdakilerden hangisi lokal anesteziklerin topikal uygulama alanlarından biri değildir?',
+    options: ['Mukoza', 'Göz', 'Deri', 'Kas içine', 'Laringeal bölge'],
+    correctAnswerIndex: 3,
+    explanation:
+        'Lokal anestezikler kas içine uygulanmaz; topikal uygulama yalnızca yüzeyel sinir uçlarının bulunduğu bölgelerde etkilidir (mukoza, deri vb.).',
+    difficulty: 1,
+    category: 'Lokal Anestezikler',
+  ),
+
+  Question(
+    id: 'la_082',
+    question:
+        'Aşağıdaki lokal anesteziklerden hangisi hem hızlı başlangıç hem orta derecede uzun etki süresine sahiptir?',
+    options: ['Lidokain', 'Bupivakain', 'Prokain', 'Tetrakain', 'Prilokain'],
+    correctAnswerIndex: 0,
+    explanation:
+        'Lidokain, hızlı etki başlangıcına ve orta süreli etkiye sahip, en yaygın kullanılan lokal anesteziklerden biridir.',
+    difficulty: 1,
+    category: 'Lokal Anestezikler',
+  ),
+
+  Question(
+    id: 'la_083',
+    question:
+        'Lokal anesteziklerin periferik sinir bloklarında tercih edilmesinde etki süresi ve motor blok şiddeti açısından en uygun kombinasyon hangisidir?',
+    options: [
+      'Kısa süreli, derin motor blok: Lidokain',
+      'Uzun süreli, hafif motor blok: Ropivakain',
+      'Orta süreli, yoğun motor blok: Prilokain',
+      'Uzun süreli, yoğun motor blok: Prokain',
+      'Kısa süreli, yüzeyel duyusal blok: Tetrakain',
+    ],
+    correctAnswerIndex: 1,
+    explanation:
+        'Ropivakain, uzun süreli etkili olup, motor blok etkisi hafiftir. Bu özellik ambülatuvar periferik sinir bloklarında avantaj sağlar.',
+    difficulty: 2,
+    category: 'Lokal Anestezikler',
+  ),
+
+  Question(
+    id: 'la_084',
+    question:
+        'Aşağıdakilerden hangisi lokal anesteziklerin farmakokinetiği üzerinde etkili olmayan bir faktördür?',
+    options: [
+      'Enjeksiyon bölgesinin vaskülaritesi',
+      'Kullanılan adjuvanlar',
+      'İlacın pKa değeri',
+      'İlacın lipofilikliği',
+      'Hastanın karaciğer fonksiyonu',
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        'pKa, lokal anesteziğin etki başlangıcını belirler. Farmakokinetik yani vücutta dağılım, metabolizma ve eliminasyonu doğrudan etkilemez.',
+    difficulty: 2,
+    category: 'Lokal Anestezikler',
+  ),
+
+  Question(
+    id: 'la_085',
+    question:
+        'Aşağıdaki lokal anesteziklerden hangisinin doğrudan vazodilatör etkisi yoktur ve bu nedenle lokal olarak vazokonstriksiyon yapabilir?',
+    options: ['Lidokain', 'Prokain', 'Kokain', 'Bupivakain', 'Ropivakain'],
+    correctAnswerIndex: 2,
+    explanation:
+        'Kokain, norepinefrin geri alımını inhibe eder ve doğrudan vazokonstriktör etki gösterir. Diğer lokal anestezikler genellikle vazodilatördür.',
+    difficulty: 2,
+    category: 'Lokal Anestezikler',
+  ),
+
+  Question(
+    id: 'la_086',
+    question:
+        'Aşağıdaki özelliklerden hangisi bir lokal anesteziğin etki başlangıcını en çok etkiler?',
+    options: [
+      'Protein bağlanma oranı',
+      'Lipofilisite',
+      'pKa değeri',
+      'Molekül ağırlığı',
+      'Metabolizma yolu',
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        'Lokal anesteziğin pKa değeri, fizyolojik pH daki iyonize/unionize oranını belirler → bu da etki başlama süresini etkiler.',
+    difficulty: 2,
+    category: 'Lokal Anestezikler',
+  ),
 ];

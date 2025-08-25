@@ -73,7 +73,6 @@ import '../data/hepatic_physiology_anesthesia_questions.dart';
 import '../data/obstetric_anesthesia_questions.dart';
 import '../data/acid_base_management_questions.dart';
 import '../data/liver_disease_anesthesia_questions.dart';
-import '../screens/daily_question_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -97,6 +96,13 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   void initState() {
     super.initState();
     _tabController = TabController(length: 5, vsync: this);
+    _tabController.addListener(() {
+      if (!_tabController.indexIsChanging) {
+        setState(() {
+          _currentIndex = _tabController.index;
+        });
+      }
+    });
     // Başlangıçta ana sayfayı göster
     _currentIndex = 0;
   }
@@ -154,11 +160,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     );
   }
 
-
-
   Widget _buildBottomNav() {
     final screenHeight = MediaQuery.of(context).size.height;
     final bottomPadding = MediaQuery.of(context).padding.bottom;
+
 
     // Android navigation bar yüksekliğini hesapla
     final systemNavigationBarHeight =
@@ -388,11 +393,8 @@ class QuizListScreen extends StatefulWidget {
 
 class _QuizListScreenState extends State<QuizListScreen> {
   final TextEditingController _searchController = TextEditingController();
-  final QuizService _quizService = QuizService();
   String _searchQuery = '';
   bool _isSearching = false;
-  List<Quiz> _ongoingQuizzes = [];
-  late StreamSubscription _mistakesSubscription;
 
   // Tüm quiz kategorileri
   late final List<Map<String, dynamic>> _allQuizCategories;
@@ -401,47 +403,12 @@ class _QuizListScreenState extends State<QuizListScreen> {
   void initState() {
     super.initState();
     _allQuizCategories = _getQuizCategories();
-    _loadOngoingQuizzes();
-    
-    // EventBus dinleyicisi ekle - devam eden quizler güncellendiğinde yenile
-    _mistakesSubscription = EventBus().mistakesUpdatedStream.listen((event) {
-      if (mounted) {
-        _loadOngoingQuizzes();
-      }
-    });
   }
 
   @override
   void dispose() {
     _searchController.dispose();
-    _mistakesSubscription.cancel();
     super.dispose();
-  }
-
-  // Devam eden quizleri yükle
-  Future<void> _loadOngoingQuizzes() async {
-    try {
-      final ongoingQuizzes = await _quizService.getOngoingQuizzes();
-      if (mounted) {
-        setState(() {
-          _ongoingQuizzes = ongoingQuizzes;
-        });
-      }
-    } catch (e) {
-      print('Devam eden quizler yüklenirken hata: $e');
-    }
-  }
-
-  // Quiz'in devam eden olup olmadığını kontrol et
-  Quiz? _getOngoingQuiz(String categoryTitle) {
-    return _ongoingQuizzes.firstWhere(
-      (quiz) => quiz.name == categoryTitle,
-      orElse: () => Quiz(
-        id: '',
-        name: '',
-        totalQuestions: 0,
-      ),
-    );
   }
 
   // Filtrelenmiş quiz kategorileri
@@ -489,14 +456,14 @@ class _QuizListScreenState extends State<QuizListScreen> {
                       child: Text(
                         'Tüm Quizler',
                         style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
+                          fontSize: 24,
                           fontWeight: FontWeight.bold,
+                          color: Colors.white,
                         ),
                       ),
                     ),
-                    GestureDetector(
-                      onTap: () {
+                    IconButton(
+                      onPressed: () {
                         setState(() {
                           _isSearching = !_isSearching;
                           if (!_isSearching) {
@@ -505,28 +472,26 @@ class _QuizListScreenState extends State<QuizListScreen> {
                           }
                         });
                       },
-                      child: Container(
-                        padding: const EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.2),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Icon(
-                          _isSearching ? Icons.close : Icons.search,
-                          color: Colors.white,
-                        ),
+                      icon: Icon(
+                        _isSearching ? Icons.close : Icons.search,
+                        color: Colors.white,
+                        size: 24,
                       ),
                     ),
                   ],
                 ),
-                // Arama alanı
+                
+                // Arama çubuğu
                 if (_isSearching) ...[
                   const SizedBox(height: 16),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
                     decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.2),
-                      borderRadius: BorderRadius.circular(25),
+                      color: Colors.white.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(16),
+                      border: Border.all(
+                        color: Colors.white.withOpacity(0.3),
+                        width: 1,
+                      ),
                     ),
                     child: TextField(
                       controller: _searchController,
@@ -536,11 +501,34 @@ class _QuizListScreenState extends State<QuizListScreen> {
                         });
                       },
                       style: const TextStyle(color: Colors.white),
-                      decoration: const InputDecoration(
-                        hintText: 'Quiz ara...',
-                        hintStyle: TextStyle(color: Colors.white70),
+                      decoration: InputDecoration(
+                        hintText: 'Quiz kategorisi ara...',
+                        hintStyle: TextStyle(
+                          color: Colors.white.withOpacity(0.7),
+                        ),
+                        prefixIcon: Icon(
+                          Icons.search,
+                          color: Colors.white.withOpacity(0.7),
+                        ),
+                        suffixIcon: _searchQuery.isNotEmpty
+                            ? IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    _searchQuery = '';
+                                    _searchController.clear();
+                                  });
+                                },
+                                icon: Icon(
+                                  Icons.clear,
+                                  color: Colors.white.withOpacity(0.7),
+                                ),
+                              )
+                            : null,
                         border: InputBorder.none,
-                        icon: Icon(Icons.search, color: Colors.white70),
+                        contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 12,
+                        ),
                       ),
                     ),
                   ),
@@ -548,6 +536,7 @@ class _QuizListScreenState extends State<QuizListScreen> {
               ],
             ),
           ),
+          
           // Quiz listesi
           Expanded(
             child: _buildQuizList(context),
@@ -555,6 +544,478 @@ class _QuizListScreenState extends State<QuizListScreen> {
         ],
       ),
     );
+  }
+
+  // Quiz kategorilerini döndüren metod - Görseldeki sıraya göre düzenlendi
+  List<Map<String, dynamic>> _getQuizCategories() {
+    return [
+      // Görsel 1'deki sıraya göre (38 kategori)
+      {
+        'title': 'Algoloji',
+        'icon': Icons.psychology,
+        'questions': painManagementQuestions,
+        'color': Colors.pink.shade700,
+      },
+      {
+        'title': 'Anestezi Uygulaması',
+        'icon': Icons.medical_information,
+        'questions': anesthesiaApplicationQuestions,
+        'color': Colors.orange.shade700,
+      },
+      {
+        'title': 'Ameliyathane Ortamı',
+        'icon': Icons.local_hospital,
+        'questions': operatingRoomEnvironmentQuestions,
+        'color': Colors.deepPurple.shade700,
+      },
+      {
+        'title': 'Solunum Sistemleri',
+        'icon': Icons.air,
+        'questions': respiratorySystemQuestions,
+        'color': Colors.teal.shade700,
+      },
+      {
+        'title': 'Anestezi İş İstasyonu',
+        'icon': Icons.settings,
+        'questions': anesthesiaWorkstationQuestions,
+        'color': Colors.indigo.shade700,
+      },
+      {
+        'title': 'Kardiyovasküler Monitörizasyon',
+        'icon': Icons.monitor_heart,
+        'questions': cardiovascularMonitoringQuestions,
+        'color': Colors.red.shade700,
+      },
+      {
+        'title': 'Farmakolojik Prensipler',
+        'icon': Icons.science,
+        'questions': pharmacologicalPrinciplesQuestions,
+        'color': Colors.lightGreen.shade700,
+      },
+      {
+        'title': 'İnhalasyon Anestezikleri',
+        'icon': Icons.air_rounded,
+        'questions': inhalationAnestheticsQuestions,
+        'color': Colors.teal.shade700,
+      },
+      {
+        'title': 'İntravenöz Anestezikler',
+        'icon': Icons.local_hospital_outlined,
+        'questions': intravenousAnestheticsQuestions,
+        'color': Colors.indigo.shade700,
+      },
+      {
+        'title': 'Analjezik Ajanlar',
+        'icon': Icons.healing,
+        'questions': analgesicAgentsQuestions,
+        'color': Colors.brown.shade700,
+      },
+      {
+        'title': 'Nöromüsküler Blokaj Ajanları',
+        'icon': Icons.accessibility_new,
+        'questions': neuromuscularBlockingAgentsQuestions,
+        'color': Colors.blueGrey.shade700,
+      },
+      {
+        'title': 'Antikolinerjik İlaçlar',
+        'icon': Icons.medication_liquid,
+        'questions': anticholinergicDrugsQuestions,
+        'color': Colors.lime.shade700,
+      },
+      {
+        'title': 'Adrenerjik Agonistler ve Antagonistler',
+        'icon': Icons.medication_outlined,
+        'questions': adrenergicDrugsQuestions,
+        'color': Colors.amber.shade700,
+      },
+      {
+        'title': 'Hipotansif Ajanlar',
+        'icon': Icons.trending_down,
+        'questions': hypotensiveAgentsQuestions,
+        'color': Colors.red.shade700,
+      },
+      {
+        'title': 'Lokal Anestezikler',
+        'icon': Icons.pin_drop,
+        'questions': localAnestheticsQuestions,
+        'color': Colors.green.shade700,
+      },
+      {
+        'title': 'Anestezide Yardımcı İlaçlar',
+        'icon': Icons.medication_liquid_outlined,
+        'questions': auxiliaryDrugsQuestions,
+        'color': Colors.orange.shade700,
+      },
+      {
+        'title': 'Havayolu Yönetimi',
+        'icon': Icons.masks,
+        'questions': airwayManagementQuestions,
+        'color': Colors.amber.shade700,
+      },
+      {
+        'title': 'Kardiyovasküler Cerrahide Anestezi',
+        'icon': Icons.medical_services,
+        'questions': cardiovascularSurgeryQuestions,
+        'color': Colors.purple.shade700,
+      },
+      {
+        'title': 'Solunum Fizyolojisi ve Anestezi',
+        'icon': Icons.air_rounded,
+        'questions': respiratoryPhysiologyQuestions,
+        'color': Colors.teal.shade700,
+      },
+      {
+        'title': 'Nörocerrahide Anestezi',
+        'icon': Icons.psychology,
+        'questions': neurologicalPsychiatricAnesthesiaQuestions,
+        'color': Colors.deepOrange.shade700,
+      },
+      {
+        'title': 'Böbrek Fizyolojisi ve Anestezi',
+        'icon': Icons.water_drop,
+        'questions': renalPhysiologyAnesthesiaQuestions,
+        'color': Colors.blue.shade700,
+      },
+      {
+        'title': 'Genitoüriner Cerrahide Anestezi',
+        'icon': Icons.medical_services,
+        'questions': genitourinaryAnesthesiaQuestions,
+        'color': Colors.blue.shade700,
+      },
+      {
+        'title': 'Hepatik Fizyoloji ve Anestezi',
+        'icon': Icons.medical_services,
+        'questions': hepaticPhysiologyAnesthesiaQuestions,
+        'color': Colors.orange.shade700,
+      },
+      {
+        'title': 'Endokrin Hastalıklarda Anestezi',
+        'icon': Icons.medical_services,
+        'questions': endocrineDiseaseAnesthesiaQuestions,
+        'color': Colors.purple.shade700,
+      },
+      {
+        'title': 'Oftalmik Cerrahide Anestezi',
+        'icon': Icons.visibility,
+        'questions': ophthalmicAnesthesiaQuestions,
+        'color': Colors.indigo.shade700,
+      },
+      {
+        'title': 'Ortopedik Cerrahide Anestezi',
+        'icon': Icons.medical_services,
+        'questions': orthopedicAnesthesiaQuestions,
+        'color': Colors.orange.shade700,
+      },
+      {
+        'title': 'Travma ve Acil Cerrahide Anestezi',
+        'icon': Icons.emergency,
+        'questions': traumaEmergencyAnesthesiaQuestions,
+        'color': Colors.red.shade700,
+      },
+
+      {
+        'title': 'Obstetrik Anestezi',
+        'icon': Icons.pregnant_woman,
+        'questions': obstetricAnesthesiaQuestions,
+        'color': Colors.pink.shade700,
+      },
+      {
+        'title': 'Pediatrik Anestezi',
+        'icon': Icons.child_care,
+        'questions': pediatricAnesthesiaQuestions,
+        'color': Colors.pink.shade700,
+      },
+      {
+        'title': 'Geriatrik Anestezi',
+        'icon': Icons.elderly,
+        'questions': geriatricAnesthesiaQuestions,
+        'color': Colors.blueGrey.shade700,
+      },
+      {
+        'title': 'Spinal, Epidural ve Kaudal Bloklar',
+        'icon': Icons.medical_information,
+        'questions': spinalEpiduralCaudalBlocksQuestions,
+        'color': Colors.deepOrange.shade700,
+      },
+      {
+        'title': 'Periferik Sinir Blokları',
+        'icon': Icons.medical_information,
+        'questions': localAnestheticsQuestions,
+        'color': Colors.green.shade700,
+      },
+      {
+        'title': 'Kronik Ağrı Tedavisi',
+        'icon': Icons.healing,
+        'questions': chronicPainTreatmentQuestions,
+        'color': Colors.red.shade700,
+      },
+      {
+        'title': 'Asit-Baz Yönetimi',
+        'icon': Icons.science,
+        'questions': acidBaseManagementQuestions,
+        'color': Colors.teal.shade700,
+      },
+      {
+        'title': 'Perioperatif ve Yoğun Bakımda Beslenme',
+        'icon': Icons.restaurant,
+        'questions': perioperativeIntensiveCareNutritionQuestions,
+        'color': Colors.green.shade700,
+      },
+      {
+        'title': 'Analjezik Ajanlar',
+        'icon': Icons.healing,
+        'questions': analgesicAgentsQuestions,
+        'color': Colors.brown.shade700,
+      },
+      {
+        'title': 'Nöromüsküler Blokaj Ajanları',
+        'icon': Icons.accessibility_new,
+        'questions': neuromuscularBlockingAgentsQuestions,
+        'color': Colors.blueGrey.shade700,
+      },
+      {
+        'title': 'Kolinesteraz İnhibitörleri',
+        'icon': Icons.science_outlined,
+        'questions': cholinesteraseInhibitorsQuestions,
+        'color': Colors.deepPurple.shade700,
+      },
+      {
+        'title': 'Antikolinerjik İlaçlar',
+        'icon': Icons.medication_liquid,
+        'questions': anticholinergicDrugsQuestions,
+        'color': Colors.lime.shade700,
+      },
+      {
+        'title': 'Adrenerjik Agonistler ve Antagonistler',
+        'icon': Icons.medication_outlined,
+        'questions': adrenergicDrugsQuestions,
+        'color': Colors.amber.shade700,
+      },
+      {
+        'title': 'Hipotansif Ajanlar',
+        'icon': Icons.trending_down,
+        'questions': hypotensiveAgentsQuestions,
+        'color': Colors.red.shade700,
+      },
+      {
+        'title': 'Lokal Anestezikler',
+        'icon': Icons.pin_drop,
+        'questions': localAnestheticsQuestions,
+        'color': Colors.green.shade700,
+      },
+      {
+        'title': 'Anestezide Yardımcı İlaçlar',
+        'icon': Icons.medication_liquid_outlined,
+        'questions': auxiliaryDrugsQuestions,
+        'color': Colors.orange.shade700,
+      },
+      {
+        'title': 'Preoperatif Değerlendirme',
+        'icon': Icons.assessment,
+        'questions': preoperativeAssessmentQuestions,
+        'color': Colors.blueGrey.shade700,
+      },
+      {
+        'title': 'Solunum Fizyolojisi ve Anestezi',
+        'icon': Icons.air_rounded,
+        'questions': respiratoryPhysiologyQuestions,
+        'color': Colors.teal.shade700,
+      },
+      {
+        'title': 'Solunum Hastalıklarında Anestezi',
+        'icon': Icons.air_sharp,
+        'questions': respiratoryDiseasesQuestions,
+        'color': Colors.cyan.shade700,
+      },
+      {
+        'title': 'Algoloji',
+        'icon': Icons.psychology,
+        'questions': painManagementQuestions,
+        'color': Colors.pink.shade700,
+      },
+      {
+        'title': 'Bölüm 28 - Nörolojik ve Psikiyatrik Hastalığı Olanlarda Anestezi',
+        'icon': Icons.psychology_outlined,
+        'questions': neurologicalPsychiatricAnesthesiaQuestions,
+        'color': Colors.deepOrange.shade700,
+      },
+      {
+        'title': 'Bölüm 37 - Otolaringoloji-Baş ve Boyun Cerrahisinde Anestezi',
+        'icon': Icons.hearing,
+        'questions': otolaryngologyHeadNeckSurgeryQuestions,
+        'color': Colors.teal.shade700,
+      },
+      {
+        'title': 'Bölüm 35 - Endokrin Hastalıklarda Anestezi',
+        'icon': Icons.medical_services,
+        'questions': endocrineDiseaseAnesthesiaQuestions,
+        'color': Colors.purple.shade700,
+      },
+      {
+        'title': 'Bölüm 29 - Nöromüsküler Hastalığı Olanlarda Anestezi',
+        'icon': Icons.accessibility_new,
+        'questions': neuromuscularDiseasesAnesthesiaQuestions,
+        'color': Colors.indigo.shade700,
+      },
+      {
+        'title': 'Bölüm 43 - Geriatrik Anestezi',
+        'icon': Icons.elderly,
+        'questions': geriatricAnesthesiaQuestions,
+        'color': Colors.blueGrey.shade700,
+      },
+      {
+        'title': 'Bölüm 39 - Travma ve Acil Cerrahide Anestezi',
+        'icon': Icons.emergency,
+        'questions': traumaEmergencyAnesthesiaQuestions,
+        'color': Colors.red.shade700,
+      },
+      {
+        'title': 'Bölüm 38 - Ortopedik Cerrahide Anestezi',
+        'icon': Icons.medical_services,
+        'questions': orthopedicAnesthesiaQuestions,
+        'color': Colors.orange.shade700,
+      },
+      {
+        'title': 'Geliştirilmiş İyileştirme Protokolleri',
+        'icon': Icons.trending_up,
+        'questions': enhancedRecoveryProtocolsQuestions,
+        'color': Colors.green.shade700,
+      },
+      {
+        'title': 'Anestezi Komplikasyonları',
+        'icon': Icons.warning,
+        'questions': anesthesiaComplicationsQuestions,
+        'color': Colors.red.shade700,
+      },
+      {
+        'title': 'Genitoüriner Cerrahide Anestezi',
+        'icon': Icons.medical_services,
+        'questions': genitourinaryAnesthesiaQuestions,
+        'color': Colors.blue.shade700,
+      },
+      {
+        'title': 'Oftalmik Cerrahide Anestezi',
+        'icon': Icons.visibility,
+        'questions': ophthalmicAnesthesiaQuestions,
+        'color': Colors.indigo.shade700,
+      },
+      {
+        'title': 'Böbrek Fizyolojisi ve Anestezi',
+        'icon': Icons.water_drop,
+        'questions': renalPhysiologyAnesthesiaQuestions,
+        'color': Colors.blue.shade700,
+      },
+      {
+        'title': 'Spinal, Epidural ve Kaudal Bloklar',
+        'icon': Icons.medical_information,
+        'questions': spinalEpiduralCaudalBlocksQuestions,
+        'color': Colors.deepOrange.shade700,
+      },
+      {
+        'title': 'Güvenlik ve Kalite İyileştirme',
+        'icon': Icons.security,
+        'questions': safetyQualityPerformanceImprovementQuestions,
+        'color': Colors.green.shade700,
+      },
+            // Eksik kategoriler
+      // Ek kategoriler
+      {
+        'title': 'Sıvı Yönetimi ve Kan Ürünleri',
+        'icon': Icons.water_drop,
+        'questions': fluidManagementBloodProductsQuestions,
+        'color': Colors.blue.shade700,
+      },
+      {
+        'title': 'Toraks Cerrahisinde Anestezi',
+        'icon': Icons.medical_services,
+        'questions': thoracicSurgeryAnesthesiaQuestions,
+        'color': Colors.purple.shade700,
+      },
+      {
+        'title': 'Termoregülasyon, Hipotermi ve Malign Hipertermi',
+        'icon': Icons.thermostat,
+        'questions': thermoregulationHypothermiaMalignantHyperthermiaQuestions,
+        'color': Colors.orange.shade700,
+      },
+      {
+        'title': 'Günübirlik ve Ameliyathane Dışı Anestezi',
+        'icon': Icons.local_hospital,
+        'questions': outpatientAnesthesiaQuestions,
+        'color': Colors.green.shade700,
+      },
+      {
+        'title': 'Kardiyopulmoner Resüsitasyon',
+        'icon': Icons.healing,
+        'questions': cardiopulmonaryResuscitationQuestions,
+        'color': Colors.red.shade700,
+      },
+      {
+        'title': 'Yoğun Bakım Uygulamalarında Karşılaşılan Sorunlar',
+        'icon': Icons.local_hospital,
+        'questions': intensiveCareProblemsQuestions,
+        'color': Colors.indigo.shade700,
+      },
+      {
+        'title': 'Postanestezik Bakım',
+        'icon': Icons.medical_information,
+        'questions': postanestheticCareQuestions,
+        'color': Colors.teal.shade700,
+      },
+      {
+        'title': 'Pediatrik Anestezi',
+        'icon': Icons.child_care,
+        'questions': pediatricAnesthesiaQuestions,
+        'color': Colors.pink.shade700,
+      },
+      {
+        'title': 'Kronik Ağrı Tedavisi',
+        'icon': Icons.healing,
+        'questions': chronicPainTreatmentQuestions,
+        'color': Colors.red.shade700,
+      },
+      {
+        'title': 'Sıvı ve Elektrolit Dengesizlikleri',
+        'icon': Icons.water_drop,
+        'questions': fluidElectrolyteImbalanceManagementQuestions,
+        'color': Colors.blue.shade700,
+      },
+      {
+        'title': 'Nörofizyoloji ve Anestezi',
+        'icon': Icons.psychology,
+        'questions': neurophysiologyAnesthesiaQuestions,
+        'color': Colors.purple.shade700,
+      },
+      {
+        'title': 'Perioperatif ve Yoğun Bakımda Beslenme',
+        'icon': Icons.restaurant,
+        'questions': perioperativeIntensiveCareNutritionQuestions,
+        'color': Colors.green.shade700,
+      },
+      {
+        'title': 'Hepatik Fizyoloji ve Anestezi',
+        'icon': Icons.medical_services,
+        'questions': hepaticPhysiologyAnesthesiaQuestions,
+        'color': Colors.orange.shade700,
+      },
+      {
+        'title': 'Obstetrik Anestezi',
+        'icon': Icons.pregnant_woman,
+        'questions': obstetricAnesthesiaQuestions,
+        'color': Colors.pink.shade700,
+      },
+      {
+        'title': 'Asit-Baz Yönetimi',
+        'icon': Icons.science,
+        'questions': acidBaseManagementQuestions,
+        'color': Colors.teal.shade700,
+      },
+      {
+        'title': 'Karaciğer Hastalığı Anestezi',
+        'icon': Icons.medical_information,
+        'questions': liverDiseaseAnesthesiaQuestions,
+        'color': Colors.brown.shade700,
+      },
+    ];
   }
 
   Widget _buildQuizList(BuildContext context) {
@@ -568,41 +1029,21 @@ class _QuizListScreenState extends State<QuizListScreen> {
         final questions = category['questions'] as List<dynamic>;
         final questionCount =
             questions is List<Question> ? questions.length : 0;
-        
-        // Bu kategoride devam eden quiz var mı kontrol et
-        final ongoingQuiz = _getOngoingQuiz(category['title'] as String);
-        final isOngoing = ongoingQuiz?.id.isNotEmpty == true;
 
         return Container(
           margin: const EdgeInsets.only(bottom: 16.0),
           child: GestureDetector(
             onTap: () {
-              if (isOngoing && ongoingQuiz != null) {
-                // Devam eden quiz varsa, mevcut ilerlemeyle devam et
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => QuizScreen(
-                      categoryName: category['title'] as String,
-                      questions: category['questions'] as List<Question>,
-                      initialQuestionIndex: ongoingQuiz.currentQuestionIndex ?? 0,
-                      initialScore: ongoingQuiz.score ?? 0,
-                      quizId: ongoingQuiz.id,
-                    ),
-                  ),
-                );
-              } else {
-                // Yeni quiz başlat
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => QuizScreen(
-                      categoryName: category['title'] as String,
-                      questions: category['questions'] as List<Question>,
-                    ),
-                  ),
-                );
-              }
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder:
+                      (context) => QuizScreen(
+                        categoryName: category['title'] as String,
+                        questions: category['questions'] as List<Question>,
+                      ),
+                ),
+              );
             },
             child: Container(
               decoration: BoxDecoration(
@@ -654,26 +1095,13 @@ class _QuizListScreenState extends State<QuizListScreen> {
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           ),
-                          if (isOngoing && ongoingQuiz != null) ...[
-                            // Devam eden quiz bilgisi
-                            Text(
-                              '${ongoingQuiz.currentQuestionIndex ?? 0}/${ongoingQuiz.totalQuestions} Soru',
-                              style: TextStyle(
-                                fontSize: 12,
-                                color: Colors.white.withOpacity(0.8),
-                                fontWeight: FontWeight.w500,
-                              ),
+                          Text(
+                            '$questionCount Soru',
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Colors.white.withOpacity(0.8),
                             ),
-                          ] else ...[
-                            // Normal quiz bilgisi
-                            Text(
-                              '$questionCount Soru',
-                              style: TextStyle(
-                                fontSize: 12,
-                                color: Colors.white.withOpacity(0.8),
-                              ),
-                            ),
-                          ],
+                          ),
                         ],
                       ),
                     ),
@@ -686,20 +1114,20 @@ class _QuizListScreenState extends State<QuizListScreen> {
                         color: Colors.white.withOpacity(0.2),
                         borderRadius: BorderRadius.circular(16),
                       ),
-                      child: Row(
+                      child: const Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(
-                            isOngoing ? 'Devam Et' : 'Başla',
-                            style: const TextStyle(
+                            'Başla',
+                            style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.w500,
                               fontSize: 12,
                             ),
                           ),
-                          const SizedBox(width: 2),
+                          SizedBox(width: 2),
                           Icon(
-                            isOngoing ? Icons.play_arrow : Icons.arrow_forward_ios,
+                            Icons.arrow_forward_ios,
                             color: Colors.white,
                             size: 12,
                           ),
@@ -738,24 +1166,10 @@ class _HomeContentState extends State<HomeContent> {
 
   bool _isLoading = true;
   late StreamSubscription _mistakesSubscription;
-  late ScrollController _scrollController;
-
-  // Bottom safe area hesaplama helper method'u
-  double _calculateBottomSafeArea(BuildContext context) {
-    final screenHeight = MediaQuery.of(context).size.height;
-    final bottomPadding = MediaQuery.of(context).padding.bottom;
-    final systemNavigationBarHeight = MediaQuery.of(context).systemGestureInsets.bottom;
-    final actualBottomPadding = bottomPadding > 0 ? bottomPadding : systemNavigationBarHeight;
-    
-    // Bottom navigation bar yüksekliği + sistem padding + ek güvenlik alanı
-    final bottomNavHeight = screenHeight * 0.07 + (actualBottomPadding * 0.3);
-    return bottomNavHeight + 20; // 20px ek güvenlik alanı
-  }
 
   @override
   void initState() {
     super.initState();
-    _scrollController = ScrollController();
     _loadData();
 
     // EventBus dinleyicisi ekle - hızlı güncelleme için
@@ -790,7 +1204,6 @@ class _HomeContentState extends State<HomeContent> {
   void dispose() {
     // EventBus dinleyicisini temizle
     _mistakesSubscription.cancel();
-    _scrollController.dispose();
     super.dispose();
   }
 
@@ -916,7 +1329,6 @@ class _HomeContentState extends State<HomeContent> {
               : RefreshIndicator(
                 onRefresh: _loadData,
                 child: SingleChildScrollView(
-                  controller: _scrollController,
                   physics: const AlwaysScrollableScrollPhysics(),
                   child: LayoutBuilder(
                     builder: (context, constraints) {
@@ -930,7 +1342,7 @@ class _HomeContentState extends State<HomeContent> {
                           _buildOngoingQuiz(),
                           _buildFinishedQuiz(),
                           SizedBox(
-                            height: _calculateBottomSafeArea(context),
+                            height: MediaQuery.of(context).padding.bottom + 100,
                           ), // Navigation bar ve Android sistem tuşları için dinamik boşluk
                         ],
                       );
@@ -943,84 +1355,64 @@ class _HomeContentState extends State<HomeContent> {
 
   Widget _buildHeader(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(20),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          // Sol taraf - Avatar ve kullanıcı bilgileri
-          Expanded(
-            flex: 3,
-            child: Row(
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(2),
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [Colors.blue, Colors.purple.shade500],
+          Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(2),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [Colors.blue, Colors.purple.shade500],
+                  ),
+                  shape: BoxShape.circle,
+                ),
+                child: CircleAvatar(
+                  radius: 24,
+                  backgroundColor: Colors.grey[900],
+                  backgroundImage:
+                      _authService.currentUser?.photoURL != null
+                          ? NetworkImage(_authService.currentUser!.photoURL!)
+                          : null,
+                  child:
+                      _authService.currentUser?.photoURL == null
+                          ? const Icon(Icons.person, color: Colors.white)
+                          : null,
+                ),
+              ),
+              const SizedBox(width: 12),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Hoş Geldin 👋',
+                    style: TextStyle(color: Colors.grey, fontSize: 14),
+                  ),
+                  Text(
+                    'Dr. $_userName',
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
                     ),
-                    shape: BoxShape.circle,
                   ),
-                  child: CircleAvatar(
-                    radius: 24,
-                    backgroundColor: Colors.grey[900],
-                    backgroundImage:
-                        _authService.currentUser?.photoURL != null
-                            ? NetworkImage(_authService.currentUser!.photoURL!)
-                            : null,
-                    child:
-                        _authService.currentUser?.photoURL == null
-                            ? const Icon(Icons.person, color: Colors.white)
-                            : null,
-                  ),
-                ),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        'Hoş Geldin 👋',
-                        style: TextStyle(color: Colors.grey, fontSize: 12),
-                      ),
-                      Text(
-                        'Dr. $_userName',
-                        style: TextStyle(
-                          fontSize: _calculateFontSize(_userName),
-                          fontWeight: FontWeight.bold,
-                        ),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+                ],
+              ),
+            ],
           ),
-          // Sağ taraf - Puan butonu
-          Expanded(
-            flex: 1,
-            child: _buildPointButton(
-              Icons.stars,
-              Colors.amber,
-              _calculateTotalPoints().toString(),
-            ),
+          Row(
+            children: [
+              _buildPointButton(
+                Icons.stars,
+                Colors.amber,
+                _calculateTotalPoints().toString(),
+              ),
+            ],
           ),
         ],
       ),
     );
-  }
-
-  // Kullanıcı adı uzunluğuna göre font boyutu hesaplama
-  double _calculateFontSize(String userName) {
-    if (userName.length <= 8) {
-      return 20.0;
-    } else if (userName.length <= 12) {
-      return 18.0;
-    } else if (userName.length <= 16) {
-      return 16.0;
-    } else {
-      return 14.0;
-    }
   }
 
   // Toplam puan hesaplama
@@ -1036,33 +1428,24 @@ class _HomeContentState extends State<HomeContent> {
 
   Widget _buildPointButton(IconData icon, Color color, String points) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       decoration: BoxDecoration(
         color: color.withOpacity(0.2),
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(12),
         border: Border.all(color: color.withOpacity(0.3), width: 1),
       ),
       child: Row(
-        mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, color: color, size: 16),
-          const SizedBox(width: 3),
+          Icon(icon, color: color),
+          const SizedBox(width: 4),
           Text(
             points,
-            style: TextStyle(
-              color: color, 
-              fontWeight: FontWeight.bold,
-              fontSize: 12,
-            ),
+            style: TextStyle(color: color, fontWeight: FontWeight.bold),
           ),
-          const SizedBox(width: 2),
+          const SizedBox(width: 4),
           Text(
             'Puan',
-            style: TextStyle(
-              color: color, 
-              fontWeight: FontWeight.bold,
-              fontSize: 10,
-            ),
+            style: TextStyle(color: color, fontWeight: FontWeight.bold),
           ),
         ],
       ),
@@ -1088,9 +1471,6 @@ class _HomeContentState extends State<HomeContent> {
           todayWeekday - 1; // 0-6 arası indeks (Pazartesi: 0, Pazar: 6)
       weeklyStatus[todayIndex] = true;
     }
-
-    // Bu haftaki giriş yapılan gün sayısını hesapla
-    final weeklyLoginDays = weeklyStatus.where((status) => status).length;
 
     return Container(
       margin: const EdgeInsets.symmetric(
@@ -1126,7 +1506,7 @@ class _HomeContentState extends State<HomeContent> {
               ), // Icon küçültüldü
               const SizedBox(width: 8),
               Text(
-                '$weeklyLoginDays Günlük Katılım!',
+                '${_userActivity?.dailyStreak ?? 1} Günlük Katılım!',
                 style: const TextStyle(
                   fontSize: 16, // Font size küçültüldü
                   fontWeight: FontWeight.bold,
@@ -1311,14 +1691,16 @@ class _HomeContentState extends State<HomeContent> {
           SizedBox(
             height: 24,
             child: ElevatedButton(
-              onPressed: () {
-                if (_dailyQuestion != null) {
-                  _showDailyQuestionDialog(context, _dailyQuestion!);
-                }
-              },
+              onPressed: _dailyQuestion?.isAnswered == true
+                  ? null
+                  : () {
+                      if (_dailyQuestion != null) {
+                        _showDailyQuestionDialog(context, _dailyQuestion!);
+                      }
+                    },
               style: ElevatedButton.styleFrom(
                 backgroundColor: _dailyQuestion?.isAnswered == true
-                    ? Colors.green.withOpacity(0.3)
+                    ? Colors.grey.withOpacity(0.3)
                     : Colors.white.withOpacity(0.2),
                 foregroundColor: Colors.white,
                 padding: EdgeInsets.zero,
@@ -1336,7 +1718,7 @@ class _HomeContentState extends State<HomeContent> {
                     const Icon(Icons.quiz, size: 10),
                   const SizedBox(width: 3),
                   Text(
-                    _dailyQuestion?.isAnswered == true ? 'Tekrar Bak' : 'Cevapla',
+                    _dailyQuestion?.isAnswered == true ? 'Çözüldü' : 'Cevapla',
                     style: const TextStyle(fontSize: 9),
                   ),
                 ],
@@ -1352,12 +1734,374 @@ class _HomeContentState extends State<HomeContent> {
     BuildContext context,
     DailyQuestion dailyQuestion,
   ) {
-    // Dialog yerine tam ekran quiz ekranına git
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => DailyQuestionScreen(dailyQuestion: dailyQuestion),
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => Dialog(
+        backgroundColor: Colors.transparent,
+        child: Container(
+          width: MediaQuery.of(context).size.width * 0.9,
+          constraints: BoxConstraints(
+            maxHeight: MediaQuery.of(context).size.height * 0.8,
+          ),
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [Colors.indigo.shade900, Colors.purple.shade900],
+            ),
+            borderRadius: BorderRadius.circular(24),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.3),
+                blurRadius: 20,
+                spreadRadius: 5,
+              ),
+            ],
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // Header
+              Container(
+                padding: const EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      Colors.orange.shade800,
+                      Colors.red.shade900,
+                    ],
+                  ),
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(24),
+                    topRight: Radius.circular(24),
+                  ),
+                ),
+                child: Row(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.2),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: const Icon(
+                        Icons.lightbulb,
+                        color: Colors.yellow,
+                        size: 24,
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    const Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Günün Sorusu',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                          Text(
+                            '20 Puan Kazanma Fırsatı!',
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: Colors.white70,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () => Navigator.of(context).pop(),
+                      child: Container(
+                        padding: const EdgeInsets.all(6),
+                        decoration: BoxDecoration(
+                          color: Colors.white.withOpacity(0.2),
+                          shape: BoxShape.circle,
+                        ),
+                        child: const Icon(
+                          Icons.close,
+                          color: Colors.white,
+                          size: 20,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              
+              // Content
+              Flexible(
+                child: SingleChildScrollView(
+                  padding: const EdgeInsets.all(20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Question
+                      Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          color: Colors.white.withOpacity(0.1),
+                          borderRadius: BorderRadius.circular(16),
+                          border: Border.all(
+                            color: Colors.white.withOpacity(0.2),
+                            width: 1,
+                          ),
+                        ),
+                        child: Text(
+                          dailyQuestion.question.question,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            height: 1.4,
+                          ),
+                        ),
+                      ),
+                      
+                      const SizedBox(height: 20),
+                      
+                      // Options
+                      ...List.generate(
+                        dailyQuestion.question.options.length,
+                        (index) => Container(
+                          margin: const EdgeInsets.only(bottom: 12),
+                          child: Material(
+                            color: Colors.transparent,
+                            child: InkWell(
+                              onTap: () {
+                                Navigator.of(context).pop();
+                                final isCorrect = index == dailyQuestion.question.correctAnswerIndex;
+                                _answerDailyQuestion(isCorrect, dailyQuestion, index);
+                              },
+                              borderRadius: BorderRadius.circular(16),
+                              child: Container(
+                                width: double.infinity,
+                                padding: const EdgeInsets.all(16),
+                                decoration: BoxDecoration(
+                                  color: Colors.white.withOpacity(0.05),
+                                  borderRadius: BorderRadius.circular(16),
+                                  border: Border.all(
+                                    color: Colors.white.withOpacity(0.2),
+                                    width: 1,
+                                  ),
+                                ),
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      width: 24,
+                                      height: 24,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white.withOpacity(0.1),
+                                        shape: BoxShape.circle,
+                                        border: Border.all(
+                                          color: Colors.white.withOpacity(0.3),
+                                          width: 2,
+                                        ),
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          String.fromCharCode(65 + index), // A, B, C, D
+                                          style: const TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 12,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(width: 16),
+                                    Expanded(
+                                      child: Text(
+                                        dailyQuestion.question.options[index],
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                    ),
+                                    const Icon(
+                                      Icons.arrow_forward_ios,
+                                      color: Colors.white54,
+                                      size: 16,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
+  }
+
+  Future<void> _answerDailyQuestion(
+    bool isCorrect,
+    DailyQuestion dailyQuestion,
+    int userAnswerIndex,
+  ) async {
+    // Loading kaldırıldı - hemen cevap gösterilecek
+    try {
+      final success = await _quizService.answerDailyQuestion(
+        questionId: dailyQuestion.id,
+        userAnswer: userAnswerIndex,
+        isCorrect: isCorrect,
+        question: dailyQuestion.question,
+      );
+
+      if (success) {
+        // Sonuç dialogunu hemen göster - Loading yok
+        showDialog(
+          context: context,
+          builder:
+              (context) => AlertDialog(
+                backgroundColor:
+                    Colors.grey.shade900, // App temasına uygun koyu renk
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                  side: BorderSide(
+                    color: isCorrect ? Colors.green : Colors.red,
+                    width: 2,
+                  ),
+                ),
+                title: Row(
+                  children: [
+                    Icon(
+                      isCorrect ? Icons.check_circle : Icons.cancel,
+                      color: isCorrect ? Colors.green : Colors.red,
+                      size: 28,
+                    ),
+                    const SizedBox(width: 8),
+                    Text(
+                      isCorrect ? 'Doğru Cevap!' : 'Yanlış Cevap',
+                      style: TextStyle(
+                        color: isCorrect ? Colors.green : Colors.red,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+                content: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: Colors.grey.shade800,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Text(
+                        'Doğru Cevap: ${dailyQuestion.question.options[dailyQuestion.question.correctAnswerIndex]}',
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                    Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color:
+                            isCorrect
+                                ? Colors.green.shade900
+                                : Colors.red.shade900,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Text(
+                        isCorrect
+                            ? '🎉 Tebrikler! 20 puan kazandınız!'
+                            : '😔 Yarın tekrar deneyin!',
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    if (dailyQuestion.question.explanation != null &&
+                        dailyQuestion.question.explanation!.isNotEmpty)
+                      Padding(
+                        padding: const EdgeInsets.only(top: 12),
+                        child: Container(
+                          padding: const EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                            color: Colors.indigo.shade900,
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                'Açıklama:',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              const SizedBox(height: 4),
+                              Text(
+                                dailyQuestion.question.explanation!,
+                                style: const TextStyle(color: Colors.white70),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                  ],
+                ),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                      // Hızlı güncelleme - sadece günün sorusunu güncelle
+                      setState(() {
+                        _dailyQuestion = _dailyQuestion?.copyWith(
+                          isAnswered: true,
+                          isCorrect: isCorrect,
+                        );
+                      });
+                    },
+                    style: TextButton.styleFrom(
+                      backgroundColor: Colors.indigo,
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 24,
+                        vertical: 12,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                    child: const Text(
+                      'Tamam',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ],
+              ),
+        );
+      }
+    } catch (e) {
+      print('Günün sorusu yanıtlama hatası: $e');
+      SnackBarUtils.showErrorSnackBar(
+        context,
+        'Bir hata oluştu, tekrar deneyin',
+      );
+    }
   }
 
   Widget _buildOngoingQuiz() {
@@ -1648,59 +2392,58 @@ class _HomeContentState extends State<HomeContent> {
       backgroundColor: Colors.transparent,
       isScrollControlled: true,
       builder:
-          (context) => SafeArea(
-            child: Container(
-              height: MediaQuery.of(context).size.height * 0.75 - MediaQuery.of(context).padding.bottom,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [Colors.indigo.shade900, Colors.black],
-                ),
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(30),
-                  topRight: Radius.circular(30),
-                ),
-                boxShadow: [
-                  BoxShadow(color: Colors.black.withOpacity(0.5), blurRadius: 15),
-                ],
+          (context) => Container(
+            height: MediaQuery.of(context).size.height * 0.75,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [Colors.indigo.shade900, Colors.black],
               ),
-              child: Column(
-                children: [
-                  // Üst başlık bölümü
-                  Container(
-                    padding: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [
-                          Colors.indigo.shade800,
-                          Colors.deepPurple.shade800,
-                        ],
-                      ),
-                      borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(30),
-                        topRight: Radius.circular(30),
-                      ),
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(30),
+                topRight: Radius.circular(30),
+              ),
+              boxShadow: [
+                BoxShadow(color: Colors.black.withOpacity(0.5), blurRadius: 15),
+              ],
+            ),
+            child: Column(
+              children: [
+                // Üst başlık bölümü
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        Colors.indigo.shade800,
+                        Colors.deepPurple.shade800,
+                      ],
                     ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Container(
-                              padding: const EdgeInsets.all(8),
-                              decoration: BoxDecoration(
-                                color: Colors.white.withOpacity(0.1),
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              child: const Icon(
-                                Icons.access_time,
-                                color: Colors.white,
-                              ),
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(30),
+                      topRight: Radius.circular(30),
+                    ),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              color: Colors.white.withOpacity(0.1),
+                              borderRadius: BorderRadius.circular(12),
                             ),
-                            const SizedBox(width: 12),
-                            const Text(
-                              'Devam Eden Quizler',
+                            child: const Icon(
+                              Icons.access_time,
+                              color: Colors.white,
+                            ),
+                          ),
+                          const SizedBox(width: 12),
+                          const Text(
+                            'Devam Eden Quizler',
                             style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
@@ -1727,20 +2470,10 @@ class _HomeContentState extends State<HomeContent> {
                               style: TextStyle(color: Colors.white70),
                             ),
                           )
-                          : Scrollbar(
-                            thickness: 4,
-                            radius: const Radius.circular(8),
-                            thumbVisibility: true,
-                            child: ListView.builder(
-                              physics: const AlwaysScrollableScrollPhysics(),
-                              padding: EdgeInsets.only(
-                                left: 16,
-                                right: 16,
-                                top: 16,
-                                bottom: MediaQuery.of(context).padding.bottom + 16,
-                              ),
-                              itemCount: _ongoingQuizzes.length,
-                              itemBuilder: (context, index) {
+                          : ListView.builder(
+                            padding: const EdgeInsets.all(16),
+                            itemCount: _ongoingQuizzes.length,
+                            itemBuilder: (context, index) {
                               final quiz = _ongoingQuizzes[index];
                               final progressValue =
                                   quiz.currentQuestionIndex != null &&
@@ -1836,12 +2569,10 @@ class _HomeContentState extends State<HomeContent> {
                               );
                             },
                           ),
-                        ),
                 ),
               ],
             ),
           ),
-        ),
     );
   }
 
@@ -2155,9 +2886,8 @@ class _HomeContentState extends State<HomeContent> {
       backgroundColor: Colors.transparent,
       isScrollControlled: true,
       builder:
-          (context) => SafeArea(
-            child: Container(
-              height: MediaQuery.of(context).size.height * 0.75 - MediaQuery.of(context).padding.bottom,
+          (context) => Container(
+            height: MediaQuery.of(context).size.height * 0.75,
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topLeft,
@@ -2234,20 +2964,10 @@ class _HomeContentState extends State<HomeContent> {
                               style: TextStyle(color: Colors.white70),
                             ),
                           )
-                          : Scrollbar(
-                            thickness: 4,
-                            radius: const Radius.circular(8),
-                            thumbVisibility: true,
-                            child: ListView.builder(
-                              physics: const AlwaysScrollableScrollPhysics(),
-                              padding: EdgeInsets.only(
-                                left: 16,
-                                right: 16,
-                                top: 16,
-                                bottom: MediaQuery.of(context).padding.bottom + 16,
-                              ),
-                              itemCount: _completedQuizzes.length,
-                              itemBuilder: (context, index) {
+                          : ListView.builder(
+                            padding: const EdgeInsets.all(16),
+                            itemCount: _completedQuizzes.length,
+                            itemBuilder: (context, index) {
                               final quiz = _completedQuizzes[index];
                               final successRate =
                                   quiz.successRate?.toInt() ?? 0;
@@ -2354,350 +3074,10 @@ class _HomeContentState extends State<HomeContent> {
                               );
                             },
                           ),
-                        ),
                 ),
               ],
             ),
           ),
-        ),
     );
   }
-}
-
-// Quiz kategorilerini döndüren metod
-List<Map<String, dynamic>> _getQuizCategories() {
-  return [
-    {
-      'title': 'Anestezi Uygulaması',
-      'icon': Icons.medical_information,
-      'questions': anesthesiaApplicationQuestions,
-      'color': Colors.orange.shade700,
-    },
-    {
-      'title': 'Solunum Sistemleri',
-      'icon': Icons.air,
-      'questions': respiratorySystemQuestions,
-      'color': Colors.teal.shade700,
-    },
-    {
-      'title': 'Kardiyovasküler Monitörizasyon',
-      'icon': Icons.monitor_heart,
-      'questions': cardiovascularMonitoringQuestions,
-      'color': Colors.red.shade700,
-    },
-    {
-      'title': 'Ameliyathane Ortamı',
-      'icon': Icons.local_hospital,
-      'questions': operatingRoomEnvironmentQuestions,
-      'color': Colors.deepPurple.shade700,
-    },
-    {
-      'title': 'Anestezi İş İstasyonu',
-      'icon': Icons.settings,
-      'questions': anesthesiaWorkstationQuestions,
-      'color': Colors.indigo.shade700,
-    },
-    {
-      'title': 'Bölüm 18 - Ameliyat Öncesi Değerlendirme',
-      'icon': Icons.assignment_turned_in,
-      'questions': preoperativeAssessmentQuestions,
-      'color': Colors.green.shade700,
-    },
-    {
-      'title': 'Bölüm 19 - Havayolu Yönetimi',
-      'icon': Icons.masks,
-      'questions': airwayManagementQuestions,
-      'color': Colors.amber.shade700,
-    },
-    {
-      'title': 'Kardiyovasküler Fizyoloji ve Anestezi',
-      'icon': Icons.favorite,
-      'questions': cardiovascularPhysiologyQuestions,
-      'color': Colors.red.shade700,
-    },
-    {
-      'title': 'Kardiyovasküler Cerrahide Anestezi',
-      'icon': Icons.medical_services,
-      'questions': cardiovascularSurgeryQuestions,
-      'color': Colors.purple.shade700,
-    },
-    {
-      'title': 'Kardiyovasküler Dışı Monitörizasyon',
-      'icon': Icons.sensors,
-      'questions': nonCardiovascularMonitoringQuestions,
-      'color': Colors.orange.shade700,
-    },
-    {
-      'title': 'Farmakolojik Prensipler',
-      'icon': Icons.science,
-      'questions': pharmacologicalPrinciplesQuestions,
-      'color': Colors.lightGreen.shade700,
-    },
-    {
-      'title': 'İnhalasyon Anestezikleri',
-      'icon': Icons.air_rounded,
-      'questions': inhalationAnestheticsQuestions,
-      'color': Colors.teal.shade700,
-    },
-    {
-      'title': 'İntravenöz Anestezikler',
-      'icon': Icons.local_hospital_outlined,
-      'questions': intravenousAnestheticsQuestions,
-      'color': Colors.indigo.shade700,
-    },
-    {
-      'title': 'Analjezik Ajanlar',
-      'icon': Icons.healing,
-      'questions': analgesicAgentsQuestions,
-      'color': Colors.brown.shade700,
-    },
-    {
-      'title': 'Nöromüsküler Blokaj Ajanları',
-      'icon': Icons.accessibility_new,
-      'questions': neuromuscularBlockingAgentsQuestions,
-      'color': Colors.blueGrey.shade700,
-    },
-    {
-      'title': 'Kolinesteraz İnhibitörleri',
-      'icon': Icons.science_outlined,
-      'questions': cholinesteraseInhibitorsQuestions,
-      'color': Colors.deepPurple.shade700,
-    },
-    {
-      'title': 'Antikolinerjik İlaçlar',
-      'icon': Icons.medication_liquid,
-      'questions': anticholinergicDrugsQuestions,
-      'color': Colors.lime.shade700,
-    },
-    {
-      'title': 'Adrenerjik Agonistler ve Antagonistler',
-      'icon': Icons.medication_outlined,
-      'questions': adrenergicDrugsQuestions,
-      'color': Colors.amber.shade700,
-    },
-    {
-      'title': 'Hipotansif Ajanlar',
-      'icon': Icons.trending_down,
-      'questions': hypotensiveAgentsQuestions,
-      'color': Colors.red.shade700,
-    },
-    {
-      'title': 'Lokal Anestezikler',
-      'icon': Icons.pin_drop,
-      'questions': localAnestheticsQuestions,
-      'color': Colors.green.shade700,
-    },
-    {
-      'title': 'Anestezide Yardımcı İlaçlar',
-      'icon': Icons.medication_liquid_outlined,
-      'questions': auxiliaryDrugsQuestions,
-      'color': Colors.orange.shade700,
-    },
-    {
-      'title': 'Preoperatif Değerlendirme',
-      'icon': Icons.assessment,
-      'questions': preoperativeAssessmentQuestions,
-      'color': Colors.blueGrey.shade700,
-    },
-    {
-      'title': 'Solunum Fizyolojisi ve Anestezi',
-      'icon': Icons.air_rounded,
-      'questions': respiratoryPhysiologyQuestions,
-      'color': Colors.teal.shade700,
-    },
-    {
-      'title': 'Solunum Hastalıklarında Anestezi',
-      'icon': Icons.air_sharp,
-      'questions': respiratoryDiseasesQuestions,
-      'color': Colors.cyan.shade700,
-    },
-    {
-      'title': 'Algoloji',
-      'icon': Icons.psychology,
-      'questions': painManagementQuestions,
-      'color': Colors.pink.shade700,
-    },
-    {
-      'title': 'Bölüm 28 - Nörolojik ve Psikiyatrik Hastalığı Olanlarda Anestezi',
-      'icon': Icons.psychology_outlined,
-      'questions': neurologicalPsychiatricAnesthesiaQuestions,
-      'color': Colors.deepOrange.shade700,
-    },
-    {
-      'title': 'Bölüm 37 - Otolaringoloji-Baş ve Boyun Cerrahisinde Anestezi',
-      'icon': Icons.hearing,
-      'questions': otolaryngologyHeadNeckSurgeryQuestions,
-      'color': Colors.teal.shade700,
-    },
-    {
-      'title': 'Bölüm 35 - Endokrin Hastalıklarda Anestezi',
-      'icon': Icons.medical_services,
-      'questions': endocrineDiseaseAnesthesiaQuestions,
-      'color': Colors.purple.shade700,
-    },
-    {
-      'title': 'Bölüm 29 - Nöromüsküler Hastalığı Olanlarda Anestezi',
-      'icon': Icons.accessibility_new,
-      'questions': neuromuscularDiseasesAnesthesiaQuestions,
-      'color': Colors.indigo.shade700,
-    },
-    {
-      'title': 'Bölüm 43 - Geriatrik Anestezi',
-      'icon': Icons.elderly,
-      'questions': geriatricAnesthesiaQuestions,
-      'color': Colors.blueGrey.shade700,
-    },
-    {
-      'title': 'Bölüm 39 - Travma ve Acil Cerrahide Anestezi',
-      'icon': Icons.emergency,
-      'questions': traumaEmergencyAnesthesiaQuestions,
-      'color': Colors.red.shade700,
-    },
-    {
-      'title': 'Bölüm 38 - Ortopedik Cerrahide Anestezi',
-      'icon': Icons.medical_services,
-      'questions': orthopedicAnesthesiaQuestions,
-      'color': Colors.orange.shade700,
-    },
-    {
-      'title': 'Bölüm 48 - Geliştirilmiş İyileştirme Protokolleri ve Perioperatif Sonuçların Optimizasyonu',
-      'icon': Icons.trending_up,
-      'questions': enhancedRecoveryProtocolsQuestions,
-      'color': Colors.green.shade700,
-    },
-    {
-      'title': 'Bölüm 54 - Anestezi Komplikasyonları',
-      'icon': Icons.warning,
-      'questions': anesthesiaComplicationsQuestions,
-      'color': Colors.red.shade700,
-    },
-    {
-      'title': 'Bölüm 32 - Genitoüriner Cerrahide Anestezi',
-      'icon': Icons.medical_services,
-      'questions': genitourinaryAnesthesiaQuestions,
-      'color': Colors.blue.shade700,
-    },
-    {
-      'title': 'Bölüm 36 - Oftalmik Cerrahide Anestezi',
-      'icon': Icons.visibility,
-      'questions': ophthalmicAnesthesiaQuestions,
-      'color': Colors.indigo.shade700,
-    },
-    {
-      'title': 'Bölüm 30 - Böbrek Fizyolojisi ve Anestezi',
-      'icon': Icons.water_drop,
-      'questions': renalPhysiologyAnesthesiaQuestions,
-      'color': Colors.blue.shade700,
-    },
-    {
-      'title': 'Bölüm 45 - Spinal, Epidural ve Kaudal Bloklar',
-      'icon': Icons.medical_information,
-      'questions': spinalEpiduralCaudalBlocksQuestions,
-      'color': Colors.deepOrange.shade700,
-    },
-    {
-      'title': 'Bölüm 59 - Güvenlik, Kalite ve Performans İyileştirme',
-      'icon': Icons.security,
-      'questions': safetyQualityPerformanceImprovementQuestions,
-      'color': Colors.green.shade700,
-    },
-    // Eksik kategoriler
-    {
-      'title': 'Bölüm 51 - Sıvı Yönetimi ve Kan Ürünleri Tedavisi',
-      'icon': Icons.water_drop,
-      'questions': fluidManagementBloodProductsQuestions,
-      'color': Colors.blue.shade700,
-    },
-    {
-      'title': 'Bölüm 25 - Toraks Cerrahisinde Anestezi',
-      'icon': Icons.medical_services,
-      'questions': thoracicSurgeryAnesthesiaQuestions,
-      'color': Colors.purple.shade700,
-    },
-    {
-      'title': 'Bölüm 52 - Termoregülasyon, Hipotermi ve Malign Hipertermi',
-      'icon': Icons.thermostat,
-      'questions': thermoregulationHypothermiaMalignantHyperthermiaQuestions,
-      'color': Colors.orange.shade700,
-    },
-    {
-      'title': 'Bölüm 44 - Günübirlik ve Ameliyathane Dışı Anestezi',
-      'icon': Icons.local_hospital,
-      'questions': outpatientAnesthesiaQuestions,
-      'color': Colors.green.shade700,
-    },
-    {
-      'title': 'Bölüm 55 - Kardiyopulmoner Resüsitasyon',
-      'icon': Icons.healing,
-      'questions': cardiopulmonaryResuscitationQuestions,
-      'color': Colors.red.shade700,
-    },
-    {
-      'title': 'Bölüm 57 - Yoğun Bakım Uygulamalarında Karşılaşılan Sorunlar',
-      'icon': Icons.local_hospital,
-      'questions': intensiveCareProblemsQuestions,
-      'color': Colors.indigo.shade700,
-    },
-    {
-      'title': 'Bölüm 56 - Postanestezik Bakım',
-      'icon': Icons.medical_information,
-      'questions': postanestheticCareQuestions,
-      'color': Colors.teal.shade700,
-    },
-    {
-      'title': 'Bölüm 42 - Pediatrik Anestezi',
-      'icon': Icons.child_care,
-      'questions': pediatricAnesthesiaQuestions,
-      'color': Colors.pink.shade700,
-    },
-    // Kalan eksik kategoriler
-    {
-      'title': 'Kronik Ağrı Tedavisi',
-      'icon': Icons.healing,
-      'questions': chronicPainTreatmentQuestions,
-      'color': Colors.red.shade700,
-    },
-    {
-      'title': 'Sıvı ve Elektrolit Dengesizlikleri',
-      'icon': Icons.water_drop,
-      'questions': fluidElectrolyteImbalanceManagementQuestions,
-      'color': Colors.blue.shade700,
-    },
-    {
-      'title': 'Nörofizyoloji ve Anestezi',
-      'icon': Icons.psychology,
-      'questions': neurophysiologyAnesthesiaQuestions,
-      'color': Colors.purple.shade700,
-    },
-    {
-      'title': 'Perioperatif Beslenme',
-      'icon': Icons.restaurant,
-      'questions': perioperativeIntensiveCareNutritionQuestions,
-      'color': Colors.green.shade700,
-    },
-    {
-      'title': 'Hepatik Fizyoloji ve Anestezi',
-      'icon': Icons.medical_services,
-      'questions': hepaticPhysiologyAnesthesiaQuestions,
-      'color': Colors.orange.shade700,
-    },
-    {
-      'title': 'Obstetrik Anestezi',
-      'icon': Icons.pregnant_woman,
-      'questions': obstetricAnesthesiaQuestions,
-      'color': Colors.pink.shade700,
-    },
-    {
-      'title': 'Asit-Baz Yönetimi',
-      'icon': Icons.science,
-      'questions': acidBaseManagementQuestions,
-      'color': Colors.teal.shade700,
-    },
-    {
-      'title': 'Karaciğer Hastalığı Anestezi',
-      'icon': Icons.medical_information,
-      'questions': liverDiseaseAnesthesiaQuestions,
-      'color': Colors.brown.shade700,
-    },
-  ];
 }

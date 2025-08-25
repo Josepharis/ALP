@@ -1288,4 +1288,36 @@ final List<Question> neuromuscularBlockingAgentsQuestions = [
     category: "nöromüsküler bloker ajanlar",
     difficulty: 2,
   ),
+
+  Question(
+    question: "Hangisi psödokolinesteraz eksikliğinde görülmez?",
+    options: [
+      "Süksinilkolin etki süresinde uzama",
+      "Miyorelaksasyonun derinleşmesi",
+      "Faz II blok gelişimi",
+      "Antikolinesterazlarla düzelme",
+      "Plazma kolinesteraz düzeylerinde düşüklük",
+    ],
+    correctAnswerIndex: 3,
+    explanation:
+        "Psödokolinesteraz eksikliği, süksinilkolin metabolizmasını bozarak etki süresinde belirgin uzamaya (6-8 saat) neden olur. Faz II blok gelişse bile antikolinesterazlar bu durumu düzeltemez (tersine kötüleştirebilir).",
+    category: "nöromüsküler bloker ajanlar",
+    difficulty: 3,
+  ),
+
+  Question(
+    question: "Hangisi süksinilkolin kullanımında potasyum düzeylerinde yükselmeye neden olmaz?",
+    options: [
+      "Yanık hastalar (7 gün sonra)",
+      "Kronik böbrek yetmezliği",
+      "Masif travma (48 saat sonra)",
+      "Omurilik yaralanması (6 ay içinde)",
+      "Miyotonik distrofi",
+    ],
+    correctAnswerIndex: 1,
+    explanation:
+        "Süksinilkolin, ekstrajunctional nikotinik reseptörlerin upregülasyonu nedeniyle yanık/travma/omurilik yaralanması ve nöromüsküler hastalıklarda (örn. miyotonik distrofi) hiperkalemi yapar. Kronik böbrek yetmezliği tek başına risk faktörü değildir.",
+    category: "nöromüsküler bloker ajanlar",
+    difficulty: 3,
+  ),
 ];

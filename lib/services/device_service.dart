@@ -6,6 +6,15 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import '../models/device_info.dart';
 
+// Custom exception for device limit exceeded
+class DeviceLimitExceededException implements Exception {
+  final String message;
+  DeviceLimitExceededException(this.message);
+  
+  @override
+  String toString() => message;
+}
+
 class DeviceService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final FirebaseAuth _auth = FirebaseAuth.instance;

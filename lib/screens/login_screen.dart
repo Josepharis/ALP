@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
 import '../theme/app_theme.dart';
 import 'package:flutter/gestures.dart';
 import './register_screen.dart';
@@ -105,7 +103,15 @@ class _LoginScreenState extends State<LoginScreen>
     final email = _emailController.text.trim();
     if (email.isEmpty) {
       setState(() {
-        _errorMessage = 'Şifre sıfırlamak için e-posta adresinizi girin';
+        _errorMessage = '❌ E-posta Adresi Gerekli\n\n💡 Şifre sıfırlama e-postası gönderebilmek için e-posta adresinizi girin.\n\nKayıt olduğunuz e-posta adresini kullanın.';
+      });
+      return;
+    }
+
+    // E-posta formatı kontrolü
+    if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(email)) {
+      setState(() {
+        _errorMessage = '❌ E-posta Formatı Geçersiz\n\n💡 Lütfen geçerli bir e-posta adresi girin.\n\nÖrnek: kullanici@example.com';
       });
       return;
     }
@@ -119,10 +125,92 @@ class _LoginScreenState extends State<LoginScreen>
       await _authService.resetPassword(email);
 
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Şifre sıfırlama e-postası gönderildi'),
-            backgroundColor: Colors.green,
+        // Başarı mesajını daha detaylı göster
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            backgroundColor: Colors.grey.shade900,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+              side: BorderSide(color: Colors.green, width: 2),
+            ),
+            title: Row(
+              children: [
+                Icon(Icons.mark_email_read, color: Colors.green, size: 28),
+                SizedBox(width: 12),
+                Text(
+                  'E-posta Gönderildi!',
+                  style: TextStyle(
+                    color: Colors.green,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Şifre sıfırlama e-postası gönderildi:',
+                  style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+                ),
+                SizedBox(height: 8),
+                Container(
+                  padding: EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: Colors.grey.shade800,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Text(
+                    email,
+                    style: TextStyle(
+                      color: Colors.blue.shade300,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 16),
+                Container(
+                  padding: EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: Colors.blue.shade900,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        '📧 Yapmanız gerekenler:',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(height: 8),
+                      Text(
+                        '• E-posta kutunuzu kontrol edin\n• Spam/önemsiz klasörünü kontrol edin\n• E-postadaki linke tıklayın\n• Yeni şifrenizi belirleyin\n• Uygulamaya geri dönün',
+                        style: TextStyle(color: Colors.white70),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(),
+                style: TextButton.styleFrom(
+                  backgroundColor: Colors.green,
+                  foregroundColor: Colors.white,
+                  padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+                child: Text('Anladım', style: TextStyle(fontWeight: FontWeight.bold)),
+              ),
+            ],
           ),
         );
       }

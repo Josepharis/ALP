@@ -12,7 +12,7 @@ import '../models/user_activity.dart';
 import '../screens/quiz_screen.dart';
 import 'category_mistakes_screen.dart';
 import '../utils/event_bus.dart';
-import '../screens/personalized_quiz_generator_sheet.dart';
+
 
 class MistakesScreen extends StatefulWidget {
   const MistakesScreen({super.key});
@@ -183,16 +183,14 @@ class _MistakesScreenState extends State<MistakesScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child:
-          _isLoading
-              ? const Center(child: CircularProgressIndicator())
-              : RefreshIndicator(
-                onRefresh: _loadMistakes,
-                child:
-                    _mistakesByCategory.isEmpty
-                        ? _buildEmptyView()
-                        : _buildCategoryCards(),
-              ),
+      child: _isLoading
+          ? const Center(child: CircularProgressIndicator())
+          : RefreshIndicator(
+              onRefresh: _loadMistakes,
+              child: _mistakesByCategory.isEmpty
+                  ? _buildEmptyView()
+                  : _buildCategoryCards(),
+            ),
     );
   }
 

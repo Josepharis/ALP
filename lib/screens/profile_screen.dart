@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../services/auth_service.dart';
-import '../services/quiz_service.dart';
+
 import '../services/user_service.dart';
 import '../models/user_activity.dart';
 import 'dart:io';
@@ -11,12 +11,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import '../services/leaderboard_service.dart';
 import 'dart:math' as math;
-import '../utils/snackbar_utils.dart';
 import '../utils/event_bus.dart';
 import '../services/device_service.dart';
 import '../models/device_info.dart';
-
-import 'login_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -27,7 +24,7 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   final AuthService _authService = AuthService();
-  final QuizService _quizService = QuizService();
+
   final UserService _userService = UserService();
   final LeaderboardService _leaderboardService = LeaderboardService();
   final DeviceService _deviceService = DeviceService();
@@ -40,7 +37,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   int _currentRank = 0;
 
   bool _isLoading = false;
-  bool _isUploading = false;
+
   Map<String, dynamic>? _userProfile;
   UserActivity? _userActivity;
   File? _imageFile;
@@ -458,7 +455,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     final bottomPadding = MediaQuery.of(context).viewPadding.bottom;
 
     return Container(
@@ -536,6 +532,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
         return Container(
           height: finalHeight,
+          margin: const EdgeInsets.only(bottom: 20), // Bottom navigation bar'dan uzaklaştır
           decoration: BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topLeft,
@@ -603,12 +600,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           context,
                           onTap: () => _showEditProfileModal(context),
                         ),
-                        _buildSettingItem(
-                          'Bildirimler',
-                          Icons.notifications,
-                          context,
-                          onTap: () => _showNotificationsSettingsModal(context),
-                        ),
+
                         _buildSettingItem(
                           'Cihazlarım',
                           Icons.devices,
@@ -635,31 +627,116 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             // Çıkış onay dialogu göster
                             final shouldSignOut = await showDialog<bool>(
                               context: context,
-                              builder:
-                                  (context) => AlertDialog(
-                                    title: const Text('Çıkış Yap'),
-                                    content: const Text(
-                                      'Hesaptan çıkmak istediğinizden emin misiniz?',
+                              builder: (context) => AlertDialog(
+                                backgroundColor: Colors.transparent,
+                                content: Container(
+                                  decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                      begin: Alignment.topLeft,
+                                      end: Alignment.bottomRight,
+                                      colors: [Colors.indigo.shade900, Colors.black],
                                     ),
-                                    actions: [
-                                      TextButton(
-                                        onPressed:
-                                            () => Navigator.pop(context, false),
-                                        child: const Text('İptal'),
-                                      ),
-                                      TextButton(
-                                        onPressed:
-                                            () => Navigator.pop(context, true),
-                                        child: const Text('Çıkış Yap'),
+                                    borderRadius: BorderRadius.circular(20),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black.withOpacity(0.3),
+                                        blurRadius: 20,
+                                        spreadRadius: 5,
                                       ),
                                     ],
                                   ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(24),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        // İkon
+                                        Container(
+                                          padding: const EdgeInsets.all(16),
+                                          decoration: BoxDecoration(
+                                            color: Colors.red.withOpacity(0.2),
+                                            shape: BoxShape.circle,
+                                          ),
+                                          child: const Icon(
+                                            Icons.logout,
+                                            color: Colors.red,
+                                            size: 32,
+                                          ),
+                                        ),
+                                        const SizedBox(height: 16),
+                                        // Başlık
+                                        const Text(
+                                          'Çıkış Yap',
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                        const SizedBox(height: 12),
+                                        // İçerik
+                                        const Text(
+                                          'Uygulamadan çıkmak istediğinize emin misiniz?',
+                                          style: TextStyle(
+                                            color: Colors.white70,
+                                            fontSize: 16,
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                        const SizedBox(height: 24),
+                                        // Butonlar
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              child: TextButton(
+                                                onPressed: () => Navigator.pop(context, false),
+                                                style: TextButton.styleFrom(
+                                                  padding: const EdgeInsets.symmetric(vertical: 12),
+                                                ),
+                                                child: const Text(
+                                                  'İptal',
+                                                  style: TextStyle(
+                                                    color: Colors.white70,
+                                                    fontSize: 16,
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            const SizedBox(width: 12),
+                                            Expanded(
+                                              child: ElevatedButton(
+                                                onPressed: () => Navigator.pop(context, true),
+                                                style: ElevatedButton.styleFrom(
+                                                  backgroundColor: Colors.red,
+                                                  padding: const EdgeInsets.symmetric(vertical: 12),
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius: BorderRadius.circular(8),
+                                                  ),
+                                                ),
+                                                child: const Text(
+                                                  'Çıkış Yap',
+                                                  style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 16,
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
                             );
 
                             if (shouldSignOut == true) {
                               print('🚪 Profile çıkış başlatılıyor...');
 
-                              // 1. ÖNCELİKLE stream'leri iptal et (Firebase token geçerli iken)
+                              // 1. ÖNCE stream'leri iptal et
                               try {
                                 print('📡 Stream\'ler iptal ediliyor...');
                                 if (_rankSubscription != null) {
@@ -678,7 +755,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 );
                               }
 
-                              // 2. SONRA Firebase çıkış yap
+                              // 2. SONRA Firebase çıkış yap (bu işlem tüm stream'leri temizler)
                               try {
                                 await _authService.signOut();
                                 print('✅ Firebase çıkış tamamlandı');
@@ -686,7 +763,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 print('⚠️ Firebase çıkış hatası: $e');
                               }
 
-                              // 3. Her durumda login'e yönlendir
+                              // 3. EN SON login sayfasına yönlendir
                               if (mounted) {
                                 Navigator.of(
                                   context,
@@ -728,222 +805,116 @@ class _ProfileScreenState extends State<ProfileScreen> {
       context: context,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
-      builder:
-          (context) => Container(
-            padding: EdgeInsets.only(
-              bottom: MediaQuery.of(context).viewInsets.bottom,
-            ),
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [Colors.indigo.shade900, Colors.black],
-              ),
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(30),
-                topRight: Radius.circular(30),
-              ),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(20),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const Text(
-                    'Profili Düzenle',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-
-                  TextField(
-                    controller: nameController,
-                    decoration: const InputDecoration(
-                      labelText: 'İsim',
-                      border: OutlineInputBorder(),
-                      filled: true,
-                      fillColor: Colors.white10,
-                    ),
-                  ),
-                  const SizedBox(height: 12),
-
-                  TextField(
-                    controller: titleController,
-                    decoration: const InputDecoration(
-                      labelText: 'Ünvan',
-                      border: OutlineInputBorder(),
-                      filled: true,
-                      fillColor: Colors.white10,
-                    ),
-                  ),
-                  const SizedBox(height: 12),
-
-                  TextField(
-                    controller: phoneController,
-                    decoration: const InputDecoration(
-                      labelText: 'Telefon',
-                      border: OutlineInputBorder(),
-                      filled: true,
-                      fillColor: Colors.white10,
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      TextButton(
-                        onPressed: () => Navigator.pop(context),
-                        child: const Text('İptal'),
-                      ),
-                      const SizedBox(width: 12),
-                      ElevatedButton(
-                        onPressed: () async {
-                          final success = await _userService.updateUserProfile(
-                            displayName: nameController.text.trim(),
-                            title: titleController.text.trim(),
-                            phone: phoneController.text.trim(),
-                          );
-
-                          // ignore: use_build_context_synchronously
-                          if (success && context.mounted) {
-                            Navigator.pop(context);
-                            _loadUserData();
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text(
-                                  'Profil bilgileriniz güncellendi',
-                                ),
-                                backgroundColor: Colors.green,
-                              ),
-                            );
-                          }
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.indigo,
-                        ),
-                        child: const Text('Kaydet'),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
+      builder: (context) => Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [Colors.indigo.shade900, Colors.black],
           ),
-    );
-  }
-
-  // Bildirim ayarları modalı
-  void _showNotificationsSettingsModal(BuildContext context) {
-    bool enablePush =
-        _userProfile?['notificationSettings']?['enablePushNotifications'] ??
-        true;
-    bool enableEmail =
-        _userProfile?['notificationSettings']?['enableEmailNotifications'] ??
-        true;
-    bool enableDaily =
-        _userProfile?['notificationSettings']?['enableDailyReminders'] ?? true;
-
-    showModalBottomSheet(
-      context: context,
-      backgroundColor: Colors.transparent,
-      builder:
-          (context) => StatefulBuilder(
-            builder:
-                (context, setState) => Container(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: [Colors.indigo.shade900, Colors.black],
-                    ),
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(30),
-                      topRight: Radius.circular(30),
-                    ),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(20),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const Text(
-                          'Bildirim Ayarları',
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
-                        ),
-                        const SizedBox(height: 20),
-
-                        SwitchListTile(
-                          title: const Text('Push Bildirimleri'),
-                          value: enablePush,
-                          onChanged: (value) {
-                            setState(() => enablePush = value);
-                          },
-                          activeColor: Colors.indigo,
-                        ),
-
-                        SwitchListTile(
-                          title: const Text('Email Bildirimleri'),
-                          value: enableEmail,
-                          onChanged: (value) {
-                            setState(() => enableEmail = value);
-                          },
-                          activeColor: Colors.indigo,
-                        ),
-
-                        SwitchListTile(
-                          title: const Text('Günlük Hatırlatıcılar'),
-                          value: enableDaily,
-                          onChanged: (value) {
-                            setState(() => enableDaily = value);
-                          },
-                          activeColor: Colors.indigo,
-                        ),
-
-                        const SizedBox(height: 20),
-                        ElevatedButton(
-                          onPressed: () async {
-                            final success = await _userService
-                                .updateNotificationSettings(
-                                  enablePushNotifications: enablePush,
-                                  enableEmailNotifications: enableEmail,
-                                  enableDailyReminders: enableDaily,
-                                );
-
-                            // ignore: use_build_context_synchronously
-                            if (success && context.mounted) {
-                              Navigator.pop(context);
-                              _loadUserData();
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text(
-                                    'Bildirim ayarlarınız güncellendi',
-                                  ),
-                                  backgroundColor: Colors.green,
-                                ),
-                              );
-                            }
-                          },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.indigo,
-                            minimumSize: const Size(double.infinity, 50),
-                          ),
-                          child: const Text('Kaydet'),
-                        ),
-                      ],
-                    ),
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(30),
+            topRight: Radius.circular(30),
+          ),
+        ),
+        child: SafeArea(
+          child: SingleChildScrollView(
+            padding: EdgeInsets.only(
+              left: 20,
+              right: 20,
+              top: 20,
+              bottom: MediaQuery.of(context).viewInsets.bottom + 20,
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Text(
+                  'Profili Düzenle',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
                   ),
                 ),
+                const SizedBox(height: 20),
+                TextField(
+                  controller: nameController,
+                  decoration: const InputDecoration(
+                    labelText: 'İsim',
+                    border: OutlineInputBorder(),
+                    filled: true,
+                    fillColor: Colors.white10,
+                  ),
+                ),
+                const SizedBox(height: 12),
+                TextField(
+                  controller: titleController,
+                  decoration: const InputDecoration(
+                    labelText: 'Ünvan',
+                    border: OutlineInputBorder(),
+                    filled: true,
+                    fillColor: Colors.white10,
+                  ),
+                ),
+                const SizedBox(height: 12),
+                TextField(
+                  controller: phoneController,
+                  decoration: const InputDecoration(
+                    labelText: 'Telefon',
+                    border: OutlineInputBorder(),
+                    filled: true,
+                    fillColor: Colors.white10,
+                  ),
+                ),
+                const SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    TextButton(
+                      onPressed: () => Navigator.pop(context),
+                      child: const Text(
+                        'İptal',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    ElevatedButton(
+                      onPressed: () async {
+                        final success = await _userService.updateUserProfile(
+                          displayName: nameController.text.trim(),
+                          title: titleController.text.trim(),
+                          phone: phoneController.text.trim(),
+                        );
+                        if (success && context.mounted) {
+                          Navigator.pop(context);
+                          _loadUserData();
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Profil bilgileriniz güncellendi'),
+                              backgroundColor: Colors.green,
+                            ),
+                          );
+                        }
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.indigo,
+                      ),
+                      child: const Text(
+                        'Kaydet',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
+        ),
+      ),
     );
   }
+
+
 
   // Gizlilik ayarları modalı
   void _showPrivacySettingsModal(BuildContext context) {
@@ -956,130 +927,34 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
     showModalBottomSheet(
       context: context,
+      isScrollControlled: true,
       backgroundColor: Colors.transparent,
-      builder:
-          (context) => StatefulBuilder(
-            builder:
-                (context, setState) => Container(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: [Colors.indigo.shade900, Colors.black],
-                    ),
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(30),
-                      topRight: Radius.circular(30),
-                    ),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(20),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const Text(
-                          'Gizlilik Ayarları',
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
-                        ),
-                        const SizedBox(height: 20),
-
-                        SwitchListTile(
-                          title: const Text('Profilimi Diğerlerine Göster'),
-                          value: showProfile,
-                          onChanged: (value) {
-                            setState(() => showProfile = value);
-                          },
-                          activeColor: Colors.indigo,
-                        ),
-
-                        SwitchListTile(
-                          title: const Text('Liderlik Tablosunda Göster'),
-                          value: showInLeaderboard,
-                          onChanged: (value) {
-                            setState(() => showInLeaderboard = value);
-                          },
-                          activeColor: Colors.indigo,
-                        ),
-
-                        SwitchListTile(
-                          title: const Text('Kullanım Verilerini Paylaş'),
-                          subtitle: const Text(
-                            'Uygulama deneyimini iyileştirmek için anonim kullanım verileri',
-                          ),
-                          value: shareUsage,
-                          onChanged: (value) {
-                            setState(() => shareUsage = value);
-                          },
-                          activeColor: Colors.indigo,
-                        ),
-
-                        const SizedBox(height: 20),
-                        ElevatedButton(
-                          onPressed: () async {
-                            final success = await _userService
-                                .updatePrivacySettings(
-                                  showProfileToOthers: showProfile,
-                                  showActivityInLeaderboard: showInLeaderboard,
-                                  shareUsageData: shareUsage,
-                                );
-
-                            // ignore: use_build_context_synchronously
-                            if (success && context.mounted) {
-                              Navigator.pop(context);
-                              _loadUserData();
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text(
-                                    'Gizlilik ayarlarınız güncellendi',
-                                  ),
-                                  backgroundColor: Colors.green,
-                                ),
-                              );
-                            }
-                          },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.indigo,
-                            minimumSize: const Size(double.infinity, 50),
-                          ),
-                          child: const Text('Kaydet'),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-          ),
-    );
-  }
-
-  // Yardım modalı
-  void _showHelpModal(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      backgroundColor: Colors.transparent,
-      builder:
-          (context) => Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [Colors.indigo.shade900, Colors.black],
-              ),
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(30),
-                topRight: Radius.circular(30),
-              ),
+      builder: (context) => StatefulBuilder(
+        builder: (context, setState) => Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [Colors.indigo.shade900, Colors.black],
             ),
-            child: Padding(
-              padding: const EdgeInsets.all(20),
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(30),
+              topRight: Radius.circular(30),
+            ),
+          ),
+          child: SafeArea(
+            child: SingleChildScrollView(
+              padding: EdgeInsets.only(
+                left: 20,
+                right: 20,
+                top: 20,
+                bottom: MediaQuery.of(context).viewInsets.bottom + 20,
+              ),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   const Text(
-                    'Yardım ve Destek',
+                    'Gizlilik Ayarları',
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -1088,65 +963,180 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   const SizedBox(height: 20),
 
-                  ListTile(
-                    leading: const Icon(Icons.email, color: Colors.indigo),
-                    title: const Text('İletişim'),
-                    subtitle: const Text('destek@anestezi.app'),
-                    onTap: () {
-                      // Email gönder
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text(
-                            'Email gönderme özelliği yakında eklenecek',
-                          ),
-                        ),
-                      );
+                  SwitchListTile(
+                    title: const Text('Profilimi Diğerlerine Göster'),
+                    value: showProfile,
+                    onChanged: (value) {
+                      setState(() => showProfile = value);
                     },
+                    activeColor: Colors.indigo,
                   ),
 
-                  ListTile(
-                    leading: const Icon(
-                      Icons.description_outlined,
-                      color: Colors.indigo,
+                  SwitchListTile(
+                    title: const Text('Liderlik Tablosunda Göster'),
+                    value: showInLeaderboard,
+                    onChanged: (value) {
+                      setState(() => showInLeaderboard = value);
+                    },
+                    activeColor: Colors.indigo,
+                  ),
+
+                  SwitchListTile(
+                    title: const Text('Kullanım Verilerini Paylaş'),
+                    subtitle: const Text(
+                      'Uygulama deneyimini iyileştirmek için anonim kullanım verileri',
                     ),
-                    title: const Text('Kullanım Kılavuzu'),
-                    onTap: () {
-                      // Kullanım kılavuzunu aç
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Kullanım kılavuzu yakında eklenecek'),
-                        ),
-                      );
+                    value: shareUsage,
+                    onChanged: (value) {
+                      setState(() => shareUsage = value);
                     },
-                  ),
-
-                  ListTile(
-                    leading: const Icon(Icons.info, color: Colors.indigo),
-                    title: const Text('Hakkında'),
-                    subtitle: const Text('Versiyon 1.0.0'),
-                    onTap: () {
-                      // Hakkında sayfasını aç
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Hakkında sayfası yakında eklenecek'),
-                        ),
-                      );
-                    },
+                    activeColor: Colors.indigo,
                   ),
 
                   const SizedBox(height: 20),
                   ElevatedButton(
-                    onPressed: () => Navigator.pop(context),
+                    onPressed: () async {
+                      final success = await _userService
+                          .updatePrivacySettings(
+                            showProfileToOthers: showProfile,
+                            showActivityInLeaderboard: showInLeaderboard,
+                            shareUsageData: shareUsage,
+                          );
+
+                      // ignore: use_build_context_synchronously
+                      if (success && context.mounted) {
+                        Navigator.pop(context);
+                        _loadUserData();
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text(
+                              'Gizlilik ayarlarınız güncellendi',
+                            ),
+                            backgroundColor: Colors.green,
+                          ),
+                        );
+                      }
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.indigo,
                       minimumSize: const Size(double.infinity, 50),
                     ),
-                    child: const Text('Kapat'),
+                    child: const Text(
+                      'Kaydet',
+                      style: TextStyle(color: Colors.white),
+                    ),
                   ),
                 ],
               ),
             ),
           ),
+        ),
+      ),
+    );
+  }
+
+  // Yardım modalı
+  void _showHelpModal(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) => Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [Colors.indigo.shade900, Colors.black],
+          ),
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(30),
+            topRight: Radius.circular(30),
+          ),
+        ),
+        child: SafeArea(
+          child: SingleChildScrollView(
+            padding: EdgeInsets.only(
+              left: 20,
+              right: 20,
+              top: 20,
+              bottom: MediaQuery.of(context).viewInsets.bottom + 20,
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Text(
+                  'Yardım ve Destek',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+                const SizedBox(height: 20),
+
+                ListTile(
+                  leading: const Icon(Icons.email, color: Colors.indigo),
+                  title: const Text('İletişim'),
+                  subtitle: const Text('destek@anestezi.app'),
+                  onTap: () {
+                    // Email gönder
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text(
+                          'Email gönderme özelliği yakında eklenecek',
+                        ),
+                      ),
+                    );
+                  },
+                ),
+
+                ListTile(
+                  leading: const Icon(
+                    Icons.description_outlined,
+                    color: Colors.indigo,
+                  ),
+                  title: const Text('Kullanım Kılavuzu'),
+                  onTap: () {
+                    // Kullanım kılavuzunu aç
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Kullanım kılavuzu yakında eklenecek'),
+                      ),
+                    );
+                  },
+                ),
+
+                ListTile(
+                  leading: const Icon(Icons.info, color: Colors.indigo),
+                  title: const Text('Hakkında'),
+                  subtitle: const Text('Versiyon 1.0.0'),
+                  onTap: () {
+                    // Hakkında sayfasını aç
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Hakkında sayfası yakında eklenecek'),
+                      ),
+                    );
+                  },
+                ),
+
+                const SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () => Navigator.pop(context),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.indigo,
+                    minimumSize: const Size(double.infinity, 50),
+                  ),
+                  child: const Text(
+                    'Kapat',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 
@@ -1350,7 +1340,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             Icons.emoji_events_outlined,
           ),
           _buildStatRow(
-            'En İyi Streak',
+            'En İyi Seri',
             '$streak gün',
             Colors.orange,
             Icons.local_fire_department,
@@ -1431,22 +1421,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
       context: context,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
-      builder: (context) => StatefulBuilder(
-        builder: (context, setState) => Container(
-          height: MediaQuery.of(context).size.height * 0.8,
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [Colors.indigo.shade900, Colors.black],
-            ),
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(30),
-              topRight: Radius.circular(30),
-            ),
+      builder: (context) => Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [Colors.indigo.shade900, Colors.black],
           ),
-          child: Padding(
-            padding: const EdgeInsets.all(20),
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(30),
+            topRight: Radius.circular(30),
+          ),
+        ),
+        child: SafeArea(
+          child: SingleChildScrollView(
+            padding: EdgeInsets.only(
+              left: 20,
+              right: 20,
+              top: 20,
+              bottom: MediaQuery.of(context).viewInsets.bottom + 20,
+            ),
             child: Column(
               children: [
                 Row(
@@ -1476,7 +1470,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
                 const SizedBox(height: 20),
-                Expanded(
+                SizedBox(
+                  height: 300, // Sabit yükseklik ver
                   child: FutureBuilder<List<DeviceInfo>>(
                     future: _deviceService.getUserDevices(),
                     builder: (context, snapshot) {
@@ -1511,16 +1506,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         itemCount: devices.length,
                         itemBuilder: (context, index) {
                           final device = devices[index];
-                          return _buildDeviceCard(device, setState);
+                          return _buildDeviceCard(device, (value) {});
                         },
                       );
                     },
                   ),
                 ),
                 const SizedBox(height: 20),
-                TextButton(
+                ElevatedButton(
                   onPressed: () => Navigator.pop(context),
-                  child: const Text('Kapat'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.indigo,
+                    minimumSize: const Size(double.infinity, 50),
+                  ),
+                  child: const Text(
+                    'Kapat',
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ),
               ],
             ),
@@ -1629,16 +1631,31 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       context: context,
                       builder: (context) => AlertDialog(
                         backgroundColor: Colors.indigo.shade900,
-                        title: const Text('Cihazı Sil'),
-                        content: const Text('Bu cihazı silmek istediğinize emin misiniz?'),
+                        title: const Text(
+                          'Cihazı Sil',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        content: const Text(
+                          'Bu cihazı silmek istediğinize emin misiniz?',
+                          style: TextStyle(color: Colors.white70),
+                        ),
                         actions: [
                           TextButton(
                             onPressed: () => Navigator.pop(context, false),
-                            child: const Text('İptal'),
+                            child: const Text(
+                              'İptal',
+                              style: TextStyle(color: Colors.white),
+                            ),
                           ),
-                          TextButton(
+                          ElevatedButton(
                             onPressed: () => Navigator.pop(context, true),
-                            child: const Text('Sil', style: TextStyle(color: Colors.red)),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.red,
+                            ),
+                            child: const Text(
+                              'Sil',
+                              style: TextStyle(color: Colors.white),
+                            ),
                           ),
                         ],
                       ),

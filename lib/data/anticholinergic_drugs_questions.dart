@@ -676,4 +676,372 @@ final List<Question> anticholinergicDrugsQuestions = [
         'Glikopirolat, santrale geçmez ve periferik muskarinik reseptörlere selektif etkili olduğundan yan etki profili düşüktür.',
     difficulty: 2,
   ),
+
+  Question(
+    id: 'anti_46',
+    question: 'Hangisi santral antikolinerjik sendromun belirtilerinden değildir?',
+    options: [
+      'Hiporefleksi',
+      'Ajitasyon',
+      'Halüsinasyonlar',
+      'Konfüzyon',
+      'Ateş',
+    ],
+    correctAnswerIndex: 0,
+    explanation:
+        'Santral antikolinerjik sendromda hiperrefleksi, ajitasyon, delirium ve ateş görülür.',
+    difficulty: 2,
+  ),
+
+  Question(
+    id: 'anti_47',
+    question: 'Hangisi atropinin kardiyak etkilerindendir?',
+    options: [
+      'Başlangıçta paradoksal bradikardi',
+      'QT kısalması',
+      'PR aralığında uzama',
+      'Ventriküler taşikardi',
+      'AV blok gelişimi',
+    ],
+    correctAnswerIndex: 0,
+    explanation:
+        'Düşük doz atropin, santral vagal stimülasyon yaparak paradoksal bradikardiye neden olabilir.',
+    difficulty: 3,
+  ),
+
+  Question(
+    id: 'anti_48',
+    question: 'Hangisi antikolinerjik ilaçların oküler etkilerindendir?',
+    options: [
+      'Midriyazis',
+      'Akomodasyon spazmı',
+      'Göz içi basıncında azalma',
+      'Lakrimasyonda artış',
+      'Siliyer kas kontraksiyonu',
+    ],
+    correctAnswerIndex: 0,
+    explanation:
+        'Antikolinerjikler midriyazis ve siklopleji yapar; miyozis yapmaz.',
+    difficulty: 2,
+  ),
+
+  Question(
+    id: 'anti_49',
+    question: 'Hangisi antikolinerjik ilaçların kardiyovasküler etkilerindendir?',
+    options: [
+      'Vazokonstriksiyon',
+      'Koroner arter spazmı',
+      'Periferik vazodilatasyon',
+      'Hipertansiyon',
+      'Myokard depresyonu',
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        'Antikolinerjikler vazomotor tonusu azaltarak periferik vazodilatasyon yapar.',
+    difficulty: 2,
+  ),
+
+  Question(
+    id: 'anti_50',
+    question: 'Hangisi antikolinerjik ilaçların üriner sistem üzerine etkilerindendir?',
+    options: [
+      'Diürez artışı',
+      'Mesane kapasitesinde azalma',
+      'Detrüsör kas kontraksiyonunda artış',
+      'İdrar retansiyonu',
+      'Üreter motilitesinde artış',
+    ],
+    correctAnswerIndex: 3,
+    explanation:
+        'Antikolinerjikler detrüsör kasını inhibe ederek idrar retansiyonuna neden olur.',
+    difficulty: 2,
+  ),
+
+  Question(
+    id: 'anti_51',
+    question: 'Hangisi antikolinerjik ilaçların termoregülasyon üzerine etkisidir?',
+    options: [
+      'Ateş düşürücü etki',
+      'Vücut ısısında düşme',
+      'Terlemede artış',
+      'Periferik vazokonstriksiyon',
+      'Santral termoregülasyonda depresyon',
+    ],
+    correctAnswerIndex: 4,
+    explanation:
+        'Antikolinerjikler terlemeyi azaltarak hipertermiye neden olabilir.',
+    difficulty: 2,
+  ),
+
+  Question(
+    id: 'anti_52',
+    question: 'Hangisi antikolinerjik ilaçların kontrendike olduğu durumlardan değildir?',
+    options: [
+      'Hipotiroidi',
+      'Glokom',
+      'Prostat hipertrofisi',
+      'Myastenia gravis',
+      'İleus',
+    ],
+    correctAnswerIndex: 0,
+    explanation:
+        'Antikolinerjikler glokom, prostat hipertrofisi, myastenia gravis ve ileusta kontrendikedir.',
+    difficulty: 2,
+  ),
+
+  Question(
+    id: 'anti_53',
+    question: 'Hangisi antikolinerjik ilaçların nöromusküler kavşak üzerine etkisidir?',
+    options: [
+      'Asetilkolin salınımını artırma',
+      'Nikotinik reseptör blokajı',
+      'Kas gevşetici etki',
+      'Motor sinir terminalinde depolarizasyon',
+      'Refleks aktivitede artış',
+    ],
+    correctAnswerIndex: 1,
+    explanation:
+        'Yüksek doz antikolinerjikler nikotinik reseptörleri de bloke edebilir.',
+    difficulty: 3,
+  ),
+
+  Question(
+    id: 'anti_54',
+    question: 'Hangisi antikolinerjik ilaçların tercih edildiği cerrahi prosedürlerdendir?',
+    options: [
+      'Katarakt cerrahisi',
+      'Glokom cerrahisi',
+      'Ürolojik cerrahi',
+      'Nöroşirürji',
+      'Kardiyak cerrahi',
+    ],
+    correctAnswerIndex: 0,
+    explanation:
+        'Antikolinerjikler katarakt cerrahisinde midriyazis için kullanılır; glokomda kontrendikedir.',
+    difficulty: 2,
+  ),
+
+  Question(
+    id: 'anti_55',
+    question: 'Hangisi antikolinerjik ilaçların antidopaminerjik etkisinden faydalanılan durumdur?',
+    options: [
+      'Parkinson hastalığı',
+      'Şizofreni',
+      'Depresyon',
+      'Migren',
+      'Epilepsi',
+    ],
+    correctAnswerIndex: 0,
+    explanation:
+        'Antikolinerjikler bazal gangliyonlardaki dopamin/asetilkolin dengesini düzenler.',
+    difficulty: 2,
+  ),
+
+  Question(
+    id: 'anti_56',
+    question: 'Hangisi antikolinerjik ilaçların pediatrik hastalarda kullanımında dikkat edilmesi gereken durumdur?',
+    options: [
+      'Hipoaktivite',
+      'Ateş yükselmesi',
+      'Bradikardi',
+      'Hipoglisemi',
+      'Hipertansiyon',
+    ],
+    correctAnswerIndex: 1,
+    explanation:
+        'Antikolinerjikler terlemeyi baskılayarak hipertermiye neden olabilir.',
+    difficulty: 2,
+  ),
+
+  Question(
+    id: 'anti_57',
+    question: 'Hangisi antikolinerjik ilaçların emzirme döneminde kullanımında dikkat edilmesi gereken durumdur?',
+    options: [
+      'Süt üretimini artırma',
+      'Bebekte irritabilite',
+      'Bebekte hipoglisemi',
+      'Bebekte hiperaktivite',
+      'Bebekte bradikardi',
+    ],
+    correctAnswerIndex: 1,
+    explanation:
+        'Antikolinerjikler süte geçerek bebekte santral antikolinerjik etki yapabilir.',
+    difficulty: 2,
+  ),
+
+  Question(
+    id: 'anti_58',
+    question: 'Hangisi antikolinerjik ilaçların postoperatif kullanım endikasyonlarındandır?',
+    options: [
+      'Ağrı tedavisi',
+      'Bulantı-kusma önleme',
+      'İdrar retansiyonu tedavisi',
+      'Sedasyon sağlama',
+      'Nöbet önleme',
+    ],
+    correctAnswerIndex: 1,
+    explanation:
+        'Skopolamin gibi antikolinerjikler motion sickness ve postoperatif bulantı-kusmada etkilidir.',
+    difficulty: 2,
+  ),
+
+  Question(
+    id: 'anti_59',
+    question: 'Atropin dozu arttıkça hangi belirti öncelikle ortaya çıkar?',
+    options: [
+      'Bradikardi',
+      'Midriyazis',
+      'İshal',
+      'Terleme',
+      'Mide bulantısı',
+    ],
+    correctAnswerIndex: 1,
+    explanation:
+        'Atropin, doza bağlı olarak önce bradikardi paradoksu-ağız kuruluğu-azalmış terleme-sonra taşikardi ve göz pupilla genişlemesi (midriyazis) yapar, sonra sekresyonları azaltır, ardından kalp hızını daha da artırır.',
+    difficulty: 2,
+  ),
+
+  Question(
+    id: 'anti_60',
+    question: 'Aşağıdaki antimuskariniklerden hangisi üriner inkontinans tedavisinde kullanılır?',
+    options: [
+      'Atropin',
+      'Glikopirolat',
+      'Skopolamin',
+      'Oksibutinin',
+      'İpratropium',
+    ],
+    correctAnswerIndex: 3,
+    explanation:
+        'Oksibutinin, mesane düz kası üzerindeki muskarinik reseptörleri bloke ederek üriner urgency ve inkontinansı azaltır.',
+    difficulty: 2,
+  ),
+
+  Question(
+    id: 'anti_61',
+    question: 'Aşağıdaki antikolinerjik etkilerden hangisi en sık yaşlı hastalarda deliryuma neden olur?',
+    options: [
+      'Bronkodilatasyon',
+      'Salivasyonun artması',
+      'Santral sedasyon ve konfüzyon',
+      'Bradikardi',
+      'Hipotansiyon',
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        'Özellikle atropin ve skopolamin, yaşlı hastalarda konfüzyon ve ajitasyon gibi santral antikolinerjik sendroma yol açabilir.',
+    difficulty: 2,
+  ),
+
+  Question(
+    id: 'anti_62',
+    question: 'Glikopirolat hangi özelliği sayesinde preanestezik ajan olarak daha güvenilirdir?',
+    options: [
+      'Kas gevşetici etkisi olması',
+      'Santral etkisinin olması',
+      'Sekresyonları artırması',
+      'Bradikardi riskinin daha az olması',
+      'Hepatik yıkıma uğraması',
+    ],
+    correctAnswerIndex: 3,
+    explanation:
+        'Glikopirolat, kuaterner amin yapısı nedeniyle santral geçiş yapmaz, bradikardi riski düşük, etkisi öngörülebilirdir.',
+    difficulty: 2,
+  ),
+
+  Question(
+    id: 'anti_63',
+    question: 'Antikolinerjik ilaçların etkilerinden hangisi hemen fark edilir?',
+    options: [
+      'Kuru ağız',
+      'Kabızlık',
+      'İdrar retansiyonu',
+      'Midriyazis',
+      'Taşikardi',
+    ],
+    correctAnswerIndex: 0,
+    explanation:
+        'Ağız kuruluğu, antimuskarinik etkinin en erken ve sık fark edilen belirtisidir.',
+    difficulty: 1,
+  ),
+
+  Question(
+    id: 'anti_64',
+    question: 'Aşağıdaki antimuskariniklerden hangisi inhaler bronkodilatör olarak kullanılır?',
+    options: [
+      'Atropin',
+      'Oksibutinin',
+      'Skopolamin',
+      'İpratropium',
+      'Glikopirolat',
+    ],
+    correctAnswerIndex: 3,
+    explanation:
+        'İpratropium, inhalasyon yoluyla verilen M3 reseptör antagonisti → bronkodilatör etki sağlar, KOAH\'ta yaygındır.',
+    difficulty: 2,
+  ),
+
+  Question(
+    id: 'anti_65',
+    question: 'Antikolinerjik ilaçların gözdeki etkilerinden biri aşağıdakilerden hangisidir?',
+    options: [
+      'Miyozis',
+      'Gözyaşı artışı',
+      'Akkomodasyon spazmı',
+      'Midriyazis ve siklopleji',
+      'Göz içi basıncında azalma',
+    ],
+    correctAnswerIndex: 3,
+    explanation:
+        'Atropin, skopolamin gibi antimuskarinikler, midriyazis (pupil genişlemesi) ve siklopleji (lens akkomodasyonunun kaybı) yapar.',
+    difficulty: 2,
+  ),
+
+  Question(
+    id: 'anti_66',
+    question: 'Skopolaminin antiemetik etkisi hangi reseptör blokajı ile ilgilidir?',
+    options: [
+      'H1',
+      'D2',
+      'M1',
+      '5-HT3',
+      'NK1',
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        'Skopolamin, vestibüler sistemdeki M1 muskarinik reseptörlerini inhibe eder → hareket hastalığında antiemetik etki gösterir.',
+    difficulty: 2,
+  ),
+
+  Question(
+    id: 'anti_67',
+    question: 'Aşağıdaki antimuskarinik ilaçlardan hangisi gebelik kategorisi açısından en güvenli olanlardan biridir?',
+    options: [
+      'Skopolamin',
+      'Atropin',
+      'Glikopirolat',
+      'İpratropium',
+      'Oksibutinin',
+    ],
+    correctAnswerIndex: 3,
+    explanation:
+        'İpratropium, inhalasyonla verildiğinden sistemik emilim azdır ve gebelikte genellikle güvenli kabul edilir (Kategori B).',
+    difficulty: 2,
+  ),
+
+  Question(
+    id: 'anti_68',
+    question: 'Aşağıdakilerden hangisi antikolinerjik ilaçların periferik etkileri arasında yer almaz?',
+    options: [
+      'Ağız kuruluğu',
+      'Terleme artışı',
+      'İdrar retansiyonu',
+      'Midriyazis',
+      'Kabızlık',
+    ],
+    correctAnswerIndex: 1,
+    explanation:
+        'Antikolinerjikler, ter bezlerindeki muskarinik reseptörleri bloke ederek terlemeyi azaltır → terleme artışı görülmez.',
+    difficulty: 2,
+  ),
 ];
