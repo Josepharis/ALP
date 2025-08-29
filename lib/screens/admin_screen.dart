@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../l10n/app_localizations.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../services/auth_service.dart';
 import '../services/admin_service.dart';
@@ -225,18 +226,18 @@ class _AdminScreenState extends State<AdminScreen>
                 context: context,
                 builder:
                     (context) => AlertDialog(
-                      title: const Text('Admin Çıkışı'),
-                      content: const Text(
-                        'Admin panelinden çıkmak istediğinizden emin misiniz?',
+                      title: Text(AppLocalizations.of(context)!.adminLogout),
+                      content: Text(
+                        AppLocalizations.of(context)!.adminLogoutConfirm,
                       ),
                       actions: [
                         TextButton(
                           onPressed: () => Navigator.pop(context, false),
-                          child: const Text('İptal'),
+                          child: Text(AppLocalizations.of(context)!.cancel),
                         ),
                         TextButton(
                           onPressed: () => Navigator.pop(context, true),
-                          child: const Text('Çıkış Yap'),
+                          child: Text(AppLocalizations.of(context)!.logout),
                         ),
                       ],
                     ),
@@ -252,7 +253,7 @@ class _AdminScreenState extends State<AdminScreen>
                   if (mounted) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
-                        content: Text('Çıkış yapılırken bir hata oluştu: $e'),
+                        content: Text('${AppLocalizations.of(context)!.logoutError}: $e'),
                         backgroundColor: Colors.red,
                       ),
                     );
@@ -270,8 +271,8 @@ class _AdminScreenState extends State<AdminScreen>
   Widget _buildNavigation() {
     final navItems = [
       {'icon': Icons.dashboard_outlined, 'label': 'Dashboard'},
-      {'icon': Icons.quiz_outlined, 'label': 'Sorular'},
-      {'icon': Icons.analytics_outlined, 'label': 'Analitik'},
+      {'icon': Icons.quiz_outlined, 'label': 'Questions'},
+      {'icon': Icons.analytics_outlined, 'label': AppLocalizations.of(context)!.analytics},
     ];
 
     return Container(
@@ -358,8 +359,8 @@ class _AdminScreenState extends State<AdminScreen>
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
-                'Genel Bakış',
+              Text(
+                AppLocalizations.of(context)!.generalOverview,
                 style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
@@ -383,7 +384,7 @@ class _AdminScreenState extends State<AdminScreen>
                   }
                 },
                 icon: const Icon(Icons.refresh, color: Colors.white, size: 24),
-                tooltip: 'İstatistikleri Yenile',
+                tooltip: AppLocalizations.of(context)!.refreshStats,
               ),
             ],
           ),
@@ -412,7 +413,7 @@ class _AdminScreenState extends State<AdminScreen>
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Veri Bulunamadı',
+                          AppLocalizations.of(context)!.dataNotFound,
                           style: TextStyle(
                             color: Colors.orange,
                             fontWeight: FontWeight.bold,
@@ -420,7 +421,7 @@ class _AdminScreenState extends State<AdminScreen>
                           ),
                         ),
                         Text(
-                          'Soru verileri yüklenmemiş. Veri migrationi yapın.',
+                          AppLocalizations.of(context)!.dataMigrationNeeded,
                           style: TextStyle(color: Colors.white70, fontSize: 12),
                         ),
                       ],
@@ -432,7 +433,7 @@ class _AdminScreenState extends State<AdminScreen>
                       backgroundColor: Colors.orange.withOpacity(0.2),
                       foregroundColor: Colors.orange,
                     ),
-                    child: const Text('Migrasyon Yap'),
+                    child: Text(AppLocalizations.of(context)!.performMigration),
                   ),
                 ],
               ),
@@ -454,14 +455,14 @@ class _AdminScreenState extends State<AdminScreen>
 
     final stats = [
       {
-        'title': 'Toplam Kullanıcı',
+        'title': AppLocalizations.of(context)!.totalUsers,
         'value': '${_userStats['totalUsers'] ?? 0}',
         'icon': Icons.people,
         'color': Colors.blue,
-        'subtitle': '${_userStats['newUsersLastWeek'] ?? 0} yeni (7 gün)',
+        'subtitle': '${_userStats['newUsersLastWeek'] ?? 0} ${AppLocalizations.of(context)!.newUsers7Days}',
       },
       {
-        'title': 'Aktif Kullanıcı',
+        'title': AppLocalizations.of(context)!.activeUsers,
         'value': '${_userStats['activeUsersToday'] ?? 0}',
         'icon': Icons.trending_up,
         'color': Colors.green,
@@ -480,7 +481,7 @@ class _AdminScreenState extends State<AdminScreen>
         'value': '${_userStats['totalQuizzes'] ?? 0}',
         'icon': Icons.assessment,
         'color': Colors.purple,
-        'subtitle': '${_userStats['recentQuizzes'] ?? 0} son 7 gün',
+        'subtitle': '${_userStats['recentQuizzes'] ?? 0} ${AppLocalizations.of(context)!.last7DaysQuizzes}',
       },
     ];
 
@@ -813,7 +814,7 @@ class _AdminScreenState extends State<AdminScreen>
             ),
             const SizedBox(height: 16),
             Text(
-              'Soru listesini görmek için\nbir kategori seçin',
+              AppLocalizations.of(context)!.selectCategoryToView,
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: Colors.white.withOpacity(0.7),
@@ -837,7 +838,7 @@ class _AdminScreenState extends State<AdminScreen>
             ),
             const SizedBox(height: 16),
             Text(
-              'Bu kategoride henüz soru yok',
+              AppLocalizations.of(context)!.noCategoryQuestions,
               style: TextStyle(
                 color: Colors.white.withOpacity(0.7),
                 fontSize: 16,
@@ -845,7 +846,7 @@ class _AdminScreenState extends State<AdminScreen>
             ),
             const SizedBox(height: 8),
             Text(
-              'Yeni soru ekleyebilir veya veri aktarımı yapabilirsiniz',
+              AppLocalizations.of(context)!.addNewQuestions,
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: Colors.white.withOpacity(0.5),
@@ -1158,16 +1159,16 @@ class _AdminScreenState extends State<AdminScreen>
                     Colors.green,
                   ),
                   _buildAnalyticsCard(
-                    'Haftalık Büyüme',
+                    AppLocalizations.of(context)!.weeklyGrowth,
                     '${_userStats['newUsersLastWeek'] ?? 0}',
-                    'Yeni kullanıcı',
+                    AppLocalizations.of(context)!.newUser,
                     Icons.person_add,
                     Colors.blue,
                   ),
                   _buildAnalyticsCard(
                     'Aktif Oranı',
                     '${_calculateActivePercentage()}%',
-                    'Günlük aktif',
+                    AppLocalizations.of(context)!.dailyActive,
                     Icons.analytics,
                     Colors.orange,
                   ),
@@ -1222,7 +1223,7 @@ class _AdminScreenState extends State<AdminScreen>
                     Icon(Icons.speed, color: Colors.green, size: 18),
                     const SizedBox(width: 8),
                     Text(
-                      'Performans: Mükemmel',
+                      AppLocalizations.of(context)!.performanceExcellent,
                       style: TextStyle(
                         color: Colors.green,
                         fontSize: 13,
@@ -1237,7 +1238,7 @@ class _AdminScreenState extends State<AdminScreen>
                     Icon(Icons.security, color: Colors.blue, size: 18),
                     const SizedBox(width: 8),
                     Text(
-                      'Güvenlik: Güvenli',
+                      AppLocalizations.of(context)!.securitySecure,
                       style: TextStyle(
                         color: Colors.blue,
                         fontSize: 13,
@@ -1289,7 +1290,7 @@ class _AdminScreenState extends State<AdminScreen>
       context: context,
       builder:
           (context) => AlertDialog(
-            title: const Text('Gerçek Veri Aktarımı'),
+            title: Text(AppLocalizations.of(context)!.realDataMigration),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -1303,7 +1304,7 @@ class _AdminScreenState extends State<AdminScreen>
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Row(
+                      Row(
                         children: [
                           Icon(
                             Icons.info_outline,
@@ -1312,30 +1313,30 @@ class _AdminScreenState extends State<AdminScreen>
                           ),
                           SizedBox(width: 8),
                           Text(
-                            'Bu işlem hakkında:',
+                            AppLocalizations.of(context)!.aboutThisProcess,
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                         ],
                       ),
                       const SizedBox(height: 8),
-                      Text('• Mevcut soru sayısı: $existingCount'),
-                      const Text(
-                        '• 24 kategoriden tüm gerçek soruları aktaracak',
+                      Text('• ${AppLocalizations.of(context)!.existingQuestionCount}: $existingCount'),
+                      Text(
+                        AppLocalizations.of(context)!.willTransferAllQuestions,
                       ),
-                      const Text('• Her kategori kendi klasöründe organize'),
-                      const Text('• Zaten var olan sorular atlanacak'),
-                      const Text('• Yüzlerce gerçek soru eklenecek'),
+                      Text(AppLocalizations.of(context)!.organizedInFolders),
+                      Text(AppLocalizations.of(context)!.existingSkipped),
+                      Text(AppLocalizations.of(context)!.hundredsAdded),
                     ],
                   ),
                 ),
                 const SizedBox(height: 16),
-                const Text(
-                  'Data ve Questions klasörlerindeki TÜM gerçek soruları Firestore\'a aktarmak istediğinizden emin misiniz?',
+                Text(
+                  AppLocalizations.of(context)!.confirmDataMigration,
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 8),
-                const Text(
-                  '⚠️ Bu işlem 2-3 dakika sürebilir.',
+                Text(
+                  AppLocalizations.of(context)!.processTakes2to3Minutes,
                   style: TextStyle(color: Colors.orange),
                 ),
               ],
@@ -1343,7 +1344,7 @@ class _AdminScreenState extends State<AdminScreen>
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context),
-                child: const Text('İptal'),
+                child: Text(AppLocalizations.of(context)!.cancel),
               ),
               ElevatedButton(
                 onPressed: () {
@@ -1354,7 +1355,7 @@ class _AdminScreenState extends State<AdminScreen>
                   backgroundColor: Colors.green,
                   foregroundColor: Colors.white,
                 ),
-                child: const Text('Gerçek Soruları Ekle'),
+                child: Text(AppLocalizations.of(context)!.addRealQuestions),
               ),
             ],
           ),
@@ -1396,7 +1397,7 @@ class _AdminScreenState extends State<AdminScreen>
         builder:
             (context) => AlertDialog(
               title: Text(
-                result['success'] ? 'Organize Veri Başarılı!' : 'Hata!',
+                result['success'] ? AppLocalizations.of(context)!.organizeDataSuccessful : AppLocalizations.of(context)!.error,
                 style: TextStyle(
                   color: result['success'] ? Colors.green : Colors.red,
                 ),
@@ -1417,14 +1418,14 @@ class _AdminScreenState extends State<AdminScreen>
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              '🎉 ${result['totalMigrated']} soru organize şekilde aktarıldı!',
+                              '🎉 ${result['totalMigrated']} ${AppLocalizations.of(context)!.questionsOrganizedTransferred}',
                               style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
                             if (result['totalErrors'] > 0)
                               Text(
-                                '⚠️ ${result['totalErrors']} hataya rastlandı',
+                                '⚠️ ${result['totalErrors']} ${AppLocalizations.of(context)!.errorsEncountered}',
                               ),
                             const SizedBox(height: 8),
                             const Text(
@@ -1470,7 +1471,7 @@ class _AdminScreenState extends State<AdminScreen>
 
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Organize veri aktarımında hata: $e'),
+          content: Text('${AppLocalizations.of(context)!.organizeDataTransferError}: $e'),
           backgroundColor: Colors.red,
         ),
       );

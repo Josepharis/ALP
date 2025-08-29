@@ -1,16 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/foundation.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 import 'services/device_service.dart';
 import 'services/notification_service.dart';
+import 'services/language_service.dart';
+import 'l10n/app_localizations.dart';
 
 import 'screens/splash_screen.dart';
 import 'screens/login_screen.dart';
 import 'screens/register_screen.dart';
 import 'screens/home_screen.dart';
 import 'screens/admin_screen.dart';
+
 
 import 'theme/app_theme.dart';
 
@@ -70,6 +76,19 @@ void main() async {
     final notificationService = NotificationService();
     await notificationService.initialize();
     await notificationService.requestPermissions();
+    
+    // Android bildirim durumunu kontrol et
+    await notificationService.checkAndroidNotificationStatus();
+    
+    // Test bildirimi gönder (sadece debug modda)
+    if (kDebugMode) {
+      await Future.delayed(const Duration(seconds: 2));
+      await notificationService.sendTestNotification();
+      
+      // Hemen 1 dakika sonra test bildirimi planla
+      await notificationService.sendImmediateTestNotification();
+    }
+    
     print('✅ NotificationService initialized');
     
   } catch (e, stackTrace) {
@@ -78,7 +97,12 @@ void main() async {
     print('Stack trace: $stackTrace');
   }
 
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => LanguageService(),
+      child: const MyApp(),
+    ),
+  );
   print('📱 Application started');
 }
 
@@ -87,29 +111,49 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'ALP',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        brightness: Brightness.dark,
-        scaffoldBackgroundColor: Colors.black,
-        primaryColor: Colors.indigo,
-        colorScheme: ColorScheme.dark(
-          primary: Colors.indigo,
-          secondary: Colors.blueAccent,
-        ),
-        textTheme: const TextTheme(
-          bodyLarge: TextStyle(color: Colors.white),
-          bodyMedium: TextStyle(color: Colors.white),
-        ),
-      ),
-      initialRoute: '/splash',
-      routes: {
-        '/splash': (context) => const SplashScreen(),
-        '/home': (context) => const HomeScreen(),
-        '/login': (context) => const LoginScreen(),
-        '/register': (context) => const RegisterScreen(),
-        '/admin': (context) => const AdminScreen(),
+    return Consumer<LanguageService>(
+      builder: (context, languageService, child) {
+        return MaterialApp(
+          title: 'ALP',
+          debugShowCheckedModeBanner: false,
+          
+          // Localization delegates
+          localizationsDelegates: const [
+            AppLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          
+          // Supported locales
+          supportedLocales: LanguageService.supportedLocales,
+          
+          // Current locale
+          locale: languageService.currentLocale,
+          
+          theme: ThemeData(
+            brightness: Brightness.dark,
+            scaffoldBackgroundColor: Colors.black,
+            primaryColor: Colors.indigo,
+            colorScheme: ColorScheme.dark(
+              primary: Colors.indigo,
+              secondary: Colors.blueAccent,
+            ),
+            textTheme: const TextTheme(
+              bodyLarge: TextStyle(color: Colors.white),
+              bodyMedium: TextStyle(color: Colors.white),
+            ),
+          ),
+          initialRoute: '/splash',
+          routes: {
+            '/splash': (context) => const SplashScreen(),
+            '/home': (context) => const HomeScreen(),
+            '/login': (context) => const LoginScreen(),
+            '/register': (context) => const RegisterScreen(),
+            '/admin': (context) => const AdminScreen(),
+
+          },
+        );
       },
     );
   }

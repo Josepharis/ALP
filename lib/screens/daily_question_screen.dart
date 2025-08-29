@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../l10n/app_localizations.dart';
 import 'package:flutter/services.dart';
 import '../models/daily_question.dart';
 import '../services/quiz_service.dart';
@@ -90,7 +91,7 @@ class _DailyQuestionScreenState extends State<DailyQuestionScreen>
             Icon(Icons.timer, color: Colors.orange, size: 28),
             SizedBox(width: 8),
             Text(
-              'Süre Doldu!',
+              AppLocalizations.of(context)!.timeUp,
               style: TextStyle(
                 color: Colors.orange,
                 fontWeight: FontWeight.bold,
@@ -99,7 +100,7 @@ class _DailyQuestionScreenState extends State<DailyQuestionScreen>
           ],
         ),
         content: Text(
-          'Günün sorusunu cevaplamak için süreniz doldu. Yarın tekrar deneyin!',
+          AppLocalizations.of(context)!.dailyQuestionTimeUp,
           style: TextStyle(color: Colors.white),
         ),
         actions: [
@@ -163,7 +164,7 @@ class _DailyQuestionScreenState extends State<DailyQuestionScreen>
       print('Günün sorusu yanıtlama hatası: $e');
       SnackBarUtils.showErrorSnackBar(
         context,
-        'Bir hata oluştu, tekrar deneyin',
+        AppLocalizations.of(context)!.errorTryAgain,
       );
     } finally {
       setState(() {
@@ -194,7 +195,7 @@ class _DailyQuestionScreenState extends State<DailyQuestionScreen>
             ),
             SizedBox(width: 8),
             Text(
-              isCorrect ? 'Doğru Cevap!' : 'Yanlış Cevap',
+              isCorrect ? AppLocalizations.of(context)!.correctAnswerTitle : AppLocalizations.of(context)!.wrongAnswerTitle,
               style: TextStyle(
                 color: isCorrect ? Colors.green : Colors.red,
                 fontWeight: FontWeight.bold,
@@ -213,7 +214,7 @@ class _DailyQuestionScreenState extends State<DailyQuestionScreen>
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Text(
-                'Doğru Cevap: ${_dailyQuestion.question.options[_dailyQuestion.question.correctAnswerIndex]}',
+                '${AppLocalizations.of(context)!.correctAnswerLabel}: ${_dailyQuestion.question.options[_dailyQuestion.question.correctAnswerIndex]}',
                 style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.w500,
@@ -229,8 +230,8 @@ class _DailyQuestionScreenState extends State<DailyQuestionScreen>
               ),
               child: Text(
                 isCorrect
-                    ? '🎉 Tebrikler! 20 puan kazandınız!'
-                    : '😔 Yarın tekrar deneyin!',
+                    ? AppLocalizations.of(context)!.congratulations
+                    : AppLocalizations.of(context)!.tryTomorrow,
                 style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
@@ -251,7 +252,7 @@ class _DailyQuestionScreenState extends State<DailyQuestionScreen>
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Açıklama:',
+                        AppLocalizations.of(context)!.explanation,
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
@@ -342,7 +343,7 @@ class _DailyQuestionScreenState extends State<DailyQuestionScreen>
                         child: Column(
                           children: [
                             Text(
-                              _isAnswered ? 'Günün Sorusu - Çözüldü' : 'Günün Sorusu',
+                              _isAnswered ? AppLocalizations.of(context)!.dailyQuestionSolved : AppLocalizations.of(context)!.dailyQuestionTitle,
                               textAlign: TextAlign.center,
                               style: const TextStyle(
                                 fontSize: 18,
@@ -354,9 +355,9 @@ class _DailyQuestionScreenState extends State<DailyQuestionScreen>
                               Text(
                                 _isAnswered
                                     ? (_dailyQuestion.isCorrect == true
-                                        ? 'Doğru cevap verdiniz!'
-                                        : 'Yanlış cevap verdiniz')
-                                    : '20 Puan Kazanma Fırsatı!',
+                                        ? AppLocalizations.of(context)!.correctAnswerGiven
+                                        : AppLocalizations.of(context)!.wrongAnswerGiven)
+                                    : AppLocalizations.of(context)!.earnPointsOpportunity,
                                 style: TextStyle(
                                   fontSize: 12,
                                   color: Colors.white70,

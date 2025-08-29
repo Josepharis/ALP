@@ -1,0 +1,1388 @@
+{
+  "@@locale": "en",
+  "appTitle": "ALP",
+  "@appTitle": {
+    "description": "The title of the application"
+  },
+  "login": "Login",
+  "@login": {
+    "description": "Login button text"
+  },
+  "register": "Register",
+  "@register": {
+    "description": "Register button text"
+  },
+  "email": "Email",
+  "@email": {
+    "description": "Email field label"
+  },
+  "password": "Password",
+  "@password": {
+    "description": "Password field label"
+  },
+  "forgotPassword": "Forgot Password?",
+  "@forgotPassword": {
+    "description": "Forgot password link text"
+  },
+  "dontHaveAccount": "Don't have an account?",
+  "@dontHaveAccount": {
+    "description": "Text asking if user doesn't have account"
+  },
+  "alreadyHaveAccount": "Already have an account?",
+  "@alreadyHaveAccount": {
+    "description": "Text asking if user already has account"
+  },
+  "signUp": "Sign Up",
+  "@signUp": {
+    "description": "Sign up button text"
+  },
+  "signIn": "Sign In",
+  "@signIn": {
+    "description": "Sign in button text"
+  },
+  "enterEmail": "Enter your email",
+  "@enterEmail": {
+    "description": "Email field hint"
+  },
+  "enterPassword": "Enter your password",
+  "@enterPassword": {
+    "description": "Password field hint"
+  },
+  "emailRequired": "Email is required",
+  "@emailRequired": {
+    "description": "Email validation message"
+  },
+  "invalidEmail": "Please enter a valid email",
+  "@invalidEmail": {
+    "description": "Invalid email validation message"
+  },
+  "passwordRequired": "Password is required",
+  "@passwordRequired": {
+    "description": "Password validation message"
+  },
+  "passwordTooShort": "Password must be at least 6 characters",
+  "@passwordTooShort": {
+    "description": "Password length validation message"
+  },
+  "resetPassword": "Reset Password",
+  "@resetPassword": {
+    "description": "Reset password button text"
+  },
+  "resetPasswordTitle": "Reset Password",
+  "@resetPasswordTitle": {
+    "description": "Reset password dialog title"
+  },
+  "resetPasswordMessage": "Enter your email address to reset your password",
+  "@resetPasswordMessage": {
+    "description": "Reset password dialog message"
+  },
+  "send": "Send",
+  "@send": {
+    "description": "Send button text"
+  },
+  "cancel": "Cancel",
+  "@cancel": {
+    "description": "Cancel button text"
+  },
+  "ok": "OK",
+  "@ok": {
+    "description": "OK button text"
+  },
+  "understood": "Understood",
+  "@understood": {
+    "description": "Understood button text"
+  },
+  "success": "Success",
+  "@success": {
+    "description": "Success message title"
+  },
+  "error": "Error",
+  "@error": {
+    "description": "Error message title"
+  },
+  "resetEmailSent": "Password reset email sent successfully!",
+  "@resetEmailSent": {
+    "description": "Reset email sent success message"
+  },
+  "checkEmailInbox": "Please check your email inbox and follow the instructions to reset your password.",
+  "@checkEmailInbox": {
+    "description": "Check email inbox message"
+  },
+  "selectLanguage": "Select Language",
+  "@selectLanguage": {
+    "description": "Language selection text"
+  },
+  "turkish": "Türkçe",
+  "@turkish": {
+    "description": "Turkish language option"
+  },
+  "english": "English",
+  "@english": {
+    "description": "English language option"
+  },
+  "home": "Home",
+  "@home": {
+    "description": "Home screen title"
+  },
+  "profile": "Profile",
+  "@profile": {
+    "description": "Profile screen title"
+  },
+  "settings": "Settings",
+  "@settings": {
+    "description": "Settings screen title"
+  },
+  "logout": "Logout",
+  "@logout": {
+    "description": "Logout button text"
+  },
+  "quiz": "Quiz",
+  "@quiz": {
+    "description": "Quiz text"
+  },
+  "questions": "Questions",
+  "@questions": {
+    "description": "Questions text"
+  },
+  "score": "Score",
+  "@score": {
+    "description": "Score text"
+  },
+  "correct": "Correct",
+  "@correct": {
+    "description": "Correct answer text"
+  },
+  "incorrect": "Incorrect",
+  "@incorrect": {
+    "description": "Incorrect answer text"
+  },
+  "next": "Next",
+  "@next": {
+    "description": "Next button text"
+  },
+  "previous": "Previous",
+  "@previous": {
+    "description": "Previous button text"
+  },
+  "finish": "Finish",
+  "@finish": {
+    "description": "Finish button text"
+  },
+  "start": "Start",
+  "@start": {
+    "description": "Start button text"
+  },
+  "localAnesthetics": "Local Anesthetics",
+  "@localAnesthetics": {
+    "description": "Local Anesthetics category"
+  },
+  "cardiovascularPhysiology": "Cardiovascular Physiology",
+  "@cardiovascularPhysiology": {
+    "description": "Cardiovascular Physiology category"
+  },
+  "respiratoryPhysiology": "Respiratory Physiology",
+  "@respiratoryPhysiology": {
+    "description": "Respiratory Physiology category"
+  },
+  "difficulty": "Difficulty",
+  "@difficulty": {
+    "description": "Difficulty level"
+  },
+  "easy": "Easy",
+  "@easy": {
+    "description": "Easy difficulty level"
+  },
+  "medium": "Medium",
+  "@medium": {
+    "description": "Medium difficulty level"
+  },
+  "hard": "Hard",
+  "@hard": {
+    "description": "Hard difficulty level"
+  },
+  "category": "Category",
+  "@category": {
+    "description": "Category text"
+  },
+  "selectCategory": "Select Category",
+  "@selectCategory": {
+    "description": "Select category text"
+  },
+  "questionCount": "Question Count",
+  "@questionCount": {
+    "description": "Question count text"
+  },
+  "totalQuestions": "Total Questions: {count}",
+  "@totalQuestions": {
+    "description": "Total questions count",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "homePage": "Home",
+  "@homePage": {
+    "description": "Home page title"
+  },
+  "quizzes": "Quizzes",
+  "@quizzes": {
+    "description": "Quizzes tab title"
+  },
+  "missing": "Missing",
+  "@missing": {
+    "description": "Missing tab title"
+  },
+  "dailyQuestion": "Daily Question",
+  "@dailyQuestion": {
+    "description": "Daily question title"
+  },
+  "ongoing": "Ongoing",
+  "@ongoing": {
+    "description": "Ongoing quizzes title"
+  },
+  "ongoingQuizzes": "Ongoing Quizzes",
+  "@ongoingQuizzes": {
+    "description": "Ongoing quizzes section title"
+  },
+  "viewAll": "View All",
+  "@viewAll": {
+    "description": "View all button text"
+  },
+  "answer": "Answer",
+  "@answer": {
+    "description": "Answer button text"
+  },
+  "checkAgain": "Check Again",
+  "@checkAgain": {
+    "description": "Check again button text"
+  },
+  "newQuiz": "New Quiz",
+  "@newQuiz": {
+    "description": "New quiz button text"
+  },
+  "leaderboard": "Leaderboard",
+  "@leaderboard": {
+    "description": "Leaderboard tab title"
+  },
+  "selectFromGallery": "Select from\nGallery",
+  "@selectFromGallery": {
+    "description": "Select from gallery option"
+  },
+  "takePhoto": "Take\nPhoto",
+  "@takePhoto": {
+    "description": "Take photo option"
+  },
+  "imageSelectionError": "An error occurred while selecting image",
+  "@imageSelectionError": {
+    "description": "Image selection error message"
+  },
+  "generalError": "An error occurred, please try again",
+  "@generalError": {
+    "description": "General error message"
+  },
+  "photoUploadError": "An error occurred while uploading photo",
+  "@photoUploadError": {
+    "description": "Photo upload error message"
+  },
+  "profileUpdated": "Your profile information has been updated",
+  "@profileUpdated": {
+    "description": "Profile updated success message"
+  },
+  "save": "Save",
+  "@save": {
+    "description": "Save button text"
+  },
+  "edit": "Edit",
+  "@edit": {
+    "description": "Edit button text"
+  },
+  "showProfileToOthers": "Show My Profile to Others",
+  "@showProfileToOthers": {
+    "description": "Show profile to others setting"
+  },
+  "showOnLeaderboard": "Show on Leaderboard",
+  "@showOnLeaderboard": {
+    "description": "Show on leaderboard setting"
+  },
+  "shareUsageData": "Share Usage Data",
+  "@shareUsageData": {
+    "description": "Share usage data setting"
+  },
+  "shareUsageDataSubtitle": "Help us improve the app by sharing anonymous usage data",
+  "@shareUsageDataSubtitle": {
+    "description": "Share usage data subtitle"
+  },
+  "helpAndSupport": "Help and Support",
+  "@helpAndSupport": {
+    "description": "Help and support section title"
+  },
+  "contact": "Contact",
+  "@contact": {
+    "description": "Contact option"
+  },
+  "userGuide": "User Guide",
+  "@userGuide": {
+    "description": "User guide option"
+  },
+  "emailFeatureComingSoon": "Email feature will be added soon",
+  "@emailFeatureComingSoon": {
+    "description": "Email feature coming soon message"
+  },
+  "userGuideComingSoon": "User guide will be added soon",
+  "@userGuideComingSoon": {
+    "description": "User guide coming soon message"
+  },
+  "question": "Question",
+  "@question": {
+    "description": "Question text"
+  },
+  "ofText": "of",
+  "@ofText": {
+    "description": "of text (e.g., 1 of 10)"
+  },
+  "timeRemaining": "Time Remaining",
+  "@timeRemaining": {
+    "description": "Time remaining text"
+  },
+  "submitAnswer": "Submit Answer",
+  "@submitAnswer": {
+    "description": "Submit answer button"
+  },
+  "nextQuestion": "Next Question",
+  "@nextQuestion": {
+    "description": "Next question button"
+  },
+  "finishQuiz": "Finish Quiz",
+  "@finishQuiz": {
+    "description": "Finish quiz button"
+  },
+  "quizCompleted": "Quiz Completed!",
+  "@quizCompleted": {
+    "description": "Quiz completed title"
+  },
+  "yourScore": "Your Score",
+  "@yourScore": {
+    "description": "Your score text"
+  },
+  "correctAnswers": "Correct Answers",
+  "@correctAnswers": {
+    "description": "Correct answers text"
+  },
+  "incorrectAnswers": "Incorrect Answers",
+  "@incorrectAnswers": {
+    "description": "Incorrect answers text"
+  },
+  "accuracy": "Accuracy",
+  "@accuracy": {
+    "description": "Accuracy percentage"
+  },
+  "excellent": "Excellent!",
+  "@excellent": {
+    "description": "Excellent performance"
+  },
+  "good": "Good!",
+  "@good": {
+    "description": "Good performance"
+  },
+  "needsImprovement": "Needs Improvement",
+  "@needsImprovement": {
+    "description": "Needs improvement performance"
+  },
+  "tryAgain": "Try Again",
+  "@tryAgain": {
+    "description": "Try again button"
+  },
+  "backToHome": "Back to Home",
+  "@backToHome": {
+    "description": "Back to home button"
+  },
+  "name": "Name",
+  "@name": {
+    "description": "Name field label"
+  },
+  "enterName": "Enter your name",
+  "@enterName": {
+    "description": "Name field hint"
+  },
+  "nameRequired": "Name is required",
+  "@nameRequired": {
+    "description": "Name validation message"
+  },
+  "confirmPassword": "Confirm Password",
+  "@confirmPassword": {
+    "description": "Confirm password field label"
+  },
+  "enterConfirmPassword": "Confirm your password",
+  "@enterConfirmPassword": {
+    "description": "Confirm password field hint"
+  },
+  "passwordsDoNotMatch": "Passwords do not match",
+  "@passwordsDoNotMatch": {
+    "description": "Password mismatch validation message"
+  },
+  "createAccount": "Create Account",
+  "@createAccount": {
+    "description": "Create account button text"
+  },
+  "registrationSuccessful": "Registration successful!",
+  "@registrationSuccessful": {
+    "description": "Registration success message"
+  },
+  "welcomeMessage": "Welcome! You can now log in.",
+  "@welcomeMessage": {
+    "description": "Welcome message after registration"
+  },
+  "loading": "Loading...",
+  "@loading": {
+    "description": "Loading text"
+  },
+  "selectAnswer": "Select an answer",
+  "@selectAnswer": {
+    "description": "Select answer instruction"
+  },
+  "explanation": "Explanation",
+  "@explanation": {
+    "description": "Explanation section title"
+  },
+  "continueQuiz": "Continue Quiz",
+  "@continueQuiz": {
+    "description": "Continue quiz button"
+  },
+  "pauseQuiz": "Pause Quiz",
+  "@pauseQuiz": {
+    "description": "Pause quiz button"
+  },
+  "exitQuiz": "Exit Quiz",
+  "@exitQuiz": {
+    "description": "Exit quiz button"
+  },
+  "areYouSure": "Are you sure?",
+  "@areYouSure": {
+    "description": "Confirmation dialog title"
+  },
+  "exitQuizConfirmation": "Do you want to exit the quiz? Your progress will be saved.",
+  "@exitQuizConfirmation": {
+    "description": "Exit quiz confirmation message"
+  },
+  "yes": "Yes",
+  "@yes": {
+    "description": "Yes button"
+  },
+  "no": "No",
+  "@no": {
+    "description": "No button"
+  },
+  "admin": "Admin",
+  "@admin": {
+    "description": "Admin title"
+  },
+  "addQuestion": "Add Question",
+  "@addQuestion": {
+    "description": "Add question button"
+  },
+  "manageQuestions": "Manage Questions",
+  "@manageQuestions": {
+    "description": "Manage questions option"
+  },
+  "statistics": "Statistics",
+  "@statistics": {
+    "description": "Statistics section"
+  },
+  "users": "Users",
+  "@users": {
+    "description": "Users section"
+  },
+  "totalUsers": "Total Users",
+  "@totalUsers": {
+    "description": "Total users count"
+  },
+  "activeUsers": "Active Users",
+  "@activeUsers": {
+    "description": "Active users count"
+  },
+  "dailyQuestionTitle": "Daily Question",
+  "@dailyQuestionTitle": {
+    "description": "Daily question title"
+  },
+  "mistakes": "Mistakes",
+  "@mistakes": {
+    "description": "Mistakes section title"
+  },
+  "noMistakes": "No mistakes found",
+  "@noMistakes": {
+    "description": "No mistakes message"
+  },
+  "reviewMistakes": "Review Mistakes",
+  "@reviewMistakes": {
+    "description": "Review mistakes button"
+  },
+  "clearMistakes": "Clear Mistakes",
+  "@clearMistakes": {
+    "description": "Clear mistakes button"
+  },
+  "mistakesCleared": "All mistakes have been cleared",
+  "@mistakesCleared": {
+    "description": "Mistakes cleared success message"
+  },
+  "systemManagement": "System Management",
+  "@systemManagement": {
+    "description": "System management title"
+  },
+  "adminLogout": "Admin Logout",
+  "@adminLogout": {
+    "description": "Admin logout dialog title"
+  },
+  "adminLogoutConfirm": "Are you sure you want to logout from admin panel?",
+  "@adminLogoutConfirm": {
+    "description": "Admin logout confirmation message"
+  },
+  "cancel": "Cancel",
+  "@cancel": {
+    "description": "Cancel button"
+  },
+  "logout": "Logout",
+  "@logout": {
+    "description": "Logout button"
+  },
+  "dashboard": "Dashboard",
+  "@dashboard": {
+    "description": "Dashboard menu item"
+  },
+  "questions": "Questions",
+  "@questions": {
+    "description": "Questions menu item"
+  },
+  "analytics": "Analytics",
+  "@analytics": {
+    "description": "Analytics menu item"
+  },
+  "overview": "Overview",
+  "@overview": {
+    "description": "Overview section title"
+  },
+  "refreshStats": "Refresh Statistics",
+  "@refreshStats": {
+    "description": "Refresh statistics tooltip"
+  },
+  "statsUpdated": "✅ Statistics updated",
+  "@statsUpdated": {
+    "description": "Statistics updated success message"
+  },
+  "quizProgressSaved": "Quiz progress has been saved",
+  "@quizProgressSaved": {
+    "description": "Quiz progress saved message"
+  },
+  "totalQuestions": "Total questions",
+  "@totalQuestions": {
+    "description": "Total questions count label"
+  },
+  "startingQuestion": "Starting question",
+  "@startingQuestion": {
+    "description": "Starting question label"
+  },
+  "startingScore": "Starting score",
+  "@startingScore": {
+    "description": "Starting score label"
+  },
+  "exitQuiz": "Exit Quiz",
+  "@exitQuiz": {
+    "description": "Exit quiz dialog title"
+  },
+  "exitQuizConfirm": "Are you sure you want to exit the quiz? Your progress will be saved and you can continue later.",
+  "@exitQuizConfirm": {
+    "description": "Exit quiz confirmation message"
+  },
+  "seconds": "seconds",
+  "@seconds": {
+    "description": "Seconds unit"
+  },
+  "score": "Score",
+  "@score": {
+    "description": "Score label"
+  },
+  "correct": "CORRECT",
+  "@correct": {
+    "description": "Correct answer label"
+  },
+  "incorrect": "INCORRECT",
+  "@incorrect": {
+    "description": "Incorrect answer label"
+  },
+  "timeUp": "TIME UP",
+  "@timeUp": {
+    "description": "Time up message"
+  },
+  "newUsers": "new users",
+  "@newUsers": {
+    "description": "New users label"
+  },
+  "days": "days",
+  "@days": {
+    "description": "Days unit"
+  },
+  "dataNotFound": "Data Not Found",
+  "@dataNotFound": {
+    "description": "Data not found title"
+  },
+  "dataMigrationNeeded": "Question data not loaded. Perform data migration.",
+  "@dataMigrationNeeded": {
+    "description": "Data migration needed message"
+  },
+  "performMigration": "Perform Migration",
+  "@performMigration": {
+    "description": "Perform migration button"
+  },
+  "createNewAccount": "Create New Account",
+  "@createNewAccount": {
+    "description": "Create new account title"
+  },
+  "joinQuizApp": "Join the quiz app and test your knowledge",
+  "@joinQuizApp": {
+    "description": "Join quiz app subtitle"
+  },
+  "enterFullName": "Enter your full name",
+  "@enterFullName": {
+    "description": "Full name field hint"
+  },
+  "fullNameRequired": "❌ Full name field cannot be empty\n💡 Please enter your full name",
+  "@fullNameRequired": {
+    "description": "Full name validation message"
+  },
+  "termsRequired": "❌ Terms and conditions must be accepted\n\n💡 You must accept the terms and conditions and privacy policy to continue.",
+  "@termsRequired": {
+    "description": "Terms acceptance validation message"
+  },
+  "nameTooShort": "❌ Name too short\n💡 Must be at least 2 characters",
+  "@nameTooShort": {
+    "description": "Name too short validation"
+  },
+  "invalidCharacters": "❌ Invalid characters\n💡 Use only letters",
+  "@invalidCharacters": {
+    "description": "Invalid characters validation"
+  },
+  "titleExample": "E.g: Anesthesiologist, Resident, Prof. Dr. etc.",
+  "@titleExample": {
+    "description": "Title field example"
+  },
+  "titleTooShort": "❌ Title too short\n💡 Must be at least 2 characters",
+  "@titleTooShort": {
+    "description": "Title too short validation"
+  },
+  "emailEmptyRegister": "❌ Email address cannot be empty\n💡 Please enter a valid email address",
+  "@emailEmptyRegister": {
+    "description": "Email empty validation for register"
+  },
+  "emailInvalidRegister": "❌ Invalid email format\n💡 Example: user@example.com",
+  "@emailInvalidRegister": {
+    "description": "Email invalid validation for register"
+  },
+  "passwordEmptyRegister": "❌ Password field cannot be empty\n💡 Create a strong password",
+  "@passwordEmptyRegister": {
+    "description": "Password empty validation for register"
+  },
+  "passwordTooShort": "❌ Password too short\n💡 Must be at least 6 characters",
+  "@passwordTooShort": {
+    "description": "Password too short validation"
+  },
+  "passwordTooLong": "❌ Password too long\n💡 Maximum 128 characters",
+  "@passwordTooLong": {
+    "description": "Password too long validation"
+  },
+  "passwordWeak": "💡 Make your password stronger\n📝 Use 8+ characters, uppercase, lowercase, numbers",
+  "@passwordWeak": {
+    "description": "Password weak suggestion"
+  },
+  "confirmPasswordEmpty": "❌ Password confirmation cannot be empty\n💡 Re-enter your password",
+  "@confirmPasswordEmpty": {
+    "description": "Confirm password empty validation"
+  },
+  "passwordMismatch": "❌ Passwords do not match\n💡 Enter the same password again",
+  "@passwordMismatch": {
+    "description": "Password mismatch validation"
+  },
+  "acceptAll": "I accept all ",
+  "@acceptAll": {
+    "description": "Accept all text"
+  },
+  "termsOfUse": "Terms of Use",
+  "@termsOfUse": {
+    "description": "Terms of use link"
+  },
+  "privacyPolicy": "Privacy Policy",
+  "@privacyPolicy": {
+    "description": "Privacy policy link"
+  },
+  "registrationFailed": "Registration Failed",
+  "@registrationFailed": {
+    "description": "Registration failed dialog title"
+  },
+  "alreadyHaveAccount": "Already have an account? ",
+  "@alreadyHaveAccount": {
+    "description": "Already have account text"
+  },
+  "quizCompleted": "Quiz completed!",
+  "@quizCompleted": {
+    "description": "Quiz completed message"
+  },
+  "quizCompletionError": "An error occurred while completing the quiz",
+  "@quizCompletionError": {
+    "description": "Quiz completion error message"
+  },
+  "answer": "ANSWER",
+  "@answer": {
+    "description": "Answer label"
+  },
+  "question": "Question",
+  "@question": {
+    "description": "Question label"
+  },
+  "logoutError": "An error occurred while logging out",
+  "@logoutError": {
+    "description": "Logout error message"
+  },
+  "systemSummary": "System Summary",
+  "@systemSummary": {
+    "description": "System summary title"
+  },
+  "systemActive": "Quiz system is active and running.",
+  "@systemActive": {
+    "description": "System active message"
+  },
+  "questionManagement": "Question Management",
+  "@questionManagement": {
+    "description": "Question management title"
+  },
+  "noCategoriesYet": "No categories yet - Perform data migration",
+  "@noCategoriesYet": {
+    "description": "No categories message"
+  },
+  "selectCategory": "Select Category",
+  "@selectCategory": {
+    "description": "Select category dropdown"
+  },
+  "selectCategoryToView": "Select a category to view\nquestion list",
+  "@selectCategoryToView": {
+    "description": "Select category instruction"
+  },
+  "noCategoryQuestions": "No questions in this category yet",
+  "@noCategoryQuestions": {
+    "description": "No questions in category message"
+  },
+  "addNewQuestions": "You can add new questions or perform data migration",
+  "@addNewQuestions": {
+    "description": "Add new questions suggestion"
+  },
+  "questionDeleted": "Question successfully deleted",
+  "@questionDeleted": {
+    "description": "Question deleted success message"
+  },
+  "edit": "Edit",
+  "@edit": {
+    "description": "Edit button"
+  },
+  "newUser": "new user",
+  "@newUser": {
+    "description": "New user singular"
+  },
+  "last7Days": "last 7 days",
+  "@last7Days": {
+    "description": "Last 7 days period"
+  },
+  "dailyActive": "daily active",
+  "@dailyActive": {
+    "description": "Daily active users"
+  },
+  "weeklyGrowth": "Weekly Growth",
+  "@weeklyGrowth": {
+    "description": "Weekly growth label"
+  },
+  "activeRate": "Active Rate",
+  "@activeRate": {
+    "description": "Active rate label"
+  },
+  "quizSolution": "Quiz Solution",
+  "@quizSolution": {
+    "description": "Quiz solution label"
+  },
+  "allQuizzes": "All Quizzes",
+  "@allQuizzes": {
+    "description": "All quizzes title"
+  },
+  "continueQuiz": "Continue",
+  "@continueQuiz": {
+    "description": "Continue quiz button"
+  },
+  "startQuiz": "Start",
+  "@startQuiz": {
+    "description": "Start quiz button"
+  },
+  "user": "User",
+  "@user": {
+    "description": "Default user name"
+  },
+  "welcome": "Welcome 👋",
+  "@welcome": {
+    "description": "Welcome message"
+  },
+  "weekdays": "Mon,Tue,Wed,Thu,Fri,Sat,Sun",
+  "@weekdays": {
+    "description": "Weekday abbreviations comma separated"
+  },
+  "dailyParticipation": "Daily Participation!",
+  "@dailyParticipation": {
+    "description": "Daily participation message"
+  },
+  "correctAnswer": "Correct!",
+  "@correctAnswer": {
+    "description": "Correct answer feedback"
+  },
+  "wrongAnswer": "Wrong!",
+  "@wrongAnswer": {
+    "description": "Wrong answer feedback"
+  },
+  "noOngoingQuiz": "No ongoing quiz found.",
+  "@noOngoingQuiz": {
+    "description": "No ongoing quiz message"
+  },
+  "all": "All",
+  "@all": {
+    "description": "All filter option"
+  },
+  "questionsCompleted": "questions completed out of",
+  "@questionsCompleted": {
+    "description": "Questions completed text"
+  },
+  "progress": "Progress",
+  "@progress": {
+    "description": "Progress label"
+  },
+  "profilePhoto": "Profile Photo",
+  "@profilePhoto": {
+    "description": "Profile photo title"
+  },
+  "photoUploadError": "An error occurred while uploading photo",
+  "@photoUploadError": {
+    "description": "Photo upload error message"
+  },
+  "editProfile": "Edit Profile",
+  "@editProfile": {
+    "description": "Edit profile option"
+  },
+  "myDevices": "My Devices",
+  "@myDevices": {
+    "description": "My devices option"
+  },
+  "help": "Help",
+  "@help": {
+    "description": "Help option"
+  },
+  "logoutConfirm": "Are you sure you want to log out?",
+  "@logoutConfirm": {
+    "description": "Logout confirmation message"
+  },
+  "timeUp": "Time's Up!",
+  "@timeUp": {
+    "description": "Time up message"
+  },
+  "dailyQuestionTimeUp": "Your time to answer today's question has expired. Try again tomorrow!",
+  "@dailyQuestionTimeUp": {
+    "description": "Daily question time up message"
+  },
+  "correctAnswerTitle": "Correct Answer!",
+  "@correctAnswerTitle": {
+    "description": "Correct answer title"
+  },
+  "wrongAnswerTitle": "Wrong Answer",
+  "@wrongAnswerTitle": {
+    "description": "Wrong answer title"
+  },
+  "correctAnswerLabel": "Correct Answer",
+  "@correctAnswerLabel": {
+    "description": "Correct answer label"
+  },
+  "congratulations": "🎉 Congratulations! You earned 20 points!",
+  "@congratulations": {
+    "description": "Congratulations message"
+  },
+  "tryTomorrow": "😔 Try again tomorrow!",
+  "@tryTomorrow": {
+    "description": "Try tomorrow message"
+  },
+  "explanation": "Explanation:",
+  "@explanation": {
+    "description": "Explanation label"
+  },
+  "dailyQuestionSolved": "Daily Question - Solved",
+  "@dailyQuestionSolved": {
+    "description": "Daily question solved title"
+  },
+  "dailyQuestionTitle": "Daily Question",
+  "@dailyQuestionTitle": {
+    "description": "Daily question title"
+  },
+  "correctAnswerGiven": "You gave the correct answer!",
+  "@correctAnswerGiven": {
+    "description": "Correct answer given message"
+  },
+  "wrongAnswerGiven": "You gave the wrong answer",
+  "@wrongAnswerGiven": {
+    "description": "Wrong answer given message"
+  },
+  "earnPointsOpportunity": "20 Points Earning Opportunity!",
+  "@earnPointsOpportunity": {
+    "description": "Earn points opportunity message"
+  },
+  "errorTryAgain": "An error occurred, please try again",
+  "@errorTryAgain": {
+    "description": "Error try again message"
+  },
+  "other": "Other",
+  "@other": {
+    "description": "Other category"
+  },
+  "noMistakesFound": "No wrong questions found!",
+  "@noMistakesFound": {
+    "description": "No mistakes found message"
+  },
+  "mistakesLoadingError": "Error loading mistakes",
+  "@mistakesLoadingError": {
+    "description": "Mistakes loading error message"
+  },
+  "userNotLoggedIn": "User not logged in!",
+  "@userNotLoggedIn": {
+    "description": "User not logged in message"
+  },
+  "dataLoadingError": "An error occurred while loading data",
+  "@dataLoadingError": {
+    "description": "Data loading error message"
+  },
+  "ranking": "Ranking",
+  "@ranking": {
+    "description": "Ranking title"
+  },
+  "first": "FIRST",
+  "@first": {
+    "description": "First place label"
+  },
+  "second": "SECOND",
+  "@second": {
+    "description": "Second place label"
+  },
+  "third": "THIRD",
+  "@third": {
+    "description": "Third place label"
+  },
+  "anonymous": "Anonymous",
+  "@anonymous": {
+    "description": "Anonymous user name"
+  },
+  "yourCircle": "Your Circle",
+  "@yourCircle": {
+    "description": "Your circle section title"
+  },
+  "rankingLoading": "Loading Ranking...",
+  "@rankingLoading": {
+    "description": "Ranking loading message"
+  },
+  "editQuestion": "Edit Question",
+  "@editQuestion": {
+    "description": "Edit question title"
+  },
+  "addNewQuestion": "Add New Question",
+  "@addNewQuestion": {
+    "description": "Add new question title"
+  },
+  "uploadWordFile": "Upload Word File",
+  "@uploadWordFile": {
+    "description": "Upload word file tooltip"
+  },
+  "createNewQuestion": "Create New Question",
+  "@createNewQuestion": {
+    "description": "Create new question title"
+  },
+  "fillQuizInfo": "Please fill in the information below to add to the quiz.",
+  "@fillQuizInfo": {
+    "description": "Fill quiz info instruction"
+  },
+  "questionTextHint": "Write the question text here...",
+  "@questionTextHint": {
+    "description": "Question text hint"
+  },
+  "pleaseEnterQuestion": "Please enter the question text",
+  "@pleaseEnterQuestion": {
+    "description": "Please enter question validation"
+  },
+  "options": "Options",
+  "@options": {
+    "description": "Options section title"
+  },
+  "selectCorrectAnswer": "Please select the correct answer and fill in all options.",
+  "@selectCorrectAnswer": {
+    "description": "Select correct answer instruction"
+  },
+  "explanationOptional": "Explanation (Optional)",
+  "@explanationOptional": {
+    "description": "Explanation optional section title"
+  },
+  "explanationHint": "You can add an explanation for the question...",
+  "@explanationHint": {
+    "description": "Explanation hint text"
+  },
+  "quizSelection": "Quiz Selection",
+  "@quizSelection": {
+    "description": "Quiz selection section title"
+  },
+  "noQuizFound": "No Quiz found yet",
+  "@noQuizFound": {
+    "description": "No quiz found message"
+  },
+  "clickNewQuiz": "Click to switch to \"New Quiz\" option",
+  "@clickNewQuiz": {
+    "description": "Click new quiz instruction"
+  },
+  "intensiveCare": "Intensive Care",
+  "@intensiveCare": {
+    "description": "Intensive care category"
+  },
+  "painTreatment": "Pain Treatment",
+  "@painTreatment": {
+    "description": "Pain treatment category"
+  },
+  "monitoring": "Monitoring",
+  "@monitoring": {
+    "description": "Monitoring category"
+  },
+  "cardiovascularSystem": "Cardiovascular System",
+  "@cardiovascularSystem": {
+    "description": "Cardiovascular system category"
+  },
+  "neurology": "Neurology",
+  "@neurology": {
+    "description": "Neurology category"
+  },
+  "statsUpdatedSuccess": "✅ Statistics updated",
+  "@statsUpdatedSuccess": {
+    "description": "Statistics updated success message"
+  },
+  "newUsers7Days": "new (7 days)",
+  "@newUsers7Days": {
+    "description": "New users in 7 days"
+  },
+  "last7DaysQuizzes": "last 7 days",
+  "@last7DaysQuizzes": {
+    "description": "Last 7 days quizzes"
+  },
+  "systemPerformance": "System Performance",
+  "@systemPerformance": {
+    "description": "System performance title"
+  },
+  "systemStable": "Quiz system is running stable and user experience is at optimum level.",
+  "@systemStable": {
+    "description": "System stable message"
+  },
+  "performanceExcellent": "Performance: Excellent",
+  "@performanceExcellent": {
+    "description": "Performance excellent status"
+  },
+  "securitySecure": "Security: Secure",
+  "@securitySecure": {
+    "description": "Security secure status"
+  },
+  "deleteQuestionConfirm": "Are you sure you want to delete this question?",
+  "@deleteQuestionConfirm": {
+    "description": "Delete question confirmation"
+  },
+  "realDataMigration": "Real Data Migration",
+  "@realDataMigration": {
+    "description": "Real data migration title"
+  },
+  "aboutThisProcess": "About this process:",
+  "@aboutThisProcess": {
+    "description": "About this process title"
+  },
+  "existingQuestionCount": "Existing question count",
+  "@existingQuestionCount": {
+    "description": "Existing question count label"
+  },
+  "willTransferAllQuestions": "• Will transfer all real questions from 24 categories",
+  "@willTransferAllQuestions": {
+    "description": "Will transfer all questions info"
+  },
+  "organizedInFolders": "• Each category organized in its own folder",
+  "@organizedInFolders": {
+    "description": "Organized in folders info"
+  },
+  "existingSkipped": "• Existing questions will be skipped",
+  "@existingSkipped": {
+    "description": "Existing questions skipped info"
+  },
+  "hundredsAdded": "• Hundreds of real questions will be added",
+  "@hundredsAdded": {
+    "description": "Hundreds of questions added info"
+  },
+  "confirmDataMigration": "Are you sure you want to transfer ALL real questions from Data and Questions folders to Firestore?",
+  "@confirmDataMigration": {
+    "description": "Confirm data migration message"
+  },
+  "processTakes2to3Minutes": "⚠️ This process may take 2-3 minutes.",
+  "@processTakes2to3Minutes": {
+    "description": "Process duration warning"
+  },
+  "addRealQuestions": "Add Real Questions",
+  "@addRealQuestions": {
+    "description": "Add real questions button"
+  },
+  "selectQuiz": "Select Quiz",
+  "@selectQuiz": {
+    "description": "Select quiz dropdown"
+  },
+  "newQuizName": "New Quiz Name",
+  "@newQuizName": {
+    "description": "New quiz name section"
+  },
+  "enterNewQuizName": "Enter new quiz name...",
+  "@enterNewQuizName": {
+    "description": "Enter new quiz name hint"
+  },
+  "quizNameRequired": "Quiz name cannot be empty",
+  "@quizNameRequired": {
+    "description": "Quiz name required validation"
+  },
+  "optionLetter": "Option",
+  "@optionLetter": {
+    "description": "Option letter label"
+  },
+  "writeOption": "Write option",
+  "@writeOption": {
+    "description": "Write option hint"
+  },
+  "excellent": "Excellent!",
+  "@excellent": {
+    "description": "Excellent result message"
+  },
+  "veryGood": "Very Good!",
+  "@veryGood": {
+    "description": "Very good result message"
+  },
+  "needsImprovement": "Needs Improvement!",
+  "@needsImprovement": {
+    "description": "Needs improvement result message"
+  },
+  "quizCompleted": "Quiz Completed",
+  "@quizCompleted": {
+    "description": "Quiz completed title"
+  },
+  "fullName": "Full Name",
+  "@fullName": {
+    "description": "Full name field label"
+  },
+  "title": "Title",
+  "@title": {
+    "description": "Title field label"
+  },
+  "and": "and",
+  "@and": {
+    "description": "And conjunction"
+  },
+  "accept": "",
+  "@accept": {
+    "description": "Accept verb - empty for proper sentence"
+  },
+  "questions": "Questions",
+  "@questions": {
+    "description": "Questions label"
+  },
+  "questionsOf": "questions out of",
+  "@questionsOf": {
+    "description": "Questions out of total"
+  },
+  "progressPercent": "Progress",
+  "@progressPercent": {
+    "description": "Progress percentage"
+  },
+  "exitQuizTitle": "Exit Quiz",
+  "@exitQuizTitle": {
+    "description": "Exit quiz dialog title"
+  },
+  "exit": "Exit",
+  "@exit": {
+    "description": "Exit button"
+  },
+  "generalOverview": "General Overview",
+  "@generalOverview": {
+    "description": "General overview title"
+  },
+  "analytics": "Analytics",
+  "@analytics": {
+    "description": "Analytics menu item"
+  },
+  "weeklyGrowth": "Weekly Growth",
+  "@weeklyGrowth": {
+    "description": "Weekly growth label"
+  },
+  "newUser": "New user",
+  "@newUser": {
+    "description": "New user label"
+  },
+  "dailyActive": "daily active",
+  "@dailyActive": {
+    "description": "Daily active label"
+  },
+  "organizingData": "Organizing data...",
+  "@organizingData": {
+    "description": "Organizing data message"
+  },
+  "eachCategoryTransferred": "Each category transferred to separate folder",
+  "@eachCategoryTransferred": {
+    "description": "Each category transferred message"
+  },
+  "organizeDataSuccessful": "Organize Data Successful!",
+  "@organizeDataSuccessful": {
+    "description": "Organize data successful message"
+  },
+  "questionsOrganizedTransferred": "questions organized and transferred!",
+  "@questionsOrganizedTransferred": {
+    "description": "Questions organized transferred message"
+  },
+  "errorsEncountered": "errors encountered",
+  "@errorsEncountered": {
+    "description": "Errors encountered message"
+  },
+  "eachCategorySubcollection": "Each category stored in separate subcollection",
+  "@eachCategorySubcollection": {
+    "description": "Each category subcollection message"
+  },
+  "organizeDataTransferError": "Error in organize data transfer",
+  "@organizeDataTransferError": {
+    "description": "Organize data transfer error message"
+  },
+  "error": "Error!",
+  "@error": {
+    "description": "Error message"
+  },
+  "allQuizzes": "All Quizzes",
+  "@allQuizzes": {
+    "description": "All quizzes title"
+  },
+  "welcome": "Welcome 👋",
+  "@welcome": {
+    "description": "Welcome message"
+  },
+  "intensiveCare": "Intensive Care",
+  "@intensiveCare": {
+    "description": "Intensive care category"
+  },
+  "painTreatment": "Pain Treatment",
+  "@painTreatment": {
+    "description": "Pain treatment category"
+  },
+  "monitoring": "Monitoring",
+  "@monitoring": {
+    "description": "Monitoring category"
+  },
+  "anesthesiaPharmacology": "Anesthesia Pharmacology",
+  "@anesthesiaPharmacology": {
+    "description": "Anesthesia pharmacology category"
+  },
+  "generalAnesthesia": "General Anesthesia",
+  "@generalAnesthesia": {
+    "description": "General anesthesia category"
+  },
+  "regionalAnesthesia": "Regional Anesthesia",
+  "@regionalAnesthesia": {
+    "description": "Regional anesthesia category"
+  },
+  "respiratorySystem": "Respiratory System",
+  "@respiratorySystem": {
+    "description": "Respiratory system category"
+  },
+  "cardiovascular": "Cardiovascular System",
+  "@cardiovascular": {
+    "description": "Cardiovascular category"
+  },
+  "neurology": "Neurology",
+  "@neurology": {
+    "description": "Neurology category"
+  },
+  "pediatricAnesthesia": "Pediatric Anesthesia",
+  "@pediatricAnesthesia": {
+    "description": "Pediatric anesthesia category"
+  },
+  "obstetricAnesthesia": "Obstetric Anesthesia",
+  "@obstetricAnesthesia": {
+    "description": "Obstetric anesthesia category"
+  },
+  "geriatricAnesthesia": "Geriatric Anesthesia",
+  "@geriatricAnesthesia": {
+    "description": "Geriatric anesthesia category"
+  },
+  "operatingRoom": "Operating Room",
+  "@operatingRoom": {
+    "description": "Operating room category"
+  },
+  "anesthesia": "Anesthesia",
+  "@anesthesia": {
+    "description": "Anesthesia category"
+  },
+  "noOngoingQuiz": "No ongoing quiz found.",
+  "@noOngoingQuiz": {
+    "description": "No ongoing quiz message"
+  },
+  "all": "All",
+  "@all": {
+    "description": "All filter option"
+  },
+  "noCompletedQuiz": "No completed quiz found.",
+  "@noCompletedQuiz": {
+    "description": "No completed quiz message"
+  },
+  "completed": "Completed",
+  "@completed": {
+    "description": "Completed status"
+  },
+  "correct": "Correct",
+  "@correct": {
+    "description": "Correct answer"
+  },
+  "anesthesiaApplication": "Anesthesia Application",
+  "@anesthesiaApplication": {
+    "description": "Anesthesia application category"
+  },
+  "respiratorySystems": "Respiratory Systems",
+  "@respiratorySystems": {
+    "description": "Respiratory systems category"
+  },
+  "cardiovascularMonitoring": "Cardiovascular Monitoring",
+  "@cardiovascularMonitoring": {
+    "description": "Cardiovascular monitoring category"
+  },
+  "operatingRoomEnvironment": "Operating Room Environment",
+  "@operatingRoomEnvironment": {
+    "description": "Operating room environment category"
+  },
+  "anesthesiaWorkstation": "Anesthesia Workstation",
+  "@anesthesiaWorkstation": {
+    "description": "Anesthesia workstation category"
+  },
+  "preoperativeEvaluation": "Chapter 18 - Preoperative Evaluation",
+  "@preoperativeEvaluation": {
+    "description": "Preoperative evaluation chapter"
+  },
+  "airwayManagement": "Chapter 19 - Airway Management",
+  "@airwayManagement": {
+    "description": "Airway management chapter"
+  },
+  "cardiovascularPhysiology": "Cardiovascular Physiology and Anesthesia",
+  "@cardiovascularPhysiology": {
+    "description": "Cardiovascular physiology category"
+  },
+  "cardiovascularSurgery": "Cardiovascular Surgery Anesthesia",
+  "@cardiovascularSurgery": {
+    "description": "Cardiovascular surgery category"
+  },
+  "nonCardiovascularMonitoring": "Non-Cardiovascular Monitoring",
+  "@nonCardiovascularMonitoring": {
+    "description": "Non-cardiovascular monitoring category"
+  }
+}

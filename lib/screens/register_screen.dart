@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import '../l10n/app_localizations.dart';
+
 
 import '../theme/app_theme.dart';
 import 'package:flutter/gestures.dart';
@@ -77,7 +78,7 @@ class _RegisterScreenState extends State<RegisterScreen>
     if (!_agreeToTerms) {
       setState(() {
         _errorMessage =
-            '❌ Kullanım koşulları kabul edilmeli\n\n💡 Devam etmek için kullanım koşullarını ve gizlilik politikasını kabul etmeniz gerekmektedir.';
+            AppLocalizations.of(context)!.termsRequired;
       });
       return;
     }
@@ -184,20 +185,18 @@ class _RegisterScreenState extends State<RegisterScreen>
       return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
 
-    return WillPopScope(
-      onWillPop: () async {
+    return PopScope(
+      canPop: true,
+      onPopInvokedWithResult: (didPop, result) async {
         // Geri tuşuna basıldığında login sayfasına dön
-        try {
-          if (Navigator.canPop(context)) {
-            Navigator.pop(context);
-          } else {
+        if (didPop) {
+          try {
+            Navigator.of(context).pushReplacementNamed('/login');
+          } catch (e) {
+            print('Geri tuşu hatası: $e');
             Navigator.of(context).pushReplacementNamed('/login');
           }
-        } catch (e) {
-          print('Geri tuşu hatası: $e');
-          Navigator.of(context).pushReplacementNamed('/login');
         }
-        return false; // Varsayılan geri işlemini engelle
       },
       child: Scaffold(
         body: Container(
@@ -329,8 +328,8 @@ class _RegisterScreenState extends State<RegisterScreen>
                                       begin: Alignment.topLeft,
                                       end: Alignment.bottomRight,
                                     ).createShader(bounds),
-                                child: const Text(
-                                  'Yeni Hesap Oluştur',
+                                child: Text(
+                                  AppLocalizations.of(context)!.createNewAccount,
                                   style: TextStyle(
                                     fontSize: 26,
                                     fontWeight: FontWeight.bold,
@@ -340,8 +339,8 @@ class _RegisterScreenState extends State<RegisterScreen>
                               ),
                               const SizedBox(height: 8),
 
-                              const Text(
-                                'Quiz uygulamasına katılın ve bilginizi test edin',
+                              Text(
+                                AppLocalizations.of(context)!.joinQuizApp,
                                 style: TextStyle(
                                   fontSize: 14,
                                   color: Colors.grey,
@@ -393,8 +392,8 @@ class _RegisterScreenState extends State<RegisterScreen>
                                             ),
                                           ),
                                           const SizedBox(width: 12),
-                                          const Text(
-                                            'Kayıt Ol',
+                                          Text(
+                                            AppLocalizations.of(context)!.signUp,
                                             style: TextStyle(
                                               fontSize: 22,
                                               fontWeight: FontWeight.bold,
@@ -409,8 +408,8 @@ class _RegisterScreenState extends State<RegisterScreen>
                                       TextFormField(
                                         controller: _nameController,
                                         decoration: InputDecoration(
-                                          labelText: 'Ad Soyad',
-                                          hintText: 'Tam adınızı girin',
+                                          labelText: AppLocalizations.of(context)!.fullName,
+                                          hintText: AppLocalizations.of(context)!.enterFullName,
                                           prefixIcon: const Icon(Icons.person),
                                           border: OutlineInputBorder(
                                             borderRadius: BorderRadius.circular(
@@ -425,15 +424,15 @@ class _RegisterScreenState extends State<RegisterScreen>
                                         validator: (value) {
                                           if (value == null ||
                                               value.trim().isEmpty) {
-                                            return '❌ Ad Soyad alanı boş bırakılamaz\n💡 Lütfen tam adınızı girin';
+                                            return AppLocalizations.of(context)!.fullNameRequired;
                                           }
                                           if (value.trim().length < 2) {
-                                            return '❌ Ad çok kısa\n💡 En az 2 karakter olmalıdır';
+                                            return AppLocalizations.of(context)!.nameTooShort;
                                           }
                                           if (!RegExp(
                                             r'^[a-zA-ZğüşıöçĞÜŞİÖÇ\s]+$',
                                           ).hasMatch(value.trim())) {
-                                            return '❌ Geçersiz karakter\n💡 Sadece harf kullanın';
+                                            return AppLocalizations.of(context)!.invalidCharacters;
                                           }
                                           return null;
                                         },
@@ -444,9 +443,9 @@ class _RegisterScreenState extends State<RegisterScreen>
                                       TextFormField(
                                         controller: _titleController,
                                         decoration: InputDecoration(
-                                          labelText: 'Unvan',
+                                          labelText: AppLocalizations.of(context)!.title,
                                           hintText:
-                                              'Ör: Anestezi Uzmanı, Asistan, Prof. Dr. vb.',
+                                              AppLocalizations.of(context)!.titleExample,
                                           prefixIcon: const Icon(Icons.work),
                                           border: OutlineInputBorder(
                                             borderRadius: BorderRadius.circular(
@@ -463,7 +462,7 @@ class _RegisterScreenState extends State<RegisterScreen>
                                           if (value != null &&
                                               value.trim().isNotEmpty &&
                                               value.trim().length < 2) {
-                                            return '❌ Unvan çok kısa\n💡 En az 2 karakter olmalıdır';
+                                            return AppLocalizations.of(context)!.titleTooShort;
                                           }
                                           return null;
                                         },
@@ -473,20 +472,20 @@ class _RegisterScreenState extends State<RegisterScreen>
                                       // Form alanları
                                       _buildAnimatedTextField(
                                         controller: _emailController,
-                                        label: 'E-posta',
-                                        hint: 'örnek@email.com',
+                                                                label: AppLocalizations.of(context)!.email,
+                        hint: AppLocalizations.of(context)!.enterEmail,
                                         icon: Icons.email_outlined,
                                         delay: 100,
                                         keyboardType:
                                             TextInputType.emailAddress,
                                         validator: (value) {
                                           if (value == null || value.isEmpty) {
-                                            return '❌ E-posta adresi boş bırakılamaz\n💡 Lütfen geçerli bir e-posta adresi girin';
+                                            return AppLocalizations.of(context)!.emailEmptyRegister;
                                           }
                                           if (!RegExp(
                                             r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
                                           ).hasMatch(value)) {
-                                            return '❌ E-posta formatı geçersiz\n💡 Örnek: kullanici@example.com';
+                                            return AppLocalizations.of(context)!.emailInvalidRegister;
                                           }
                                           return null;
                                         },
@@ -495,8 +494,8 @@ class _RegisterScreenState extends State<RegisterScreen>
 
                                       _buildAnimatedTextField(
                                         controller: _passwordController,
-                                        label: 'Şifre',
-                                        hint: 'En az 6 karakter',
+                                                                label: AppLocalizations.of(context)!.password,
+                        hint: AppLocalizations.of(context)!.enterPassword,
                                         icon: Icons.lock_outline,
                                         delay: 200,
                                         obscureText: !_isPasswordVisible,
@@ -516,13 +515,13 @@ class _RegisterScreenState extends State<RegisterScreen>
                                         ),
                                         validator: (value) {
                                           if (value == null || value.isEmpty) {
-                                            return '❌ Şifre alanı boş bırakılamaz\n💡 Güçlü bir şifre oluşturun';
+                                            return AppLocalizations.of(context)!.passwordEmptyRegister;
                                           }
                                           if (value.length < 6) {
-                                            return '❌ Şifre çok kısa\n💡 En az 6 karakter olmalıdır';
+                                            return AppLocalizations.of(context)!.passwordTooShort;
                                           }
                                           if (value.length > 128) {
-                                            return '❌ Şifre çok uzun\n💡 En fazla 128 karakter olabilir';
+                                            return AppLocalizations.of(context)!.passwordTooLong;
                                           }
                                           // Güçlü şifre kontrolleri
                                           bool hasUppercase = value.contains(
@@ -543,7 +542,7 @@ class _RegisterScreenState extends State<RegisterScreen>
 
                                           if (value.length >= 6 &&
                                               value.length < 8) {
-                                            return '💡 Şifrenizi daha güçlü yapın\n📝 8+ karakter, büyük-küçük harf, rakam kullanın';
+                                            return AppLocalizations.of(context)!.passwordWeak;
                                           }
 
                                           return null;
@@ -553,8 +552,8 @@ class _RegisterScreenState extends State<RegisterScreen>
 
                                       _buildAnimatedTextField(
                                         controller: _confirmPasswordController,
-                                        label: 'Şifre Onayı',
-                                        hint: 'Şifrenizi tekrar girin',
+                                        label: AppLocalizations.of(context)!.confirmPassword,
+                                        hint: AppLocalizations.of(context)!.enterConfirmPassword,
                                         icon: Icons.lock_outline,
                                         delay: 300,
                                         obscureText: !_isConfirmPasswordVisible,
@@ -574,11 +573,11 @@ class _RegisterScreenState extends State<RegisterScreen>
                                         ),
                                         validator: (value) {
                                           if (value == null || value.isEmpty) {
-                                            return '❌ Şifre onayı boş bırakılamaz\n💡 Şifrenizi tekrar girin';
+                                            return AppLocalizations.of(context)!.confirmPasswordEmpty;
                                           }
                                           if (value !=
                                               _passwordController.text) {
-                                            return '❌ Şifreler eşleşmiyor\n💡 Aynı şifreyi tekrar girin';
+                                            return AppLocalizations.of(context)!.passwordMismatch;
                                           }
                                           return null;
                                         },
@@ -638,7 +637,7 @@ class _RegisterScreenState extends State<RegisterScreen>
                                                   Expanded(
                                                     child: RichText(
                                                       text: TextSpan(
-                                                        text: 'Tüm ',
+                                                        text: AppLocalizations.of(context)!.acceptAll,
                                                         style: const TextStyle(
                                                           color: Colors.grey,
                                                           fontSize: 13,
@@ -646,7 +645,7 @@ class _RegisterScreenState extends State<RegisterScreen>
                                                         children: [
                                                           TextSpan(
                                                             text:
-                                                                'Kullanım Koşullarını',
+                                                                AppLocalizations.of(context)!.termsOfUse,
                                                             style: TextStyle(
                                                               color:
                                                                   Colors
@@ -663,12 +662,12 @@ class _RegisterScreenState extends State<RegisterScreen>
                                                                     // Kullanım koşulları sayfasına yönlendir
                                                                   },
                                                           ),
-                                                          const TextSpan(
-                                                            text: ' ve ',
+                                                          TextSpan(
+                                                            text: ' ${AppLocalizations.of(context)!.and} ',
                                                           ),
                                                           TextSpan(
                                                             text:
-                                                                'Gizlilik Politikasını',
+                                                                AppLocalizations.of(context)!.privacyPolicy,
                                                             style: TextStyle(
                                                               color:
                                                                   Colors
@@ -685,9 +684,9 @@ class _RegisterScreenState extends State<RegisterScreen>
                                                                     // Gizlilik politikası sayfasına yönlendir
                                                                   },
                                                           ),
-                                                          const TextSpan(
+                                                          TextSpan(
                                                             text:
-                                                                ' kabul ediyorum.',
+                                                                ' ${AppLocalizations.of(context)!.accept}.',
                                                           ),
                                                         ],
                                                       ),
@@ -784,9 +783,9 @@ class _RegisterScreenState extends State<RegisterScreen>
                                                           const SizedBox(
                                                             width: 12,
                                                           ),
-                                                          const Expanded(
+                                                          Expanded(
                                                             child: Text(
-                                                              'Kayıt Olunamadı',
+                                                              AppLocalizations.of(context)!.registrationFailed,
                                                               style: TextStyle(
                                                                 color:
                                                                     Colors.red,
@@ -829,7 +828,7 @@ class _RegisterScreenState extends State<RegisterScreen>
                                           return Transform.scale(
                                             scale: value,
                                             child: _buildGradientButton(
-                                              text: 'Kayıt Ol',
+                                              text: AppLocalizations.of(context)!.signUp,
                                               onPressed: _register,
                                               isLoading: _isLoading,
                                             ),
@@ -843,14 +842,14 @@ class _RegisterScreenState extends State<RegisterScreen>
                                         child: RichText(
                                           text: TextSpan(
                                             text:
-                                                'Zaten bir hesabınız var mı? ',
+                                                AppLocalizations.of(context)!.alreadyHaveAccount,
                                             style: const TextStyle(
                                               color: Colors.grey,
                                               fontSize: 15,
                                             ),
                                             children: [
                                               TextSpan(
-                                                text: 'Giriş Yap',
+                                                text: AppLocalizations.of(context)!.login,
                                                 style: TextStyle(
                                                   color: Colors.blue.shade300,
                                                   fontWeight: FontWeight.bold,

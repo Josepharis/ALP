@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:provider/provider.dart';
-import 'dart:ui';
 import 'dart:math';
 import 'dart:async'; // StreamSubscription için import
 
 import '../services/auth_service.dart';
 import '../services/quiz_service.dart';
 import '../models/question.dart';
-import '../models/user_activity.dart';
-import '../screens/quiz_screen.dart';
 import 'category_mistakes_screen.dart';
 import '../utils/event_bus.dart';
 
@@ -138,7 +134,7 @@ class _MistakesScreenState extends State<MistakesScreen> {
         final Map<String, List<Question>> groupedMistakes = {};
 
         for (var question in mistakeQuestions) {
-          final category = question.category ?? 'Diğer';
+          final category = question.category ?? 'Diğer'; // Will be localized in UI
           print(
             "Soru: ${question.question.substring(0, min(30, question.question.length))}... - Kategori: $category",
           );

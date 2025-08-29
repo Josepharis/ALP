@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import '../l10n/app_localizations.dart';
 // import 'package:confetti/confetti.dart';
 import 'dart:math';
 
@@ -119,16 +120,16 @@ class _QuizResultScreenState extends State<QuizResultScreen> {
     Color statusColor;
 
     if (scorePercentage >= 90) {
-      resultMessage = 'Mükemmel!';
+      resultMessage = AppLocalizations.of(context)!.excellent;
       statusColor = Colors.green;
     } else if (scorePercentage >= 70) {
-      resultMessage = 'Çok İyi!';
+      resultMessage = AppLocalizations.of(context)!.veryGood;
       statusColor = Colors.lightGreen;
     } else if (scorePercentage >= 50) {
       resultMessage = 'Orta!';
       statusColor = Colors.yellow;
     } else {
-      resultMessage = 'Geliştirilmeli!';
+      resultMessage = AppLocalizations.of(context)!.needsImprovement;
       statusColor = Colors.orange;
     }
 
@@ -167,7 +168,7 @@ class _QuizResultScreenState extends State<QuizResultScreen> {
             ),
             const SizedBox(height: 8),
             Text(
-              'Quiz Tamamlandı',
+              AppLocalizations.of(context)!.quizCompleted,
               style: TextStyle(color: Colors.grey[300], fontSize: 16),
             ),
             const SizedBox(height: 32),
@@ -220,13 +221,13 @@ class _QuizResultScreenState extends State<QuizResultScreen> {
                   Colors.blue,
                 ),
                 _buildStatItem(
-                  'Doğru',
+                  AppLocalizations.of(context)!.correct,
                   '$finalScore',
                   Icons.check_circle,
                   Colors.green,
                 ),
                 _buildStatItem(
-                  'Yanlış',
+                  AppLocalizations.of(context)!.incorrect,
                   '${totalQuestions - finalScore}',
                   Icons.close,
                   Colors.red,
@@ -281,7 +282,7 @@ class _QuizResultScreenState extends State<QuizResultScreen> {
             Navigator.of(context).popUntil((route) => route.isFirst);
           },
           icon: const Icon(Icons.home),
-          label: const Text('Ana Sayfa'),
+          label: Text(AppLocalizations.of(context)!.backToHome),
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.white.withOpacity(0.2),
             foregroundColor: Colors.white,
@@ -300,7 +301,7 @@ class _QuizResultScreenState extends State<QuizResultScreen> {
             // Burada global navigasyon kullanmak yerine sonra düzenleyeceğiz
           },
           icon: const Icon(Icons.refresh),
-          label: const Text('Yeni Quiz'),
+          label: Text(AppLocalizations.of(context)!.newQuiz),
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.blue,
             foregroundColor: Colors.white,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../l10n/app_localizations.dart';
 import '../services/leaderboard_service.dart';
 import '../utils/snackbar_utils.dart';
 import 'dart:math' as math;
@@ -125,7 +126,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
               setState(() => _isLoading = false);
               SnackBarUtils.showErrorSnackBar(
                 context,
-                'Veriler yüklenirken bir hata oluştu: $error',
+                '${AppLocalizations.of(context)!.dataLoadingError}: $error',
               );
             }
           },
@@ -184,7 +185,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
             ),
             const SizedBox(width: 12),
             Text(
-              'Sıralama',
+              AppLocalizations.of(context)!.ranking,
               style: GoogleFonts.poppins(
                 fontSize: 28,
                 fontWeight: FontWeight.bold,
@@ -257,7 +258,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
                         child: _buildCard(
                           user: firstPlace,
                           color: Colors.amber.shade600,
-                          label: 'BİRİNCİ',
+                          label: AppLocalizations.of(context)!.first,
                           position: 1,
                         ),
                       ),
@@ -277,7 +278,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
                       child: _buildCard(
                         user: secondPlace,
                         color: Colors.grey.shade500,
-                        label: 'İKİNCİ',
+                        label: AppLocalizations.of(context)!.second,
                         position: 2,
                       ),
                     ),
@@ -290,7 +291,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
                       child: _buildCard(
                         user: thirdPlace,
                         color: Colors.orange.shade700,
-                        label: 'ÜÇÜNCÜ',
+                        label: AppLocalizations.of(context)!.third,
                         position: 3,
                       ),
                     ),
@@ -616,7 +617,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
                 const Icon(Icons.people_outline, color: Colors.white, size: 18),
                 const SizedBox(width: 8),
                 Text(
-                  'Senin Çevren',
+                  AppLocalizations.of(context)!.yourCircle,
                   style: GoogleFonts.poppins(
                     color: Colors.white,
                     fontSize: 14,
@@ -781,7 +782,7 @@ class _LoadingView extends StatelessWidget {
           ),
           const SizedBox(height: 24),
           Text(
-            'Sıralama Yükleniyor...',
+            AppLocalizations.of(context)!.rankingLoading,
             style: GoogleFonts.poppins(
               color: Colors.white,
               fontSize: 18,

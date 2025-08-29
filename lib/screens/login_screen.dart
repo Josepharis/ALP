@@ -3,6 +3,8 @@ import '../theme/app_theme.dart';
 import 'package:flutter/gestures.dart';
 import './register_screen.dart';
 import '../services/auth_service.dart';
+import '../widgets/language_selector.dart';
+import '../l10n/app_localizations.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -285,6 +287,7 @@ class _LoginScreenState extends State<LoginScreen>
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
     final size = MediaQuery.of(context).size;
     final isSmallScreen = size.width < 600;
 
@@ -300,22 +303,25 @@ class _LoginScreenState extends State<LoginScreen>
         height: double.infinity,
         decoration: BoxDecoration(gradient: AppTheme.backgroundGradient),
         child: SafeArea(
-          child: Center(
-            child: SingleChildScrollView(
-              child: Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: isSmallScreen ? 24 : size.width * 0.1,
-                ),
-                child: FadeTransition(
-                  opacity: _fadeAnimation!,
-                  child: SlideTransition(
-                    position: _slideAnimation!,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        // Arka plan dekoratif öğeleri
-                        Stack(
+          child: Stack(
+            children: [
+              // Ana içerik
+              Center(
+                child: SingleChildScrollView(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: isSmallScreen ? 24 : size.width * 0.1,
+                    ),
+                    child: FadeTransition(
+                      opacity: _fadeAnimation!,
+                      child: SlideTransition(
+                        position: _slideAnimation!,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            // Arka plan dekoratif öğeleri
+                            Stack(
                           alignment: Alignment.center,
                           children: [
                             // Arka plan ışıltıları
@@ -470,9 +476,9 @@ class _LoginScreenState extends State<LoginScreen>
                                       ),
                                     ),
                                     const SizedBox(width: 12),
-                                    const Text(
-                                      'Giriş Yap',
-                                      style: TextStyle(
+                                                                          Text(
+                                        localizations.login,
+                                        style: const TextStyle(
                                         fontSize: 22,
                                         fontWeight: FontWeight.bold,
                                         color: Colors.white,
@@ -483,20 +489,20 @@ class _LoginScreenState extends State<LoginScreen>
                                 const SizedBox(height: 20),
 
                                 // E-posta giriş alanı
-                                _buildAnimatedTextField(
-                                  controller: _emailController,
-                                  label: 'E-posta',
-                                  hint: 'örnek@email.com',
+                                                                  _buildAnimatedTextField(
+                                    controller: _emailController,
+                                    label: localizations.email,
+                                    hint: localizations.enterEmail,
                                   icon: Icons.email_outlined,
                                   keyboardType: TextInputType.emailAddress,
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
-                                      return '❌ E-posta adresi boş bırakılamaz\n💡 Kayıt olduğunuz e-posta adresini girin';
+                                      return localizations.emailRequired;
                                     }
                                     if (!RegExp(
                                       r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
                                     ).hasMatch(value)) {
-                                      return '❌ E-posta formatı geçersiz\n💡 Örnek: kullanici@example.com';
+                                      return localizations.invalidEmail;
                                     }
                                     return null;
                                   },
@@ -504,10 +510,10 @@ class _LoginScreenState extends State<LoginScreen>
                                 const SizedBox(height: 16),
 
                                 // Şifre giriş alanı
-                                _buildAnimatedTextField(
-                                  controller: _passwordController,
-                                  label: 'Şifre',
-                                  hint: 'Şifrenizi girin',
+                                                                  _buildAnimatedTextField(
+                                    controller: _passwordController,
+                                    label: localizations.password,
+                                    hint: localizations.enterPassword,
                                   icon: Icons.lock_outline,
                                   obscureText: !_isPasswordVisible,
                                   suffixIcon: IconButton(
@@ -526,7 +532,7 @@ class _LoginScreenState extends State<LoginScreen>
                                   ),
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
-                                      return '❌ Şifre alanı boş bırakılamaz\n💡 Kayıt olurken belirlediğiniz şifreyi girin';
+                                      return localizations.passwordRequired;
                                     }
                                     return null;
                                   },
@@ -545,7 +551,7 @@ class _LoginScreenState extends State<LoginScreen>
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
-                                    child: const Text('Şifremi Unuttum?'),
+                                    child: Text(localizations.forgotPassword),
                                   ),
                                 ),
                                 const SizedBox(height: 10),
@@ -653,7 +659,7 @@ class _LoginScreenState extends State<LoginScreen>
                                     return Transform.scale(
                                       scale: value,
                                       child: _buildGradientButton(
-                                        text: 'Giriş Yap',
+                                        text: localizations.login,
                                         onPressed: _signIn,
                                         isLoading: _isLoading,
                                       ),
@@ -666,14 +672,14 @@ class _LoginScreenState extends State<LoginScreen>
                                 Center(
                                   child: RichText(
                                     text: TextSpan(
-                                      text: 'Hesabınız yok mu? ',
+                                      text: '${localizations.dontHaveAccount} ',
                                       style: const TextStyle(
                                         color: Colors.grey,
                                         fontSize: 15,
                                       ),
                                       children: [
                                         TextSpan(
-                                          text: 'Kayıt Ol',
+                                          text: localizations.signUp,
                                           style: TextStyle(
                                             color: Colors.blue.shade300,
                                             fontWeight: FontWeight.bold,
@@ -700,12 +706,24 @@ class _LoginScreenState extends State<LoginScreen>
                             ),
                           ),
                         ),
-                      ],
+                          ],
+                        ),
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
+              
+              // Dil seçici - sağ üst köşe
+              Positioned(
+                top: 16,
+                right: 16,
+                child: LanguageSelector(
+                  isCompact: true,
+                  showLabel: false,
+                ),
+              ),
+            ],
           ),
         ),
       ),

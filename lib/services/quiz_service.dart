@@ -65,10 +65,14 @@ import '../data/neurophysiology_anesthesia_questions.dart'; // Added
 import '../data/perioperative_intensive_care_nutrition_questions.dart'; // Added
 import '../data/fluid_electrolyte_imbalance_management_questions.dart'; // Added
 import '../utils/event_bus.dart';
+import 'question_translation_service.dart';
+
 
 class QuizService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final AuthService _authService = AuthService();
+  final QuestionTranslationService _translationService = QuestionTranslationService();
+
 
   // Kullanıcının quiz ilerlemesini kaydet
   Future<bool> saveQuizProgress(Quiz quiz) async {
@@ -1469,5 +1473,68 @@ class QuizService {
       print('completeQuiz hatası: $e');
       return false;
     }
+  }
+
+  // Çeviri destekli soru alma metodları
+  List<Question> getTranslatedQuestionsByCategory(String categoryName, String languageCode) {
+    List<Question> questions = [];
+    
+    // Kategori adına göre soruları al
+    switch (categoryName.toLowerCase()) {
+      case 'lokal anestezikler':
+      case 'local anesthetics':
+        questions = localAnestheticsQuestions;
+        break;
+      case 'kardiyovasküler fizyoloji':
+      case 'cardiovascular physiology':
+        questions = cardiovascularPhysiologyQuestions;
+        break;
+      case 'solunum fizyolojisi':
+      case 'respiratory physiology':
+        questions = respiratoryPhysiologyQuestions;
+        break;
+      case 'anestezi uygulaması':
+      case 'anesthesia application':
+        questions = anesthesiaApplicationQuestions;
+        break;
+      case 'solunum sistemi':
+      case 'respiratory system':
+        questions = respiratorySystemQuestions;
+        break;
+      default:
+        questions = localAnestheticsQuestions; // Varsayılan
+    }
+    
+    // Soruları çevir
+    return _translationService.translateQuestions(questions, languageCode);
+  }
+
+  // Rastgele çevrilmiş sorular al
+  List<Question> getRandomTranslatedQuestions(int count, String languageCode) {
+    List<Question> allQuestions = [
+      ...localAnestheticsQuestions,
+      ...cardiovascularPhysiologyQuestions,
+      ...respiratoryPhysiologyQuestions,
+      ...anesthesiaApplicationQuestions,
+      ...respiratorySystemQuestions,
+    ];
+    
+    allQuestions.shuffle();
+    final selectedQuestions = allQuestions.take(count).toList();
+    
+    return _translationService.translateQuestions(selectedQuestions, languageCode);
+  }
+
+  // Çevrilmiş kategorileri al
+  List<String> getTranslatedCategories(String languageCode) {
+    final categories = [
+      'Lokal Anestezikler',
+      'Kardiyovasküler Fizyoloji', 
+      'Solunum Fizyolojisi',
+      'Anestezi Uygulaması',
+      'Solunum Sistemi',
+    ];
+    
+    return _translationService.getTranslatedCategories(categories, languageCode);
   }
 }

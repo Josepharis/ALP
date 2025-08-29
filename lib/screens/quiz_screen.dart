@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../l10n/app_localizations.dart';
 import 'package:flutter/services.dart';
 import 'dart:math';
 
@@ -6,7 +7,7 @@ import '../models/question.dart';
 import 'question_detail_screen.dart';
 import '../services/quiz_service.dart';
 import '../models/quiz.dart';
-import 'quiz_result_screen.dart';
+
 import '../utils/event_bus.dart';
 import '../utils/snackbar_utils.dart';
 
@@ -99,7 +100,7 @@ class _QuizScreenState extends State<QuizScreen>
       // Başarılı mesajı (opsiyonel)
       SnackBarUtils.showSuccessSnackBar(
         context,
-        'Quiz ilerlemeniz kaydedilmiştir',
+        AppLocalizations.of(context)!.quizProgressSaved,
       );
     } catch (e) {
       print('Quiz ilerleme kaydetme hatası: $e');
@@ -191,7 +192,7 @@ class _QuizScreenState extends State<QuizScreen>
                       vertical: 8,
                     ),
                     child: Text(
-                      'Quizden çıkmak istediğinize emin misiniz? İlerlemeniz kaydedilecek ve daha sonra devam edebilirsiniz.',
+                      AppLocalizations.of(context)!.exitQuizConfirm,
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: Colors.white.withOpacity(0.8),
@@ -299,8 +300,16 @@ class _QuizScreenState extends State<QuizScreen>
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: _showExitConfirmationDialog,
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (didPop, result) async {
+        if (!didPop) {
+          final shouldPop = await _showExitConfirmationDialog();
+          if (shouldPop && context.mounted) {
+            Navigator.of(context).pop();
+          }
+        }
+      },
       child: Scaffold(
         extendBody: true,
         body: Container(
@@ -407,11 +416,11 @@ class _QuizScreenState extends State<QuizScreen>
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                '${(_animation.value * 60).toInt()} saniye',
+                '${(_animation.value * 60).toInt()} ${AppLocalizations.of(context)!.seconds}',
                 style: const TextStyle(color: Colors.white70),
               ),
               Text(
-                'Puan: ${isAnswered ? (selectedAnswerIndex == widget.questions[currentQuestionIndex].correctAnswerIndex ? "+10" : "+0") : ""}',
+                '${AppLocalizations.of(context)!.score}: ${isAnswered ? (selectedAnswerIndex == widget.questions[currentQuestionIndex].correctAnswerIndex ? "+10" : "+0") : ""}',
                 style: TextStyle(
                   color:
                       isAnswered
@@ -714,7 +723,7 @@ class _QuizScreenState extends State<QuizScreen>
           index == widget.questions[currentQuestionIndex].correctAnswerIndex;
 
       print(
-        "CEVAP: ${isCorrect ? 'DOĞRU' : 'YANLIŞ'} - Soru: ${widget.questions[currentQuestionIndex].question}",
+        "CEVAP: ${isCorrect ? AppLocalizations.of(context)!.correct.toUpperCase() : AppLocalizations.of(context)!.incorrect.toUpperCase()} - Soru: ${widget.questions[currentQuestionIndex].question}",
       );
 
       setState(() {
@@ -854,12 +863,12 @@ class _QuizScreenState extends State<QuizScreen>
 
         // Quiz tamamlandı, ana sayfaya dön
         Navigator.pop(context);
-        SnackBarUtils.showSuccessSnackBar(context, 'Quiz tamamlandı!');
+        SnackBarUtils.showSuccessSnackBar(context, AppLocalizations.of(context)!.quizCompleted);
       } else {
         print('HATA: Quiz tamamlanamadı veya veritabanına kaydedilemedi');
         SnackBarUtils.showErrorSnackBar(
           context,
-          'Quiz tamamlanırken bir hata oluştu',
+          AppLocalizations.of(context)!.quizCompletionError,
         );
       }
     } catch (e) {

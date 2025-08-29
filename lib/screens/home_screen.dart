@@ -13,6 +13,7 @@ import '../services/tutorial_service.dart';
 
 import '../utils/event_bus.dart';
 import '../utils/snackbar_utils.dart';
+import '../l10n/app_localizations.dart';
 import '../widgets/interactive_tutorial.dart';
 import '../screens/quiz_screen.dart';
 import '../screens/mistakes_screen.dart';
@@ -243,11 +244,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   ),
                   elevation: 0,
                   items: [
-                    _buildNavItem(Icons.home_rounded, 'Ana Sayfa', 0),
-                    _buildNavItem(Icons.quiz_rounded, 'Quizler', 1),
-                    _buildNavItem(Icons.assignment_late_rounded, 'Eksikler', 2),
-                    _buildNavItem(Icons.leaderboard_rounded, 'Sıralama', 3),
-                    _buildNavItem(Icons.person_rounded, 'Profil', 4),
+                    _buildNavItem(Icons.home_rounded, AppLocalizations.of(context)!.homePage, 0),
+                    _buildNavItem(Icons.quiz_rounded, AppLocalizations.of(context)!.quizzes, 1),
+                    _buildNavItem(Icons.assignment_late_rounded, AppLocalizations.of(context)!.missing, 2),
+                    _buildNavItem(Icons.leaderboard_rounded, AppLocalizations.of(context)!.leaderboard, 3),
+                    _buildNavItem(Icons.person_rounded, AppLocalizations.of(context)!.profile, 4),
                   ],
                 ),
               ),
@@ -485,9 +486,9 @@ class _QuizListScreenState extends State<QuizListScreen> {
                       child: const Icon(Icons.quiz, color: Colors.white),
                     ),
                     const SizedBox(width: 12),
-                    const Expanded(
+                    Expanded(
                       child: Text(
-                        'Tüm Quizler',
+                        AppLocalizations.of(context)!.allQuizzes,
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 20,
@@ -657,7 +658,7 @@ class _QuizListScreenState extends State<QuizListScreen> {
                           if (isOngoing && ongoingQuiz != null) ...[
                             // Devam eden quiz bilgisi
                             Text(
-                              '${ongoingQuiz.currentQuestionIndex ?? 0}/${ongoingQuiz.totalQuestions} Soru',
+                              '${ongoingQuiz.currentQuestionIndex ?? 0}/${ongoingQuiz.totalQuestions} ${AppLocalizations.of(context)!.questions}',
                               style: TextStyle(
                                 fontSize: 12,
                                 color: Colors.white.withOpacity(0.8),
@@ -690,7 +691,7 @@ class _QuizListScreenState extends State<QuizListScreen> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(
-                            isOngoing ? 'Devam Et' : 'Başla',
+                            isOngoing ? AppLocalizations.of(context)!.continueQuiz : AppLocalizations.of(context)!.startQuiz,
                             style: const TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.w500,
@@ -730,7 +731,7 @@ class _HomeContentState extends State<HomeContent> {
   final AuthService _authService = AuthService();
   final TutorialService _tutorialService = TutorialService();
 
-  String _userName = 'Kullanıcı';
+  String _userName = 'User'; // Will be replaced with localized version
   UserActivity? _userActivity;
   DailyQuestion? _dailyQuestion;
   List<Quiz> _ongoingQuizzes = [];
@@ -833,7 +834,7 @@ class _HomeContentState extends State<HomeContent> {
       // 1. Aşama: Hızlı kullanıcı bilgisi yükleme
       final currentUser = _authService.currentUser;
       if (currentUser != null) {
-        _userName = currentUser.displayName ?? 'Kullanıcı';
+        _userName = currentUser.displayName ?? AppLocalizations.of(context)!.user;
       }
 
       // 2. Aşama: Temel verileri paralel yükle
@@ -977,8 +978,8 @@ class _HomeContentState extends State<HomeContent> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        'Hoş Geldin 👋',
+                      Text(
+                        AppLocalizations.of(context)!.welcome,
                         style: TextStyle(color: Colors.grey, fontSize: 12),
                       ),
                       Text(
@@ -1079,7 +1080,7 @@ class _HomeContentState extends State<HomeContent> {
     final todayWeekday = now.weekday; // 1-7 arası (Pazartesi: 1, Pazar: 7)
 
     // Haftanın günlerini Pazartesi'den Pazar'a sırala
-    final weekdayNames = ['Pzt', 'Sal', 'Çar', 'Per', 'Cum', 'Cmt', 'Paz'];
+    final weekdayNames = AppLocalizations.of(context)!.weekdays.split(',');
 
     // Eğer kullanıcı aktivitesi yoksa, varsayılan olarak sadece bugünü işaretle
     if (_userActivity == null) {
@@ -1126,7 +1127,7 @@ class _HomeContentState extends State<HomeContent> {
               ), // Icon küçültüldü
               const SizedBox(width: 8),
               Text(
-                '$weeklyLoginDays Günlük Katılım!',
+                '$weeklyLoginDays ${AppLocalizations.of(context)!.dailyParticipation}',
                 style: const TextStyle(
                   fontSize: 16, // Font size küçültüldü
                   fontWeight: FontWeight.bold,
@@ -1236,8 +1237,8 @@ class _HomeContentState extends State<HomeContent> {
                 ),
               ),
               const SizedBox(width: 4),
-              const Text(
-                'Günün Sorusu',
+              Text(
+                AppLocalizations.of(context)!.dailyQuestion,
                 style: TextStyle(
                   fontSize: 11,
                   fontWeight: FontWeight.bold,
@@ -1266,7 +1267,7 @@ class _HomeContentState extends State<HomeContent> {
                       ),
                       const SizedBox(width: 2),
                       Text(
-                        _dailyQuestion?.isCorrect == true ? 'Doğru!' : 'Yanlış!',
+                        _dailyQuestion?.isCorrect == true ? AppLocalizations.of(context)!.correctAnswer : AppLocalizations.of(context)!.wrongAnswer,
                         style: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
@@ -1297,7 +1298,7 @@ class _HomeContentState extends State<HomeContent> {
           const SizedBox(height: 4),
           Text(
             _dailyQuestion?.question.question ??
-                'Anestezide propofol hangi reseptör üzerinden etki gösterir?',
+                'In anesthesia, through which receptor does propofol act?',
             style: const TextStyle(
               fontSize: 11,
               fontWeight: FontWeight.w500,
@@ -1336,7 +1337,7 @@ class _HomeContentState extends State<HomeContent> {
                     const Icon(Icons.quiz, size: 10),
                   const SizedBox(width: 3),
                   Text(
-                    _dailyQuestion?.isAnswered == true ? 'Tekrar Bak' : 'Cevapla',
+                    _dailyQuestion?.isAnswered == true ? AppLocalizations.of(context)!.checkAgain : AppLocalizations.of(context)!.answer,
                     style: const TextStyle(fontSize: 9),
                   ),
                 ],
@@ -1370,18 +1371,18 @@ class _HomeContentState extends State<HomeContent> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Devam Eden',
+                  AppLocalizations.of(context)!.ongoing,
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                   ), // Font size küçültüldü
                 ),
                 Text(
-                  'Tümünü Gör',
+                  AppLocalizations.of(context)!.viewAll,
                   style: TextStyle(color: Colors.blue, fontSize: 12),
                 ), // Font size küçültüldü
               ],
@@ -1402,9 +1403,9 @@ class _HomeContentState extends State<HomeContent> {
                   ),
                 ],
               ),
-              child: const Center(
+              child: Center(
                 child: Text(
-                  'Henüz devam eden quiz bulunmamaktadır.',
+                  AppLocalizations.of(context)!.noOngoingQuiz,
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 12,
@@ -1443,10 +1444,10 @@ class _HomeContentState extends State<HomeContent> {
               ),
               TextButton(
                 onPressed: () => _showAllOngoingQuizzes(context),
-                child: const Row(
+                child: Row(
                   children: [
                     Text(
-                      'Tümü',
+                      AppLocalizations.of(context)!.all,
                       style: TextStyle(fontSize: 12),
                     ), // Font size küçültüldü
                     SizedBox(width: 4),
@@ -1467,7 +1468,7 @@ class _HomeContentState extends State<HomeContent> {
                 quizzesToShow.isEmpty
                     ? Center(
                       child: Text(
-                        'Henüz devam eden quiz bulunmamaktadır',
+                        AppLocalizations.of(context)!.noOngoingQuiz,
                         style: TextStyle(
                           color: Colors.grey[400],
                           fontSize: 12,
@@ -1557,7 +1558,7 @@ class _HomeContentState extends State<HomeContent> {
                                               overflow: TextOverflow.ellipsis,
                                             ),
                                             Text(
-                                              '${quiz.totalQuestions} sorudan ${quiz.currentQuestionIndex ?? 0} soru tamamlandı',
+                                              '${quiz.currentQuestionIndex ?? 0} ${AppLocalizations.of(context)!.questionsOf} ${quiz.totalQuestions} ${AppLocalizations.of(context)!.questionsCompleted}',
                                               style: TextStyle(
                                                 color: Colors.white.withOpacity(
                                                   0.8,
@@ -1580,7 +1581,7 @@ class _HomeContentState extends State<HomeContent> {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        'İlerleme: %${(progressValue * 100).toInt()}',
+                                        '${AppLocalizations.of(context)!.progressPercent}: %${(progressValue * 100).toInt()}',
                                         style: TextStyle(
                                           color: Colors.white.withOpacity(0.9),
                                           fontWeight: FontWeight.w500,
@@ -1721,9 +1722,9 @@ class _HomeContentState extends State<HomeContent> {
                 Expanded(
                   child:
                       _ongoingQuizzes.isEmpty
-                          ? const Center(
+                          ? Center(
                             child: Text(
-                              'Henüz devam eden quiz bulunmamaktadır.',
+                              AppLocalizations.of(context)!.noOngoingQuiz,
                               style: TextStyle(color: Colors.white70),
                             ),
                           )
@@ -1803,7 +1804,7 @@ class _HomeContentState extends State<HomeContent> {
                                                   ),
                                                   const SizedBox(height: 4),
                                                   Text(
-                                                    '${quiz.totalQuestions} sorudan ${quiz.currentQuestionIndex ?? 0} soru tamamlandı',
+                                                    '${quiz.currentQuestionIndex ?? 0} ${AppLocalizations.of(context)!.questionsOf} ${quiz.totalQuestions} ${AppLocalizations.of(context)!.questionsCompleted}',
                                                     style: TextStyle(
                                                       fontSize: 12,
                                                       color: Colors.grey[400],
@@ -1947,9 +1948,9 @@ class _HomeContentState extends State<HomeContent> {
                   width: 1,
                 ),
               ),
-              child: const Center(
+              child: Center(
                 child: Text(
-                  'Henüz tamamlanan quiz bulunmamaktadır.',
+                  AppLocalizations.of(context)!.noCompletedQuiz,
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 12,
@@ -1983,9 +1984,9 @@ class _HomeContentState extends State<HomeContent> {
                   // Tüm tamamlanan quizleri göster
                   _showAllCompletedQuizzes(context);
                 },
-                child: const Row(
+                child: Row(
                   children: [
-                    Text('Tümü', style: TextStyle(fontSize: 12)),
+                    Text(AppLocalizations.of(context)!.all, style: TextStyle(fontSize: 12)),
                     SizedBox(width: 4),
                     Icon(Icons.arrow_forward, size: 14),
                   ],
@@ -2005,7 +2006,7 @@ class _HomeContentState extends State<HomeContent> {
                 final successRate = quiz.successRate?.toInt() ?? 0;
 
                 // Tamamlanma tarihini formatla
-                String completedDate = 'Tamamlandı';
+                String completedDate = AppLocalizations.of(context)!.completed;
                 if (quiz.createdAt != null) {
                   final date = quiz.createdAt!;
                   completedDate = '${date.day}.${date.month}.${date.year}';
@@ -2080,7 +2081,7 @@ class _HomeContentState extends State<HomeContent> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Doğru: ${quiz.score}/${quiz.totalQuestions}',
+                              '${AppLocalizations.of(context)!.correct}: ${quiz.score}/${quiz.totalQuestions}',
                               style: TextStyle(
                                 color: Colors.white.withOpacity(0.9),
                                 fontWeight: FontWeight.w500,
@@ -2228,9 +2229,9 @@ class _HomeContentState extends State<HomeContent> {
                 Expanded(
                   child:
                       _completedQuizzes.isEmpty
-                          ? const Center(
+                          ? Center(
                             child: Text(
-                              'Henüz tamamlanan quiz bulunmamaktadır.',
+                              AppLocalizations.of(context)!.noCompletedQuiz,
                               style: TextStyle(color: Colors.white70),
                             ),
                           )
@@ -2253,7 +2254,7 @@ class _HomeContentState extends State<HomeContent> {
                                   quiz.successRate?.toInt() ?? 0;
 
                               // Tamamlanma tarihini formatla
-                              String completedDate = 'Tamamlandı';
+                              String completedDate = AppLocalizations.of(context)!.completed;
                               if (quiz.createdAt != null) {
                                 final date = quiz.createdAt!;
                                 completedDate =

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../l10n/app_localizations.dart';
 import '../services/auth_service.dart';
 
 import '../services/user_service.dart';
@@ -203,8 +204,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
-                          'Profil Fotoğrafı',
+                        Text(
+                          AppLocalizations.of(context)!.profilePhoto,
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
@@ -241,13 +242,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             children: [
                               _buildImageOptionDialog(
                                 icon: Icons.photo_library,
-                                title: 'Galeriden\nSeç',
+                                title: AppLocalizations.of(context)!.selectFromGallery,
                                 onTap: () => Navigator.pop(context, 'gallery'),
                                 isTablet: isTablet,
                               ),
                               _buildImageOptionDialog(
                                 icon: Icons.camera_alt,
-                                title: 'Fotoğraf\nÇek',
+                                title: AppLocalizations.of(context)!.takePhoto,
                                 onTap: () => Navigator.pop(context, 'camera'),
                                 isTablet: isTablet,
                               ),
@@ -299,7 +300,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           if (mounted) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: const Text('Görsel seçilirken bir hata oluştu'),
+                content: Text(AppLocalizations.of(context)!.imageSelectionError),
                 backgroundColor: Colors.red.shade700,
               ),
             );
@@ -317,7 +318,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: const Text('Bir hata oluştu, tekrar deneyin'),
+            content: Text(AppLocalizations.of(context)!.generalError),
             backgroundColor: Colors.red.shade700,
           ),
         );
@@ -441,7 +442,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       print('Fotoğraf yükleme hatası: $e');
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Fotoğraf yüklenirken bir hata oluştu')),
+          SnackBar(content: Text(AppLocalizations.of(context)!.photoUploadError)),
         );
       }
     } finally {
@@ -595,14 +596,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     child: Column(
                       children: [
                         _buildSettingItem(
-                          'Profili Düzenle',
+                          AppLocalizations.of(context)!.editProfile,
                           Icons.edit,
                           context,
                           onTap: () => _showEditProfileModal(context),
                         ),
 
                         _buildSettingItem(
-                          'Cihazlarım',
+                          AppLocalizations.of(context)!.myDevices,
                           Icons.devices,
                           context,
                           onTap: () => _showDeviceManagementModal(context),
@@ -614,7 +615,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           onTap: () => _showPrivacySettingsModal(context),
                         ),
                         _buildSettingItem(
-                          'Yardım',
+                          AppLocalizations.of(context)!.help,
                           Icons.help,
                           context,
                           onTap: () => _showHelpModal(context),
