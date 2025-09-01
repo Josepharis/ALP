@@ -226,7 +226,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
                 ),
                 const SizedBox(width: 8),
                 Text(
-                  'Liderler',
+                  AppLocalizations.of(context)!.leaders,
                   style: GoogleFonts.poppins(
                     color: Colors.white,
                     fontSize: 14,
@@ -705,7 +705,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
                   overflow: TextOverflow.ellipsis,
                 ),
                 Text(
-                  '$points puan',
+                  '$points ${AppLocalizations.of(context)!.points.toLowerCase()}',
                   style: GoogleFonts.poppins(
                     color: Colors.white70,
                     fontSize: 12,

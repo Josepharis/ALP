@@ -807,85 +807,8 @@ final List<Question> adrenergicDrugsQuestions = [
     explanation:
         "Hipogliseminin adrenerjik semptomları (ör. tremor, taşikardi) beta-2 blokajı ile maskelenebilir → özellikle diyabetiklerde önemli.",
   ),
-
   Question(
-    question: "Beta-blokerlerin intoksikasyonunda kullanılan antidottur?",
-    options: [
-      "Glukagon",
-      "Fizostigmin",
-      "Nalokson",
-      "Flumazenil",
-      "Kalsiyum glukonat",
-    ],
-    correctAnswerIndex: 0,
-    difficulty: 3,
-    explanation:
-        "Glukagon, β reseptörlerinden bağımsız cAMP artışı sağlayarak kardiyak inotropiyi düzeltir.",
-  ),
-
-  // Eksik sorular ekleniyor
-  Question(
-    question: "Aşağıdakilerden hangisi alfa-1 reseptör antagonisti olarak kullanılır?",
-    options: [
-      "Propranolol",
-      "Fenilefrin",
-      "Fentolamin",
-      "Atenolol",
-      "Metoprolol",
-    ],
-    correctAnswerIndex: 2,
-    difficulty: 2,
-    explanation:
-        "Fentolamin, alfa-1 ve alfa-2 reseptörleri bloklar → vazodilatasyon sağlar → feokromositoma krizinde kullanılır.",
-  ),
-
-  Question(
-    question: "Aşağıdaki beta blokerlerden hangisi seçici beta-1 antagonistidir?",
-    options: [
-      "Propranolol",
-      "Labetalol",
-      "Carvedilol",
-      "Atenolol",
-      "Timolol",
-    ],
-    correctAnswerIndex: 3,
-    difficulty: 2,
-    explanation:
-        "Atenolol, beta-1 selektif antagonistik etki gösterir → kalp üzerinde etkili, bronşlara daha az etkilidir → KOAH'ta daha güvenlidir.",
-  ),
-
-  Question(
-    question: "Beta bloker kullanan bir hastada bronkospazm gelişti. En olası neden nedir?",
-    options: [
-      "Aşırı doz",
-      "Beta-1 reseptör blokajı",
-      "Beta-2 reseptör blokajı",
-      "Parasempatik uyarı",
-      "Alfa-1 aktivasyonu",
-    ],
-    correctAnswerIndex: 2,
-    difficulty: 2,
-    explanation:
-        "Beta-2 reseptörler bronş düz kaslarında bulunur → blokajı bronkospazma neden olabilir → özellikle propranolol gibi non-selektif ajanlarda görülür.",
-  ),
-
-  Question(
-    question: "Aşağıdaki durumların hangisinde adrenalin kullanımı kontrendikedir veya dikkatli olunmalıdır?",
-    options: [
-      "Anaflaksi",
-      "Kardiyojenik şok",
-      "Glokom",
-      "Asistol",
-      "Lokal anestezikle birlikte kullanımı",
-    ],
-    correctAnswerIndex: 2,
-    difficulty: 2,
-    explanation:
-        "Adrenalin, göz içi basıncını artırabilir → glokomda kontrendikedir veya dikkatli kullanılmalıdır.",
-  ),
-
-  Question(
-    question: "Aşağıdaki ajanlardan hangisi alfa ve beta antagonistidir?",
+    question: "Aşağıdaki ilaçlardan hangisi alfa ve beta antagonistidir?",
     options: [
       "Atenolol",
       "Propranolol",
@@ -928,22 +851,6 @@ final List<Question> adrenergicDrugsQuestions = [
     explanation:
         "Metoprolol, kalp üzerindeki beta-1 reseptörleri selektif olarak inhibe eder → kardiyoselektif beta bloker olarak bilinir.",
   ),
-
-  Question(
-    question: "Beta bloker kullanımında hipoglisemi maskelenebilir. Bunun nedeni nedir?",
-    options: [
-      "Glukoz metabolizmasını artırması",
-      "Beta-2 reseptör blokajı ile tremorun azalması",
-      "Parasempatik aktiviteyi baskılaması",
-      "Kortizol salınımını artırması",
-      "Adrenalin salınımını uyarması",
-    ],
-    correctAnswerIndex: 1,
-    difficulty: 3,
-    explanation:
-        "Hipogliseminin adrenerjik semptomları (ör. tremor, taşikardi) beta-2 blokajı ile maskelenebilir → özellikle diyabetiklerde önemli.",
-  ),
-
   Question(
     question: "Beta-1 blokajı ile aşağıdaki hangi klinik etki görülür?",
     options: [

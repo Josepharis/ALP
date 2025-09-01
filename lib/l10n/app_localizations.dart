@@ -302,7 +302,7 @@ abstract class AppLocalizations {
   /// **'Logout'**
   String get logout;
 
-  /// Quiz text
+  /// Quiz label
   ///
   /// In en, this message translates to:
   /// **'Quiz'**
@@ -446,13 +446,13 @@ abstract class AppLocalizations {
   /// **'Daily Question'**
   String get dailyQuestion;
 
-  /// Ongoing quizzes title
+  /// Ongoing label
   ///
   /// In en, this message translates to:
   /// **'Ongoing'**
   String get ongoing;
 
-  /// Ongoing quizzes section title
+  /// Ongoing quizzes title
   ///
   /// In en, this message translates to:
   /// **'Ongoing Quizzes'**
@@ -590,7 +590,7 @@ abstract class AppLocalizations {
   /// **'User guide will be added soon'**
   String get userGuideComingSoon;
 
-  /// Question label
+  /// Single question label
   ///
   /// In en, this message translates to:
   /// **'Question'**
@@ -818,7 +818,7 @@ abstract class AppLocalizations {
   /// **'Manage Questions'**
   String get manageQuestions;
 
-  /// Statistics section
+  /// Statistics label
   ///
   /// In en, this message translates to:
   /// **'Statistics'**
@@ -1244,16 +1244,16 @@ abstract class AppLocalizations {
   /// **'Daily Participation!'**
   String get dailyParticipation;
 
-  /// Correct answer feedback
+  /// Correct answer label
   ///
   /// In en, this message translates to:
-  /// **'Correct!'**
+  /// **'Correct Answer'**
   String get correctAnswer;
 
-  /// Wrong answer feedback
+  /// Wrong answer label
   ///
   /// In en, this message translates to:
-  /// **'Wrong!'**
+  /// **'Wrong Answer'**
   String get wrongAnswer;
 
   /// No ongoing quiz message
@@ -1406,7 +1406,7 @@ abstract class AppLocalizations {
   /// **'An error occurred while loading data'**
   String get dataLoadingError;
 
-  /// Ranking title
+  /// Ranking label
   ///
   /// In en, this message translates to:
   /// **'Ranking'**
@@ -1436,7 +1436,7 @@ abstract class AppLocalizations {
   /// **'Anonymous'**
   String get anonymous;
 
-  /// Your circle section title
+  /// Your circle label
   ///
   /// In en, this message translates to:
   /// **'Your Circle'**
@@ -1933,6 +1933,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Non-Cardiovascular Monitoring'**
   String get nonCardiovascularMonitoring;
+
+  /// Points label
+  ///
+  /// In en, this message translates to:
+  /// **'Points'**
+  String get points;
+
+  /// Success rate label
+  ///
+  /// In en, this message translates to:
+  /// **'Success Rate'**
+  String get successRate;
+
+  /// Total points label
+  ///
+  /// In en, this message translates to:
+  /// **'Total Points'**
+  String get totalPoints;
+
+  /// Best streak label
+  ///
+  /// In en, this message translates to:
+  /// **'Best Streak'**
+  String get bestStreak;
+
+  /// Leaders label
+  ///
+  /// In en, this message translates to:
+  /// **'Leaders'**
+  String get leaders;
+
+  /// Completed quizzes title
+  ///
+  /// In en, this message translates to:
+  /// **'Completed Quizzes'**
+  String get completedQuizzes;
 }
 
 class _AppLocalizationsDelegate

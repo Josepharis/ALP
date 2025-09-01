@@ -80,14 +80,7 @@ void main() async {
     // Android bildirim durumunu kontrol et
     await notificationService.checkAndroidNotificationStatus();
     
-    // Test bildirimi gönder (sadece debug modda)
-    if (kDebugMode) {
-      await Future.delayed(const Duration(seconds: 2));
-      await notificationService.sendTestNotification();
-      
-      // Hemen 1 dakika sonra test bildirimi planla
-      await notificationService.sendImmediateTestNotification();
-    }
+
     
     print('✅ NotificationService initialized');
     

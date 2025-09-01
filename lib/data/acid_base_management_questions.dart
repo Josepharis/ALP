@@ -1260,19 +1260,4 @@ final List<Question> acidBaseManagementQuestions = [
     explanation: "İdrar anyon açığı (Na+ + K+ - Cl-), renal HCO3- üretimini değerlendirir (negatif değer renal asidozu ekarte ettirir).",
     category: "Asit-Baz Yönetimi",
   ),
-
-  Question(
-    question: "Aşağıdakilerden hangisi, metabolik asidozda potasyum dengesini en iyi açıklar?",
-    options: [
-      "H⁺ hücre içine girerken K⁺ dışarı çıkar",
-      "K⁺ hücre içine girerken H⁺ dışarı çıkar",
-      "Her ikisi de hücre içinde kalır",
-      "Her ikisi de hücre dışında kalır",
-      "Potasyum dengesi değişmez"
-    ],
-    correctAnswerIndex: 0,
-    difficulty: 2,
-    explanation: "Metabolik asidozda H⁺ hücre içine girerken K⁺ dışarı çıkar → hiperkalemi gelişir.",
-    category: "Asit-Baz Yönetimi",
-  ),
 ];

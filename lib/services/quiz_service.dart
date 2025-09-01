@@ -25,7 +25,7 @@ import '../data/adrenergic_drugs_questions.dart';
 import '../data/hypotensive_agents_questions.dart';
 import '../data/local_anesthetics_questions.dart';
 import '../data/auxiliary_drugs_questions.dart';
-import '../data/preoperative_assessment_questions.dart';
+
 import '../data/airway_management_questions.dart';
 import '../data/cardiovascular_physiology_questions.dart';
 import '../data/cardiovascular_surgery_questions.dart';
@@ -53,10 +53,13 @@ import '../data/thermoregulation_hypothermia_malignant_hyperthermia_questions.da
 import '../data/outpatient_anesthesia_questions.dart'; // Added
 import '../data/cardiopulmonary_resuscitation_questions.dart'; // Added
 import '../data/intensive_care_problems_questions.dart'; // Added
+import '../data/sepsis_ards_questions.dart'; // Added
+import '../data/coagulation_anticoagulant_questions.dart'; // Added
 import '../data/postanesthetic_care_questions.dart'; // Added
 import '../data/pediatric_anesthesia_questions.dart'; // Added
 import '../data/chronic_pain_treatment_questions.dart'; // Added
 import '../data/postoperative_care_mechanical_ventilation_questions.dart'; // Added
+import '../data/neurosurgery_anesthesia_questions.dart'; // Added
 import '../data/hepatic_physiology_anesthesia_questions.dart'; // Added
 import '../data/obstetric_anesthesia_questions.dart'; // Added
 import '../data/acid_base_management_questions.dart'; // Added
@@ -64,6 +67,7 @@ import '../data/liver_disease_anesthesia_questions.dart'; // Added
 import '../data/neurophysiology_anesthesia_questions.dart'; // Added
 import '../data/perioperative_intensive_care_nutrition_questions.dart'; // Added
 import '../data/fluid_electrolyte_imbalance_management_questions.dart'; // Added
+import '../data/erc_2021_guidelines_questions.dart'; // Added
 import '../utils/event_bus.dart';
 import 'question_translation_service.dart';
 
@@ -587,7 +591,7 @@ class QuizService {
         hypotensiveAgentsQuestions,
         localAnestheticsQuestions,
         auxiliaryDrugsQuestions,
-        preoperativeAssessmentQuestions,
+        
         airwayManagementQuestions,
         cardiovascularPhysiologyQuestions,
         cardiovascularSurgeryQuestions,
@@ -615,7 +619,10 @@ class QuizService {
         intensiveCareProblemsQuestions,
         postanestheticCareQuestions,
         pediatricAnesthesiaQuestions,
+        postoperativeCareMechanicalVentilationQuestions,
+        neurosurgeryAnesthesiaQuestions,
         safetyQualityPerformanceImprovementQuestions,
+        erc2021GuidelinesQuestions,
       ];
 
       // Tüm soruları bir listede topla
@@ -852,11 +859,7 @@ class QuizService {
       'anestezide yardımcı ilaçlar': auxiliaryDrugsQuestions,
       'antiemetikler': auxiliaryDrugsQuestions,
       'premedikasyon': auxiliaryDrugsQuestions,
-      'bölüm 18 - ameliyat öncesi değerlendirme':
-          preoperativeAssessmentQuestions,
-      'ameliyat öncesi değerlendirme': preoperativeAssessmentQuestions,
-      'preoperatif değerlendirme': preoperativeAssessmentQuestions,
-      'preoperatif': preoperativeAssessmentQuestions,
+
       'algoloji': painManagementQuestions,
       'ağrı yönetimi': painManagementQuestions,
       'ağrı tedavisi': painManagementQuestions,
@@ -926,6 +929,15 @@ class QuizService {
           'yoğun bakım': intensiveCareProblemsQuestions, // Added
           'icu': intensiveCareProblemsQuestions, // Added
           'bölüm 57': intensiveCareProblemsQuestions, // Added
+          'sepsis ve ards': sepsisArdsQuestions, // Added
+          'sepsis': sepsisArdsQuestions, // Added
+          'ards': sepsisArdsQuestions, // Added
+          'septik şok': sepsisArdsQuestions, // Added
+          'koagülasyon ve antikoagülan tedavi': coagulationAnticoagulantQuestions, // Added
+          'koagülasyon': coagulationAnticoagulantQuestions, // Added
+          'antikoagülan': coagulationAnticoagulantQuestions, // Added
+          'hemostaz': coagulationAnticoagulantQuestions, // Added
+          'kanama bozuklukları': coagulationAnticoagulantQuestions, // Added
           'postanestezik bakım': postanestheticCareQuestions, // Added
           'pacu': postanestheticCareQuestions, // Added
           'postoperatif bakım': postanestheticCareQuestions, // Added
@@ -938,6 +950,28 @@ class QuizService {
           'bölüm 42': pediatricAnesthesiaQuestions, // Added
           'güvenlik kalite performans iyileştirme': safetyQualityPerformanceImprovementQuestions, // Added
           'bölüm 59': safetyQualityPerformanceImprovementQuestions, // Added
+          'postoperatif bakım ünitesi ve yoğun bakımda inhalasyon tedavisi ve mekanik ventilasyon': postoperativeCareMechanicalVentilationQuestions, // Added
+          'postoperatif bakım ve mekanik ventilasyon': postoperativeCareMechanicalVentilationQuestions, // Added
+          'mekanik ventilasyon': postoperativeCareMechanicalVentilationQuestions, // Added
+          'yoğun bakım mekanik ventilasyon': postoperativeCareMechanicalVentilationQuestions, // Added
+          'inhalasyon tedavisi ve mekanik ventilasyon': postoperativeCareMechanicalVentilationQuestions, // Added
+          'bölüm 58': postoperativeCareMechanicalVentilationQuestions, // Added
+          'nörocerrahide anestezi': neurosurgeryAnesthesiaQuestions, // Added
+          'beyin cerrahisi anestezi': neurosurgeryAnesthesiaQuestions, // Added
+          'nörocerrahi': neurosurgeryAnesthesiaQuestions, // Added
+          'kraniotomi anestezi': neurosurgeryAnesthesiaQuestions, // Added
+          'spinal cerrahi anestezi': neurosurgeryAnesthesiaQuestions, // Added
+          'bölüm 27': neurosurgeryAnesthesiaQuestions, // Added
+          'erc 2021 guidelines': erc2021GuidelinesQuestions,
+          'erc 2021': erc2021GuidelinesQuestions,
+          'erc kılavuzu': erc2021GuidelinesQuestions,
+          'erc guidelines': erc2021GuidelinesQuestions,
+          'resüsitasyon kılavuzu': erc2021GuidelinesQuestions,
+          'cpr kılavuzu': erc2021GuidelinesQuestions,
+          'kardiyak arrest': erc2021GuidelinesQuestions,
+          'defibrilasyon': erc2021GuidelinesQuestions,
+          'temel yaşam desteği': erc2021GuidelinesQuestions,
+          'ileri yaşam desteği': erc2021GuidelinesQuestions,
         };
 
     final lowerCategoryName = categoryName.toLowerCase();
@@ -1501,6 +1535,10 @@ class QuizService {
       case 'respiratory system':
         questions = respiratorySystemQuestions;
         break;
+      case 'erc 2021 guidelines':
+      case 'erc 2021':
+        questions = erc2021GuidelinesQuestions;
+        break;
       default:
         questions = localAnestheticsQuestions; // Varsayılan
     }
@@ -1517,6 +1555,7 @@ class QuizService {
       ...respiratoryPhysiologyQuestions,
       ...anesthesiaApplicationQuestions,
       ...respiratorySystemQuestions,
+      ...erc2021GuidelinesQuestions,
     ];
     
     allQuestions.shuffle();
@@ -1533,6 +1572,7 @@ class QuizService {
       'Solunum Fizyolojisi',
       'Anestezi Uygulaması',
       'Solunum Sistemi',
+      'ERC 2021 Guidelines',
     ];
     
     return _translationService.getTranslatedCategories(categories, languageCode);

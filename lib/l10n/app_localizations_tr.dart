@@ -118,7 +118,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get quiz => 'Quiz';
 
   @override
-  String get questions => 'Soru';
+  String get questions => 'Sorular';
 
   @override
   String get score => 'Puan';
@@ -605,10 +605,10 @@ class AppLocalizationsTr extends AppLocalizations {
   String get dailyParticipation => 'Günlük Katılım!';
 
   @override
-  String get correctAnswer => 'Doğru!';
+  String get correctAnswer => 'Doğru Cevap';
 
   @override
-  String get wrongAnswer => 'Yanlış!';
+  String get wrongAnswer => 'Yanlış Cevap';
 
   @override
   String get noOngoingQuiz => 'Henüz devam eden quiz bulunmamaktadır.';
@@ -959,4 +959,22 @@ class AppLocalizationsTr extends AppLocalizations {
   @override
   String get nonCardiovascularMonitoring =>
       'Kardiyovasküler Dışı Monitörizasyon';
+
+  @override
+  String get points => 'Puan';
+
+  @override
+  String get successRate => 'Başarı Oranı';
+
+  @override
+  String get totalPoints => 'Toplam Puan';
+
+  @override
+  String get bestStreak => 'En İyi Seri';
+
+  @override
+  String get leaders => 'Liderler';
+
+  @override
+  String get completedQuizzes => 'Tamamlanan Quizler';
 }

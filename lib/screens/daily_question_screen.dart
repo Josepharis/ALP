@@ -404,11 +404,11 @@ class _DailyQuestionScreenState extends State<DailyQuestionScreen>
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            '${(_animation.value * 60).toInt()} saniye',
+                            '${(_animation.value * 60).toInt()} ${AppLocalizations.of(context)!.seconds}',
                             style: const TextStyle(color: Colors.white70),
                           ),
                           Text(
-                            'Puan: +20',
+                            '${AppLocalizations.of(context)!.score}: +20',
                             style: TextStyle(color: Colors.white70),
                           ),
                         ],

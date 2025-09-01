@@ -80,17 +80,6 @@ final anesthesiaApplicationQuestions = <Question>[
         "Alexander Wood, 1855'te hipodermik şırıngayı icat etmiştir; bu, IV anestezinin temelidir.",
     category: "Anestezi Uygulaması",
   ),
-
-  Question(
-    question:
-        "Nöromüsküler blokaj için kullanılan ilk ajan aşağıdakilerden hangisidir?",
-    options: ["Süksinilkolin", "Roküronyum", "Kürar", "Gallamin", "Atrakurium"],
-    correctAnswerIndex: 2,
-    explanation:
-        "Kürar, kas gevşemesi amacıyla kullanılan ilk nöromüsküler blokerdir (1942).",
-    category: "Anestezi Uygulaması",
-  ),
-
   Question(
     question:
         "Aşağıdakilerden hangisi \"anestezi sırasında hastanın nabzını sürekli izlemeyi öneren\" ve çene itme manevrasını ilk kullanan kişidir?",
@@ -159,37 +148,7 @@ final anesthesiaApplicationQuestions = <Question>[
     category: "Anestezi Uygulaması",
   ),
 
-  Question(
-    question:
-        "ABD'de anestezi uzmanlığı sertifikasını veren kurum aşağıdakilerden hangisidir?",
-    options: [
-      "FDA",
-      "AANA",
-      "ASA",
-      "American Board of Anesthesiology",
-      "Joint Commission",
-    ],
-    correctAnswerIndex: 3,
-    explanation:
-        "American Board of Anesthesiology, ABD'de anestezi uzmanlarını belgelendiren kurumdur.",
-    category: "Anestezi Uygulaması",
-  ),
-
-  Question(
-    question:
-        "Gelişmiş iyileşme protokollerinde (Enhanced Recovery) anestezi uzmanının en belirgin katkısı hangisidir?",
-    options: [
-      "Hasta takibi",
-      "Ameliyat süresini kısaltmak",
-      "Postoperatif ağrı ve komplikasyonları azaltmak",
-      "Yara iyileşmesini hızlandırmak",
-      "Enfeksiyonları önlemek",
-    ],
-    correctAnswerIndex: 2,
-    explanation:
-        "Anestezistler postoperatif ağrının azaltılması ve erken mobilizasyon gibi süreçlerde kritik rol oynar.",
-    category: "Anestezi Uygulaması",
-  ),
+  
 
   Question(
     question:
@@ -283,21 +242,6 @@ final anesthesiaApplicationQuestions = <Question>[
   ),
 
   Question(
-    question: "Anestezinin ilk olarak hangi ülkede yaygınlaştığı kabul edilir?",
-    options: [
-      "İngiltere",
-      "Almanya",
-      "Fransa",
-      "Amerika Birleşik Devletleri",
-      "İskoçya",
-    ],
-    correctAnswerIndex: 3,
-    explanation:
-        "Amerika Birleşik Devletleri, 1846 yılında William T.G. Morton'ın ether ile genel anestezi uygulaması sonrası anesteziyi hızla yaygınlaştırmıştır.",
-    category: "Anestezi Uygulaması",
-  ),
-
-  Question(
     question:
         "Etherin anestezi ajanı olarak ilk kullanımında hangi durum yaşanmıştır?",
     options: [
@@ -314,7 +258,7 @@ final anesthesiaApplicationQuestions = <Question>[
   ),
 
   Question(
-    question: "James Simpson'un katkısı nedir?",
+    question: "James Simpson’un anestezi camiasına katkısı nedir?",
     options: [
       "İlk başarılı lokal anesteziyi uygulamıştır",
       "İlk anestezi cihazını icat etmiştir",
@@ -338,21 +282,6 @@ final anesthesiaApplicationQuestions = <Question>[
     category: "Anestezi Uygulaması",
   ),
 
-  Question(
-    question:
-        "Etherin genel anestezi olarak kullanımı ilk olarak hangi tıp fakültesi hastanesinde gerçekleştirilmiştir?",
-    options: [
-      "Massachusetts General Hospital",
-      "Johns Hopkins Hospital",
-      "Cleveland Clinic",
-      "London Hospital",
-      "Paris Üniversitesi Tıp Fakültesi",
-    ],
-    correctAnswerIndex: 0,
-    explanation:
-        "1846'da Massachusetts General Hospital'da William T.G. Morton, ether kullanarak ilk başarılı genel anesteziyi uygulamıştır. Bu tarih, modern anestezinin başlangıcı kabul edilir.",
-    category: "Anestezi Uygulaması",
-  ),
 
   Question(
     question:
@@ -401,23 +330,6 @@ final anesthesiaApplicationQuestions = <Question>[
         "William T.G. Morton, ether ile yapılan ilk başarılı genel anesteziyi 1846 yılında Massachusetts General Hospital'da gerçekleştirmiştir. Bu, modern anestezinin temel taşlarını atmıştır.",
     category: "Anestezi Uygulaması",
   ),
-
-  Question(
-    question:
-        "Chloroformun anestezi alanında yaygınlaşmasındaki temel faktör nedir?",
-    options: [
-      "Daha az toksik olması",
-      "Daha etkili analjezik etki yapması",
-      "Hızlı bir iyileşme süreci sağlaması",
-      "Kolay bulunabilir olması",
-      "Daha düşük maliyetli olması",
-    ],
-    correctAnswerIndex: 0,
-    explanation:
-        "Chloroform, ether'e göre daha az toksik olduğu için anestezi uygulamalarında daha yaygın şekilde kullanılmaya başlanmıştır. Ancak, sonradan toksik etkileri nedeniyle kullanımından kaçınılmıştır.",
-    category: "Anestezi Uygulaması",
-  ),
-
   Question(
     question:
         "Genel anestezinin gelişiminde ilk sedasyon ajanı olarak hangi ilaç kullanılmıştır?",
@@ -433,33 +345,6 @@ final anesthesiaApplicationQuestions = <Question>[
         "Chloral hydrate, ilk sedasyon ajanı olarak 19. yüzyılın sonlarında kullanılmıştır. Bu ilaç, anestezi uygulamaları öncesinde hastayı sedate etmek için yaygın olarak kullanılmıştır.",
     category: "Anestezi Uygulaması",
   ),
-
-  Question(
-    question:
-        "Anestezi uygulamalarındaki ilk önemli gelişme olarak kabul edilen tarih nedir?",
-    options: ["1800", "1820", "1846", "1870", "1900"],
-    correctAnswerIndex: 2,
-    explanation:
-        "1846 yılı, William T.G. Morton'ın ether ile genel anesteziyi ilk kez başarılı bir şekilde uyguladığı yıl olup, bu tarih modern anestezinin başlangıcı olarak kabul edilir.",
-    category: "Anestezi Uygulaması",
-  ),
-
-  Question(
-    question:
-        "William T.G. Morton'ın etherle anesteziyi ilk kez kullanmasından sonra hangi önemli sonuç ortaya çıkmıştır?",
-    options: [
-      "Anesteziye bağlı komplikasyonlar artmıştır",
-      "Cerrahiler çok daha hızlı yapılabilmeye başlanmıştır",
-      "Anestezi uygulamaları hızla tüm dünyada yayılmaya başlamıştır",
-      "Anestezi ajanlarının sayısı azalmıştır",
-      "Anestezinin kullanımı yalnızca Avrupa'da yayılmaya başlamıştır",
-    ],
-    correctAnswerIndex: 2,
-    explanation:
-        "Etherle yapılan ilk başarılı anestezi, anestezinin tüm dünyada yayılmasına olanak sağlamış, modern cerrahiyi mümkün kılmıştır. Bu buluşun ardından anestezi uygulamaları hızla artmıştır.",
-    category: "Anestezi Uygulaması",
-  ),
-
   Question(
     question:
         "Anestezi tarihinde önemli bir dönüm noktası olan ilk kombi anestezi tekniği kim tarafından geliştirilmiştir?",
@@ -476,29 +361,4 @@ final anesthesiaApplicationQuestions = <Question>[
     category: "Anestezi Uygulaması",
   ),
 
-  Question(
-    question:
-        "Modern anestezi tarihinde önemli bir yer tutan inhalasyon anesteziklerinin ilk hali hangi maddelerle başlamıştır?",
-    options: [
-      "Eter ve nitrojen oksit",
-      "Kloroform ve eter",
-      "Halotan ve sevofluran",
-      "Halotan ve isofluran",
-      "Propofol ve etomidat",
-    ],
-    correctAnswerIndex: 1,
-    explanation:
-        "Eter ve kloroform, modern anestezi uygulamalarında ilk inhalasyon anestezikleri olarak kullanılmıştır. Bu ajanlar, cerrahi müdahalelerde hastaların sedasyon ve analjezisini sağlamıştır.",
-    category: "Anestezi Uygulaması",
-  ),
-
-  Question(
-    question:
-        "Lokal anestezinin ilk kez klinik olarak kullanılmasında hangi ilaç önemli bir rol oynamıştır?",
-    options: ["Eter", "Kloroform", "Kokain", "Halotan", "Propofol"],
-    correctAnswerIndex: 2,
-    explanation:
-        "Carl Koller, kokaini lokal anestezi olarak kullanarak ilk kez 1884 yılında lokal anesteziyi uygulamıştır. Bu, modern lokal anestezinin temellerini atmıştır.",
-    category: "Anestezi Uygulaması",
-  ),
 ];

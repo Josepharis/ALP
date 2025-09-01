@@ -7,45 +7,15 @@ class QuestionTranslationService {
 
   // Soru çevirileri için basit bir mapping sistemi
   final Map<String, Map<String, String>> _questionTranslations = {
-    'Lokal anesteziklerin temel etki mekanizması nedir?': {
-      'en': 'What is the basic mechanism of action of local anesthetics?',
-    },
-    'Aşağıdaki lokal anesteziklerden hangisi ester yapılıdır?': {
-      'en': 'Which of the following local ananesthetics has an ester structure?',
-    },
-    'Aşağıdakilerden hangisi amid yapılı lokal anesteziklerden biridir?': {
-      'en': 'Which of the following is an amide-type local anesthetic?',
-    },
+    // Çeviriler buraya eklenecek
   };
 
   final Map<String, Map<String, List<String>>> _optionTranslations = {
-    'Lokal anesteziklerin temel etki mekanizması nedir?': {
-      'en': [
-        'Inhibiting calcium channels',
-        'Increasing glutamate release',
-        'Blocking sodium channels',
-        'Activating GABA receptors',
-        'Blocking NMDA receptors',
-      ],
-    },
-    'Aşağıdaki lokal anesteziklerden hangisi ester yapılıdır?': {
-      'en': ['Lidocaine', 'Bupivacaine', 'Prilocaine', 'Procaine', 'Mepivacaine'],
-    },
-    'Aşağıdakilerden hangisi amid yapılı lokal anesteziklerden biridir?': {
-      'en': ['Tetracaine', 'Chloroprocaine', 'Benzocaine', 'Lidocaine', 'Cocaine'],
-    },
+    // Seçenek çevirileri buraya eklenecek
   };
 
   final Map<String, Map<String, String>> _explanationTranslations = {
-    'Lokal anesteziklerin temel etki mekanizması nedir?': {
-      'en': 'Local anesthetics block voltage-sensitive sodium channels in nerve cells, preventing action potential and stopping transmission.',
-    },
-    'Aşağıdaki lokal anesteziklerden hangisi ester yapılıdır?': {
-      'en': 'Procaine is an ester-type local anesthetic. Esters are metabolized by plasma cholinesterase and have short duration.',
-    },
-    'Aşağıdakilerden hangisi amid yapılı lokal anesteziklerden biridir?': {
-      'en': 'Lidocaine is an amide-type local anesthetic. It is metabolized in the liver and has intermediate duration.',
-    },
+    // Açıklama çevirileri buraya eklenecek
   };
 
   final Map<String, Map<String, String>> _categoryTranslations = {
@@ -72,6 +42,9 @@ class QuestionTranslationService {
     },
     'Ameliyathane Ortamı': {
       'en': 'Operating Room Environment',
+    },
+    'analjezik ajanlar': {
+      'en': 'Analgesic Agents',
     },
   };
 
@@ -101,13 +74,15 @@ class QuestionTranslationService {
   }
 
   // Kategori ismini çevir
-  String translateCategory(String category, String languageCode) {
-    if (languageCode == 'tr') return category;
-    return _categoryTranslations[category]?[languageCode] ?? category;
+  String translateCategoryName(String categoryName, String languageCode) {
+    if (languageCode == 'tr') {
+      return categoryName;
+    }
+    return _categoryTranslations[categoryName]?[languageCode] ?? categoryName;
   }
 
-  // Mevcut kategorileri çevrilmiş olarak döndür
+  // Kategori listesini çevir
   List<String> getTranslatedCategories(List<String> categories, String languageCode) {
-    return categories.map((category) => translateCategory(category, languageCode)).toList();
+    return categories.map((category) => translateCategoryName(category, languageCode)).toList();
   }
 }

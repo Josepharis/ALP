@@ -1220,4 +1220,1689 @@ final List<Question> intravenousAnestheticsQuestions = [
     category: "intravenöz anestezikler",
     difficulty: 2,
   ),
+
+  // Bölüm 46 – Periferik Sinir Blokları
+  Question(
+    question:
+        "Aşağıdaki bloklardan hangisi, omuz cerrahisinde en sık tercih edilen periferik sinir blokudur?",
+    options: [
+      "İnterskalen blok",
+      "Supraklavikuler blok",
+      "İnfraclavikuler blok",
+      "Aksiller blok",
+      "Paravertebral blok",
+    ],
+    correctAnswerIndex: 0,
+    explanation:
+        "Omuz ve üst humerus cerrahileri için en sık tercih edilen blok interskalen brakiyal pleksus blokudur.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Aşağıdaki sinirlerden hangisi, aksiller blokla etkili şekilde bloklanamaz ve ek blok gerekebilir?",
+    options: [
+      "N. medianus",
+      "N. radialis",
+      "N. musculocutaneus",
+      "N. ulnaris",
+      "N. interkostobrakialis",
+    ],
+    correctAnswerIndex: 4,
+    explanation:
+        "N. interkostobrakialis, brakiyal pleksusun dışında yer alır ve aksiller blokla etkilenmez → ek cilt infiltrasyonu gerekebilir.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Aşağıdaki periferik sinir bloklarından hangisinde pnömotoraks riski en yüksektir?",
+    options: [
+      "İnterskalen blok",
+      "Supraklavikuler blok",
+      "Aksiller blok",
+      "İnfraclavikuler blok",
+      "Median sinir bloğu",
+    ],
+    correctAnswerIndex: 1,
+    explanation:
+        "Supraklavikuler blok, plevra ile yakın anatomik ilişkidedir → pnömotoraks riski en yüksek olan brakiyal pleksus blokudur.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Aşağıdaki seçeneklerden hangisi, interskalen blok sonrası görülen Horner sendromu belirtilerinden biri değildir?",
+    options: [
+      "Pitozis",
+      "Midriyazis",
+      "Anhidrozis",
+      "Miosis",
+      "Enoftalmi",
+    ],
+    correctAnswerIndex: 1,
+    explanation:
+        "Horner sendromu, sempatik zincirin blokajıyla oluşur → miyozis (küçülmüş pupil) görülür. Midriyazis tersidir, beklenmez.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Aşağıdakilerden hangisi, infraclavikuler brakiyal pleksus blokunun avantajlarından biri değildir?",
+    options: [
+      "Plevra ile uzak mesafe",
+      "Stabil iğne pozisyonu",
+      "Koltuk altına göre daha proksimal blok",
+      "İkili sinir blokajı gerektirmemesi",
+      "Tüm pleksusun kolayca bloke edilmesi",
+    ],
+    correctAnswerIndex: 3,
+    explanation:
+        "İnfraclavikuler blok her ne kadar geniş etki gösterse de, bazen n. musculocutaneus için ek blok gerekebilir.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Aksiller blok uygulaması sırasında artan enjeksiyon basıncı hissedilirse, ilk yapılması gereken nedir?",
+    options: [
+      "Daha hızlı enjeksiyon yapmak",
+      "İğnenin pozisyonunu değiştirmek",
+      "Bloktan vazgeçmek",
+      "Enjeksiyona devam etmek",
+      "Lokal anesteziyi artırmak",
+    ],
+    correctAnswerIndex: 1,
+    explanation:
+        "Yüksek enjeksiyon basıncı, iğnenin intranevral olduğunu gösterebilir → hasarı önlemek için pozisyon değiştirilmelidir.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Aşağıdaki sinirlerden hangisi, femoral sinir blokuyla etkili şekilde bloke edilemez?",
+    options: [
+      "N. femoralis",
+      "N. saphenus",
+      "N. obturatorius",
+      "N. cutaneus femoris lateralis",
+      "N. genitofemoralis",
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        "N. obturatorius, femoral sinir blokunun dışında kalabilir → kalça ve diz cerrahilerinde ayrıca bloke edilmesi gerekebilir.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Aşağıdaki sinir bloklarından hangisi, önkol cerrahileri için distal bir blok tekniğidir?",
+    options: [
+      "İnterskalen blok",
+      "Aksiller blok",
+      "İnfraclavikuler blok",
+      "Median sinir bloğu",
+      "Supraklavikuler blok",
+    ],
+    correctAnswerIndex: 3,
+    explanation:
+        "Median sinir bloğu, dirsek veya el bileği düzeyinde yapılan distal ekstremite sinir blokudur, önkol ve el cerrahilerinde kullanılır.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Femoral sinir bloğu sonrası en sık görülen motor defisit aşağıdakilerden hangisidir?",
+    options: [
+      "Ayak bileği dorsifleksiyonu kaybı",
+      "Diz ekstansiyonunda zayıflık",
+      "Kalça abdüksiyonunda kısıtlılık",
+      "Ayak plantar fleksiyon kaybı",
+      "Kalça ekstansiyonunda kayıp",
+    ],
+    correctAnswerIndex: 1,
+    explanation:
+        "Femoral sinir, diz ekstansiyonunu sağlayan quadriceps kaslarını innerve eder → blok sonrası diz ekstansiyonunda zayıflık oluşabilir.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Aşağıdaki sinirlerden hangisi, femoral sinir bloğunun distal dalıdır?",
+    options: [
+      "N. obturatorius",
+      "N. tibialis",
+      "N. saphenus",
+      "N. suralis",
+      "N. peroneus",
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        "N. saphenus, femoral sinirin saf duyusal dalıdır → diz altı medial bacağın duyusunu sağlar.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Periferik sinir stimülatörü ile sinir blok yapılırken, uygun sinir yaklaşımı için hedeflenen kas cevabı hangi akım seviyesinde görülmelidir?",
+    options: [
+      "> 1 mA",
+      "0.8–1.5 mA",
+      "0.5–0.8 mA",
+      "< 0.2 mA",
+      "2 mA'dan büyük",
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        "0.5 mA civarındaki motor yanıt, iğnenin sinire yeterince yakın olduğunu gösterir ama intranevral risk oluşturmaz.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Popliteal blok sonrası ayakta dorsifleksiyon kaybı gelişmesi en çok hangi sinirin etkilenmesiyle ilişkilidir?",
+    options: [
+      "N. tibialis",
+      "N. peroneus profundus",
+      "N. saphenus",
+      "N. suralis",
+      "N. obturatorius",
+    ],
+    correctAnswerIndex: 1,
+    explanation:
+        "N. peroneus profundus, ayak bileği dorsifleksiyonunu sağlar → popliteal seviyedeki bloklarda bu sinir etkilenirse dorsifleksiyon kaybı olur.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Aşağıdaki durumlardan hangisi, periferik sinir bloğu sonrası gelişen nöropatinin en olası nedenidir?",
+    options: [
+      "Sinir stimülatörünün kullanılmaması",
+      "Enjeksiyon öncesi aspirasyon yapılması",
+      "Lokal anestezik dozunun yetersiz olması",
+      "Yüksek enjeksiyon basıncı",
+      "Sedasyon verilmemesi",
+    ],
+    correctAnswerIndex: 3,
+    explanation:
+        "Yüksek basınçla enjeksiyon, sinir içine enjeksiyon ihtimalini artırır → nöropati riski yükselir. İğne pozisyonu mutlaka kontrol edilmelidir.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Aşağıdaki sinir bloklarından hangisi, posterior diz cerrahileri için genellikle femoral sinir bloğuna ek olarak uygulanır?",
+    options: [
+      "N. suralis bloğu",
+      "N. obturatorius bloğu",
+      "N. ischiadicus (siyatik) bloğu",
+      "N. genitofemoralis bloğu",
+      "N. peroneus communis bloğu",
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        "Posterior diz innervasyonu siyatik sinir kaynaklıdır. Femoral sinir bloğuna ek olarak siyatik blok gereklidir.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Aşağıdaki yöntemlerden hangisi, ultrason eşliğinde periferik sinir blok uygulamasında iğnenin sinir içine girmesini en güvenilir şekilde önler?",
+    options: [
+      "Ekspiryumda enjeksiyon yapılması",
+      "Yavaş enjeksiyon yapılması",
+      "Perinevrial enjeksiyonun tercih edilmesi",
+      "Enjeksiyon sırasında basınç izlenmesi",
+      "Tek el ile iğne yönlendirmesi",
+    ],
+    correctAnswerIndex: 3,
+    explanation:
+        "Enjeksiyon basıncının izlenmesi, yüksek direnç varsa uyarıcıdır → sinir içi enjeksiyon önlenir.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Aşağıdakilerden hangisi, ultrason görüntüsünde siyatik siniri tanımlamada yardımcı anatomik yapılardan biridir?",
+    options: [
+      "Femur başı",
+      "Popliteal arter",
+      "Gluteus minimus kası",
+      "Ischial tüberozite",
+      "Obturator internus",
+    ],
+    correctAnswerIndex: 3,
+    explanation:
+        "Ischial tüberozite, gluteal yaklaşımda siyatik siniri bulmak için kullanılan önemli bir anatomik referanstır.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Aşağıdaki sinir blokları ve endikasyon eşleştirmelerinden hangisi yanlıştır?",
+    options: [
+      "İnterskalen blok – Omuz cerrahisi",
+      "Femoral blok – Diz artroskopisi",
+      "Aksiller blok – El cerrahisi",
+      "Popliteal blok – Ayak bileği cerrahisi",
+      "Supraklavikuler blok – Servikal disk hernisi",
+    ],
+    correctAnswerIndex: 4,
+    explanation:
+        "Supraklavikuler blok, brakiyal pleksusu hedef alır → servikal disk hernisi için bir endikasyon değildir.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Ultrason altında yapılan sinir bloklarında kullanılan iğne tipiyle ilgili olarak aşağıdaki ifadelerden hangisi doğrudur?",
+    options: [
+      "Keskin uçlu iğneler önerilir",
+      "Eğri iğneler sinir bulmayı kolaylaştırır",
+      "Ekojenik iğneler görüntüleme avantajı sağlar",
+      "İğne çapı ne kadar büyükse o kadar iyidir",
+      "Standart spinal iğne kullanımı tercih edilir",
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        "Ekojenik iğneler, ultrason görüntüsünde daha kolay görünür → iğne ucunun takibi kolaylaşır.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Aşağıdakilerden hangisi, brakiyal pleksusun medial kordundan çıkan sinirlerden biri değildir?",
+    options: [
+      "N. ulnaris",
+      "N. medianus (medial kökeni)",
+      "N. cutaneus brachii medialis",
+      "N. musculocutaneus",
+      "N. cutaneus antebrachii medialis",
+    ],
+    correctAnswerIndex: 3,
+    explanation:
+        "N. musculocutaneus, lateral kordun dalıdır. Diğerleri medial korddan çıkar.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Popliteal sinir blokları için ultrason kılavuzluğunda en önemli referans yapılar hangileridir?",
+    options: [
+      "Femur ve patella",
+      "M. biceps femoris ve popliteal arter",
+      "Fibula ve tibia",
+      "Gluteus medius ve piriformis",
+      "Femoral arter ve femoral sinir",
+    ],
+    correctAnswerIndex: 1,
+    explanation:
+        "Popliteal bölgede siyatik sinirin dalları, popliteal arter ve m. biceps femoris ile ilişkilidir → bu yapılar rehber alınır.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Aşağıdaki periferik sinir bloklarından hangisi sadece duyusal innervasyonu hedef alır?",
+    options: [
+      "Median sinir bloğu",
+      "Radial sinir bloğu",
+      "Femoral sinir bloğu",
+      "Saphenous sinir bloğu",
+      "Obturator sinir bloğu",
+    ],
+    correctAnswerIndex: 3,
+    explanation:
+        "N. saphenus, saf duyusal bir sinirdir → motor lif içermez, bu nedenle sadece duyusal blok yapar.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Aşağıdakilerden hangisi, obturator sinir bloğu için klinik endikasyonlardan biridir?",
+    options: [
+      "Popliteal fossa cerrahisi",
+      "TUR-P (Transüretral Prostat Rezeksiyonu)",
+      "Ön kol cerrahisi",
+      "Ayak bileği ameliyatı",
+      "Kalça çıkığı redüksiyonu",
+    ],
+    correctAnswerIndex: 1,
+    explanation:
+        "TUR-P sırasında mesane duvarına elektrik akımı verilmesi, obturator siniri uyararak adduktor kas spazmına yol açabilir → obturator blok ile bu önlenebilir.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Supraklavikuler blok uygulaması sırasında hangi yapıların görselleştirilmesi en kritik öneme sahiptir?",
+    options: [
+      "Subklavian arter ve brakiyal pleksus",
+      "A. axillaris ve v. cephalica",
+      "Trakea ve plevra",
+      "Clavicula ve m. deltoideus",
+      "A. carotis ve v. jugularis",
+    ],
+    correctAnswerIndex: 0,
+    explanation:
+        "Supraklavikuler blok, subklavian arterin etrafındaki brakiyal pleksus trunkuslarını hedef alır → bu yapıların net görüntülenmesi kritik önemdedir.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Aşağıdakilerden hangisi, periferik sinir bloğu sonrası geç ortaya çıkan sinir hasarının en sık nedenidir?",
+    options: [
+      "Lokal enfeksiyon",
+      "Hematom",
+      "İntranevral enjeksiyon",
+      "İntratekal enjeksiyon",
+      "İğne ucunun kemik teması",
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        "İğne ucunun sinir içine girmesi (intranevral) ve oraya enjeksiyon yapılması, geçici ya da kalıcı nöropatilerin en sık nedenidir.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Aşağıdaki sinir bloklarının hangisinde diyafram paralizisi riski en yüksektir?",
+    options: [
+      "Aksiller blok",
+      "İnfraclavikuler blok",
+      "İnterskalen blok",
+      "Popliteal blok",
+      "Saphenous blok",
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        "İnterskalen blok, n. phrenicus'u da bloke edebilir → özellikle KOAH'lılarda bu risk önemlidir.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "İki loplu 'kukuleta' görünümü (donut sign) ultrason altında neyi gösterir?",
+    options: [
+      "İğnenin sinirin içine girdiğini",
+      "Kas içine enjeksiyon yapıldığını",
+      "Sinirin çevresel olarak lokal anestezik ile sarıldığını",
+      "Sinirin bası altında kaldığını",
+      "Sinirin ödemli olduğunu",
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        "Donut sign, sinirin çevresel (circumferansiyel) lokal anestezik dağılımı ile optimal blok pozisyonu anlamına gelir.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Ultrason eşliğinde sinir bloklarında 'double-contour' görüntüsü genellikle neyin göstergesidir?",
+    options: [
+      "Kas içine enjeksiyon",
+      "Arter içi enjeksiyon",
+      "Epinevral enjeksiyon",
+      "Sinirin dışında ama çok yakın enjeksiyon",
+      "Kemik korteks yansıması",
+    ],
+    correctAnswerIndex: 3,
+    explanation:
+        "Double-contour, sinirin dışındaki lokal anestezik birikimini gösterir → sinire çok yakın ama güvenli mesafede enjeksiyon yapıldığını gösterir.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "İnterskalen blok uygulamasında sinir stimülatörü ile elde edilmesi beklenen motor cevap hangisidir?",
+    options: [
+      "Parmak fleksiyonu",
+      "Dirsek ekstansiyonu",
+      "Deltoid kas kasılması",
+      "Trapez kas kasılması",
+      "Diafragma kontraksiyonu",
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        "İnterskalen blok, C5–C7 seviyelerini hedefler → deltoid kas kasılması, uygun yerleşimin göstergesidir.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Aşağıdaki durumlardan hangisi, siyatik sinirin en distal dalıdır ve topuk bölgesinin duyusunu iletir?",
+    options: [
+      "N. tibialis",
+      "N. suralis",
+      "N. peroneus communis",
+      "N. saphenus",
+      "N. femoralis",
+    ],
+    correctAnswerIndex: 1,
+    explanation:
+        "N. suralis, siyatik sinirin bir dalıdır ve topuk ile lateral ayak bölgesinin duyusunu sağlar.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Aşağıdaki periferik sinir bloklarından hangisi, ayakta yalnızca medial plantar yüzeyin duyusunu bloke etmek amacıyla uygulanır?",
+    options: [
+      "N. peroneus superficialis bloğu",
+      "N. saphenus bloğu",
+      "N. suralis bloğu",
+      "N. tibialis bloğu",
+      "N. obturatorius bloğu",
+    ],
+    correctAnswerIndex: 3,
+    explanation:
+        "N. tibialis, ayakta medial ve plantar yüzeyin duyusunu iletir. Blokajı bu bölgedeki cerrahilerde kullanılır.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Aksiller blok sırasında blok başarısını artırmak için N. musculocutaneus aşağıdaki kasların hangisinin içinde aranmalıdır?",
+    options: [
+      "M. triceps brachii",
+      "M. coracobrachialis",
+      "M. biceps brachii",
+      "M. deltoideus",
+      "M. brachialis",
+    ],
+    correctAnswerIndex: 1,
+    explanation:
+        "N. musculocutaneus, genellikle m. coracobrachialis kasının içindedir → aksiller blok sırasında ayrıca bloke edilmelidir.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Aşağıdaki sinirlerden hangisinin blokajı, el bileği cerrahisi için yeterlidir?",
+    options: [
+      "N. radialis",
+      "N. medianus",
+      "N. ulnaris",
+      "Tüm brakiyal pleksus",
+      "N. medianus + n. ulnaris + n. radialis",
+    ],
+    correctAnswerIndex: 4,
+    explanation:
+        "El bileği cerrahisinde üç ana sinirin birlikte blokajı gerekir (median, ulnar, radial). Tek sinir yeterli olmaz.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Aşağıdakilerden hangisi, siyatik sinirin infragluteal yaklaşımıyla blokajında kullanılan yüzey anatomisi yapılandırmalarından biridir?",
+    options: [
+      "Spina iliaca anterior superior",
+      "Trokanter major ve iskiyal tüber",
+      "Femoral arter",
+      "A. profunda femoris",
+      "M. sartorius",
+    ],
+    correctAnswerIndex: 1,
+    explanation:
+        "İnfragluteal siyatik blokta, trokanter major ve iskiyal tüber arasında sinir lokalize edilir → bu anatomik işaretler kritiktir.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Popliteal sinir bloğu için en uygun pozisyon aşağıdakilerden hangisidir?",
+    options: [
+      "Lateral dekübit",
+      "Supin",
+      "Trendelenburg",
+      "Prone",
+      "Oturur",
+    ],
+    correctAnswerIndex: 3,
+    explanation:
+        "Popliteal blok genellikle prone pozisyonda ya da diz fleksiyonda lateral dekübitte uygulanır → sinir yüzeyel olur.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Aşağıdakilerden hangisi, n. saphenus blokajı için uygun tekniklerden biridir?",
+    options: [
+      "Femoral üçgen düzeyinde yapılan blok",
+      "Popliteal fossa'da blok",
+      "Ayak bileği medialinde blok",
+      "Gluteal bölgede blok",
+      "El bileği düzeyinde blok",
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        "N. saphenus, ayak bileği seviyesinde medial malleol hizasında yüzeyelleşir → burada kolayca bloke edilebilir.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Aşağıdakilerden hangisi, brakiyal pleksus supraklavikuler blok sonrası gelişen Horner sendromunun nedenidir?",
+    options: [
+      "N. frenikus'un direkt blokajı",
+      "Stellat gangliyonun blokajı",
+      "Medulla spinalisin etkilenmesi",
+      "N. vagus'un uyarılması",
+      "Karotid sinüs refleksi",
+    ],
+    correctAnswerIndex: 1,
+    explanation:
+        "Stellat gangliyon, sempatik zincirin bir parçasıdır → supraklavikuler blokla etkilenirse Horner sendromu ortaya çıkabilir.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Aşağıdakilerden hangisi, periferik sinir bloğu sonrası nörolojik defisit geliştiğinde izlenecek en doğru yaklaşımdır?",
+    options: [
+      "Bekleyip gözlem",
+      "Oral steroid başlamak",
+      "Sadece ağrı kesici vermek",
+      "Nöroloji konsültasyonu ve EMG planı",
+      "Lokal anesteziyi tekrarlamak",
+    ],
+    correctAnswerIndex: 3,
+    explanation:
+        "Nörolojik defisit gelişmişse, mutlaka nöroloji konsültasyonu istenir, gerekirse EMG yapılır, altta yatan komplikasyon araştırılır.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "İnterskalen blok sonrası ani gelişen solunum sıkıntısı ve tek taraflı akciğer seslerinin azalması en olası olarak hangi komplikasyonu düşündürür?",
+    options: [
+      "Diyafram paralizisi",
+      "İntratekal enjeksiyon",
+      "Pnömotoraks",
+      "Bronkospazm",
+      "LAST",
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        "Supraklavikuler ve interskalen bloklar, plevraya yakın yapıldığı için pnömotoraks riski taşır → solunum sıkıntısı ve tek taraflı bulgular tipiktir.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "İntranevral enjeksiyon şüphesi varsa ilk yapılması gereken işlem nedir?",
+    options: [
+      "Blok devam ettirilir",
+      "Ağrı kontrolü için opioid verilir",
+      "Enjeksiyona ara verilir ve iğne geri çekilir",
+      "Lokal anestezik dozu artırılır",
+      "Aspirasyon yapılmaz",
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        "İğne sinir içine girmişse, enjeksiyona devam edilmesi kalıcı hasara yol açabilir → hemen durdurulmalı, iğne pozisyonu değiştirilmelidir.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Periferik sinir stimülasyonu kullanılırken motor yanıt 0.1 mA akımda bile devam ediyorsa, bu durum neyi düşündürmelidir?",
+    options: [
+      "Sinir yeterince yakın",
+      "Blok başarısız",
+      "İğne intranevral yerleşimli",
+      "Stimülasyon etkisiz",
+      "Sinir uzakta",
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        "0.2 mA altındaki motor yanıt, iğne ucunun sinir içinde olabileceğini gösterir → risklidir, enjeksiyon yapılmamalıdır.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Popliteal blokta sinirler arasındaki ayrılma seviyesi kişiden kişiye değişkenlik gösterir. Bu nedenle hangi yaklaşım daha güvenlidir?",
+    options: [
+      "Tek enjeksiyon",
+      "Yüzeysel enjeksiyon",
+      "Trunkus seviyesinde blok",
+      "Derin interfasiyal enjeksiyon",
+      "Medialden yaklaşım",
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        "Popliteal fossa'da siyatik sinirin tibial ve peroneal dallara ayrılmadan önceki trunkus düzeyi, blok başarısı açısından idealdir.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Aşağıdaki periferik sinir bloklarından hangisi, motor fonksiyona minimal etkisiyle postoperatif mobilizasyonu en az engeller?",
+    options: [
+      "Femoral sinir bloğu",
+      "İnterskalen blok",
+      "Saphenous sinir bloğu",
+      "Supraklavikuler blok",
+      "Obturator sinir bloğu",
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        "N. saphenus saf duyusal sinirdir → motor fonksiyonları etkilemez → özellikle diz cerrahisinde mobilizasyonu engellemez.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Periferik sinir bloğu sonrası gelişen geçici sinir hasarında genellikle hangi semptom ön plandadır?",
+    options: [
+      "Ateş",
+      "Hipotansiyon",
+      "Hiperaljezi",
+      "Parestezi",
+      "Bradikardi",
+    ],
+    correctAnswerIndex: 3,
+    explanation:
+        "Geçici sinir hasarlarında en sık görülen semptom parestezi ve hafif güç kaybıdır → çoğu zaman günler içinde geriler.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Aşağıdaki sinirlerden hangisi, kalça cerrahisi için yapılan periferik bloklarda mutlaka hedeflenmesi gereken sinirlerdendir?",
+    options: [
+      "N. suralis",
+      "N. axillaris",
+      "N. femoralis",
+      "N. medianus",
+      "N. peroneus superficialis",
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        "Kalça cerrahilerinde en çok uyarılan sinirlerden biri n. femoralis'tir → blok başarısı için hedeflenmelidir.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "İnfraklavikuler brakiyal pleksus blokunda hangi yapının tanınması blok başarısını artırır?",
+    options: [
+      "A. subklavia",
+      "A. axillaris",
+      "Trakea",
+      "A. thoracica interna",
+      "V. jugularis externa",
+    ],
+    correctAnswerIndex: 1,
+    explanation:
+        "İnfraklavikuler yaklaşımda brakiyal pleksus a. axillaris'in etrafında yer alır → bu arterin görüntülenmesi yön bulmak için kritiktir.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Periferik sinir bloğu sonrası gelişen geç solunum depresyonu, en olası hangi durumla ilişkilidir?",
+    options: [
+      "LAST",
+      "Diyafram paralizisi",
+      "İntratekal opioid geçişi",
+      "İntravenöz sedatif kullanımı",
+      "Alerjik reaksiyon",
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        "Eğer opioid blok solüsyonuna eklenmişse → intratekal geçiş durumunda geç başlayan solunum depresyonu oluşabilir.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Kombine femoral + siyatik blok, hangi bölge cerrahileri için en uygundur?",
+    options: [
+      "El bileği",
+      "Omuz",
+      "Kalça",
+      "Dorsal toraks",
+      "Abdominal duvar",
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        "Kalça cerrahilerinde, hem anterior (femoral) hem de posterior (siyatik) innervasyon gerekir → bu nedenle kombine blok uygulanır.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Aşağıdaki ajanlardan hangisi, periferik sinir bloklarında lokal anesteziğe eklenerek geç başlangıçlı nörotoksisiteye neden olabilir?",
+    options: [
+      "Epinefrin",
+      "Deksametazon",
+      "Klorheksidin",
+      "Midazolam",
+      "Ketamin",
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        "Klorheksidin, cilt dezenfektanı olarak kullanılırken sinir dokusuna teması durumunda geç nörotoksisite oluşturabilir.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Aşağıdakilerden hangisi, n. peroneus communis için en yüzeyel anatomik lokalizasyondur?",
+    options: [
+      "Tibial tüberozite",
+      "Fibula başı",
+      "Femur kondili",
+      "Patella lateral kenarı",
+      "Tarsal tünel",
+    ],
+    correctAnswerIndex: 1,
+    explanation:
+        "N. peroneus communis, fibula başında çok yüzeyeldir → burada kolayca palpe ve bloke edilebilir.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Aşağıdakilerden hangisi, periferik sinir bloklarında motor blok geri dönüş sıralaması açısından doğrudur?",
+    options: [
+      "En proksimalden distale",
+      "Duyusal liflerden motorlara",
+      "En distaldeki kaslar önce",
+      "Sempatik sinirler son",
+      "Motor blok tamamen sabittir",
+    ],
+    correctAnswerIndex: 0,
+    explanation:
+        "Sinir iyileşmesi ve blok çözülmesi sıklıkla en proksimal kaslardan başlar ve distale doğru ilerler.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Popliteal blokta sinirler arasındaki ayrılma seviyesi kişiden kişiye değişkenlik gösterir. Bu nedenle hangi yaklaşım daha güvenlidir?",
+    options: [
+      "Tek enjeksiyon",
+      "Yüzeysel enjeksiyon",
+      "Trunkus seviyesinde blok",
+      "Derin interfasiyal enjeksiyon",
+      "Medialden yaklaşım",
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        "Popliteal fossa'da siyatik sinirin tibial ve peroneal dallara ayrılmadan önceki trunkus düzeyi, blok başarısı açısından idealdir.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Popliteal sinir bloğu sonrası hasta ayak bileğini fleksiyona getiremiyor. En olası etkilenen sinir hangisidir?",
+    options: [
+      "N. suralis",
+      "N. femoralis",
+      "N. tibialis",
+      "N. peroneus profundus",
+      "N. obturatorius",
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        "N. tibialis, ayak bileği plantar fleksiyonunu sağlar → bu fonksiyon kaybı varsa bu sinir etkilenmiş demektir.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Ultrasonla sinir görüntüleme kalitesini artıran teknik faktör aşağıdakilerden hangisidir?",
+    options: [
+      "Düşük frekanslı prob",
+      "Damarların baskılanması",
+      "Gain ayarını artırmak",
+      "Geniş açılı transdüser kullanmak",
+      "Dondurma modunu kullanmak",
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        "Gain ayarının artırılması, ekojenik yapıları daha net gösterir → sinir dokusunun daha iyi tanımlanmasına yardımcı olur.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Aşağıdakilerden hangisi interskalenik blok için en olası endikasyondur?",
+    options: [
+      "El cerrahisi",
+      "Dirsek cerrahisi",
+      "Omuz artroskopisi",
+      "Karpal tünel cerrahisi",
+      "Brakiyal arter kateterizasyonu",
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        "İnterskalenik blok, omuz ve üst kol cerrahileri için en uygun blok tekniğidir.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "İnterskalenik blok uygulamasında en sık etkilenmeyen sinir aşağıdakilerden hangisidir?",
+    options: [
+      "N. supraskapularis",
+      "N. musculocutaneus",
+      "N. ulnaris",
+      "N. medianus",
+      "N. axillaris",
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        "Ulnar sinir, C8–T1 kökenlidir. İnterskalenik blok C5–C7 düzeyine etki ettiği için ulnar sinirin bloğu yetersiz kalabilir.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Aşağıdaki periferik sinir bloklarından hangisi diyafragma paralizisine en sık neden olur?",
+    options: [
+      "İnterskalenik blok",
+      "Supraklavikuler blok",
+      "İnfraklavikuler blok",
+      "Aksiller blok",
+      "Radial sinir blokajı",
+    ],
+    correctAnswerIndex: 0,
+    explanation:
+        "İnterskalenik blok sırasında n. phrenicus (C3–C5) etkilenebilir ve bu durum geçici diyafragma paralizisine neden olabilir.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Aşağıdaki sinirlerden hangisi aksiller blok sırasında genellikle ayrı olarak bloke edilmelidir?",
+    options: [
+      "N. ulnaris",
+      "N. radialis",
+      "N. medianus",
+      "N. musculocutaneus",
+      "N. axillaris",
+    ],
+    correctAnswerIndex: 3,
+    explanation:
+        "N. musculocutaneus, brakiyal pleksustan erken ayrıldığı için aksiller blokta ayrıca bloke edilmelidir.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Femoral sinir bloğu için en uygun anatomik referans aşağıdakilerden hangisidir?",
+    options: [
+      "İnguinal ligamentin ortası",
+      "Femur başı",
+      "Anterior superior iliak spine",
+      "Popliteal çukur",
+      "Pubik simfiz",
+    ],
+    correctAnswerIndex: 0,
+    explanation:
+        "Femoral sinir bloğu, inguinal ligamentin ortasında femoral arter lateralinde yapılır.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Popliteal sinir bloğu ile hangi sinirlerin blokajı hedeflenir?",
+    options: [
+      "N. femoralis ve n. obturatorius",
+      "N. ischiadicus'un tibial ve peroneal dalları",
+      "N. suralis ve n. saphenus",
+      "N. tibialis ve n. femoralis",
+      "N. genitofemoralis",
+    ],
+    correctAnswerIndex: 1,
+    explanation:
+        "Popliteal blok, siyatik sinirin tibial ve peroneal dallarını hedefler.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Bier blok (IV rejyonal anestezi) sırasında kullanılan tourniquet süresi en az ne kadar olmalıdır?",
+    options: [
+      "5 dakika",
+      "10 dakika",
+      "20 dakika",
+      "30 dakika",
+      "45 dakika",
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        "Bier blokta tourniquet en az 20 dakika tutulmalıdır, aksi takdirde sistemik toksisite riski vardır.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Aşağıdaki periferik sinir bloklarından hangisinde pnömotoraks riski en yüksektir?",
+    options: [
+      "İnterskalenik blok",
+      "Supraklavikuler blok",
+      "İnfraklavikuler blok",
+      "Aksiller blok",
+      "Median sinir bloğu",
+    ],
+    correctAnswerIndex: 1,
+    explanation:
+        "Supraklavikuler blok pleuraya çok yakın bir bölgeden yapılır ve pnömotoraks riski en yüksektir.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Ultrason eşliğinde sinir bloklarında 'kar yağışı' görünümü aşağıdaki durumlardan hangisini gösterir?",
+    options: [
+      "Sinir liflerinin kalsifikasyonu",
+      "Lokal anesteziğin sinir etrafında yayılması",
+      "Hava embolisi",
+      "Enfeksiyon",
+      "Sinir yaralanması",
+    ],
+    correctAnswerIndex: 1,
+    explanation:
+        "Lokal anestezik, sinir etrafında yayılırken ultrason ekranında 'kar yağışı' benzeri bir görüntü oluşturur.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Femoral sinir bloğu sonrası aşağıdakilerden hangisi beklenir?",
+    options: [
+      "Uyluk adduksiyonunda artış",
+      "Uyluk fleksiyonunda zayıflık",
+      "Ayak bileği dorsifleksiyonunda artış",
+      "Kalça ekstansiyonunda artış",
+      "Uyluk ekstansiyon gücünde artış",
+    ],
+    correctAnswerIndex: 1,
+    explanation:
+        "Femoral sinir, uyluk ön grup kaslarını (özellikle quadriceps) innerve eder. Blok sonrası bu kaslarda zayıflık olur.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Supraklavikuler blok hangi düzeyde yapılır?",
+    options: [
+      "Kök düzeyi (roots)",
+      "Trunkus düzeyi (trunks)",
+      "Divizyon düzeyi",
+      "Kord düzeyi",
+      "Periferik sinir düzeyi",
+    ],
+    correctAnswerIndex: 1,
+    explanation:
+        "Supraklavikuler blok, brakiyal pleksusun trunkus düzeyinde uygulanır. Sinirler birbirine çok yakındır, bu nedenle güçlü bir blok sağlar.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Aşağıdakilerden hangisi ulnar sinirin bloke edildiğini gösterir?",
+    options: [
+      "El başparmak fleksiyonu kaybı",
+      "El bileği ekstansiyonu kaybı",
+      "4. ve 5. parmakta duyu kaybı",
+      "Önkol supinasyonunda azalma",
+      "El bileği fleksiyonunda artış",
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        "Ulnar sinir 4. ve 5. parmakların palmar ve dorsal duyusunu sağlar. Blok sonrası bu bölgelerde duyu kaybı olur.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Aşağıdaki sinirlerden hangisi infraklavikuler blokta genellikle yeterli şekilde bloke edilmez?",
+    options: [
+      "N. musculocutaneus",
+      "N. medianus",
+      "N. ulnaris",
+      "N. axillaris",
+      "N. thoracodorsalis",
+    ],
+    correctAnswerIndex: 0,
+    explanation:
+        "Musculocutaneus sinir pleksustan erken ayrıldığı için bloktan kaçabilir.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Bier blok için en uygun lokal anestezik hangisidir?",
+    options: [
+      "Bupivakain",
+      "Ropivakain",
+      "Lidokain",
+      "Prilokain",
+      "Levobupivakain",
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        "IVRA (Bier Blok) için kısa etkili ve kardiyotoksik olmayan lidokain tercih edilir. Bupivakain gibi uzun etkili ajanlar kontrendikedir.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Aşağıdaki bloklardan hangisi ayak sırtında duyuyu en iyi bloke eder?",
+    options: [
+      "N. saphenus bloğu",
+      "N. tibialis bloğu",
+      "N. suralis bloğu",
+      "N. peroneus superficialis bloğu",
+      "N. obturatorius bloğu",
+    ],
+    correctAnswerIndex: 3,
+    explanation:
+        "N. peroneus superficialis, ayak sırtının büyük kısmını innerve eder. Bu bölgedeki cerrahiler için hedef sinirdir.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Aşağıdakilerden hangisi interkostal sinir bloğunun en sık komplikasyonudur?",
+    options: [
+      "Enfeksiyon",
+      "Hipotansiyon",
+      "Pnömotoraks",
+      "Hipoestezi",
+      "İdrar retansiyonu",
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        "İğne pleuraya çok yakın olduğundan interkostal bloklarda pnömotoraks riski yüksektir.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "İnfraklavikuler blok sonrası tüm üst ekstremitede motor blok oluşması aşağıdaki yapının etkilenmesine bağlıdır?",
+    options: [
+      "Supraklavikuler sinirler",
+      "Brachial plexus cords",
+      "N. intercostobrachialis",
+      "Plevra",
+      "N. thoracicus longus",
+    ],
+    correctAnswerIndex: 1,
+    explanation:
+        "İnfraklavikuler blok, brakiyal pleksusun medial, lateral ve posterior kordlarını hedef alır.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "El bileği cerrahisi için yapılan periferik sinir bloklarında aşağıdaki kombinasyonlardan hangisi gereklidir?",
+    options: [
+      "Yalnızca median sinir",
+      "Median + radial sinir",
+      "Ulnar + radial sinir",
+      "Median + ulnar + radial sinir",
+      "Sadece ulnar sinir",
+    ],
+    correctAnswerIndex: 3,
+    explanation:
+        "El bileğinde cerrahi için tüm duyusal innervasyon hedeflenmelidir: median, ulnar ve radial sinirler birlikte bloklanmalıdır.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Aşağıdakilerden hangisi radial sinir bloğu sonrası gözlenmez?",
+    options: [
+      "El bileği ekstansiyon kaybı",
+      "Başparmak abdüksiyon zayıflığı",
+      "Arka kol yüzeyinde duyu kaybı",
+      "El bileği fleksiyonu kaybı",
+      "Düşük el deformitesi",
+    ],
+    correctAnswerIndex: 3,
+    explanation:
+        "Radial sinir ekstansörleri innerve eder; fleksiyon fonksiyonu median ve ulnar sinire aittir.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "N. saphenus bloğu, hangi sinirin dalıdır?",
+    options: [
+      "N. tibialis",
+      "N. peroneus",
+      "N. femoralis",
+      "N. obturatorius",
+      "N. ischiadicus",
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        "N. saphenus, femoral sinirin saf duyusal bir dalıdır ve diz ile iç bacak bölgesinin duyusunu sağlar.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Horner sendromu gelişmesi hangi periferik blokla ilişkilidir?",
+    options: [
+      "Femoral blok",
+      "İnterskalenik blok",
+      "Popliteal blok",
+      "Radial sinir bloğu",
+      "Median sinir bloğu",
+    ],
+    correctAnswerIndex: 1,
+    explanation:
+        "İnterskalenik blok sırasında servikal sempatik zincirin etkilenmesi Horner sendromuna neden olabilir.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Periferik sinir bloğu sırasında sinirin iç kısmına yapılan enjeksiyonun en ciddi sonucu nedir?",
+    options: [
+      "Parestezi",
+      "Sinir irritasyonu",
+      "Kalıcı sinir hasarı",
+      "Sinir çevresi hematomu",
+      "Motor blok artışı",
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        "Sinir içine enjeksiyon ciddi nörotoksisiteye yol açabilir ve kalıcı sinir hasarı gelişebilir.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "N. obturatorius bloğu en çok hangi girişimde tamamlayıcı blok olarak yapılır?",
+    options: [
+      "Popliteal sinir bloğu",
+      "Femoral sinir bloğu",
+      "İnguinal herni onarımı",
+      "Transüretral rezeksiyon (TUR)",
+      "Aksiller sinir bloğu",
+    ],
+    correctAnswerIndex: 3,
+    explanation:
+        "TUR işlemlerinde obturator sinir refleksini önlemek için obturator sinir bloğu eklenebilir.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Lidokain ile yapılan bir sinir bloğunun etkisi genellikle ne kadar sürer?",
+    options: [
+      "15–30 dakika",
+      "30–60 dakika",
+      "90–120 dakika",
+      "2–4 saat",
+      "6–8 saat",
+    ],
+    correctAnswerIndex: 1,
+    explanation:
+        "Lidokain orta etkili bir lokal anesteziktir, genellikle etkisi 30–60 dakika sürer.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Peroneal sinir bloğu aşağıdakilerden hangisi için özellikle kullanışlıdır?",
+    options: [
+      "Diz artroskopisi",
+      "Ayak bileği cerrahisi",
+      "Kalça protezi",
+      "Uyluk kas biyopsisi",
+      "Bel fıtığı cerrahisi",
+    ],
+    correctAnswerIndex: 1,
+    explanation:
+        "Peroneal sinir ayak bileği ve ayağın dış kısmında duyuyu sağlar. Bu bölge cerrahileri için kullanılır.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Aşağıdaki periferik bloklardan hangisi brakiyal pleksusun en distaldeki dal düzeyini hedef alır?",
+    options: [
+      "İnterskalenik blok",
+      "Supraklavikuler blok",
+      "İnfraklavikuler blok",
+      "Aksiller blok",
+      "Median sinir bloğu",
+    ],
+    correctAnswerIndex: 3,
+    explanation:
+        "Aksiller blok, brakiyal pleksusun periferik dal düzeyinde yapılır (n. medianus, ulnaris, radialis, musculocutaneus).",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Aşağıdakilerden hangisi n. musculocutaneus'un duyu sağladığı bölgedir?",
+    options: [
+      "El sırtı",
+      "Önkol radial taraf",
+      "4. parmak palmar yüz",
+      "Kol medial yüzü",
+      "El palmar yüzü",
+    ],
+    correctAnswerIndex: 1,
+    explanation:
+        "N. musculocutaneus, dirsekten sonra lateral önkol derisinin duyusunu sağlar.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Aşağıdaki kombinasyonlardan hangisi tam üst ekstremite blokajı sağlar?",
+    options: [
+      "Median + radial",
+      "Median + ulnar + radial",
+      "Supraklavikuler blok",
+      "Aksiller blok + musculocutaneus bloğu",
+      "İnterskalenik blok + ulnar sinir bloğu",
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        "Supraklavikuler blok, brakiyal pleksusun trunkus düzeyini hedefler ve tüm üst ekstremiteyi etkili şekilde bloke eder.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Radial sinir bloğu en iyi nerede yapılır?",
+    options: [
+      "Deltoid kas altında",
+      "Humerus spiral oluğunda",
+      "Klavikula altında",
+      "El bileği seviyesinde",
+      "Aksiller bölgede",
+    ],
+    correctAnswerIndex: 1,
+    explanation:
+        "Radial sinir, humerusun spiral oluğunda yüzeyeldir ve bu bölgede kolaylıkla bloke edilebilir.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "N. obturatorius bloğu sırasında motor uyarının devam etmesi aşağıdaki komplikasyona neden olabilir?",
+    options: [
+      "Pnömotoraks",
+      "İntranevral enjeksiyon",
+      "Aritmi",
+      "İstemsiz kas kasılması (addüktör spazmı)",
+      "Bradikardi",
+    ],
+    correctAnswerIndex: 3,
+    explanation:
+        "Obturator sinir, addüktör kasları uyardığından blok eksikse cerrahi sırasında ani kas kontraksiyonu olabilir.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Aşağıdaki periferik sinirlerden hangisinin bloğu diz altı cerrahisinde tek başına yeterli değildir?",
+    options: [
+      "N. tibialis",
+      "N. saphenus",
+      "N. peroneus communis",
+      "N. femoralis",
+      "N. suralis",
+    ],
+    correctAnswerIndex: 3,
+    explanation:
+        "N. femoralis uyluğun ön yüzünü innerve eder; diz altı için genellikle saphenus, tibialis ve peroneal dallar gerekir.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Aşağıdaki sinir bloklarından hangisi, elin ulnar innervasyonunu sağlayan sinirin blokajı için en uygun yaklaşımı ifade eder?",
+    options: [
+      "Aksiller blok",
+      "İnterskalen blok",
+      "Supraklavikular blok",
+      "Median sinir bloku",
+      "Radial sinir bloku",
+    ],
+    correctAnswerIndex: 0,
+    explanation:
+        "Aksiller blok, ulnar sinirin blokajı için uygundur çünkü brakial pleksusun terminal dalları bu bölgede bloke edilebilir.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Brakial pleksus bloğunda 'hissedilen düşme' (pop) hissi hangi yapının geçilmesi sırasında hissedilir?",
+    options: [
+      "Skalen kaslar",
+      "Klikavikula",
+      "Aksiller kılıf",
+      "Plevra",
+      "Subklavian arter",
+    ],
+    correctAnswerIndex: 0,
+    explanation:
+        "İnterskalen blokta iğne skalen kasların fasyasını geçerken 'pop' hissi alınır.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "'Wrist bloğu' yapılırken aşağıdaki sinirlerden hangisi bloke edilmez?",
+    options: [
+      "Median sinir",
+      "Ulnar sinir",
+      "Radial sinir",
+      "Müskülokütan sinir",
+      "Lateral antebrakiyal kutanöz sinir",
+    ],
+    correctAnswerIndex: 4,
+    explanation:
+        "Lateral antebrakiyal kutanöz sinir dirsek seviyesinde innervasyon sağlar, el bileği bloğunda etkisi yoktur.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "İnterskalen brakial pleksus bloğunda en sık görülen komplikasyon nedir?",
+    options: [
+      "Pnömotoraks",
+      "Frenik sinir bloğu",
+      "Total spinal anestezi",
+      "Kardiyak arrest",
+      "Horner sendromu",
+    ],
+    correctAnswerIndex: 1,
+    explanation:
+        "Frenik sinir bloğu (%100'e yakın oranda görülür, diyafram paralizisine yol açabilir).",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Aşağıdaki bloklardan hangisinde ultrason eşliğinde transversus abdominis planı (TAP) bloğu uygulanır?",
+    options: [
+      "Torakal epidural",
+      "Abdomen cerrahisinde analjezi",
+      "Lumbar pleksus bloğu",
+      "Siyatik sinir bloğu",
+      "Servikal pleksus bloğu",
+    ],
+    correctAnswerIndex: 1,
+    explanation:
+        "TAP bloğu, abdominal duvar cerrahilerinde analjezi sağlar.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Supraklavikular blokta iğnenin hedef aldığı ana yapı nedir?",
+    options: [
+      "Subklavian arter",
+      "Brakial pleksusun trunkusları",
+      "Aksiller sinir",
+      "Vertebral arter",
+      "Sternokleidomastoid kas",
+    ],
+    correctAnswerIndex: 1,
+    explanation:
+        "Supraklavikular blokta brakial pleksusun trunkusları hedeflenir.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Aşağıdaki yöntemlerden hangisi siyatik sinir bloğu için kullanılan yaklaşımlardan biri değildir?",
+    options: [
+      "Labat yaklaşımı",
+      "Anterior yaklaşım",
+      "Lateral yaklaşım",
+      "Subgluteal yaklaşım",
+      "Supraklavikular yaklaşım",
+    ],
+    correctAnswerIndex: 4,
+    explanation:
+        "Supraklavikular yaklaşım brakial pleksus içindir, siyatik sinirle ilgisi yoktur.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "'Ankle bloğu' hangi sinirlerin blokajını içerir?",
+    options: [
+      "Radial, median, ulnar",
+      "Tibial, süperfisyel peroneal, derin peroneal, sural",
+      "Femoral, obturator",
+      "İlioinguinal, genitofemoral",
+      "Siyatik, pudendal",
+    ],
+    correctAnswerIndex: 1,
+    explanation:
+        "Ayak bileği bloğunda tibial, süperfisyel peroneal, derin peroneal ve sural sinirler bloke edilir.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "'Psoas kompartman bloğu' hangi sinir pleksusunu bloke eder?",
+    options: [
+      "Brakial pleksus",
+      "Lumbar pleksus",
+      "Servikal pleksus",
+      "Sakral pleksus",
+      "Torakal pleksus",
+    ],
+    correctAnswerIndex: 1,
+    explanation:
+        "Psoas kompartman bloğu lumbar pleksusu bloke eder (femoral, lateral femoral kutanöz ve obturator sinirler).",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "'Axiller brakial pleksus bloğu'nda hangi sinir en geç bloke olur?",
+    options: [
+      "Median sinir",
+      "Ulnar sinir",
+      "Radial sinir",
+      "Müskülokütan sinir",
+      "Medial antebrakiyal kutanöz sinir",
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        "Radial sinir kılıfın posteriyorunda yer alır ve en geç bloke olur.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "'Süperfisyel servikal pleksus bloğu' hangi cerrahide kullanılır?",
+    options: [
+      "Tiroidektomi",
+      "Kalça protezi",
+      "Laparoskopik kolesistektomi",
+      "Kraniotomi",
+      "Üst ekstremite cerrahisi",
+    ],
+    correctAnswerIndex: 0,
+    explanation:
+        "Tiroid ve boyun cerrahisinde süperfisyel servikal pleksus bloğu kullanılır.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "'Femoral sinir bloğu' sonrası hangi kasın güçsüzlüğü beklenir?",
+    options: [
+      "Gastroknemius",
+      "Tibialis anterior",
+      "Kuadriseps femoris",
+      "Gluteus maksimus",
+      "Hamstringler",
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        "Femoral sinir kuadriseps kasını innerve eder, blok sonrası güçsüzlük olur.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Aşağıdakilerden hangisi 'infraklavikular blok' için doğrudur?",
+    options: [
+      "Pnömotoraks riski yüksektir",
+      "Sadece el cerrahisinde kullanılır",
+      "Kordlar seviyesinde brakial pleksus bloke edilir",
+      "Horner sendromu sık görülür",
+      "Femoral siniri de bloke eder",
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        "İnfraklavikular blokta brakial pleksusun kordları bloke edilir.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "'TAP bloğu' hangi sinirleri bloke eder?",
+    options: [
+      "Torakal spinal sinirlerin anterior dalları",
+      "Brakial pleksus",
+      "Lumbar pleksus",
+      "Siyatik sinir",
+      "Pudendal sinir",
+    ],
+    correctAnswerIndex: 0,
+    explanation:
+        "TAP bloğu, torakal spinal sinirlerin anterior dallarını (T6-L1) bloke eder.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
+  Question(
+    question:
+        "Periferik sinir bloğunda adjuvan olarak kullanılan ajan hangisidir?",
+    options: [
+      "Propofol",
+      "Dekstroz",
+      "Dexmedetomidin",
+      "Heparin",
+      "Mannitol",
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        "Dexmedetomidin, lokal anesteziklerin etki süresini uzatmak için adjuvan olarak kullanılır.",
+    category: "Periferik Sinir Blokları",
+    difficulty: 2,
+  ),
+
 ];

@@ -1384,5 +1384,81 @@
   "nonCardiovascularMonitoring": "Non-Cardiovascular Monitoring",
   "@nonCardiovascularMonitoring": {
     "description": "Non-cardiovascular monitoring category"
+  },
+  "points": "Points",
+  "@points": {
+    "description": "Points label"
+  },
+  "seconds": "seconds",
+  "@seconds": {
+    "description": "Seconds unit"
+  },
+  "score": "Score",
+  "@score": {
+    "description": "Score label"
+  },
+  "quiz": "Quiz",
+  "@quiz": {
+    "description": "Quiz label"
+  },
+  "ranking": "Ranking",
+  "@ranking": {
+    "description": "Ranking label"
+  },
+  "statistics": "Statistics",
+  "@statistics": {
+    "description": "Statistics label"
+  },
+  "correctAnswer": "Correct Answer",
+  "@correctAnswer": {
+    "description": "Correct answer label"
+  },
+  "wrongAnswer": "Wrong Answer",
+  "@wrongAnswer": {
+    "description": "Wrong answer label"
+  },
+  "successRate": "Success Rate",
+  "@successRate": {
+    "description": "Success rate label"
+  },
+  "totalPoints": "Total Points",
+  "@totalPoints": {
+    "description": "Total points label"
+  },
+  "bestStreak": "Best Streak",
+  "@bestStreak": {
+    "description": "Best streak label"
+  },
+  "days": "days",
+  "@days": {
+    "description": "Days unit"
+  },
+  "leaders": "Leaders",
+  "@leaders": {
+    "description": "Leaders label"
+  },
+  "yourCircle": "Your Circle",
+  "@yourCircle": {
+    "description": "Your circle label"
+  },
+  "ongoing": "Ongoing",
+  "@ongoing": {
+    "description": "Ongoing label"
+  },
+  "ongoingQuizzes": "Ongoing Quizzes",
+  "@ongoingQuizzes": {
+    "description": "Ongoing quizzes title"
+  },
+  "completedQuizzes": "Completed Quizzes",
+  "@completedQuizzes": {
+    "description": "Completed quizzes title"
+  },
+  "questions": "Questions",
+  "@questions": {
+    "description": "Questions label"
+  },
+  "question": "Question",
+  "@question": {
+    "description": "Single question label"
   }
 }

@@ -19,15 +19,16 @@ class NotificationService {
     final now = tz.TZDateTime.now(turkeyTime);
     print('Şu anki Türkiye saati: $now');
     
-    // Türkiye saati: 15:00, 15:10, 15:20
-    final times = [
-      tz.TZDateTime(turkeyTime, now.year, now.month, now.day, 15, 0),
-      tz.TZDateTime(turkeyTime, now.year, now.month, now.day, 15, 10),
-      tz.TZDateTime(turkeyTime, now.year, now.month, now.day, 15, 20),
-    ];
-
+    // Test bildirimi: Bugün 20:45
+    final testTime = tz.TZDateTime(turkeyTime, now.year, now.month, now.day, 20, 45);
+    print('🧪 Test bildirimi bugün 20:45 için planlanıyor: $testTime');
+    
+    // Normal bildirim: 19:00
+    final normalTime = tz.TZDateTime(turkeyTime, now.year, now.month, now.day, 19, 0);
+    print('📅 Normal bildirim saati: $normalTime');
+    
     // Eğer belirlenen saatler geçtiyse, bir sonraki güne planla
-    final scheduledTimes = times.map((time) {
+    final scheduledTimes = [testTime, normalTime].map((time) {
       if (time.isBefore(now)) {
         final nextDay = time.add(const Duration(days: 1));
         print('Saat geçmiş, yarına planlanıyor: $nextDay');
@@ -157,15 +158,25 @@ class NotificationService {
 
     final scheduledTimes = _notificationTimes;
     
-    // 3 farklı bildirim planla
+    // Günlük bildirim planla
     for (int i = 0; i < scheduledTimes.length; i++) {
       final scheduledTime = scheduledTimes[i];
-      final notificationId = i; // 0, 1, 2
+      final notificationId = i; // 0: Test, 1: Normal
+      
+      // Test bildirimi için özel mesaj
+      String title, body;
+      if (i == 0) {
+        title = '🧪 Test Bildirimi!';
+        body = 'Bu bir test bildirimidir. Anestezi quiz uygulaması çalışıyor!';
+      } else {
+        title = 'Günlük Quiz Zamanı! 📚';
+        body = 'Bugünkü anestezi sorularını çözmeyi unutmayın!';
+      }
       
       await _notifications.zonedSchedule(
         notificationId,
-        'Günlük Quiz Zamanı! 📚',
-        'Bugünkü anestezi sorularını çözmeyi unutmayın!',
+        title,
+        body,
         scheduledTime,
         details,
         androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
@@ -173,7 +184,7 @@ class NotificationService {
         matchDateTimeComponents: DateTimeComponents.time,
       );
 
-      print('Bildirim ${i + 1} planlandı: ${scheduledTime.toString()}');
+      print('Bildirim ${i + 1} planlandı: ${scheduledTime.toString()} - $title');
     }
     
     // Planlanan bildirimleri kontrol et
@@ -193,85 +204,7 @@ class NotificationService {
     print('Tüm bildirimler iptal edildi');
   }
 
-  // Test bildirimi gönder (hem iOS hem Android)
-  Future<void> sendTestNotification() async {
-    print('Test bildirimi gönderiliyor...');
-    
-    const androidDetails = AndroidNotificationDetails(
-      'test_channel',
-      'Test Kanalı',
-      channelDescription: 'Test bildirimleri için',
-      importance: Importance.max,
-      priority: Priority.high,
-      enableVibration: true,
-      playSound: true,
-      icon: '@mipmap/launcher_icon',
-    );
 
-    const iosDetails = DarwinNotificationDetails(
-      presentAlert: true,
-      presentBadge: true,
-      presentSound: true,
-    );
-
-    const details = NotificationDetails(
-      android: androidDetails,
-      iOS: iosDetails,
-    );
-
-    await _notifications.show(
-      999,
-      'Test Bildirimi 🔔',
-      'Bildirimler çalışıyor!',
-      details,
-    );
-    
-    print('Test bildirimi gönderildi');
-  }
-
-  // Hemen test bildirimi gönder (1 dakika sonra)
-  Future<void> sendImmediateTestNotification() async {
-    print('Hemen test bildirimi planlanıyor...');
-    
-    const androidDetails = AndroidNotificationDetails(
-      'test_channel',
-      'Test Kanalı',
-      channelDescription: 'Test bildirimleri için',
-      importance: Importance.max,
-      priority: Priority.high,
-      enableVibration: true,
-      playSound: true,
-      icon: '@mipmap/launcher_icon',
-    );
-
-    const iosDetails = DarwinNotificationDetails(
-      presentAlert: true,
-      presentBadge: true,
-      presentSound: true,
-    );
-
-    const details = NotificationDetails(
-      android: androidDetails,
-      iOS: iosDetails,
-    );
-
-    // 1 dakika sonra test bildirimi
-    final turkeyTime = tz.getLocation('Europe/Istanbul');
-    final now = tz.TZDateTime.now(turkeyTime);
-    final testTime = now.add(const Duration(minutes: 1));
-
-    await _notifications.zonedSchedule(
-      998,
-      'Test Bildirimi 🔔',
-      '1 dakika sonra geldi!',
-      testTime,
-      details,
-      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
-      uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
-    );
-
-    print('Test bildirimi 1 dakika sonra planlandı: $testTime');
-  }
 
   // Android bildirim durumunu kontrol et
   Future<void> checkAndroidNotificationStatus() async {
@@ -286,5 +219,12 @@ class NotificationService {
         print('⚠️ Android bildirimler devre dışı! Kullanıcıdan izin istenmeli.');
       }
     }
+  }
+  
+  // Test bildirimi için yeniden planlama
+  Future<void> rescheduleTestNotification() async {
+    print('🧪 Test bildirimi yeniden planlanıyor...');
+    await scheduleDailyNotification();
+    print('✅ Test bildirimi yeniden planlandı');
   }
 } 

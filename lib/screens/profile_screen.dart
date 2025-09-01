@@ -1252,11 +1252,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               _buildProfileStat(
-                'Quiz',
+                AppLocalizations.of(context)!.quiz,
                 _userActivity?.quizProgress.length.toString() ?? '0',
               ),
-              _buildProfileStat('Sıralama', '#$_currentRank'),
-              _buildProfileStat('Puan', _calculateTotalPoints().toString()),
+              _buildProfileStat(AppLocalizations.of(context)!.ranking, '#$_currentRank'),
+              _buildProfileStat(AppLocalizations.of(context)!.points, _calculateTotalPoints().toString()),
             ],
           ),
         ],
@@ -1311,38 +1311,38 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
       child: Column(
         children: [
-          const Text(
-            'İstatistikler',
+          Text(
+            AppLocalizations.of(context)!.statistics,
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),
           _buildStatRow(
-            'Doğru Cevap',
+            AppLocalizations.of(context)!.correctAnswer,
             correctAnswers,
             Colors.green,
             Icons.check_circle_outlined,
           ),
           _buildStatRow(
-            'Yanlış Cevap',
+            AppLocalizations.of(context)!.wrongAnswer,
             wrongAnswers,
             Colors.red,
             Icons.highlight_off,
           ),
           _buildStatRow(
-            'Başarı Oranı',
+            AppLocalizations.of(context)!.successRate,
             successRate,
             Colors.blue,
             Icons.insights,
           ),
           _buildStatRow(
-            'Toplam Puan',
+            AppLocalizations.of(context)!.totalPoints,
             totalPoints,
             Colors.purple,
             Icons.emoji_events_outlined,
           ),
           _buildStatRow(
-            'En İyi Seri',
-            '$streak gün',
+            AppLocalizations.of(context)!.bestStreak,
+            '$streak ${AppLocalizations.of(context)!.days}',
             Colors.orange,
             Icons.local_fire_department,
           ),

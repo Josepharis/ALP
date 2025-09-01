@@ -21,7 +21,7 @@ class DataMigrationService {
         'Kardiyovasküler Monitoring',
         'Non-Kardiyovasküler Monitoring',
         'Havayolu Yönetimi',
-        'Preoperatif Değerlendirme',
+
         'Solunum Sistemi',
         'Solunumsal Fizyoloji',
         'Solunumsal Hastalıklar',

@@ -10,7 +10,7 @@ import '../data/pharmacological_principles_questions.dart';
 import '../data/operating_room_environment_questions.dart';
 import '../data/non_cardiovascular_monitoring_questions.dart';
 import '../data/anesthesia_workstation_questions.dart';
-import '../data/preoperative_assessment_questions.dart';
+
 import '../data/auxiliary_drugs_questions.dart';
 import '../data/local_anesthetics_questions.dart';
 import '../data/anticholinergic_drugs_questions.dart';
@@ -65,10 +65,7 @@ class RealDataMigrationService {
           'category': 'Anestezi İstasyonu',
           'questions': anesthesiaWorkstationQuestions,
         },
-        {
-          'category': 'Preoperatif Değerlendirme',
-          'questions': preoperativeAssessmentQuestions,
-        },
+
         {'category': 'Yardımcı İlaçlar', 'questions': auxiliaryDrugsQuestions},
         {
           'category': 'Lokal Anestezikler',

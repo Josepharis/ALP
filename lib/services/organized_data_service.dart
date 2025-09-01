@@ -29,6 +29,7 @@ import '../data/respiratory_diseases_questions.dart';
 import '../data/respiratory_physiology_questions.dart';
 import '../data/chronic_pain_treatment_questions.dart';
 import '../data/postoperative_care_mechanical_ventilation_questions.dart';
+import '../data/neurosurgery_anesthesia_questions.dart';
 import '../data/hepatic_physiology_anesthesia_questions.dart';
 import '../data/obstetric_anesthesia_questions.dart';
 import '../data/acid_base_management_questions.dart';
@@ -190,6 +191,11 @@ class OrganizedDataService {
           'displayName': 'Postoperatif Bakım ve Mekanik Ventilasyon',
           'collectionName': 'postoperatif-bakim-mekanik-ventilasyon',
           'questions': postoperativeCareMechanicalVentilationQuestions,
+        },
+        {
+          'displayName': 'Nörocerrahide Anestezi',
+          'collectionName': 'norocerrahide-anestezi',
+          'questions': neurosurgeryAnesthesiaQuestions,
         },
         {
           'displayName': 'Hepatik Fizyoloji ve Anestezi',

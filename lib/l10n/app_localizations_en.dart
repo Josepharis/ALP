@@ -604,10 +604,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get dailyParticipation => 'Daily Participation!';
 
   @override
-  String get correctAnswer => 'Correct!';
+  String get correctAnswer => 'Correct Answer';
 
   @override
-  String get wrongAnswer => 'Wrong!';
+  String get wrongAnswer => 'Wrong Answer';
 
   @override
   String get noOngoingQuiz => 'No ongoing quiz found.';
@@ -959,4 +959,22 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get nonCardiovascularMonitoring => 'Non-Cardiovascular Monitoring';
+
+  @override
+  String get points => 'Points';
+
+  @override
+  String get successRate => 'Success Rate';
+
+  @override
+  String get totalPoints => 'Total Points';
+
+  @override
+  String get bestStreak => 'Best Streak';
+
+  @override
+  String get leaders => 'Leaders';
+
+  @override
+  String get completedQuizzes => 'Completed Quizzes';
 }
