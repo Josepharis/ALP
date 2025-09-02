@@ -612,7 +612,7 @@ class _QuizScreenState extends State<QuizScreen>
                           ),
                           const SizedBox(width: 4),
                           const Text(
-                            'Detay',
+                            'Detail',
                             style: TextStyle(
                               color: Colors.white70,
                               fontSize: 12,
