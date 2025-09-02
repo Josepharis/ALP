@@ -23,6 +23,8 @@ import '../data/english/cardiopulmonary_resuscitation_questions.dart' as english
 import '../data/english/common_clinical_concerns_critical_care_questions.dart' as english_critical_care;
 import '../data/english/inhalation_therapy_mechanical_ventilation_pacu_icu_questions.dart' as english_ventilation;
 import '../data/english/safety_quality_performance_improvement_questions.dart' as english_safety;
+import '../data/english/sepsis_ards_critical_care_questions.dart' as english_sepsis_ards;
+import '../data/english/respiratory_physiology_anesthesia_questions.dart' as english_respiratory_physiology;
 
 import '../data/auxiliary_drugs_questions.dart';
 import '../data/local_anesthetics_questions.dart';

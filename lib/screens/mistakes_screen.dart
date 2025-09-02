@@ -201,9 +201,9 @@ class _MistakesScreenState extends State<MistakesScreen> {
             color: Colors.green.withOpacity(0.7),
           ),
           const SizedBox(height: 16),
-          const Text(
-            'Tebrikler!',
-            style: TextStyle(
+          Text(
+            'Congratulations!',
+            style: const TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
               color: Colors.white,
@@ -213,7 +213,7 @@ class _MistakesScreenState extends State<MistakesScreen> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 32),
             child: Text(
-              'Henüz herhangi bir quizde yanlış yapmadınız veya tüm yanlışlarınızı düzelttiniz.',
+              'You haven\'t made any mistakes in any quiz yet, or you have corrected all your mistakes.',
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 16, color: Colors.grey[300]),
             ),

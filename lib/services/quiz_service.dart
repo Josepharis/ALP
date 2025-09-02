@@ -26,6 +26,9 @@ import '../data/hypotensive_agents_questions.dart';
 import '../data/local_anesthetics_questions.dart';
 import '../data/auxiliary_drugs_questions.dart';
 
+// İngilizce soru dosyaları
+import '../data/english/postanesthesia_care_questions.dart' as en;
+
 import '../data/airway_management_questions.dart';
 import '../data/cardiovascular_physiology_questions.dart';
 import '../data/cardiovascular_surgery_questions.dart';
@@ -70,6 +73,7 @@ import '../data/fluid_electrolyte_imbalance_management_questions.dart'; // Added
 import '../data/erc_2021_guidelines_questions.dart'; // Added
 import '../utils/event_bus.dart';
 import 'question_translation_service.dart';
+import 'multilingual_question_service.dart';
 
 
 class QuizService {
@@ -512,7 +516,7 @@ class QuizService {
   }
 
   // Günün sorusunu getir - Yeni sistem: Tüm kategorilerden rastgele
-  Future<DailyQuestion?> getDailyQuestion() async {
+  Future<DailyQuestion?> getDailyQuestion([String? languageCode]) async {
     try {
       print('DEBUG: Günün sorusu getiriliyor...');
 
@@ -524,12 +528,13 @@ class QuizService {
 
       print('DEBUG: Bugünün tarihi: $todayString');
 
-      // Kullanıcının bugün günün sorusunu çözüp çözmediğini kontrol et
+      // Kullanıcının bugün günün sorusunu çözüp çözmediğini kontrol et (dil seçimine göre)
       final userId = _authService.currentUser?.uid;
       if (userId != null) {
+        final answerCollectionName = languageCode == 'en' ? 'daily_question_answers_en' : 'daily_question_answers';
         final userAnswerDoc =
             await _firestore
-                .collection('daily_question_answers')
+                .collection(answerCollectionName)
                 .doc('${userId}_$todayString')
                 .get();
 
@@ -551,9 +556,12 @@ class QuizService {
         }
       }
 
-      // Bugün için günün sorusunu kontrol et
-      final dailyQuestionDoc =
-          await _firestore.collection('daily_questions').doc(todayString).get();
+      // Bugün için günün sorusunu kontrol et (dil seçimine göre farklı koleksiyon)
+      final collectionName = languageCode == 'en' ? 'daily_questions_en' : 'daily_questions';
+      final dailyQuestionDoc = await _firestore
+          .collection(collectionName)
+          .doc(todayString)
+          .get();
 
       if (dailyQuestionDoc.exists) {
         print('DEBUG: Bugün için günün sorusu zaten mevcut');
@@ -572,64 +580,75 @@ class QuizService {
 
       print('DEBUG: Bugün için yeni günün sorusu seçiliyor...');
 
-      // Tüm kategorilerden rastgele bir soru seç
-      final allQuestionSets = [
-        anesthesiaApplicationQuestions,
-        respiratorySystemQuestions,
-        cardiovascularMonitoringQuestions,
-        pharmacologicalPrinciplesQuestions,
-        operatingRoomEnvironmentQuestions,
-        nonCardiovascularMonitoringQuestions,
-        anesthesiaWorkstationQuestions,
-        inhalationAnestheticsQuestions,
-        intravenousAnestheticsQuestions,
-        analgesicAgentsQuestions,
-        neuromuscularBlockingAgentsQuestions,
-        cholinesteraseInhibitorsQuestions,
-        anticholinergicDrugsQuestions,
-        adrenergicDrugsQuestions,
-        hypotensiveAgentsQuestions,
-        localAnestheticsQuestions,
-        auxiliaryDrugsQuestions,
-        
-        airwayManagementQuestions,
-        cardiovascularPhysiologyQuestions,
-        cardiovascularSurgeryQuestions,
-        respiratoryDiseasesQuestions,
-        respiratoryPhysiologyQuestions,
-        painManagementQuestions,
-        neurologicalPsychiatricAnesthesiaQuestions,
-        otolaryngologyHeadNeckSurgeryQuestions,
-        endocrineDiseaseAnesthesiaQuestions,
-        neuromuscularDiseasesAnesthesiaQuestions,
-        geriatricAnesthesiaQuestions,
-        traumaEmergencyAnesthesiaQuestions,
-        orthopedicAnesthesiaQuestions,
-        enhancedRecoveryProtocolsQuestions,
-        anesthesiaComplicationsQuestions,
-        genitourinaryAnesthesiaQuestions,
-        ophthalmicAnesthesiaQuestions,
-        renalPhysiologyAnesthesiaQuestions,
-        spinalEpiduralCaudalBlocksQuestions,
-        fluidManagementBloodProductsQuestions,
-        thoracicSurgeryAnesthesiaQuestions,
-        thermoregulationHypothermiaMalignantHyperthermiaQuestions,
-        outpatientAnesthesiaQuestions,
-        cardiopulmonaryResuscitationQuestions,
-        intensiveCareProblemsQuestions,
-        postanestheticCareQuestions,
-        pediatricAnesthesiaQuestions,
-        postoperativeCareMechanicalVentilationQuestions,
-        neurosurgeryAnesthesiaQuestions,
-        safetyQualityPerformanceImprovementQuestions,
-        erc2021GuidelinesQuestions,
-      ];
-
-      // Tüm soruları bir listede topla
+      // Dil seçimine göre doğru soru setlerini al
       List<Question> allQuestions = [];
-      for (var questionSet in allQuestionSets) {
-        allQuestions.addAll(questionSet);
+      
+      if (languageCode == 'en') {
+        // İngilizce sorular için MultilingualQuestionService kullan
+        final englishCategories = MultilingualQuestionService.getQuizCategories('en');
+        for (var category in englishCategories) {
+          allQuestions.addAll(category['questions'] as List<Question>);
+        }
+      } else {
+        // Türkçe sorular (varsayılan)
+        final allQuestionSets = [
+          anesthesiaApplicationQuestions,
+          respiratorySystemQuestions,
+          cardiovascularMonitoringQuestions,
+          pharmacologicalPrinciplesQuestions,
+          operatingRoomEnvironmentQuestions,
+          nonCardiovascularMonitoringQuestions,
+          anesthesiaWorkstationQuestions,
+          inhalationAnestheticsQuestions,
+          intravenousAnestheticsQuestions,
+          analgesicAgentsQuestions,
+          neuromuscularBlockingAgentsQuestions,
+          cholinesteraseInhibitorsQuestions,
+          anticholinergicDrugsQuestions,
+          adrenergicDrugsQuestions,
+          hypotensiveAgentsQuestions,
+          localAnestheticsQuestions,
+          auxiliaryDrugsQuestions,
+          
+          airwayManagementQuestions,
+          cardiovascularPhysiologyQuestions,
+          cardiovascularSurgeryQuestions,
+          respiratoryDiseasesQuestions,
+          respiratoryPhysiologyQuestions,
+          painManagementQuestions,
+          neurologicalPsychiatricAnesthesiaQuestions,
+          otolaryngologyHeadNeckSurgeryQuestions,
+          endocrineDiseaseAnesthesiaQuestions,
+          neuromuscularDiseasesAnesthesiaQuestions,
+          geriatricAnesthesiaQuestions,
+          traumaEmergencyAnesthesiaQuestions,
+          orthopedicAnesthesiaQuestions,
+          enhancedRecoveryProtocolsQuestions,
+          anesthesiaComplicationsQuestions,
+          genitourinaryAnesthesiaQuestions,
+          ophthalmicAnesthesiaQuestions,
+          renalPhysiologyAnesthesiaQuestions,
+          spinalEpiduralCaudalBlocksQuestions,
+          fluidManagementBloodProductsQuestions,
+          thoracicSurgeryAnesthesiaQuestions,
+          thermoregulationHypothermiaMalignantHyperthermiaQuestions,
+          outpatientAnesthesiaQuestions,
+          cardiopulmonaryResuscitationQuestions,
+          intensiveCareProblemsQuestions,
+          postanestheticCareQuestions,
+          pediatricAnesthesiaQuestions,
+          postoperativeCareMechanicalVentilationQuestions,
+          neurosurgeryAnesthesiaQuestions,
+          safetyQualityPerformanceImprovementQuestions,
+          erc2021GuidelinesQuestions,
+        ];
+        
+        for (var questionSet in allQuestionSets) {
+          allQuestions.addAll(questionSet);
+        }
       }
+
+
 
       if (allQuestions.isEmpty) {
         print('DEBUG: Hiç soru bulunamadı!');
@@ -654,7 +673,7 @@ class QuizService {
         isAnswered: false,
       );
 
-      await _firestore.collection('daily_questions').doc(todayString).set({
+      await _firestore.collection(collectionName).doc(todayString).set({
         'questionId': dailyQuestion.id,
         'question': selectedQuestion.toJson(),
         'date': Timestamp.fromDate(today),
@@ -676,6 +695,7 @@ class QuizService {
     required int userAnswer,
     required bool isCorrect,
     required Question question,
+    String? languageCode,
   }) async {
     try {
       final userId = _authService.currentUser?.uid;
@@ -691,9 +711,10 @@ class QuizService {
 
       print('DEBUG: Günün sorusu yanıtlanıyor - Doğru: $isCorrect');
 
-      // Kullanıcının cevabını kaydet
+      // Kullanıcının cevabını kaydet (dil seçimine göre)
+      final answerCollectionName = languageCode == 'en' ? 'daily_question_answers_en' : 'daily_question_answers';
       await _firestore
-          .collection('daily_question_answers')
+          .collection(answerCollectionName)
           .doc('${userId}_$todayString')
           .set({
             'userId': userId,
@@ -792,11 +813,17 @@ class QuizService {
 
     // Kategori mapping - Firestore'dan gelen adları kod içindeki soru setleriyle eşleştir
     final categoryMapping = {
-      // Anestezi kategorileri
+      // Anestezi kategorileri (Türkçe)
       'anestezi': anesthesiaApplicationQuestions,
       'anestezi uygulama': anesthesiaApplicationQuestions,
       'anestezi uygulaması': anesthesiaApplicationQuestions,
       'anestezi uygulamasi': anesthesiaApplicationQuestions,
+      
+      // Anestezi kategorileri (İngilizce)
+      'anesthesia application': anesthesiaApplicationQuestions,
+      
+      // Postanesthesia Care (İngilizce)
+      'postanesthesia care': en.postanesthesiaCareQuestions,
 
       // Solunum kategorileri
       'solunum': respiratorySystemQuestions,

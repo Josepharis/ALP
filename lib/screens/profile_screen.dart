@@ -471,13 +471,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
-          title: const Text('Profil'),
+          title: const Text('Profile'),
           actions: [
             TextButton.icon(
               onPressed: () => _showSettingsModal(context),
               icon: const Icon(Icons.settings, color: Colors.white),
               label: const Text(
-                'Ayarlar',
+                'Settings',
                 style: TextStyle(color: Colors.white, fontSize: 14),
               ),
             ),
@@ -566,7 +566,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const Text(
-                      'Ayarlar',
+                      'Settings',
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
@@ -609,7 +609,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           onTap: () => _showDeviceManagementModal(context),
                         ),
                         _buildSettingItem(
-                          'Gizlilik',
+                          'Privacy',
                           Icons.lock,
                           context,
                           onTap: () => _showPrivacySettingsModal(context),
@@ -621,7 +621,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           onTap: () => _showHelpModal(context),
                         ),
                         _buildSettingItem(
-                          'Çıkış Yap',
+                          'Log Out',
                           Icons.exit_to_app,
                           context,
                           onTap: () async {
@@ -667,7 +667,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         const SizedBox(height: 16),
                                         // Başlık
                                         const Text(
-                                          'Çıkış Yap',
+                                          'Log Out',
                                           style: TextStyle(
                                             fontSize: 20,
                                             fontWeight: FontWeight.bold,
@@ -677,7 +677,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         const SizedBox(height: 12),
                                         // İçerik
                                         const Text(
-                                          'Uygulamadan çıkmak istediğinize emin misiniz?',
+                                          'Are you sure you want to exit the application?',
                                           style: TextStyle(
                                             color: Colors.white70,
                                             fontSize: 16,
@@ -695,7 +695,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                   padding: const EdgeInsets.symmetric(vertical: 12),
                                                 ),
                                                 child: const Text(
-                                                  'İptal',
+                                                  'Cancel',
                                                   style: TextStyle(
                                                     color: Colors.white70,
                                                     fontSize: 16,
@@ -716,7 +716,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                   ),
                                                 ),
                                                 child: const Text(
-                                                  'Çıkış Yap',
+                                                  'Log Out',
                                                   style: TextStyle(
                                                     color: Colors.white,
                                                     fontSize: 16,
@@ -798,9 +798,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
     final titleController = TextEditingController(
       text: _userProfile?['title'] ?? '',
     );
-    final phoneController = TextEditingController(
-      text: _userProfile?['phone'] ?? '',
-    );
 
     showModalBottomSheet(
       context: context,
@@ -830,7 +827,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 const Text(
-                  'Profili Düzenle',
+                  'Edit Profile',
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -841,7 +838,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 TextField(
                   controller: nameController,
                   decoration: const InputDecoration(
-                    labelText: 'İsim',
+                    labelText: 'Name',
                     border: OutlineInputBorder(),
                     filled: true,
                     fillColor: Colors.white10,
@@ -851,17 +848,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 TextField(
                   controller: titleController,
                   decoration: const InputDecoration(
-                    labelText: 'Ünvan',
-                    border: OutlineInputBorder(),
-                    filled: true,
-                    fillColor: Colors.white10,
-                  ),
-                ),
-                const SizedBox(height: 12),
-                TextField(
-                  controller: phoneController,
-                  decoration: const InputDecoration(
-                    labelText: 'Telefon',
+                    labelText: 'Title',
                     border: OutlineInputBorder(),
                     filled: true,
                     fillColor: Colors.white10,
@@ -874,7 +861,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     TextButton(
                       onPressed: () => Navigator.pop(context),
                       child: const Text(
-                        'İptal',
+                        'Cancel',
                         style: TextStyle(color: Colors.white),
                       ),
                     ),
@@ -884,14 +871,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         final success = await _userService.updateUserProfile(
                           displayName: nameController.text.trim(),
                           title: titleController.text.trim(),
-                          phone: phoneController.text.trim(),
+                          phone: '', // Phone field removed
                         );
                         if (success && context.mounted) {
                           Navigator.pop(context);
                           _loadUserData();
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
-                              content: Text('Profil bilgileriniz güncellendi'),
+                              content: Text('Profile information updated'),
                               backgroundColor: Colors.green,
                             ),
                           );
@@ -901,7 +888,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         backgroundColor: Colors.indigo,
                       ),
                       child: const Text(
-                        'Kaydet',
+                        'Save',
                         style: TextStyle(color: Colors.white),
                       ),
                     ),
@@ -955,7 +942,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   const Text(
-                    'Gizlilik Ayarları',
+                    'Privacy Settings',
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -965,7 +952,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   const SizedBox(height: 20),
 
                   SwitchListTile(
-                    title: const Text('Profilimi Diğerlerine Göster'),
+                    title: const Text('Show My Profile to Others'),
                     value: showProfile,
                     onChanged: (value) {
                       setState(() => showProfile = value);
@@ -974,7 +961,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
 
                   SwitchListTile(
-                    title: const Text('Liderlik Tablosunda Göster'),
+                    title: const Text('Show in Leaderboard'),
                     value: showInLeaderboard,
                     onChanged: (value) {
                       setState(() => showInLeaderboard = value);
@@ -983,9 +970,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
 
                   SwitchListTile(
-                    title: const Text('Kullanım Verilerini Paylaş'),
+                    title: const Text('Share Usage Data'),
                     subtitle: const Text(
-                      'Uygulama deneyimini iyileştirmek için anonim kullanım verileri',
+                      'Anonymous usage data to improve app experience',
                     ),
                     value: shareUsage,
                     onChanged: (value) {
@@ -1011,7 +998,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
                             content: Text(
-                              'Gizlilik ayarlarınız güncellendi',
+                              'Privacy settings updated',
                             ),
                             backgroundColor: Colors.green,
                           ),
@@ -1023,7 +1010,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       minimumSize: const Size(double.infinity, 50),
                     ),
                     child: const Text(
-                      'Kaydet',
+                      'Save',
                       style: TextStyle(color: Colors.white),
                     ),
                   ),
@@ -1066,7 +1053,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 const Text(
-                  'Yardım ve Destek',
+                  'Help & Support',
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -1077,14 +1064,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                 ListTile(
                   leading: const Icon(Icons.email, color: Colors.indigo),
-                  title: const Text('İletişim'),
-                  subtitle: const Text('destek@anestezi.app'),
+                  title: const Text('Contact'),
+                  subtitle: const Text('support@anesthesia.app'),
                   onTap: () {
                     // Email gönder
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
                         content: Text(
-                          'Email gönderme özelliği yakında eklenecek',
+                          'Email feature will be added soon',
                         ),
                       ),
                     );
@@ -1096,12 +1083,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     Icons.description_outlined,
                     color: Colors.indigo,
                   ),
-                  title: const Text('Kullanım Kılavuzu'),
+                  title: const Text('User Guide'),
                   onTap: () {
                     // Kullanım kılavuzunu aç
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
-                        content: Text('Kullanım kılavuzu yakında eklenecek'),
+                        content: Text('User guide will be added soon'),
                       ),
                     );
                   },
@@ -1109,13 +1096,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                 ListTile(
                   leading: const Icon(Icons.info, color: Colors.indigo),
-                  title: const Text('Hakkında'),
-                  subtitle: const Text('Versiyon 1.0.0'),
+                  title: const Text('About'),
+                  subtitle: const Text('Version 1.0.0'),
                   onTap: () {
                     // Hakkında sayfasını aç
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
-                        content: Text('Hakkında sayfası yakında eklenecek'),
+                        content: Text('About page will be added soon'),
                       ),
                     );
                   },
@@ -1129,7 +1116,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     minimumSize: const Size(double.infinity, 50),
                   ),
                   child: const Text(
-                    'Kapat',
+                    'Close',
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
@@ -1452,7 +1439,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       onPressed: () => Navigator.pop(context),
                     ),
                     const Text(
-                      'Cihazlarım',
+                      'My Devices',
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -1464,7 +1451,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  'En fazla 2 cihazdan giriş yapabilirsiniz',
+                  'You can log in from a maximum of 2 devices',
                   style: TextStyle(
                     fontSize: 14,
                     color: Colors.grey[400],
@@ -1485,7 +1472,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       if (snapshot.hasError) {
                         return Center(
                           child: Text(
-                            'Cihazlar yüklenirken hata oluştu:\n${snapshot.error}',
+                            'Error loading devices:\n${snapshot.error}',
                             style: const TextStyle(color: Colors.red),
                             textAlign: TextAlign.center,
                           ),
@@ -1497,7 +1484,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       if (devices.isEmpty) {
                         return const Center(
                           child: Text(
-                            'Kayıtlı cihaz bulunamadı',
+                            'No registered devices found',
                             style: TextStyle(color: Colors.grey),
                           ),
                         );
@@ -1521,7 +1508,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     minimumSize: const Size(double.infinity, 50),
                   ),
                   child: const Text(
-                    'Kapat',
+                    'Close',
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
@@ -1591,7 +1578,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: const Text(
-                    'Bu Cihaz',
+                    'This Device',
                     style: TextStyle(
                       fontSize: 12,
                       color: Colors.green,
@@ -1609,14 +1596,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Kayıt: ${_formatDate(device.registeredAt)}',
+                    'Registered: ${_formatDate(device.registeredAt)}',
                     style: TextStyle(
                       fontSize: 12,
                       color: Colors.grey[400],
                     ),
                   ),
                   Text(
-                    'Son Giriş: ${_formatDate(device.lastLoginAt)}',
+                    'Last Login: ${_formatDate(device.lastLoginAt)}',
                     style: TextStyle(
                       fontSize: 12,
                       color: Colors.grey[400],
@@ -1633,18 +1620,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       builder: (context) => AlertDialog(
                         backgroundColor: Colors.indigo.shade900,
                         title: const Text(
-                          'Cihazı Sil',
+                          'Delete Device',
                           style: TextStyle(color: Colors.white),
                         ),
                         content: const Text(
-                          'Bu cihazı silmek istediğinize emin misiniz?',
+                          'Are you sure you want to delete this device?',
                           style: TextStyle(color: Colors.white70),
                         ),
                         actions: [
                           TextButton(
                             onPressed: () => Navigator.pop(context, false),
                             child: const Text(
-                              'İptal',
+                              'Cancel',
                               style: TextStyle(color: Colors.white),
                             ),
                           ),
@@ -1654,7 +1641,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               backgroundColor: Colors.red,
                             ),
                             child: const Text(
-                              'Sil',
+                              'Delete',
                               style: TextStyle(color: Colors.white),
                             ),
                           ),

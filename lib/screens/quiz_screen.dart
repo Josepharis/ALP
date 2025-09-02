@@ -172,9 +172,9 @@ class _QuizScreenState extends State<QuizScreen>
                           ),
                         ),
                         const SizedBox(height: 16),
-                        const Text(
-                          'Quizden Çıkış',
-                          style: TextStyle(
+                        Text(
+                          AppLocalizations.of(context)!.exitQuiz,
+                          style: const TextStyle(
                             color: Colors.white,
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -221,10 +221,10 @@ class _QuizScreenState extends State<QuizScreen>
                                   width: 1,
                                 ),
                               ),
-                              child: const Center(
+                              child: Center(
                                 child: Text(
-                                  'İptal',
-                                  style: TextStyle(
+                                  AppLocalizations.of(context)!.cancel,
+                                  style: const TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.w500,
                                     fontSize: 15,
@@ -257,10 +257,10 @@ class _QuizScreenState extends State<QuizScreen>
                                   ),
                                 ],
                               ),
-                              child: const Center(
+                              child: Center(
                                 child: Text(
-                                  'Çıkış',
-                                  style: TextStyle(
+                                  AppLocalizations.of(context)!.exit,
+                                  style: const TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold,
                                     fontSize: 15,
@@ -655,8 +655,8 @@ class _QuizScreenState extends State<QuizScreen>
                       children: [
                         Text(
                           currentQuestionIndex == widget.questions.length - 1
-                              ? 'Bitir'
-                              : 'Sonraki',
+                              ? AppLocalizations.of(context)!.finish
+                              : AppLocalizations.of(context)!.next,
                           style: const TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.w600,

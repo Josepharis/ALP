@@ -722,7 +722,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Text(
-                'SEN',
+                'YOU',
                 style: GoogleFonts.poppins(
                   color: Colors.white,
                   fontSize: 10,

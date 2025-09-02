@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../l10n/app_localizations.dart';
 import 'package:flutter/services.dart';
 import '../models/daily_question.dart';
 import '../services/quiz_service.dart';
+import '../services/language_service.dart';
 import '../utils/snackbar_utils.dart';
 
 class DailyQuestionScreen extends StatefulWidget {
@@ -142,6 +144,7 @@ class _DailyQuestionScreenState extends State<DailyQuestionScreen>
         userAnswer: selectedIndex,
         isCorrect: isCorrect,
         question: _dailyQuestion.question,
+        languageCode: Provider.of<LanguageService>(context, listen: false).currentLocale.languageCode,
       );
 
       if (success) {
