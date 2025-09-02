@@ -10,7 +10,20 @@ import '../data/pharmacological_principles_questions.dart';
 import '../data/operating_room_environment_questions.dart';
 import '../data/non_cardiovascular_monitoring_questions.dart';
 import '../data/anesthesia_workstation_questions.dart';
-import '../data/preoperative_assessment_questions.dart';
+
+// English data imports
+import '../data/english/obstetric_anesthesia_questions.dart' as english_obstetric;
+import '../data/english/geriatric_anesthesia_questions.dart' as english_geriatric;
+import '../data/english/peripheral_nerve_blocks_questions.dart' as english_peripheral;
+import '../data/english/enhanced_recovery_protocols_questions.dart' as english_eras;
+import '../data/english/fluid_electrolyte_disturbances_questions.dart' as english_fluid;
+import '../data/english/fluid_management_blood_component_therapy_questions.dart' as english_blood;
+import '../data/english/nutrition_perioperative_critical_care_questions.dart' as english_nutrition;
+import '../data/english/cardiopulmonary_resuscitation_questions.dart' as english_cpr;
+import '../data/english/common_clinical_concerns_critical_care_questions.dart' as english_critical_care;
+import '../data/english/inhalation_therapy_mechanical_ventilation_pacu_icu_questions.dart' as english_ventilation;
+import '../data/english/safety_quality_performance_improvement_questions.dart' as english_safety;
+
 import '../data/auxiliary_drugs_questions.dart';
 import '../data/local_anesthetics_questions.dart';
 import '../data/anticholinergic_drugs_questions.dart';
@@ -112,11 +125,7 @@ class OrganizedDataService {
           'collectionName': 'anestezi-istasyonu',
           'questions': anesthesiaWorkstationQuestions,
         },
-        {
-          'displayName': 'Preoperatif Değerlendirme',
-          'collectionName': 'preoperatif-degerlendirme',
-          'questions': preoperativeAssessmentQuestions,
-        },
+       
         {
           'displayName': 'Yardımcı İlaçlar',
           'collectionName': 'yardimci-ilaclar',
@@ -207,6 +216,61 @@ class OrganizedDataService {
           'collectionName': 'obstetrik-anestezi',
           'questions': obstetricAnesthesiaQuestions,
         },
+        {
+          'displayName': 'Obstetric Anesthesia (English)',
+          'collectionName': 'obstetric-anesthesia-english',
+          'questions': english_obstetric.obstetricAnesthesiaQuestions,
+        },
+        {
+          'displayName': 'Geriatric Anesthesia (English)',
+          'collectionName': 'geriatric-anesthesia-english',
+          'questions': english_geriatric.geriatricAnesthesiaQuestions,
+        },
+            {
+      'displayName': 'Peripheral Nerve Blocks (English)',
+      'collectionName': 'peripheral-nerve-blocks-english',
+      'questions': english_peripheral.peripheralNerveBlocksQuestions,
+    },
+    {
+      'displayName': 'Enhanced Recovery Protocols (English)',
+      'collectionName': 'enhanced-recovery-protocols-english',
+      'questions': english_eras.enhancedRecoveryProtocolsQuestions,
+    },
+    {
+      'displayName': 'Fluid & Electrolyte Disturbances (English)',
+      'collectionName': 'fluid-electrolyte-disturbances-english',
+      'questions': english_fluid.fluidElectrolyteDisturbancesQuestions,
+    },
+    {
+      'displayName': 'Fluid Management & Blood Component Therapy (English)',
+      'collectionName': 'fluid-management-blood-component-therapy-english',
+      'questions': english_blood.fluidManagementBloodComponentTherapyQuestions,
+    },
+    {
+      'displayName': 'Nutrition in Perioperative & Critical Care (English)',
+      'collectionName': 'nutrition-perioperative-critical-care-english',
+      'questions': english_nutrition.nutritionPerioperativeCriticalCareQuestions,
+    },
+    {
+      'displayName': 'Cardiopulmonary Resuscitation (English)',
+      'collectionName': 'cardiopulmonary-resuscitation-english',
+      'questions': english_cpr.cardiopulmonaryResuscitationQuestions,
+    },
+    {
+      'displayName': 'Common Clinical Concerns in Critical Care Medicine (English)',
+      'collectionName': 'common-clinical-concerns-critical-care-english',
+      'questions': english_critical_care.commonClinicalConcernsCriticalCareQuestions,
+    },
+    {
+      'displayName': 'Inhalation Therapy & Mechanical Ventilation in the PACU & ICU (English)',
+      'collectionName': 'inhalation-therapy-mechanical-ventilation-pacu-icu-english',
+      'questions': english_ventilation.inhalationTherapyMechanicalVentilationPacuIcuQuestions,
+    },
+    {
+      'displayName': 'Safety, Quality, & Performance Improvement (English)',
+      'collectionName': 'safety-quality-performance-improvement-english',
+      'questions': english_safety.safetyQualityPerformanceImprovementQuestions,
+    },
         {
           'displayName': 'Asit-Baz Yönetimi',
           'collectionName': 'acid-base-management',

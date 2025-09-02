@@ -17,7 +17,6 @@ final List<Question> intravenousAnestheticsQuestions = [
     category: "intravenöz anestezikler",
     difficulty: 2,
   ),
-
   Question(
     question: "Etkisi en hızlı başlayan intravenöz anestetik hangisidir?",
     options: ["Ketamin", "Midazolam", "Propofol", "Etomidat", "Diazepam"],
@@ -27,7 +26,6 @@ final List<Question> intravenousAnestheticsQuestions = [
     category: "intravenöz anestezikler",
     difficulty: 1,
   ),
-
   Question(
     question: "Propofol ile ilgili en doğru ifade aşağıdakilerden hangisidir?",
     options: [
@@ -43,7 +41,6 @@ final List<Question> intravenousAnestheticsQuestions = [
     category: "intravenöz anestezikler",
     difficulty: 2,
   ),
-
   Question(
     question:
         "Aşağıdaki ajanlardan hangisi en az kardiyovasküler depresyona neden olur?",
@@ -54,7 +51,6 @@ final List<Question> intravenousAnestheticsQuestions = [
     category: "intravenöz anestezikler",
     difficulty: 2,
   ),
-
   Question(
     question:
         "Aşağıdaki ajanlardan hangisi adrenokortikal baskılama yapabilir?",
@@ -65,7 +61,6 @@ final List<Question> intravenousAnestheticsQuestions = [
     category: "intravenöz anestezikler",
     difficulty: 3,
   ),
-
   Question(
     question: "Tiopentalin etki süresinin kısa olmasının temel nedeni nedir?",
     options: [
@@ -81,7 +76,6 @@ final List<Question> intravenousAnestheticsQuestions = [
     category: "intravenöz anestezikler",
     difficulty: 3,
   ),
-
   Question(
     question:
         "Propofol infüzyon sendromu ile ilgili en tipik bulgu hangisidir?",
@@ -98,7 +92,6 @@ final List<Question> intravenousAnestheticsQuestions = [
     category: "intravenöz anestezikler",
     difficulty: 3,
   ),
-
   Question(
     question:
         "Aşağıdaki ajanlardan hangisi anestezi indüksiyonunda çocuklarda sıklıkla tercih edilmez?",
@@ -109,7 +102,6 @@ final List<Question> intravenousAnestheticsQuestions = [
     category: "intravenöz anestezikler",
     difficulty: 2,
   ),
-
   Question(
     question: "Midazolam ile ilgili aşağıdaki ifadelerden hangisi doğrudur?",
     options: [
@@ -125,7 +117,6 @@ final List<Question> intravenousAnestheticsQuestions = [
     category: "intravenöz anestezikler",
     difficulty: 2,
   ),
-
   Question(
     question: "Tiopental ile ilgili hangisi doğrudur?",
     options: [
@@ -141,7 +132,6 @@ final List<Question> intravenousAnestheticsQuestions = [
     category: "intravenöz anestezikler",
     difficulty: 2,
   ),
-
   Question(
     question:
         "Propofol kullanımında en sık görülen istenmeyen etki hangisidir?",
@@ -158,7 +148,6 @@ final List<Question> intravenousAnestheticsQuestions = [
     category: "intravenöz anestezikler",
     difficulty: 1,
   ),
-
   Question(
     question: "Ketaminin solunum sistemi üzerine etkisi nasıldır?",
     options: [
