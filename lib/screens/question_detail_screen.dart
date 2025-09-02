@@ -13,7 +13,7 @@ class QuestionDetailScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: const Text('Detaylı Bilgi'),
+        title: const Text('Detailed Information'),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
@@ -40,7 +40,7 @@ class QuestionDetailScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              'Soru',
+              'Question',
               style: TextStyle(
                 color: Colors.white70,
                 fontSize: 16,
@@ -67,7 +67,7 @@ class QuestionDetailScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              'Açıklama',
+              'Explanation',
               style: TextStyle(
                 color: Colors.white70,
                 fontSize: 16,
@@ -77,7 +77,7 @@ class QuestionDetailScreen extends StatelessWidget {
             const SizedBox(height: 8),
             Text(
               question.explanation ??
-                  'Bu soru için detaylı açıklama bulunmamaktadır.',
+                  'No detailed explanation available for this question.',
               style: const TextStyle(color: Colors.white, fontSize: 16),
             ),
           ],
@@ -99,7 +99,7 @@ class QuestionDetailScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              'Kaynaklar',
+              'References',
               style: TextStyle(
                 color: Colors.white70,
                 fontSize: 16,

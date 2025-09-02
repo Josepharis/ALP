@@ -191,7 +191,7 @@ class _CategoryMistakesScreenState extends State<CategoryMistakesScreen> {
                     if (question.explanation != null &&
                         question.explanation!.isNotEmpty)
                       Text(
-                        'Açıklama mevcut',
+                        'Explanation available',
                         style: TextStyle(color: Colors.blue[300], fontSize: 13),
                       ),
                     Row(

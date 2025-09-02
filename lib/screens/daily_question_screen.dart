@@ -122,7 +122,7 @@ class _DailyQuestionScreenState extends State<DailyQuestionScreen>
                 borderRadius: BorderRadius.circular(8),
               ),
             ),
-            child: Text('Tamam', style: TextStyle(fontWeight: FontWeight.bold)),
+            child: Text('OK', style: TextStyle(fontWeight: FontWeight.bold)),
           ),
         ],
       ),
@@ -289,7 +289,7 @@ class _DailyQuestionScreenState extends State<DailyQuestionScreen>
                 borderRadius: BorderRadius.circular(8),
               ),
             ),
-            child: Text('Tamam', style: TextStyle(fontWeight: FontWeight.bold)),
+            child: Text('OK', style: TextStyle(fontWeight: FontWeight.bold)),
           ),
         ],
       ),
@@ -535,7 +535,7 @@ class _DailyQuestionScreenState extends State<DailyQuestionScreen>
                                     ),
                                     SizedBox(width: 8),
                                     Text(
-                                      'Açıklama',
+                                      'Explanation',
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 16,
