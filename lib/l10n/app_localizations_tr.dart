@@ -243,7 +243,7 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get shareUsageDataSubtitle =>
-      'Anonim kullanım verilerini paylaşarak uygulamayı geliştirmemize yardımcı olun';
+      'Uygulama deneyimini geliştirmek için anonim kullanım verileri';
 
   @override
   String get helpAndSupport => 'Yardım ve Destek';
@@ -977,4 +977,112 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get completedQuizzes => 'Tamamlanan Quizler';
+
+  @override
+  String get generalRanking => 'Genel Sıralama';
+
+  @override
+  String get monthlyRanking => 'Aylık Sıralama';
+
+  @override
+  String get thisMonth => 'Bu Ay';
+
+  @override
+  String get monthlyLeaders => 'Aylık Liderler';
+
+  @override
+  String get monthlyCircle => 'Aylık Çevren';
+
+  @override
+  String get congratulationsNoMistakes => 'Tebrikler!';
+
+  @override
+  String get noMistakesMessage =>
+      'Henüz hiçbir quizde hata yapmadınız veya tüm hatalarınızı düzelttiniz.';
+
+  @override
+  String get noMistakesInCategory =>
+      'Bu kategoride hata yapmadınız veya tüm hatalarınızı düzelttiniz.';
+
+  @override
+  String get you => 'SEN';
+
+  @override
+  String get privacy => 'Gizlilik';
+
+  @override
+  String get editProfileTitle => 'Profili Düzenle';
+
+  @override
+  String get nameLabel => 'Ad';
+
+  @override
+  String get titleLabel => 'Unvan';
+
+  @override
+  String get logOut => 'Çıkış Yap';
+
+  @override
+  String get logOutTitle => 'Çıkış Yap';
+
+  @override
+  String get logOutMessage => 'Uygulamadan çıkmak istediğinizden emin misiniz?';
+
+  @override
+  String get privacySettings => 'Gizlilik Ayarları';
+
+  @override
+  String get showMyProfileToOthers => 'Profilimi Diğerlerine Göster';
+
+  @override
+  String get showInLeaderboard => 'Liderlik Tablosunda Göster';
+
+  @override
+  String get privacySettingsUpdated => 'Gizlilik ayarları güncellendi';
+
+  @override
+  String get about => 'Hakkında';
+
+  @override
+  String get myDevicesSubtitle => 'Maksimum 2 cihazdan giriş yapabilirsiniz';
+
+  @override
+  String get noRegisteredDevices => 'Kayıtlı cihaz bulunamadı';
+
+  @override
+  String get errorLoadingDevices => 'Cihazlar yüklenirken hata oluştu';
+
+  @override
+  String get currentDevice => 'Mevcut Cihaz';
+
+  @override
+  String get lastActive => 'Son Aktif';
+
+  @override
+  String get deviceInfo => 'Cihaz Bilgisi';
+
+  @override
+  String get platform => 'Platform';
+
+  @override
+  String get version => 'Versiyon';
+
+  @override
+  String get logoutFromDevice => 'Cihazdan Çıkış Yap';
+
+  @override
+  String get logoutFromDeviceMessage =>
+      'Bu cihazdan çıkış yapmak istediğinizden emin misiniz?';
+
+  @override
+  String get deviceLoggedOut => 'Cihazdan çıkış yapıldı';
+
+  @override
+  String get close => 'Kapat';
+
+  @override
+  String get profileInformationUpdated => 'Profil bilgileri güncellendi';
+
+  @override
+  String get aboutPageComingSoon => 'Hakkında sayfası yakında eklenecek';
 }

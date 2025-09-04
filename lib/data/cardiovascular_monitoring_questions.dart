@@ -1006,4 +1006,21 @@ final cardiovascularMonitoringQuestions = <Question>[
     category: "Kardiyovasküler Monitörizasyon",
     difficulty: 3,
   ),
+
+  Question(
+    question:
+        "Kardiyak output yüksek ama dokular hipoperfüze ise en olası neden nedir?",
+    options: [
+      "Kardiyojenik şok",
+      "Distributif şok",
+      "Hipovolemi",
+      "Tam kalp bloğu",
+      "Pulmoner emboli",
+    ],
+    correctAnswerIndex: 1,
+    explanation:
+        "Distributif şok (örneğin sepsis), yüksek CO ile birlikte doku düzeyinde perfüzyon bozukluğu ile seyreder.",
+    category: "Kardiyovasküler Monitörizasyon",
+    difficulty: 3,
+  ),
 ];

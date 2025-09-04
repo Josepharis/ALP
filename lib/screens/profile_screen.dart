@@ -471,14 +471,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
-          title: const Text('Profile'),
+          title: Text(AppLocalizations.of(context)!.profile),
           actions: [
             TextButton.icon(
               onPressed: () => _showSettingsModal(context),
               icon: const Icon(Icons.settings, color: Colors.white),
-              label: const Text(
-                'Settings',
-                style: TextStyle(color: Colors.white, fontSize: 14),
+              label: Text(
+                AppLocalizations.of(context)!.settings,
+                style: const TextStyle(color: Colors.white, fontSize: 14),
               ),
             ),
             const SizedBox(width: 8),
@@ -565,9 +565,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text(
-                      'Settings',
-                      style: TextStyle(
+                    Text(
+                      AppLocalizations.of(context)!.settings,
+                      style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
@@ -609,7 +609,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           onTap: () => _showDeviceManagementModal(context),
                         ),
                         _buildSettingItem(
-                          'Privacy',
+                          AppLocalizations.of(context)!.privacy,
                           Icons.lock,
                           context,
                           onTap: () => _showPrivacySettingsModal(context),
@@ -621,7 +621,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           onTap: () => _showHelpModal(context),
                         ),
                         _buildSettingItem(
-                          'Log Out',
+                          AppLocalizations.of(context)!.logOut,
                           Icons.exit_to_app,
                           context,
                           onTap: () async {
@@ -666,9 +666,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         ),
                                         const SizedBox(height: 16),
                                         // Başlık
-                                        const Text(
-                                          'Log Out',
-                                          style: TextStyle(
+                                        Text(
+                                          AppLocalizations.of(context)!.logOutTitle,
+                                          style: const TextStyle(
                                             fontSize: 20,
                                             fontWeight: FontWeight.bold,
                                             color: Colors.white,
@@ -676,9 +676,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         ),
                                         const SizedBox(height: 12),
                                         // İçerik
-                                        const Text(
-                                          'Are you sure you want to exit the application?',
-                                          style: TextStyle(
+                                        Text(
+                                          AppLocalizations.of(context)!.logOutMessage,
+                                          style: const TextStyle(
                                             color: Colors.white70,
                                             fontSize: 16,
                                           ),
@@ -694,9 +694,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                 style: TextButton.styleFrom(
                                                   padding: const EdgeInsets.symmetric(vertical: 12),
                                                 ),
-                                                child: const Text(
-                                                  'Cancel',
-                                                  style: TextStyle(
+                                                child: Text(
+                                                  AppLocalizations.of(context)!.cancel,
+                                                  style: const TextStyle(
                                                     color: Colors.white70,
                                                     fontSize: 16,
                                                     fontWeight: FontWeight.w500,
@@ -715,9 +715,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                     borderRadius: BorderRadius.circular(8),
                                                   ),
                                                 ),
-                                                child: const Text(
-                                                  'Log Out',
-                                                  style: TextStyle(
+                                                child: Text(
+                                                  AppLocalizations.of(context)!.logOut,
+                                                  style: const TextStyle(
                                                     color: Colors.white,
                                                     fontSize: 16,
                                                     fontWeight: FontWeight.w500,
@@ -826,9 +826,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Text(
-                  'Edit Profile',
-                  style: TextStyle(
+                Text(
+                  AppLocalizations.of(context)!.editProfileTitle,
+                  style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
@@ -837,9 +837,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 const SizedBox(height: 20),
                 TextField(
                   controller: nameController,
-                  decoration: const InputDecoration(
-                    labelText: 'Name',
-                    border: OutlineInputBorder(),
+                  decoration: InputDecoration(
+                    labelText: AppLocalizations.of(context)!.nameLabel,
+                    border: const OutlineInputBorder(),
                     filled: true,
                     fillColor: Colors.white10,
                   ),
@@ -847,9 +847,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 const SizedBox(height: 12),
                 TextField(
                   controller: titleController,
-                  decoration: const InputDecoration(
-                    labelText: 'Title',
-                    border: OutlineInputBorder(),
+                  decoration: InputDecoration(
+                    labelText: AppLocalizations.of(context)!.titleLabel,
+                    border: const OutlineInputBorder(),
                     filled: true,
                     fillColor: Colors.white10,
                   ),
@@ -858,13 +858,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    TextButton(
-                      onPressed: () => Navigator.pop(context),
-                      child: const Text(
-                        'Cancel',
-                        style: TextStyle(color: Colors.white),
+                                          TextButton(
+                        onPressed: () => Navigator.pop(context),
+                        child: Text(
+                          AppLocalizations.of(context)!.cancel,
+                          style: const TextStyle(color: Colors.white),
+                        ),
                       ),
-                    ),
                     const SizedBox(width: 12),
                     ElevatedButton(
                       onPressed: () async {
@@ -876,20 +876,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         if (success && context.mounted) {
                           Navigator.pop(context);
                           _loadUserData();
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Profile information updated'),
-                              backgroundColor: Colors.green,
-                            ),
-                          );
+                                                      ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(AppLocalizations.of(context)!.profileInformationUpdated),
+                                backgroundColor: Colors.green,
+                              ),
+                            );
                         }
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.indigo,
                       ),
-                      child: const Text(
-                        'Save',
-                        style: TextStyle(color: Colors.white),
+                      child: Text(
+                        AppLocalizations.of(context)!.save,
+                        style: const TextStyle(color: Colors.white),
                       ),
                     ),
                   ],
@@ -941,9 +941,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Text(
-                    'Privacy Settings',
-                    style: TextStyle(
+                  Text(
+                    AppLocalizations.of(context)!.privacySettings,
+                    style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
@@ -952,7 +952,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   const SizedBox(height: 20),
 
                   SwitchListTile(
-                    title: const Text('Show My Profile to Others'),
+                    title: Text(AppLocalizations.of(context)!.showMyProfileToOthers),
                     value: showProfile,
                     onChanged: (value) {
                       setState(() => showProfile = value);
@@ -961,7 +961,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
 
                   SwitchListTile(
-                    title: const Text('Show in Leaderboard'),
+                    title: Text(AppLocalizations.of(context)!.showInLeaderboard),
                     value: showInLeaderboard,
                     onChanged: (value) {
                       setState(() => showInLeaderboard = value);
@@ -970,9 +970,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
 
                   SwitchListTile(
-                    title: const Text('Share Usage Data'),
-                    subtitle: const Text(
-                      'Anonymous usage data to improve app experience',
+                    title: Text(AppLocalizations.of(context)!.shareUsageData),
+                    subtitle: Text(
+                      AppLocalizations.of(context)!.shareUsageDataSubtitle,
                     ),
                     value: shareUsage,
                     onChanged: (value) {
@@ -996,9 +996,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         Navigator.pop(context);
                         _loadUserData();
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
+                          SnackBar(
                             content: Text(
-                              'Privacy settings updated',
+                              AppLocalizations.of(context)!.privacySettingsUpdated,
                             ),
                             backgroundColor: Colors.green,
                           ),
@@ -1009,9 +1009,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       backgroundColor: Colors.indigo,
                       minimumSize: const Size(double.infinity, 50),
                     ),
-                    child: const Text(
-                      'Save',
-                      style: TextStyle(color: Colors.white),
+                    child: Text(
+                      AppLocalizations.of(context)!.save,
+                      style: const TextStyle(color: Colors.white),
                     ),
                   ),
                 ],
@@ -1052,9 +1052,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Text(
-                  'Help & Support',
-                  style: TextStyle(
+                Text(
+                  AppLocalizations.of(context)!.helpAndSupport,
+                  style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
@@ -1064,14 +1064,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                 ListTile(
                   leading: const Icon(Icons.email, color: Colors.indigo),
-                  title: const Text('Contact'),
+                  title: Text(AppLocalizations.of(context)!.contact),
                   subtitle: const Text('support@anesthesia.app'),
                   onTap: () {
                     // Email gönder
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
+                      SnackBar(
                         content: Text(
-                          'Email feature will be added soon',
+                          AppLocalizations.of(context)!.emailFeatureComingSoon,
                         ),
                       ),
                     );
@@ -1083,12 +1083,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     Icons.description_outlined,
                     color: Colors.indigo,
                   ),
-                  title: const Text('User Guide'),
+                  title: Text(AppLocalizations.of(context)!.userGuide),
                   onTap: () {
                     // Kullanım kılavuzunu aç
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('User guide will be added soon'),
+                      SnackBar(
+                        content: Text(AppLocalizations.of(context)!.userGuideComingSoon),
                       ),
                     );
                   },
@@ -1096,13 +1096,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                 ListTile(
                   leading: const Icon(Icons.info, color: Colors.indigo),
-                  title: const Text('About'),
+                  title: Text(AppLocalizations.of(context)!.about),
                   subtitle: const Text('Version 1.0.0'),
                   onTap: () {
                     // Hakkında sayfasını aç
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('About page will be added soon'),
+                      SnackBar(
+                        content: Text(AppLocalizations.of(context)!.aboutPageComingSoon),
                       ),
                     );
                   },
@@ -1115,9 +1115,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     backgroundColor: Colors.indigo,
                     minimumSize: const Size(double.infinity, 50),
                   ),
-                  child: const Text(
-                    'Close',
-                    style: TextStyle(color: Colors.white),
+                  child: Text(
+                    AppLocalizations.of(context)!.close,
+                    style: const TextStyle(color: Colors.white),
                   ),
                 ),
               ],
@@ -1438,9 +1438,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       icon: const Icon(Icons.close, color: Colors.white),
                       onPressed: () => Navigator.pop(context),
                     ),
-                    const Text(
-                      'My Devices',
-                      style: TextStyle(
+                    Text(
+                      AppLocalizations.of(context)!.myDevices,
+                      style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
@@ -1451,7 +1451,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  'You can log in from a maximum of 2 devices',
+                  AppLocalizations.of(context)!.myDevicesSubtitle,
                   style: TextStyle(
                     fontSize: 14,
                     color: Colors.grey[400],
@@ -1472,7 +1472,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       if (snapshot.hasError) {
                         return Center(
                           child: Text(
-                            'Error loading devices:\n${snapshot.error}',
+                            '${AppLocalizations.of(context)!.errorLoadingDevices}:\n${snapshot.error}',
                             style: const TextStyle(color: Colors.red),
                             textAlign: TextAlign.center,
                           ),
@@ -1482,10 +1482,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       final devices = snapshot.data ?? [];
 
                       if (devices.isEmpty) {
-                        return const Center(
+                        return Center(
                           child: Text(
-                            'No registered devices found',
-                            style: TextStyle(color: Colors.grey),
+                            AppLocalizations.of(context)!.noRegisteredDevices,
+                            style: const TextStyle(color: Colors.grey),
                           ),
                         );
                       }
@@ -1507,9 +1507,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     backgroundColor: Colors.indigo,
                     minimumSize: const Size(double.infinity, 50),
                   ),
-                  child: const Text(
-                    'Close',
-                    style: TextStyle(color: Colors.white),
+                  child: Text(
+                    AppLocalizations.of(context)!.close,
+                    style: const TextStyle(color: Colors.white),
                   ),
                 ),
               ],
@@ -1619,20 +1619,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       context: context,
                       builder: (context) => AlertDialog(
                         backgroundColor: Colors.indigo.shade900,
-                        title: const Text(
-                          'Delete Device',
-                          style: TextStyle(color: Colors.white),
+                        title: Text(
+                          AppLocalizations.of(context)!.logoutFromDevice,
+                          style: const TextStyle(color: Colors.white),
                         ),
-                        content: const Text(
-                          'Are you sure you want to delete this device?',
-                          style: TextStyle(color: Colors.white70),
+                        content: Text(
+                          AppLocalizations.of(context)!.logoutFromDeviceMessage,
+                          style: const TextStyle(color: Colors.white70),
                         ),
                         actions: [
                           TextButton(
                             onPressed: () => Navigator.pop(context, false),
-                            child: const Text(
-                              'Cancel',
-                              style: TextStyle(color: Colors.white),
+                            child: Text(
+                              AppLocalizations.of(context)!.cancel,
+                              style: const TextStyle(color: Colors.white),
                             ),
                           ),
                           ElevatedButton(
@@ -1640,9 +1640,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.red,
                             ),
-                            child: const Text(
-                              'Delete',
-                              style: TextStyle(color: Colors.white),
+                            child: Text(
+                              AppLocalizations.of(context)!.logoutFromDevice,
+                              style: const TextStyle(color: Colors.white),
                             ),
                           ),
                         ],

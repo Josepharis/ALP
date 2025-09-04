@@ -1,0 +1,107 @@
+    question:
+        "Pulmoner arter kateteri ile aşağıdakilerden hangisi doğrudan ölçülemez?",
+    question:
+        "Düşük santral venöz basınç (CVP) aşağıdaki durumların hangisinde beklenmez?",
+    question:
+        "Pulsoksimetre ile ilgili olarak aşağıdakilerden hangisi yanlıştır?",
+    question:
+        "Kardiyak output ölçümünde termodilüsyon yöntemi sırasında kullanılan soğuk sıvı hangi yapıya enjekte edilir?",
+    question:
+        "Aşağıdakilerden hangisi sol ventrikül dolum basıncını en iyi yansıtır?",
+    question:
+        "Non-invaziv olarak kan basıncı ölçümünde oskültatuvar yöntem ile duyulan sesler hangi isimle anılır?",
+    question:
+        "Santral venöz basınç artışı aşağıdaki durumların hangisinde beklenir?",
+    question: "CVP eğrisi üzerindeki \"a dalgası\" neyi temsil eder?",
+    question:
+        "Pulmoner kapiller kama basıncı (PCWP) normalde kaç mmHg civarındadır?",
+    question: "Arteriyel kan basıncı osilometrik yöntemde neyle hesaplanır?",
+    question:
+        "Düşük kardiyak output aşağıdaki durumların hangisinde beklenmez?",
+    question:
+        "Pulmoner arter kateteri (PAC) ile ölçülebilen parametrelerden biri değildir:",
+    question:
+        "Aşağıdaki parametrelerden hangisi \"afterload\" olarak tanımlanabilir?",
+    question:
+        "EKG monitörizasyonu sırasında \"QT intervali\" uzaması en çok hangi elektrolit bozukluğunda görülür?",
+    question:
+        "Arteriyel kanülasyon sonrası nabız dalga formunun \"damping\" etkisiyle değişmesi en çok neye bağlıdır?",
+    question:
+        "Swan-Ganz kateteriyle yapılan kardiyak output ölçümünde aşağıdakilerden hangisi en çok etki eder?",
+    question:
+        "İntraoperatif EKG monitörizasyonunda en sık kullanılan derivasyon hangisidir?",
+    question: "Hiperdinamik dolaşımda kardiyak output nasıl etkilenir?",
+    question:
+        "Swan-Ganz kateteri ile ölçülen pulmoner kapiller kama basıncının (PCWP) sürekli yüksek olması neyi düşündürür?",
+    question: "CVP ölçümünde \"v\" dalgası neyi temsil eder?",
+    question:
+        "Pulmoner arter kateteri ile doğrudan ölçülemeyip sadece hesaplanan değer aşağıdakilerden hangisidir?",
+    question:
+        "İntraoperatif hipovolemi şüphesinde en hızlı ve etkili ilk değerlendirme yöntemi nedir?",
+    question:
+        "Sistemik vasküler direnç (SVR) hangi faktör tarafından en fazla etkilenir?",
+    question:
+        "Arteriyel basınç dalga formunda dik ve hızlı yükselen bir sistolik tepe genellikle neyi gösterir?",
+    question:
+        "CVP'nin yükselmesine neden olan fizyolojik bir durum hangisidir?",
+    question:
+        "Spontan solunum yapan hastada CVP ölçümü için en uygun zaman hangisidir?",
+    question:
+        "Aşağıdaki yöntemlerden hangisi minimal invaziv kardiyak output ölçümüne örnektir?",
+    question:
+        "Aşağıdaki monitörizasyon yöntemlerinden hangisi doku perfüzyonunu en iyi gösterir?",
+    question: "Pulmoner wedge basıncı (PAWP) en çok neyi yansıtır?",
+    question:
+        "Kardiyak debi hesaplamasında kullanılan Fick prensibi aşağıdakilerden hangisini gerektirir?",
+    question: "Kardiyak indeksi hesaplamak için ne gereklidir?",
+    question: "Hangi monitör hem ventilasyon hem dolaşım hakkında bilgi verir?",
+    question:
+        "Kardiyak monitörizasyon sırasında en çok kullanılan non-invazif tansiyon ölçüm yöntemi nedir?",
+    question: "CVP değeri normalde kaç mmHg civarındadır?",
+    question:
+        "Kalp yetmezliği olan bir hastada en anlamlı monitörizasyon parametresi hangisidir?",
+    question: "Düşük SVR (sistemik vasküler direnç) hangi durumda görülmez?",
+    question: "Aşağıdakilerden hangisi wedge pozisyonuna geçişte yapılmaz?",
+    question:
+        "Kardiyovasküler monitörizasyon sırasında arterial dalga formunda dik yükselen \"anacrotic limb\" neyi temsil eder?",
+    question: "Hangi monitörizasyon yöntemi ventrikül hacmini en iyi gösterir?",
+    question: "Pulmoner arter basıncı en fazla hangi klinik durumda artar?",
+    question: "Non-invazif tansiyon ölçüm cihazları hangi prensiple çalışır?",
+    question:
+        "Kardiyak output yüksek ama dokular hipoperfüze ise en olası neden nedir?",
+    question:
+        "CVP ölçümünde transduserin yerleştirilmesi gereken referans noktası neresidir?",
+    question:
+        "Swan-Ganz kateteri ile aşağıdaki parametrelerden hangisi ölçülemez?",
+    question:
+        "Pulmoner arter kateterizasyonunda (PAK) \"wedge basıncı\" hangi yapının basıncını yansıtır?",
+    question: "\"Pulse kontur analizi\" ile hangi parametre ölçülemez?",
+    question:
+        "\"Bispektral indeks (BIS)\" monitorizasyonu hangi aralıkta genel anesteziyi gösterir?",
+    question: "Hangisi \"kardiyak output\" ölçüm yöntemlerinden değildir?",
+    question:
+        "\"Stroke volüm varyasyonu (SVV)\" hangi durumda volüm duyarlılığını kaybeder?",
+    question:
+        "Hangisi \"pulmoner arter kateteri\" komplikasyonlarından değildir?",
+    question:
+        "\"Kardiyak output\" ölçümünde Fick yöntemi hangi parametreyi kullanmaz?",
+    question: "Hangisi \"non-invaziv kardiyak output\" ölçüm yöntemidir?",
+    question:
+        "Hangisi \"arteriyel kan basıncı\" dalga formu analizinde \"dikrotik çentik\"in kaybolma nedenidir?",
+    question:
+        "\"Kardiyak output\" ölçümünde termodilüsyon yöntemi hangi fizik yasasına dayanır?",
+    question: "Hangisi \"pulse oksimetre\" kullanımını en çok etkiler?",
+    question: "\"Masif pulmoner emboli\"de PAK bulgusu nedir?",
+    question: "\"Kardiyak tamponad\"da CVP dalga formunda hangisi görülür?",
+    question: "\"İntraoperatif TEE\" hangi durumda kesinlikle kontrendikedir?",
+    question:
+        "\"Pulse basıncı varyasyonu\" (PPV) hangi aralıkta volüm ihtiyacını gösterir?",
+    question: "\"Kardiyojenik şok\"ta PAK bulguları hangisidir?",
+    question: "\"Kardiyak output\" ölçümünde LiDCO yöntemi hangisini kullanır?",
+    question:
+        "\"Arteriyel kan basıncı\" monitorizasyonunda hangisi \"damping\" artefaktını gösterir?",
+    question:
+        "\"NIRS (Near-Infrared Spectroscopy)\" hangi bölge oksijenasyonunu ölçer?",
+    question:
+        "\"Pulmoner arter kateteri\" yerleşimi sırasında hangi EKG değişikliği sağ ventrikül irritasyonunu gösterir?",
+    question: "\"İntraoperatif TEE\" hangi kapak patolojisinde en değerlidir?",

@@ -1,0 +1,65 @@
+5:    question:
+22:    question:
+39:    question:
+56:    question:
+73:    question:
+90:    question:
+107:    question:
+124:    question: "CVP eğrisi üzerindeki \"a dalgası\" neyi temsil eder?",
+139:    question:
+149:    question: "Arteriyel kan basıncı osilometrik yöntemde neyle hesaplanır?",
+165:    question:
+182:    question:
+199:    question:
+216:    question:
+233:    question:
+250:    question:
+267:    question:
+278:    question: "Hiperdinamik dolaşımda kardiyak output nasıl etkilenir?",
+294:    question:
+311:    question: "CVP ölçümünde \"v\" dalgası neyi temsil eder?",
+326:    question:
+343:    question:
+360:    question:
+377:    question:
+394:    question:
+411:    question:
+428:    question:
+445:    question:
+462:    question: "Pulmoner wedge basıncı (PAWP) en çok neyi yansıtır?",
+478:    question:
+495:    question: "Kardiyak indeksi hesaplamak için ne gereklidir?",
+510:    question: "Hangi monitör hem ventilasyon hem dolaşım hakkında bilgi verir?",
+526:    question:
+542:    question: "CVP değeri normalde kaç mmHg civarındadır?",
+551:    question:
+561:    question: "Düşük SVR (sistemik vasküler direnç) hangi durumda görülmez?",
+576:    question: "Aşağıdakilerden hangisi wedge pozisyonuna geçişte yapılmaz?",
+591:    question:
+608:    question: "Hangi monitörizasyon yöntemi ventrikül hacmini en iyi gösterir?",
+624:    question: "Pulmoner arter basıncı en fazla hangi klinik durumda artar?",
+640:    question: "Non-invazif tansiyon ölçüm cihazları hangi prensiple çalışır?",
+656:    question:
+673:    question:
+690:    question:
+707:    question:
+723:    question: "\"Pulse kontur analizi\" ile hangi parametre ölçülemez?",
+738:    question:
+748:    question: "Hangisi \"kardiyak output\" ölçüm yöntemlerinden değildir?",
+763:    question:
+779:    question:
+795:    question:
+811:    question: "Hangisi \"non-invaziv kardiyak output\" ölçüm yöntemidir?",
+826:    question:
+842:    question:
+852:    question: "Hangisi \"pulse oksimetre\" kullanımını en çok etkiler?",
+867:    question: "\"Masif pulmoner emboli\"de PAK bulgusu nedir?",
+882:    question: "\"Kardiyak tamponad\"da CVP dalga formunda hangisi görülür?",
+897:    question: "\"İntraoperatif TEE\" hangi durumda kesinlikle kontrendikedir?",
+913:    question:
+923:    question: "\"Kardiyojenik şok\"ta PAK bulguları hangisidir?",
+938:    question: "\"Kardiyak output\" ölçümünde LiDCO yöntemi hangisini kullanır?",
+953:    question:
+969:    question:
+979:    question:
+995:    question: "\"İntraoperatif TEE\" hangi kapak patolojisinde en değerlidir?",

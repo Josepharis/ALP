@@ -67,6 +67,22 @@ final anesthesiaApplicationQuestions = <Question>[
 
   Question(
     question:
+        "Spinal anesteziyi ilk uygulayan hekim kimdir?",
+    options: [
+      "Fidel Pages",
+      "August Bier",
+      "Heinrich Braun",
+      "William Halsted",
+      "Jean Sicard",
+    ],
+    correctAnswerIndex: 1,
+    explanation:
+        "August Bier, 1898 yılında ilk spinal anesteziyi uygulamıştır.",
+    category: "Anestezi Uygulaması",
+  ),
+
+  Question(
+    question:
         "İlk hipodermik şırınga ve iğnenin icadı kime aittir ve intravenöz anestezinin başlangıcı bu icatla mümkün olmuştur?",
     options: [
       "Albert Niemann",
@@ -80,6 +96,7 @@ final anesthesiaApplicationQuestions = <Question>[
         "Alexander Wood, 1855'te hipodermik şırıngayı icat etmiştir; bu, IV anestezinin temelidir.",
     category: "Anestezi Uygulaması",
   ),
+
   Question(
     question:
         "Aşağıdakilerden hangisi \"anestezi sırasında hastanın nabzını sürekli izlemeyi öneren\" ve çene itme manevrasını ilk kullanan kişidir?",
@@ -147,8 +164,6 @@ final anesthesiaApplicationQuestions = <Question>[
         "Joseph O'Dwyer, trakeal entübasyonu elektif olarak uygulayan öncülerdendir.",
     category: "Anestezi Uygulaması",
   ),
-
-  
 
   Question(
     question:
@@ -242,23 +257,7 @@ final anesthesiaApplicationQuestions = <Question>[
   ),
 
   Question(
-    question:
-        "Etherin anestezi ajanı olarak ilk kullanımında hangi durum yaşanmıştır?",
-    options: [
-      "Başarıyla uygulanan ilk genel anestezi",
-      "Hasta öldü",
-      "Ameliyatı durdurma kararı alındı",
-      "Anestezi derinliği iyi ayarlanamadı",
-      "İlk tecrübeler başarısız oldu",
-    ],
-    correctAnswerIndex: 0,
-    explanation:
-        "William T.G. Morton, etheri kullanarak ilk başarılı genel anesteziyi 1846'da uygulamıştır. Bu, modern anestezinin başlangıcı olarak kabul edilir.",
-    category: "Anestezi Uygulaması",
-  ),
-
-  Question(
-    question: "James Simpson’un anestezi camiasına katkısı nedir?",
+    question: "James Simpson'un anestezi camiasına katkısı nedir?",
     options: [
       "İlk başarılı lokal anesteziyi uygulamıştır",
       "İlk anestezi cihazını icat etmiştir",
@@ -282,20 +281,19 @@ final anesthesiaApplicationQuestions = <Question>[
     category: "Anestezi Uygulaması",
   ),
 
-
   Question(
     question:
-        "Anestezi tarihinin en önemli buluşlarından biri olan spinal anesteziyi kim keşfetmiştir?",
+        "Etherin genel anestezi olarak kullanımı ilk olarak hangi tıp fakültesi hastanesinde gerçekleştirilmiştir?",
     options: [
-      "William T.G. Morton",
-      "James Simpson",
-      "Carl Koller",
-      "August Bier",
-      "Horace Wells",
+      "Massachusetts General Hospital",
+      "Johns Hopkins Hospital",
+      "Cleveland Clinic",
+      "London Hospital",
+      "Paris Üniversitesi Tıp Fakültesi",
     ],
-    correctAnswerIndex: 3,
+    correctAnswerIndex: 0,
     explanation:
-        "Spinal anestezi, August Bier tarafından 1898 yılında keşfedilmiştir. Bu keşif, bölgesel anestezi kullanımında devrim yaratmıştır.",
+        "1846'da Massachusetts General Hospital'da William T.G. Morton, ether kullanarak ilk başarılı genel anesteziyi uygulamıştır. Bu tarih, modern anestezinin başlangıcı kabul edilir.",
     category: "Anestezi Uygulaması",
   ),
 
@@ -330,6 +328,7 @@ final anesthesiaApplicationQuestions = <Question>[
         "William T.G. Morton, ether ile yapılan ilk başarılı genel anesteziyi 1846 yılında Massachusetts General Hospital'da gerçekleştirmiştir. Bu, modern anestezinin temel taşlarını atmıştır.",
     category: "Anestezi Uygulaması",
   ),
+
   Question(
     question:
         "Genel anestezinin gelişiminde ilk sedasyon ajanı olarak hangi ilaç kullanılmıştır?",
@@ -345,6 +344,7 @@ final anesthesiaApplicationQuestions = <Question>[
         "Chloral hydrate, ilk sedasyon ajanı olarak 19. yüzyılın sonlarında kullanılmıştır. Bu ilaç, anestezi uygulamaları öncesinde hastayı sedate etmek için yaygın olarak kullanılmıştır.",
     category: "Anestezi Uygulaması",
   ),
+
   Question(
     question:
         "Anestezi tarihinde önemli bir dönüm noktası olan ilk kombi anestezi tekniği kim tarafından geliştirilmiştir?",
@@ -358,6 +358,118 @@ final anesthesiaApplicationQuestions = <Question>[
     correctAnswerIndex: 1,
     explanation:
         "John Snow, ether ve chloroformu kombinleyerek ilk kombine anestezi tekniklerini geliştirmiştir. Bu, daha güvenli bir anestezi uygulaması sağlamıştır.",
+    category: "Anestezi Uygulaması",
+  ),
+
+  Question(
+    question:
+        "Anestezi tarihinin önemli gelişmelerinden biri, ağrı kontrolü sağlamak için kullanılan ilk ilaç nedir?",
+    options: [
+      "Eter",
+      "Chloroform",
+      "Fentanil",
+      "Kokain",
+      "Halotan",
+    ],
+    correctAnswerIndex: 3,
+    explanation:
+        "Kokain, ilk kez ağrı kontrolü için kullanılan lokal anestezik ajandır. Ayrıca, lokal anestezi uygulamalarında analjezik etkisiyle devrim yaratmıştır.",
+    category: "Anestezi Uygulaması",
+  ),
+
+  Question(
+    question:
+        "Anestezi tarihinin önemli figürlerinden olan Horace Wells neyi keşfetmiştir?",
+    options: [
+      "İlk güvenli genel anesteziyi uygulamıştır",
+      "Lokal anesteziyi keşfetmiştir",
+      "Nitrous oxide (gülme gazı) kullanarak ilk ağrısız işlemi gerçekleştirmiştir",
+      "Chloroformu anestezi için kullanmaya başlamıştır",
+      "İlk anestezi cihazını icat etmiştir",
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        "Horace Wells, nitrojen oksit (gülme gazı) kullanarak ilk ağrısız diş tedavisini 1844'te gerçekleştirmiştir. Bu, modern anestezi uygulamalarının ilk adımlarını atmıştır.",
+    category: "Anestezi Uygulaması",
+  ),
+
+  Question(
+    question:
+        "Anestezi tarihinin önemli figürlerinden olan Sir Robert Macintosh hangi katkıyı yapmıştır?",
+    options: [
+      "İlk genel anesteziyi uygulamıştır",
+      "Spinal anesteziyi keşfetmiştir",
+      "Endotrakeal tüpün kullanımını yaygınlaştırmıştır",
+      "Halotanı keşfetmiştir",
+      "Anestezi monitörizasyonunu geliştirmiştir",
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        "Sir Robert Macintosh, endotrakeal tüpün kullanılmasını yaygınlaştırarak hava yolunun güvenliğini artırmış ve anestezi yönetimini güvenli hale getirmiştir.",
+    category: "Anestezi Uygulaması",
+  ),
+
+  Question(
+    question:
+        "Modern anestezi cihazlarının ilk icadı hangi yıl gerçekleşmiştir?",
+    options: [
+      "1846",
+      "1860",
+      "1880",
+      "1900",
+      "1920",
+    ],
+    correctAnswerIndex: 1,
+    explanation:
+        "1860 yılında, William Morton ve John Snow, modern anestezi cihazlarını geliştirmeye başlamışlardır. Bu cihazlar, anestezinin daha kontrollü ve güvenli hale gelmesine olanak sağlamıştır.",
+    category: "Anestezi Uygulaması",
+  ),
+
+  Question(
+    question:
+        "Anestezi tarihinin önemli buluşlarından biri, ilk güvenli genel anesteziyi uygulamak hangi hastalıkla mücadelede gerçekleştirilmiştir?",
+    options: [
+      "Diş çekimi",
+      "Cilt cerrahisi",
+      "Karaciğer ameliyatı",
+      "Ameliyat sonrası komplikasyonlar",
+      "Göz cerrahisi",
+    ],
+    correctAnswerIndex: 0,
+    explanation:
+        "William T.G. Morton, etheri kullanarak diş çekimi sırasında ilk güvenli genel anesteziyi uygulamıştır. Bu, modern anestezinin başlangıcıdır.",
+    category: "Anestezi Uygulaması",
+  ),
+
+  Question(
+    question:
+        "Anestezi tarihindeki ilk büyük devrim, hangi aşamada yaşanmıştır?",
+    options: [
+      "Kokainin keşfi",
+      "Halotan kullanımı",
+      "Eterin güvenli kullanımı",
+      "Spinal anestezi uygulaması",
+      "Halojenize anesteziklerin bulunması",
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        "Ether'in ilk güvenli kullanımının keşfi, modern anestezinin başlangıcıdır ve cerrahilerin ağrısız yapılabilmesini mümkün kılmıştır.",
+    category: "Anestezi Uygulaması",
+  ),
+
+  Question(
+    question:
+        "Anestezinin gelişiminde önemli bir buluş olan propofolun klinik kullanıma girmesi hangi yıl gerçekleşmiştir?",
+    options: [
+      "1980",
+      "1985",
+      "1990",
+      "1995",
+      "2000",
+    ],
+    correctAnswerIndex: 1,
+    explanation:
+        "Propofol, 1985 yılında klinik kullanım için onaylanmış ve günümüzde anestezi uygulamalarında yaygın olarak kullanılmaktadır. Bu, anestezinin gelişmesinde önemli bir adımdır.",
     category: "Anestezi Uygulaması",
   ),
 

@@ -163,7 +163,6 @@ final List<Question> intravenousAnestheticsQuestions = [
     category: "intravenöz anestezikler",
     difficulty: 2,
   ),
-
   Question(
     question: "Etomidatın en önemli nörolojik avantajı nedir?",
     options: [
@@ -179,7 +178,6 @@ final List<Question> intravenousAnestheticsQuestions = [
     category: "intravenöz anestezikler",
     difficulty: 3,
   ),
-
   Question(
     question:
         "Propofol ile indüksiyon sonrası en hızlı uyanma hangi özelliğe bağlıdır?",
@@ -196,7 +194,6 @@ final List<Question> intravenousAnestheticsQuestions = [
     category: "intravenöz anestezikler",
     difficulty: 2,
   ),
-
   Question(
     question:
         "Midazolamın su içinde çözünür olmasını sağlayan özellik aşağıdakilerden hangisidir?",
@@ -213,7 +210,6 @@ final List<Question> intravenousAnestheticsQuestions = [
     category: "intravenöz anestezikler",
     difficulty: 3,
   ),
-
   Question(
     question:
         "Ketaminin neden olduğu psikomimetik etkiler hangisi ile en iyi baskılanır?",
@@ -224,7 +220,6 @@ final List<Question> intravenousAnestheticsQuestions = [
     category: "intravenöz anestezikler",
     difficulty: 2,
   ),
-
   Question(
     question:
         "Etomidatın kullanımı ile ilişkilendirilen geçici kasılmaların nedeni nedir?",
@@ -241,7 +236,6 @@ final List<Question> intravenousAnestheticsQuestions = [
     category: "intravenöz anestezikler",
     difficulty: 3,
   ),
-
   Question(
     question: "Tiopental ile ilgili hangisi yanlıştır?",
     options: [
@@ -257,7 +251,6 @@ final List<Question> intravenousAnestheticsQuestions = [
     category: "intravenöz anestezikler",
     difficulty: 2,
   ),
-
   Question(
     question:
         "Aşağıdakilerden hangisi propofolün kullanım alanlarından biri değildir?",
@@ -274,7 +267,6 @@ final List<Question> intravenousAnestheticsQuestions = [
     category: "intravenöz anestezikler",
     difficulty: 1,
   ),
-
   Question(
     question: "Midazolamın antagonist ilacı aşağıdakilerden hangisidir?",
     options: ["Flumazenil", "Nalokson", "Dantrolen", "Atropin", "Sugammadeks"],
@@ -284,7 +276,6 @@ final List<Question> intravenousAnestheticsQuestions = [
     category: "intravenöz anestezikler",
     difficulty: 1,
   ),
-
   Question(
     question:
         "Propofol infüzyon sendromu gelişimini artıran en önemli faktör aşağıdakilerden hangisidir?",
@@ -301,10 +292,9 @@ final List<Question> intravenousAnestheticsQuestions = [
     category: "intravenöz anestezikler",
     difficulty: 3,
   ),
-
   Question(
     question:
-        "Ketaminin neden olduğu 'disosiyatif anestezi' terimi neyi ifade eder?",
+        "Ketaminin neden olduğu \"disosiyatif anestezi\" terimi neyi ifade eder?",
     options: [
       "Kas gevşemesi ile bilinç kaybı",
       "Bilinç açıkken motor kontrol kaybı",
@@ -318,7 +308,6 @@ final List<Question> intravenousAnestheticsQuestions = [
     category: "intravenöz anestezikler",
     difficulty: 3,
   ),
-
   Question(
     question:
         "Tiopentalin indüksiyon sonrası hızlı etkisinin sona erme nedeni nedir?",
@@ -335,7 +324,6 @@ final List<Question> intravenousAnestheticsQuestions = [
     category: "intravenöz anestezikler",
     difficulty: 3,
   ),
-
   Question(
     question: "Hangisi propofolün antiemetik etkisine katkıda bulunur?",
     options: [
@@ -351,7 +339,21 @@ final List<Question> intravenousAnestheticsQuestions = [
     category: "intravenöz anestezikler",
     difficulty: 3,
   ),
-
+  Question(
+    question: "Midazolam'ın etki süresi aşağıdakilerden hangisine bağlı olarak uzayabilir?",
+    options: [
+      "Hepatik metabolizma hızının artması",
+      "Plazma protein bağlanma oranının azalması",
+      "Böbrek klirensinin artması",
+      "Oral biyoyararlanımının düşüklüğü",
+      "İlacın suya çözünürlüğü",
+    ],
+    correctAnswerIndex: 1,
+    explanation:
+        "Protein bağlanması azaldığında serbest ilaç miktarı artar, bu da etki süresinin uzamasına neden olabilir.",
+    category: "intravenöz anestezikler",
+    difficulty: 2,
+  ),
   Question(
     question: "Tiopental'in kontrendike olduğu hastalık hangisidir?",
     options: [
@@ -367,7 +369,6 @@ final List<Question> intravenousAnestheticsQuestions = [
     category: "intravenöz anestezikler",
     difficulty: 2,
   ),
-
   Question(
     question:
         "Etomidat kullanımında adrenokortikal baskılanma hangi enzimin inhibisyonu ile ilişkilidir?",
@@ -384,7 +385,6 @@ final List<Question> intravenousAnestheticsQuestions = [
     category: "intravenöz anestezikler",
     difficulty: 3,
   ),
-
   Question(
     question: "Hangisi benzodiazepinlerin özelliklerinden biri değildir?",
     options: [
@@ -400,7 +400,6 @@ final List<Question> intravenousAnestheticsQuestions = [
     category: "intravenöz anestezikler",
     difficulty: 1,
   ),
-
   Question(
     question:
         "Propofol hangi reseptör düzeyinde etki göstererek anestezik etki yapar?",
@@ -417,7 +416,6 @@ final List<Question> intravenousAnestheticsQuestions = [
     category: "intravenöz anestezikler",
     difficulty: 2,
   ),
-
   Question(
     question:
         "Aşağıdakilerden hangisi propofol infüzyon sendromunun bir bulgusu değildir?",
@@ -434,7 +432,6 @@ final List<Question> intravenousAnestheticsQuestions = [
     category: "intravenöz anestezikler",
     difficulty: 3,
   ),
-
   Question(
     question: "Midazolam'ın amnestik etkisinin nedeni nedir?",
     options: [
@@ -450,7 +447,6 @@ final List<Question> intravenousAnestheticsQuestions = [
     category: "intravenöz anestezikler",
     difficulty: 3,
   ),
-
   Question(
     question:
         "Propofol uygulaması sırasında dikkat edilmesi gereken kontaminasyon riski aşağıdakilerden hangisinden kaynaklanır?",
@@ -467,7 +463,6 @@ final List<Question> intravenousAnestheticsQuestions = [
     category: "intravenöz anestezikler",
     difficulty: 2,
   ),
-
   Question(
     question:
         "Etomidat'ın kortizol üretimini baskılaması ne zaman en önemli hale gelir?",
@@ -484,7 +479,6 @@ final List<Question> intravenousAnestheticsQuestions = [
     category: "intravenöz anestezikler",
     difficulty: 3,
   ),
-
   Question(
     question:
         "Propofol infüzyon sendromunun en ciddi sonucu aşağıdakilerden hangisidir?",
@@ -501,7 +495,6 @@ final List<Question> intravenousAnestheticsQuestions = [
     category: "intravenöz anestezikler",
     difficulty: 3,
   ),
-
   Question(
     question:
         "Aşağıdakilerden hangisi ketaminin avantajlarından biri değildir?",
@@ -518,7 +511,6 @@ final List<Question> intravenousAnestheticsQuestions = [
     category: "intravenöz anestezikler",
     difficulty: 2,
   ),
-
   Question(
     question:
         "Tiopental kullanımı sonrası en sık görülen yan etki aşağıdakilerden hangisidir?",
@@ -535,7 +527,6 @@ final List<Question> intravenousAnestheticsQuestions = [
     category: "intravenöz anestezikler",
     difficulty: 2,
   ),
-
   Question(
     question:
         "Midazolam'ın farmakokinetik özelliklerinden biri aşağıdakilerden hangisidir?",
@@ -552,7 +543,6 @@ final List<Question> intravenousAnestheticsQuestions = [
     category: "intravenöz anestezikler",
     difficulty: 2,
   ),
-
   Question(
     question:
         "Aşağıdaki ajanlardan hangisi intravenöz indüksiyonda en sık kullanılan ajandır?",
@@ -563,7 +553,6 @@ final List<Question> intravenousAnestheticsQuestions = [
     category: "intravenöz anestezikler",
     difficulty: 1,
   ),
-
   Question(
     question:
         "Propofol'ün neden olduğu hipotansiyonun temel mekanizması nedir?",
@@ -580,9 +569,9 @@ final List<Question> intravenousAnestheticsQuestions = [
     category: "intravenöz anestezikler",
     difficulty: 2,
   ),
-
   Question(
-    question: "Aşağıdaki durumların hangisinde ketamin tercih edilmez?",
+    question:
+        "Aşağıdaki durumların hangisinde ketamin tercih edilmez?",
     options: [
       "Astımlı hasta",
       "Hipovolemik şok",
@@ -596,9 +585,9 @@ final List<Question> intravenousAnestheticsQuestions = [
     category: "intravenöz anestezikler",
     difficulty: 2,
   ),
-
   Question(
-    question: "Etomidat'ın en belirgin avantajı aşağıdakilerden hangisidir?",
+    question:
+        "Etomidat'ın en belirgin avantajı aşağıdakilerden hangisidir?",
     options: [
       "Antiemetik etki",
       "Sempatik aktiviteyi artırması",
@@ -612,7 +601,6 @@ final List<Question> intravenousAnestheticsQuestions = [
     category: "intravenöz anestezikler",
     difficulty: 2,
   ),
-
   Question(
     question:
         "Barbitüratların (tiopental) nöroanestezide avantajlı özelliği hangisidir?",
@@ -629,7 +617,6 @@ final List<Question> intravenousAnestheticsQuestions = [
     category: "intravenöz anestezikler",
     difficulty: 3,
   ),
-
   Question(
     question: "Dexmedetomidin'in temel etki mekanizması nedir?",
     options: [
@@ -645,7 +632,6 @@ final List<Question> intravenousAnestheticsQuestions = [
     category: "intravenöz anestezikler",
     difficulty: 2,
   ),
-
   Question(
     question:
         "Propofol infüzyon sendromunun (PRIS) başlıca komplikasyonu aşağıdakilerden hangisidir?",
@@ -662,7 +648,6 @@ final List<Question> intravenousAnestheticsQuestions = [
     category: "intravenöz anestezikler",
     difficulty: 3,
   ),
-
   Question(
     question:
         "Midazolam'ın avantajlı özelliklerinden biri aşağıdakilerden hangisidir?",
@@ -679,7 +664,6 @@ final List<Question> intravenousAnestheticsQuestions = [
     category: "intravenöz anestezikler",
     difficulty: 2,
   ),
-
   Question(
     question:
         "Aşağıdaki IV anesteziklerden hangisinin antiemetik etkisi mevcuttur?",
@@ -690,7 +674,6 @@ final List<Question> intravenousAnestheticsQuestions = [
     category: "intravenöz anestezikler",
     difficulty: 1,
   ),
-
   Question(
     question:
         "Etomidat kullanımından sonra en sık gözlenen geçici motor yan etki nedir?",
@@ -707,7 +690,6 @@ final List<Question> intravenousAnestheticsQuestions = [
     category: "intravenöz anestezikler",
     difficulty: 2,
   ),
-
   Question(
     question: "Dexmedetomidin'in belirgin hemodinamik etkisi hangisidir?",
     options: [
@@ -723,7 +705,6 @@ final List<Question> intravenousAnestheticsQuestions = [
     category: "intravenöz anestezikler",
     difficulty: 2,
   ),
-
   Question(
     question:
         "Ketamin anestezisi sonrası en sık karşılaşılan psikotropik yan etki nedir?",
@@ -740,7 +721,6 @@ final List<Question> intravenousAnestheticsQuestions = [
     category: "intravenöz anestezikler",
     difficulty: 2,
   ),
-
   Question(
     question:
         "Aşağıdakilerden hangisi total intravenöz anestezi (TIVA) için en uygun ajandır?",
@@ -757,7 +737,6 @@ final List<Question> intravenousAnestheticsQuestions = [
     category: "intravenöz anestezikler",
     difficulty: 2,
   ),
-
   Question(
     question:
         "Aşağıdaki ajanlardan hangisi spinal cord seviyesinde analjezi ve sedasyon sağlayarak solunumu baskılamadan etkili olur?",
@@ -768,7 +747,6 @@ final List<Question> intravenousAnestheticsQuestions = [
     category: "intravenöz anestezikler",
     difficulty: 3,
   ),
-
   Question(
     question:
         "Propofolün preparatında yer alan lipid taşıyıcı emülsiyonun getirdiği en önemli risk nedir?",
@@ -785,7 +763,6 @@ final List<Question> intravenousAnestheticsQuestions = [
     category: "intravenöz anestezikler",
     difficulty: 2,
   ),
-
   Question(
     question:
         "Aşağıdaki ajanlardan hangisi minimal kardiyodepresan etkisi ile bilinir?",
@@ -796,2102 +773,509 @@ final List<Question> intravenousAnestheticsQuestions = [
     category: "intravenöz anestezikler",
     difficulty: 2,
   ),
-
   Question(
-    question:
-        "Propofolün yağ bazlı içeriği nedeniyle hangi laboratuvar parametresi uzun infüzyonlarda artabilir?",
-    options: ["Kreatinin", "Laktat", "Trigliserid", "AST", "Bilirubin"],
+    question: "Midazolam ile ilgili aşağıdaki ifadelerden hangisi doğrudur?",
+    options: [
+      "Yavaş etki başlangıcına sahiptir",
+      "Oral yolla uygulanamaz",
+      "CYP3A4 ile metabolize olur",
+      "NMDA reseptörlerini bloke eder",
+      "Ters etkisi yoktur",
+    ],
     correctAnswerIndex: 2,
     explanation:
-        "Propofol uzun süreli kullanıldığında trigliserid düzeylerini yükseltebilir → takip edilmelidir.",
+        "Midazolam karaciğerde CYP3A4 enzimleriyle metabolize olur → bu nedenle ilaç etkileşimlerine açık bir benzodiazepindir.",
     category: "intravenöz anestezikler",
-    difficulty: 3,
+    difficulty: 2,
   ),
-
   Question(
     question:
-        "Dexmedetomidin'in sedasyon profili aşağıdakilerden hangisine en çok benzer?",
+        "Propofolün neden olduğu solunum depresyonu en çok aşağıdaki hastalarda belirgindir?",
     options: [
-      "Propofol ile oluşturulana",
-      "Doğal uykuya",
-      "Ketaminin oluşturduğu profile",
-      "Derin hipnoza",
-      "GABA agonistlerine",
+      "Astım",
+      "Hipovolemik şok",
+      "Yaşlı hastalar",
+      "Obez bireyler",
+      "Hipotiroidi hastaları",
     ],
-    correctAnswerIndex: 1,
+    correctAnswerIndex: 2,
     explanation:
-        "Dexmedetomidin locus coeruleus üzerinden etki eder → doğal uykuya benzer sedasyon oluşturur. Hasta kolay uyanabilir.",
-    category: "intravenöz anestezikler",
-    difficulty: 3,
-  ),
-
-  // Eksik sorular ekleniyor
-  Question(
-    question: "Aşağıdaki intravenöz anesteziklerden hangisinin etki başlangıcı en hızlıdır?",
-    options: [
-      "Propofol",
-      "Tiyopental",
-      "Etomidat",
-      "Ketamin",
-      "Midazolam",
-    ],
-    correctAnswerIndex: 1,
-    explanation:
-        "Tiyopental, bir beyin dolaşım zamanında (10-15 saniye) etki başlatır. Yüksek lipofilik özelliği sayesinde hızla SSS'ne geçer.",
+        "Yaşlı hastalarda ilaçlara duyarlılık artar → propofol daha belirgin apne ve bradikardi yapabilir → doz titrasyonu önemlidir.",
     category: "intravenöz anestezikler",
     difficulty: 2,
   ),
-
   Question(
-    question: "Benzodiazepinlerin antagonisti olarak kullanılan ajan hangisidir?",
+    question:
+        "Aşağıdakilerden hangisi tiopentalin özelliklerinden biridir?",
     options: [
-      "Nalokson",
-      "Flumazenil",
-      "Neostigmin",
-      "Sugammadeks",
-      "Atropin",
+      "Analjezik etkisi vardır",
+      "Bronkospazm yapabilir",
+      "GABA-A reseptörlerini bloke eder",
+      "CMRO₂'yi artırır",
+      "Etki başlangıcı yavaştır",
     ],
     correctAnswerIndex: 1,
     explanation:
-        "Flumazenil, GABA-A reseptörlerinde kompetitif antagonizm yaparak benzodiazepin etkilerini geri çevirir.",
+        "Tiopental histamin salınımı yaparak bronkokonstriksiyon oluşturabilir → astım hastalarında dikkatli olunmalıdır.",
     category: "intravenöz anestezikler",
     difficulty: 2,
   ),
-
   Question(
-    question: "Hangi IV anestezik intraoperatif hatırlamayı (awareness) en çok önler?",
+    question:
+        "Aşağıdakilerden hangisi propofolün avantajlarından biri değildir?",
     options: [
-      "Propofol",
-      "Tiyopental",
-      "Etomidat",
-      "Ketamin",
-      "Dexmedetomidin",
+      "Hızlı etki başlangıcı",
+      "Hızlı uyanma",
+      "Antiemetik etki",
+      "Analjezik etki",
+      "Doz titrasyonu kolaylığı",
+    ],
+    correctAnswerIndex: 3,
+    explanation:
+        "Propofol anestezik ve sedatif etkilidir ancak analjezik özelliği yoktur. Analjezi için opioidlerle kombine edilir.",
+    category: "intravenöz anestezikler",
+    difficulty: 1,
+  ),
+  Question(
+    question:
+        "Ketaminin bronkodilatör etkisinin mekanizması aşağıdakilerden hangisidir?",
+    options: [
+      "Histamin salınımını artırması",
+      "Sempatik aktiviteyi artırması",
+      "Parasempatik aktiviteyi artırması",
+      "GABA reseptörlerini bloke etmesi",
+      "NMDA reseptörlerini aktive etmesi",
+    ],
+    correctAnswerIndex: 1,
+    explanation:
+        "Ketamin sempatik aktiviteyi artırarak bronkodilatasyon sağlar → astım ve reaktif hava yolu hastalığında avantajlıdır.",
+    category: "intravenöz anestezikler",
+    difficulty: 2,
+  ),
+  Question(
+    question:
+        "Aşağıdaki ajanlardan hangisi nöroanestezide en az tercih edilir?",
+    options: ["Propofol", "Etomidat", "Ketamin", "Tiopental", "Midazolam"],
+    correctAnswerIndex: 2,
+    explanation:
+        "Ketamin serebral kan akımını ve ICP'yi artırır → nöroanestezide kontrendikedir.",
+    category: "intravenöz anestezikler",
+    difficulty: 2,
+  ),
+  Question(
+    question:
+        "Dexmedetomidin'in benzodiazepinlerden farkı aşağıdakilerden hangisidir?",
+    options: [
+      "Solunum depresyonu yapmaması",
+      "Analjezik etkisinin olmaması",
+      "Sedatif etkisinin olmaması",
+      "Amnestik etkisinin olmaması",
+      "Antikonvülzan etkisinin olmaması",
     ],
     correctAnswerIndex: 0,
     explanation:
-        "Propofol, BIS (Bispectral Index) değerini güvenilir şekilde düşürerek intraoperatif farkındalık riskini azaltır.",
+        "Dexmedetomidin alfa-2 agonist olup solunumu baskılamaz, bu özelliğiyle benzodiazepinlerden ayrılır.",
     category: "intravenöz anestezikler",
     difficulty: 2,
   ),
-
   Question(
-    question: "'Beyin koruyucu' etkisi en belirgin olan IV anestezik hangisidir?",
+    question:
+        "Propofol infüzyon sendromunda görülen rabdomiyolizin nedeni aşağıdakilerden hangisidir?",
     options: [
-      "Propofol",
-      "Tiyopental",
-      "Etomidat",
-      "Ketamin",
-      "Midazolam",
+      "Hipokalemi",
+      "Mitokondriyal disfonksiyon",
+      "Hipoglisemi",
+      "Hiponatremi",
+      "Hipokalsemi",
     ],
     correctAnswerIndex: 1,
     explanation:
-        "Tiyopental, CMRO2'yi %50-60 oranında azaltarak nöroprotektif etki gösterir.",
+        "Propofol mitokondriyal solunum zincirini bozar → enerji üretimi azalır → rabdomiyoliz gelişir.",
+    category: "intravenöz anestezikler",
+    difficulty: 3,
+  ),
+  Question(
+    question:
+        "Aşağıdakilerden hangisi midazolamın metabolizmasını etkileyen faktörlerden biridir?",
+    options: [
+      "Renal fonksiyon",
+      "CYP3A4 enzim aktivitesi",
+      "Plazma protein düzeyi",
+      "Kan şekeri düzeyi",
+      "Hematokrit değeri",
+    ],
+    correctAnswerIndex: 1,
+    explanation:
+        "Midazolam CYP3A4 enzimiyle metabolize olur → bu enzimin inhibitörleri (makrolidler, antifungal) etki süresini uzatır.",
     category: "intravenöz anestezikler",
     difficulty: 2,
   ),
-
   Question(
-    question: "Hangisi dexmedetomidinin özelliklerinden biri değildir?",
+    question:
+        "Etomidatın adrenokortikal baskılamasının süresi ne kadardır?",
     options: [
-      "Alfa-2 adrenerjik agonist olması",
+      "2-4 saat",
+      "6-8 saat",
+      "12-24 saat",
+      "48-72 saat",
+      "1 hafta",
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        "Etomidat tek dozda bile 11-beta hidroksilaz enzimini 12-24 saat inhibe eder → kortizol sentezini bozar.",
+    category: "intravenöz anestezikler",
+    difficulty: 3,
+  ),
+  Question(
+    question:
+        "Aşağıdakilerden hangisi ketaminin kontrendikasyonlarından biridir?",
+    options: [
+      "Astım",
+      "Hipovolemik şok",
+      "İntrakraniyal hipertansiyon",
+      "Yanıklı hasta",
+      "Pediatrik hasta",
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        "Ketamin serebral kan akımını ve ICP'yi artırır → intrakraniyal hipertansiyonda kontrendikedir.",
+    category: "intravenöz anestezikler",
+    difficulty: 2,
+  ),
+  Question(
+    question:
+        "Propofolün yaşlı hastalarda doz ayarlaması nasıl yapılmalıdır?",
+    options: [
+      "Doz artırılmalıdır",
+      "Doz azaltılmalıdır",
+      "Doz değiştirilmemelidir",
+      "Sadece infüzyon hızı artırılmalıdır",
+      "Sadece bolus doz artırılmalıdır",
+    ],
+    correctAnswerIndex: 1,
+    explanation:
+        "Yaşlı hastalarda ilaç duyarlılığı artar → propofol dozu %20-50 azaltılmalıdır.",
+    category: "intravenöz anestezikler",
+    difficulty: 2,
+  ),
+  Question(
+    question:
+        "Aşağıdakilerden hangisi tiopentalin redistribüsyon özelliğini açıklar?",
+    options: [
+      "Hızlı hepatik metabolizma",
+      "Beyinden kas ve yağ dokularına geçiş",
+      "Renal atılım",
+      "Plazma proteinine bağlanma",
+      "Serebrospinal sıvıya geçiş",
+    ],
+    correctAnswerIndex: 1,
+    explanation:
+        "Tiopental beyin gibi iyi perfüze organlardan kas ve yağ dokularına hızla geçer → etki süresi kısalır.",
+    category: "intravenöz anestezikler",
+    difficulty: 3,
+  ),
+  Question(
+    question:
+        "Dexmedetomidin'in sedasyon sağlama mekanizması aşağıdakilerden hangisidir?",
+    options: [
+      "GABA-A agonizmi",
+      "Locus coeruleus inhibisyonu",
+      "NMDA antagonizması",
+      "Dopamin agonizması",
+      "Serotonin inhibisyonu",
+    ],
+    correctAnswerIndex: 1,
+    explanation:
+        "Dexmedetomidin locus coeruleus'taki alfa-2 reseptörlerini aktive ederek doğal uyku benzeri sedasyon sağlar.",
+    category: "intravenöz anestezikler",
+    difficulty: 3,
+  ),
+  Question(
+    question:
+        "Aşağıdakilerden hangisi propofol infüzyon sendromunun erken bulgularından biridir?",
+    options: [
+      "Hiperglisemi",
+      "Metabolik alkaloz",
+      "Laktik asidoz",
+      "Hipokalemi",
+      "Hiponatremi",
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        "Propofol infüzyon sendromunda mitokondriyal disfonksiyon nedeniyle laktik asidoz erken bulgu olarak görülür.",
+    category: "intravenöz anestezikler",
+    difficulty: 3,
+  ),
+  Question(
+    question:
+        "Midazolamın flumazenil ile antagonizması hangi reseptör düzeyinde gerçekleşir?",
+    options: [
+      "NMDA reseptörü",
+      "GABA-A reseptörü",
+      "Alfa-2 reseptörü",
+      "Dopamin reseptörü",
+      "Serotonin reseptörü",
+    ],
+    correctAnswerIndex: 1,
+    explanation:
+        "Flumazenil benzodiazepin reseptör antagonisti olup GABA-A reseptör kompleksinde kompetitif antagonizma yapar.",
+    category: "intravenöz anestezikler",
+    difficulty: 2,
+  ),
+  Question(
+    question:
+        "Aşağıdakilerden hangisi ketaminin avantajlarından biridir?",
+    options: [
       "Solunum depresyonu yapmaması",
       "Analjezik etki göstermesi",
-      "Hipotansiyon yapması",
-      "Anksiyolitik etki",
+      "Bronkodilatasyon yapması",
+      "Hepsi doğru",
+      "Hiçbiri doğru değil",
     ],
     correctAnswerIndex: 3,
     explanation:
-        "Dexmedetomidin, bradikardi yapabilir ancak hipotansiyon beklenmez (alfa-2 selektivitesi nedeniyle).",
+        "Ketamin solunumu baskılamaz, analjezik etkilidir ve bronkodilatasyon yapar → bu özelliklerin hepsi avantajdır.",
     category: "intravenöz anestezikler",
-    difficulty: 2,
+    difficulty: 1,
   ),
-
   Question(
-    question: "Aşağıdakilerden hangisi IV anesteziklerin eliminasyon yollarından biri değildir?",
+    question:
+        "Propofolün antiemetik etkisinin mekanizması aşağıdakilerden hangisidir?",
     options: [
-      "Karaciğer metabolizması",
-      "Böbreklerden atılım",
-      "Ekstrahepatik ester hidrolizi",
-      "Akciğerlerden ekshalasyon",
-      "Plazma esterazları",
-    ],
-    correctAnswerIndex: 3,
-    explanation:
-        "IV anestezikler akciğerlerden atılmaz. Remifentanil gibi bazıları plazma esterazlarıyla metabolize olur.",
-    category: "intravenöz anestezikler",
-    difficulty: 2,
-  ),
-
-  Question(
-    question: "Hangisi remifentanilin özelliklerinden biri değildir?",
-    options: [
-      "Ultra-kısa etki süresi",
-      "Esterazlarla metabolizma",
-      "Kontekst-duyarsız yarı ömür",
-      "Postoperatif analjezi sağlaması",
-      "Hemodinamik stabilite",
-    ],
-    correctAnswerIndex: 3,
-    explanation:
-        "Remifentanil, hızlı metabolizması nedeniyle postop analjezi sağlamaz. Ek analjezi gereksinimi doğar.",
-    category: "intravenöz anestezikler",
-    difficulty: 2,
-  ),
-
-  Question(
-    question: "Hangi intravenöz anestezik en belirgin kardiyovasküler depresyon yapar?",
-    options: [
-      "Ketamin",
-      "Propofol",
-      "Etomidat",
-      "Midazolam",
-      "Deksmedetomidin",
+      "Dopamin antagonizması",
+      "5-HT3 reseptör inhibisyonu",
+      "Histamin blokajı",
+      "Muskarinik reseptör blokajı",
+      "GABA-A agonizması",
     ],
     correctAnswerIndex: 1,
     explanation:
-        "Propofol, sistemik vasküler direnç ve kardiyak outputta belirgin düşüşe neden olarak en fazla kardiyovasküler depresyon yapan ajandır.",
+        "Propofol 5-HT3 (serotonin) reseptörlerini inhibe ederek antiemetik etki gösterir.",
     category: "intravenöz anestezikler",
     difficulty: 2,
   ),
-
   Question(
-    question: "Aşağıdakilerden hangisi propofol infüzyon sendromunun özelliklerinden değildir?",
+    question:
+        "Aşağıdakilerden hangisi etomidatın myoklonik kasılmalarını azaltmak için kullanılabilir?",
     options: [
-      "Metabolik asidoz",
-      "Rabdomiyoliz",
-      "Hiperkalemi",
-      "Hepatik yetmezlik",
-      "Kardiyak disritmi",
-    ],
-    correctAnswerIndex: 3,
-    explanation:
-        "Propofol infüzyon sendromunda hepatik yetmezlik değil, hepatomegali görülebilir. Diğer bulgular tipiktir.",
-    category: "intravenöz anestezikler",
-    difficulty: 2,
-  ),
-
-  Question(
-    question: "Hangi intravenöz anestezik bronkodilatasyon yapar?",
-    options: [
-      "Propofol",
-      "Tiyopental",
-      "Ketamin",
-      "Etomidat",
+      "Atropin",
       "Midazolam",
-    ],
-    correctAnswerIndex: 2,
-    explanation:
-        "Ketamin, sempatik sinir sistemi aktivasyonu yoluyla bronkodilatasyon yapar.",
-    category: "intravenöz anestezikler",
-    difficulty: 2,
-  ),
-
-  Question(
-    question: "Hangi intravenöz anestezik en belirgin intrakraniyal basınç düşürücü etkiye sahiptir?",
-    options: [
       "Ketamin",
       "Propofol",
-      "Etomidat",
-      "Tiyopental",
-      "Midazolam",
-    ],
-    correctAnswerIndex: 3,
-    explanation:
-        "Tiyopental, beyin metabolik hızını en fazla azaltarak intrakraniyal basıncı belirgin düşürür.",
-    category: "intravenöz anestezikler",
-    difficulty: 2,
-  ),
-
-  Question(
-    question: "Aşağıdaki ilaçlardan hangisi alfa-2 adrenerjik agonisttir?",
-    options: [
-      "Propofol",
-      "Ketamin",
-      "Etomidat",
-      "Deksmedetomidin",
-      "Midazolam",
-    ],
-    correctAnswerIndex: 3,
-    explanation:
-        "Deksmedetomidin selektif alfa-2 adrenerjik agonisttir.",
-    category: "intravenöz anestezikler",
-    difficulty: 2,
-  ),
-
-  Question(
-    question: "Hangi intravenöz anestezik en düşük histamin salınımına neden olur?",
-    options: [
-      "Morfin",
-      "Tiyopental",
-      "Propofol",
-      "Ketamin",
-      "Etomidat",
-    ],
-    correctAnswerIndex: 4,
-    explanation:
-        "Etomidat, histamin salınımına en az neden olan ajandır.",
-    category: "intravenöz anestezikler",
-    difficulty: 2,
-  ),
-
-  Question(
-    question: "Hangi intravenöz anestezik en fazla enjeksiyon ağrısı yapar?",
-    options: [
-      "Propofol",
-      "Tiyopental",
-      "Etomidat",
-      "Ketamin",
-      "Midazolam",
-    ],
-    correctAnswerIndex: 0,
-    explanation:
-        "Propofol, en fazla enjeksiyon ağrısı yapan ajandır.",
-    category: "intravenöz anestezikler",
-    difficulty: 2,
-  ),
-
-  Question(
-    question: "Hangi intravenöz anestezik en fazla bulantı-kusmaya neden olur?",
-    options: [
-      "Propofol",
-      "Tiyopental",
-      "Etomidat",
-      "Ketamin",
-      "Midazolam",
-    ],
-    correctAnswerIndex: 3,
-    explanation:
-        "Ketamin, postoperatif bulantı-kusma insidansını artırır.",
-    category: "intravenöz anestezikler",
-    difficulty: 2,
-  ),
-
-  Question(
-    question: "Aşağıdakilerden hangisi tiyopentalin farmakokinetik özelliklerinden değildir?",
-    options: [
-      "Yüksek protein bağlanma",
-      "Hızlı beyin penetrasyonu",
-      "Yağ dokusunda birikim",
-      "Böbrek yoluyla atılım",
-      "Yeniden dağılım",
-    ],
-    correctAnswerIndex: 3,
-    explanation:
-        "Tiyopental karaciğerde metabolize olur, böbrek yoluyla atılmaz.",
-    category: "intravenöz anestezikler",
-    difficulty: 2,
-  ),
-
-  Question(
-    question: "Hangi intravenöz anestezik en fazla hipotansiyon yapar?",
-    options: [
-      "Propofol",
-      "Tiyopental",
-      "Etomidat",
-      "Ketamin",
-      "Midazolam",
-    ],
-    correctAnswerIndex: 0,
-    explanation:
-        "Propofol, sistemik vasküler direnci en fazla düşürerek belirgin hipotansiyon yapar.",
-    category: "intravenöz anestezikler",
-    difficulty: 2,
-  ),
-
-  Question(
-    question: "Hangi intravenöz anestezik en az protein bağlanır?",
-    options: [
-      "Propofol",
-      "Tiyopental",
-      "Etomidat",
-      "Ketamin",
-      "Midazolam",
-    ],
-    correctAnswerIndex: 3,
-    explanation:
-        "Ketamin %20-30 protein bağlanma oranıyla en az bağlanan ajandır.",
-    category: "intravenöz anestezikler",
-    difficulty: 2,
-  ),
-
-  Question(
-    question: "Aşağıdakilerden hangisi propofolün farmakokinetik özelliklerinden değildir?",
-    options: [
-      "Hızlı başlangıç",
-      "Kısa etki süresi",
-      "Karaciğer metabolizması",
-      "Ekstrahepatik eliminasyon",
-      "Aktif metabolit",
-    ],
-    correctAnswerIndex: 4,
-    explanation:
-        "Propofolün aktif metaboliti yoktur.",
-    category: "intravenöz anestezikler",
-    difficulty: 2,
-  ),
-
-  Question(
-    question: "Hangi intravenöz anestezik en fazla nöroprotektif etkiye sahiptir?",
-    options: [
-      "Propofol",
-      "Tiyopental",
-      "Etomidat",
-      "Ketamin",
-      "Midazolam",
+      "Fentanil",
     ],
     correctAnswerIndex: 1,
     explanation:
-        "Tiyopental, beyin metabolik hızını en fazla azaltarak nöroprotektif etki gösterir.",
+        "Etomidat öncesi midazolam verilmesi myoklonik kasılmaları azaltabilir.",
     category: "intravenöz anestezikler",
     difficulty: 2,
   ),
-
   Question(
-    question: "Aşağıdakilerden hangisi benzodiazepin zehirlenmesinde görülmez?",
+    question:
+        "Tiopentalin porfiri hastalarında kontrendike olmasının nedeni aşağıdakilerden hangisidir?",
     options: [
-      "Solunum depresyonu",
-      "Hipotansiyon",
+      "Hepatotoksisite",
+      "Porfirin sentezini artırması",
+      "Renal toksisite",
+      "Kardiyotoksisite",
+      "Nörotoksisite",
+    ],
+    correctAnswerIndex: 1,
+    explanation:
+        "Tiopental porfirin sentezini artırarak porfiri atağını tetikleyebilir → porfiri hastalarında kesinlikle kontrendikedir.",
+    category: "intravenöz anestezikler",
+    difficulty: 3,
+  ),
+  Question(
+    question:
+        "Aşağıdakilerden hangisi dexmedetomidinin kullanım alanlarından biridir?",
+    options: [
+      "Genel anestezi indüksiyonu",
+      "Yoğun bakım sedasyonu",
+      "Analjezi",
+      "Antiemetik etki",
+      "Kas gevşemesi",
+    ],
+    correctAnswerIndex: 1,
+    explanation:
+        "Dexmedetomidin özellikle yoğun bakımda sedasyon için kullanılır → solunumu baskılamaz ve uyandırılabilir.",
+    category: "intravenöz anestezikler",
+    difficulty: 2,
+  ),
+  Question(
+    question:
+        "Propofol infüzyon sendromunun önlenmesi için alınması gereken önlem aşağıdakilerden hangisidir?",
+    options: [
+      "Düşük doz kullanım",
+      "Kısa süreli infüzyon",
+      "Doz sınırlaması (4 mg/kg/saat)",
+      "Hepsi doğru",
+      "Hiçbiri doğru değil",
+    ],
+    correctAnswerIndex: 3,
+    explanation:
+        "Propofol infüzyon sendromunu önlemek için düşük doz, kısa süre ve doz sınırlaması (4 mg/kg/saat) uygulanmalıdır.",
+    category: "intravenöz anestezikler",
+    difficulty: 2,
+  ),
+  Question(
+    question:
+        "Aşağıdakilerden hangisi midazolamın farmakokinetik özelliklerinden biridir?",
+    options: [
+      "Yüksek hepatik klirens",
+      "Düşük protein bağlanması",
+      "Renal atılım",
+      "Yavaş metabolizma",
+      "Uzun eliminasyon yarı ömrü",
+    ],
+    correctAnswerIndex: 0,
+    explanation:
+        "Midazolam yüksek hepatik klirens ile hızla metabolize olur → bu nedenle etki süresi kısadır.",
+    category: "intravenöz anestezikler",
+    difficulty: 2,
+  ),
+  Question(
+    question:
+        "Ketaminin neden olduğu psikomimetik etkilerin önlenmesi için hangi ajan kullanılabilir?",
+    options: [
+      "Atropin",
+      "Midazolam",
+      "Ketamin",
+      "Propofol",
+      "Fentanil",
+    ],
+    correctAnswerIndex: 1,
+    explanation:
+        "Ketamin öncesi veya sonrası midazolam verilmesi psikomimetik etkileri azaltır.",
+    category: "intravenöz anestezikler",
+    difficulty: 2,
+  ),
+  Question(
+    question:
+        "Aşağıdakilerden hangisi propofolün kardiyovasküler etkilerinden biridir?",
+    options: [
+      "Taşikardi",
       "Hipertansiyon",
-      "Koma",
-      "Konvülziyon",
+      "Hipotansiyon",
+      "Vazokonstriksiyon",
+      "Pozitif inotrop etki",
     ],
     correctAnswerIndex: 2,
     explanation:
-        "Benzodiazepin zehirlenmesinde hipertansiyon görülmez, hipotansiyon görülebilir.",
+        "Propofol sistemik vasküler direnci azaltır ve negatif inotrop etki yapar → hipotansiyon oluşur.",
+    category: "intravenöz anestezikler",
+    difficulty: 1,
+  ),
+  Question(
+    question:
+        "Etomidatın nöroanestezide tercih edilmesinin nedeni aşağıdakilerden hangisidir?",
+    options: [
+      "ICP'yi artırması",
+      "CMRO₂'yi azaltması",
+      "Serebral kan akımını artırması",
+      "Nöbet eşiğini düşürmesi",
+      "EEG'de epileptiform aktivite oluşturması",
+    ],
+    correctAnswerIndex: 1,
+    explanation:
+        "Etomidat CMRO₂'yi azaltır ve ICP'yi düşürür → nöroanestezide avantajlıdır.",
+    category: "intravenöz anestezikler",
+    difficulty: 3,
+  ),
+  Question(
+    question:
+        "Aşağıdakilerden hangisi total intravenöz anestezi (TIVA) protokolünde propofolün avantajlarından biridir?",
+    options: [
+      "Uzun etki süresi",
+      "Yavaş uyanma",
+      "Antiemetik etki",
+      "Analjezik etki",
+      "Kas gevşetici etki",
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        "TIVA'da propofolün antiemetik etkisi postoperatif bulantı-kusma riskini azaltır.",
     category: "intravenöz anestezikler",
     difficulty: 2,
   ),
-
   Question(
-    question: "Aşağıdakilerden hangisi propofol infüzyon sendromunun (PRIS) bir belirtisi değildir?",
+    question:
+        "Aşağıdakilerden hangisi propofolün kontrendikasyonlarından biridir?",
     options: [
-      "Metabolik asidoz",
-      "Bradikardi",
+      "Soya alerjisi",
+      "Yumurta alerjisi",
+      "Lipid metabolizma bozukluğu",
+      "Hepsi doğru",
+      "Hiçbiri doğru değil",
+    ],
+    correctAnswerIndex: 3,
+    explanation:
+        "Propofol soya ve yumurta fosfolipidi içerir → bu alerjilerde kontrendikedir. Ayrıca lipid metabolizma bozukluğunda da dikkatli kullanılmalıdır.",
+    category: "intravenöz anestezikler",
+    difficulty: 2,
+  ),
+  Question(
+    question:
+        "Midazolamın etki süresinin uzamasına neden olan faktör aşağıdakilerden hangisidir?",
+    options: [
+      "CYP3A4 enzim indüksiyonu",
+      "CYP3A4 enzim inhibisyonu",
+      "Renal fonksiyon bozukluğu",
+      "Hipoproteinemi",
+      "Hepsi doğru",
+    ],
+    correctAnswerIndex: 4,
+    explanation:
+        "CYP3A4 inhibisyonu, renal fonksiyon bozukluğu ve hipoproteinemi midazolamın etki süresini uzatabilir.",
+    category: "intravenöz anestezikler",
+    difficulty: 2,
+  ),
+  Question(
+    question:
+        "Aşağıdakilerden hangisi ketaminin kullanım alanlarından biridir?",
+    options: [
+      "Astım hastalarında anestezi",
+      "Hipovolemik şokta anestezi",
+      "Yanık hastalarında anestezi",
+      "Hepsi doğru",
+      "Hiçbiri doğru değil",
+    ],
+    correctAnswerIndex: 3,
+    explanation:
+        "Ketamin bronkodilatasyon, kardiyovasküler stimülasyon ve analjezik etkileri nedeniyle astım, hipovolemi ve yanık hastalarında avantajlıdır.",
+    category: "intravenöz anestezikler",
+    difficulty: 2,
+  ),
+  Question(
+    question:
+        "Propofol infüzyon sendromunda görülen hiperkaleminin nedeni aşağıdakilerden hangisidir?",
+    options: [
       "Rabdomiyoliz",
-      "Hipotermi",
-      "Kalp yetmezliği",
+      "Böbrek yetmezliği",
+      "Asidoz",
+      "Hepsi doğru",
+      "Hiçbiri doğru değil",
     ],
     correctAnswerIndex: 3,
     explanation:
-        "PRIS; metabolik asidoz, bradikardi, rabdomiyoliz, hiperpotasemi ve kardiyak yetmezlik gibi ciddi tablolarla karakterizedir. Hipotermi tipik değildir.",
+        "Propofol infüzyon sendromunda rabdomiyoliz, böbrek yetmezliği ve asidoz hiperkalemiye neden olabilir.",
+    category: "intravenöz anestezikler",
+    difficulty: 3,
+  ),
+  Question(
+    question:
+        "Aşağıdakilerden hangisi dexmedetomidinin benzodiazepinlerden üstün olduğu özelliktir?",
+    options: [
+      "Solunum depresyonu yapmaması",
+      "Uyandırılabilir sedasyon sağlaması",
+      "Analjezik etki göstermesi",
+      "Hepsi doğru",
+      "Hiçbiri doğru değil",
+    ],
+    correctAnswerIndex: 3,
+    explanation:
+        "Dexmedetomidin solunumu baskılamaz, uyandırılabilir sedasyon sağlar ve analjezik etki gösterir → benzodiazepinlerden üstün özelliklerdir.",
     category: "intravenöz anestezikler",
     difficulty: 2,
   ),
-
-  Question(
-    question: "Etomidat ile anestezi indüksiyonu sırasında en çok karşılaşılan geçici hareket nedir?",
-    options: [
-      "Titreme",
-      "Fascikülasyon",
-      "Nistagmus",
-      "Myoklonus",
-      "Hıçkırık",
-    ],
-    correctAnswerIndex: 3,
-    explanation:
-        "Etomidat sık olarak myoklonik kasılmalara neden olur. Bu durum kısa süreli ve geçicidir.",
-    category: "intravenöz anestezikler",
-    difficulty: 2,
-  ),
-
-  Question(
-    question: "Midazolam kullanımı sonrası gelişen paradoksal ajitasyon durumunda ne yapılmalıdır?",
-    options: [
-      "Nalokson verilmelidir",
-      "Ketamin ile devam edilir",
-      "Flumazenil uygulanmalıdır",
-      "Propofol başlanır",
-      "Deksametazon verilir",
-    ],
-    correctAnswerIndex: 2,
-    explanation:
-        "Benzodiazepin kaynaklı ajitasyon veya aşırı sedasyon gelişirse flumazenil antidot olarak kullanılabilir.",
-    category: "intravenöz anestezikler",
-    difficulty: 2,
-  ),
-
-  // Bölüm 46 – Periferik Sinir Blokları
-  Question(
-    question:
-        "Aşağıdaki bloklardan hangisi, omuz cerrahisinde en sık tercih edilen periferik sinir blokudur?",
-    options: [
-      "İnterskalen blok",
-      "Supraklavikuler blok",
-      "İnfraclavikuler blok",
-      "Aksiller blok",
-      "Paravertebral blok",
-    ],
-    correctAnswerIndex: 0,
-    explanation:
-        "Omuz ve üst humerus cerrahileri için en sık tercih edilen blok interskalen brakiyal pleksus blokudur.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Aşağıdaki sinirlerden hangisi, aksiller blokla etkili şekilde bloklanamaz ve ek blok gerekebilir?",
-    options: [
-      "N. medianus",
-      "N. radialis",
-      "N. musculocutaneus",
-      "N. ulnaris",
-      "N. interkostobrakialis",
-    ],
-    correctAnswerIndex: 4,
-    explanation:
-        "N. interkostobrakialis, brakiyal pleksusun dışında yer alır ve aksiller blokla etkilenmez → ek cilt infiltrasyonu gerekebilir.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Aşağıdaki periferik sinir bloklarından hangisinde pnömotoraks riski en yüksektir?",
-    options: [
-      "İnterskalen blok",
-      "Supraklavikuler blok",
-      "Aksiller blok",
-      "İnfraclavikuler blok",
-      "Median sinir bloğu",
-    ],
-    correctAnswerIndex: 1,
-    explanation:
-        "Supraklavikuler blok, plevra ile yakın anatomik ilişkidedir → pnömotoraks riski en yüksek olan brakiyal pleksus blokudur.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Aşağıdaki seçeneklerden hangisi, interskalen blok sonrası görülen Horner sendromu belirtilerinden biri değildir?",
-    options: [
-      "Pitozis",
-      "Midriyazis",
-      "Anhidrozis",
-      "Miosis",
-      "Enoftalmi",
-    ],
-    correctAnswerIndex: 1,
-    explanation:
-        "Horner sendromu, sempatik zincirin blokajıyla oluşur → miyozis (küçülmüş pupil) görülür. Midriyazis tersidir, beklenmez.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Aşağıdakilerden hangisi, infraclavikuler brakiyal pleksus blokunun avantajlarından biri değildir?",
-    options: [
-      "Plevra ile uzak mesafe",
-      "Stabil iğne pozisyonu",
-      "Koltuk altına göre daha proksimal blok",
-      "İkili sinir blokajı gerektirmemesi",
-      "Tüm pleksusun kolayca bloke edilmesi",
-    ],
-    correctAnswerIndex: 3,
-    explanation:
-        "İnfraclavikuler blok her ne kadar geniş etki gösterse de, bazen n. musculocutaneus için ek blok gerekebilir.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Aksiller blok uygulaması sırasında artan enjeksiyon basıncı hissedilirse, ilk yapılması gereken nedir?",
-    options: [
-      "Daha hızlı enjeksiyon yapmak",
-      "İğnenin pozisyonunu değiştirmek",
-      "Bloktan vazgeçmek",
-      "Enjeksiyona devam etmek",
-      "Lokal anesteziyi artırmak",
-    ],
-    correctAnswerIndex: 1,
-    explanation:
-        "Yüksek enjeksiyon basıncı, iğnenin intranevral olduğunu gösterebilir → hasarı önlemek için pozisyon değiştirilmelidir.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Aşağıdaki sinirlerden hangisi, femoral sinir blokuyla etkili şekilde bloke edilemez?",
-    options: [
-      "N. femoralis",
-      "N. saphenus",
-      "N. obturatorius",
-      "N. cutaneus femoris lateralis",
-      "N. genitofemoralis",
-    ],
-    correctAnswerIndex: 2,
-    explanation:
-        "N. obturatorius, femoral sinir blokunun dışında kalabilir → kalça ve diz cerrahilerinde ayrıca bloke edilmesi gerekebilir.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Aşağıdaki sinir bloklarından hangisi, önkol cerrahileri için distal bir blok tekniğidir?",
-    options: [
-      "İnterskalen blok",
-      "Aksiller blok",
-      "İnfraclavikuler blok",
-      "Median sinir bloğu",
-      "Supraklavikuler blok",
-    ],
-    correctAnswerIndex: 3,
-    explanation:
-        "Median sinir bloğu, dirsek veya el bileği düzeyinde yapılan distal ekstremite sinir blokudur, önkol ve el cerrahilerinde kullanılır.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Femoral sinir bloğu sonrası en sık görülen motor defisit aşağıdakilerden hangisidir?",
-    options: [
-      "Ayak bileği dorsifleksiyonu kaybı",
-      "Diz ekstansiyonunda zayıflık",
-      "Kalça abdüksiyonunda kısıtlılık",
-      "Ayak plantar fleksiyon kaybı",
-      "Kalça ekstansiyonunda kayıp",
-    ],
-    correctAnswerIndex: 1,
-    explanation:
-        "Femoral sinir, diz ekstansiyonunu sağlayan quadriceps kaslarını innerve eder → blok sonrası diz ekstansiyonunda zayıflık oluşabilir.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Aşağıdaki sinirlerden hangisi, femoral sinir bloğunun distal dalıdır?",
-    options: [
-      "N. obturatorius",
-      "N. tibialis",
-      "N. saphenus",
-      "N. suralis",
-      "N. peroneus",
-    ],
-    correctAnswerIndex: 2,
-    explanation:
-        "N. saphenus, femoral sinirin saf duyusal dalıdır → diz altı medial bacağın duyusunu sağlar.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Periferik sinir stimülatörü ile sinir blok yapılırken, uygun sinir yaklaşımı için hedeflenen kas cevabı hangi akım seviyesinde görülmelidir?",
-    options: [
-      "> 1 mA",
-      "0.8–1.5 mA",
-      "0.5–0.8 mA",
-      "< 0.2 mA",
-      "2 mA'dan büyük",
-    ],
-    correctAnswerIndex: 2,
-    explanation:
-        "0.5 mA civarındaki motor yanıt, iğnenin sinire yeterince yakın olduğunu gösterir ama intranevral risk oluşturmaz.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Popliteal blok sonrası ayakta dorsifleksiyon kaybı gelişmesi en çok hangi sinirin etkilenmesiyle ilişkilidir?",
-    options: [
-      "N. tibialis",
-      "N. peroneus profundus",
-      "N. saphenus",
-      "N. suralis",
-      "N. obturatorius",
-    ],
-    correctAnswerIndex: 1,
-    explanation:
-        "N. peroneus profundus, ayak bileği dorsifleksiyonunu sağlar → popliteal seviyedeki bloklarda bu sinir etkilenirse dorsifleksiyon kaybı olur.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Aşağıdaki durumlardan hangisi, periferik sinir bloğu sonrası gelişen nöropatinin en olası nedenidir?",
-    options: [
-      "Sinir stimülatörünün kullanılmaması",
-      "Enjeksiyon öncesi aspirasyon yapılması",
-      "Lokal anestezik dozunun yetersiz olması",
-      "Yüksek enjeksiyon basıncı",
-      "Sedasyon verilmemesi",
-    ],
-    correctAnswerIndex: 3,
-    explanation:
-        "Yüksek basınçla enjeksiyon, sinir içine enjeksiyon ihtimalini artırır → nöropati riski yükselir. İğne pozisyonu mutlaka kontrol edilmelidir.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Aşağıdaki sinir bloklarından hangisi, posterior diz cerrahileri için genellikle femoral sinir bloğuna ek olarak uygulanır?",
-    options: [
-      "N. suralis bloğu",
-      "N. obturatorius bloğu",
-      "N. ischiadicus (siyatik) bloğu",
-      "N. genitofemoralis bloğu",
-      "N. peroneus communis bloğu",
-    ],
-    correctAnswerIndex: 2,
-    explanation:
-        "Posterior diz innervasyonu siyatik sinir kaynaklıdır. Femoral sinir bloğuna ek olarak siyatik blok gereklidir.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Aşağıdaki yöntemlerden hangisi, ultrason eşliğinde periferik sinir blok uygulamasında iğnenin sinir içine girmesini en güvenilir şekilde önler?",
-    options: [
-      "Ekspiryumda enjeksiyon yapılması",
-      "Yavaş enjeksiyon yapılması",
-      "Perinevrial enjeksiyonun tercih edilmesi",
-      "Enjeksiyon sırasında basınç izlenmesi",
-      "Tek el ile iğne yönlendirmesi",
-    ],
-    correctAnswerIndex: 3,
-    explanation:
-        "Enjeksiyon basıncının izlenmesi, yüksek direnç varsa uyarıcıdır → sinir içi enjeksiyon önlenir.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Aşağıdakilerden hangisi, ultrason görüntüsünde siyatik siniri tanımlamada yardımcı anatomik yapılardan biridir?",
-    options: [
-      "Femur başı",
-      "Popliteal arter",
-      "Gluteus minimus kası",
-      "Ischial tüberozite",
-      "Obturator internus",
-    ],
-    correctAnswerIndex: 3,
-    explanation:
-        "Ischial tüberozite, gluteal yaklaşımda siyatik siniri bulmak için kullanılan önemli bir anatomik referanstır.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Aşağıdaki sinir blokları ve endikasyon eşleştirmelerinden hangisi yanlıştır?",
-    options: [
-      "İnterskalen blok – Omuz cerrahisi",
-      "Femoral blok – Diz artroskopisi",
-      "Aksiller blok – El cerrahisi",
-      "Popliteal blok – Ayak bileği cerrahisi",
-      "Supraklavikuler blok – Servikal disk hernisi",
-    ],
-    correctAnswerIndex: 4,
-    explanation:
-        "Supraklavikuler blok, brakiyal pleksusu hedef alır → servikal disk hernisi için bir endikasyon değildir.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Ultrason altında yapılan sinir bloklarında kullanılan iğne tipiyle ilgili olarak aşağıdaki ifadelerden hangisi doğrudur?",
-    options: [
-      "Keskin uçlu iğneler önerilir",
-      "Eğri iğneler sinir bulmayı kolaylaştırır",
-      "Ekojenik iğneler görüntüleme avantajı sağlar",
-      "İğne çapı ne kadar büyükse o kadar iyidir",
-      "Standart spinal iğne kullanımı tercih edilir",
-    ],
-    correctAnswerIndex: 2,
-    explanation:
-        "Ekojenik iğneler, ultrason görüntüsünde daha kolay görünür → iğne ucunun takibi kolaylaşır.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Aşağıdakilerden hangisi, brakiyal pleksusun medial kordundan çıkan sinirlerden biri değildir?",
-    options: [
-      "N. ulnaris",
-      "N. medianus (medial kökeni)",
-      "N. cutaneus brachii medialis",
-      "N. musculocutaneus",
-      "N. cutaneus antebrachii medialis",
-    ],
-    correctAnswerIndex: 3,
-    explanation:
-        "N. musculocutaneus, lateral kordun dalıdır. Diğerleri medial korddan çıkar.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Popliteal sinir blokları için ultrason kılavuzluğunda en önemli referans yapılar hangileridir?",
-    options: [
-      "Femur ve patella",
-      "M. biceps femoris ve popliteal arter",
-      "Fibula ve tibia",
-      "Gluteus medius ve piriformis",
-      "Femoral arter ve femoral sinir",
-    ],
-    correctAnswerIndex: 1,
-    explanation:
-        "Popliteal bölgede siyatik sinirin dalları, popliteal arter ve m. biceps femoris ile ilişkilidir → bu yapılar rehber alınır.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Aşağıdaki periferik sinir bloklarından hangisi sadece duyusal innervasyonu hedef alır?",
-    options: [
-      "Median sinir bloğu",
-      "Radial sinir bloğu",
-      "Femoral sinir bloğu",
-      "Saphenous sinir bloğu",
-      "Obturator sinir bloğu",
-    ],
-    correctAnswerIndex: 3,
-    explanation:
-        "N. saphenus, saf duyusal bir sinirdir → motor lif içermez, bu nedenle sadece duyusal blok yapar.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Aşağıdakilerden hangisi, obturator sinir bloğu için klinik endikasyonlardan biridir?",
-    options: [
-      "Popliteal fossa cerrahisi",
-      "TUR-P (Transüretral Prostat Rezeksiyonu)",
-      "Ön kol cerrahisi",
-      "Ayak bileği ameliyatı",
-      "Kalça çıkığı redüksiyonu",
-    ],
-    correctAnswerIndex: 1,
-    explanation:
-        "TUR-P sırasında mesane duvarına elektrik akımı verilmesi, obturator siniri uyararak adduktor kas spazmına yol açabilir → obturator blok ile bu önlenebilir.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Supraklavikuler blok uygulaması sırasında hangi yapıların görselleştirilmesi en kritik öneme sahiptir?",
-    options: [
-      "Subklavian arter ve brakiyal pleksus",
-      "A. axillaris ve v. cephalica",
-      "Trakea ve plevra",
-      "Clavicula ve m. deltoideus",
-      "A. carotis ve v. jugularis",
-    ],
-    correctAnswerIndex: 0,
-    explanation:
-        "Supraklavikuler blok, subklavian arterin etrafındaki brakiyal pleksus trunkuslarını hedef alır → bu yapıların net görüntülenmesi kritik önemdedir.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Aşağıdakilerden hangisi, periferik sinir bloğu sonrası geç ortaya çıkan sinir hasarının en sık nedenidir?",
-    options: [
-      "Lokal enfeksiyon",
-      "Hematom",
-      "İntranevral enjeksiyon",
-      "İntratekal enjeksiyon",
-      "İğne ucunun kemik teması",
-    ],
-    correctAnswerIndex: 2,
-    explanation:
-        "İğne ucunun sinir içine girmesi (intranevral) ve oraya enjeksiyon yapılması, geçici ya da kalıcı nöropatilerin en sık nedenidir.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Aşağıdaki sinir bloklarının hangisinde diyafram paralizisi riski en yüksektir?",
-    options: [
-      "Aksiller blok",
-      "İnfraclavikuler blok",
-      "İnterskalen blok",
-      "Popliteal blok",
-      "Saphenous blok",
-    ],
-    correctAnswerIndex: 2,
-    explanation:
-        "İnterskalen blok, n. phrenicus'u da bloke edebilir → özellikle KOAH'lılarda bu risk önemlidir.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "İki loplu 'kukuleta' görünümü (donut sign) ultrason altında neyi gösterir?",
-    options: [
-      "İğnenin sinirin içine girdiğini",
-      "Kas içine enjeksiyon yapıldığını",
-      "Sinirin çevresel olarak lokal anestezik ile sarıldığını",
-      "Sinirin bası altında kaldığını",
-      "Sinirin ödemli olduğunu",
-    ],
-    correctAnswerIndex: 2,
-    explanation:
-        "Donut sign, sinirin çevresel (circumferansiyel) lokal anestezik dağılımı ile optimal blok pozisyonu anlamına gelir.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Ultrason eşliğinde sinir bloklarında 'double-contour' görüntüsü genellikle neyin göstergesidir?",
-    options: [
-      "Kas içine enjeksiyon",
-      "Arter içi enjeksiyon",
-      "Epinevral enjeksiyon",
-      "Sinirin dışında ama çok yakın enjeksiyon",
-      "Kemik korteks yansıması",
-    ],
-    correctAnswerIndex: 3,
-    explanation:
-        "Double-contour, sinirin dışındaki lokal anestezik birikimini gösterir → sinire çok yakın ama güvenli mesafede enjeksiyon yapıldığını gösterir.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "İnterskalen blok uygulamasında sinir stimülatörü ile elde edilmesi beklenen motor cevap hangisidir?",
-    options: [
-      "Parmak fleksiyonu",
-      "Dirsek ekstansiyonu",
-      "Deltoid kas kasılması",
-      "Trapez kas kasılması",
-      "Diafragma kontraksiyonu",
-    ],
-    correctAnswerIndex: 2,
-    explanation:
-        "İnterskalen blok, C5–C7 seviyelerini hedefler → deltoid kas kasılması, uygun yerleşimin göstergesidir.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Aşağıdaki durumlardan hangisi, siyatik sinirin en distal dalıdır ve topuk bölgesinin duyusunu iletir?",
-    options: [
-      "N. tibialis",
-      "N. suralis",
-      "N. peroneus communis",
-      "N. saphenus",
-      "N. femoralis",
-    ],
-    correctAnswerIndex: 1,
-    explanation:
-        "N. suralis, siyatik sinirin bir dalıdır ve topuk ile lateral ayak bölgesinin duyusunu sağlar.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Aşağıdaki periferik sinir bloklarından hangisi, ayakta yalnızca medial plantar yüzeyin duyusunu bloke etmek amacıyla uygulanır?",
-    options: [
-      "N. peroneus superficialis bloğu",
-      "N. saphenus bloğu",
-      "N. suralis bloğu",
-      "N. tibialis bloğu",
-      "N. obturatorius bloğu",
-    ],
-    correctAnswerIndex: 3,
-    explanation:
-        "N. tibialis, ayakta medial ve plantar yüzeyin duyusunu iletir. Blokajı bu bölgedeki cerrahilerde kullanılır.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Aksiller blok sırasında blok başarısını artırmak için N. musculocutaneus aşağıdaki kasların hangisinin içinde aranmalıdır?",
-    options: [
-      "M. triceps brachii",
-      "M. coracobrachialis",
-      "M. biceps brachii",
-      "M. deltoideus",
-      "M. brachialis",
-    ],
-    correctAnswerIndex: 1,
-    explanation:
-        "N. musculocutaneus, genellikle m. coracobrachialis kasının içindedir → aksiller blok sırasında ayrıca bloke edilmelidir.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Aşağıdaki sinirlerden hangisinin blokajı, el bileği cerrahisi için yeterlidir?",
-    options: [
-      "N. radialis",
-      "N. medianus",
-      "N. ulnaris",
-      "Tüm brakiyal pleksus",
-      "N. medianus + n. ulnaris + n. radialis",
-    ],
-    correctAnswerIndex: 4,
-    explanation:
-        "El bileği cerrahisinde üç ana sinirin birlikte blokajı gerekir (median, ulnar, radial). Tek sinir yeterli olmaz.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Aşağıdakilerden hangisi, siyatik sinirin infragluteal yaklaşımıyla blokajında kullanılan yüzey anatomisi yapılandırmalarından biridir?",
-    options: [
-      "Spina iliaca anterior superior",
-      "Trokanter major ve iskiyal tüber",
-      "Femoral arter",
-      "A. profunda femoris",
-      "M. sartorius",
-    ],
-    correctAnswerIndex: 1,
-    explanation:
-        "İnfragluteal siyatik blokta, trokanter major ve iskiyal tüber arasında sinir lokalize edilir → bu anatomik işaretler kritiktir.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Popliteal sinir bloğu için en uygun pozisyon aşağıdakilerden hangisidir?",
-    options: [
-      "Lateral dekübit",
-      "Supin",
-      "Trendelenburg",
-      "Prone",
-      "Oturur",
-    ],
-    correctAnswerIndex: 3,
-    explanation:
-        "Popliteal blok genellikle prone pozisyonda ya da diz fleksiyonda lateral dekübitte uygulanır → sinir yüzeyel olur.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Aşağıdakilerden hangisi, n. saphenus blokajı için uygun tekniklerden biridir?",
-    options: [
-      "Femoral üçgen düzeyinde yapılan blok",
-      "Popliteal fossa'da blok",
-      "Ayak bileği medialinde blok",
-      "Gluteal bölgede blok",
-      "El bileği düzeyinde blok",
-    ],
-    correctAnswerIndex: 2,
-    explanation:
-        "N. saphenus, ayak bileği seviyesinde medial malleol hizasında yüzeyelleşir → burada kolayca bloke edilebilir.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Aşağıdakilerden hangisi, brakiyal pleksus supraklavikuler blok sonrası gelişen Horner sendromunun nedenidir?",
-    options: [
-      "N. frenikus'un direkt blokajı",
-      "Stellat gangliyonun blokajı",
-      "Medulla spinalisin etkilenmesi",
-      "N. vagus'un uyarılması",
-      "Karotid sinüs refleksi",
-    ],
-    correctAnswerIndex: 1,
-    explanation:
-        "Stellat gangliyon, sempatik zincirin bir parçasıdır → supraklavikuler blokla etkilenirse Horner sendromu ortaya çıkabilir.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Aşağıdakilerden hangisi, periferik sinir bloğu sonrası nörolojik defisit geliştiğinde izlenecek en doğru yaklaşımdır?",
-    options: [
-      "Bekleyip gözlem",
-      "Oral steroid başlamak",
-      "Sadece ağrı kesici vermek",
-      "Nöroloji konsültasyonu ve EMG planı",
-      "Lokal anesteziyi tekrarlamak",
-    ],
-    correctAnswerIndex: 3,
-    explanation:
-        "Nörolojik defisit gelişmişse, mutlaka nöroloji konsültasyonu istenir, gerekirse EMG yapılır, altta yatan komplikasyon araştırılır.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "İnterskalen blok sonrası ani gelişen solunum sıkıntısı ve tek taraflı akciğer seslerinin azalması en olası olarak hangi komplikasyonu düşündürür?",
-    options: [
-      "Diyafram paralizisi",
-      "İntratekal enjeksiyon",
-      "Pnömotoraks",
-      "Bronkospazm",
-      "LAST",
-    ],
-    correctAnswerIndex: 2,
-    explanation:
-        "Supraklavikuler ve interskalen bloklar, plevraya yakın yapıldığı için pnömotoraks riski taşır → solunum sıkıntısı ve tek taraflı bulgular tipiktir.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "İntranevral enjeksiyon şüphesi varsa ilk yapılması gereken işlem nedir?",
-    options: [
-      "Blok devam ettirilir",
-      "Ağrı kontrolü için opioid verilir",
-      "Enjeksiyona ara verilir ve iğne geri çekilir",
-      "Lokal anestezik dozu artırılır",
-      "Aspirasyon yapılmaz",
-    ],
-    correctAnswerIndex: 2,
-    explanation:
-        "İğne sinir içine girmişse, enjeksiyona devam edilmesi kalıcı hasara yol açabilir → hemen durdurulmalı, iğne pozisyonu değiştirilmelidir.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Periferik sinir stimülasyonu kullanılırken motor yanıt 0.1 mA akımda bile devam ediyorsa, bu durum neyi düşündürmelidir?",
-    options: [
-      "Sinir yeterince yakın",
-      "Blok başarısız",
-      "İğne intranevral yerleşimli",
-      "Stimülasyon etkisiz",
-      "Sinir uzakta",
-    ],
-    correctAnswerIndex: 2,
-    explanation:
-        "0.2 mA altındaki motor yanıt, iğne ucunun sinir içinde olabileceğini gösterir → risklidir, enjeksiyon yapılmamalıdır.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Popliteal blokta sinirler arasındaki ayrılma seviyesi kişiden kişiye değişkenlik gösterir. Bu nedenle hangi yaklaşım daha güvenlidir?",
-    options: [
-      "Tek enjeksiyon",
-      "Yüzeysel enjeksiyon",
-      "Trunkus seviyesinde blok",
-      "Derin interfasiyal enjeksiyon",
-      "Medialden yaklaşım",
-    ],
-    correctAnswerIndex: 2,
-    explanation:
-        "Popliteal fossa'da siyatik sinirin tibial ve peroneal dallara ayrılmadan önceki trunkus düzeyi, blok başarısı açısından idealdir.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Aşağıdaki periferik sinir bloklarından hangisi, motor fonksiyona minimal etkisiyle postoperatif mobilizasyonu en az engeller?",
-    options: [
-      "Femoral sinir bloğu",
-      "İnterskalen blok",
-      "Saphenous sinir bloğu",
-      "Supraklavikuler blok",
-      "Obturator sinir bloğu",
-    ],
-    correctAnswerIndex: 2,
-    explanation:
-        "N. saphenus saf duyusal sinirdir → motor fonksiyonları etkilemez → özellikle diz cerrahisinde mobilizasyonu engellemez.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Periferik sinir bloğu sonrası gelişen geçici sinir hasarında genellikle hangi semptom ön plandadır?",
-    options: [
-      "Ateş",
-      "Hipotansiyon",
-      "Hiperaljezi",
-      "Parestezi",
-      "Bradikardi",
-    ],
-    correctAnswerIndex: 3,
-    explanation:
-        "Geçici sinir hasarlarında en sık görülen semptom parestezi ve hafif güç kaybıdır → çoğu zaman günler içinde geriler.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Aşağıdaki sinirlerden hangisi, kalça cerrahisi için yapılan periferik bloklarda mutlaka hedeflenmesi gereken sinirlerdendir?",
-    options: [
-      "N. suralis",
-      "N. axillaris",
-      "N. femoralis",
-      "N. medianus",
-      "N. peroneus superficialis",
-    ],
-    correctAnswerIndex: 2,
-    explanation:
-        "Kalça cerrahilerinde en çok uyarılan sinirlerden biri n. femoralis'tir → blok başarısı için hedeflenmelidir.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "İnfraklavikuler brakiyal pleksus blokunda hangi yapının tanınması blok başarısını artırır?",
-    options: [
-      "A. subklavia",
-      "A. axillaris",
-      "Trakea",
-      "A. thoracica interna",
-      "V. jugularis externa",
-    ],
-    correctAnswerIndex: 1,
-    explanation:
-        "İnfraklavikuler yaklaşımda brakiyal pleksus a. axillaris'in etrafında yer alır → bu arterin görüntülenmesi yön bulmak için kritiktir.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Periferik sinir bloğu sonrası gelişen geç solunum depresyonu, en olası hangi durumla ilişkilidir?",
-    options: [
-      "LAST",
-      "Diyafram paralizisi",
-      "İntratekal opioid geçişi",
-      "İntravenöz sedatif kullanımı",
-      "Alerjik reaksiyon",
-    ],
-    correctAnswerIndex: 2,
-    explanation:
-        "Eğer opioid blok solüsyonuna eklenmişse → intratekal geçiş durumunda geç başlayan solunum depresyonu oluşabilir.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Kombine femoral + siyatik blok, hangi bölge cerrahileri için en uygundur?",
-    options: [
-      "El bileği",
-      "Omuz",
-      "Kalça",
-      "Dorsal toraks",
-      "Abdominal duvar",
-    ],
-    correctAnswerIndex: 2,
-    explanation:
-        "Kalça cerrahilerinde, hem anterior (femoral) hem de posterior (siyatik) innervasyon gerekir → bu nedenle kombine blok uygulanır.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Aşağıdaki ajanlardan hangisi, periferik sinir bloklarında lokal anesteziğe eklenerek geç başlangıçlı nörotoksisiteye neden olabilir?",
-    options: [
-      "Epinefrin",
-      "Deksametazon",
-      "Klorheksidin",
-      "Midazolam",
-      "Ketamin",
-    ],
-    correctAnswerIndex: 2,
-    explanation:
-        "Klorheksidin, cilt dezenfektanı olarak kullanılırken sinir dokusuna teması durumunda geç nörotoksisite oluşturabilir.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Aşağıdakilerden hangisi, n. peroneus communis için en yüzeyel anatomik lokalizasyondur?",
-    options: [
-      "Tibial tüberozite",
-      "Fibula başı",
-      "Femur kondili",
-      "Patella lateral kenarı",
-      "Tarsal tünel",
-    ],
-    correctAnswerIndex: 1,
-    explanation:
-        "N. peroneus communis, fibula başında çok yüzeyeldir → burada kolayca palpe ve bloke edilebilir.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Aşağıdakilerden hangisi, periferik sinir bloklarında motor blok geri dönüş sıralaması açısından doğrudur?",
-    options: [
-      "En proksimalden distale",
-      "Duyusal liflerden motorlara",
-      "En distaldeki kaslar önce",
-      "Sempatik sinirler son",
-      "Motor blok tamamen sabittir",
-    ],
-    correctAnswerIndex: 0,
-    explanation:
-        "Sinir iyileşmesi ve blok çözülmesi sıklıkla en proksimal kaslardan başlar ve distale doğru ilerler.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Popliteal blokta sinirler arasındaki ayrılma seviyesi kişiden kişiye değişkenlik gösterir. Bu nedenle hangi yaklaşım daha güvenlidir?",
-    options: [
-      "Tek enjeksiyon",
-      "Yüzeysel enjeksiyon",
-      "Trunkus seviyesinde blok",
-      "Derin interfasiyal enjeksiyon",
-      "Medialden yaklaşım",
-    ],
-    correctAnswerIndex: 2,
-    explanation:
-        "Popliteal fossa'da siyatik sinirin tibial ve peroneal dallara ayrılmadan önceki trunkus düzeyi, blok başarısı açısından idealdir.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Popliteal sinir bloğu sonrası hasta ayak bileğini fleksiyona getiremiyor. En olası etkilenen sinir hangisidir?",
-    options: [
-      "N. suralis",
-      "N. femoralis",
-      "N. tibialis",
-      "N. peroneus profundus",
-      "N. obturatorius",
-    ],
-    correctAnswerIndex: 2,
-    explanation:
-        "N. tibialis, ayak bileği plantar fleksiyonunu sağlar → bu fonksiyon kaybı varsa bu sinir etkilenmiş demektir.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Ultrasonla sinir görüntüleme kalitesini artıran teknik faktör aşağıdakilerden hangisidir?",
-    options: [
-      "Düşük frekanslı prob",
-      "Damarların baskılanması",
-      "Gain ayarını artırmak",
-      "Geniş açılı transdüser kullanmak",
-      "Dondurma modunu kullanmak",
-    ],
-    correctAnswerIndex: 2,
-    explanation:
-        "Gain ayarının artırılması, ekojenik yapıları daha net gösterir → sinir dokusunun daha iyi tanımlanmasına yardımcı olur.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Aşağıdakilerden hangisi interskalenik blok için en olası endikasyondur?",
-    options: [
-      "El cerrahisi",
-      "Dirsek cerrahisi",
-      "Omuz artroskopisi",
-      "Karpal tünel cerrahisi",
-      "Brakiyal arter kateterizasyonu",
-    ],
-    correctAnswerIndex: 2,
-    explanation:
-        "İnterskalenik blok, omuz ve üst kol cerrahileri için en uygun blok tekniğidir.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "İnterskalenik blok uygulamasında en sık etkilenmeyen sinir aşağıdakilerden hangisidir?",
-    options: [
-      "N. supraskapularis",
-      "N. musculocutaneus",
-      "N. ulnaris",
-      "N. medianus",
-      "N. axillaris",
-    ],
-    correctAnswerIndex: 2,
-    explanation:
-        "Ulnar sinir, C8–T1 kökenlidir. İnterskalenik blok C5–C7 düzeyine etki ettiği için ulnar sinirin bloğu yetersiz kalabilir.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Aşağıdaki periferik sinir bloklarından hangisi diyafragma paralizisine en sık neden olur?",
-    options: [
-      "İnterskalenik blok",
-      "Supraklavikuler blok",
-      "İnfraklavikuler blok",
-      "Aksiller blok",
-      "Radial sinir blokajı",
-    ],
-    correctAnswerIndex: 0,
-    explanation:
-        "İnterskalenik blok sırasında n. phrenicus (C3–C5) etkilenebilir ve bu durum geçici diyafragma paralizisine neden olabilir.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Aşağıdaki sinirlerden hangisi aksiller blok sırasında genellikle ayrı olarak bloke edilmelidir?",
-    options: [
-      "N. ulnaris",
-      "N. radialis",
-      "N. medianus",
-      "N. musculocutaneus",
-      "N. axillaris",
-    ],
-    correctAnswerIndex: 3,
-    explanation:
-        "N. musculocutaneus, brakiyal pleksustan erken ayrıldığı için aksiller blokta ayrıca bloke edilmelidir.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Femoral sinir bloğu için en uygun anatomik referans aşağıdakilerden hangisidir?",
-    options: [
-      "İnguinal ligamentin ortası",
-      "Femur başı",
-      "Anterior superior iliak spine",
-      "Popliteal çukur",
-      "Pubik simfiz",
-    ],
-    correctAnswerIndex: 0,
-    explanation:
-        "Femoral sinir bloğu, inguinal ligamentin ortasında femoral arter lateralinde yapılır.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Popliteal sinir bloğu ile hangi sinirlerin blokajı hedeflenir?",
-    options: [
-      "N. femoralis ve n. obturatorius",
-      "N. ischiadicus'un tibial ve peroneal dalları",
-      "N. suralis ve n. saphenus",
-      "N. tibialis ve n. femoralis",
-      "N. genitofemoralis",
-    ],
-    correctAnswerIndex: 1,
-    explanation:
-        "Popliteal blok, siyatik sinirin tibial ve peroneal dallarını hedefler.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Bier blok (IV rejyonal anestezi) sırasında kullanılan tourniquet süresi en az ne kadar olmalıdır?",
-    options: [
-      "5 dakika",
-      "10 dakika",
-      "20 dakika",
-      "30 dakika",
-      "45 dakika",
-    ],
-    correctAnswerIndex: 2,
-    explanation:
-        "Bier blokta tourniquet en az 20 dakika tutulmalıdır, aksi takdirde sistemik toksisite riski vardır.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Aşağıdaki periferik sinir bloklarından hangisinde pnömotoraks riski en yüksektir?",
-    options: [
-      "İnterskalenik blok",
-      "Supraklavikuler blok",
-      "İnfraklavikuler blok",
-      "Aksiller blok",
-      "Median sinir bloğu",
-    ],
-    correctAnswerIndex: 1,
-    explanation:
-        "Supraklavikuler blok pleuraya çok yakın bir bölgeden yapılır ve pnömotoraks riski en yüksektir.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Ultrason eşliğinde sinir bloklarında 'kar yağışı' görünümü aşağıdaki durumlardan hangisini gösterir?",
-    options: [
-      "Sinir liflerinin kalsifikasyonu",
-      "Lokal anesteziğin sinir etrafında yayılması",
-      "Hava embolisi",
-      "Enfeksiyon",
-      "Sinir yaralanması",
-    ],
-    correctAnswerIndex: 1,
-    explanation:
-        "Lokal anestezik, sinir etrafında yayılırken ultrason ekranında 'kar yağışı' benzeri bir görüntü oluşturur.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Femoral sinir bloğu sonrası aşağıdakilerden hangisi beklenir?",
-    options: [
-      "Uyluk adduksiyonunda artış",
-      "Uyluk fleksiyonunda zayıflık",
-      "Ayak bileği dorsifleksiyonunda artış",
-      "Kalça ekstansiyonunda artış",
-      "Uyluk ekstansiyon gücünde artış",
-    ],
-    correctAnswerIndex: 1,
-    explanation:
-        "Femoral sinir, uyluk ön grup kaslarını (özellikle quadriceps) innerve eder. Blok sonrası bu kaslarda zayıflık olur.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Supraklavikuler blok hangi düzeyde yapılır?",
-    options: [
-      "Kök düzeyi (roots)",
-      "Trunkus düzeyi (trunks)",
-      "Divizyon düzeyi",
-      "Kord düzeyi",
-      "Periferik sinir düzeyi",
-    ],
-    correctAnswerIndex: 1,
-    explanation:
-        "Supraklavikuler blok, brakiyal pleksusun trunkus düzeyinde uygulanır. Sinirler birbirine çok yakındır, bu nedenle güçlü bir blok sağlar.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Aşağıdakilerden hangisi ulnar sinirin bloke edildiğini gösterir?",
-    options: [
-      "El başparmak fleksiyonu kaybı",
-      "El bileği ekstansiyonu kaybı",
-      "4. ve 5. parmakta duyu kaybı",
-      "Önkol supinasyonunda azalma",
-      "El bileği fleksiyonunda artış",
-    ],
-    correctAnswerIndex: 2,
-    explanation:
-        "Ulnar sinir 4. ve 5. parmakların palmar ve dorsal duyusunu sağlar. Blok sonrası bu bölgelerde duyu kaybı olur.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Aşağıdaki sinirlerden hangisi infraklavikuler blokta genellikle yeterli şekilde bloke edilmez?",
-    options: [
-      "N. musculocutaneus",
-      "N. medianus",
-      "N. ulnaris",
-      "N. axillaris",
-      "N. thoracodorsalis",
-    ],
-    correctAnswerIndex: 0,
-    explanation:
-        "Musculocutaneus sinir pleksustan erken ayrıldığı için bloktan kaçabilir.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Bier blok için en uygun lokal anestezik hangisidir?",
-    options: [
-      "Bupivakain",
-      "Ropivakain",
-      "Lidokain",
-      "Prilokain",
-      "Levobupivakain",
-    ],
-    correctAnswerIndex: 2,
-    explanation:
-        "IVRA (Bier Blok) için kısa etkili ve kardiyotoksik olmayan lidokain tercih edilir. Bupivakain gibi uzun etkili ajanlar kontrendikedir.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Aşağıdaki bloklardan hangisi ayak sırtında duyuyu en iyi bloke eder?",
-    options: [
-      "N. saphenus bloğu",
-      "N. tibialis bloğu",
-      "N. suralis bloğu",
-      "N. peroneus superficialis bloğu",
-      "N. obturatorius bloğu",
-    ],
-    correctAnswerIndex: 3,
-    explanation:
-        "N. peroneus superficialis, ayak sırtının büyük kısmını innerve eder. Bu bölgedeki cerrahiler için hedef sinirdir.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Aşağıdakilerden hangisi interkostal sinir bloğunun en sık komplikasyonudur?",
-    options: [
-      "Enfeksiyon",
-      "Hipotansiyon",
-      "Pnömotoraks",
-      "Hipoestezi",
-      "İdrar retansiyonu",
-    ],
-    correctAnswerIndex: 2,
-    explanation:
-        "İğne pleuraya çok yakın olduğundan interkostal bloklarda pnömotoraks riski yüksektir.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "İnfraklavikuler blok sonrası tüm üst ekstremitede motor blok oluşması aşağıdaki yapının etkilenmesine bağlıdır?",
-    options: [
-      "Supraklavikuler sinirler",
-      "Brachial plexus cords",
-      "N. intercostobrachialis",
-      "Plevra",
-      "N. thoracicus longus",
-    ],
-    correctAnswerIndex: 1,
-    explanation:
-        "İnfraklavikuler blok, brakiyal pleksusun medial, lateral ve posterior kordlarını hedef alır.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "El bileği cerrahisi için yapılan periferik sinir bloklarında aşağıdaki kombinasyonlardan hangisi gereklidir?",
-    options: [
-      "Yalnızca median sinir",
-      "Median + radial sinir",
-      "Ulnar + radial sinir",
-      "Median + ulnar + radial sinir",
-      "Sadece ulnar sinir",
-    ],
-    correctAnswerIndex: 3,
-    explanation:
-        "El bileğinde cerrahi için tüm duyusal innervasyon hedeflenmelidir: median, ulnar ve radial sinirler birlikte bloklanmalıdır.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Aşağıdakilerden hangisi radial sinir bloğu sonrası gözlenmez?",
-    options: [
-      "El bileği ekstansiyon kaybı",
-      "Başparmak abdüksiyon zayıflığı",
-      "Arka kol yüzeyinde duyu kaybı",
-      "El bileği fleksiyonu kaybı",
-      "Düşük el deformitesi",
-    ],
-    correctAnswerIndex: 3,
-    explanation:
-        "Radial sinir ekstansörleri innerve eder; fleksiyon fonksiyonu median ve ulnar sinire aittir.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "N. saphenus bloğu, hangi sinirin dalıdır?",
-    options: [
-      "N. tibialis",
-      "N. peroneus",
-      "N. femoralis",
-      "N. obturatorius",
-      "N. ischiadicus",
-    ],
-    correctAnswerIndex: 2,
-    explanation:
-        "N. saphenus, femoral sinirin saf duyusal bir dalıdır ve diz ile iç bacak bölgesinin duyusunu sağlar.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Horner sendromu gelişmesi hangi periferik blokla ilişkilidir?",
-    options: [
-      "Femoral blok",
-      "İnterskalenik blok",
-      "Popliteal blok",
-      "Radial sinir bloğu",
-      "Median sinir bloğu",
-    ],
-    correctAnswerIndex: 1,
-    explanation:
-        "İnterskalenik blok sırasında servikal sempatik zincirin etkilenmesi Horner sendromuna neden olabilir.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Periferik sinir bloğu sırasında sinirin iç kısmına yapılan enjeksiyonun en ciddi sonucu nedir?",
-    options: [
-      "Parestezi",
-      "Sinir irritasyonu",
-      "Kalıcı sinir hasarı",
-      "Sinir çevresi hematomu",
-      "Motor blok artışı",
-    ],
-    correctAnswerIndex: 2,
-    explanation:
-        "Sinir içine enjeksiyon ciddi nörotoksisiteye yol açabilir ve kalıcı sinir hasarı gelişebilir.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "N. obturatorius bloğu en çok hangi girişimde tamamlayıcı blok olarak yapılır?",
-    options: [
-      "Popliteal sinir bloğu",
-      "Femoral sinir bloğu",
-      "İnguinal herni onarımı",
-      "Transüretral rezeksiyon (TUR)",
-      "Aksiller sinir bloğu",
-    ],
-    correctAnswerIndex: 3,
-    explanation:
-        "TUR işlemlerinde obturator sinir refleksini önlemek için obturator sinir bloğu eklenebilir.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Lidokain ile yapılan bir sinir bloğunun etkisi genellikle ne kadar sürer?",
-    options: [
-      "15–30 dakika",
-      "30–60 dakika",
-      "90–120 dakika",
-      "2–4 saat",
-      "6–8 saat",
-    ],
-    correctAnswerIndex: 1,
-    explanation:
-        "Lidokain orta etkili bir lokal anesteziktir, genellikle etkisi 30–60 dakika sürer.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Peroneal sinir bloğu aşağıdakilerden hangisi için özellikle kullanışlıdır?",
-    options: [
-      "Diz artroskopisi",
-      "Ayak bileği cerrahisi",
-      "Kalça protezi",
-      "Uyluk kas biyopsisi",
-      "Bel fıtığı cerrahisi",
-    ],
-    correctAnswerIndex: 1,
-    explanation:
-        "Peroneal sinir ayak bileği ve ayağın dış kısmında duyuyu sağlar. Bu bölge cerrahileri için kullanılır.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Aşağıdaki periferik bloklardan hangisi brakiyal pleksusun en distaldeki dal düzeyini hedef alır?",
-    options: [
-      "İnterskalenik blok",
-      "Supraklavikuler blok",
-      "İnfraklavikuler blok",
-      "Aksiller blok",
-      "Median sinir bloğu",
-    ],
-    correctAnswerIndex: 3,
-    explanation:
-        "Aksiller blok, brakiyal pleksusun periferik dal düzeyinde yapılır (n. medianus, ulnaris, radialis, musculocutaneus).",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Aşağıdakilerden hangisi n. musculocutaneus'un duyu sağladığı bölgedir?",
-    options: [
-      "El sırtı",
-      "Önkol radial taraf",
-      "4. parmak palmar yüz",
-      "Kol medial yüzü",
-      "El palmar yüzü",
-    ],
-    correctAnswerIndex: 1,
-    explanation:
-        "N. musculocutaneus, dirsekten sonra lateral önkol derisinin duyusunu sağlar.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Aşağıdaki kombinasyonlardan hangisi tam üst ekstremite blokajı sağlar?",
-    options: [
-      "Median + radial",
-      "Median + ulnar + radial",
-      "Supraklavikuler blok",
-      "Aksiller blok + musculocutaneus bloğu",
-      "İnterskalenik blok + ulnar sinir bloğu",
-    ],
-    correctAnswerIndex: 2,
-    explanation:
-        "Supraklavikuler blok, brakiyal pleksusun trunkus düzeyini hedefler ve tüm üst ekstremiteyi etkili şekilde bloke eder.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Radial sinir bloğu en iyi nerede yapılır?",
-    options: [
-      "Deltoid kas altında",
-      "Humerus spiral oluğunda",
-      "Klavikula altında",
-      "El bileği seviyesinde",
-      "Aksiller bölgede",
-    ],
-    correctAnswerIndex: 1,
-    explanation:
-        "Radial sinir, humerusun spiral oluğunda yüzeyeldir ve bu bölgede kolaylıkla bloke edilebilir.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "N. obturatorius bloğu sırasında motor uyarının devam etmesi aşağıdaki komplikasyona neden olabilir?",
-    options: [
-      "Pnömotoraks",
-      "İntranevral enjeksiyon",
-      "Aritmi",
-      "İstemsiz kas kasılması (addüktör spazmı)",
-      "Bradikardi",
-    ],
-    correctAnswerIndex: 3,
-    explanation:
-        "Obturator sinir, addüktör kasları uyardığından blok eksikse cerrahi sırasında ani kas kontraksiyonu olabilir.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Aşağıdaki periferik sinirlerden hangisinin bloğu diz altı cerrahisinde tek başına yeterli değildir?",
-    options: [
-      "N. tibialis",
-      "N. saphenus",
-      "N. peroneus communis",
-      "N. femoralis",
-      "N. suralis",
-    ],
-    correctAnswerIndex: 3,
-    explanation:
-        "N. femoralis uyluğun ön yüzünü innerve eder; diz altı için genellikle saphenus, tibialis ve peroneal dallar gerekir.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Aşağıdaki sinir bloklarından hangisi, elin ulnar innervasyonunu sağlayan sinirin blokajı için en uygun yaklaşımı ifade eder?",
-    options: [
-      "Aksiller blok",
-      "İnterskalen blok",
-      "Supraklavikular blok",
-      "Median sinir bloku",
-      "Radial sinir bloku",
-    ],
-    correctAnswerIndex: 0,
-    explanation:
-        "Aksiller blok, ulnar sinirin blokajı için uygundur çünkü brakial pleksusun terminal dalları bu bölgede bloke edilebilir.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Brakial pleksus bloğunda 'hissedilen düşme' (pop) hissi hangi yapının geçilmesi sırasında hissedilir?",
-    options: [
-      "Skalen kaslar",
-      "Klikavikula",
-      "Aksiller kılıf",
-      "Plevra",
-      "Subklavian arter",
-    ],
-    correctAnswerIndex: 0,
-    explanation:
-        "İnterskalen blokta iğne skalen kasların fasyasını geçerken 'pop' hissi alınır.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "'Wrist bloğu' yapılırken aşağıdaki sinirlerden hangisi bloke edilmez?",
-    options: [
-      "Median sinir",
-      "Ulnar sinir",
-      "Radial sinir",
-      "Müskülokütan sinir",
-      "Lateral antebrakiyal kutanöz sinir",
-    ],
-    correctAnswerIndex: 4,
-    explanation:
-        "Lateral antebrakiyal kutanöz sinir dirsek seviyesinde innervasyon sağlar, el bileği bloğunda etkisi yoktur.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "İnterskalen brakial pleksus bloğunda en sık görülen komplikasyon nedir?",
-    options: [
-      "Pnömotoraks",
-      "Frenik sinir bloğu",
-      "Total spinal anestezi",
-      "Kardiyak arrest",
-      "Horner sendromu",
-    ],
-    correctAnswerIndex: 1,
-    explanation:
-        "Frenik sinir bloğu (%100'e yakın oranda görülür, diyafram paralizisine yol açabilir).",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Aşağıdaki bloklardan hangisinde ultrason eşliğinde transversus abdominis planı (TAP) bloğu uygulanır?",
-    options: [
-      "Torakal epidural",
-      "Abdomen cerrahisinde analjezi",
-      "Lumbar pleksus bloğu",
-      "Siyatik sinir bloğu",
-      "Servikal pleksus bloğu",
-    ],
-    correctAnswerIndex: 1,
-    explanation:
-        "TAP bloğu, abdominal duvar cerrahilerinde analjezi sağlar.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Supraklavikular blokta iğnenin hedef aldığı ana yapı nedir?",
-    options: [
-      "Subklavian arter",
-      "Brakial pleksusun trunkusları",
-      "Aksiller sinir",
-      "Vertebral arter",
-      "Sternokleidomastoid kas",
-    ],
-    correctAnswerIndex: 1,
-    explanation:
-        "Supraklavikular blokta brakial pleksusun trunkusları hedeflenir.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Aşağıdaki yöntemlerden hangisi siyatik sinir bloğu için kullanılan yaklaşımlardan biri değildir?",
-    options: [
-      "Labat yaklaşımı",
-      "Anterior yaklaşım",
-      "Lateral yaklaşım",
-      "Subgluteal yaklaşım",
-      "Supraklavikular yaklaşım",
-    ],
-    correctAnswerIndex: 4,
-    explanation:
-        "Supraklavikular yaklaşım brakial pleksus içindir, siyatik sinirle ilgisi yoktur.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "'Ankle bloğu' hangi sinirlerin blokajını içerir?",
-    options: [
-      "Radial, median, ulnar",
-      "Tibial, süperfisyel peroneal, derin peroneal, sural",
-      "Femoral, obturator",
-      "İlioinguinal, genitofemoral",
-      "Siyatik, pudendal",
-    ],
-    correctAnswerIndex: 1,
-    explanation:
-        "Ayak bileği bloğunda tibial, süperfisyel peroneal, derin peroneal ve sural sinirler bloke edilir.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "'Psoas kompartman bloğu' hangi sinir pleksusunu bloke eder?",
-    options: [
-      "Brakial pleksus",
-      "Lumbar pleksus",
-      "Servikal pleksus",
-      "Sakral pleksus",
-      "Torakal pleksus",
-    ],
-    correctAnswerIndex: 1,
-    explanation:
-        "Psoas kompartman bloğu lumbar pleksusu bloke eder (femoral, lateral femoral kutanöz ve obturator sinirler).",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "'Axiller brakial pleksus bloğu'nda hangi sinir en geç bloke olur?",
-    options: [
-      "Median sinir",
-      "Ulnar sinir",
-      "Radial sinir",
-      "Müskülokütan sinir",
-      "Medial antebrakiyal kutanöz sinir",
-    ],
-    correctAnswerIndex: 2,
-    explanation:
-        "Radial sinir kılıfın posteriyorunda yer alır ve en geç bloke olur.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "'Süperfisyel servikal pleksus bloğu' hangi cerrahide kullanılır?",
-    options: [
-      "Tiroidektomi",
-      "Kalça protezi",
-      "Laparoskopik kolesistektomi",
-      "Kraniotomi",
-      "Üst ekstremite cerrahisi",
-    ],
-    correctAnswerIndex: 0,
-    explanation:
-        "Tiroid ve boyun cerrahisinde süperfisyel servikal pleksus bloğu kullanılır.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "'Femoral sinir bloğu' sonrası hangi kasın güçsüzlüğü beklenir?",
-    options: [
-      "Gastroknemius",
-      "Tibialis anterior",
-      "Kuadriseps femoris",
-      "Gluteus maksimus",
-      "Hamstringler",
-    ],
-    correctAnswerIndex: 2,
-    explanation:
-        "Femoral sinir kuadriseps kasını innerve eder, blok sonrası güçsüzlük olur.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Aşağıdakilerden hangisi 'infraklavikular blok' için doğrudur?",
-    options: [
-      "Pnömotoraks riski yüksektir",
-      "Sadece el cerrahisinde kullanılır",
-      "Kordlar seviyesinde brakial pleksus bloke edilir",
-      "Horner sendromu sık görülür",
-      "Femoral siniri de bloke eder",
-    ],
-    correctAnswerIndex: 2,
-    explanation:
-        "İnfraklavikular blokta brakial pleksusun kordları bloke edilir.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "'TAP bloğu' hangi sinirleri bloke eder?",
-    options: [
-      "Torakal spinal sinirlerin anterior dalları",
-      "Brakial pleksus",
-      "Lumbar pleksus",
-      "Siyatik sinir",
-      "Pudendal sinir",
-    ],
-    correctAnswerIndex: 0,
-    explanation:
-        "TAP bloğu, torakal spinal sinirlerin anterior dallarını (T6-L1) bloke eder.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
-  Question(
-    question:
-        "Periferik sinir bloğunda adjuvan olarak kullanılan ajan hangisidir?",
-    options: [
-      "Propofol",
-      "Dekstroz",
-      "Dexmedetomidin",
-      "Heparin",
-      "Mannitol",
-    ],
-    correctAnswerIndex: 2,
-    explanation:
-        "Dexmedetomidin, lokal anesteziklerin etki süresini uzatmak için adjuvan olarak kullanılır.",
-    category: "Periferik Sinir Blokları",
-    difficulty: 2,
-  ),
-
 ];

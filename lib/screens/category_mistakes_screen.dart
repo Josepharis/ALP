@@ -5,6 +5,7 @@ import '../services/quiz_service.dart';
 import '../utils/snackbar_utils.dart';
 import 'quiz_screen.dart';
 import 'question_detail_screen.dart';
+import '../l10n/app_localizations.dart';
 
 class CategoryMistakesScreen extends StatefulWidget {
   final String category;
@@ -109,7 +110,7 @@ class _CategoryMistakesScreenState extends State<CategoryMistakesScreen> {
           ),
           const SizedBox(height: 16),
           Text(
-            'Congratulations!',
+            AppLocalizations.of(context)!.congratulationsNoMistakes,
             style: const TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
@@ -120,7 +121,7 @@ class _CategoryMistakesScreenState extends State<CategoryMistakesScreen> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 32),
             child: Text(
-              'You haven\'t made any mistakes in this category, or you have corrected all your mistakes.',
+              AppLocalizations.of(context)!.noMistakesInCategory,
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 16, color: Colors.grey[300]),
             ),

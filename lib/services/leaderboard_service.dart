@@ -152,6 +152,98 @@ class LeaderboardService {
     return getLeaderboard();
   }
 
+  // Aylık sıralamayı getir
+  Future<List<Map<String, dynamic>>> getMonthlyLeaderboard() async {
+    try {
+      print('Aylık sıralama verileri yükleniyor...');
+
+      // Önce tüm kullanıcıları getirelim
+      final userDocs = await _firestore.collection('users').get();
+      print(
+        'Kullanıcı bilgileri yüklendi. Bulunan toplam kullanıcı sayısı: ${userDocs.docs.length}',
+      );
+
+      // Kullanıcı verilerinden bir map oluşturalım
+      final Map<String, Map<String, dynamic>> userMap = {};
+      for (var doc in userDocs.docs) {
+        userMap[doc.id] = doc.data();
+      }
+
+      // Tüm aktivite verilerini alalım
+      final activitiesSnapshot = await _firestore.collection('userActivities').get();
+
+      print(
+        'Aktivite verileri yüklendi. Aktivitesi olan kullanıcı sayısı: ${activitiesSnapshot.docs.length}',
+      );
+
+      // Şimdilik tüm verileri döndür (aylık filtreleme kaldırıldı)
+      List<Map<String, dynamic>> monthlyData = [];
+      
+      for (var doc in activitiesSnapshot.docs) {
+        final activityData = doc.data();
+        final userId = activityData['userId'] as String? ?? doc.id;
+        final userData = userMap[userId] ?? {};
+        
+        monthlyData.add({
+          'userId': userId,
+          'displayName': userData['displayName'] ?? 'İsimsiz Kullanıcı',
+          'profileImageUrl': userData['profileImageUrl'],
+          'title': userData['title'] ?? 'Anestezi Uzmanı',
+          'totalPoints': activityData['totalPoints'] ?? 0,
+          'totalCorrectAnswers': activityData['totalCorrectAnswers'] ?? 0,
+          'totalWrongAnswers': activityData['totalWrongAnswers'] ?? 0,
+          'dailyStreak': activityData['dailyStreak'] ?? 0,
+          'isCurrentUser': userId == _auth.currentUser?.uid,
+        });
+      }
+
+      // Puana göre sırala (yüksekten düşüğe)
+      monthlyData.sort(
+        (a, b) => (b['totalPoints'] as int).compareTo(a['totalPoints'] as int),
+      );
+
+      // Sıralama numaralarını ekle
+      int rank = 1;
+      for (var userData in monthlyData) {
+        userData['rank'] = rank++;
+      }
+
+      print(
+        'Aylık sıralama verileri işlendi, ${monthlyData.length} kullanıcı bulundu',
+      );
+      return monthlyData;
+    } catch (e) {
+      print('getMonthlyLeaderboard hatası: $e');
+      // Hata durumunda test verileri dön
+      return _createTestMonthlyLeaderboardData();
+    }
+  }
+
+  // Aylık sıralama için test verileri oluştur
+  List<Map<String, dynamic>> _createTestMonthlyLeaderboardData() {
+    List<Map<String, dynamic>> testData = [];
+
+    // 10 test kullanıcısı oluştur
+    for (int i = 1; i <= 10; i++) {
+      final bool isCurrentUser = i == 3; // 3. kullanıcıyı mevcut kullanıcı yap
+
+      testData.add({
+        'userId': 'testUser$i',
+        'rank': i,
+        'displayName': 'Dr. Kullanıcı $i',
+        'title': 'Anestezi Uzmanı',
+        'totalPoints': 2000 - (i * 100), // Aylık puanlar daha düşük
+        'totalCorrectAnswers': 25 - i,
+        'totalWrongAnswers': i * 2,
+        'dailyStreak': 5 - (i ~/ 2),
+        'isCurrentUser': isCurrentUser,
+      });
+    }
+
+    print('Test aylık sıralama verileri oluşturuldu: ${testData.length} kullanıcı');
+    return testData;
+  }
+
   // Liderlik tablosu için stream
   Stream<List<Map<String, dynamic>>> getLeaderboardStream() {
     return _firestore
@@ -235,6 +327,67 @@ class LeaderboardService {
           // Firestore permission hataları vs. için güvenli fallback
           print('getUserRankStream Firestore hatası: $error');
           return 0; // Hata durumunda sıfır döndür
+        });
+  }
+
+  // Aylık liderlik tablosu için stream
+  Stream<List<Map<String, dynamic>>> getMonthlyLeaderboardStream() {
+    return _firestore
+        .collection('userActivities')
+        .orderBy('totalPoints', descending: true)
+        .snapshots()
+        .asyncMap((activitySnapshot) async {
+          try {
+            // Auth durumunu kontrol et
+            final currentUser = _auth.currentUser;
+            if (currentUser == null) {
+              print('Kullanıcı çıkış yapmış, boş liste döndürülüyor');
+              return <Map<String, dynamic>>[];
+            }
+
+            // Tüm kullanıcıları bir kerede getir
+            final userDocs = await _firestore.collection('users').get();
+            final userMap = {for (var doc in userDocs.docs) doc.id: doc.data()};
+
+            // Şimdilik tüm verileri döndür (aylık filtreleme kaldırıldı)
+            List<Map<String, dynamic>> monthlyData = [];
+            
+            for (var doc in activitySnapshot.docs) {
+              final activityData = doc.data();
+              final userId = activityData['userId'] as String? ?? doc.id;
+              final userData = userMap[userId] ?? {};
+              
+              monthlyData.add({
+                'userId': userId,
+                'displayName': userData['displayName'] ?? 'İsimsiz Kullanıcı',
+                'profileImageUrl': userData['profileImageUrl'],
+                'title': userData['title'] ?? 'Anestezi Uzmanı',
+                'totalPoints': activityData['totalPoints'] ?? 0,
+                'totalCorrectAnswers': activityData['totalCorrectAnswers'] ?? 0,
+                'totalWrongAnswers': activityData['totalWrongAnswers'] ?? 0,
+                'dailyStreak': activityData['dailyStreak'] ?? 0,
+                'isCurrentUser': userId == currentUser.uid,
+              });
+            }
+
+            // Puana göre sırala
+            monthlyData.sort((a, b) => (b['totalPoints'] as int).compareTo(a['totalPoints'] as int));
+
+            // Sıralama numaralarını ekle
+            for (int i = 0; i < monthlyData.length; i++) {
+              monthlyData[i]['rank'] = i + 1;
+            }
+
+            print('Aylık sıralama verileri işlendi, ${monthlyData.length} kullanıcı bulundu');
+            return monthlyData;
+          } catch (e) {
+            print('Monthly leaderboard stream hatası: $e');
+            return <Map<String, dynamic>>[];
+          }
+        })
+        .handleError((error) {
+          print('Monthly leaderboard stream Firestore hatası: $error');
+          return <Map<String, dynamic>>[];
         });
   }
 }

@@ -1460,5 +1460,177 @@
   "question": "Question",
   "@question": {
     "description": "Single question label"
+  },
+  "generalRanking": "General Ranking",
+  "@generalRanking": {
+    "description": "General ranking tab"
+  },
+  "monthlyRanking": "Monthly Ranking",
+  "@monthlyRanking": {
+    "description": "Monthly ranking tab"
+  },
+  "thisMonth": "This Month",
+  "@thisMonth": {
+    "description": "This month label"
+  },
+  "monthlyLeaders": "Monthly Leaders",
+  "@monthlyLeaders": {
+    "description": "Monthly leaders section"
+  },
+  "monthlyCircle": "Monthly Circle",
+  "@monthlyCircle": {
+    "description": "Monthly circle section"
+  },
+  "congratulationsNoMistakes": "Congratulations!",
+  "@congratulationsNoMistakes": {
+    "description": "Congratulations for no mistakes"
+  },
+  "noMistakesMessage": "You haven't made any mistakes in any quiz yet, or you have corrected all your mistakes.",
+  "@noMistakesMessage": {
+    "description": "No mistakes message"
+  },
+  "noMistakesInCategory": "You haven't made any mistakes in this category, or you have corrected all your mistakes.",
+  "@noMistakesInCategory": {
+    "description": "No mistakes in category message"
+  },
+  "you": "YOU",
+  "@you": {
+    "description": "You label for current user"
+  },
+  "privacy": "Privacy",
+  "@privacy": {
+    "description": "Privacy settings"
+  },
+  "editProfileTitle": "Edit Profile",
+  "@editProfileTitle": {
+    "description": "Edit profile title"
+  },
+  "nameLabel": "Name",
+  "@nameLabel": {
+    "description": "Name field label"
+  },
+  "titleLabel": "Title",
+  "@titleLabel": {
+    "description": "Title field label"
+  },
+  "logOut": "Log Out",
+  "@logOut": {
+    "description": "Log out button"
+  },
+  "logOutTitle": "Log Out",
+  "@logOutTitle": {
+    "description": "Log out dialog title"
+  },
+  "logOutMessage": "Are you sure you want to exit the application?",
+  "@logOutMessage": {
+    "description": "Log out confirmation message"
+  },
+  "cancel": "Cancel",
+  "@cancel": {
+    "description": "Cancel button"
+  },
+  "privacySettings": "Privacy Settings",
+  "@privacySettings": {
+    "description": "Privacy settings title"
+  },
+  "showMyProfileToOthers": "Show My Profile to Others",
+  "@showMyProfileToOthers": {
+    "description": "Show profile to others setting"
+  },
+  "showInLeaderboard": "Show in Leaderboard",
+  "@showInLeaderboard": {
+    "description": "Show in leaderboard setting"
+  },
+  "shareUsageData": "Share Usage Data",
+  "@shareUsageData": {
+    "description": "Share usage data setting"
+  },
+  "shareUsageDataSubtitle": "Anonymous usage data to improve app experience",
+  "@shareUsageDataSubtitle": {
+    "description": "Share usage data subtitle"
+  },
+  "save": "Save",
+  "@save": {
+    "description": "Save button"
+  },
+  "privacySettingsUpdated": "Privacy settings updated",
+  "@privacySettingsUpdated": {
+    "description": "Privacy settings updated message"
+  },
+  "helpAndSupport": "Help & Support",
+  "@helpAndSupport": {
+    "description": "Help and support title"
+  },
+  "contact": "Contact",
+  "@contact": {
+    "description": "Contact option"
+  },
+  "userGuide": "User Guide",
+  "@userGuide": {
+    "description": "User guide option"
+  },
+  "about": "About",
+  "@about": {
+    "description": "About option"
+  },
+  "myDevices": "My Devices",
+  "@myDevices": {
+    "description": "My devices title"
+  },
+  "myDevicesSubtitle": "You can log in from a maximum of 2 devices",
+  "@myDevicesSubtitle": {
+    "description": "My devices subtitle"
+  },
+  "noRegisteredDevices": "No registered devices found",
+  "@noRegisteredDevices": {
+    "description": "No registered devices message"
+  },
+  "errorLoadingDevices": "Error loading devices",
+  "@errorLoadingDevices": {
+    "description": "Error loading devices message"
+  },
+  "currentDevice": "Current Device",
+  "@currentDevice": {
+    "description": "Current device label"
+  },
+  "lastActive": "Last Active",
+  "@lastActive": {
+    "description": "Last active label"
+  },
+  "deviceInfo": "Device Info",
+  "@deviceInfo": {
+    "description": "Device info label"
+  },
+  "platform": "Platform",
+  "@platform": {
+    "description": "Platform label"
+  },
+  "version": "Version",
+  "@version": {
+    "description": "Version label"
+  },
+  "logoutFromDevice": "Logout from Device",
+  "@logoutFromDevice": {
+    "description": "Logout from device button"
+  },
+  "logoutFromDeviceMessage": "Are you sure you want to logout from this device?",
+  "@logoutFromDeviceMessage": {
+    "description": "Logout from device confirmation message"
+  },
+  "deviceLoggedOut": "Logged out from device",
+  "@deviceLoggedOut": {
+    "description": "Device logged out message"
+  },
+  "close": "Close",
+  "@close": {
+    "description": "Close button"
+  },
+  "profileInformationUpdated": "Profile information updated",
+  "@profileInformationUpdated": {
+    "description": "Profile information updated message"
+  },
+  "aboutPageComingSoon": "About page will be added soon",
+  "@aboutPageComingSoon": {
+    "description": "About page coming soon message"
   }
 }

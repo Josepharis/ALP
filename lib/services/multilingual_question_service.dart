@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 // Türkçe soru dosyaları
 import '../data/anesthesia_application_questions.dart' as tr;
 import '../data/respiratory_system_questions.dart' as tr;
@@ -65,6 +64,7 @@ import '../data/anesthesia_complications_questions.dart' as tr;
 import '../data/sepsis_ards_questions.dart' as tr;
 
 // İngilizce soru dosyaları (sadece mevcut olanlar)
+import '../data/english/anesthesia_history_questions.dart' as en;
 import '../data/english/cardiovascular_monitoring_questions.dart' as en;
 import '../data/english/operating_room_environment_questions.dart' as en;
 import '../data/english/anesthesia_workstation_questions.dart' as en;
@@ -511,6 +511,12 @@ class MultilingualQuestionService {
   /// İngilizce quiz kategorileri
   static List<Map<String, dynamic>> _getEnglishQuizCategories() {
     return [
+      {
+        'title': 'Anesthesia Application',
+        'icon': Icons.medical_information,
+        'questions': en.anesthesiaHistoryQuestions,
+        'color': Colors.orange.shade700,
+      },
       {
         'title': 'Operating Room Environment',
         'icon': Icons.local_hospital,

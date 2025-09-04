@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import '../l10n/app_localizations.dart';
 import '../services/leaderboard_service.dart';
 import '../utils/snackbar_utils.dart';
-import 'dart:math' as math;
 import 'dart:ui';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:flutter/foundation.dart';
 import 'dart:async';
 
 class LeaderboardScreen extends StatefulWidget {
@@ -20,27 +18,20 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
   final LeaderboardService _leaderboardService = LeaderboardService();
   bool _isLoading = true;
   List<Map<String, dynamic>> _leaderboardData = [];
-  int _currentUserRank = 0;
+  List<Map<String, dynamic>> _monthlyLeaderboardData = [];
   late final AnimationController _animationController;
-  late final Animation<double> _fadeAnimation;
-  late final Animation<Offset> _slideAnimation;
   final ScrollController _scrollController = ScrollController();
-  bool _isInitialized = false;
   StreamSubscription? _leaderboardSubscription;
+  StreamSubscription? _monthlyLeaderboardSubscription;
   StreamSubscription? _rankSubscription;
+  // StreamSubscription? _monthlyRankSubscription; // Şimdilik kullanılmıyor
+  int _selectedTabIndex = 0; // 0: General, 1: Monthly
 
   @override
   void initState() {
     super.initState();
     _initializeAnimations();
     _subscribeToLeaderboard();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (mounted) {
-        setState(() {
-          _isInitialized = true;
-        });
-      }
-    });
     WidgetsBinding.instance.addObserver(this);
   }
 
@@ -65,6 +56,16 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
     }
 
     try {
+      if (_monthlyLeaderboardSubscription != null) {
+        _monthlyLeaderboardSubscription!.cancel();
+        _monthlyLeaderboardSubscription = null;
+        print('✅ Monthly leaderboard stream iptal edildi');
+      }
+    } catch (e) {
+      print('⚠️ Monthly leaderboard stream iptal hatası: $e');
+    }
+
+    try {
       if (_rankSubscription != null) {
         _rankSubscription!.cancel();
         _rankSubscription = null;
@@ -73,6 +74,17 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
     } catch (e) {
       print('⚠️ Rank stream iptal hatası: $e');
     }
+
+    // Monthly rank subscription şimdilik kullanılmıyor
+    // try {
+    //   if (_monthlyRankSubscription != null) {
+    //     _monthlyRankSubscription!.cancel();
+    //     _monthlyRankSubscription = null;
+    //     print('✅ Monthly rank stream iptal edildi');
+    //   }
+    // } catch (e) {
+    //   print('⚠️ Monthly rank stream iptal hatası: $e');
+    // }
 
     _animationController.dispose();
     _scrollController.dispose();
@@ -86,29 +98,19 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
       vsync: this,
       duration: const Duration(milliseconds: 1200),
     );
-
-    _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(
-        parent: _animationController,
-        curve: const Interval(0.0, 0.5, curve: Curves.easeOut),
-      ),
-    );
-
-    _slideAnimation = Tween<Offset>(
-      begin: const Offset(0, 0.3),
-      end: Offset.zero,
-    ).animate(
-      CurvedAnimation(
-        parent: _animationController,
-        curve: const Interval(0.3, 1.0, curve: Curves.easeOutCubic),
-      ),
-    );
   }
 
   void _subscribeToLeaderboard() {
     setState(() => _isLoading = true);
+    
+    // Eğer veri zaten varsa loading'i hemen kapat
+    if (_selectedTabIndex == 0 && _leaderboardData.isNotEmpty) {
+      setState(() => _isLoading = false);
+    } else if (_selectedTabIndex == 1 && _monthlyLeaderboardData.isNotEmpty) {
+      setState(() => _isLoading = false);
+    }
 
-    // Liderlik tablosu stream'ine abone ol
+    // Genel liderlik tablosu stream'ine abone ol
     _leaderboardSubscription = _leaderboardService
         .getLeaderboardStream()
         .listen(
@@ -116,9 +118,45 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
             if (mounted) {
               setState(() {
                 _leaderboardData = data;
-                _isLoading = false;
+                // Genel veri geldiğinde loading'i kapat
+                if (_selectedTabIndex == 0) {
+                  _isLoading = false;
+                }
               });
-              _animationController.forward();
+              // Genel tab seçiliyse animasyonu başlat
+              if (_selectedTabIndex == 0) {
+                _animationController.forward();
+              }
+            }
+          },
+          onError: (error) {
+            if (mounted) {
+              setState(() => _isLoading = false);
+              SnackBarUtils.showErrorSnackBar(
+                context,
+                '${AppLocalizations.of(context)!.dataLoadingError}: $error',
+              );
+            }
+          },
+        );
+
+    // Aylık liderlik tablosu stream'ine abone ol
+    _monthlyLeaderboardSubscription = _leaderboardService
+        .getMonthlyLeaderboardStream()
+        .listen(
+          (data) {
+            if (mounted) {
+              setState(() {
+                _monthlyLeaderboardData = data;
+                // Aylık veri geldiğinde loading'i kapat
+                if (_selectedTabIndex == 1) {
+                  _isLoading = false;
+                }
+              });
+              // Aylık tab seçiliyse animasyonu başlat
+              if (_selectedTabIndex == 1) {
+                _animationController.forward();
+              }
             }
           },
           onError: (error) {
@@ -134,18 +172,17 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
 
     // Kullanıcı sıralaması stream'ine abone ol
     _rankSubscription = _leaderboardService.getUserRankStream().listen((rank) {
-      if (mounted) {
-        setState(() {
-          _currentUserRank = rank;
-        });
-      }
+      // Kullanıcı sıralaması güncellendi
     });
+
+    // Aylık kullanıcı sıralaması stream'ine abone ol (şimdilik boş bırakıldı)
+    // _monthlyRankSubscription = _leaderboardService.getMonthlyLeaderboardStream().listen((data) {
+    //   // Aylık sıralama güncellendi
+    // });
   }
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    final bottomPadding = MediaQuery.of(context).viewPadding.bottom;
 
     return SafeArea(
       child: _isLoading
@@ -156,6 +193,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
                 physics: const BouncingScrollPhysics(),
                 slivers: [
                   _buildHeader(),
+                  _buildTabSelector(),
                   _buildTopThree(),
                   _buildLeaderboardList(),
                 ],
@@ -198,12 +236,105 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
     );
   }
 
-  Widget _buildTopThree() {
-    if (_leaderboardData.length < 3) return const SliverToBoxAdapter();
+  Widget _buildTabSelector() {
+    return SliverToBoxAdapter(
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        decoration: BoxDecoration(
+          color: Colors.white.withOpacity(0.1),
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(color: Colors.white.withOpacity(0.2)),
+        ),
+        child: Row(
+          children: [
+            Expanded(
+              child: _buildTabButton(
+                index: 0,
+                text: AppLocalizations.of(context)!.generalRanking,
+                icon: Icons.leaderboard_rounded,
+              ),
+            ),
+            Expanded(
+              child: _buildTabButton(
+                index: 1,
+                text: AppLocalizations.of(context)!.monthlyRanking,
+                icon: Icons.calendar_month_rounded,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 
-    final firstPlace = _leaderboardData[0];
-    final secondPlace = _leaderboardData[1];
-    final thirdPlace = _leaderboardData[2];
+  Widget _buildTabButton({
+    required int index,
+    required String text,
+    required IconData icon,
+  }) {
+    final isSelected = _selectedTabIndex == index;
+    
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          _selectedTabIndex = index;
+          _isLoading = true;
+        });
+        
+        // Animation'ı sıfırla ve başlat
+        _animationController.reset();
+        
+        // Eğer veri zaten varsa loading'i hemen kapat
+        if (index == 0 && _leaderboardData.isNotEmpty) {
+          setState(() {
+            _isLoading = false;
+          });
+          _animationController.forward();
+        } else if (index == 1 && _monthlyLeaderboardData.isNotEmpty) {
+          setState(() {
+            _isLoading = false;
+          });
+          _animationController.forward();
+        }
+      },
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+        decoration: BoxDecoration(
+          color: isSelected ? Colors.amber.shade600 : Colors.transparent,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              icon,
+              color: isSelected ? Colors.white : Colors.white70,
+              size: 18,
+            ),
+            const SizedBox(width: 8),
+            Text(
+              text,
+              style: GoogleFonts.poppins(
+                color: isSelected ? Colors.white : Colors.white70,
+                fontSize: 14,
+                fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTopThree() {
+    final currentData = _selectedTabIndex == 0 ? _leaderboardData : _monthlyLeaderboardData;
+    
+    if (currentData.length < 3) return const SliverToBoxAdapter();
+
+    final firstPlace = currentData[0];
+    final secondPlace = currentData[1];
+    final thirdPlace = currentData[2];
 
     return SliverToBoxAdapter(
       child: Column(
@@ -226,7 +357,9 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
                 ),
                 const SizedBox(width: 8),
                 Text(
-                  AppLocalizations.of(context)!.leaders,
+                  _selectedTabIndex == 0 
+                    ? AppLocalizations.of(context)!.leaders
+                    : AppLocalizations.of(context)!.monthlyLeaders,
                   style: GoogleFonts.poppins(
                     color: Colors.white,
                     fontSize: 14,
@@ -559,12 +692,14 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
   }
 
   Widget _buildLeaderboardList() {
-    if (_leaderboardData.length <= 3) {
+    final currentData = _selectedTabIndex == 0 ? _leaderboardData : _monthlyLeaderboardData;
+    
+    if (currentData.length <= 3) {
       return const SliverToBoxAdapter();
     }
 
     // Kullanıcının pozisyonunu bul
-    final userIndex = _leaderboardData.indexWhere(
+    final userIndex = currentData.indexWhere(
       (user) => user['isCurrentUser'] ?? false,
     );
 
@@ -573,9 +708,9 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
       return SliverList(
         delegate: SliverChildBuilderDelegate((context, index) {
           final itemIndex = index + 3;
-          if (itemIndex >= _leaderboardData.length) return null;
+          if (itemIndex >= currentData.length) return null;
 
-          final user = _leaderboardData[itemIndex];
+          final user = currentData[itemIndex];
           final rank = itemIndex + 1;
           final displayName = user['displayName'] ?? 'İsimsiz';
           final points = user['totalPoints'] ?? 0;
@@ -588,17 +723,17 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
             points,
             isCurrentUser,
           );
-        }, childCount: _leaderboardData.length - 3),
+        }, childCount: currentData.length - 3),
       );
     }
 
     // Kullanıcının etrafındaki 5 kişiyi göster (kendisi dahil)
-    final startIndex = (userIndex - 2).clamp(3, _leaderboardData.length - 1);
+    final startIndex = (userIndex - 2).clamp(3, currentData.length - 1);
     final endIndex = (userIndex + 2).clamp(
       startIndex,
-      _leaderboardData.length - 1,
+      currentData.length - 1,
     );
-    final usersToShow = _leaderboardData.sublist(startIndex, endIndex + 1);
+    final usersToShow = currentData.sublist(startIndex, endIndex + 1);
 
     return SliverToBoxAdapter(
       child: Column(
@@ -617,7 +752,9 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
                 const Icon(Icons.people_outline, color: Colors.white, size: 18),
                 const SizedBox(width: 8),
                 Text(
-                  AppLocalizations.of(context)!.yourCircle,
+                  _selectedTabIndex == 0 
+                    ? AppLocalizations.of(context)!.yourCircle
+                    : AppLocalizations.of(context)!.monthlyCircle,
                   style: GoogleFonts.poppins(
                     color: Colors.white,
                     fontSize: 14,
@@ -722,7 +859,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Text(
-                'YOU',
+                AppLocalizations.of(context)!.you,
                 style: GoogleFonts.poppins(
                   color: Colors.white,
                   fontSize: 10,
@@ -738,7 +875,9 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
   Future<void> _loadLeaderboardData() async {
     // Yenileme için stream'leri yeniden başlat
     _leaderboardSubscription?.cancel();
+    _monthlyLeaderboardSubscription?.cancel();
     _rankSubscription?.cancel();
+    // _monthlyRankSubscription?.cancel(); // Şimdilik kullanılmıyor
     _subscribeToLeaderboard();
   }
 }

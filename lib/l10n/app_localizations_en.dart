@@ -242,10 +242,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get shareUsageDataSubtitle =>
-      'Help us improve the app by sharing anonymous usage data';
+      'Anonymous usage data to improve app experience';
 
   @override
-  String get helpAndSupport => 'Help and Support';
+  String get helpAndSupport => 'Help & Support';
 
   @override
   String get contact => 'Contact';
@@ -977,4 +977,112 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get completedQuizzes => 'Completed Quizzes';
+
+  @override
+  String get generalRanking => 'General Ranking';
+
+  @override
+  String get monthlyRanking => 'Monthly Ranking';
+
+  @override
+  String get thisMonth => 'This Month';
+
+  @override
+  String get monthlyLeaders => 'Monthly Leaders';
+
+  @override
+  String get monthlyCircle => 'Monthly Circle';
+
+  @override
+  String get congratulationsNoMistakes => 'Congratulations!';
+
+  @override
+  String get noMistakesMessage =>
+      'You haven\'t made any mistakes in any quiz yet, or you have corrected all your mistakes.';
+
+  @override
+  String get noMistakesInCategory =>
+      'You haven\'t made any mistakes in this category, or you have corrected all your mistakes.';
+
+  @override
+  String get you => 'YOU';
+
+  @override
+  String get privacy => 'Privacy';
+
+  @override
+  String get editProfileTitle => 'Edit Profile';
+
+  @override
+  String get nameLabel => 'Name';
+
+  @override
+  String get titleLabel => 'Title';
+
+  @override
+  String get logOut => 'Log Out';
+
+  @override
+  String get logOutTitle => 'Log Out';
+
+  @override
+  String get logOutMessage => 'Are you sure you want to exit the application?';
+
+  @override
+  String get privacySettings => 'Privacy Settings';
+
+  @override
+  String get showMyProfileToOthers => 'Show My Profile to Others';
+
+  @override
+  String get showInLeaderboard => 'Show in Leaderboard';
+
+  @override
+  String get privacySettingsUpdated => 'Privacy settings updated';
+
+  @override
+  String get about => 'About';
+
+  @override
+  String get myDevicesSubtitle => 'You can log in from a maximum of 2 devices';
+
+  @override
+  String get noRegisteredDevices => 'No registered devices found';
+
+  @override
+  String get errorLoadingDevices => 'Error loading devices';
+
+  @override
+  String get currentDevice => 'Current Device';
+
+  @override
+  String get lastActive => 'Last Active';
+
+  @override
+  String get deviceInfo => 'Device Info';
+
+  @override
+  String get platform => 'Platform';
+
+  @override
+  String get version => 'Version';
+
+  @override
+  String get logoutFromDevice => 'Logout from Device';
+
+  @override
+  String get logoutFromDeviceMessage =>
+      'Are you sure you want to logout from this device?';
+
+  @override
+  String get deviceLoggedOut => 'Logged out from device';
+
+  @override
+  String get close => 'Close';
+
+  @override
+  String get profileInformationUpdated => 'Profile information updated';
+
+  @override
+  String get aboutPageComingSoon => 'About page will be added soon';
 }

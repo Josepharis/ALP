@@ -524,7 +524,7 @@ abstract class AppLocalizations {
   /// **'Your profile information has been updated'**
   String get profileUpdated;
 
-  /// Save button text
+  /// Save button
   ///
   /// In en, this message translates to:
   /// **'Save'**
@@ -557,13 +557,13 @@ abstract class AppLocalizations {
   /// Share usage data subtitle
   ///
   /// In en, this message translates to:
-  /// **'Help us improve the app by sharing anonymous usage data'**
+  /// **'Anonymous usage data to improve app experience'**
   String get shareUsageDataSubtitle;
 
-  /// Help and support section title
+  /// Help and support title
   ///
   /// In en, this message translates to:
-  /// **'Help and Support'**
+  /// **'Help & Support'**
   String get helpAndSupport;
 
   /// Contact option
@@ -1292,7 +1292,7 @@ abstract class AppLocalizations {
   /// **'Edit Profile'**
   String get editProfile;
 
-  /// My devices option
+  /// My devices title
   ///
   /// In en, this message translates to:
   /// **'My Devices'**
@@ -1969,6 +1969,216 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Completed Quizzes'**
   String get completedQuizzes;
+
+  /// General ranking tab
+  ///
+  /// In en, this message translates to:
+  /// **'General Ranking'**
+  String get generalRanking;
+
+  /// Monthly ranking tab
+  ///
+  /// In en, this message translates to:
+  /// **'Monthly Ranking'**
+  String get monthlyRanking;
+
+  /// This month label
+  ///
+  /// In en, this message translates to:
+  /// **'This Month'**
+  String get thisMonth;
+
+  /// Monthly leaders section
+  ///
+  /// In en, this message translates to:
+  /// **'Monthly Leaders'**
+  String get monthlyLeaders;
+
+  /// Monthly circle section
+  ///
+  /// In en, this message translates to:
+  /// **'Monthly Circle'**
+  String get monthlyCircle;
+
+  /// Congratulations for no mistakes
+  ///
+  /// In en, this message translates to:
+  /// **'Congratulations!'**
+  String get congratulationsNoMistakes;
+
+  /// No mistakes message
+  ///
+  /// In en, this message translates to:
+  /// **'You haven\'t made any mistakes in any quiz yet, or you have corrected all your mistakes.'**
+  String get noMistakesMessage;
+
+  /// No mistakes in category message
+  ///
+  /// In en, this message translates to:
+  /// **'You haven\'t made any mistakes in this category, or you have corrected all your mistakes.'**
+  String get noMistakesInCategory;
+
+  /// You label for current user
+  ///
+  /// In en, this message translates to:
+  /// **'YOU'**
+  String get you;
+
+  /// Privacy settings
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy'**
+  String get privacy;
+
+  /// Edit profile title
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Profile'**
+  String get editProfileTitle;
+
+  /// Name field label
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get nameLabel;
+
+  /// Title field label
+  ///
+  /// In en, this message translates to:
+  /// **'Title'**
+  String get titleLabel;
+
+  /// Log out button
+  ///
+  /// In en, this message translates to:
+  /// **'Log Out'**
+  String get logOut;
+
+  /// Log out dialog title
+  ///
+  /// In en, this message translates to:
+  /// **'Log Out'**
+  String get logOutTitle;
+
+  /// Log out confirmation message
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to exit the application?'**
+  String get logOutMessage;
+
+  /// Privacy settings title
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy Settings'**
+  String get privacySettings;
+
+  /// Show profile to others setting
+  ///
+  /// In en, this message translates to:
+  /// **'Show My Profile to Others'**
+  String get showMyProfileToOthers;
+
+  /// Show in leaderboard setting
+  ///
+  /// In en, this message translates to:
+  /// **'Show in Leaderboard'**
+  String get showInLeaderboard;
+
+  /// Privacy settings updated message
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy settings updated'**
+  String get privacySettingsUpdated;
+
+  /// About option
+  ///
+  /// In en, this message translates to:
+  /// **'About'**
+  String get about;
+
+  /// My devices subtitle
+  ///
+  /// In en, this message translates to:
+  /// **'You can log in from a maximum of 2 devices'**
+  String get myDevicesSubtitle;
+
+  /// No registered devices message
+  ///
+  /// In en, this message translates to:
+  /// **'No registered devices found'**
+  String get noRegisteredDevices;
+
+  /// Error loading devices message
+  ///
+  /// In en, this message translates to:
+  /// **'Error loading devices'**
+  String get errorLoadingDevices;
+
+  /// Current device label
+  ///
+  /// In en, this message translates to:
+  /// **'Current Device'**
+  String get currentDevice;
+
+  /// Last active label
+  ///
+  /// In en, this message translates to:
+  /// **'Last Active'**
+  String get lastActive;
+
+  /// Device info label
+  ///
+  /// In en, this message translates to:
+  /// **'Device Info'**
+  String get deviceInfo;
+
+  /// Platform label
+  ///
+  /// In en, this message translates to:
+  /// **'Platform'**
+  String get platform;
+
+  /// Version label
+  ///
+  /// In en, this message translates to:
+  /// **'Version'**
+  String get version;
+
+  /// Logout from device button
+  ///
+  /// In en, this message translates to:
+  /// **'Logout from Device'**
+  String get logoutFromDevice;
+
+  /// Logout from device confirmation message
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to logout from this device?'**
+  String get logoutFromDeviceMessage;
+
+  /// Device logged out message
+  ///
+  /// In en, this message translates to:
+  /// **'Logged out from device'**
+  String get deviceLoggedOut;
+
+  /// Close button
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get close;
+
+  /// Profile information updated message
+  ///
+  /// In en, this message translates to:
+  /// **'Profile information updated'**
+  String get profileInformationUpdated;
+
+  /// About page coming soon message
+  ///
+  /// In en, this message translates to:
+  /// **'About page will be added soon'**
+  String get aboutPageComingSoon;
 }
 
 class _AppLocalizationsDelegate

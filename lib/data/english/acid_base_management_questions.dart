@@ -633,16 +633,16 @@ List<Question> acidBaseManagementQuestions = [
   ),
   Question(
     id: 'acid_base_management_043',
-    question: 'What is the most common cause of metabolic alkalosis?',
+    question: 'Which is the strongest buffer system?',
     options: [
-      'Renal failure',
-      'Hypokalemia',
-      'Diabetic ketoacidosis',
-      'Vomiting',
-      'Sepsis'
+      'Hemoglobin',
+      'Bicarbonate',
+      'Phosphate',
+      'Plasma proteins',
+      'Glutathione'
     ],
-    correctAnswerIndex: 3,
-    explanation: 'Loss of gastric acid due to vomiting → metabolic alkalosis.',
+    correctAnswerIndex: 1,
+    explanation: 'The bicarbonate buffer system is the fastest and most effective in acid–base regulation.',
     category: 'Acid-Base Management',
     difficulty: 2
   ),
