@@ -740,14 +740,14 @@ class _AdminScreenState extends State<AdminScreen>
                     ? _languageStats['turkishCategories'] ?? 0
                     : _languageStats['englishCategories'] ?? 0;
                 final color = isTurkish ? Colors.red : Colors.blue;
-                final icon = isTurkish ? Icons.flag_circle : Icons.language;
+                final flag = isTurkish ? '🇹🇷' : '🇺🇸';
 
                 return _buildLanguageStatCard(
                   language, 
                   questionCount, 
                   categoryCount, 
                   color, 
-                  icon, 
+                  flag, 
                   screenWidth
                 );
               },
@@ -763,7 +763,7 @@ class _AdminScreenState extends State<AdminScreen>
     int questionCount, 
     int categoryCount, 
     Color color, 
-    IconData icon, 
+    String flag, 
     double screenWidth
   ) {
     final isSmallScreen = screenWidth < 600;
@@ -787,20 +787,35 @@ class _AdminScreenState extends State<AdminScreen>
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          // Icon ve başlık satırı
+          // Flag ve başlık satırı
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                padding: EdgeInsets.all(isSmallScreen ? 2 : 4),
+                padding: EdgeInsets.all(isSmallScreen ? 4 : 6),
                 decoration: BoxDecoration(
                   color: color.withOpacity(0.2),
-                  borderRadius: BorderRadius.circular(isSmallScreen ? 3 : 4),
+                  borderRadius: BorderRadius.circular(isSmallScreen ? 6 : 8),
                 ),
-                child: Icon(
-                  icon,
-                  color: color,
-                  size: isSmallScreen ? 16 : (isLargeScreen ? 20 : 18),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      flag,
+                      style: TextStyle(
+                        fontSize: isSmallScreen ? 16 : (isLargeScreen ? 20 : 18),
+                      ),
+                    ),
+                    SizedBox(width: isSmallScreen ? 4 : 6),
+                    Text(
+                      language,
+                      style: TextStyle(
+                        color: color,
+                        fontSize: isSmallScreen ? 12 : (isLargeScreen ? 14 : 13),
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],
@@ -1260,12 +1275,11 @@ class _AdminScreenState extends State<AdminScreen>
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(
-                            Icons.flag_circle,
-                            color: _selectedLanguage == 'turkish' 
-                                ? Colors.red
-                                : Colors.white.withOpacity(0.7),
-                            size: 14,
+                          Text(
+                            '🇹🇷',
+                            style: TextStyle(
+                              fontSize: 14,
+                            ),
                           ),
                           const SizedBox(width: 6),
                           Flexible(
@@ -1316,12 +1330,11 @@ class _AdminScreenState extends State<AdminScreen>
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(
-                            Icons.language,
-                            color: _selectedLanguage == 'english' 
-                                ? Colors.blue
-                                : Colors.white.withOpacity(0.7),
-                            size: 14,
+                          Text(
+                            '🇺🇸',
+                            style: TextStyle(
+                              fontSize: 14,
+                            ),
                           ),
                           const SizedBox(width: 6),
                           Flexible(
