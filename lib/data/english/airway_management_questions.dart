@@ -601,4 +601,409 @@ List<Question> airwayManagementQuestions = [
     category: 'Airway Management',
     difficulty: 2
   ),
+  Question(
+    id: 'airway_management_041',
+    question: 'What is the most appropriate intubation method in patients at high risk of aspiration?',
+    options: [
+      'Awake intubation',
+      'Cricothyrotomy',
+      'Rapid sequence intubation (RSI)',
+      'Tracheostomy',
+      'Nasal intubation'
+    ],
+    correctAnswerIndex: 2,
+    explanation: 'RSI reduces aspiration of gastric contents in high-risk patients.',
+    category: 'Airway Management',
+    difficulty: 2
+  ),
+  Question(
+    id: 'airway_management_042',
+    question: 'Between which structures is the cricothyroid membrane located?',
+    options: [
+      'Thyroid cartilage and hyoid bone',
+      'Cricoid cartilage and trachea',
+      'Thyroid and cricoid cartilages',
+      'Epiglottis and vocal cords',
+      'Cricoid and hyoid bone'
+    ],
+    correctAnswerIndex: 2,
+    explanation: 'The cricothyroid membrane lies between the thyroid and cricoid cartilages; it is a target in emergency airway access.',
+    category: 'Airway Management',
+    difficulty: 2
+  ),
+  Question(
+    id: 'airway_management_043',
+    question: 'Which of the following is one of the strongest predictors of difficult intubation?',
+    options: [
+      'Body mass index <25',
+      'Mallampati class I',
+      'Mouth opening <3 cm',
+      'Tall stature',
+      'Presence of hypotension'
+    ],
+    correctAnswerIndex: 2,
+    explanation: 'A mouth opening under 3 cm makes intubation technically difficult.',
+    category: 'Airway Management',
+    difficulty: 2
+  ),
+  Question(
+    id: 'airway_management_044',
+    question: 'According to the Difficult Airway Society algorithm, what should be done first if intubation fails?',
+    options: [
+      'Create a surgical airway',
+      'Attempt intubation again',
+      'Insert a laryngeal mask airway (LMA)',
+      'Wake the patient',
+      'Transtracheal jet ventilation'
+    ],
+    correctAnswerIndex: 2,
+    explanation: 'If intubation fails and mask ventilation is possible, a supraglottic device (LMA) is recommended.',
+    category: 'Airway Management',
+    difficulty: 2
+  ),
+  Question(
+    id: 'airway_management_045',
+    question: 'In which patients is an oropharyngeal airway contraindicated?',
+    options: [
+      'Awake patients',
+      'Unconscious patients',
+      'Those with traumatic brain injury',
+      'Intubated patients',
+      'Patients under anesthesia'
+    ],
+    correctAnswerIndex: 0,
+    explanation: 'In conscious patients it can cause gagging, vomiting, and laryngospasm.',
+    category: 'Airway Management',
+    difficulty: 2
+  ),
+  Question(
+    id: 'airway_management_046',
+    question: 'In difficult airway prediction, a thyromental distance below how many centimeters is risky?',
+    options: [
+      '8 cm',
+      '7 cm',
+      '6.5 cm',
+      '6 cm',
+      '5 cm'
+    ],
+    correctAnswerIndex: 3,
+    explanation: 'When thyromental distance is <6 cm, the risk of difficult intubation increases.',
+    category: 'Airway Management',
+    difficulty: 2
+  ),
+  Question(
+    id: 'airway_management_047',
+    question: 'What is the most common cardiac arrhythmia during intubation?',
+    options: [
+      'Bradycardia',
+      'Tachycardia',
+      'Ventricular fibrillation',
+      'AV block',
+      'Asystole'
+    ],
+    correctAnswerIndex: 0,
+    explanation: 'Especially in children, vagal stimulation may lead to bradycardia.',
+    category: 'Airway Management',
+    difficulty: 2
+  ),
+  Question(
+    id: 'airway_management_048',
+    question: 'Which statement about the nasopharyngeal airway is correct in airway management?',
+    options: [
+      'Used only in children',
+      'Inserted through the nose; can be tolerated by conscious patients',
+      'Increases aspiration risk',
+      'Used only as an alternative to tracheostomy',
+      'Used in patients with full mouth opening'
+    ],
+    correctAnswerIndex: 1,
+    explanation: 'A nasopharyngeal airway is generally better tolerated by awake patients.',
+    category: 'Airway Management',
+    difficulty: 2
+  ),
+  Question(
+    id: 'airway_management_049',
+    question: 'Which is the most commonly used videolaryngoscope?',
+    options: [
+      'GlideScope',
+      'Bonfils',
+      'Airtraq',
+      'McGrath',
+      'C-MAC'
+    ],
+    correctAnswerIndex: 0,
+    explanation: 'GlideScope is among the most widely used videolaryngoscopes.',
+    category: 'Airway Management',
+    difficulty: 2
+  ),
+  Question(
+    id: 'airway_management_050',
+    question: 'In the difficult airway algorithm, if the patient cannot be intubated and cannot be ventilated with a mask, what should be done first?',
+    options: [
+      'Insert an LMA',
+      'Perform videolaryngoscopy',
+      'Create a surgical airway',
+      'Wake the patient',
+      'Insert a nasopharyngeal airway'
+    ],
+    correctAnswerIndex: 2,
+    explanation: 'In a "can\'t intubate, can\'t ventilate" situation, a surgical airway (cricothyrotomy) is indicated.',
+    category: 'Airway Management',
+    difficulty: 2
+  ),
+  Question(
+    id: 'airway_management_051',
+    question: 'Which situation is a contraindication for cricothyrotomy?',
+    options: [
+      'Laryngeal trauma',
+      'Facial trauma',
+      'Children (<10 years)',
+      'Hypoxia',
+      'Dysphagia'
+    ],
+    correctAnswerIndex: 2,
+    explanation: 'The cricothyroid membrane is narrow in children; transtracheal jet ventilation is preferred.',
+    category: 'Airway Management',
+    difficulty: 2
+  ),
+  Question(
+    id: 'airway_management_052',
+    question: 'What should be done if glottic structures are not visible?',
+    options: [
+      'Re-adjust the position',
+      'Force the tube forward',
+      'Abandon intubation',
+      'Hyperventilate',
+      'Increase sedation'
+    ],
+    correctAnswerIndex: 0,
+    explanation: 'If the view is poor, reposition and try the BURP maneuver.',
+    category: 'Airway Management',
+    difficulty: 2
+  ),
+  Question(
+    id: 'airway_management_053',
+    question: 'Which device allows intubation while preserving spontaneous respiration?',
+    options: [
+      'Fiberoptic bronchoscope',
+      'Laryngoscope',
+      'Cricothyrotomy tube',
+      'Nasopharyngeal airway',
+      'Orotracheal tube'
+    ],
+    correctAnswerIndex: 0,
+    explanation: 'Fiberoptic intubation can be performed safely in an awake patient with spontaneous breathing.',
+    category: 'Airway Management',
+    difficulty: 2
+  ),
+  Question(
+    id: 'airway_management_054',
+    question: 'What is the most common mistake in airway management?',
+    options: [
+      'Failure to assess aspiration risk',
+      'Assessing mouth opening',
+      'Preoxygenation before intubation',
+      'Performing videolaryngoscopy',
+      'Applying the Sellick maneuver'
+    ],
+    correctAnswerIndex: 0,
+    explanation: 'Sedation or intubation without assessing aspiration risk can cause serious complications.',
+    category: 'Airway Management',
+    difficulty: 2
+  ),
+  Question(
+    id: 'airway_management_055',
+    question: 'What is the approximate success rate of the LMA in securing the airway?',
+    options: [
+      '40%',
+      '60%',
+      '80%',
+      '90%',
+      '100%'
+    ],
+    correctAnswerIndex: 3,
+    explanation: 'LMA insertion has a success rate around 90%.',
+    category: 'Airway Management',
+    difficulty: 2
+  ),
+  Question(
+    id: 'airway_management_056',
+    question: 'Which of the following is one of the most important complications in emergency intubation?',
+    options: [
+      'Hyperkalemia',
+      'Hypoglycemia',
+      'Aspiration',
+      'Bradycardia',
+      'Hypocapnia'
+    ],
+    correctAnswerIndex: 2,
+    explanation: 'In emergencies the stomach may be full, increasing the aspiration risk.',
+    category: 'Airway Management',
+    difficulty: 2
+  ),
+  Question(
+    id: 'airway_management_057',
+    question: 'What is the most reliable predictive test for difficult intubation?',
+    options: [
+      'Mallampati classification',
+      'Thyromental distance measurement',
+      'Neck circumference measurement',
+      'Sternomental distance',
+      'Mouth-opening assessment'
+    ],
+    correctAnswerIndex: 0,
+    explanation: 'Mallampati classification (Classes III–IV, where the tongue base obscures the view, increase the risk of difficult intubation).',
+    category: 'Airway Management',
+    difficulty: 2
+  ),
+  Question(
+    id: 'airway_management_058',
+    question: 'Which fits the definition of a "difficult airway"?',
+    options: [
+      'More than 3 laryngoscopy attempts or >10 minutes of intubation attempts by an experienced anesthetist',
+      'Failure to intubate on the first attempt',
+      'Partial visualization of the cords during laryngoscopy',
+      'Difficult mask ventilation',
+      'A short neck'
+    ],
+    correctAnswerIndex: 0,
+    explanation: 'Per ASA criteria.',
+    category: 'Airway Management',
+    difficulty: 2
+  ),
+  Question(
+    id: 'airway_management_059',
+    question: 'Which is not a supraglottic airway device?',
+    options: [
+      'Endotracheal tube',
+      'Laryngeal mask airway (LMA)',
+      'i-gel',
+      'ProSeal LMA',
+      'Laryngeal tube'
+    ],
+    correctAnswerIndex: 0,
+    explanation: 'Endotracheal tube (It is an infraglottic airway; the others are supraglottic devices).',
+    category: 'Airway Management',
+    difficulty: 2
+  ),
+  Question(
+    id: 'airway_management_060',
+    question: 'Which is an indication for cricothyrotomy?',
+    options: [
+      '"Can\'t intubate, can\'t ventilate" (CICO) situation',
+      'Elective tonsillectomy',
+      'Need for nasal intubation',
+      'Need for bronchoscopy',
+      'Tracheal stenosis'
+    ],
+    correctAnswerIndex: 0,
+    explanation: 'Emergency surgical airway in a non-ventilatable, non-intubatable patient.',
+    category: 'Airway Management',
+    difficulty: 2
+  ),
+  Question(
+    id: 'airway_management_061',
+    question: 'What is the most common complication after intubation?',
+    options: [
+      'Sore throat',
+      'Pneumothorax',
+      'Dental injury',
+      'Esophageal perforation',
+      'Nerve injury'
+    ],
+    correctAnswerIndex: 0,
+    explanation: 'Sore throat (Seen in ~30–50%; usually resolves within 24–48 h).',
+    category: 'Airway Management',
+    difficulty: 2
+  ),
+  Question(
+    id: 'airway_management_062',
+    question: 'What is the first step in treating laryngospasm?',
+    options: [
+      '100% O₂ with positive-pressure ventilation + cricoid pressure',
+      'Immediate tracheotomy',
+      'Intravenous lidocaine',
+      'Immediate extubation',
+      'High-dose opioid'
+    ],
+    correctAnswerIndex: 0,
+    explanation: 'Apply positive-pressure O₂ and the Larson maneuver to break glottic closure.',
+    category: 'Airway Management',
+    difficulty: 2
+  ),
+  Question(
+    id: 'airway_management_063',
+    question: 'Which is not an anatomical difference of the pediatric airway?',
+    options: [
+      'Longer trachea',
+      'Larger tongue',
+      'Higher larynx',
+      'Funnel-shaped cricoid',
+      'Narrow subglottic area'
+    ],
+    correctAnswerIndex: 0,
+    explanation: 'Children have a shorter trachea; correct tube placement is critical.',
+    category: 'Airway Management',
+    difficulty: 2
+  ),
+  Question(
+    id: 'airway_management_064',
+    question: 'Which condition is a contraindication to intubation?',
+    options: [
+      'Laryngeal edema',
+      'Asthma',
+      'COPD',
+      'Obesity',
+      'Pregnancy'
+    ],
+    correctAnswerIndex: 0,
+    explanation: 'Laryngeal edema (Intubation is difficult and risky; tracheostomy may be required).',
+    category: 'Airway Management',
+    difficulty: 2
+  ),
+  Question(
+    id: 'airway_management_065',
+    question: 'Which of the following is not a laryngoscope blade type used during intubation?',
+    options: [
+      'Guedel',
+      'Macintosh',
+      'Miller',
+      'McCoy',
+      'Wisconsin'
+    ],
+    correctAnswerIndex: 0,
+    explanation: 'Guedel (Guedel is an oropharyngeal airway; the others are blade types).',
+    category: 'Airway Management',
+    difficulty: 2
+  ),
+  Question(
+    id: 'airway_management_066',
+    question: 'What is the appropriate endotracheal tube cuff pressure during intubation?',
+    options: [
+      '20–30 cmH₂O',
+      '10–15 cmH₂O',
+      '40–50 cmH₂O',
+      '60–70 cmH₂O',
+      '80–90 cmH₂O'
+    ],
+    correctAnswerIndex: 0,
+    explanation: '20–30 cmH₂O (Higher pressures can cause tracheal ischemia and necrosis).',
+    category: 'Airway Management',
+    difficulty: 2
+  ),
+  Question(
+    id: 'airway_management_067',
+    question: 'What is the appropriate endotracheal tube cuff inflation volume during intubation?',
+    options: [
+      '5–10 mL of air',
+      '1–2 mL of air',
+      '15–20 mL of air',
+      '25–30 mL of air',
+      '35–40 mL of air'
+    ],
+    correctAnswerIndex: 1,
+    explanation: '1–2 mL of air (Volume is adjusted to tube size; excessive volume is traumatic).',
+    category: 'Airway Management',
+    difficulty: 2
+  ),
 ];

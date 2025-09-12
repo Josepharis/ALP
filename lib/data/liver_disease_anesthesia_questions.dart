@@ -167,7 +167,7 @@ final List<Question> liverDiseaseAnesthesiaQuestions = [
   ),
 
   Question(
-    question: "Aşağıdakilerden hangisi karaciğer hastalığı olan hastada en iyi preoperatif risk tahminini sağlar?",
+    question: "Karaciğer hastalığı olan hastada aşağıdaki parametrelerden hangisi en iyi preoperatif risk tahminini sağlar?",
     options: [
       "AST/ALT oranı",
       "Serum bilirubin",
@@ -223,96 +223,6 @@ final List<Question> liverDiseaseAnesthesiaQuestions = [
     correctAnswerIndex: 3,
     difficulty: 2,
     explanation: "Propofol, hızlı dağılım ve kısa etki süresi sayesinde birikme riski azdır. Ancak doz titrasyonu dikkatle yapılmalıdır.",
-    category: "Karaciğer Hastalığı Olan Hastalarda Anestezi",
-  ),
-
-  Question(
-    question: "Aşağıdakilerden hangisi, gebede artmış oksijen gereksiniminin en önemli nedenlerinden biridir?",
-    options: [
-      "Metabolik hızın artması",
-      "Mide hacminin büyümesi",
-      "Böbrek fonksiyonlarının azalması",
-      "Akciğer kompliansının artması",
-      "Artmış hematokrit"
-    ],
-    correctAnswerIndex: 0,
-    difficulty: 2,
-    explanation: "Gebelikte metabolik hız %20–30 artar → oksijen ihtiyacı artar, bu durum anestezide oksijen desteğini kritik hale getirir.",
-    category: "Karaciğer Hastalığı Olan Hastalarda Anestezi",
-  ),
-
-  Question(
-    question: "Aşağıdakilerden hangisi, doğum sırasında epidural anestezi sonrası motor blok derinleşmesinin en olası nedenidir?",
-    options: [
-      "Dilüe lokal anestezik kullanılması",
-      "Epidural alana opioid verilmesi",
-      "Kateterin subaraknoid alana kaçması",
-      "Preeklampsi varlığı",
-      "Epidural yerleşimin yetersiz olması"
-    ],
-    correctAnswerIndex: 2,
-    difficulty: 2,
-    explanation: "Epidural kateterin subaraknoid alana girmesi, spinal anesteziye benzer derin motor blok ile sonuçlanabilir.",
-    category: "Karaciğer Hastalığı Olan Hastalarda Anestezi",
-  ),
-
-  Question(
-    question: "Obstetrik analjezi amacıyla epidural uygulamada en sık kullanılan kateter yerleştirme aralığı hangisidir?",
-    options: [
-      "T12–L1",
-      "T10–T11",
-      "L2–L3",
-      "L3–L4",
-      "L1–L2"
-    ],
-    correctAnswerIndex: 3,
-    difficulty: 2,
-    explanation: "L3–L4 aralığı, hem anatomik erişim kolaylığı sağlar hem de spinal kordun yukarıda olması nedeniyle güvenli giriş noktasıdır.",
-    category: "Karaciğer Hastalığı Olan Hastalarda Anestezi",
-  ),
-
-  Question(
-    question: "Aşağıdakilerden hangisi, epidural anestezi sonrası gelişen dural ponksiyona bağlı komplikasyonlardan biridir?",
-    options: [
-      "Motor blok derinliği azalması",
-      "Postdural ponksiyon baş ağrısı",
-      "Sezaryen oranında artış",
-      "Hipoglisemi",
-      "Uterin kasılma artışı"
-    ],
-    correctAnswerIndex: 1,
-    difficulty: 2,
-    explanation: "Dura ponksiyonu sonrası BOS kaçağı olur → dural ponksiyon baş ağrısı en sık komplikasyondur.",
-    category: "Karaciğer Hastalığı Olan Hastalarda Anestezi",
-  ),
-
-  Question(
-    question: "Aşağıdakilerden hangisi, epidural analjezi uygulanmış bir doğum eyleminde maternal ateş artışına neden olabilir?",
-    options: [
-      "Lokal anestezik alerjisi",
-      "Sefalopelvik uyumsuzluk",
-      "Epidural uygulamanın kendisi",
-      "Amniyotik sıvı artışı",
-      "Epizyotomi"
-    ],
-    correctAnswerIndex: 2,
-    difficulty: 2,
-    explanation: "Bazı çalışmalarda epidural analjezinin doğrudan maternal ateş artışı ile ilişkili olduğu gösterilmiştir; mekanizma tam bilinmemekle birlikte proinflamatuvar yanıt olabilir.",
-    category: "Karaciğer Hastalığı Olan Hastalarda Anestezi",
-  ),
-
-  Question(
-    question: "Epidural anestezi sonrası hipotansiyon gelişen gebede en uygun ilk vazopresör ajan hangisidir?",
-    options: [
-      "Dopamin",
-      "Adrenalin",
-      "Noradrenalin",
-      "Fenilefrin",
-      "Dobutamin"
-    ],
-    correctAnswerIndex: 3,
-    difficulty: 2,
-    explanation: "Fenilefrin, uteroplasental perfüzyonu bozmadan arteriyel basıncı artırır, gebelikte hipotansiyon tedavisinde tercih edilir.",
     category: "Karaciğer Hastalığı Olan Hastalarda Anestezi",
   ),
 
@@ -1082,7 +992,7 @@ final List<Question> liverDiseaseAnesthesiaQuestions = [
   ),
 
   Question(
-    question: "Karaciğer sirozlu hastalarda hangi durum spontan bakteriyel peritonit (SBP) için tipiktir?",
+    question: "Karaciğer sirozlu bir hastada hangi durum spontan bakteriyel peritonit (SBP) için tipiktir?",
     options: [
       "Asit sıvısında PMNL >250 hücre/mm3",
       "Asit sıvısında şeker düşüklüğü",

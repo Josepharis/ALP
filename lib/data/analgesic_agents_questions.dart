@@ -5,8 +5,7 @@ final List<Question> analgesicAgentsQuestions = [
     question: "Aşağıdakilerden hangisi opioidlere özgü bir etki değildir?",
     options: ["Solunum depresyonu", "İshal", "Miosis", "Öfori", "Analjezi"],
     correctAnswerIndex: 1,
-    explanation:
-        "Opioidler gastrointestinal motiliteyi azaltarak konstipasyona yol açar. İshal opioidlerle tipik olarak görülmez.",
+    explanation: "Opioidler gastrointestinal motiliteyi azaltarak konstipasyona yol açar. İshal opioidlerle tipik olarak görülmez.",
     category: "analjezik ajanlar",
     difficulty: 2,
   ),
@@ -21,8 +20,7 @@ final List<Question> analgesicAgentsQuestions = [
       "Oral biyoyararlanımı yüksektir",
     ],
     correctAnswerIndex: 3,
-    explanation:
-        "Fentanil yüksek lipofilisiteye sahip olduğundan hızlı beyin penetrasyonu ve hızlı etki başlar.",
+    explanation: "Fentanil yüksek lipofilisiteye sahip olduğundan hızlı beyin penetrasyonu ve hızlı etki başlar.",
     category: "analjezik ajanlar",
     difficulty: 2,
   ),
@@ -31,8 +29,7 @@ final List<Question> analgesicAgentsQuestions = [
     question: "Aşağıdaki opioidlerden hangisinin etkisi uzun sürelidir?",
     options: ["Fentanil", "Remifentanil", "Sufentanil", "Morfin", "Alfentanil"],
     correctAnswerIndex: 3,
-    explanation:
-        "Morfin yarı ömrü uzun olan, daha geç başlayan ama uzun süren bir etki profiline sahiptir.",
+    explanation: "Morfin yarı ömrü uzun olan, daha geç başlayan ama uzun süren bir etki profiline sahiptir.",
     category: "analjezik ajanlar",
     difficulty: 1,
   ),
@@ -47,19 +44,16 @@ final List<Question> analgesicAgentsQuestions = [
       "Oral kullanılabilir",
     ],
     correctAnswerIndex: 1,
-    explanation:
-        "Remifentanil plazma ve doku esterazlarıyla yıkılır. Etkisi çok kısa sürelidir ve sürekli infüzyonla kullanılır.",
+    explanation: "Remifentanil plazma ve doku esterazlarıyla yıkılır. Etkisi çok kısa sürelidir ve sürekli infüzyonla kullanılır.",
     category: "analjezik ajanlar",
     difficulty: 2,
   ),
 
   Question(
-    question:
-        "Aşağıdaki opioidlerden hangisi aktif metabolitleri nedeniyle renal yetmezlikte dikkatle kullanılmalıdır?",
+    question: "Aşağıdaki opioidlerden hangisi aktif metabolitleri nedeniyle renal yetmezlikte dikkatle kullanılmalıdır?",
     options: ["Remifentanil", "Fentanil", "Morfin", "Alfentanil", "Sufentanil"],
     correctAnswerIndex: 2,
-    explanation:
-        "Morfinin aktif metaboliti olan M6G (morfin-6-glukuronid) böbrek yetmezliğinde birikir ve solunum depresyonu riskini artırır.",
+    explanation: "Morfinin aktif metaboliti olan M6G (morfin-6-glukuronid) böbrek yetmezliğinde birikir ve solunum depresyonu riskini artırır.",
     category: "analjezik ajanlar",
     difficulty: 3,
   ),
@@ -68,19 +62,16 @@ final List<Question> analgesicAgentsQuestions = [
     question: "Opioidlerin hangi etkisi tolerans gelişimine en az yatkındır?",
     options: ["Analjezi", "Öfori", "Solunum depresyonu", "Miosis", "Sedasyon"],
     correctAnswerIndex: 3,
-    explanation:
-        "Miosis, opioidlerin tolerans gelişmeyen tipik bir etkisidir. Kronik kullanıcılarda dahi belirgindir.",
+    explanation: "Miosis, opioidlerin tolerans gelişmeyen tipik bir etkisidir. Kronik kullanıcılarda dahi belirgindir.",
     category: "analjezik ajanlar",
     difficulty: 2,
   ),
 
   Question(
-    question:
-        "Aşağıdaki reseptörlerden hangisi opioidlerin primer analjezik etkisinden sorumludur?",
+    question: "Aşağıdaki reseptörlerden hangisi opioidlerin primer analjezik etkisinden sorumludur?",
     options: ["Delta", "Kappa", "NMDA", "Mu", "Beta"],
     correctAnswerIndex: 3,
-    explanation:
-        "Mu (μ) reseptörleri opioidlerin analjezik, sedatif, solunum depresif ve öforik etkilerinin çoğundan sorumludur.",
+    explanation: "Mu (μ) reseptörleri opioidlerin analjezik, sedatif, solunum depresif ve öforik etkilerinin çoğundan sorumludur.",
     category: "analjezik ajanlar",
     difficulty: 2,
   ),
@@ -95,15 +86,13 @@ final List<Question> analgesicAgentsQuestions = [
       "Etki süresi morfinden uzundur",
     ],
     correctAnswerIndex: 2,
-    explanation:
-        "Nalokson opioid antagonistidir; mu, delta ve kappa reseptörlerini bloke eder. IV kullanımda hızlı etki eder.",
+    explanation: "Nalokson opioid antagonistidir; mu, delta ve kappa reseptörlerini bloke eder. IV kullanımda hızlı etki eder.",
     category: "analjezik ajanlar",
     difficulty: 1,
   ),
 
   Question(
-    question:
-        "Tramadol'ün analjezik etkisinin bir kısmı hangi nörotransmitterler üzerinden gerçekleşir?",
+    question: "Tramadol'ün analjezik etkisinin bir kısmı hangi nörotransmitterler üzerinden gerçekleşir?",
     options: [
       "Dopamin ve GABA",
       "NMDA ve glutamat",
@@ -112,19 +101,16 @@ final List<Question> analgesicAgentsQuestions = [
       "Histamin ve serotonin",
     ],
     correctAnswerIndex: 2,
-    explanation:
-        "Tramadol hem zayıf bir μ-opioid agonistidir hem de serotonin ve noradrenalin geri alım inhibitörüdür; bu kombinasyon analjezik etki sağlar.",
+    explanation: "Tramadol hem zayıf bir μ-opioid agonistidir hem de serotonin ve noradrenalin geri alım inhibitörüdür; bu kombinasyon analjezik etki sağlar.",
     category: "analjezik ajanlar",
     difficulty: 3,
   ),
 
   Question(
-    question:
-        "Opioid kullanımına bağlı gelişen kas gövde rijiditesi en çok hangi ajanla ilişkilidir?",
+    question: "Opioid kullanımına bağlı gelişen kas gövde rijiditesi en çok hangi ajanla ilişkilidir?",
     options: ["Morfin", "Tramadol", "Fentanil", "Meperidin", "Nalbuphin"],
     correctAnswerIndex: 2,
-    explanation:
-        "Fentanil ve türevleri (özellikle yüksek doz IV bolus) göğüs duvarı rijiditesi yapabilir; bu da ventilasyonu zorlaştırabilir.",
+    explanation: "Fentanil ve türevleri (özellikle yüksek doz IV bolus) göğüs duvarı rijiditesi yapabilir; bu da ventilasyonu zorlaştırabilir.",
     category: "analjezik ajanlar",
     difficulty: 2,
   ),
@@ -133,15 +119,13 @@ final List<Question> analgesicAgentsQuestions = [
     question: "Aşağıdaki opioidlerin hangisinin aktif metaboliti yoktur?",
     options: ["Morfin", "Meperidin", "Tramadol", "Fentanil", "Hidromorfon"],
     correctAnswerIndex: 3,
-    explanation:
-        "Fentanil karaciğerde inaktif metabolitlere yıkılır. Bu nedenle renal yetmezlikte birikme riski düşüktür.",
+    explanation: "Fentanil karaciğerde inaktif metabolitlere yıkılır. Bu nedenle renal yetmezlikte birikme riski düşüktür.",
     category: "analjezik ajanlar",
     difficulty: 2,
   ),
 
   Question(
-    question:
-        "Opioidlerin neden olduğu bulantı-kusma etkisi hangi mekanizma ile ilişkilidir?",
+    question: "Opioidlerin neden olduğu bulantı-kusma etkisi hangi mekanizma ile ilişkilidir?",
     options: [
       "NMDA antagonizması",
       "Mu reseptör stimülasyonu",
@@ -150,15 +134,13 @@ final List<Question> analgesicAgentsQuestions = [
       "Histamin salınımı",
     ],
     correctAnswerIndex: 3,
-    explanation:
-        "CTZ medulladaki kusma merkezidir ve opioidler bu bölgeyi uyararak bulantı-kusmaya neden olur.",
+    explanation: "CTZ medulladaki kusma merkezidir ve opioidler bu bölgeyi uyararak bulantı-kusmaya neden olur.",
     category: "analjezik ajanlar",
     difficulty: 3,
   ),
 
   Question(
-    question:
-        "Meperidin ile ilişkili en ciddi toksisite aşağıdakilerden hangisidir?",
+    question: "Meperidin ile ilişkili en ciddi toksisite aşağıdakilerden hangisidir?",
     options: [
       "Karaciğer yetmezliği",
       "Epileptik nöbet",
@@ -167,15 +149,13 @@ final List<Question> analgesicAgentsQuestions = [
       "İdrar retansiyonu",
     ],
     correctAnswerIndex: 1,
-    explanation:
-        "Meperidin metaboliti olan normeperidin santral sinir sisteminde birikerek nöbet riskini artırır; özellikle böbrek yetmezliğinde tehlikelidir.",
+    explanation: "Meperidin metaboliti olan normeperidin santral sinir sisteminde birikerek nöbet riskini artırır; özellikle böbrek yetmezliğinde tehlikelidir.",
     category: "analjezik ajanlar",
     difficulty: 3,
   ),
 
   Question(
-    question:
-        "Opioidlere karşı gelişen tolerans en hızlı hangi etki üzerinde görülür?",
+    question: "Opioidlere karşı gelişen tolerans en hızlı hangi etki üzerinde görülür?",
     options: [
       "Analjezi",
       "Miosis",
@@ -184,8 +164,7 @@ final List<Question> analgesicAgentsQuestions = [
       "Bulantı-kusma",
     ],
     correctAnswerIndex: 0,
-    explanation:
-        "Analjezik etkiye tolerans hızlı gelişir. Ancak miosis ve konstipasyon gibi etkiler uzun süre sabit kalabilir.",
+    explanation: "Analjezik etkiye tolerans hızlı gelişir. Ancak miosis ve konstipasyon gibi etkiler uzun süre sabit kalabilir.",
     category: "analjezik ajanlar",
     difficulty: 2,
   ),
@@ -200,15 +179,13 @@ final List<Question> analgesicAgentsQuestions = [
       "Remifentanil",
     ],
     correctAnswerIndex: 2,
-    explanation:
-        "Buprenorfin, yüksek afiniteye sahip bir parsiyel mu agonistidir. Analjezik etkisi vardır ancak tam agonistlerden daha az etkilidir.",
+    explanation: "Buprenorfin, yüksek afiniteye sahip bir parsiyel mu agonistidir. Analjezik etkisi vardır ancak tam agonistlerden daha az etkilidir.",
     category: "analjezik ajanlar",
     difficulty: 2,
   ),
 
   Question(
-    question:
-        "Opioid toleransının gelişiminde en önemli faktör aşağıdakilerden hangisidir?",
+    question: "Opioid toleransının gelişiminde en önemli faktör aşağıdakilerden hangisidir?",
     options: [
       "Reseptör sayısının artması",
       "Reseptör afinitesinin artması",
@@ -217,19 +194,16 @@ final List<Question> analgesicAgentsQuestions = [
       "Reseptör mutasyonu",
     ],
     correctAnswerIndex: 2,
-    explanation:
-        "Sürekli opioid kullanımı reseptör down-regülasyonu ve internalizasyonuna neden olur, bu da toleransın gelişiminde rol oynar.",
+    explanation: "Sürekli opioid kullanımı reseptör down-regülasyonu ve internalizasyonuna neden olur, bu da toleransın gelişiminde rol oynar.",
     category: "analjezik ajanlar",
     difficulty: 3,
   ),
 
   Question(
-    question:
-        "Aşağıdaki opioidlerden hangisi serotonerjik kriz riskini artırabilir?",
+    question: "Aşağıdaki opioidlerden hangisi serotonerjik kriz riskini artırabilir?",
     options: ["Fentanil", "Tramadol", "Morfin", "Kodein", "Hepsi"],
     correctAnswerIndex: 1,
-    explanation:
-        "Tramadol ve meperidin serotonin geri alımını da etkileyebilir; bu nedenle SSRI gibi ilaçlarla birlikte kullanıldığında serotonerjik kriz riski vardır.",
+    explanation: "Tramadol ve meperidin serotonin geri alımını da etkileyebilir; bu nedenle SSRI gibi ilaçlarla birlikte kullanıldığında serotonerjik kriz riski vardır.",
     category: "analjezik ajanlar",
     difficulty: 3,
   ),
@@ -238,37 +212,31 @@ final List<Question> analgesicAgentsQuestions = [
     question: "Aşağıdakilerden hangisi opioid yoksunluk bulgusu değildir?",
     options: ["Rinore", "Midriyazis", "Ajitasyon", "Konstipasyon", "Terleme"],
     correctAnswerIndex: 3,
-    explanation:
-        "Opioid yoksunluğunda konstipasyon görülmez; aksine diyare tipiktir. Midriyazis, terleme ve huzursuzluk sık bulgulardır.",
+    explanation: "Opioid yoksunluğunda konstipasyon görülmez; aksine diyare tipiktir. Midriyazis, terleme ve huzursuzluk sık bulgulardır.",
     category: "analjezik ajanlar",
     difficulty: 2,
   ),
 
   Question(
-    question:
-        "Naloksonun etki süresi aşağıdakilerden hangisi için yetersiz kalabilir?",
+    question: "Naloksonun etki süresi aşağıdakilerden hangisi için yetersiz kalabilir?",
     options: ["Fentanil", "Remifentanil", "Morfin", "Meperidin", "Tramadol"],
     correctAnswerIndex: 2,
-    explanation:
-        "Naloksonun yarı ömrü morfinden daha kısadır. Bu nedenle tekrar doz gerekebilir; rebound solunum depresyonu riski vardır.",
+    explanation: "Naloksonun yarı ömrü morfinden daha kısadır. Bu nedenle tekrar doz gerekebilir; rebound solunum depresyonu riski vardır.",
     category: "analjezik ajanlar",
     difficulty: 2,
   ),
 
   Question(
-    question:
-        "Opioidlerin neden olduğu solunum depresyonu aşağıdaki reseptörlerden hangisi aracılığıyla olur?",
+    question: "Opioidlerin neden olduğu solunum depresyonu aşağıdaki reseptörlerden hangisi aracılığıyla olur?",
     options: ["Kappa", "Delta", "NMDA", "Mu", "Sigma"],
     correctAnswerIndex: 3,
-    explanation:
-        "Solunum depresyonu opioidlerin medulladaki solunum merkezinde yer alan mu (μ) reseptörleri üzerinden yaptığı inhibitör etkiyle oluşur.",
+    explanation: "Solunum depresyonu opioidlerin medulladaki solunum merkezinde yer alan mu (μ) reseptörleri üzerinden yaptığı inhibitör etkiyle oluşur.",
     category: "analjezik ajanlar",
     difficulty: 2,
   ),
 
   Question(
-    question:
-        "Remifentanil ile ilgili olarak aşağıdakilerden hangisi doğrudur?",
+    question: "Remifentanil ile ilgili olarak aşağıdakilerden hangisi doğrudur?",
     options: [
       "Etkisi hepatik metabolizmaya bağlıdır",
       "Uzun etkili bir ajandır",
@@ -277,15 +245,13 @@ final List<Question> analgesicAgentsQuestions = [
       "Analjezik gücü morfinden düşüktür",
     ],
     correctAnswerIndex: 3,
-    explanation:
-        "Remifentanil plazma ve doku esterazlarıyla hızla yıkılır; bu nedenle çok kısa etkili olup hızlı titrasyon avantajı sunar.",
+    explanation: "Remifentanil plazma ve doku esterazlarıyla hızla yıkılır; bu nedenle çok kısa etkili olup hızlı titrasyon avantajı sunar.",
     category: "analjezik ajanlar",
     difficulty: 2,
   ),
 
   Question(
-    question:
-        "Aşağıdakilerden hangisi opioidlerin medulla üzerindeki etkilerinden biri değildir?",
+    question: "Aşağıdakilerden hangisi opioidlerin medulla üzerindeki etkilerinden biri değildir?",
     options: [
       "Solunum depresyonu",
       "Öksürük refleksinin baskılanması",
@@ -294,15 +260,13 @@ final List<Question> analgesicAgentsQuestions = [
       "Sedasyon",
     ],
     correctAnswerIndex: 3,
-    explanation:
-        "Opioidler medullada öksürük ve solunum merkezlerini baskılar, sedasyon yapar; ancak doğrudan kas gevşetici etkileri yoktur.",
+    explanation: "Opioidler medullada öksürük ve solunum merkezlerini baskılar, sedasyon yapar; ancak doğrudan kas gevşetici etkileri yoktur.",
     category: "analjezik ajanlar",
     difficulty: 2,
   ),
 
   Question(
-    question:
-        "Opioidlerin gastrointestinal sistem üzerindeki tipik etkisi hangisidir?",
+    question: "Opioidlerin gastrointestinal sistem üzerindeki tipik etkisi hangisidir?",
     options: [
       "Motilite artışı",
       "Sekresyon artışı",
@@ -311,8 +275,7 @@ final List<Question> analgesicAgentsQuestions = [
       "Peptik ülser gelişimi",
     ],
     correctAnswerIndex: 3,
-    explanation:
-        "Opioidler mide ve bağırsak motilitesini azaltır, peristaltizmi yavaşlatır. Bu da konstipasyona neden olur.",
+    explanation: "Opioidler mide ve bağırsak motilitesini azaltır, peristaltizmi yavaşlatır. Bu da konstipasyona neden olur.",
     category: "analjezik ajanlar",
     difficulty: 1,
   ),
@@ -321,8 +284,7 @@ final List<Question> analgesicAgentsQuestions = [
     question: "Aşağıdakilerden hangisi tam opioid agonistidir?",
     options: ["Buprenorfin", "Nalbuphin", "Morfin", "Nalokson", "Pentazosin"],
     correctAnswerIndex: 2,
-    explanation:
-        "Morfin klasik tam μ-opioid agonistidir; analjezik etkisi belirgindir. Diğerleri parsiyel agonist veya antagonisttir.",
+    explanation: "Morfin klasik tam μ-opioid agonistidir; analjezik etkisi belirgindir. Diğerleri parsiyel agonist veya antagonisttir.",
     category: "analjezik ajanlar",
     difficulty: 1,
   ),
@@ -337,15 +299,13 @@ final List<Question> analgesicAgentsQuestions = [
       "GH (büyüme hormonu) salınımını baskılar",
     ],
     correctAnswerIndex: 2,
-    explanation:
-        "Opioidler hipotalamo-hipofizer aksı etkileyerek gonadotropin (LH, FSH) salınımını baskılar; bu durum hipogonadizme neden olabilir.",
+    explanation: "Opioidler hipotalamo-hipofizer aksı etkileyerek gonadotropin (LH, FSH) salınımını baskılar; bu durum hipogonadizme neden olabilir.",
     category: "analjezik ajanlar",
     difficulty: 3,
   ),
 
   Question(
-    question:
-        "Opioid kullanımına bağlı gelişen hiperaljezi en çok hangi durumda görülür?",
+    question: "Opioid kullanımına bağlı gelişen hiperaljezi en çok hangi durumda görülür?",
     options: [
       "Düşük doz uzun süreli kullanım",
       "Hızlı doz azaltılması",
@@ -354,19 +314,16 @@ final List<Question> analgesicAgentsQuestions = [
       "Oral kullanım",
     ],
     correctAnswerIndex: 2,
-    explanation:
-        "Özellikle remifentanil gibi kısa etkili opioidlerin yüksek doz ve kısa süreli infüzyonu sonrası, 'opioid ilişkili hiperaljezi' gelişebilir.",
+    explanation: "Özellikle remifentanil gibi kısa etkili opioidlerin yüksek doz ve kısa süreli infüzyonu sonrası, 'opioid ilişkili hiperaljezi' gelişebilir.",
     category: "analjezik ajanlar",
     difficulty: 3,
   ),
 
   Question(
-    question:
-        "Aşağıdaki opioidlerin hangisi kas rijiditesine en çok neden olur?",
+    question: "Aşağıdaki opioidlerin hangisi kas rijiditesine en çok neden olur?",
     options: ["Alfentanil", "Meperidin", "Morfin", "Nalbuphin", "Tramadol"],
     correctAnswerIndex: 0,
-    explanation:
-        "Alfentanil, hızlı etki başlangıcı ve yüksek potens nedeniyle göğüs duvarı rijiditesine neden olabilir; bu etki genellikle yüksek doz IV bolus ile ortaya çıkar.",
+    explanation: "Alfentanil, hızlı etki başlangıcı ve yüksek potens nedeniyle göğüs duvarı rijiditesine neden olabilir; bu etki genellikle yüksek doz IV bolus ile ortaya çıkar.",
     category: "analjezik ajanlar",
     difficulty: 2,
   ),
@@ -381,15 +338,13 @@ final List<Question> analgesicAgentsQuestions = [
       "Böbrek üzerinden metabolize olur",
     ],
     correctAnswerIndex: 2,
-    explanation:
-        "Tramadol'ün analjezik etkisi hem zayıf μ-opioid agonist etkisinden hem de serotonin/noradrenalin geri alım inhibitörlüğünden kaynaklanır.",
+    explanation: "Tramadol'ün analjezik etkisi hem zayıf μ-opioid agonist etkisinden hem de serotonin/noradrenalin geri alım inhibitörlüğünden kaynaklanır.",
     category: "analjezik ajanlar",
     difficulty: 2,
   ),
 
   Question(
-    question:
-        "Opioidlerin medulla üzerindeki etkilerinden hangisi tedavi edici olarak kullanılır?",
+    question: "Opioidlerin medulla üzerindeki etkilerinden hangisi tedavi edici olarak kullanılır?",
     options: [
       "Solunum depresyonu",
       "Öksürük refleksi baskılanması",
@@ -398,30 +353,25 @@ final List<Question> analgesicAgentsQuestions = [
       "Midriyazis",
     ],
     correctAnswerIndex: 1,
-    explanation:
-        "Opioidler medulladaki öksürük merkezini baskılayarak antitussif (öksürük kesici) etki yaparlar; bu amaçla düşük doz kodein gibi ajanlar kullanılır.",
+    explanation: "Opioidler medulladaki öksürük merkezini baskılayarak antitussif (öksürük kesici) etki yaparlar; bu amaçla düşük doz kodein gibi ajanlar kullanılır.",
     category: "analjezik ajanlar",
     difficulty: 2,
   ),
 
   Question(
-    question:
-        "Aşağıdakilerden hangisi opioid yoksunluk sendromuna ait geç bulgulardan biridir?",
+    question: "Aşağıdakilerden hangisi opioid yoksunluk sendromuna ait geç bulgulardan biridir?",
     options: ["Midriyazis", "Anksiyete", "Rinore", "Terleme", "Kas ağrısı"],
     correctAnswerIndex: 4,
-    explanation:
-        "Opioid yoksunluğunun erken bulguları arasında rinore, lakrimasyon, terleme varken; kas ağrıları ve kramplar geç bulgular arasında yer alır.",
+    explanation: "Opioid yoksunluğunun erken bulguları arasında rinore, lakrimasyon, terleme varken; kas ağrıları ve kramplar geç bulgular arasında yer alır.",
     category: "analjezik ajanlar",
     difficulty: 2,
   ),
 
   Question(
-    question:
-        "Aşağıdaki opioidlerin hangisi kardiyovasküler stabiliteyi en fazla korur?",
+    question: "Aşağıdaki opioidlerin hangisi kardiyovasküler stabiliteyi en fazla korur?",
     options: ["Meperidin", "Morfin", "Sufentanil", "Fentanil", "Remifentanil"],
     correctAnswerIndex: 3,
-    explanation:
-        "Fentanil, minimal histamin salınımı ve sempatik tonus üzerindeki etkileri nedeniyle kardiyovasküler stabiliteyi en iyi koruyan opioidlerden biridir.",
+    explanation: "Fentanil, minimal histamin salınımı ve sempatik tonus üzerindeki etkileri nedeniyle kardiyovasküler stabiliteyi en iyi koruyan opioidlerden biridir.",
     category: "analjezik ajanlar",
     difficulty: 2,
   ),
@@ -436,26 +386,22 @@ final List<Question> analgesicAgentsQuestions = [
       "Pupilla fiksasyonu",
     ],
     correctAnswerIndex: 2,
-    explanation:
-        "Opioidler parasempatik sistemi uyararak pupillaların daralmasına (miosis) neden olur. Bu etkiye tolerans gelişmez.",
+    explanation: "Opioidler parasempatik sistemi uyararak pupillaların daralmasına (miosis) neden olur. Bu etkiye tolerans gelişmez.",
     category: "analjezik ajanlar",
     difficulty: 1,
   ),
 
   Question(
-    question:
-        "Aşağıdaki opioidlerden hangisi safra kanallarında spazma neden olarak biliyer kolik oluşturabilir?",
+    question: "Aşağıdaki opioidlerden hangisi safra kanallarında spazma neden olarak biliyer kolik oluşturabilir?",
     options: ["Meperidin", "Fentanil", "Morfin", "Tramadol", "Nalbuphin"],
     correctAnswerIndex: 2,
-    explanation:
-        "Morfin Oddi sfinkterini kasarak safra akışını azaltabilir ve biliyer kolik ağrıya yol açabilir.",
+    explanation: "Morfin Oddi sfinkterini kasarak safra akışını azaltabilir ve biliyer kolik ağrıya yol açabilir.",
     category: "analjezik ajanlar",
     difficulty: 2,
   ),
 
   Question(
-    question:
-        "Aşağıdakilerden hangisi opioid kullanımında konstipasyon gelişimini en iyi önler?",
+    question: "Aşağıdakilerden hangisi opioid kullanımında konstipasyon gelişimini en iyi önler?",
     options: [
       "Düşük doz opioid kullanımı",
       "Antikolinerjik kombinasyonu",
@@ -464,8 +410,7 @@ final List<Question> analgesicAgentsQuestions = [
       "SSRI eş zamanlı kullanımı",
     ],
     correctAnswerIndex: 2,
-    explanation:
-        "Laksatiflere yanıt vermeyen opioid kaynaklı konstipasyon, periferik opioid reseptör antagonistleri (örn. metilnaltrekson) ile etkili şekilde tedavi edilir.",
+    explanation: "Laksatiflere yanıt vermeyen opioid kaynaklı konstipasyon, periferik opioid reseptör antagonistleri (örn. metilnaltrekson) ile etkili şekilde tedavi edilir.",
     category: "analjezik ajanlar",
     difficulty: 3,
   ),
@@ -480,19 +425,16 @@ final List<Question> analgesicAgentsQuestions = [
       "Kusmayı önlerler",
     ],
     correctAnswerIndex: 2,
-    explanation:
-        "Opioidler plasentayı geçer ve doğum sırasında uygulandığında yenidoğanda solunum depresyonuna neden olabilir.",
+    explanation: "Opioidler plasentayı geçer ve doğum sırasında uygulandığında yenidoğanda solunum depresyonuna neden olabilir.",
     category: "analjezik ajanlar",
     difficulty: 2,
   ),
 
   Question(
-    question:
-        "Aşağıdaki opioidlerin hangisi doğum ağrısında sıklıkla tercih edilir?",
+    question: "Aşağıdaki opioidlerin hangisi doğum ağrısında sıklıkla tercih edilir?",
     options: ["Morfin", "Nalbuphin", "Fentanil", "Meperidin", "Alfentanil"],
     correctAnswerIndex: 3,
-    explanation:
-        "Meperidin (petidin), hem analjezik etkisi hem de uterus kontraksiyonlarını çok az etkilemesi nedeniyle doğum sırasında tercih edilen opioidlerden biridir.",
+    explanation: "Meperidin (petidin), hem analjezik etkisi hem de uterus kontraksiyonlarını çok az etkilemesi nedeniyle doğum sırasında tercih edilen opioidlerden biridir.",
     category: "analjezik ajanlar",
     difficulty: 2,
   ),
@@ -507,15 +449,13 @@ final List<Question> analgesicAgentsQuestions = [
       "TNF-alfa aktivasyonu",
     ],
     correctAnswerIndex: 2,
-    explanation:
-        "Özellikle morfin gibi bazı opioidler mast hücrelerinden histamin salınımına neden olur; bu da kaşıntıya yol açar.",
+    explanation: "Özellikle morfin gibi bazı opioidler mast hücrelerinden histamin salınımına neden olur; bu da kaşıntıya yol açar.",
     category: "analjezik ajanlar",
     difficulty: 2,
   ),
 
   Question(
-    question:
-        "Aşağıdakilerden hangisi opioidlerin kronik kullanımı sonucunda gelişebilecek bir durumdur?",
+    question: "Aşağıdakilerden hangisi opioidlerin kronik kullanımı sonucunda gelişebilecek bir durumdur?",
     options: [
       "Hiperkalemi",
       "Hipoglisemi",
@@ -524,37 +464,31 @@ final List<Question> analgesicAgentsQuestions = [
       "Hipertiroidizm",
     ],
     correctAnswerIndex: 2,
-    explanation:
-        "Kronik opioid kullanımı hipotalamo-hipofiz-gonad aksını baskılayarak testosteron düzeyini düşürür; bu durum opioid ilişkili hipogonadizm olarak bilinir.",
+    explanation: "Kronik opioid kullanımı hipotalamo-hipofiz-gonad aksını baskılayarak testosteron düzeyini düşürür; bu durum opioid ilişkili hipogonadizm olarak bilinir.",
     category: "analjezik ajanlar",
     difficulty: 3,
   ),
 
   Question(
-    question:
-        "Aşağıdaki opioidlerden hangisinin antitussif etkisi daha belirgindir?",
+    question: "Aşağıdaki opioidlerden hangisinin antitussif etkisi daha belirgindir?",
     options: ["Morfin", "Fentanil", "Tramadol", "Kodein", "Nalbuphin"],
     correctAnswerIndex: 3,
-    explanation:
-        "Kodein düşük dozda öksürük merkezini baskılayarak güçlü antitussif etki gösterir; bu amaçla sıkça reçetelenir.",
+    explanation: "Kodein düşük dozda öksürük merkezini baskılayarak güçlü antitussif etki gösterir; bu amaçla sıkça reçetelenir.",
     category: "analjezik ajanlar",
     difficulty: 1,
   ),
 
   Question(
-    question:
-        "Aşağıdaki opioidlerden hangisi histamin salınımına en az neden olur?",
+    question: "Aşağıdaki opioidlerden hangisi histamin salınımına en az neden olur?",
     options: ["Morfin", "Meperidin", "Fentanil", "Kodein", "Tramadol"],
     correctAnswerIndex: 2,
-    explanation:
-        "Fentanil ve türevleri (sufentanil, alfentanil) histamin salınımı açısından oldukça güvenlidir ve bu nedenle hemodinamik stabilite aranan hastalarda tercih edilir.",
+    explanation: "Fentanil ve türevleri (sufentanil, alfentanil) histamin salınımı açısından oldukça güvenlidir ve bu nedenle hemodinamik stabilite aranan hastalarda tercih edilir.",
     category: "analjezik ajanlar",
     difficulty: 2,
   ),
 
   Question(
-    question:
-        "Aşağıdakilerden hangisi μ-opioid reseptör stimülasyonuna bağlı değildir?",
+    question: "Aşağıdakilerden hangisi μ-opioid reseptör stimülasyonuna bağlı değildir?",
     options: [
       "Solunum depresyonu",
       "Euforia",
@@ -563,15 +497,13 @@ final List<Question> analgesicAgentsQuestions = [
       "Hipertansiyon",
     ],
     correctAnswerIndex: 4,
-    explanation:
-        "μ-reseptör stimülasyonu hipotansiyon yapabilir; hipertansiyon bu reseptör aktivitesine bağlı tipik bir etki değildir.",
+    explanation: "μ-reseptör stimülasyonu hipotansiyon yapabilir; hipertansiyon bu reseptör aktivitesine bağlı tipik bir etki değildir.",
     category: "analjezik ajanlar",
     difficulty: 2,
   ),
 
   Question(
-    question:
-        "Aşağıdaki durumların hangisinde opioidlerin etkisi artmış olabilir?",
+    question: "Aşağıdaki durumların hangisinde opioidlerin etkisi artmış olabilir?",
     options: [
       "Karaciğer enzim indüksiyonu",
       "CYP3A4 aktivasyonunun artması",
@@ -580,19 +512,16 @@ final List<Question> analgesicAgentsQuestions = [
       "Hipertiroidi",
     ],
     correctAnswerIndex: 2,
-    explanation:
-        "Renal yetmezlikte bazı opioidlerin aktif metabolitleri (özellikle morfin) birikir; bu durum etkilerinin artmasına ve toksisiteye yol açabilir.",
+    explanation: "Renal yetmezlikte bazı opioidlerin aktif metabolitleri (özellikle morfin) birikir; bu durum etkilerinin artmasına ve toksisiteye yol açabilir.",
     category: "analjezik ajanlar",
     difficulty: 2,
   ),
 
   Question(
-    question:
-        "Meperidin kullanımında normeperidin birikimi ile ortaya çıkabilen en önemli klinik bulgu nedir?",
+    question: "Meperidin kullanımında normeperidin birikimi ile ortaya çıkabilen en önemli klinik bulgu nedir?",
     options: ["Deliryum", "Solunum artışı", "Nöbet", "Hipotermi", "Midriyazis"],
     correctAnswerIndex: 2,
-    explanation:
-        "Normeperidin nörotoksiktir; yüksek doz veya böbrek yetmezliğinde birikerek konvülsiyonlara (nöbetlere) neden olabilir.",
+    explanation: "Normeperidin nörotoksiktir; yüksek doz veya böbrek yetmezliğinde birikerek konvülsiyonlara (nöbetlere) neden olabilir.",
     category: "analjezik ajanlar",
     difficulty: 3,
   ),
@@ -607,8 +536,7 @@ final List<Question> analgesicAgentsQuestions = [
       "Analjeziyi uzatmak",
     ],
     correctAnswerIndex: 3,
-    explanation:
-        "Opioidlerin neden olduğu kaşıntı, histamin salınımına bağlıdır; bu nedenle H1 antagonistleri (antihistaminikler) ile azaltılabilir.",
+    explanation: "Opioidlerin neden olduğu kaşıntı, histamin salınımına bağlıdır; bu nedenle H1 antagonistleri (antihistaminikler) ile azaltılabilir.",
     category: "analjezik ajanlar",
     difficulty: 2,
   ),
@@ -623,15 +551,13 @@ final List<Question> analgesicAgentsQuestions = [
       "Noradrenalin geri alımını inhibe eder",
     ],
     correctAnswerIndex: 3,
-    explanation:
-        "Tramadol yüksek dozda kullanıldığında nöbet riskini artırabilir; özellikle epileptik hastalarda dikkatli kullanılmalıdır.",
+    explanation: "Tramadol yüksek dozda kullanıldığında nöbet riskini artırabilir; özellikle epileptik hastalarda dikkatli kullanılmalıdır.",
     category: "analjezik ajanlar",
     difficulty: 2,
   ),
 
   Question(
-    question:
-        "Opioidlerin en ciddi yan etkisi olarak kabul edilen durum hangisidir?",
+    question: "Opioidlerin en ciddi yan etkisi olarak kabul edilen durum hangisidir?",
     options: [
       "Miosis",
       "Sedasyon",
@@ -640,8 +566,7 @@ final List<Question> analgesicAgentsQuestions = [
       "Kaşıntı",
     ],
     correctAnswerIndex: 3,
-    explanation:
-        "Solunum depresyonu, opioidlerin en ciddi ve yaşamı tehdit edebilen yan etkisidir; doz titrasyonu ve izlem bu nedenle çok önemlidir.",
+    explanation: "Solunum depresyonu, opioidlerin en ciddi ve yaşamı tehdit edebilen yan etkisidir; doz titrasyonu ve izlem bu nedenle çok önemlidir.",
     category: "analjezik ajanlar",
     difficulty: 1,
   ),
@@ -650,19 +575,706 @@ final List<Question> analgesicAgentsQuestions = [
     question: "Aşağıdakilerden hangisi opioid antagonistidir?",
     options: ["Meperidin", "Tramadol", "Nalokson", "Fentanil", "Alfentanil"],
     correctAnswerIndex: 2,
-    explanation:
-        "Nalokson, tam opioid antagonistidir ve opioid aşırı dozlarında ilk tercihtir; etkisi kısa sürelidir, gerekirse tekrar dozu verilir.",
+    explanation: "Nalokson, tam opioid antagonistidir ve opioid aşırı dozlarında ilk tercihtir; etkisi kısa sürelidir, gerekirse tekrar dozu verilir.",
     category: "analjezik ajanlar",
     difficulty: 1,
   ),
 
   Question(
-    question:
-        "Aşağıdaki opioid reseptörlerinden hangisi analjezi etkisinden en çok sorumludur?",
+    question: "Aşağıdaki opioid reseptörlerinden hangisi analjezi etkisinden en çok sorumludur?",
     options: ["Delta (δ)", "Kappa (κ)", "Mu (μ)", "Sigma (σ)", "NMDA"],
     correctAnswerIndex: 2,
-    explanation:
-        "Mu (μ) reseptörleri, spinal ve supraspinal düzeyde analjezi, solunum depresyonu ve bağımlılık etkilerinden sorumludur.",
+    explanation: "Mu (μ) reseptörleri, spinal ve supraspinal düzeyde analjezi, solunum depresyonu ve bağımlılık etkilerinden sorumludur.",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Aşağıdaki opioidlerden hangisi en hızlı etki başlangıcına sahiptir?",
+    options: ["Morfin", "Fentanil", "Sufentanil", "Remifentanil", "Alfentanil"],
+    correctAnswerIndex: 3,
+    explanation: "Remifentanil çok kısa etkili ve hızlı başlangıçlıdır, esterazlarla yıkılır → sürekli infüzyona uygundur.",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Aşağıdakilerden hangisi opioidlerin tipik bir etkisi değildir?",
+    options: ["Solunum depresyonu", "Mide boşalmasını geciktirme", "Midriazis", "Bradikardi", "Kaşıntı"],
+    correctAnswerIndex: 2,
+    explanation: "Opioidler miyozis (pinpoint pupiller) yapar. Midriazis sempatomimetik ajanlara özgüdür.",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Aşağıdaki opioidlerden hangisi histamin salınımı ile en ilişkilidir?",
+    options: ["Morfin", "Fentanil", "Sufentanil", "Remifentanil", "Alfentanil"],
+    correctAnswerIndex: 0,
+    explanation: "Morfin, histamin salınımına yol açar → hipotansiyon ve bronkospazma neden olabilir.",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Fentanil ile ilgili aşağıdaki ifadelerden hangisi doğrudur?",
+    options: [
+      "Histamin salınımı yapar",
+      "Uzun etkili bir opioiddir",
+      "Solunumu baskılamaz",
+      "Kardiyostabil bir ajandır",
+      "Yüksek oral biyoyararlanıma sahiptir",
+    ],
+    correctAnswerIndex: 3,
+    explanation: "Fentanil kardiyovasküler sistemi minimal etkiler → kardiyostabildir. Bu nedenle anestezide sık kullanılır.",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Remifentanil ile ilgili aşağıdaki ifadelerden hangisi yanlıştır?",
+    options: [
+      "Pseudo-kolinesteraz ile yıkılır",
+      "Etkisi hızla sonlanır",
+      "Karaciğer yetmezliğinde doz ayarlamak gerekir",
+      "Sürekli infüzyonla verilir",
+      "Bağımlılık potansiyeli vardır",
+    ],
+    correctAnswerIndex: 2,
+    explanation: "Remifentanil plazma esterazlarıyla yıkılır → karaciğer ya da böbrek yetmezliği dozlamı etkilemez.",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Aşağıdakilerden hangisi opioidlerin neden olduğu bulantı-kusma refleksinden sorumludur?",
+    options: ["Karotis sinüs", "Kemoreseptör tetik bölge (CTZ)", "Vestibüler çekirdek", "Solunum merkezi", "Serebral korteks"],
+    correctAnswerIndex: 1,
+    explanation: "CTZ, opioidler tarafından uyarıldığında bulantı-kusma oluşur → medulladaki bu merkez dopaminerjiktir.",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Opioidlerin neden olduğu solunum depresyonu aşağıdaki hangi mekanizma ile gerçekleşir?",
+    options: [
+      "Bronkokonstriksiyon",
+      "Kemoreseptör duyarlılığının artması",
+      "Medulladaki CO₂ hassasiyetinin azalması",
+      "Santral sinir sisteminin vagal uyarımı",
+      "Periferik reseptör uyarımı",
+    ],
+    correctAnswerIndex: 2,
+    explanation: "Opioidler medulladaki solunum merkezinde CO₂'ye duyarlılığı azaltır → solunum depresyonu gelişir.",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Aşağıdakilerden hangisi opioid toleransı gelişmeyen bir etkidir?",
+    options: ["Analjezi", "Mide-barsak motilitesi azalması", "Solunum depresyonu", "Sedasyon", "Kaşıntı"],
+    correctAnswerIndex: 1,
+    explanation: "GİS etkileri (konstipasyon gibi) zamanla tolerans gelişmeyen nadir opioid etkilerindendir.",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Aşağıdaki ajanlardan hangisi parsiyel opioid agonisti olarak sınıflandırılır?",
+    options: ["Morfin", "Sufentanil", "Nalokson", "Buprenorfin", "Remifentanil"],
+    correctAnswerIndex: 3,
+    explanation: "Buprenorfin, μ-reseptör için parsiyel agonist, kappa reseptör için antagonisttir → bağımlılık tedavisinde kullanılır.",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Tramadol'ün klasik opioidlerden farkı aşağıdakilerden hangisidir?",
+    options: [
+      "Histamin salınımı yapması",
+      "Sadece kappa reseptöre bağlanması",
+      "Monoamin geri alım inhibitörü özelliği",
+      "Uzun etki süresi",
+      "Santral analjezi sağlamaması",
+    ],
+    correctAnswerIndex: 2,
+    explanation: "Tramadol, zayıf μ-agonist olmasının yanında serotonin ve norepinefrin geri alım inhibitörü özelliği ile farklıdır.",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Aşağıdakilerden hangisi yüksek doz opioid verilmesi sonrası gelişebilecek bir bulgudur?",
+    options: ["Miyozis", "Hiperventilasyon", "Midriazis", "Taşikardi", "Hipertansiyon"],
+    correctAnswerIndex: 0,
+    explanation: "Opioid toksisitesinin klasik triadı: miyozis + solunum depresyonu + bilinç değişikliği.",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Aşağıdaki opioidlerden hangisinin etki süresi en kısadır?",
+    options: ["Fentanil", "Sufentanil", "Remifentanil", "Alfentanil", "Morfin"],
+    correctAnswerIndex: 2,
+    explanation: "Remifentanil esterazlarla yıkıldığı için çok kısa etkilidir → etkisi dakikalar içinde sonlanır.",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Aşağıdakilerden hangisi opioid yoksunluğu belirtilerinden biridir?",
+    options: ["Miyozis", "Bradikardi", "Kusma", "Hipotermi", "Solunum depresyonu"],
+    correctAnswerIndex: 2,
+    explanation: "Yoksunlukta midriazis, taşikardi, kusma, ishal, anksiyete gibi semptomlar görülür.",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Fentanil uygulaması sonrası gelişen göğüs kaslarında rijiditeye en olası neden aşağıdakilerden hangisidir?",
+    options: ["Bronkospazm", "Histamin salınımı", "Dopamin aktivasyonu", "Santral kas tonus artışı", "Asetilkolin azalması"],
+    correctAnswerIndex: 3,
+    explanation: "Yüksek doz fentanil, santral yollar üzerinden kas rijiditesine neden olabilir → özellikle göğüs kasları etkilenir.",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Aşağıdakilerden hangisi opioidlerin doğumda kullanımı ile ilgili doğru bir ifadedir?",
+    options: ["Her dozda güvenlidir", "Bebeğin solunumu etkilenmez", "Nalokson ile geri döndürülebilir", "Uterus kasılmalarını artırır", "Prematürelerde kontrendikedir"],
+    correctAnswerIndex: 2,
+    explanation: "Opioid kullanımı sonrası yenidoğanda solunum depresyonu olabilir → nalokson ile geri döndürülebilir.",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Aşağıdakilerden hangisi opioidlerin GİS üzerindeki etkilerinden biridir?",
+    options: ["İshal yapmaları", "Mide boşalmasını hızlandırmaları", "Sfinkter tonusunu artırmaları", "Peristaltizmi artırmaları", "Ülserojenik etkileri"],
+    correctAnswerIndex: 2,
+    explanation: "Opioidler GİS'te sfinkter tonusunu artırır, motiliteyi azaltır → konstipasyon yapar.",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Aşağıdakilerden hangisi opioid toleransı gelişmeyen etkilerdendir?",
+    options: ["Analjezi", "Sedasyon", "Solunum depresyonu", "Mide barsak motilite azalması", "Öfori"],
+    correctAnswerIndex: 3,
+    explanation: "Opioidlerde GİS etkilerine karşı tolerans gelişmez → konstipasyon kronik kullanımda devam eder.",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Naloksonun etki süresi ortalama ne kadardır?",
+    options: ["5–10 saniye", "5–15 dakika", "30–45 dakika", "2–4 saat", "6–8 saat"],
+    correctAnswerIndex: 2,
+    explanation: "Naloksonun etkisi kısa sürelidir (30–45 dk) → uzun etkili opioid zehirlenmelerinde tekrar doz gerekebilir.",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Aşağıdaki opioid ajanlardan hangisi en potent olandır?",
+    options: ["Morfin", "Fentanil", "Sufentanil", "Alfentanil", "Tramadol"],
+    correctAnswerIndex: 2,
+    explanation: "Sufentanil, morfinden yaklaşık 1000 kat daha potenttir → yüksek potensli kısa etkili opioidlerdendir.",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Aşağıdakilerden hangisi opioid kullanımının uzun süreli komplikasyonlarından biridir?",
+    options: ["Hipertansiyon", "Tolerans gelişimi", "Bradikinezi", "Renal yetmezlik", "Hepatik fibroz"],
+    correctAnswerIndex: 1,
+    explanation: "Uzun süreli opioid kullanımı birçok etkiye karşı tolerans gelişmesine neden olur (özellikle analjezi, öfori, sedasyon).",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Morfinin renal yetersizlikte dikkatle kullanılması gereken nedeni nedir?",
+    options: ["Protein bağlanmasının azalması", "Artmış CYP450 aktivitesi", "Aktif metabolitlerinin birikimi", "İlacın lipofilik olması", "Antagonist etkili yan ürün oluşması"],
+    correctAnswerIndex: 2,
+    explanation: "Morfinin aktif metabolitleri (M6G) renal yolla atılır, birikirse solunum depresyonu artabilir.",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Aşağıdaki opioidlerden hangisinin kullanımı sonrası göğüs kas rijiditesi riski en fazladır?",
+    options: ["Morfin", "Fentanil", "Tramadol", "Meperidin", "Metadon"],
+    correctAnswerIndex: 1,
+    explanation: "Özellikle yüksek doz fentanil uygulaması sonrası göğüs kaslarında rijidite gelişebilir → ventilasyonu zorlaştırır.",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Aşağıdakilerden hangisi nalokson kullanımına bağlı en olası durumdur?",
+    options: ["Bronkodilatasyon", "Opioid etkilerinin geçici artışı", "Akut yoksunluk sendromu", "Hipotermi", "Kalıcı analjezi"],
+    correctAnswerIndex: 2,
+    explanation: "Nalokson bağımlı hastada verildiğinde ani yoksunluk sendromu gelişebilir → ajitasyon, kusma, taşikardi vb.",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Opioidlerin en az etkilediği sistem aşağıdakilerden hangisidir?",
+    options: ["Solunum sistemi", "Gastrointestinal sistem", "Kardiyovasküler sistem", "Santral sinir sistemi", "Ürogenital sistem"],
+    correctAnswerIndex: 2,
+    explanation: "Opioidler genelde kardiyovasküler sistemi minimal etkiler. Morfin histamin yoluyla hafif hipotansiyon yapabilir.",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Aşağıdaki opioidlerden hangisinin doğum sırasında kullanımı yenidoğanda en uzun sürede solunum depresyonu oluşturabilir?",
+    options: ["Morfin", "Meperidin", "Remifentanil", "Tramadol", "Fentanil"],
+    correctAnswerIndex: 1,
+    explanation: "Meperidin metaboliti (normeperidin) uzun yarı ömürlüdür → yenidoğanda gecikmiş solunum depresyonu riski oluşturabilir.",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Aşağıdakilerden hangisi opioid reseptörleri ile ilgili doğrudur?",
+    options: ["Tümü iyon kanalıdır", "NMDA reseptörleri ile etkileşirler", "Hepsi G protein bağlıdır", "Yalnızca periferik dokularda bulunurlar", "Ligand kapılı kalsiyum kanalı içerirler"],
+    correctAnswerIndex: 2,
+    explanation: "Opioid reseptörleri (μ, κ, δ), G protein kenetli reseptörlerdir → hücre içi cAMP düzeyini azaltarak etki gösterirler.",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Aşağıdakilerden hangisi opioidlerin doz bağımlı etkilerinden biridir?",
+    options: ["Hipoglisemi", "Bradikardi", "Trombositopeni", "Hiperventilasyon", "Anemi"],
+    correctAnswerIndex: 1,
+    explanation: "Opioidler doz bağımlı olarak vagal tonusu artırır, özellikle yüksek dozlarda bradikardi yapabilirler.",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Aşağıdaki opioidlerden hangisi en yüksek lipofilisiteye sahiptir?",
+    options: ["Morfin", "Meperidin", "Alfentanil", "Fentanil", "Tramadol"],
+    correctAnswerIndex: 3,
+    explanation: "Fentanil ve sufentanil çok lipofilik opioiddir → hızlı etki başlangıcı ve kısa süreli etkisi bu özelliğine bağlıdır. Morfin ise en düşük lipofilik özeliği olan opioiddir.",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Aşağıdakilerden hangisi opioidlerin spinal analjezi sağlamasında rol oynayan reseptördür?",
+    options: ["NMDA", "Mu (μ)", "Beta-adrenerjik", "D₁ reseptörü", "Muskarinik"],
+    correctAnswerIndex: 1,
+    explanation: "Özellikle μ-reseptörleri, hem spinal hem supraspinal düzeyde analjeziden sorumludur.",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Aşağıdaki opioidlerden hangisi deliryum, tremor ve nöbet gibi etkiler yapabilecek atipik bir opioiddir?",
+    options: ["Meperidin", "Morfin", "Fentanil", "Sufentanil", "Remifentanil"],
+    correctAnswerIndex: 0,
+    explanation: "Meperidin metaboliti normeperidin, nörotoksiktir → özellikle yaşlı ve böbrek yetmezliği olanlarda nörolojik yan etkiler yapabilir.",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Aşağıdaki opioidlerden hangisi öfori etkisi ile bağımlılık potansiyeli yüksek bir ajandır?",
+    options: ["Sufentanil", "Morfin", "Nalbuphin", "Nalokson", "Buprenorfin"],
+    correctAnswerIndex: 1,
+    explanation: "Morfin, tam agonisttir ve μ-reseptör aracılığıyla öfori oluşturur → bu durum bağımlılık potansiyelini artırır.",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Aşağıdaki opioid antagonistlerinden hangisi uzun etkilidir ve opioid bağımlılığı tedavisinde kullanılır?",
+    options: ["Nalokson", "Tramadol", "Naltrekson", "Buprenorfin", "Sufentanil"],
+    correctAnswerIndex: 2,
+    explanation: "Naltrekson uzun etkili oral opioid antagonistidir → bağımlılık tedavisinde naloksona kıyasla daha kalıcı etki sağlar.",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Aşağıdakilerden hangisi opioid kullanımı sonrası gelişen safra koliklerinin nedeni olabilir?",
+    options: ["Oddi sfinkter spazmı", "Histamin salınımı", "HCl salınımının azalması", "Karaciğer kan akımının artması", "Portal ven basıncının düşmesi"],
+    correctAnswerIndex: 0,
+    explanation: "Opioidler Oddi sfinkterini kasar, safra akışı engellenebilir → bu da safra koliklerine neden olabilir.",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Aşağıdaki opioid türevlerinden hangisi sentetik değildir?",
+    options: ["Morfin", "Fentanil", "Tramadol", "Meperidin", "Alfentanil"],
+    correctAnswerIndex: 0,
+    explanation: "Morfin doğal bir opioid olup afyon bitkisinden elde edilir. Diğerleri sentetik veya yarı-sentetiktir.",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Aşağıdaki ajanlardan hangisi analjezi etkisi olmadan yalnızca opioid antagonisti olarak görev yapar?",
+    options: ["Naltrekson", "Nalokson", "Tramadol", "Buprenorfin", "Nalbuphin"],
+    correctAnswerIndex: 1,
+    explanation: "Nalokson, tüm opioid reseptörlerinde tam antagonistik etki gösterir ve analjezik etkisi yoktur.",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Aşağıdakilerden hangisi opioid intoksikasyonunun klasik bulgularından biri değildir?",
+    options: ["Bilinç değişikliği", "Solunum depresyonu", "Miyozis", "Hipertermi", "Bradikardi"],
+    correctAnswerIndex: 3,
+    explanation: "Opioid zehirlenmesinde tipik triad: bilinç değişikliği, miyozis ve solunum depresyonu. Hipertermi değil, hipotermi görülebilir.",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Aşağıdakilerden hangisi opioidlerin merkezi analjezik etkisinin bir parçası değildir?",
+    options: ["PAG (periaquaductal gray) aktivasyonu", "Descending inhibitör yolak aktivasyonu", "Medullada serotonin salınımı", "Endojen opioid artışı", "Glutamat aktivasyonu"],
+    correctAnswerIndex: 4,
+    explanation: "Glutamat ağrının iletiminden sorumludur. Opioidler ise bu iletimi inhibe eder. Dolayısıyla glutamat aktivasyonu analjezi ile çelişir.",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Aşağıdaki opioid türevlerinden hangisi aynı zamanda SSRI etkisi göstererek serotonin sendromu riski oluşturabilir?",
+    options: ["Sufentanil", "Meperidin", "Alfentanil", "Buprenorfin", "Morfin"],
+    correctAnswerIndex: 1,
+    explanation: "Meperidin, serotonin geri alımını da inhibe eder → MAO inhibitörleri ile birlikte kullanımı serotonin sendromu riskini artırır.",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Aşağıdakilerden hangisi opioidlerin renal sistem üzerindeki tipik etkilerinden biridir?",
+    options: ["Poliüri", "Natriürez", "Antidiürez", "Hipokalemi", "Glikozüri"],
+    correctAnswerIndex: 2,
+    explanation: "Opioidler ADH salınımını artırır → antidiürez etkisi oluşturur → idrar miktarında azalma olabilir.",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Doğum sırasında verilen opioidler, yenidoğanda en sık hangi duruma yol açar?",
+    options: ["Hipoglisemi", "Solunum depresyonu", "Sepsis benzeri tablo", "Serebral palsi", "Hipotermi"],
+    correctAnswerIndex: 1,
+    explanation: "Opioidler plasentayı geçer → yenidoğanda solunum depresyonu gelişebilir → nalokson ile tedavi edilir.",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Opioidlerin neden olduğu kaşıntı, spinal düzeyde hangi reseptörle ilişkilidir?",
+    options: ["NMDA", "Mu (μ)", "Delta (δ)", "Kappa (κ)", "GABA"],
+    correctAnswerIndex: 1,
+    explanation: "Spinal düzeyde μ-reseptör aktivasyonu kaşıntıya katkı sağlar. Bu durum histamin bağımsız da olabilir.",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Aşağıdaki opioidlerden hangisi preemptif analjezi amacıyla kullanılabilir?",
+    options: ["Morfin", "Fentanil", "Remifentanil", "Sufentanil", "Hepsi"],
+    correctAnswerIndex: 4,
+    explanation: "Opioidler, cerrahi stimulus öncesi verilerek preemptif analjezi sağlarlar → ağrı eşiğini yükseltirler.",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Aşağıdakilerden hangisi opioid kullanımında mental durum değişikliği nedenlerinden biri değildir?",
+    options: ["Doz aşımı", "Nörotoksik metabolitler", "Karaciğer yetmezliği", "NMDA aktivasyonu", "Opioid yoksunluğu"],
+    correctAnswerIndex: 3,
+    explanation: "Opioidler NMDA reseptörlerini inhibe eder. Mental durum değişikliği genellikle doza bağlı veya metabolit birikimine bağlıdır.",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Opioidlerin analjezik etkisinin uzaması amacıyla hangi uygulama yolu daha etkilidir?",
+    options: ["İM", "IV bolus", "Epidural", "Oral", "SC"],
+    correctAnswerIndex: 2,
+    explanation: "Epidural veya spinal uygulama ile opioidler direkt spinal reseptörleri etkiler → daha uzun süreli ve etkili analjezi sağlar.",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Aşağıdakilerden hangisi opioidlerin bağımlılık yapıcı etkisinin temel nedenidir?",
+    options: ["Solunum depresyonu", "Dopamin salınımının artması", "Kas tonusu artışı", "Mide boşalmasının gecikmesi", "Parasempatik blokaj"],
+    correctAnswerIndex: 1,
+    explanation: "Opioidler mezolimbik sistemde dopamin salınımını artırarak ödül merkezini uyarır → bu da bağımlılık yapıcı etkiyi tetikler.",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Hangisi opioid reseptör agonisti-antagonist bir analjeziktir?",
+    options: ["Morfin", "Fentanil", "Nalbufin", "Tramadol", "Metadon"],
+    correctAnswerIndex: 2,
+    explanation: "Nalbufin, kappa reseptör agonisti ve mu reseptör antagonistidir (agonist-antagonist opioid).",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Hangisi fentanilin morfine göre avantajıdır?",
+    options: ["Daha uzun etki süresi", "Daha az histamin salınımı", "Daha fazla sedasyon", "Oral biyoyararlanımının yüksek olması", "Daha az solunum depresyonu"],
+    correctAnswerIndex: 1,
+    explanation: "Fentanil, morfine göre daha potent, daha lipofilik ve daha az histamin salınımı yapar (daha az hipotansiyon).",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Hangisi metadonun özelliklerinden biri değildir?",
+    options: ["Uzun eliminasyon yarı ömrü", "NMDA reseptör antagonizması", "Potent serotonin geri alım inhibisyonu", "Opioid yoksunluk tedavisinde kullanılma", "Oral etkinliğinin yüksek olması"],
+    correctAnswerIndex: 2,
+    explanation: "Metadon, uzun yarı ömürlü, NMDA antagonisti, opioid yoksunluk tedavisinde kullanılan bir mu agonistidir.",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Hangisi tramadolün yan etkilerinden biridir?",
+    options: ["Hipertansiyon", "Nöbet eşiğini yükseltme", "Bradikardi", "Kabızlık yapmama", "Serotonin sendromu riski"],
+    correctAnswerIndex: 4,
+    explanation: "Tramadol, serotonin geri alım inhibisyonu yaparak serotonin sendromu riski oluşturur.",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Hangisi NSAİİ'lerin analjezik etki mekanizmasıdır?",
+    options: ["Opioid reseptör agonizması", "COX-2 inhibisyonu", "GABA-A reseptör aktivasyonu", "NMDA reseptör blokajı", "Asetilkolin esteraz inhibisyonu"],
+    correctAnswerIndex: 1,
+    explanation: "NSAİİ'ler COX-2 inhibisyonu ile prostaglandin sentezini azaltarak analjezi sağlar.",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Hangisi COX-2 selektif NSAİİ'dir?",
+    options: ["İbuprofen", "Naproksen", "Diklofenak", "Celecoxib", "Aspirin"],
+    correctAnswerIndex: 3,
+    explanation: "COX-2 selektif NSAİİ'ler: Celecoxib, etoricoxib. Diğerleri (ibuprofen, naproksen, diklofenak, aspirin) non-selektif COX inhibitörleridir.",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Hangisi asetaminofen toksisitesinin tedavisinde kullanılır?",
+    options: ["Flumazenil", "Nalokson", "N-asetilsistein", "Fomepizol", "Vitamin K"],
+    correctAnswerIndex: 2,
+    explanation: "Asetaminofen toksisitesi karaciğer nekrozuna yol açar. N-asetilsistein, glutatyon replasmanı yaparak detoksifikasyon sağlar.",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Hangisi meperidinin (petidin) metabolitinin neden olduğu yan etkidir?",
+    options: ["Hepatotoksisite", "Nöbet", "Kardiyak aritmi", "Akut böbrek hasarı", "Hipertansiyon"],
+    correctAnswerIndex: 1,
+    explanation: "Meperidin, normeperidin metabolitine dönüşür ve nöbet eşiğini düşürür. Kronik kullanımda nöbet riski artar.",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Hangisi opioid rotasyonunda dikkat edilmesi gereken bir durumdur?",
+    options: ["Eşdeğer dozların kesin olarak hesaplanması", "Yeni opioidin etki başlangıç süresinin uzun olması", "Çapraz toleransın ihmal edilmesi", "Aynı reseptör afinitelerinin göz ardı edilmesi", "Oral yoldan parenteral yola geçişte doz artırımı"],
+    correctAnswerIndex: 0,
+    explanation: "Opioid rotasyonunda eşdeğer doz hesaplaması kritiktir (örn: morfin 10 mg IV = fentanil 100 mcg IV).",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Hangisi ketorolak kullanımı için doğru değildir?",
+    options: ["Maksimum 5 gün kullanılmalıdır", "Postoperatif ağrıda parenteral kullanılabilir", "COX-1 inhibisyonu yapar", "Gebelikte güvenle kullanılabilir", "Böbrek yetmezliğinde kontrendikedir"],
+    correctAnswerIndex: 3,
+    explanation: "Ketorolak, gebelikte (3. trimester) kontrendikedir (fetal duktus arteriozusun erken kapanmasına neden olabilir).",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Hangisi gabapentinin nöropatik ağrıdaki etki mekanizmasıdır?",
+    options: ["NMDA reseptör blokajı", "Voltaj bağımlı kalsiyum kanallarını inhibe etme", "Dopamin geri alım inhibisyonu", "Muskarinik reseptör agonizması", "GABA-B reseptör aktivasyonu"],
+    correctAnswerIndex: 1,
+    explanation: "Gabapentin/pregabalin, alfa-2-delta alt birimine bağlanarak voltaj bağımlı kalsiyum kanallarını inhibe eder.",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Hangisi opioidlerle birlikte kullanıldığında solunum depresyonu riskini azaltır?",
+    options: ["Midazolam", "Nalokson", "Flumazenil", "Ketamin", "Neostigmin"],
+    correctAnswerIndex: 1,
+    explanation: "Nalokson, kompetitif mu reseptör antagonistidir ve opioid kaynaklı solunum depresyonunu tersine çevirir.",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Hangisi transdermal fentanil için doğrudur?",
+    options: ["Akut ağrıda ilk tercihtir", "Etkisi 5 dakikada başlar", "Termal uyaranlarla salınımı artar", "Böbrek yetmezliğinde doz ayarı gerekmez", "48 saatte bir uygulanır"],
+    correctAnswerIndex: 2,
+    explanation: "Transdermal fentanil, ısı artışıyla sistemik emilimi artar (sıcak banyo, ateş).",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Hangisi asetaminofen toksisitesinde görülen laboratuvar bulgusudur?",
+    options: ["Hipoglisemi", "AST/ALT > 1000 IU/L", "Hipokalsemi", "Lökopeni", "Hipernatremi"],
+    correctAnswerIndex: 1,
+    explanation: "Asetaminofen toksisitesinde karaciğer nekrozu gelişir ve AST/ALT belirgin yükselir.",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Hangisi tramadolün metabolitidir ve opioid reseptörlerine bağlanır?",
+    options: ["Normeperidin", "O-desmetiltramadol", "6-Monoasetilmorfin", "Hidromorfon", "Norfentanil"],
+    correctAnswerIndex: 1,
+    explanation: "Tramadol, CYP2D6 ile O-desmetiltramadol metabolitine dönüşür (mu reseptör agonisti).",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Hangisi NSAİİ'lerin böbrek üzerindeki etkisidir?",
+    options: ["Renin sekresyonunu artırma", "Afferent arteriyol dilatasyonu", "Prostaglandin E2 sentezini azaltma", "Sodyum atılımını artırma", "Diürez oluşturma"],
+    correctAnswerIndex: 2,
+    explanation: "NSAİİ'ler renal vazodilatör prostaglandinleri (PGE2, PGI2) inhibe ederek afferent arteriyol vazokonstriksiyonu yapar.",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Hangisi metamizol (dipiron) için doğrudur?",
+    options: ["COX-2 selektif inhibisyon yapar", "Agranülositoz riski taşır", "Gebelikte güvenle kullanılabilir", "Astım atağını tetiklemez", "Kardiyoprotektif etkisi vardır"],
+    correctAnswerIndex: 1,
+    explanation: "Metamizol, agranülositoz ve alejik reaksiyon riski nedeniyle birçok ülkede kısıtlıdır.",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Hangisi epidural opioid uygulamasının yan etkisidir?",
+    options: ["Hipertansiyon", "Geç solunum depresyonu", "Bradikardi", "Hipertermi", "Kas rijiditesi"],
+    correctAnswerIndex: 1,
+    explanation: "Epidural morfin, CSF'de yavaş ilerlediği için 6-12 saat sonra solunum depresyonu yapabilir.",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Hangisi kodeinin aktif metabolitidir?",
+    options: ["Morfin", "Hidrokodon", "Oksikodon", "Fentanil", "Buprenorfin"],
+    correctAnswerIndex: 0,
+    explanation: "Kodein, CYP2D6 ile morfine dönüşür (zayıf metabolize edenlerde etkisiz, ultrarapid metabolize edenlerde toksisite riski).",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Hangisi buprenorfinin özelliğidir?",
+    options: ["Tam mu reseptör agonistidir", "Yüksek dozda solunum depresyonu plato yapar", "Oral biyoyararlanımı %90'dır", "Naloksonla tamamen antagonize edilebilir", "Opioid yoksunluk semptomlarını şiddetlendirir"],
+    correctAnswerIndex: 1,
+    explanation: "Buprenorfin, parsiyel mu agonisti ve kappa antagonistidir. Yüksek dozda solunum depresyonu plato yapar.",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Hangisi duloksetinin etki mekanizmasıdır?",
+    options: ["Dopamin geri alım inhibisyonu", "Noradrenalin ve serotonin geri alım inhibisyonu", "NMDA reseptör blokajı", "GABA-A reseptör aktivasyonu", "Muskarinik reseptör antagonizması"],
+    correctAnswerIndex: 1,
+    explanation: "Duloksetin, SNRI grubundadır (nöropatik ağrı ve depresyonda kullanılır).",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Hangisi lokal anestezik sistemik toksisitesinin tedavisinde ilk seçenektir?",
+    options: ["Lidokain", "Propranolol", "Lipid emülsiyon (%20 intralipid)", "Kalsiyum glukonat", "Diazepam"],
+    correctAnswerIndex: 2,
+    explanation: "Lipid emülsiyon tedavisi (LAST), lokal anestezik sistemik toksisitede ilk basamak tedavidir.",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Hangisi opioid kullanımında gelişen hiperaljezi ile ilişkilidir?",
+    options: ["Delta reseptör aktivasyonu", "NMDA reseptör aktivasyonu", "GABA-A reseptör inhibisyonu", "Alfa-2 reseptör downregülasyonu", "Muskarinik reseptör blokajı"],
+    correctAnswerIndex: 1,
+    explanation: "Uzun süreli opioid kullanımında NMDA reseptör aktivasyonu sonucu hiperaljezi (ağrı duyarlılığında artış) gelişir.",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Hangisi NSAİİ'lerin renal yan etkilerinden değildir?",
+    options: ["Akut böbrek hasarı", "Hiperkalemi", "Sodyum retansiyonu", "Metabolik alkaloz", "Papiller nekroz"],
+    correctAnswerIndex: 3,
+    explanation: "NSAİİ'ler prostaglandin inhibisyonu ile: Vazokonstriksiyon → Akut böbrek hasarı, Aldosteron azalması → Hiperkalemi, Metabolik asidoz yapabilir (alkaloz değil).",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Hangisi asetaminofen toksisitesinde görülen laboratuvar bulgusudur?",
+    options: ["AST > ALT yükselişi", "Hipoglisemi", "Hipoprotrombinemi", "Laktat dehidrojenaz düşüklüğü", "Amonyak düşüklüğü"],
+    correctAnswerIndex: 0,
+    explanation: "Asetaminofen toksisitesinde AST ve ALT yükselir, genellikle AST daha yüksektir.",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Hangisi opioidlerle birlikte kullanıldığında sedasyonu en fazla artırır?",
+    options: ["Metoklopramid", "Ondansetron", "Hidroksizin", "Ranitidin", "Metilprednizolon"],
+    correctAnswerIndex: 2,
+    explanation: "Hidroksizin (antihistaminik), opioidlerle sinerjistik sedasyon yapar.",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Hangisi ketorolak için doğru değildir?",
+    options: ["Parenteral uygulanabilir", "5 günden uzun kullanılmaz", "Postoperatif ağrıda etkilidir", "Platelet fonksiyonunu artırır", "GIS ülserasyonu yapabilir"],
+    correctAnswerIndex: 3,
+    explanation: "Ketorolak, COX-1 inhibisyonu ile trombosit fonksiyonunu bozar (antiplatelet etki).",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Hangisi opioid intoleransı olan hastada alternatif analjezik seçeneğidir?",
+    options: ["Metadon", "Lidokain infüzyonu", "Ketamin infüzyonu", "Diazepam", "Atropin"],
+    correctAnswerIndex: 2,
+    explanation: "Ketamin, opioid intoleransında NMDA antagonizması ile analjezi sağlar.",
+    category: "analjezik ajanlar",
+    difficulty: 2,
+  ),
+
+  Question(
+    question: "Hangisi tapentadolün etki mekanizmasıdır?",
+    options: ["Saf mu agonizması", "Mu agonizması + Noradrenalin geri alım inhibisyonu", "NMDA antagonizması + Serotonin geri alım inhibisyonu", "GABA-A agonizması", "Alfa-2 agonizması"],
+    correctAnswerIndex: 1,
+    explanation: "Tapentadol, mu agonisti + noradrenalin geri alım inhibitörü dual etkilidir.",
     category: "analjezik ajanlar",
     difficulty: 2,
   ),

@@ -647,21 +647,6 @@ List<Question> acidBaseManagementQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'acid_base_management_044',
-    question: 'Which is the strongest buffer system?',
-    options: [
-      'Hemoglobin',
-      'Bicarbonate',
-      'Phosphate',
-      'Plasma proteins',
-      'Glutathione'
-    ],
-    correctAnswerIndex: 1,
-    explanation: 'The bicarbonate buffer system is the fastest and most effective in acid–base regulation.',
-    category: 'Acid-Base Management',
-    difficulty: 2
-  ),
-  Question(
     id: 'acid_base_management_045',
     question: 'What is the renal response in metabolic acidosis?',
     options: [

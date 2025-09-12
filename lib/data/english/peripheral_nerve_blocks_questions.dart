@@ -648,6 +648,186 @@ List<Question> peripheralNerveBlocksQuestions = [
   ),
   Question(
     id: 'peripheral_nerve_blocks_044',
+    question: 'Which combination of nerve blocks is required for wrist surgery?',
+    options: [
+      'Radial nerve',
+      'Median nerve',
+      'Ulnar nerve',
+      'Entire brachial plexus',
+      'Median + Ulnar + Radial nerves'
+    ],
+    correctAnswerIndex: 4,
+    explanation: 'Wrist surgery requires blocking all three major nerves.',
+    category: 'Peripheral Nerve Blocks',
+    difficulty: 2
+  ),
+  Question(
+    id: 'peripheral_nerve_blocks_045',
+    question: 'In infragluteal sciatic block, which surface landmarks are used?',
+    options: [
+      'ASIS',
+      'Greater trochanter & ischial tuberosity',
+      'Femoral artery',
+      'Profunda femoris artery',
+      'Sartorius muscle'
+    ],
+    correctAnswerIndex: 1,
+    explanation: 'Sciatic nerve is localized between these landmarks.',
+    category: 'Peripheral Nerve Blocks',
+    difficulty: 2
+  ),
+  Question(
+    id: 'peripheral_nerve_blocks_046',
+    question: 'Best patient position for popliteal block?',
+    options: [
+      'Lateral decubitus',
+      'Supine',
+      'Trendelenburg',
+      'Prone',
+      'Sitting'
+    ],
+    correctAnswerIndex: 3,
+    explanation: 'Popliteal block is easiest in prone or lateral with knee flexed.',
+    category: 'Peripheral Nerve Blocks',
+    difficulty: 2
+  ),
+  Question(
+    id: 'peripheral_nerve_blocks_047',
+    question: 'Which is an appropriate technique for saphenous nerve block?',
+    options: [
+      'Femoral triangle',
+      'Popliteal fossa',
+      'Medial ankle',
+      'Gluteal region',
+      'Wrist level'
+    ],
+    correctAnswerIndex: 2,
+    explanation: 'Saphenous nerve becomes superficial near medial malleolus.',
+    category: 'Peripheral Nerve Blocks',
+    difficulty: 2
+  ),
+  Question(
+    id: 'peripheral_nerve_blocks_048',
+    question: 'Cause of Horner\'s syndrome after supraclavicular block?',
+    options: [
+      'Direct phrenic nerve block',
+      'Stellate ganglion block',
+      'Spinal cord involvement',
+      'Vagus nerve stimulation',
+      'Carotid sinus reflex'
+    ],
+    correctAnswerIndex: 1,
+    explanation: 'Stellate ganglion involvement leads to Horner\'s syndrome.',
+    category: 'Peripheral Nerve Blocks',
+    difficulty: 2
+  ),
+  Question(
+    id: 'peripheral_nerve_blocks_049',
+    question: 'Correct management of neurological deficit after block?',
+    options: [
+      'Observe only',
+      'Start oral steroids',
+      'Painkillers only',
+      'Neurology consult + EMG',
+      'Repeat LA injection'
+    ],
+    correctAnswerIndex: 3,
+    explanation: 'Any neuro deficit must be evaluated promptly.',
+    category: 'Peripheral Nerve Blocks',
+    difficulty: 2
+  ),
+  Question(
+    id: 'peripheral_nerve_blocks_050',
+    question: 'Dyspnea + unilateral decreased breath sounds after interscalene block suggest?',
+    options: [
+      'Diaphragm paralysis',
+      'Intrathecal injection',
+      'Pneumothorax',
+      'Bronchospasm',
+      'LAST'
+    ],
+    correctAnswerIndex: 2,
+    explanation: 'Interscalene/supraclavicular are near pleura → pneumothorax risk.',
+    category: 'Peripheral Nerve Blocks',
+    difficulty: 2
+  ),
+  Question(
+    id: 'peripheral_nerve_blocks_051',
+    question: 'First step if intraneural injection is suspected?',
+    options: [
+      'Continue the block',
+      'Give opioids for pain',
+      'Stop injection & withdraw needle',
+      'Increase anesthetic dose',
+      'Do not aspirate'
+    ],
+    correctAnswerIndex: 2,
+    explanation: 'Continuing injection inside nerve may cause permanent damage.',
+    category: 'Peripheral Nerve Blocks',
+    difficulty: 2
+  ),
+  Question(
+    id: 'peripheral_nerve_blocks_052',
+    question: 'While using peripheral nerve stimulation, if motor response persists even at 0.1 mA, what does this indicate?',
+    options: [
+      'Nerve is sufficiently close',
+      'Block failure',
+      'Intraneural needle placement',
+      'Ineffective stimulation',
+      'Nerve is far away'
+    ],
+    correctAnswerIndex: 2,
+    explanation: 'A motor response at <0.2 mA suggests the needle tip may be inside the nerve → high risk, injection should not be performed.',
+    category: 'Peripheral Nerve Blocks',
+    difficulty: 2
+  ),
+  Question(
+    id: 'peripheral_nerve_blocks_053',
+    question: 'In popliteal block, since the bifurcation level of the sciatic nerve varies among individuals, which approach is safest?',
+    options: [
+      'Single injection',
+      'Superficial injection',
+      'Trunk-level block',
+      'Deep interfascial injection',
+      'Medial approach'
+    ],
+    correctAnswerIndex: 2,
+    explanation: 'Blocking at the sciatic trunk level (before division into tibial & peroneal branches) ensures higher success.',
+    category: 'Peripheral Nerve Blocks',
+    difficulty: 2
+  ),
+  Question(
+    id: 'peripheral_nerve_blocks_054',
+    question: 'Which peripheral nerve block minimally affects motor function and least impairs postoperative mobilization?',
+    options: [
+      'Femoral nerve block',
+      'Interscalene block',
+      'Saphenous nerve block',
+      'Supraclavicular block',
+      'Obturator nerve block'
+    ],
+    correctAnswerIndex: 2,
+    explanation: 'The saphenous nerve is purely sensory → no motor deficit, allowing early mobilization.',
+    category: 'Peripheral Nerve Blocks',
+    difficulty: 2
+  ),
+  Question(
+    id: 'peripheral_nerve_blocks_055',
+    question: 'In transient nerve injury after peripheral nerve block, which symptom is most common?',
+    options: [
+      'Fever',
+      'Hypotension',
+      'Hyperalgesia',
+      'Paresthesia',
+      'Bradycardia'
+    ],
+    correctAnswerIndex: 3,
+    explanation: 'Temporary nerve injuries often cause paresthesia ± mild weakness → usually resolve in days.',
+    category: 'Peripheral Nerve Blocks',
+    difficulty: 2
+  ),
+  Question(
+    id: 'peripheral_nerve_blocks_056',
     question: 'Which nerve must be targeted in peripheral blocks for hip surgery?',
     options: [
       'Sural nerve',
@@ -662,7 +842,7 @@ List<Question> peripheralNerveBlocksQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'peripheral_nerve_blocks_045',
+    id: 'peripheral_nerve_blocks_057',
     question: 'In infraclavicular brachial plexus block, identifying which structure improves success?',
     options: [
       'Subclavian artery',
@@ -677,7 +857,7 @@ List<Question> peripheralNerveBlocksQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'peripheral_nerve_blocks_046',
+    id: 'peripheral_nerve_blocks_058',
     question: 'Delayed respiratory depression after peripheral nerve block is most likely associated with:',
     options: [
       'LAST',
@@ -692,7 +872,7 @@ List<Question> peripheralNerveBlocksQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'peripheral_nerve_blocks_047',
+    id: 'peripheral_nerve_blocks_059',
     question: 'Combined femoral + sciatic block is most appropriate for which surgery?',
     options: [
       'Wrist',
@@ -707,7 +887,7 @@ List<Question> peripheralNerveBlocksQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'peripheral_nerve_blocks_048',
+    id: 'peripheral_nerve_blocks_060',
     question: 'Which agent can cause delayed neurotoxicity if added to LA in peripheral blocks?',
     options: [
       'Epinephrine',
@@ -722,7 +902,7 @@ List<Question> peripheralNerveBlocksQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'peripheral_nerve_blocks_049',
+    id: 'peripheral_nerve_blocks_061',
     question: 'The most superficial anatomical localization of the common peroneal nerve is at:',
     options: [
       'Tibial tuberosity',
@@ -737,7 +917,7 @@ List<Question> peripheralNerveBlocksQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'peripheral_nerve_blocks_050',
+    id: 'peripheral_nerve_blocks_062',
     question: 'In motor block recovery, which sequence is correct?',
     options: [
       'From proximal to distal',
@@ -752,7 +932,7 @@ List<Question> peripheralNerveBlocksQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'peripheral_nerve_blocks_051',
+    id: 'peripheral_nerve_blocks_063',
     question: 'After popliteal block, patient cannot plantar-flex the ankle. Which nerve is likely affected?',
     options: [
       'Sural nerve',
@@ -767,7 +947,7 @@ List<Question> peripheralNerveBlocksQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'peripheral_nerve_blocks_052',
+    id: 'peripheral_nerve_blocks_064',
     question: 'Which factor improves ultrasound nerve visualization?',
     options: [
       'Low-frequency probe',
@@ -782,7 +962,7 @@ List<Question> peripheralNerveBlocksQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'peripheral_nerve_blocks_053',
+    id: 'peripheral_nerve_blocks_065',
     question: 'Which of the following is the most likely indication for interscalene block?',
     options: [
       'Hand surgery',
@@ -797,7 +977,7 @@ List<Question> peripheralNerveBlocksQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'peripheral_nerve_blocks_054',
+    id: 'peripheral_nerve_blocks_066',
     question: 'In interscalene block, which nerve is most often not affected?',
     options: [
       'Suprascapular nerve',
@@ -812,7 +992,7 @@ List<Question> peripheralNerveBlocksQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'peripheral_nerve_blocks_055',
+    id: 'peripheral_nerve_blocks_067',
     question: 'Which peripheral nerve block most commonly causes diaphragmatic paralysis?',
     options: [
       'Interscalene block',
@@ -827,7 +1007,7 @@ List<Question> peripheralNerveBlocksQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'peripheral_nerve_blocks_056',
+    id: 'peripheral_nerve_blocks_068',
     question: 'During axillary block, which nerve usually needs to be blocked separately?',
     options: [
       'Ulnar nerve',
@@ -842,7 +1022,7 @@ List<Question> peripheralNerveBlocksQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'peripheral_nerve_blocks_057',
+    id: 'peripheral_nerve_blocks_069',
     question: 'What is the best anatomical landmark for femoral nerve block?',
     options: [
       'Midpoint of inguinal ligament',
@@ -857,7 +1037,7 @@ List<Question> peripheralNerveBlocksQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'peripheral_nerve_blocks_058',
+    id: 'peripheral_nerve_blocks_070',
     question: 'Which nerves are targeted in popliteal block?',
     options: [
       'Femoral & obturator nerves',
@@ -872,7 +1052,7 @@ List<Question> peripheralNerveBlocksQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'peripheral_nerve_blocks_059',
+    id: 'peripheral_nerve_blocks_071',
     question: 'What is the minimum tourniquet time in Bier block (IV regional anesthesia)?',
     options: [
       '5 min',
@@ -887,7 +1067,7 @@ List<Question> peripheralNerveBlocksQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'peripheral_nerve_blocks_060',
+    id: 'peripheral_nerve_blocks_072',
     question: 'Which block carries the highest risk of pneumothorax?',
     options: [
       'Interscalene block',
@@ -902,7 +1082,7 @@ List<Question> peripheralNerveBlocksQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'peripheral_nerve_blocks_061',
+    id: 'peripheral_nerve_blocks_073',
     question: 'In ultrasound-guided nerve blocks, "snowstorm appearance" indicates:',
     options: [
       'Nerve fiber calcification',
@@ -917,7 +1097,7 @@ List<Question> peripheralNerveBlocksQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'peripheral_nerve_blocks_062',
+    id: 'peripheral_nerve_blocks_074',
     question: 'Expected clinical finding after femoral nerve block?',
     options: [
       'Better upright standing',
@@ -932,7 +1112,7 @@ List<Question> peripheralNerveBlocksQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'peripheral_nerve_blocks_063',
+    id: 'peripheral_nerve_blocks_075',
     question: 'Most important complication of infraclavicular block?',
     options: [
       'Brachial plexus injury',
@@ -947,7 +1127,7 @@ List<Question> peripheralNerveBlocksQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'peripheral_nerve_blocks_064',
+    id: 'peripheral_nerve_blocks_076',
     question: 'In supraclavicular block, which nerve is affected last (most distal)?',
     options: [
       'Axillary nerve',
@@ -962,7 +1142,7 @@ List<Question> peripheralNerveBlocksQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'peripheral_nerve_blocks_065',
+    id: 'peripheral_nerve_blocks_077',
     question: 'Best site for saphenous nerve block?',
     options: [
       'Popliteal fossa',
@@ -977,7 +1157,7 @@ List<Question> peripheralNerveBlocksQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'peripheral_nerve_blocks_066',
+    id: 'peripheral_nerve_blocks_078',
     question: 'Expected finding after radial nerve block?',
     options: [
       'Increased wrist extension',
@@ -992,7 +1172,7 @@ List<Question> peripheralNerveBlocksQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'peripheral_nerve_blocks_067',
+    id: 'peripheral_nerve_blocks_079',
     question: 'At which level of brachial plexus is infraclavicular block performed?',
     options: [
       'Roots (C5–C6)',
@@ -1007,7 +1187,7 @@ List<Question> peripheralNerveBlocksQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'peripheral_nerve_blocks_068',
+    id: 'peripheral_nerve_blocks_080',
     question: 'Most common neurological complication of PNB?',
     options: [
       'Permanent paralysis',
@@ -1022,7 +1202,7 @@ List<Question> peripheralNerveBlocksQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'peripheral_nerve_blocks_069',
+    id: 'peripheral_nerve_blocks_081',
     question: 'Sudden dyspnea & unilateral diaphragm paralysis after interscalene block → which nerve?',
     options: [
       'Vagus nerve',
@@ -1037,7 +1217,7 @@ List<Question> peripheralNerveBlocksQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'peripheral_nerve_blocks_070',
+    id: 'peripheral_nerve_blocks_082',
     question: 'Most common adjuvant added to prolong PNB effect?',
     options: [
       'Furosemide',
@@ -1052,7 +1232,7 @@ List<Question> peripheralNerveBlocksQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'peripheral_nerve_blocks_071',
+    id: 'peripheral_nerve_blocks_083',
     question: 'Which block most effectively anesthetizes the entire brachial plexus?',
     options: [
       'Axillary block',
@@ -1067,7 +1247,7 @@ List<Question> peripheralNerveBlocksQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'peripheral_nerve_blocks_072',
+    id: 'peripheral_nerve_blocks_084',
     question: 'At which level is supraclavicular block performed?',
     options: [
       'Root level',
@@ -1082,7 +1262,7 @@ List<Question> peripheralNerveBlocksQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'peripheral_nerve_blocks_073',
+    id: 'peripheral_nerve_blocks_085',
     question: 'Which of the following indicates ulnar nerve blockade?',
     options: [
       'Loss of thumb flexion',
@@ -1097,7 +1277,7 @@ List<Question> peripheralNerveBlocksQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'peripheral_nerve_blocks_074',
+    id: 'peripheral_nerve_blocks_086',
     question: 'Which nerve is often inadequately blocked with infraclavicular block?',
     options: [
       'Musculocutaneous nerve',
@@ -1112,7 +1292,7 @@ List<Question> peripheralNerveBlocksQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'peripheral_nerve_blocks_075',
+    id: 'peripheral_nerve_blocks_087',
     question: 'Most appropriate local anesthetic for Bier block (IVRA)?',
     options: [
       'Bupivacaine',
@@ -1127,7 +1307,7 @@ List<Question> peripheralNerveBlocksQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'peripheral_nerve_blocks_076',
+    id: 'peripheral_nerve_blocks_088',
     question: 'Which block best anesthetizes the dorsum of the foot?',
     options: [
       'Saphenous nerve block',
@@ -1142,7 +1322,7 @@ List<Question> peripheralNerveBlocksQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'peripheral_nerve_blocks_077',
+    id: 'peripheral_nerve_blocks_089',
     question: 'Most common complication of intercostal nerve block?',
     options: [
       'Infection',
@@ -1157,7 +1337,7 @@ List<Question> peripheralNerveBlocksQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'peripheral_nerve_blocks_078',
+    id: 'peripheral_nerve_blocks_090',
     question: 'Complete motor block of the upper extremity after infraclavicular block is due to blockade of:',
     options: [
       'Supraclavicular nerves',
@@ -1172,7 +1352,7 @@ List<Question> peripheralNerveBlocksQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'peripheral_nerve_blocks_079',
+    id: 'peripheral_nerve_blocks_091',
     question: 'For wrist surgery, which nerve block combination is necessary?',
     options: [
       'Median nerve only',
@@ -1187,7 +1367,7 @@ List<Question> peripheralNerveBlocksQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'peripheral_nerve_blocks_080',
+    id: 'peripheral_nerve_blocks_092',
     question: 'Which of the following is NOT observed after radial nerve block?',
     options: [
       'Loss of wrist extension',
@@ -1202,7 +1382,7 @@ List<Question> peripheralNerveBlocksQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'peripheral_nerve_blocks_081',
+    id: 'peripheral_nerve_blocks_093',
     question: 'The saphenous nerve is a branch of which nerve?',
     options: [
       'Tibial nerve',
@@ -1217,7 +1397,7 @@ List<Question> peripheralNerveBlocksQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'peripheral_nerve_blocks_082',
+    id: 'peripheral_nerve_blocks_094',
     question: 'Horner\'s syndrome may occur after which block?',
     options: [
       'Femoral block',
@@ -1232,7 +1412,7 @@ List<Question> peripheralNerveBlocksQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'peripheral_nerve_blocks_083',
+    id: 'peripheral_nerve_blocks_095',
     question: 'Most serious complication of intraneural injection during PNB?',
     options: [
       'Paresthesia',
@@ -1247,7 +1427,7 @@ List<Question> peripheralNerveBlocksQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'peripheral_nerve_blocks_084',
+    id: 'peripheral_nerve_blocks_096',
     question: 'Obturator nerve block is most often added as a complementary block during which procedure?',
     options: [
       'Popliteal nerve block',
@@ -1262,7 +1442,7 @@ List<Question> peripheralNerveBlocksQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'peripheral_nerve_blocks_085',
+    id: 'peripheral_nerve_blocks_097',
     question: 'Duration of action of lidocaine in nerve block?',
     options: [
       '15–30 min',
@@ -1277,7 +1457,7 @@ List<Question> peripheralNerveBlocksQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'peripheral_nerve_blocks_086',
+    id: 'peripheral_nerve_blocks_098',
     question: 'Peroneal nerve block is especially useful for:',
     options: [
       'Knee arthroscopy',
@@ -1292,7 +1472,7 @@ List<Question> peripheralNerveBlocksQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'peripheral_nerve_blocks_087',
+    id: 'peripheral_nerve_blocks_099',
     question: 'Which block targets the most distal level of the brachial plexus?',
     options: [
       'Interscalene block',
@@ -1307,7 +1487,7 @@ List<Question> peripheralNerveBlocksQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'peripheral_nerve_blocks_088',
+    id: 'peripheral_nerve_blocks_100',
     question: 'Musculocutaneous nerve supplies sensation to which area?',
     options: [
       'Dorsum of hand',
@@ -1322,7 +1502,7 @@ List<Question> peripheralNerveBlocksQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'peripheral_nerve_blocks_089',
+    id: 'peripheral_nerve_blocks_101',
     question: 'Which of the following ensures complete upper limb blockade?',
     options: [
       'Median + radial',
@@ -1337,7 +1517,7 @@ List<Question> peripheralNerveBlocksQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'peripheral_nerve_blocks_090',
+    id: 'peripheral_nerve_blocks_102',
     question: 'Best site for radial nerve block?',
     options: [
       'Under deltoid muscle',
@@ -1352,7 +1532,7 @@ List<Question> peripheralNerveBlocksQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'peripheral_nerve_blocks_091',
+    id: 'peripheral_nerve_blocks_103',
     question: 'During obturator nerve block, persistent motor response may cause which complication?',
     options: [
       'Pneumothorax',
@@ -1367,7 +1547,7 @@ List<Question> peripheralNerveBlocksQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'peripheral_nerve_blocks_092',
+    id: 'peripheral_nerve_blocks_104',
     question: 'Which nerve block alone is NOT sufficient for below-knee surgery?',
     options: [
       'Tibial nerve',
@@ -1382,7 +1562,7 @@ List<Question> peripheralNerveBlocksQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'peripheral_nerve_blocks_093',
+    id: 'peripheral_nerve_blocks_105',
     question: 'Best approach for blocking the ulnar nerve in the hand?',
     options: [
       'Axillary block',
@@ -1397,7 +1577,7 @@ List<Question> peripheralNerveBlocksQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'peripheral_nerve_blocks_094',
+    id: 'peripheral_nerve_blocks_106',
     question: 'In brachial plexus block, the "pop" sensation occurs when needle passes through:',
     options: [
       'Scalene muscles',
@@ -1412,7 +1592,7 @@ List<Question> peripheralNerveBlocksQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'peripheral_nerve_blocks_095',
+    id: 'peripheral_nerve_blocks_107',
     question: 'Which nerve is NOT blocked in wrist block?',
     options: [
       'Median nerve',
@@ -1427,7 +1607,7 @@ List<Question> peripheralNerveBlocksQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'peripheral_nerve_blocks_096',
+    id: 'peripheral_nerve_blocks_108',
     question: 'Most common complication of interscalene block?',
     options: [
       'Pneumothorax',
@@ -1442,7 +1622,7 @@ List<Question> peripheralNerveBlocksQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'peripheral_nerve_blocks_097',
+    id: 'peripheral_nerve_blocks_109',
     question: 'Which block uses ultrasound-guided TAP (Transversus Abdominis Plane)?',
     options: [
       'Thoracic epidural',
@@ -1457,7 +1637,7 @@ List<Question> peripheralNerveBlocksQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'peripheral_nerve_blocks_098',
+    id: 'peripheral_nerve_blocks_110',
     question: 'Target structure in supraclavicular block?',
     options: [
       'Subclavian artery',
@@ -1472,7 +1652,7 @@ List<Question> peripheralNerveBlocksQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'peripheral_nerve_blocks_099',
+    id: 'peripheral_nerve_blocks_111',
     question: 'Which is NOT an approach for sciatic nerve block?',
     options: [
       'Labat approach',
@@ -1487,7 +1667,7 @@ List<Question> peripheralNerveBlocksQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'peripheral_nerve_blocks_100',
+    id: 'peripheral_nerve_blocks_112',
     question: 'Ankle block includes blockade of which nerves?',
     options: [
       'Radial, median, ulnar',
@@ -1502,7 +1682,7 @@ List<Question> peripheralNerveBlocksQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'peripheral_nerve_blocks_101',
+    id: 'peripheral_nerve_blocks_113',
     question: 'Psoas compartment block targets which plexus?',
     options: [
       'Brachial plexus',
@@ -1517,7 +1697,7 @@ List<Question> peripheralNerveBlocksQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'peripheral_nerve_blocks_102',
+    id: 'peripheral_nerve_blocks_114',
     question: 'In axillary block, which nerve is usually the last to be blocked?',
     options: [
       'Median nerve',
@@ -1532,7 +1712,7 @@ List<Question> peripheralNerveBlocksQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'peripheral_nerve_blocks_103',
+    id: 'peripheral_nerve_blocks_115',
     question: 'Superficial cervical plexus block is used in which surgery?',
     options: [
       'Thyroidectomy',
@@ -1547,7 +1727,7 @@ List<Question> peripheralNerveBlocksQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'peripheral_nerve_blocks_104',
+    id: 'peripheral_nerve_blocks_116',
     question: 'Weakness of which muscle is expected after femoral block?',
     options: [
       'Gastrocnemius',
@@ -1562,7 +1742,7 @@ List<Question> peripheralNerveBlocksQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'peripheral_nerve_blocks_105',
+    id: 'peripheral_nerve_blocks_117',
     question: 'Which statement about infraclavicular block is TRUE?',
     options: [
       'High risk of pneumothorax',
@@ -1577,7 +1757,7 @@ List<Question> peripheralNerveBlocksQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'peripheral_nerve_blocks_106',
+    id: 'peripheral_nerve_blocks_118',
     question: 'TAP block anesthetizes which nerves?',
     options: [
       'Anterior rami of thoracic spinal nerves',
@@ -1592,7 +1772,7 @@ List<Question> peripheralNerveBlocksQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'peripheral_nerve_blocks_107',
+    id: 'peripheral_nerve_blocks_119',
     question: 'Which adjuvant is commonly added to prolong PNB duration?',
     options: [
       'Propofol',

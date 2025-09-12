@@ -32,6 +32,10 @@ import '../data/renal_disease_anesthesia_questions.dart' as tr;
 import '../data/genitourinary_anesthesia_questions.dart' as tr;
 import '../data/hepatic_physiology_anesthesia_questions.dart' as tr;
 import '../data/liver_disease_anesthesia_questions.dart' as tr;
+import '../data/endocrine_diseases_anesthesia_questions.dart' as tr;
+import '../data/algology_questions.dart' as tr;
+import '../data/perioperative_intensive_care_nutrition_questions.dart' as tr;
+import '../data/preoperative_assessment_premedication_documentation_questions.dart' as tr;
 
 import '../data/geriatric_anesthesia_questions.dart' as tr;
 import '../data/pediatric_anesthesia_questions.dart' as tr;
@@ -65,6 +69,7 @@ import '../data/sepsis_ards_questions.dart' as tr;
 
 // İngilizce soru dosyaları (sadece mevcut olanlar)
 import '../data/english/anesthesia_history_questions.dart' as en;
+import '../data/english/preoperative_assessment_premedication_documentation_questions.dart' as en;
 import '../data/english/cardiovascular_monitoring_questions.dart' as en;
 import '../data/english/operating_room_environment_questions.dart' as en;
 import '../data/english/anesthesia_workstation_questions.dart' as en;
@@ -117,11 +122,15 @@ import '../data/english/peripheral_nerve_blocks_questions.dart' as en;
 import '../data/english/spinal_epidural_caudal_blocks_questions.dart' as en;
 import '../data/english/chronic_pain_management_questions.dart' as en;
 import '../data/english/algology_questions.dart' as en;
+import '../data/english/nutrition_perioperative_critical_care_questions.dart' as en;
+import '../data/english/coagulation_anticoagulant_therapy_questions.dart' as en;
 import '../data/english/enhanced_recovery_protocols_questions.dart' as en;
 import '../data/english/common_clinical_concerns_critical_care_questions.dart' as en;
 import '../data/english/cardiopulmonary_resuscitation_questions.dart' as en;
+import '../data/english/erc_2021_guidelines_questions.dart' as en;
 import '../data/english/anesthetic_complications_questions.dart' as en;
 import '../data/english/sepsis_ards_critical_care_questions.dart' as en;
+import '../data/english/breathing_systems_questions.dart' as en;
 
 class MultilingualQuestionService {
   static const String _englishLanguageCode = 'en';
@@ -144,6 +153,7 @@ class MultilingualQuestionService {
         'questions': tr.anesthesiaApplicationQuestions,
         'color': Colors.orange.shade700,
       },
+      
       {
         'title': 'Ameliyathane Ortamı',
         'icon': Icons.local_hospital,
@@ -241,29 +251,39 @@ class MultilingualQuestionService {
         'color': Colors.orange.shade700,
       },
       {
+        'title': 'Ameliyat Öncesi Değerlendirme, Premedikasyon ve Dokümantasyon',
+        'icon': Icons.assignment,
+        'questions': tr.preoperativeAssessmentPremedicationDocumentationQuestions,
+        'color': Colors.blue.shade700,
+      },
+      {
         'title': 'Havayolu Yönetimi',
         'icon': Icons.masks,
         'questions': tr.airwayManagementQuestions,
         'color': Colors.amber.shade700,
       },
+      
       {
         'title': 'Kardiyovasküler Fizyoloji ve Anestezi',
         'icon': Icons.favorite,
         'questions': tr.cardiovascularPhysiologyQuestions,
         'color': Colors.red.shade700,
       },
+    
       {
         'title': 'Kardiyovasküler Hastalığı Olan Hastalarda Anestezi',
         'icon': Icons.favorite,
         'questions': tr.cardiovascularDiseaseAnesthesiaQuestions,
         'color': Colors.red.shade700,
       },
-      {
+
+        {
         'title': 'Kardiyovasküler Cerrahide Anestezi',
         'icon': Icons.medical_services,
         'questions': tr.cardiovascularSurgeryQuestions,
         'color': Colors.purple.shade700,
       },
+      
       {
         'title': 'Solunum Fizyolojisi ve Anestezi',
         'icon': Icons.air_rounded,
@@ -336,30 +356,11 @@ class MultilingualQuestionService {
         'questions': tr.liverDiseaseAnesthesiaQuestions,
         'color': Colors.orange.shade700,
       },
-
       {
-        'title': 'Geriatrik Anestezi',
-        'icon': Icons.elderly,
-        'questions': tr.geriatricAnesthesiaQuestions,
-        'color': Colors.grey.shade700,
-      },
-      {
-        'title': 'Pediatrik Anestezi',
-        'icon': Icons.child_care,
-        'questions': tr.pediatricAnesthesiaQuestions,
-        'color': Colors.lightBlue.shade700,
-      },
-      {
-        'title': 'Obstetrik Anestezi',
-        'icon': Icons.pregnant_woman,
-        'questions': tr.obstetricAnesthesiaQuestions,
-        'color': Colors.pink.shade700,
-      },
-      {
-        'title': 'Maternal-Fetal Fizyoloji ve Anestezi',
-        'icon': Icons.family_restroom,
-        'questions': tr.maternalFetalPhysiologyAnesthesiaQuestions,
-        'color': Colors.pink.shade700,
+        'title': 'Endokrin Hastalığı Olan Hastalarda Anestezi',
+        'icon': Icons.medical_services,
+        'questions': tr.endocrineDiseaseAnesthesiaQuestions,
+        'color': Colors.purple.shade700,
       },
       {
         'title': 'Oftalmik Anestezi',
@@ -368,82 +369,59 @@ class MultilingualQuestionService {
         'color': Colors.blue.shade700,
       },
       {
-        'title': 'Ortopedik Anestezi',
-        'icon': Icons.accessible,
-        'questions': tr.orthopedicAnesthesiaQuestions,
-        'color': Colors.brown.shade700,
-      },
-      {
         'title': 'KBB ve Baş-Boyun Cerrahisinde Anestezi',
         'icon': Icons.hearing,
         'questions': tr.otolaryngologyHeadNeckSurgeryQuestions,
         'color': Colors.blue.shade700,
       },
-      {
-        'title': 'Ayaktan Anestezi',
-        'icon': Icons.directions_walk,
-        'questions': tr.outpatientAnesthesiaQuestions,
-        'color': Colors.green.shade700,
+       {
+        'title': 'Ortopedik Anestezi',
+        'icon': Icons.accessible,
+        'questions': tr.orthopedicAnesthesiaQuestions,
+        'color': Colors.brown.shade700,
       },
-      {
+       {
         'title': 'Travma ve Acil Cerrahide Anestezi',
         'icon': Icons.emergency,
         'questions': tr.traumaEmergencyAnesthesiaQuestions,
         'color': Colors.red.shade700,
       },
       {
-        'title': 'Asit-Baz Yönetimi',
-        'icon': Icons.science,
-        'questions': tr.acidBaseManagementQuestions,
-        'color': Colors.cyan.shade700,
+        'title': 'Maternal-Fetal Fizyoloji ve Anestezi',
+        'icon': Icons.family_restroom,
+        'questions': tr.maternalFetalPhysiologyAnesthesiaQuestions,
+        'color': Colors.pink.shade700,
       },
       {
-        'title': 'Sıvı-Elektrolit Dengesizliği Yönetimi',
-        'icon': Icons.water_drop,
-        'questions': tr.fluidElectrolyteImbalanceManagementQuestions,
-        'color': Colors.blue.shade700,
+        'title': 'Obstetrik Anestezi',
+        'icon': Icons.pregnant_woman,
+        'questions': tr.obstetricAnesthesiaQuestions,
+        'color': Colors.pink.shade700,
       },
       {
-        'title': 'Sıvı Yönetimi ve Kan Ürünleri',
-        'icon': Icons.bloodtype,
-        'questions': tr.fluidManagementBloodProductsQuestions,
-        'color': Colors.red.shade700,
+        'title': 'Pediatrik Anestezi',
+        'icon': Icons.child_care,
+        'questions': tr.pediatricAnesthesiaQuestions,
+        'color': Colors.lightBlue.shade700,
       },
+
       {
-        'title': 'Koagülasyon ve Antikoagülanlar',
-        'icon': Icons.bloodtype,
-        'questions': tr.coagulationAnticoagulantQuestions,
-        'color': Colors.red.shade700,
+        'title': 'Geriatrik Anestezi',
+        'icon': Icons.elderly,
+        'questions': tr.geriatricAnesthesiaQuestions,
+        'color': Colors.grey.shade700,
       },
-      {
-        'title': 'Termoregülasyon, Hipotermi ve Malign Hipertermi',
-        'icon': Icons.thermostat,
-        'questions': tr.thermoregulationHypothermiaMalignantHyperthermiaQuestions,
-        'color': Colors.orange.shade700,
-      },
-      {
-        'title': 'Güvenlik, Kalite ve Performans İyileştirme',
-        'icon': Icons.security,
-        'questions': tr.safetyQualityPerformanceImprovementQuestions,
+        {
+        'title': 'Ayaktan Anestezi',
+        'icon': Icons.directions_walk,
+        'questions': tr.outpatientAnesthesiaQuestions,
         'color': Colors.green.shade700,
       },
-      {
-        'title': 'Postoperatif Bakım - Yoğun Bakım Ventilasyonu',
-        'icon': Icons.air,
-        'questions': tr.postoperativeCareIcuVentilationQuestions,
-        'color': Colors.teal.shade700,
-      },
-      {
-        'title': 'Postoperatif Bakım - Mekanik Ventilasyon',
-        'icon': Icons.air,
-        'questions': tr.postoperativeCareMechanicalVentilationQuestions,
-        'color': Colors.teal.shade700,
-      },
-      {
-        'title': 'Postanestezik Bakım',
-        'icon': Icons.medical_services,
-        'questions': tr.postanestheticCareQuestions,
-        'color': Colors.blue.shade700,
+       {
+        'title': 'Spinal, Epidural ve Kaudal Bloklar',
+        'icon': Icons.psychology,
+        'questions': tr.spinalEpiduralCaudalBlocksQuestions,
+        'color': Colors.purple.shade700,
       },
       {
         'title': 'Periferik Sinir Blokları',
@@ -451,12 +429,7 @@ class MultilingualQuestionService {
         'questions': tr.peripheralNerveBlocksQuestions,
         'color': Colors.purple.shade700,
       },
-      {
-        'title': 'Spinal, Epidural ve Kaudal Bloklar',
-        'icon': Icons.psychology,
-        'questions': tr.spinalEpiduralCaudalBlocksQuestions,
-        'color': Colors.purple.shade700,
-      },
+     
       {
         'title': 'Kronik Ağrı Tedavisi',
         'icon': Icons.healing,
@@ -464,21 +437,45 @@ class MultilingualQuestionService {
         'color': Colors.pink.shade700,
       },
       {
-        'title': 'Ağrı Yönetimi',
-        'icon': Icons.healing,
-        'questions': tr.painManagementQuestions,
-        'color': Colors.pink.shade700,
-      },
-      {
-        'title': 'Gelişmiş İyileşme Protokolleri',
+        'title': 'Geliştirilmiş İyileştirme Protokolleri ve Perioperatif',
         'icon': Icons.trending_up,
         'questions': tr.enhancedRecoveryProtocolsQuestions,
         'color': Colors.green.shade700,
       },
+        {
+        'title': 'Sıvı-Elektrolit Dengesizliği Yönetimi',
+        'icon': Icons.water_drop,
+        'questions': tr.fluidElectrolyteImbalanceManagementQuestions,
+        'color': Colors.blue.shade700,
+      },
+        {
+        'title': 'Asit-Baz Yönetimi',
+        'icon': Icons.science,
+        'questions': tr.acidBaseManagementQuestions,
+        'color': Colors.cyan.shade700,
+      },
       {
-        'title': 'Yoğun Bakım Problemleri',
-        'icon': Icons.medical_services,
-        'questions': tr.intensiveCareProblemsQuestions,
+        'title': 'Sıvı Yönetimi ve Kan Ürünleri Tedavisi',
+        'icon': Icons.bloodtype,
+        'questions': tr.fluidManagementBloodProductsQuestions,
+        'color': Colors.red.shade700,
+      },
+       {
+        'title': 'Termoregülasyon, Hipotermi ve Malign Hipertermi',
+        'icon': Icons.thermostat,
+        'questions': tr.thermoregulationHypothermiaMalignantHyperthermiaQuestions,
+        'color': Colors.orange.shade700,
+      },
+        {
+        'title': 'Perioperatif Yoğun Bakım Beslenmesi',
+        'icon': Icons.restaurant,
+        'questions': tr.perioperativeIntensiveCareNutritionQuestions,
+        'color': Colors.green.shade700,
+      },
+        {
+        'title': 'Anestezi Komplikasyonları',
+        'icon': Icons.warning,
+        'questions': tr.anesthesiaComplicationsQuestions,
         'color': Colors.red.shade700,
       },
       {
@@ -487,23 +484,55 @@ class MultilingualQuestionService {
         'questions': tr.cardiopulmonaryResuscitationQuestions,
         'color': Colors.red.shade700,
       },
+        {
+        'title': 'Postanestezik Bakım',
+        'icon': Icons.medical_services,
+        'questions': tr.postanestheticCareQuestions,
+        'color': Colors.blue.shade700,
+      },
+        {
+        'title': 'Yoğun Bakım Problemleri',
+        'icon': Icons.medical_services,
+        'questions': tr.intensiveCareProblemsQuestions,
+        'color': Colors.red.shade700,
+      },
+    
+       {
+        'title': 'Postoperatif Bakım - Yoğun Bakım Ventilasyonu',
+        'icon': Icons.air,
+        'questions': tr.postoperativeCareIcuVentilationQuestions,
+        'color': Colors.teal.shade700,
+      },
+        {
+        'title': 'Güvenlik, Kalite ve Performans İyileştirme',
+        'icon': Icons.security,
+        'questions': tr.safetyQualityPerformanceImprovementQuestions,
+        'color': Colors.green.shade700,
+      },
+       {
+        'title': 'Sepsis ve ARDS',
+        'icon': Icons.medical_services,
+        'questions': tr.sepsisArdsQuestions,
+        'color': Colors.red.shade700,
+      },
+
       {
+        'title': 'Koagülasyon ve Antikoagülanlar',
+        'icon': Icons.bloodtype,
+        'questions': tr.coagulationAnticoagulantQuestions,
+        'color': Colors.red.shade700,
+      },
+       {
         'title': 'ERC 2021 Kılavuzları',
         'icon': Icons.medical_services,
         'questions': tr.erc2021GuidelinesQuestions,
         'color': Colors.red.shade700,
       },
       {
-        'title': 'Anestezi Komplikasyonları',
-        'icon': Icons.warning,
-        'questions': tr.anesthesiaComplicationsQuestions,
-        'color': Colors.red.shade700,
-      },
-      {
-        'title': 'Sepsis ve ARDS',
-        'icon': Icons.medical_services,
-        'questions': tr.sepsisArdsQuestions,
-        'color': Colors.red.shade700,
+        'title': 'Algoloji',
+        'icon': Icons.healing,
+        'questions': tr.algologyQuestions,
+        'color': Colors.purple.shade700,
       },
     ];
   }
@@ -517,11 +546,18 @@ class MultilingualQuestionService {
         'questions': en.anesthesiaHistoryQuestions,
         'color': Colors.orange.shade700,
       },
+     
       {
         'title': 'Operating Room Environment',
         'icon': Icons.local_hospital,
         'questions': en.operatingRoomEnvironmentQuestions,
         'color': Colors.deepPurple.shade700,
+      },
+      {
+        'title': 'Breathing Systems',
+        'icon': Icons.air,
+        'questions': en.breathingSystemsQuestions,
+        'color': Colors.teal.shade700,
       },
       {
         'title': 'Anesthesia Workstation',
@@ -606,6 +642,12 @@ class MultilingualQuestionService {
         'icon': Icons.medication_liquid_outlined,
         'questions': en.adjunctsToAnesthesiaQuestions,
         'color': Colors.orange.shade700,
+      },
+       {
+        'title': 'Preoperative Assessment, Premedication & Documentation',
+        'icon': Icons.assignment,
+        'questions': en.preoperativeAssessmentPremedicationDocumentationQuestions,
+        'color': Colors.blue.shade700,
       },
       {
         'title': 'Airway Management',
@@ -710,33 +752,15 @@ class MultilingualQuestionService {
         'color': Colors.pink.shade700,
       },
       {
-        'title': 'Geriatric Anesthesia',
-        'icon': Icons.elderly,
-        'questions': en.geriatricAnesthesiaQuestions,
-        'color': Colors.grey.shade700,
-      },
-      {
-        'title': 'Pediatric Anesthesia',
-        'icon': Icons.child_care,
-        'questions': en.pediatricAnesthesiaQuestions,
-        'color': Colors.lightBlue.shade700,
-      },
-      {
-        'title': 'Obstetric Anesthesia',
-        'icon': Icons.pregnant_woman,
-        'questions': en.obstetricAnesthesiaQuestions,
-        'color': Colors.pink.shade700,
-      },
-      {
-        'title': 'Maternal-Fetal Physiology & Anesthesia',
-        'icon': Icons.family_restroom,
-        'questions': en.maternalFetalPhysiologyAnesthesiaQuestions,
-        'color': Colors.pink.shade700,
-      },
-      {
         'title': 'Anesthesia for Ophthalmic Surgery',
         'icon': Icons.visibility,
         'questions': en.anesthesiaOphthalmicSurgeryQuestions,
+        'color': Colors.blue.shade700,
+      },
+      {
+        'title': 'Anesthesia for Otolaryngology & Head-Neck Surgery',
+        'icon': Icons.hearing,
+        'questions': en.anesthesiaOtolaryngologyHeadNeckSurgeryQuestions,
         'color': Colors.blue.shade700,
       },
       {
@@ -746,10 +770,34 @@ class MultilingualQuestionService {
         'color': Colors.brown.shade700,
       },
       {
-        'title': 'Anesthesia for Otolaryngology & Head-Neck Surgery',
-        'icon': Icons.hearing,
-        'questions': en.anesthesiaOtolaryngologyHeadNeckSurgeryQuestions,
-        'color': Colors.blue.shade700,
+        'title': 'Anesthesia for Trauma & Emergency Surgery',
+        'icon': Icons.emergency,
+        'questions': en.anesthesiaTraumaEmergencySurgeryQuestions,
+        'color': Colors.red.shade700,
+      },
+      {
+        'title': 'Maternal-Fetal Physiology & Anesthesia',
+        'icon': Icons.family_restroom,
+        'questions': en.maternalFetalPhysiologyAnesthesiaQuestions,
+        'color': Colors.pink.shade700,
+      },
+      {
+        'title': 'Obstetric Anesthesia',
+        'icon': Icons.pregnant_woman,
+        'questions': en.obstetricAnesthesiaQuestions,
+        'color': Colors.pink.shade700,
+      },
+      {
+        'title': 'Pediatric Anesthesia',
+        'icon': Icons.child_care,
+        'questions': en.pediatricAnesthesiaQuestions,
+        'color': Colors.lightBlue.shade700,
+      },
+      {
+        'title': 'Geriatric Anesthesia',
+        'icon': Icons.elderly,
+        'questions': en.geriatricAnesthesiaQuestions,
+        'color': Colors.grey.shade700,
       },
       {
         'title': 'Ambulatory & Non-Operating Room Anesthesia',
@@ -758,22 +806,40 @@ class MultilingualQuestionService {
         'color': Colors.green.shade700,
       },
       {
-        'title': 'Anesthesia for Trauma & Emergency Surgery',
-        'icon': Icons.emergency,
-        'questions': en.anesthesiaTraumaEmergencySurgeryQuestions,
-        'color': Colors.red.shade700,
+        'title': 'Spinal, Epidural & Caudal Blocks',
+        'icon': Icons.psychology,
+        'questions': en.spinalEpiduralCaudalBlocksQuestions,
+        'color': Colors.purple.shade700,
       },
       {
-        'title': 'Acid-Base Management',
-        'icon': Icons.science,
-        'questions': en.acidBaseManagementQuestions,
-        'color': Colors.cyan.shade700,
+        'title': 'Peripheral Nerve Blocks',
+        'icon': Icons.psychology,
+        'questions': en.peripheralNerveBlocksQuestions,
+        'color': Colors.purple.shade700,
+      },
+      {
+        'title': 'Chronic Pain Management',
+        'icon': Icons.healing,
+        'questions': en.chronicPainManagementQuestions,
+        'color': Colors.pink.shade700,
+      },
+      {
+        'title': 'Enhanced Recovery Protocols',
+        'icon': Icons.trending_up,
+        'questions': en.enhancedRecoveryProtocolsQuestions,
+        'color': Colors.green.shade700,
       },
       {
         'title': 'Fluid-Electrolyte Disturbances',
         'icon': Icons.water_drop,
         'questions': en.fluidElectrolyteDisturbancesQuestions,
         'color': Colors.blue.shade700,
+      },
+      {
+        'title': 'Acid-Base Management',
+        'icon': Icons.science,
+        'questions': en.acidBaseManagementQuestions,
+        'color': Colors.cyan.shade700,
       },
       {
         'title': 'Fluid Management & Blood Component Therapy',
@@ -788,57 +854,15 @@ class MultilingualQuestionService {
         'color': Colors.orange.shade700,
       },
       {
-        'title': 'Safety, Quality & Performance Improvement',
-        'icon': Icons.security,
-        'questions': en.safetyQualityPerformanceImprovementQuestions,
+        'title': 'Nutrition - Perioperative Critical Care',
+        'icon': Icons.restaurant,
+        'questions': en.nutritionPerioperativeCriticalCareQuestions,
         'color': Colors.green.shade700,
       },
       {
-        'title': 'Inhalation Therapy, Mechanical Ventilation, PACU & ICU',
-        'icon': Icons.air,
-        'questions': en.inhalationTherapyMechanicalVentilationPacuIcuQuestions,
-        'color': Colors.teal.shade700,
-      },
-      {
-        'title': 'Postanesthesia Care',
-        'icon': Icons.medical_services,
-        'questions': en.postanesthesiaCareQuestions,
-        'color': Colors.blue.shade700,
-      },
-      {
-        'title': 'Peripheral Nerve Blocks',
-        'icon': Icons.psychology,
-        'questions': en.peripheralNerveBlocksQuestions,
-        'color': Colors.purple.shade700,
-      },
-      {
-        'title': 'Spinal, Epidural & Caudal Blocks',
-        'icon': Icons.psychology,
-        'questions': en.spinalEpiduralCaudalBlocksQuestions,
-        'color': Colors.purple.shade700,
-      },
-      {
-        'title': 'Chronic Pain Management',
-        'icon': Icons.healing,
-        'questions': en.chronicPainManagementQuestions,
-        'color': Colors.pink.shade700,
-      },
-      {
-        'title': 'Algology',
-        'icon': Icons.healing,
-        'questions': en.algologyQuestions,
-        'color': Colors.pink.shade700,
-      },
-      {
-        'title': 'Enhanced Recovery Protocols',
-        'icon': Icons.trending_up,
-        'questions': en.enhancedRecoveryProtocolsQuestions,
-        'color': Colors.green.shade700,
-      },
-      {
-        'title': 'Common Clinical Concerns - Critical Care',
-        'icon': Icons.medical_services,
-        'questions': en.commonClinicalConcernsCriticalCareQuestions,
+        'title': 'Anesthetic Complications',
+        'icon': Icons.warning,
+        'questions': en.anestheticComplicationsQuestions,
         'color': Colors.red.shade700,
       },
       {
@@ -848,16 +872,52 @@ class MultilingualQuestionService {
         'color': Colors.red.shade700,
       },
       {
-        'title': 'Anesthetic Complications',
-        'icon': Icons.warning,
-        'questions': en.anestheticComplicationsQuestions,
+        'title': 'Postanesthesia Care',
+        'icon': Icons.medical_services,
+        'questions': en.postanesthesiaCareQuestions,
+        'color': Colors.blue.shade700,
+      },
+      {
+        'title': 'Common Clinical Concerns - Critical Care',
+        'icon': Icons.medical_services,
+        'questions': en.commonClinicalConcernsCriticalCareQuestions,
         'color': Colors.red.shade700,
+      },
+      {
+        'title': 'Inhalation Therapy, Mechanical Ventilation, PACU & ICU',
+        'icon': Icons.air,
+        'questions': en.inhalationTherapyMechanicalVentilationPacuIcuQuestions,
+        'color': Colors.teal.shade700,
+      },
+      {
+        'title': 'Safety, Quality & Performance Improvement',
+        'icon': Icons.security,
+        'questions': en.safetyQualityPerformanceImprovementQuestions,
+        'color': Colors.green.shade700,
       },
       {
         'title': 'Sepsis & ARDS Critical Care',
         'icon': Icons.medical_services,
         'questions': en.sepsisArdsCriticalCareQuestions,
         'color': Colors.red.shade700,
+      },
+      {
+        'title': 'Coagulation & Anticoagulant Therapy',
+        'icon': Icons.bloodtype,
+        'questions': en.coagulationAnticoagulantTherapyQuestions,
+        'color': Colors.red.shade700,
+      },
+      {
+        'title': 'ERC 2021 Guidelines',
+        'icon': Icons.medical_services,
+        'questions': en.erc2021GuidelinesQuestions,
+        'color': Colors.red.shade700,
+      },
+      {
+        'title': 'Algology',
+        'icon': Icons.healing,
+        'questions': en.algologyQuestions,
+        'color': Colors.pink.shade700,
       },
     ];
   }

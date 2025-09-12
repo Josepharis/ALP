@@ -2,8 +2,7 @@ import '../models/question.dart';
 
 final List<Question> respiratoryDiseasesQuestions = [
   Question(
-    question:
-        'Aşağıdakilerden hangisi Kronik Obstrüktif Akciğer Hastalığı (KOAH) olan hastada anestezi sırasında hava hapsi (air trapping) riskini artırır?',
+    question: 'Aşağıdakilerden hangisi Kronik Obstrüktif Akciğer Hastalığı (KOAH) olan hastada anestezi sırasında hava hapsi (air trapping) riskini artırır?',
     options: [
       'Yüksek tidal volüm',
       'Uzun ekspiratuvar zaman',
@@ -12,12 +11,10 @@ final List<Question> respiratoryDiseasesQuestions = [
       'PEEP uygulanması',
     ],
     correctAnswerIndex: 3,
-    explanation:
-        'KOAH\'ta ekspirasyon süresi uzamıştır. Hızlı solunum, yeterli ekspirasyon olmadan yeni inspirasyona neden olur → hava hapsi gelişir.',
+    explanation: 'KOAH\'ta ekspirasyon süresi uzamıştır. Hızlı solunum, yeterli ekspirasyon olmadan yeni inspirasyona neden olur → hava hapsi gelişir.',
   ),
   Question(
-    question:
-        'Aşağıdakilerden hangisi astım krizinde kontrendike olan bir inhalasyon anesteziğidir?',
+    question: 'Aşağıdakilerden hangisi astım krizinde kontrendike olan bir inhalasyon anesteziğidir?',
     options: [
       'Sevofluran',
       'Desfluran',
@@ -26,12 +23,10 @@ final List<Question> respiratoryDiseasesQuestions = [
       'Nitroz oksit',
     ],
     correctAnswerIndex: 1,
-    explanation:
-        'Desfluran, irritan etkisi nedeniyle astımlı hastalarda bronkospazmı tetikleyebilir → tercih edilmez.',
+    explanation: 'Desfluran, irritan etkisi nedeniyle astımlı hastalarda bronkospazmı tetikleyebilir → tercih edilmez.',
   ),
   Question(
-    question:
-        'Aşağıdakilerden hangisi astımlı hastada bronkospazm tedavisinde en etkili ilk basamaktır?',
+    question: 'Aşağıdakilerden hangisi astımlı hastada bronkospazm tedavisinde en etkili ilk basamaktır?',
     options: [
       'Antibiyotikler',
       'Beta blokerler',
@@ -40,12 +35,10 @@ final List<Question> respiratoryDiseasesQuestions = [
       'Aminofilin',
     ],
     correctAnswerIndex: 2,
-    explanation:
-        'Beta-2 agonistler, bronş düz kaslarını gevşeterek bronkodilatasyon sağlar → akut tedavide ilk tercihtir.',
+    explanation: 'Beta-2 agonistler, bronş düz kaslarını gevşeterek bronkodilatasyon sağlar → akut tedavide ilk tercihtir.',
   ),
   Question(
-    question:
-        'KOAH\'lı hastada aşağıdaki anestezi seçeneklerinden hangisi en uygun kabul edilir?',
+    question: 'KOAH\'lı hastada aşağıdaki anestezi seçeneklerinden hangisi en uygun kabul edilir?',
     options: [
       'Yüksek FiO₂ ile genel anestezi',
       'Yüzeyel sedasyon',
@@ -54,12 +47,10 @@ final List<Question> respiratoryDiseasesQuestions = [
       'Derin inhalasyon anestezisi',
     ],
     correctAnswerIndex: 3,
-    explanation:
-        'KOAH\'ta solunum depresyonu riski vardır → bölgesel anestezi veya dikkatli sedasyon tercih edilir.',
+    explanation: 'KOAH\'ta solunum depresyonu riski vardır → bölgesel anestezi veya dikkatli sedasyon tercih edilir.',
   ),
   Question(
-    question:
-        'Aşağıdakilerden hangisi pulmoner hipertansiyon varlığında genel anestezi sırasında en çok kaçınılması gereken durumdur?',
+    question: 'Aşağıdakilerden hangisi pulmoner hipertansiyon varlığında genel anestezi sırasında en çok kaçınılması gereken durumdur?',
     options: [
       'Normovolemi',
       'Hiperventilasyon',
@@ -68,12 +59,10 @@ final List<Question> respiratoryDiseasesQuestions = [
       'PEEP uygulanması',
     ],
     correctAnswerIndex: 2,
-    explanation:
-        'Hipoksi ve hiperkapni, pulmoner vazokonstriksiyonu artırır → pulmoner arter basıncını yükseltir → dikkatle önlenmelidir.',
+    explanation: 'Hipoksi ve hiperkapni, pulmoner vazokonstriksiyonu artırır → pulmoner arter basıncını yükseltir → dikkatle önlenmelidir.',
   ),
   Question(
-    question:
-        'Aşağıdakilerden hangisi ileri restriktif akciğer hastalığı olan bir hastada en sık gözlenen intraoperatif bulgudur?',
+    question: 'Aşağıdakilerden hangisi ileri restriktif akciğer hastalığı olan bir hastada en sık gözlenen intraoperatif bulgudur?',
     options: [
       'Hipokapni',
       'Artmış akciğer kompliansı',
@@ -82,12 +71,10 @@ final List<Question> respiratoryDiseasesQuestions = [
       'Hava hapsi',
     ],
     correctAnswerIndex: 3,
-    explanation:
-        'Restriktif hastalıklarda akciğer kompliansı azaldığı için hasta sık ve yüzeyel solur, TV düşük kalır.',
+    explanation: 'Restriktif hastalıklarda akciğer kompliansı azaldığı için hasta sık ve yüzeyel solur, TV düşük kalır.',
   ),
   Question(
-    question:
-        'Aşağıdakilerden hangisi pnömonektomi sonrası anestezide özel dikkat gerektiren durumdur?',
+    question: 'Aşağıdakilerden hangisi pnömonektomi sonrası anestezide özel dikkat gerektiren durumdur?',
     options: [
       'Yüksek PEEP',
       'Düşük solunum frekansı',
@@ -96,20 +83,16 @@ final List<Question> respiratoryDiseasesQuestions = [
       'Tek akciğer ventilasyonu',
     ],
     correctAnswerIndex: 0,
-    explanation:
-        'PEEP, sağlam kalan akciğerde barotravma ve venöz dönüş azlığına yol açabilir → dikkatle kullanılmalıdır.',
+    explanation: 'PEEP, sağlam kalan akciğerde barotravma ve venöz dönüş azlığına yol açabilir → dikkatle kullanılmalıdır.',
   ),
   Question(
-    question:
-        'Aşağıdaki hastalıklardan hangisinde hava yolu reaktivitesi en fazla artmıştır?',
+    question: 'Aşağıdaki hastalıklardan hangisinde hava yolu reaktivitesi en fazla artmıştır?',
     options: ['KOAH', 'Bronşektazi', 'Pulmoner fibrozis', 'Astım', 'Amfizem'],
     correctAnswerIndex: 3,
-    explanation:
-        'Astım, hava yolu hiperreaktivitesiyle karakterizedir → bronkospazm riski en yüksektir.',
+    explanation: 'Astım, hava yolu hiperreaktivitesiyle karakterizedir → bronkospazm riski en yüksektir.',
   ),
   Question(
-    question:
-        'Aşağıdakilerden hangisi tek akciğer ventilasyonu (TAV) sırasında hipoksi gelişimini önlemede en etkili yöntemdir?',
+    question: 'Aşağıdakilerden hangisi tek akciğer ventilasyonu (TAV) sırasında hipoksi gelişimini önlemede en etkili yöntemdir?',
     options: [
       'Hiperventilasyon',
       'Oksijen akımının artırılması',
@@ -118,12 +101,10 @@ final List<Question> respiratoryDiseasesQuestions = [
       'FiO₂\'nin düşürülmesi',
     ],
     correctAnswerIndex: 2,
-    explanation:
-        'TAV sırasında açık akciğere CPAP uygulamak, alveolleri açık tutarak oksijenlenmeyi artırır.',
+    explanation: 'TAV sırasında açık akciğere CPAP uygulamak, alveolleri açık tutarak oksijenlenmeyi artırır.',
   ),
   Question(
-    question:
-        'Aşağıdakilerden hangisi obstrüktif akciğer hastalarında preoperatif olarak mutlaka değerlendirilmelidir?',
+    question: 'Aşağıdakilerden hangisi obstrüktif akciğer hastalarında preoperatif olarak mutlaka değerlendirilmelidir?',
     options: [
       'Vital kapasite',
       'Solunum sayısı',
@@ -132,12 +113,10 @@ final List<Question> respiratoryDiseasesQuestions = [
       'Kalp hızı',
     ],
     correctAnswerIndex: 2,
-    explanation:
-        'FEV₁/FVC, obstrüksiyonun derecesini gösterir → KOAH/astım gibi durumlarda önemli risk belirtecidir.',
+    explanation: 'FEV₁/FVC, obstrüksiyonun derecesini gösterir → KOAH/astım gibi durumlarda önemli risk belirtecidir.',
   ),
   Question(
-    question:
-        'Aşağıdakilerden hangisi obstrüktif akciğer hastalığında mekanik ventilasyon sırasında komplikasyon riskini artırır?',
+    question: 'Aşağıdakilerden hangisi obstrüktif akciğer hastalığında mekanik ventilasyon sırasında komplikasyon riskini artırır?',
     options: [
       'Uzun ekspirasyon süresi',
       'Düşük tidal volüm',
@@ -146,26 +125,10 @@ final List<Question> respiratoryDiseasesQuestions = [
       'Yüksek inspiratuvar oksijen konsantrasyonu',
     ],
     correctAnswerIndex: 2,
-    explanation:
-        'Yüksek solunum frekansı, ekspirasyon süresini kısaltır → hava hapsi ve intratorasik basınç artışı → komplikasyon riski artar.',
+    explanation: 'Yüksek solunum frekansı, ekspirasyon süresini kısaltır → hava hapsi ve intratorasik basınç artışı → komplikasyon riski artar.',
   ),
   Question(
-    question:
-        'Kronik bronşitli bir hastada perioperatif dönemde hangi laboratuvar bulgusu beklenir?',
-    options: [
-      'Polisitemi',
-      'Hipokrom mikrositer anemi',
-      'Trombositopeni',
-      'Lökopeni',
-      'Hiponatremi',
-    ],
-    correctAnswerIndex: 0,
-    explanation:
-        'Kronik hipoksiye bağlı sekonder polisitemi görülür. PaCO₂ >45 mmHg ise solunum yetmezliği riski artar.',
-  ),
-  Question(
-    question:
-        'Aşağıdakilerden hangisi interstisyel akciğer hastalığı (restriktif) olan bir hastada beklenen fizyolojik değişikliktir?',
+    question: 'Aşağıdakilerden hangisi interstisyel akciğer hastalığı (restriktif) olan bir hastada beklenen fizyolojik değişikliktir?',
     options: [
       'FEV₁/FVC oranında azalma',
       'Total akciğer kapasitesinde artış',
@@ -174,34 +137,16 @@ final List<Question> respiratoryDiseasesQuestions = [
       'Hava yolu reaktivitesinde artış',
     ],
     correctAnswerIndex: 3,
-    explanation:
-        'İnterstisyel hastalıklarda, alveol-kapiller membran kalınlaşır → gaz değişimi bozulur → diffüzyon kapasitesi azalır.',
+    explanation: 'İnterstisyel hastalıklarda, alveol-kapiller membran kalınlaşır → gaz değişimi bozulur → diffüzyon kapasitesi azalır.',
   ),
   Question(
-    question:
-        'Tek akciğer ventilasyonu uygulanan bir hastada en sık görülen komplikasyon nedir?',
+    question: 'Tek akciğer ventilasyonu uygulanan bir hastada en sık görülen komplikasyon nedir?',
     options: ['Hipotansiyon', 'Hipoksi', 'Bradikardi', 'Pnömotoraks', 'Asidoz'],
     correctAnswerIndex: 1,
-    explanation:
-        'Tek akciğer ventilasyonunda, açıkta kalan akciğer perfüze edilir ama havalanmaz → şant artar → hipoksemi gelişebilir.',
+    explanation: 'Tek akciğer ventilasyonunda, açıkta kalan akciğer perfüze edilir ama havalanmaz → şant artar → hipoksemi gelişebilir.',
   ),
   Question(
-    question:
-        'Pulmoner emboli şüphesi olan bir hastada hangi anestezik teknik tercih edilir?',
-    options: [
-      'Rejyonal anestezi',
-      'Genel anestezi',
-      'Yüksek doz opioid',
-      'İnhalasyon anestezisi',
-      'Total intravenöz anestezi',
-    ],
-    correctAnswerIndex: 1,
-    explanation:
-        'Hemorajik komplikasyon riski nedeniyle spinal/epidural kontrendikedir. Genel anestezi gerekirse heparinizasyon dikkatle yönetilir.',
-  ),
-  Question(
-    question:
-        'Aşağıdakilerden hangisi restriktif akciğer hastalıklarında en sık kullanılan ventilasyon stratejisidir?',
+    question: 'Aşağıdakilerden hangisi restriktif akciğer hastalıklarında en sık kullanılan ventilasyon stratejisidir?',
     options: [
       'Yüksek tidal volüm, düşük frekans',
       'Yüksek PEEP, düşük tidal volüm',
@@ -210,20 +155,16 @@ final List<Question> respiratoryDiseasesQuestions = [
       'Spontan solunuma izin verilmesi',
     ],
     correctAnswerIndex: 2,
-    explanation:
-        'Restriktif hastalarda akciğer kompliansı düşük olduğundan, küçük volümlerle sık solunum daha etkili olur.',
+    explanation: 'Restriktif hastalarda akciğer kompliansı düşük olduğundan, küçük volümlerle sık solunum daha etkili olur.',
   ),
   Question(
-    question:
-        'Aşağıdaki anestezik ajanlardan hangisi bronkodilatör etki gösterir?',
+    question: 'Aşağıdaki anestezik ajanlardan hangisi bronkodilatör etki gösterir?',
     options: ['Ketamin', 'Propofol', 'Etomidat', 'Desfluran', 'Midazolam'],
     correctAnswerIndex: 0,
-    explanation:
-        'Ketamin, bronş düz kaslarını gevşetici etkisi nedeniyle reaktif hava yolu hastalarında avantajlıdır.',
+    explanation: 'Ketamin, bronş düz kaslarını gevşetici etkisi nedeniyle reaktif hava yolu hastalarında avantajlıdır.',
   ),
   Question(
-    question:
-        'Aşağıdaki durumlardan hangisi akciğer rezeksiyonu sonrası en sık mortalite nedenidir?',
+    question: 'Aşağıdaki durumlardan hangisi akciğer rezeksiyonu sonrası en sık mortalite nedenidir?',
     options: [
       'Kanama',
       'Hipoglisemi',
@@ -232,26 +173,10 @@ final List<Question> respiratoryDiseasesQuestions = [
       'Hipotermi',
     ],
     correctAnswerIndex: 3,
-    explanation:
-        'Akciğer kapasitesindeki azalma, postop dönemde solunum yetmezliği riskini artırır → mortalite nedenlerinin başında gelir.',
+    explanation: 'Akciğer kapasitesindeki azalma, postop dönemde solunum yetmezliği riskini artırır → mortalite nedenlerinin başında gelir.',
   ),
   Question(
-    question:
-        'Hangisi masif hemoptizide acil hava yolu yönetimi için doğrudur?',
-    options: [
-      'Çift lümenli endotrakeal tüp',
-      'Nazal entübasyon',
-      'Laringeal maske',
-      'Yüz maskesi',
-      'Trakeostomi',
-    ],
-    correctAnswerIndex: 0,
-    explanation:
-        'Kanayan akciğerin izolasyonu için DLT veya bronş blokeri şarttır. Fiberoptik bronkoskopi ile yerleştirilir.',
-  ),
-  Question(
-    question:
-        'Aşağıdakilerden hangisi obez bir hastada akciğer fonksiyonlarını en çok etkileyen pozisyondur?',
+    question: 'Aşağıdakilerden hangisi obez bir hastada akciğer fonksiyonlarını en çok etkileyen pozisyondur?',
     options: [
       'Lateral',
       'Semi-fowler',
@@ -260,12 +185,10 @@ final List<Question> respiratoryDiseasesQuestions = [
       'Prone',
     ],
     correctAnswerIndex: 2,
-    explanation:
-        'Trendelenburg pozisyonunda diyafram yukarı itilir → FRC azalır, atelektazi ve hipoksemi riski artar → obez hastada en riskli pozisyondur.',
+    explanation: 'Trendelenburg pozisyonunda diyafram yukarı itilir → FRC azalır, atelektazi ve hipoksemi riski artar → obez hastada en riskli pozisyondur.',
   ),
   Question(
-    question:
-        'Aşağıdakilerden hangisi astımlı bir hastada anestezi indüksiyonu sırasında bronkospazmı en az tetikleyen ajanlardan biridir?',
+    question: 'Aşağıdakilerden hangisi astımlı bir hastada anestezi indüksiyonu sırasında bronkospazmı en az tetikleyen ajanlardan biridir?',
     options: [
       'Desfluran',
       'Sevofluran',
@@ -274,12 +197,10 @@ final List<Question> respiratoryDiseasesQuestions = [
       'Süksinilkolin',
     ],
     correctAnswerIndex: 2,
-    explanation:
-        'Ketamin, bronkodilatör etkisiyle astımlı hastalarda güvenlidir. Sevofluran da uygundur, ketamin ayrıca analjezi sağlar.',
+    explanation: 'Ketamin, bronkodilatör etkisiyle astımlı hastalarda güvenlidir. Sevofluran da uygundur, ketamin ayrıca analjezi sağlar.',
   ),
   Question(
-    question:
-        'Aşağıdakilerden hangisi postoperatif pulmoner komplikasyon riskini artıran en önemli faktörlerden biridir?',
+    question: 'Aşağıdakilerden hangisi postoperatif pulmoner komplikasyon riskini artıran en önemli faktörlerden biridir?',
     options: [
       '10 yaş altı olmak',
       'Obezite',
@@ -288,12 +209,10 @@ final List<Question> respiratoryDiseasesQuestions = [
       'Sol lateral pozisyon',
     ],
     correctAnswerIndex: 1,
-    explanation:
-        'Obez hastalarda, FRC düşüktür, ventilasyon bozulur → atelektazi, hipoksemi ve enfeksiyon riski artar.',
+    explanation: 'Obez hastalarda, FRC düşüktür, ventilasyon bozulur → atelektazi, hipoksemi ve enfeksiyon riski artar.',
   ),
   Question(
-    question:
-        'Aşağıdakilerden hangisi preoperatif KOAH yönetimi açısından doğrudur?',
+    question: 'Aşağıdakilerden hangisi preoperatif KOAH yönetimi açısından doğrudur?',
     options: [
       'Sigarayı 24 saat önce bırakmak yeterlidir',
       'Steroid tedavisi sadece acil durumlarda verilir',
@@ -302,26 +221,10 @@ final List<Question> respiratoryDiseasesQuestions = [
       'Sigarayı en az 8 hafta önceden bırakmak faydalıdır',
     ],
     correctAnswerIndex: 4,
-    explanation:
-        'Sigaranın 6–8 hafta önce bırakılması, solunum fonksiyonlarını ve mukosiliyer temizliği düzeltir → postop komplikasyonları azaltır.',
+    explanation: 'Sigaranın 6–8 hafta önce bırakılması, solunum fonksiyonlarını ve mukosiliyer temizliği düzeltir → postop komplikasyonları azaltır.',
   ),
   Question(
-    question:
-        'Pulmoner hipertansiyon hastasında en önemli intraoperatif risk nedir?',
-    options: [
-      'Atelektazi',
-      'Pulmoner ödem',
-      'Sağ kalp yetmezliği',
-      'Hiperventilasyon',
-      'Hipokapni',
-    ],
-    correctAnswerIndex: 2,
-    explanation:
-        'Pulmoner hipertansiyonda sağ ventrikül yüklenir ve yetmezlik gelişebilir.',
-  ),
-  Question(
-    question:
-        'Aşağıdakilerden hangisi pneumotoraks riski açısından en dikkatli kullanılmalı ventilasyon stratejisidir?',
+    question: 'Aşağıdakilerden hangisi pneumotoraks riski açısından en dikkatli kullanılmalı ventilasyon stratejisidir?',
     options: [
       'Düşük PEEP',
       'Düşük tidal volüm',
@@ -330,8 +233,271 @@ final List<Question> respiratoryDiseasesQuestions = [
       'Düşük solunum frekansı',
     ],
     correctAnswerIndex: 3,
-    explanation:
-        'Yüksek PEEP, alveoler basıncı artırır → pneumotoraks riskini artırabilir, özellikle yapısal akciğer hastalığı olanlarda dikkat gerektirir.',
+    explanation: 'Yüksek PEEP, alveoler basıncı artırır → pneumotoraks riskini artırabilir, özellikle yapısal akciğer hastalığı olanlarda dikkat gerektirir.',
+  ),
+  Question(
+    question: 'Aşağıdakilerden hangisi obstrüktif akciğer hastalığı olan hastada genel anestezinin başlıca riskidir?',
+    options: [
+      'Oksijen toksisitesi',
+      'Hipoglisemi',
+      'Hava hapsi ve barotravma',
+      'Hipotermi',
+      'Trombositopeni',
+    ],
+    correctAnswerIndex: 2,
+    explanation: 'Ekspirasyon süresi uzun olan KOAH\'lı hastalarda, genel anestezi sırasında hava hapsi → intratorasik basınç artışı → barotravma riski doğar.',
+  ),
+  Question(
+    question: 'Bronkoplevral fistül gelişen bir hastada anestezi uygulaması açısından en kritik önlem nedir?',
+    options: [
+      'Yüksek FiO₂ uygulanması',
+      'LMA kullanımı',
+      'Tek akciğer ventilasyonu',
+      'Trendelenburg pozisyonu',
+      'Volatil anestezi kullanımı',
+    ],
+    correctAnswerIndex: 2,
+    explanation: 'Bronkoplevral fistülde, hava kaçağı olan akciğerin ventilasyonu kesilmelidir → tek akciğer ventilasyonu uygulanır.',
+  ),
+  Question(
+    question: 'Aşağıdakilerden hangisi ventilasyon/perfüzyon (V/Q) oranını artırır?',
+    options: ['Atelektazi', 'Pulmoner emboli', 'Pulmoner fibrozis', 'Astım', 'Amfizem'],
+    correctAnswerIndex: 1,
+    explanation: 'Pulmoner embolide perfüzyon azalır, ventilasyon devam eder → V/Q oranı artar (sonsuz yaklaşır).',
+  ),
+  Question(
+    question: 'Aşağıdakilerden hangisi hipoksemik respiratuvar yetmezlikte en sık kullanılan destek yöntemidir?',
+    options: [
+      'Yalnızca O₂ verilmesi',
+      'CPAP veya BiPAP',
+      'Hiperventilasyon',
+      'Spinal anestezi',
+      'Nitrik oksit inhalasyonu',
+    ],
+    correctAnswerIndex: 1,
+    explanation: 'CPAP/BiPAP, alveollerin açık kalmasını sağlayarak oksijenlenmeyi artırır, noninvaziv solunum desteğinde ilk tercihlerdir.',
+  ),
+  Question(
+    question: 'Aşağıdaki parametrelerden hangisinin tek başına düşük olması, akciğer rezeksiyonu sonrası postop riskin yüksek olduğuna işaret eder?',
+    options: [
+      'Vital kapasite',
+      'PaCO₂',
+      'FEV₁ < %40',
+      'SaO₂ > %94',
+      'DLCO > %70',
+    ],
+    correctAnswerIndex: 2,
+    explanation: 'FEV₁ <%40, akciğer rezeksiyonundan sonra solunum yetmezliği ve komplikasyon riski yüksek olan hastaları tanımlar.',
+  ),
+  Question(
+    question: 'Aşağıdakilerden hangisi obstrüktif akciğer hastalığı olan bir hastada ekspiryum sonunda pozitif basınç (auto-PEEP) oluşmasına neden olur?',
+    options: [
+      'Düşük solunum sayısı',
+      'Yüksek tidal volüm',
+      'Yetersiz ekspiratuvar süre',
+      'Uzun inspirasyon süresi',
+      'Nitrik oksit verilmesi',
+    ],
+    correctAnswerIndex: 2,
+    explanation: 'Ekspirasyon süresi yetersizse, hava alveollerden tam atılamaz → auto-PEEP oluşur, hava hapsi gelişir.',
+  ),
+  Question(
+    question: 'Aşağıdaki durumlardan hangisinde postoperatif pulmoner komplikasyon riski en düşüktür?',
+    options: [
+      'Abdominal aort anevrizma cerrahisi',
+      'Laparoskopik kolesistektomi',
+      'Açık kolektomi',
+      'Torakotomi',
+      'Ösofajektomi',
+    ],
+    correctAnswerIndex: 1,
+    explanation: 'Laparoskopik cerrahiler, daha az ağrı ve daha iyi mobilizasyon sağlar → pulmoner komplikasyon riski daha düşüktür.',
+  ),
+  Question(
+    question: 'Aşağıdakilerden hangisi pulmoner hipertansiyonu olan bir hastada intraoperatif olarak kaçınılması gereken durumdur?',
+    options: [
+      'Anestezi derinliğinin artırılması',
+      'Normokapni sağlanması',
+      'Hipoventilasyon',
+      'Hafif vazodilatasyon',
+      'İntravenöz sıvı desteği',
+    ],
+    correctAnswerIndex: 2,
+    explanation: 'Hipoventilasyon → hiperkapni ve hipoksi oluşturur → pulmoner arter basıncı artar → tehlikelidir.',
+  ),
+  Question(
+    question: 'Aşağıdakilerden hangisi bronşektazili hastada anestezi öncesi en önemli hazırlıktır?',
+    options: [
+      'Laksatif verilmesi',
+      'Antikoagülan başlanması',
+      'Steroid yüklemesi',
+      'Yoğun sekresyon drenajı sağlamak',
+      'Diyete 2 gün önceden başlanması',
+    ],
+    correctAnswerIndex: 3,
+    explanation: 'Bronşektazide, sekresyon birikimi yaygındır → preop drenaj ile havayolu temizlenmeli, enfeksiyon ve obstrüksiyon riski azaltılmalıdır.',
+  ),
+  Question(
+    question: 'Aşağıdakilerden hangisi akciğer rezeksiyonu sonrası ventilasyonun en uygun göstergesidir?',
+    options: [
+      'PaCO₂',
+      'SpO₂',
+      'Tidal volüm',
+      'Arteriyel pH',
+      'Solunum sayısı',
+    ],
+    correctAnswerIndex: 0,
+    explanation: 'PaCO₂, alveoler ventilasyonu en iyi yansıtan parametredir → özellikle post-rezeksiyon hastalarında dikkatle izlenmelidir.',
+  ),
+  Question(
+    question: 'Aşağıdaki parametrelerden hangisinin düşük olması, restriktif akciğer hastalığı lehinedir?',
+    options: [
+      'FEV₁/FVC oranı',
+      'Total akciğer kapasitesi (TLC)',
+      'PaCO₂',
+      'Inspiratuvar rezerv volüm',
+      'HCO₃',
+    ],
+    correctAnswerIndex: 1,
+    explanation: 'Restriktif hastalıklarda, tüm akciğer volümleri düşer → en karakteristik olanı TLC azalmasıdır.',
+  ),
+  Question(
+    question: 'Aşağıdakilerden hangisi KOAH\'lı hastada postoperatif komplikasyon riskini azaltmak için en uygun yaklaşımdır?',
+    options: [
+      '%100 O₂ ile ventilasyon',
+      'Derin sedasyon',
+      'Sigara içiminin devam etmesi',
+      'Ameliyat öncesi bronkodilatör kullanımı',
+      'Yüksek doz steroid başlanması',
+    ],
+    correctAnswerIndex: 3,
+    explanation: 'Bronkodilatör tedavi, hava yollarını açar, ventilasyonu iyileştirir → postop komplikasyon riskini azaltır.',
+  ),
+  Question(
+    question: 'Aşağıdakilerden hangisi astım atağı sırasında anestezi altında en erken belirti olabilir?',
+    options: [
+      'Hipotansiyon',
+      'ETCO₂ artışı',
+      'Solunum seslerinde azalma',
+      'Bradikardi',
+      'Arteriyel oksijen saturasyonunda artış',
+    ],
+    correctAnswerIndex: 2,
+    explanation: 'Bronkospazmda, hava akımı azalır → auskültasyonda solunum sesleri azalabilir veya kaybolabilir → erken uyarıcı bulgudur.',
+  ),
+  Question(
+    question: 'Aşağıdakilerden hangisi postoperatif atelektazi gelişimini azaltmaya en çok katkı sağlar?',
+    options: [
+      'Düşük doz sedasyon',
+      'Erken mobilizasyon ve solunum egzersizi',
+      'Yüksek FiO₂',
+      'Nitrik oksit verilmesi',
+      'NPO süresinin uzatılması',
+    ],
+    correctAnswerIndex: 1,
+    explanation: 'Erken mobilizasyon ve solunum egzersizi, alveolleri açar → atelektaziyi önlemede en etkili yaklaşımlardandır.',
+  ),
+  Question(
+    question: 'Aşağıdakilerden hangisi kronik hiperkapnili bir hastada oksijen tedavisinde dikkat edilmesi gereken bir noktadır?',
+    options: [
+      'O₂ dozu yüksek tutulmalıdır',
+      'O₂ tedavisi kesilmelidir',
+      'PaCO₂\'ye göre FiO₂ ayarlanır',
+      'FiO₂ aşırı artırılırsa solunum baskılanabilir',
+      'Oksijenin etkisi yoktur',
+    ],
+    correctAnswerIndex: 3,
+    explanation: 'Kronik hiperkapnili hastalarda, solunum stimülasyonu hipoksiye bağlı olabilir → aşırı O₂ verilmesi hipoventilasyona yol açabilir.',
+  ),
+  Question(
+    question: 'Aşağıdakilerden hangisi tek akciğer ventilasyonu sırasında hipoksi gelişirse yapılması gereken ilk müdahaledir?',
+    options: [
+      'CPAP uygulanması',
+      'PEEP artırılması',
+      'FiO₂ azaltılması',
+      'Nitroz oksit verilmesi',
+      'Hastayı sırtüstü çevirmek',
+    ],
+    correctAnswerIndex: 0,
+    explanation: 'Tek akciğer ventilasyonunda, açık akciğere CPAP uygulanarak alveollerin açık kalması sağlanır → hipoksi önlenir.',
+  ),
+  Question(
+    question: 'Aşağıdakilerden hangisi pulmoner fibrozis hastasında anestezi sırasında karşılaşılması en olası sorundur?',
+    options: [
+      'Artmış akciğer kompliansı',
+      'Kolay ventilasyon',
+      'Hipoksiye direnç',
+      'Azalmış diffüzyon kapasitesi',
+      'Solunum sayısında azalma',
+    ],
+    correctAnswerIndex: 3,
+    explanation: 'Fibrozis, alveol-kapiller membranı kalınlaştırır → gaz değişimi bozulur → diffüzyon kapasitesi azalır.',
+  ),
+  Question(
+    question: 'Aşağıdakilerden hangisi solunum hastalığı olan hastada cerrahi sonrası erken dönemde ekstübasyon yapılması için bir engeldir?',
+    options: [
+      'pH: 7.38',
+      'PaCO₂: 52 mmHg',
+      'Vital kapasite: 9 mL/kg',
+      'SpO₂: %94',
+      'SaO₂: %96',
+    ],
+    correctAnswerIndex: 2,
+    explanation: 'Vital kapasite <15 mL/kg, solunum kas gücünün yetersiz olduğunu gösterir → erken ekstübasyon için risk oluşturur.',
+  ),
+  Question(
+    question: 'Aşağıdakilerden hangisi akciğer rezeksiyonuna bağlı postoperatif mortalite ile en güçlü ilişkili testtir?',
+    options: ['SpO₂', 'FEV₁', 'DLCO', 'Hb', 'PaCO₂'],
+    correctAnswerIndex: 2,
+    explanation: 'Diffüzyon kapasitesi (DLCO), gaz değişim yeteneğini yansıtır → post-rezeksiyon riskini belirlemede en hassas parametrelerden biridir.',
+  ),
+  Question(
+    question: 'Aşağıdaki durumlardan hangisinde hipoksiye rağmen PaCO₂ normal veya düşük olabilir?',
+    options: [
+      'Diffüzyon bozukluğu',
+      'Pulmoner emboli',
+      'Atelektazi',
+      'Bronkospazm',
+      'Solunumsal asidoz',
+    ],
+    correctAnswerIndex: 1,
+    explanation: 'Pulmoner embolide perfüzyon azalır, ama alveollerdeki havalanma sürebilir → hipoksemi olur, PaCO₂ genellikle normal veya düşük kalır.',
+  ),
+  Question(
+    question: 'Aşağıdakilerden hangisi pulmoner hastalığı olan hastada uygulanan yüksek FiO₂\'nin zararlı etkilerinden biri değildir?',
+    options: [
+      'Absorpsiyon atelektazisi',
+      'Serbest radikal oluşumu',
+      'Hipoventilasyon',
+      'Hiperkapni',
+      'Serebral ödem',
+    ],
+    correctAnswerIndex: 4,
+    explanation: 'Yüksek FiO₂; oksidatif stres, CO₂ retansiyonu ve atelektaziye neden olabilir, ancak doğrudan serebral ödem ile ilişkili değildir.',
+  ),
+  Question(
+    question: 'Aşağıdakilerden hangisi astımlı hastalarda premedikasyon olarak tercih edilebilecek ajanlardan biridir?',
+    options: [
+      'Antihistaminikler',
+      'Lityum',
+      'B bloker',
+      'Midazolam',
+      'Aspirin',
+    ],
+    correctAnswerIndex: 3,
+    explanation: 'Midazolam, sedatif ve anksiyolitiktir; histamin salınımına neden olmaz, bronkokonstriksiyonu tetiklemez→ astımlı hastalar için güvenlidir.',
+  ),
+  Question(
+    question: 'Pulmoner hipertansiyon hastasında en önemli intraoperatif risk nedir?',
+    options: [
+      'Atelektazi',
+      'Pulmoner ödem',
+      'Sağ kalp yetmezliği',
+      'Hiperventilasyon',
+      'Hipokapni',
+    ],
+    correctAnswerIndex: 2,
+    explanation: 'Pulmoner hipertansiyonda sağ ventrikül yüklenir ve yetmezlik gelişebilir.',
   ),
   Question(
     question: 'KOAH hastasında yüksek FiO₂ uygulanmasının riski nedir?',
@@ -343,152 +509,10 @@ final List<Question> respiratoryDiseasesQuestions = [
       'Hipokapni',
     ],
     correctAnswerIndex: 2,
-    explanation:
-        'KOAH\'ta solunum sürücüsü hipoksiye bağlı olabilir; yüksek FiO₂ bu mekanizmayı baskılayabilir.',
+    explanation: 'KOAH\'ta solunum sürücüsü hipoksiye bağlı olabilir; yüksek FiO₂ bu mekanizmayı baskılayabilir.',
   ),
   Question(
-    question:
-        'Aşağıdakilerden hangisi KOAH\'lı hastada postoperatif komplikasyon riskini azaltmak için en uygun yaklaşımdır?',
-    options: [
-      '%100 O₂ ile ventilasyon',
-      'Derin sedasyon',
-      'Sigara içiminin devam etmesi',
-      'Ameliyat öncesi bronkodilatör kullanımı',
-      'Yüksek doz steroid başlanması',
-    ],
-    correctAnswerIndex: 3,
-    explanation:
-        'Bronkodilatör tedavi, hava yollarını açar, ventilasyonu iyileştirir → postop komplikasyon riskini azaltır.',
-  ),
-  Question(
-    question:
-        'Aşağıdaki durumlardan hangisinde hipoksiye rağmen PaCO₂ normal veya düşük olabilir?',
-    options: [
-      'Diffüzyon bozukluğu',
-      'Pulmoner emboli',
-      'Atelektazi',
-      'Bronkospazm',
-      'Solunumsal asidoz',
-    ],
-    correctAnswerIndex: 1,
-    explanation:
-        'Pulmoner embolide perfüzyon azalır, ama alveollerdeki havalanma sürebilir → hipoksemi olur, PaCO₂ genellikle normal veya düşük kalır.',
-  ),
-  Question(
-    question:
-        'Aşağıdakilerden hangisi astım atağı sırasında anestezi altında en erken belirti olabilir?',
-    options: [
-      'Hipotansiyon',
-      'ETCO₂ artışı',
-      'Solunum seslerinde azalma',
-      'Bradikardi',
-      'Arteriyel oksijen saturasyonunda artış',
-    ],
-    correctAnswerIndex: 2,
-    explanation:
-        'Bronkospazmda, hava akımı azalır → auskültasyonda solunum sesleri azalabilir veya kaybolabilir → erken uyarıcı bulgudur.',
-  ),
-  Question(
-    question:
-        'Aşağıdakilerden hangisi postoperatif atelektazi gelişimini azaltmaya en çok katkı sağlar?',
-    options: [
-      'Düşük doz sedasyon',
-      'Erken mobilizasyon ve solunum egzersizi',
-      'Yüksek FiO₂',
-      'Nitrik oksit verilmesi',
-      'NPO süresinin uzatılması',
-    ],
-    correctAnswerIndex: 1,
-    explanation:
-        'Erken mobilizasyon ve solunum egzersizi, alveolleri açar → atelektaziyi önlemede en etkili yaklaşımlardandır.',
-  ),
-  Question(
-    question:
-        'Aşağıdakilerden hangisi kronik hiperkapnili bir hastada oksijen tedavisinde dikkat edilmesi gereken bir noktadır?',
-    options: [
-      'O₂ dozu yüksek tutulmalıdır',
-      'O₂ tedavisi kesilmelidir',
-      'PaCO₂\'ye göre FiO₂ ayarlanır',
-      'FiO₂ aşırı artırılırsa solunum baskılanabilir',
-      'Oksijenin etkisi yoktur',
-    ],
-    correctAnswerIndex: 3,
-    explanation:
-        'Kronik hiperkapnili hastalarda, solunum stimülasyonu hipoksiye bağlı olabilir → aşırı O₂ verilmesi hipoventilasyona yol açabilir.',
-  ),
-  Question(
-    question:
-        'Aşağıdakilerden hangisi tek akciğer ventilasyonu sırasında hipoksi gelişirse yapılması gereken ilk müdahaledir?',
-    options: [
-      'CPAP uygulanması',
-      'PEEP artırılması',
-      'FiO₂ azaltılması',
-      'Nitroz oksit verilmesi',
-      'Hastayı sırtüstü çevirmek',
-    ],
-    correctAnswerIndex: 0,
-    explanation:
-        'Tek akciğer ventilasyonunda, açık akciğere CPAP uygulanarak alveollerin açık kalması sağlanır → hipoksi önlenir.',
-  ),
-  Question(
-    question:
-        'Aşağıdakilerden hangisi pulmoner hastalığı olan hastada uygulanan yüksek FiO₂\'nin zararlı etkilerinden biri değildir?',
-    options: [
-      'Absorpsiyon atelektazisi',
-      'Serbest radikal oluşumu',
-      'Hipoventilasyon',
-      'Hiperkapni',
-      'Serebral ödem',
-    ],
-    correctAnswerIndex: 4,
-    explanation:
-        'Yüksek FiO₂; oksidatif stres, CO₂ retansiyonu ve atelektaziye neden olabilir, ancak doğrudan serebral ödem ile ilişkili değildir.',
-  ),
-  Question(
-    question:
-        'Aşağıdakilerden hangisi pulmoner fibrozis hastasında anestezi sırasında karşılaşılması en olası sorundur?',
-    options: [
-      'Artmış akciğer kompliansı',
-      'Kolay ventilasyon',
-      'Hipoksiye direnç',
-      'Azalmış diffüzyon kapasitesi',
-      'Solunum sayısında azalma',
-    ],
-    correctAnswerIndex: 3,
-    explanation:
-        'Fibrozis, alveol-kapiller membranı kalınlaştırır → gaz değişimi bozulur → diffüzyon kapasitesi azalır.',
-  ),
-  Question(
-    question:
-        'Aşağıdakilerden hangisi astımlı hastalarda premedikasyon olarak tercih edilebilecek ajanlardan biridir?',
-    options: [
-      'Antihistaminikler',
-      'Lityum',
-      'B bloker',
-      'Midazolam',
-      'Aspirin',
-    ],
-    correctAnswerIndex: 3,
-    explanation:
-        'Midazolam, sedatif ve anksiyolitiktir; histamin salınımına neden olmaz, bronkokonstriksiyonu tetiklemez→ astımlı hastalar için güvenlidir.',
-  ),
-  Question(
-    question:
-        'Aşağıdakilerden hangisi solunum hastalığı olan hastada cerrahi sonrası erken dönemde ekstübasyon yapılması için bir engeldir?',
-    options: [
-      'pH: 7.38',
-      'PaCO₂: 52 mmHg',
-      'Vital kapasite: 9 mL/kg',
-      'SpO₂: %94',
-      'SaO₂: %96',
-    ],
-    correctAnswerIndex: 2,
-    explanation:
-        'Vital kapasite <15 mL/kg, solunum kas gücünün yetersiz olduğunu gösterir → erken ekstübasyon için risk oluşturur.',
-  ),
-  Question(
-    question:
-        'Astımlı bir hastada perioperatif bronkospazm geliştiğinde ilk yapılması gereken nedir?',
+    question: 'Astımlı hastada intraoperatif bronkospazm geliştiğinde ilk yapılması gereken nedir?',
     options: [
       'Entübasyon',
       'İnhalasyon anestezisinin kesilmesi',
@@ -497,12 +521,10 @@ final List<Question> respiratoryDiseasesQuestions = [
       'PEEP artırılması',
     ],
     correctAnswerIndex: 2,
-    explanation:
-        'Bronkospazmda ilk yaklaşım beta-agonist tedavidir (örneğin salbutamol).',
+    explanation: 'Bronkospazmda ilk yaklaşım beta-agonist tedavidir (örneğin salbutamol).',
   ),
   Question(
-    question:
-        'Pulmoner hipertansiyonu olan hastada hipotansiyon geliştiğinde aşağıdaki ajanlardan hangisi tercih edilmelidir?',
+    question: 'Pulmoner hipertansiyonu olan hastada hipotansiyon geliştiğinde aşağıdaki ajanlardan hangisi tercih edilmelidir?',
     options: [
       'Noradrenalin',
       'Dobutamin',
@@ -511,12 +533,10 @@ final List<Question> respiratoryDiseasesQuestions = [
       'Fenilefrin',
     ],
     correctAnswerIndex: 0,
-    explanation:
-        'Noradrenalin sistemik vasküler direnci artırırken pulmoner basıncı minimal etkiler.',
+    explanation: 'Noradrenalin sistemik vasküler direnci artırırken pulmoner basıncı minimal etkiler.',
   ),
   Question(
-    question:
-        'Astımlı bir hastada perioperatif steroid tedavisinin amacı nedir?',
+    question: 'Astımlı bir hastada perioperatif steroid tedavisinin amacı nedir?',
     options: [
       'Bronkodilatasyon sağlamak',
       'Mukoza sekresyonunu artırmak',
@@ -525,12 +545,10 @@ final List<Question> respiratoryDiseasesQuestions = [
       'Vazodilatasyon oluşturmak',
     ],
     correctAnswerIndex: 3,
-    explanation:
-        'Steroidler astımda inflamasyonu baskılayarak semptomları kontrol altına alır.',
+    explanation: 'Steroidler astımda inflamasyonu baskılayarak semptomları kontrol altına alır.',
   ),
   Question(
-    question:
-        'Amfizemli hastada anestezi sırasında en sık karşılaşılan ventilasyon sorunu nedir?',
+    question: 'Amfizemli hastada anestezi sırasında en sık karşılaşılan ventilasyon sorunu nedir?',
     options: [
       'Hipoekspansiyon',
       'Volüm kaybı',
@@ -539,25 +557,10 @@ final List<Question> respiratoryDiseasesQuestions = [
       'Pulmoner emboli',
     ],
     correctAnswerIndex: 2,
-    explanation:
-        'Amfizemde alveoller genişlemiş ve elastikiyet kaybolmuştur; hava dışarı çıkamaz → hava tuzağı.',
+    explanation: 'Amfizemde alveoller genişlemiş ve elastikiyet kaybolmuştur; hava dışarı çıkamaz → hava tuzağı.',
   ),
   Question(
-    question: 'Hangisi pulmoner hipertansiyon tedavisinde kullanılmaz?',
-    options: [
-      'Beta blokerler',
-      'Oksijen',
-      'PDE-5 inhibitörleri (sildenafil)',
-      'Prostasiklin analogları (epoprostenol)',
-      'Endotelin reseptör antagonistleri (bosentan)',
-    ],
-    correctAnswerIndex: 0,
-    explanation:
-        'Pulmoner vazodilatörler kullanılır. Beta blokerler sağ ventrikül fonksiyonunu bozar.',
-  ),
-  Question(
-    question:
-        'KOAH hastasında postoperatif oksijen tedavisinde hangisinden kaçınılmalıdır?',
+    question: 'KOAH hastasında postoperatif oksijen tedavisinde hangisinden kaçınılmalıdır?',
     options: [
       'Düşük akımlı O₂ verilmesi',
       'Yüksek FiO₂ ile oksijen verilmesi',
@@ -566,12 +569,10 @@ final List<Question> respiratoryDiseasesQuestions = [
       'Nazal kanül kullanımı',
     ],
     correctAnswerIndex: 1,
-    explanation:
-        'Yüksek oksijen düzeyleri CO₂ retansiyonunu artırabilir; hipoksik solunum sürücüsünü baskılar.',
+    explanation: 'Yüksek oksijen düzeyleri CO₂ retansiyonunu artırabilir; hipoksik solunum sürücüsünü baskılar.',
   ),
   Question(
-    question:
-        'Astım atağı geçirmiş bir hasta elektif cerrahiden ne kadar süre sonra ameliyat edilebilir?',
+    question: 'Astım atağı geçirmiş bir hasta elektif cerrahiden ne kadar süre sonra ameliyat edilebilir?',
     options: [
       '24 saat',
       '48 saat',
@@ -580,12 +581,10 @@ final List<Question> respiratoryDiseasesQuestions = [
       'Atak geçtikten hemen sonra',
     ],
     correctAnswerIndex: 3,
-    explanation:
-        'Stabil olmayan astımda cerrahi genellikle ataktan sonra 2 hafta ertelenmelidir.',
+    explanation: 'Stabil olmayan astımda cerrahi genellikle ataktan sonra 2 hafta ertelenmelidir.',
   ),
   Question(
-    question:
-        'KOAH hastasında postoperatif komplikasyon riskini artıran en önemli faktör hangisidir?',
+    question: 'KOAH hastasında postoperatif komplikasyon riskini artıran en önemli faktör hangisidir?',
     options: [
       'Erkek cinsiyet',
       'SpO₂ >%95',
@@ -594,12 +593,10 @@ final List<Question> respiratoryDiseasesQuestions = [
       'Düşük hemoglobin',
     ],
     correctAnswerIndex: 2,
-    explanation:
-        'Ciddi obstrüksiyon (FEV₁ <%50) postoperatif solunum komplikasyonları ile güçlü ilişkilidir.',
+    explanation: 'Ciddi obstrüksiyon (FEV₁ <%50) postoperatif solunum komplikasyonları ile güçlü ilişkilidir.',
   ),
   Question(
-    question:
-        'Astım hastasında entübasyon sonrası wheezing duyulması durumunda ilk yapılması gereken nedir?',
+    question: 'Astım hastasında entübasyon sonrası wheezing duyulması durumunda ilk yapılması gereken nedir?',
     options: [
       'Anesteziyi sonlandırmak',
       'Salbutamol inhalasyonu uygulamak',
@@ -608,12 +605,10 @@ final List<Question> respiratoryDiseasesQuestions = [
       'Furosemid vermek',
     ],
     correctAnswerIndex: 1,
-    explanation:
-        'Wheezing varlığında ilk adım inhaler bronkodilatör uygulamaktır.',
+    explanation: 'Wheezing varlığında ilk adım inhaler bronkodilatör uygulamaktır.',
   ),
   Question(
-    question:
-        'İnterstisyel akciğer hastalığı olan bir hastada akciğer komplikasyonunu önlemek için aşağıdakilerden hangisi önerilmez?',
+    question: 'İnterstisyel akciğer hastalığı olan bir hastada akciğer komplikasyonunu önlemek için aşağıdakilerden hangisi önerilmez?',
     options: [
       'Olası yüksek FiO₂\'den kaçınmak',
       'Düşük tidal volüm uygulamak',
@@ -622,12 +617,10 @@ final List<Question> respiratoryDiseasesQuestions = [
       'Akciğer koruyucu ventilasyon',
     ],
     correctAnswerIndex: 2,
-    explanation:
-        'Bu hastalarda yüksek PEEP akciğer hasarını artırabilir; dikkatli kullanılmalıdır.',
+    explanation: 'Bu hastalarda yüksek PEEP akciğer hasarını artırabilir; dikkatli kullanılmalıdır.',
   ),
   Question(
-    question:
-        'Astım hastasında bronkospazm riskini azaltmak için indüksiyon öncesi hangi ilaç verilmelidir?',
+    question: 'Astım hastasında bronkospazm riskini azaltmak için indüksiyon öncesi hangi ilaç verilmelidir?',
     options: [
       'Beta bloker',
       'Antikolinerjik',
@@ -636,28 +629,22 @@ final List<Question> respiratoryDiseasesQuestions = [
       'Lökotrien inhibitörü',
     ],
     correctAnswerIndex: 1,
-    explanation:
-        'Antikolinerjik ilaçlar bronkokonstriksiyonu azaltarak bronkospazm riskini düşürür.',
+    explanation: 'Antikolinerjik ilaçlar bronkokonstriksiyonu azaltarak bronkospazm riskini düşürür.',
   ),
   Question(
-    question:
-        'Pulmoner hipertansiyonlu hastada genel anestezi için en uygun indüksiyon ajanı hangisidir?',
+    question: 'Pulmoner hipertansiyonlu hastada genel anestezi için en uygun indüksiyon ajanı hangisidir?',
     options: ['Propofol', 'Ketamin', 'Etomidat', 'Midazolam', 'Tiyopental'],
     correctAnswerIndex: 2,
-    explanation:
-        'Etomidat hemodinamik stabilite sağlar ve pulmoner basınç üzerine etkisi azdır.',
+    explanation: 'Etomidat hemodinamik stabilite sağlar ve pulmoner basınç üzerine etkisi azdır.',
   ),
   Question(
-    question:
-        'Astım hastasında solunum depresyonunu artırmadan sedasyon sağlayan en uygun ajan hangisidir?',
+    question: 'Astım hastasında solunum depresyonunu artırmadan sedasyon sağlayan en uygun ajan hangisidir?',
     options: ['Diazepam', 'Morfin', 'Fentanil', 'Ketamin', 'Deksmedetomidin'],
     correctAnswerIndex: 4,
-    explanation:
-        'Deksmedetomidin sedasyon sağlar, minimal solunum depresyonu ile avantajlıdır.',
+    explanation: 'Deksmedetomidin sedasyon sağlar, minimal solunum depresyonu ile avantajlıdır.',
   ),
   Question(
-    question:
-        'İnterstisyel akciğer hastalığı olan hastada postoperatif oksijen desteğinde en dikkat edilmesi gereken nedir?',
+    question: 'İnterstisyel akciğer hastalığı olan hastada postoperatif oksijen desteğinde en dikkat edilmesi gereken nedir?',
     options: [
       'Oksijen satürasyonunun %100 olması',
       'FiO₂\'nin yüksek tutulması',
@@ -666,12 +653,10 @@ final List<Question> respiratoryDiseasesQuestions = [
       'Oksijenin maske ile verilmesi',
     ],
     correctAnswerIndex: 3,
-    explanation:
-        'Bu hastalarda serbest radikal oluşumu riski nedeniyle oksijen dikkatli ve hedefe yönelik verilmelidir.',
+    explanation: 'Bu hastalarda serbest radikal oluşumu riski nedeniyle oksijen dikkatli ve hedefe yönelik verilmelidir.',
   ),
   Question(
-    question:
-        'Astım hastasında aspirasyon riskini azaltmak için hangi anestezi yaklaşımı daha uygundur?',
+    question: 'Astım hastasında aspirasyon riskini azaltmak için hangi anestezi yaklaşımı daha uygundur?',
     options: [
       'Hızlı sekans indüksiyon',
       'Spinal anestezi',
@@ -680,12 +665,10 @@ final List<Question> respiratoryDiseasesQuestions = [
       'Derin anestezi ile entübasyon',
     ],
     correctAnswerIndex: 0,
-    explanation:
-        'Astımda mide içeriği reflüsüne bağlı bronkospazm riski nedeniyle hızlı sekans tercih edilir.',
+    explanation: 'Astımda mide içeriği reflüsüne bağlı bronkospazm riski nedeniyle hızlı sekans tercih edilir.',
   ),
   Question(
-    question:
-        'Pulmoner hipertansiyonu olan hastada genel anestezi sırasında en istenmeyen durum nedir?',
+    question: 'Pulmoner hipertansiyonu olan hastada genel anestezi sırasında en istenmeyen durum nedir?',
     options: [
       'Hipotansiyon',
       'Hiperkapni',
@@ -694,12 +677,10 @@ final List<Question> respiratoryDiseasesQuestions = [
       'Hipokapni',
     ],
     correctAnswerIndex: 3,
-    explanation:
-        'Hipoksi pulmoner vazokonstriksiyonu tetikleyerek sağ kalp yükünü artırabilir.',
+    explanation: 'Hipoksi pulmoner vazokonstriksiyonu tetikleyerek sağ kalp yükünü artırabilir.',
   ),
   Question(
-    question:
-        'KOAH hastasında postoperatif dönemde hiperkapni gelişmesinin en olası nedeni nedir?',
+    question: 'KOAH hastasında postoperatif dönemde hiperkapni gelişmesinin en olası nedeni nedir?',
     options: [
       'Yüksek FiO₂ verilmesi',
       'Artmış tidal volüm',
@@ -708,12 +689,10 @@ final List<Question> respiratoryDiseasesQuestions = [
       'Artmış hematokrit',
     ],
     correctAnswerIndex: 0,
-    explanation:
-        'KOAH hastaları hipoksik ventilatuar sürücüye bağımlı olabilir; yüksek FiO₂ bu mekanizmayı baskılar.',
+    explanation: 'KOAH hastaları hipoksik ventilatuar sürücüye bağımlı olabilir; yüksek FiO₂ bu mekanizmayı baskılar.',
   ),
   Question(
-    question:
-        'Pulmoner hipertansiyonu olan hastada postoperatif dönemde sağ kalp yetmezliğini tetikleyebilecek en önemli faktör nedir?',
+    question: 'Pulmoner hipertansiyonu olan hastada postoperatif dönemde sağ kalp yetmezliğini tetikleyebilecek en önemli faktör nedir?',
     options: [
       'Hipoksemi',
       'Hipervolemi',
@@ -722,12 +701,10 @@ final List<Question> respiratoryDiseasesQuestions = [
       'Hipokapni',
     ],
     correctAnswerIndex: 0,
-    explanation:
-        'Hipoksemi, pulmoner vasküler direnç artışına yol açar ve sağ kalbi zorlar.',
+    explanation: 'Hipoksemi, pulmoner vasküler direnç artışına yol açar ve sağ kalbi zorlar.',
   ),
   Question(
-    question:
-        'KOAH hastasında hava yolu obstrüksiyonunun en iyi göstergesi hangisidir?',
+    question: 'KOAH hastasında hava yolu obstrüksiyonunun en iyi göstergesi hangisidir?',
     options: [
       'FVC',
       'FEV₁/FVC oranı',
@@ -736,12 +713,10 @@ final List<Question> respiratoryDiseasesQuestions = [
       'Total akciğer kapasitesi',
     ],
     correctAnswerIndex: 1,
-    explanation:
-        'FEV₁/FVC oranının düşüklüğü obstrüktif hastalık göstergesidir.',
+    explanation: 'FEV₁/FVC oranının düşüklüğü obstrüktif hastalık göstergesidir.',
   ),
   Question(
-    question:
-        'KOAH\'lı hastada anestezi sırasında entübasyonda en uygun tüp tipi hangisidir?',
+    question: 'KOAH\'lı hastada anestezi sırasında entübasyonda en uygun tüp tipi hangisidir?',
     options: [
       'Cuff\'suz tüp',
       'Çift lümenli tüp',
@@ -750,12 +725,10 @@ final List<Question> respiratoryDiseasesQuestions = [
       'Nazotrakeal tüp',
     ],
     correctAnswerIndex: 2,
-    explanation:
-        'Subglottik emişli tüp sekresyon aspirasyonunu azaltarak postoperatif komplikasyonları önleyebilir.',
+    explanation: 'Subglottik emişli tüp sekresyon aspirasyonunu azaltarak postoperatif komplikasyonları önleyebilir.',
   ),
   Question(
-    question:
-        'KOAH hastasında yüksek PEEP uygulamasının en olası komplikasyonu nedir?',
+    question: 'KOAH hastasında yüksek PEEP uygulamasının en olası komplikasyonu nedir?',
     options: [
       'Hipoksemi',
       'Hipokapni',
@@ -764,12 +737,10 @@ final List<Question> respiratoryDiseasesQuestions = [
       'Bronkospazm',
     ],
     correctAnswerIndex: 2,
-    explanation:
-        'Artan PEEP, hava hapsine neden olarak akciğer hasarı ve barotravma riskini artırır.',
+    explanation: 'Artan PEEP, hava hapsine neden olarak akciğer hasarı ve barotravma riskini artırır.',
   ),
   Question(
-    question:
-        'Astım hastasında entübasyon sonrası wheezing devam ediyorsa, tedaviye eklenmesi gereken ajan nedir?',
+    question: 'Astım hastasında entübasyon sonrası wheezing devam ediyorsa, tedaviye eklenmesi gereken ajan nedir?',
     options: [
       'Salbutamol',
       'İzofluran',
@@ -778,12 +749,10 @@ final List<Question> respiratoryDiseasesQuestions = [
       'Ketamin',
     ],
     correctAnswerIndex: 2,
-    explanation:
-        'İpratropium bromür antikolinerjik etkisiyle bronkodilatasyon sağlar ve beta-agonistlere eklenebilir.',
+    explanation: 'İpratropium bromür antikolinerjik etkisiyle bronkodilatasyon sağlar ve beta-agonistlere eklenebilir.',
   ),
   Question(
-    question:
-        'Astım hastasında bronkospazm geliştiğinde inhaler tedaviye yanıtsızsa ikinci seçenek nedir?',
+    question: 'Astım hastasında bronkospazm geliştiğinde inhaler tedaviye yanıtsızsa ikinci seçenek nedir?',
     options: [
       'Antibiyotik',
       'Deksametazon',
@@ -792,12 +761,10 @@ final List<Question> respiratoryDiseasesQuestions = [
       'Adenozin',
     ],
     correctAnswerIndex: 1,
-    explanation:
-        'Kortikosteroidler bronşiyal inflamasyonu azaltır ve dirençli bronkospazmda kullanılır.',
+    explanation: 'Kortikosteroidler bronşiyal inflamasyonu azaltır ve dirençli bronkospazmda kullanılır.',
   ),
   Question(
-    question:
-        'KOAH hastasında intratorasik basınç artışına bağlı en olası komplikasyon nedir?',
+    question: 'KOAH hastasında intratorasik basınç artışına bağlı en olası komplikasyon nedir?',
     options: [
       'Atelektazi',
       'Hipoksemi',
@@ -806,12 +773,10 @@ final List<Question> respiratoryDiseasesQuestions = [
       'Pulmoner emboli',
     ],
     correctAnswerIndex: 2,
-    explanation:
-        'Artan intratorasik basınç venöz dönüşü azaltarak hipotansiyona neden olabilir.',
+    explanation: 'Artan intratorasik basınç venöz dönüşü azaltarak hipotansiyona neden olabilir.',
   ),
   Question(
-    question:
-        'Pulmoner hipertansiyonu olan hastada anestezi sırasında dikkat edilmesi gereken en önemli parametre nedir?',
+    question: 'Pulmoner hipertansiyonu olan hastada anestezi sırasında dikkat edilmesi gereken en önemli parametre nedir?',
     options: [
       'Kalp hızı',
       'Santral venöz basınç',
@@ -820,20 +785,16 @@ final List<Question> respiratoryDiseasesQuestions = [
       'PaCO₂',
     ],
     correctAnswerIndex: 2,
-    explanation:
-        'Pulmoner arter basıncındaki artış sağ ventrikül yükünü artırabilir; dikkatle izlenmelidir.',
+    explanation: 'Pulmoner arter basıncındaki artış sağ ventrikül yükünü artırabilir; dikkatle izlenmelidir.',
   ),
   Question(
-    question:
-        'Astım atağı sonrası bronkospazmın çözülmesinde en etkili ajan hangisidir?',
+    question: 'Astım atağı sonrası bronkospazmın çözülmesinde en etkili ajan hangisidir?',
     options: ['Adrenalin', 'Teofilin', 'Salbutamol', 'İzofluran', 'Ketamin'],
     correctAnswerIndex: 2,
-    explanation:
-        'Beta-2 agonistler (örneğin salbutamol) bronkodilatasyon sağlayarak etkili olur.',
+    explanation: 'Beta-2 agonistler (örneğin salbutamol) bronkodilatasyon sağlayarak etkili olur.',
   ),
   Question(
-    question:
-        'KOAH hastasında postoperatif analjezi için en uygun yöntem hangisidir?',
+    question: 'KOAH hastasında postoperatif analjezi için en uygun yöntem hangisidir?',
     options: [
       'Sistemik opioid infüzyonu',
       'Epidural analjezi',
@@ -842,12 +803,10 @@ final List<Question> respiratoryDiseasesQuestions = [
       'Morfin IM',
     ],
     correctAnswerIndex: 1,
-    explanation:
-        'Epidural analjezi etkili ve solunum depresyonu riskini azaltıcıdır.',
+    explanation: 'Epidural analjezi etkili ve solunum depresyonu riskini azaltıcıdır.',
   ),
   Question(
-    question:
-        'KOAH hastasında genel anestezi sonrası en sık solunum komplikasyonu nedir?',
+    question: 'KOAH hastasında genel anestezi sonrası en sık solunum komplikasyonu nedir?',
     options: [
       'Pulmoner emboli',
       'Pnömotoraks',
@@ -856,8 +815,43 @@ final List<Question> respiratoryDiseasesQuestions = [
       'Pulmoner ödem',
     ],
     correctAnswerIndex: 3,
-    explanation:
-        'Atelektazi KOAH\'lı hastalarda postoperatif dönemde sık görülür, sekresyon ve hipoventilasyonla ilişkilidir.',
+    explanation: 'Atelektazi KOAH\'lı hastalarda postoperatif dönemde sık görülür, sekresyon ve hipoventilasyonla ilişkilidir.',
+  ),
+  Question(
+    question: 'Kronik bronşitli bir hastada perioperatif dönemde hangi laboratuvar bulgusu beklenir?',
+    options: [
+      'Polisitemi',
+      'Hipokrom mikrositer anemi',
+      'Trombositopeni',
+      'Lökopeni',
+      'Hiponatremi',
+    ],
+    correctAnswerIndex: 0,
+    explanation: 'Kronik hipoksiye bağlı sekonder polisitemi görülür. PaCO₂ >45 mmHg ise solunum yetmezliği riski artar.',
+  ),
+  Question(
+    question: 'Pulmoner emboli şüphesi olan bir hastada hangi anestezik teknik tercih edilir?',
+    options: [
+      'Rejyonal anestezi',
+      'Genel anestezi',
+      'Yüksek doz opioid',
+      'İnhalasyon anestezisi',
+      'Total intravenöz anestezi',
+    ],
+    correctAnswerIndex: 1,
+    explanation: 'Hemorajik komplikasyon riski nedeniyle spinal/epidural kontrendikedir. Genel anestezi gerekirse heparinizasyon dikkatle yönetilir.',
+  ),
+  Question(
+    question: 'Hangisi masif hemoptizide acil hava yolu yönetimi için doğrudur?',
+    options: [
+      'Çift lümenli endotrakeal tüp',
+      'Nazal entübasyon',
+      'Laringeal maske',
+      'Yüz maskesi',
+      'Trakeostomi',
+    ],
+    correctAnswerIndex: 0,
+    explanation: 'Kanayan akciğerin izolasyonu için DLT veya bronş blokeri şarttır. Fiberoptik bronkoskopi ile yerleştirilir.',
   ),
   Question(
     question: 'Hangisi pulmoner hipertansiyon tedavisinde kullanılmaz?',
@@ -869,127 +863,6 @@ final List<Question> respiratoryDiseasesQuestions = [
       'Endotelin reseptör antagonistleri (bosentan)',
     ],
     correctAnswerIndex: 0,
-    explanation:
-        'Pulmoner vazodilatörler kullanılır. Beta blokerler sağ ventrikül fonksiyonunu bozar.',
-  ),
-  Question(
-    question:
-        'Aşağıdaki parametrelerden hangisinin düşük olması, restriktif akciğer hastalığı lehinedir?',
-    options: [
-      'FEV₁/FVC oranı',
-      'Total akciğer kapasitesi (TLC)',
-      'PaCO₂',
-      'Inspiratuvar rezerv volüm',
-      'HCO₃',
-    ],
-    correctAnswerIndex: 1,
-    explanation:
-        'Restriktif hastalıklarda, tüm akciğer volümleri düşer → en karakteristik olanı TLC azalmasıdır.',
-  ),
-  Question(
-    question:
-        'Aşağıdakilerden hangisi akciğer rezeksiyonuna bağlı postoperatif mortalite ile en güçlü ilişkili testtir?',
-    options: ['SpO₂', 'FEV₁', 'DLCO', 'Hb', 'PaCO₂'],
-    correctAnswerIndex: 2,
-    explanation:
-        'Diffüzyon kapasitesi (DLCO), gaz değişim yeteneğini yansıtır → post-rezeksiyon riskini belirlemede en hassas parametrelerden biridir.',
-  ),
-  Question(
-    question:
-        'Aşağıdaki durumlardan hangisinde hipoksiye rağmen PaCO₂ normal veya düşük olabilir?',
-    options: [
-      'Diffüzyon bozukluğu',
-      'Pulmoner emboli',
-      'Atelektazi',
-      'Bronkospazm',
-      'Solunumsal asidoz',
-    ],
-    correctAnswerIndex: 1,
-    explanation:
-        'Pulmoner embolide perfüzyon azalır, ama alveollerdeki havalanma sürebilir → hipoksemi olur, PaCO₂ genellikle normal veya düşük kalır.',
-  ),
-  Question(
-    question:
-        'Aşağıdakilerden hangisi pulmoner hastalığı olan hastada uygulanan yüksek FiO₂\'nin zararlı etkilerinden biri değildir?',
-    options: [
-      'Absorpsiyon atelektazisi',
-      'Serbest radikal oluşumu',
-      'Hipoventilasyon',
-      'Hiperkapni',
-      'Serebral ödem',
-    ],
-    correctAnswerIndex: 4,
-    explanation:
-        'Yüksek FiO₂; oksidatif stres, CO₂ retansiyonu ve atelektaziye neden olabilir, ancak doğrudan serebral ödem ile ilişkili değildir.',
-  ),
-  Question(
-    question:
-        'Aşağıdakilerden hangisi astımlı hastalarda premedikasyon olarak tercih edilebilecek ajanlardan biridir?',
-    options: [
-      'Antihistaminikler',
-      'Lityum',
-      'B bloker',
-      'Midazolam',
-      'Aspirin',
-    ],
-    correctAnswerIndex: 3,
-    explanation:
-        'Midazolam, sedatif ve anksiyolitiktir; histamin salınımına neden olmaz, bronkokonstriksiyonu tetiklemez→ astımlı hastalar için güvenlidir.',
-  ),
-  Question(
-    question:
-        'Aşağıdakilerden hangisi tek akciğer ventilasyonu sırasında hipoksi gelişirse yapılması gereken ilk müdahaledir?',
-    options: [
-      'CPAP uygulanması',
-      'PEEP artırılması',
-      'FiO₂ azaltılması',
-      'Nitroz oksit verilmesi',
-      'Hastayı sırtüstü çevirmek',
-    ],
-    correctAnswerIndex: 0,
-    explanation:
-        'Tek akciğer ventilasyonunda, açık akciğere CPAP uygulanarak alveollerin açık kalması sağlanır → hipoksi önlenir.',
-  ),
-  Question(
-    question:
-        'Hangisi masif hemoptizide acil hava yolu yönetimi için doğrudur?',
-    options: [
-      'Çift lümenli endotrakeal tüp',
-      'Nazal entübasyon',
-      'Laringeal maske',
-      'Yüz maskesi',
-      'Trakeostomi',
-    ],
-    correctAnswerIndex: 0,
-    explanation:
-        'Kanayan akciğerin izolasyonu için DLT veya bronş blokeri şarttır. Fiberoptik bronkoskopi ile yerleştirilir.',
-  ),
-  Question(
-    question:
-        'Aşağıdakilerden hangisi pulmoner fibrozis hastasında anestezi sırasında karşılaşılması en olası sorundur?',
-    options: [
-      'Artmış akciğer kompliansı',
-      'Kolay ventilasyon',
-      'Hipoksiye direnç',
-      'Azalmış diffüzyon kapasitesi',
-      'Solunum sayısında azalma',
-    ],
-    correctAnswerIndex: 3,
-    explanation:
-        'Fibrozis, alveol-kapiller membranı kalınlaştırır → gaz değişimi bozulur → diffüzyon kapasitesi azalır.',
-  ),
-  Question(
-    question:
-        'Aşağıdakilerden hangisi solunum hastalığı olan hastada cerrahi sonrası erken dönemde ekstübasyon yapılması için bir engeldir?',
-    options: [
-      'pH: 7.38',
-      'PaCO₂: 52 mmHg',
-      'Vital kapasite: 9 mL/kg',
-      'SpO₂: %94',
-      'SaO₂: %96',
-    ],
-    correctAnswerIndex: 2,
-    explanation:
-        'Vital kapasite <15 mL/kg, solunum kas gücünün yetersiz olduğunu gösterir → erken ekstübasyon için risk oluşturur.',
+    explanation: 'Pulmoner vazodilatörler kullanılır. Beta blokerler sağ ventrikül fonksiyonunu bozar.',
   ),
 ];

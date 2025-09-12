@@ -3,7 +3,7 @@ import '../../models/question.dart';
 List<Question> analgesicAgentsQuestions = [
   Question(
     id: 'analgesic_agents_001',
-    question: 'Which of the following is NOT a typical effect of opioids?',
+    question: 'Which of the following is not a specific effect of opioids?',
     options: [
       'Respiratory depression',
       'Diarrhea',
@@ -12,28 +12,28 @@ List<Question> analgesicAgentsQuestions = [
       'Analgesia'
     ],
     correctAnswerIndex: 1,
-    explanation: 'Opioids decrease gastrointestinal motility, leading to constipation. Diarrhea is not typical of opioids.',
+    explanation: 'Opioids reduce gastrointestinal motility, leading to constipation. Diarrhea is not typically seen with opioids.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
     id: 'analgesic_agents_002',
-    question: 'Which of the following is true regarding fentanyl?',
+    question: 'Which of the following statements about fentanyl is correct?',
     options: [
       'It is a long-acting opioid',
       'It causes significant histamine release',
-      'It is highly water-soluble',
-      'Its lipophilic nature results in rapid onset of action',
+      'It has high water solubility',
+      'It has rapid onset due to its lipophilic nature',
       'It has high oral bioavailability'
     ],
     correctAnswerIndex: 3,
-    explanation: 'Fentanyl\'s high lipophilicity allows rapid brain penetration and rapid onset of action.',
+    explanation: 'Fentanyl is highly lipophilic, allowing rapid brain penetration and fast onset of action.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
     id: 'analgesic_agents_003',
-    question: 'Which opioid has a long duration of action?',
+    question: 'Which of the following opioids has a long duration of action?',
     options: [
       'Fentanyl',
       'Remifentanil',
@@ -42,22 +42,22 @@ List<Question> analgesicAgentsQuestions = [
       'Alfentanil'
     ],
     correctAnswerIndex: 3,
-    explanation: 'Morphine has a relatively long half-life, with slower onset but prolonged effect.',
+    explanation: 'Morphine has a longer half-life, slower onset, but prolonged effect.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
     id: 'analgesic_agents_004',
-    question: 'What is the key pharmacokinetic feature of remifentanil?',
+    question: 'What is the most important pharmacokinetic property of remifentanil?',
     options: [
-      'Metabolized in the liver',
+      'Metabolized by the liver',
       'Hydrolyzed by cholinesterase',
       'Long-acting',
       'Weak analgesic effect',
-      'Orally bioavailable'
+      'Orally available'
     ],
     correctAnswerIndex: 1,
-    explanation: 'Remifentanil is rapidly broken down by plasma and tissue esterases → ultra-short acting, used via continuous infusion.',
+    explanation: 'Remifentanil is metabolized by plasma and tissue esterases. It has an ultra-short duration of action and is used via continuous infusion.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
@@ -72,13 +72,13 @@ List<Question> analgesicAgentsQuestions = [
       'Sufentanil'
     ],
     correctAnswerIndex: 2,
-    explanation: 'Morphine\'s active metabolite, morphine-6-glucuronide (M6G), accumulates in renal failure, increasing the risk of respiratory depression.',
+    explanation: 'Morphine\'s active metabolite, M6G (morphine-6-glucuronide), accumulates in renal failure, increasing the risk of respiratory depression.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
     id: 'analgesic_agents_006',
-    question: 'Which opioid effect shows the least tolerance development?',
+    question: 'Which effect of opioids is least likely to develop tolerance?',
     options: [
       'Analgesia',
       'Euphoria',
@@ -87,13 +87,13 @@ List<Question> analgesicAgentsQuestions = [
       'Sedation'
     ],
     correctAnswerIndex: 3,
-    explanation: 'Miosis is a hallmark of opioid use and tolerance does not develop to this effect.',
+    explanation: 'Miosis is a hallmark effect of opioids and does not develop tolerance, even in chronic users.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
     id: 'analgesic_agents_007',
-    question: 'Which receptor mediates the primary analgesic effect of opioids?',
+    question: 'Which receptor is primarily responsible for the analgesic effect of opioids?',
     options: [
       'Delta',
       'Kappa',
@@ -102,43 +102,43 @@ List<Question> analgesicAgentsQuestions = [
       'Beta'
     ],
     correctAnswerIndex: 3,
-    explanation: 'The mu (μ) receptor is responsible for most analgesic, sedative, euphoric, and respiratory depressive effects of opioids.',
+    explanation: 'Mu (μ) receptors mediate analgesia, sedation, respiratory depression, and euphoria.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
     id: 'analgesic_agents_008',
-    question: 'Which of the following is correct regarding naloxone?',
+    question: 'Which statement about naloxone is correct?',
     options: [
-      'Partial opioid agonist',
-      'Oral use only',
-      'Opioid receptor antagonist',
-      'Has analgesic effect',
-      'Longer duration than morphine'
+      'It is a partial opioid agonist',
+      'It is used only orally',
+      'It is an opioid receptor antagonist',
+      'It has analgesic effects',
+      'Its duration of action is longer than morphine'
     ],
     correctAnswerIndex: 2,
-    explanation: 'Naloxone is an opioid receptor antagonist (mu, delta, kappa) with rapid onset when given IV.',
+    explanation: 'Naloxone is an opioid antagonist blocking mu, delta, and kappa receptors. It acts rapidly when given IV.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
     id: 'analgesic_agents_009',
-    question: 'Which neurotransmitters contribute to tramadol\'s analgesic effect?',
+    question: 'Part of tramadol\'s analgesic effect is mediated through which neurotransmitters?',
     options: [
       'Dopamine and GABA',
       'NMDA and glutamate',
-      'Serotonin and norepinephrine',
+      'Serotonin and noradrenaline',
       'Acetylcholine and GABA',
       'Histamine and serotonin'
     ],
     correctAnswerIndex: 2,
-    explanation: 'Tramadol is a weak μ-opioid agonist and inhibits serotonin and norepinephrine reuptake, enhancing analgesia.',
+    explanation: 'Tramadol is a weak μ-opioid agonist and also inhibits serotonin and noradrenaline reuptake, enhancing analgesia.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
     id: 'analgesic_agents_010',
-    question: 'Which opioid is most associated with chest wall rigidity?',
+    question: 'Which opioid is most commonly associated with truncal muscle rigidity?',
     options: [
       'Morphine',
       'Tramadol',
@@ -147,13 +147,13 @@ List<Question> analgesicAgentsQuestions = [
       'Nalbuphine'
     ],
     correctAnswerIndex: 2,
-    explanation: 'High-dose IV bolus fentanyl (and derivatives) can cause chest wall rigidity → impairs ventilation.',
+    explanation: 'Fentanyl and its derivatives (especially high-dose IV bolus) can cause chest wall rigidity, complicating ventilation.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
     id: 'analgesic_agents_011',
-    question: 'Which opioid has no active metabolites?',
+    question: 'Which of the following opioids has no active metabolites?',
     options: [
       'Morphine',
       'Meperidine',
@@ -162,52 +162,52 @@ List<Question> analgesicAgentsQuestions = [
       'Hydromorphone'
     ],
     correctAnswerIndex: 3,
-    explanation: 'Fentanyl is metabolized into inactive metabolites, making it safer in renal impairment.',
+    explanation: 'Fentanyl is metabolized to inactive compounds, making it safer in renal impairment.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
     id: 'analgesic_agents_012',
-    question: 'Which mechanism explains opioid-induced nausea and vomiting?',
+    question: 'The nausea and vomiting caused by opioids is related to stimulation of which site?',
     options: [
       'NMDA antagonism',
       'Mu receptor stimulation',
-      'Direct action on respiratory center',
-      'Stimulation of the chemoreceptor trigger zone (CTZ)',
+      'Direct effect on the respiratory center',
+      'Chemoreceptor trigger zone (CTZ)',
       'Histamine release'
     ],
     correctAnswerIndex: 3,
-    explanation: 'Opioids stimulate the CTZ in the medulla, leading to nausea and vomiting.',
+    explanation: 'Opioids stimulate the CTZ in the medulla, causing nausea and vomiting.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
     id: 'analgesic_agents_013',
-    question: 'Which is the most serious toxicity associated with meperidine?',
+    question: 'The most serious toxicity associated with meperidine is:',
     options: [
-      'Hepatic failure',
+      'Liver failure',
       'Seizures',
       'Bronchospasm',
       'Bradycardia',
       'Urinary retention'
     ],
     correctAnswerIndex: 1,
-    explanation: 'Meperidine\'s metabolite normeperidine accumulates → neurotoxicity and seizures, especially in renal failure.',
+    explanation: 'The metabolite normeperidine can accumulate, especially in renal failure, leading to seizures.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
     id: 'analgesic_agents_014',
-    question: 'Tolerance to which opioid effect develops the fastest?',
+    question: 'Tolerance to which effect of opioids develops most rapidly?',
     options: [
       'Analgesia',
       'Miosis',
       'Respiratory depression',
       'Constipation',
-      'Nausea/vomiting'
+      'Nausea and vomiting'
     ],
     correctAnswerIndex: 0,
-    explanation: 'Tolerance develops quickly to analgesic effects, but not to miosis or constipation.',
+    explanation: 'Tolerance develops quickly to the analgesic effect, while miosis and constipation remain relatively unaffected.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
@@ -222,22 +222,22 @@ List<Question> analgesicAgentsQuestions = [
       'Remifentanil'
     ],
     correctAnswerIndex: 2,
-    explanation: 'Buprenorphine is a partial mu agonist → effective analgesic, but weaker than full agonists.',
+    explanation: 'Buprenorphine is a high-affinity partial mu agonist. It provides analgesia but with less efficacy than full agonists.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
     id: 'analgesic_agents_016',
-    question: 'What is the main mechanism underlying opioid tolerance?',
+    question: 'What is the most important mechanism in the development of opioid tolerance?',
     options: [
-      'Increased receptor number',
+      'Increase in receptor number',
       'Increased receptor affinity',
-      'Down-regulation and internalization',
-      'Enhanced hepatic metabolism',
+      'Downregulation and internalization',
+      'Increased hepatic metabolism',
       'Receptor mutation'
     ],
     correctAnswerIndex: 2,
-    explanation: 'Chronic opioid use leads to receptor down-regulation and internalization, contributing to tolerance.',
+    explanation: 'Chronic opioid use causes receptor downregulation and internalization, driving tolerance.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
@@ -249,16 +249,16 @@ List<Question> analgesicAgentsQuestions = [
       'Tramadol',
       'Morphine',
       'Codeine',
-      'All of the above'
+      'All of them'
     ],
     correctAnswerIndex: 1,
-    explanation: 'Tramadol (and meperidine) inhibit serotonin reuptake → risk of serotonin syndrome when combined with SSRIs.',
+    explanation: 'Tramadol (and meperidine) inhibit serotonin reuptake and may cause serotonin syndrome, especially with SSRIs.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
     id: 'analgesic_agents_018',
-    question: 'Which of the following is NOT a sign of opioid withdrawal?',
+    question: 'Which of the following is not a withdrawal symptom of opioids?',
     options: [
       'Rhinorrhea',
       'Mydriasis',
@@ -267,7 +267,7 @@ List<Question> analgesicAgentsQuestions = [
       'Sweating'
     ],
     correctAnswerIndex: 3,
-    explanation: 'Withdrawal causes diarrhea, not constipation. Mydriasis, rhinorrhea, and sweating are typical.',
+    explanation: 'Diarrhea, not constipation, is typical in withdrawal. Other common findings include mydriasis, sweating, and restlessness.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
@@ -282,12 +282,477 @@ List<Question> analgesicAgentsQuestions = [
       'Tramadol'
     ],
     correctAnswerIndex: 2,
-    explanation: 'Naloxone\'s half-life is shorter than morphine\'s → repeat dosing may be needed to prevent rebound respiratory depression.',
+    explanation: 'Naloxone has a shorter half-life than morphine, so repeated dosing may be needed to prevent rebound respiratory depression.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
     id: 'analgesic_agents_020',
+    question: 'Opioid-induced respiratory depression is mediated by which receptor?',
+    options: [
+      'Kappa',
+      'Delta',
+      'NMDA',
+      'Mu',
+      'Sigma'
+    ],
+    correctAnswerIndex: 3,
+    explanation: 'Mu receptors in the medullary respiratory center mediate opioid-induced respiratory depression.',
+    category: 'Analgesic Agents',
+    difficulty: 2
+  ),
+  Question(
+    id: 'analgesic_agents_021',
+    question: 'Which of the following is correct regarding remifentanil?',
+    options: [
+      'Its effect depends on hepatic metabolism',
+      'It is long-acting',
+      'It is a coumarin derivative',
+      'Its effect ends rapidly via esterase metabolism',
+      'Its analgesic potency is lower than morphine'
+    ],
+    correctAnswerIndex: 3,
+    explanation: 'Remifentanil is rapidly hydrolyzed by esterases, making it ultra-short-acting and easily titratable.',
+    category: 'Analgesic Agents',
+    difficulty: 2
+  ),
+  Question(
+    id: 'analgesic_agents_022',
+    question: 'Which of the following is not a medullary effect of opioids?',
+    options: [
+      'Respiratory depression',
+      'Cough suppression',
+      'Nausea and vomiting',
+      'Muscle relaxation',
+      'Sedation'
+    ],
+    correctAnswerIndex: 3,
+    explanation: 'Opioids act on medullary centers for respiration, cough, and arousal, but they are not direct muscle relaxants.',
+    category: 'Analgesic Agents',
+    difficulty: 2
+  ),
+  Question(
+    id: 'analgesic_agents_023',
+    question: 'What is the typical gastrointestinal effect of opioids?',
+    options: [
+      'Increased motility',
+      'Increased secretions',
+      'Increased peristalsis',
+      'Decreased motility',
+      'Peptic ulcer formation'
+    ],
+    correctAnswerIndex: 3,
+    explanation: 'Opioids reduce gastric and intestinal motility, slowing peristalsis and causing constipation.',
+    category: 'Analgesic Agents',
+    difficulty: 2
+  ),
+  Question(
+    id: 'analgesic_agents_024',
+    question: 'Which of the following is a full opioid agonist?',
+    options: [
+      'Buprenorphine',
+      'Nalbuphine',
+      'Morphine',
+      'Naloxone',
+      'Pentazocine'
+    ],
+    correctAnswerIndex: 2,
+    explanation: 'Morphine is the classic full μ-opioid agonist. The others are partial agonists or antagonists.',
+    category: 'Analgesic Agents',
+    difficulty: 2
+  ),
+  Question(
+    id: 'analgesic_agents_025',
+    question: 'What is the effect of opioids on the neuroendocrine system?',
+    options: [
+      'Increase TSH secretion',
+      'Stimulate ACTH secretion',
+      'Suppress LH and FSH secretion',
+      'Inhibit prolactin secretion',
+      'Suppress GH secretion'
+    ],
+    correctAnswerIndex: 2,
+    explanation: 'Opioids suppress gonadotropin (LH, FSH) release via hypothalamic-pituitary axis, potentially causing hypogonadism.',
+    category: 'Analgesic Agents',
+    difficulty: 2
+  ),
+  Question(
+    id: 'analgesic_agents_026',
+    question: 'Opioid-induced hyperalgesia is most commonly seen in which situation?',
+    options: [
+      'Low-dose chronic use',
+      'Rapid dose tapering',
+      'High-dose short infusion',
+      'Combined NSAID use',
+      'Oral administration'
+    ],
+    correctAnswerIndex: 2,
+    explanation: 'High-dose, short-term infusions of short-acting opioids (like remifentanil) may lead to opioid-induced hyperalgesia.',
+    category: 'Analgesic Agents',
+    difficulty: 2
+  ),
+  Question(
+    id: 'analgesic_agents_027',
+    question: 'Which opioid is most associated with muscle rigidity?',
+    options: [
+      'Alfentanil',
+      'Meperidine',
+      'Morphine',
+      'Nalbuphine',
+      'Tramadol'
+    ],
+    correctAnswerIndex: 0,
+    explanation: 'Alfentanil, with rapid onset and high potency, can cause chest wall rigidity when given as high-dose IV bolus.',
+    category: 'Analgesic Agents',
+    difficulty: 2
+  ),
+  Question(
+    id: 'analgesic_agents_028',
+    question: 'Which statement about tramadol is correct?',
+    options: [
+      'It is a pure opioid agonist',
+      'It acts only peripherally',
+      'Its analgesic effect also involves serotonergic and noradrenergic pathways',
+      'Its respiratory depression is more severe than morphine',
+      'It is metabolized through the kidneys'
+    ],
+    correctAnswerIndex: 2,
+    explanation: 'Tramadol provides analgesia via weak μ-agonism and serotonin/noradrenaline reuptake inhibition.',
+    category: 'Analgesic Agents',
+    difficulty: 2
+  ),
+  Question(
+    id: 'analgesic_agents_029',
+    question: 'Which medullary effect of opioids is therapeutically useful?',
+    options: [
+      'Respiratory depression',
+      'Cough suppression',
+      'Nausea and vomiting',
+      'Delayed gastric emptying',
+      'Mydriasis'
+    ],
+    correctAnswerIndex: 1,
+    explanation: 'Opioids suppress the medullary cough center, producing antitussive effects (e.g., codeine at low doses).',
+    category: 'Analgesic Agents',
+    difficulty: 2
+  ),
+  Question(
+    id: 'analgesic_agents_030',
+    question: 'Which of the following is a late sign of opioid withdrawal?',
+    options: [
+      'Mydriasis',
+      'Anxiety',
+      'Rhinorrhea',
+      'Sweating',
+      'Muscle pain'
+    ],
+    correctAnswerIndex: 4,
+    explanation: 'Early signs include rhinorrhea, lacrimation, and sweating; muscle aches and cramps occur later.',
+    category: 'Analgesic Agents',
+    difficulty: 2
+  ),
+  Question(
+    id: 'analgesic_agents_031',
+    question: 'Which of the following opioids best preserves cardiovascular stability?',
+    options: [
+      'Meperidine',
+      'Morphine',
+      'Sufentanil',
+      'Fentanyl',
+      'Remifentanil'
+    ],
+    correctAnswerIndex: 3,
+    explanation: 'Fentanyl causes minimal histamine release and has limited effects on sympathetic tone, making it one of the opioids that best preserves cardiovascular stability.',
+    category: 'Analgesic Agents',
+    difficulty: 2
+  ),
+  Question(
+    id: 'analgesic_agents_032',
+    question: 'Which is the typical ocular effect of opioids?',
+    options: [
+      'Mydriasis',
+      'Glaucoma',
+      'Miosis',
+      'Accommodation spasm',
+      'Fixed pupils'
+    ],
+    correctAnswerIndex: 2,
+    explanation: 'Opioids stimulate the parasympathetic system, causing pupillary constriction (miosis). Tolerance does not develop to this effect.',
+    category: 'Analgesic Agents',
+    difficulty: 2
+  ),
+  Question(
+    id: 'analgesic_agents_033',
+    question: 'Which opioid can cause biliary colic by inducing spasm of the bile ducts?',
+    options: [
+      'Meperidine',
+      'Fentanyl',
+      'Morphine',
+      'Tramadol',
+      'Nalbuphine'
+    ],
+    correctAnswerIndex: 2,
+    explanation: 'Morphine contracts the sphincter of Oddi, reducing bile flow and potentially causing biliary colic pain.',
+    category: 'Analgesic Agents',
+    difficulty: 2
+  ),
+  Question(
+    id: 'analgesic_agents_034',
+    question: 'Which intervention best prevents opioid-induced constipation?',
+    options: [
+      'Low-dose opioid use',
+      'Combination with anticholinergics',
+      'Administration of peripheral opioid antagonists',
+      'Fluid restriction',
+      'Concurrent SSRI use'
+    ],
+    correctAnswerIndex: 2,
+    explanation: 'Opioid-induced constipation that does not respond to laxatives is effectively treated with peripheral opioid receptor antagonists (e.g., methylnaltrexone).',
+    category: 'Analgesic Agents',
+    difficulty: 2
+  ),
+  Question(
+    id: 'analgesic_agents_035',
+    question: 'Which statement about opioids is correct?',
+    options: [
+      'They do not cross the placenta',
+      'They are commonly teratogenic',
+      'They can cause neonatal respiratory depression',
+      'They are highly nephrotoxic',
+      'They prevent vomiting'
+    ],
+    correctAnswerIndex: 2,
+    explanation: 'Opioids cross the placenta. When administered during labor, they may cause respiratory depression in the newborn.',
+    category: 'Analgesic Agents',
+    difficulty: 2
+  ),
+  Question(
+    id: 'analgesic_agents_036',
+    question: 'Which opioid is commonly preferred for labor pain?',
+    options: [
+      'Morphine',
+      'Nalbuphine',
+      'Fentanyl',
+      'Meperidine',
+      'Alfentanil'
+    ],
+    correctAnswerIndex: 3,
+    explanation: 'Meperidine (pethidine) is often used during labor because it provides analgesia while having minimal effect on uterine contractions.',
+    category: 'Analgesic Agents',
+    difficulty: 2
+  ),
+  Question(
+    id: 'analgesic_agents_037',
+    question: 'What is the main cause of opioid-related pruritus?',
+    options: [
+      'Serotonin release',
+      'Acetylcholine release',
+      'Histamine release',
+      'Prostaglandin synthesis',
+      'TNF-alpha activation'
+    ],
+    correctAnswerIndex: 2,
+    explanation: 'Some opioids, particularly morphine, trigger mast cell histamine release, leading to pruritus.',
+    category: 'Analgesic Agents',
+    difficulty: 2
+  ),
+  Question(
+    id: 'analgesic_agents_038',
+    question: 'Which condition may develop as a result of chronic opioid use?',
+    options: [
+      'Hyperkalemia',
+      'Hypoglycemia',
+      'Hypogonadism',
+      'Prevention of hypothermia',
+      'Hyperthyroidism'
+    ],
+    correctAnswerIndex: 2,
+    explanation: 'Chronic opioid use suppresses the hypothalamic-pituitary-gonadal axis, reducing testosterone levels—a condition known as opioid-induced hypogonadism.',
+    category: 'Analgesic Agents',
+    difficulty: 2
+  ),
+  Question(
+    id: 'analgesic_agents_039',
+    question: 'Which opioid has the most pronounced antitussive effect?',
+    options: [
+      'Morphine',
+      'Fentanyl',
+      'Tramadol',
+      'Codeine',
+      'Nalbuphine'
+    ],
+    correctAnswerIndex: 3,
+    explanation: 'Codeine, even at low doses, strongly suppresses the cough reflex and is widely prescribed for this purpose.',
+    category: 'Analgesic Agents',
+    difficulty: 2
+  ),
+  Question(
+    id: 'analgesic_agents_040',
+    question: 'Which opioid causes the least histamine release?',
+    options: [
+      'Morphine',
+      'Meperidine',
+      'Fentanyl',
+      'Codeine',
+      'Tramadol'
+    ],
+    correctAnswerIndex: 2,
+    explanation: 'Fentanyl and its derivatives (sufentanil, alfentanil) release very little histamine, making them preferable in patients requiring hemodynamic stability.',
+    category: 'Analgesic Agents',
+    difficulty: 2
+  ),
+  Question(
+    id: 'analgesic_agents_041',
+    question: 'Which of the following is not due to μ-opioid receptor stimulation?',
+    options: [
+      'Respiratory depression',
+      'Euphoria',
+      'Analgesia',
+      'Miosis',
+      'Hypertension'
+    ],
+    correctAnswerIndex: 4,
+    explanation: 'μ-receptor activation may cause hypotension, but hypertension is not a typical effect.',
+    category: 'Analgesic Agents',
+    difficulty: 2
+  ),
+  Question(
+    id: 'analgesic_agents_042',
+    question: 'In which situation may the effects of opioids be increased?',
+    options: [
+      'Liver enzyme induction',
+      'Increased CYP3A4 activity',
+      'Renal failure',
+      'Acute hypervolemia',
+      'Hyperthyroidism'
+    ],
+    correctAnswerIndex: 2,
+    explanation: 'In renal failure, active metabolites of some opioids (especially morphine) accumulate, intensifying effects and toxicity risk.',
+    category: 'Analgesic Agents',
+    difficulty: 2
+  ),
+  Question(
+    id: 'analgesic_agents_043',
+    question: 'What is the most important clinical finding due to normeperidine accumulation with meperidine use?',
+    options: [
+      'Delirium',
+      'Increased respiration',
+      'Seizure',
+      'Hypothermia',
+      'Mydriasis'
+    ],
+    correctAnswerIndex: 2,
+    explanation: 'Normeperidine is neurotoxic; accumulation in high doses or renal failure can cause seizures.',
+    category: 'Analgesic Agents',
+    difficulty: 2
+  ),
+  Question(
+    id: 'analgesic_agents_044',
+    question: 'Why are antihistamines given together with opioids?',
+    options: [
+      'To reduce respiratory depression',
+      'To enhance sedation',
+      'To enhance antiemetic effect',
+      'To reduce pruritus',
+      'To prolong analgesia'
+    ],
+    correctAnswerIndex: 3,
+    explanation: 'Opioid-induced pruritus is histamine-mediated, so it can be reduced with H1 antagonists (antihistamines).',
+    category: 'Analgesic Agents',
+    difficulty: 2
+  ),
+  Question(
+    id: 'analgesic_agents_045',
+    question: 'Which statement about tramadol is incorrect?',
+    options: [
+      'It is a weak μ-opioid agonist',
+      'It is a serotonin reuptake inhibitor',
+      'It causes minimal respiratory depression',
+      'It carries no risk of seizures at high doses',
+      'It inhibits noradrenaline reuptake'
+    ],
+    correctAnswerIndex: 3,
+    explanation: 'Tramadol may increase seizure risk at high doses, particularly in patients with epilepsy.',
+    category: 'Analgesic Agents',
+    difficulty: 2
+  ),
+  Question(
+    id: 'analgesic_agents_046',
+    question: 'Which is considered the most serious adverse effect of opioids?',
+    options: [
+      'Miosis',
+      'Sedation',
+      'Constipation',
+      'Respiratory depression',
+      'Pruritus'
+    ],
+    correctAnswerIndex: 3,
+    explanation: 'Respiratory depression is the most serious, life-threatening side effect of opioids, requiring careful dose titration and monitoring.',
+    category: 'Analgesic Agents',
+    difficulty: 2
+  ),
+  Question(
+    id: 'analgesic_agents_047',
+    question: 'Which of the following is an opioid antagonist?',
+    options: [
+      'Meperidine',
+      'Tramadol',
+      'Naloxone',
+      'Fentanyl',
+      'Alfentanil'
+    ],
+    correctAnswerIndex: 2,
+    explanation: 'Naloxone is a pure opioid antagonist and the drug of choice for opioid overdose; its short duration often necessitates repeated doses.',
+    category: 'Analgesic Agents',
+    difficulty: 2
+  ),
+  Question(
+    id: 'analgesic_agents_048',
+    question: 'Which opioid receptor is most responsible for analgesia?',
+    options: [
+      'Delta (δ)',
+      'Kappa (κ)',
+      'Mu (μ)',
+      'Sigma (σ)',
+      'NMDA'
+    ],
+    correctAnswerIndex: 2,
+    explanation: 'Mu receptors mediate analgesia at both spinal and supraspinal levels, as well as respiratory depression and dependence.',
+    category: 'Analgesic Agents',
+    difficulty: 2
+  ),
+  Question(
+    id: 'analgesic_agents_049',
+    question: 'Which opioid has the fastest onset of action?',
+    options: [
+      'Morphine',
+      'Fentanyl',
+      'Sufentanil',
+      'Remifentanil',
+      'Alfentanil'
+    ],
+    correctAnswerIndex: 3,
+    explanation: 'Remifentanil is ultra-short-acting with rapid onset, metabolized by esterases, and ideal for continuous infusion.',
+    category: 'Analgesic Agents',
+    difficulty: 2
+  ),
+  Question(
+    id: 'analgesic_agents_050',
+    question: 'Which of the following is not a typical effect of opioids?',
+    options: [
+      'Respiratory depression',
+      'Delayed gastric emptying',
+      'Mydriasis',
+      'Bradycardia',
+      'Pruritus'
+    ],
+    correctAnswerIndex: 2,
+    explanation: 'Opioids cause miosis (pinpoint pupils). Mydriasis is typical of sympathomimetic drugs.',
+    category: 'Analgesic Agents',
+    difficulty: 2
+  ),
+  Question(
+    id: 'analgesic_agents_051',
     question: 'Which of the following opioids is most associated with histamine release?',
     options: [
       'Morphine',
@@ -297,42 +762,42 @@ List<Question> analgesicAgentsQuestions = [
       'Alfentanil'
     ],
     correctAnswerIndex: 0,
-    explanation: 'Morphine induces histamine release → can cause hypotension and bronchospasm.',
+    explanation: 'Morphine triggers histamine release → may cause hypotension and bronchospasm.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
-    id: 'analgesic_agents_021',
-    question: 'Which of the following is true regarding fentanyl?',
+    id: 'analgesic_agents_052',
+    question: 'Which statement about fentanyl is correct?',
     options: [
-      'Causes histamine release',
-      'Is a long-acting opioid',
-      'Does not cause respiratory depression',
-      'Is a cardiostable agent',
-      'Has high oral bioavailability'
+      'It causes histamine release',
+      'It is a long-acting opioid',
+      'It does not depress respiration',
+      'It is cardiostable',
+      'It has high oral bioavailability'
     ],
     correctAnswerIndex: 3,
-    explanation: 'Fentanyl minimally affects the cardiovascular system → it is cardiostable, making it widely used in anesthesia.',
+    explanation: 'Fentanyl has minimal cardiovascular effects → cardiostable, hence widely used in anesthesia.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
-    id: 'analgesic_agents_022',
-    question: 'Which of the following about remifentanil is FALSE?',
+    id: 'analgesic_agents_053',
+    question: 'Which statement about remifentanil is incorrect?',
     options: [
-      'Hydrolyzed by pseudocholinesterase',
-      'Its effect terminates rapidly',
-      'Requires dose adjustment in liver failure',
-      'Administered as continuous infusion',
-      'Has abuse potential'
+      'It is metabolized by pseudocholinesterase',
+      'Its effect ends rapidly',
+      'Dose adjustment is required in hepatic failure',
+      'It is administered by continuous infusion',
+      'It has abuse potential'
     ],
     correctAnswerIndex: 2,
-    explanation: 'Remifentanil is metabolized by plasma esterases → unaffected by liver or kidney failure.',
+    explanation: 'Remifentanil is broken down by plasma esterases → dosing is not affected by hepatic or renal failure.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
-    id: 'analgesic_agents_023',
+    id: 'analgesic_agents_054',
     question: 'Which structure is responsible for opioid-induced nausea and vomiting?',
     options: [
       'Carotid sinus',
@@ -342,42 +807,42 @@ List<Question> analgesicAgentsQuestions = [
       'Cerebral cortex'
     ],
     correctAnswerIndex: 1,
-    explanation: 'Opioids stimulate the CTZ in the medulla → nausea and vomiting occur.',
+    explanation: 'When opioids stimulate the CTZ (dopaminergic), nausea and vomiting occur; the CTZ is in the medulla.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
-    id: 'analgesic_agents_024',
-    question: 'How do opioids cause respiratory depression?',
+    id: 'analgesic_agents_055',
+    question: 'By what mechanism do opioids cause respiratory depression?',
     options: [
       'Bronchoconstriction',
       'Increased chemoreceptor sensitivity',
-      'Reduced CO₂ sensitivity in the medulla',
+      'Decreased medullary CO₂ sensitivity',
       'Vagal stimulation of the CNS',
       'Peripheral receptor stimulation'
     ],
     correctAnswerIndex: 2,
-    explanation: 'Opioids reduce CO₂ sensitivity of the medullary respiratory center → respiratory depression.',
+    explanation: 'Opioids reduce CO₂ sensitivity in the medullary respiratory center → respiratory depression.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
-    id: 'analgesic_agents_025',
-    question: 'Which opioid effect does NOT develop tolerance?',
+    id: 'analgesic_agents_056',
+    question: 'Which effect does not develop tolerance with opioids?',
     options: [
       'Analgesia',
       'Decreased GI motility',
       'Respiratory depression',
       'Sedation',
-      'Itching'
+      'Pruritus'
     ],
     correctAnswerIndex: 1,
-    explanation: 'Gastrointestinal effects (constipation) persist without tolerance.',
+    explanation: 'GI effects (e.g., constipation) are among the few opioid effects that do not develop tolerance over time.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
-    id: 'analgesic_agents_026',
+    id: 'analgesic_agents_057',
     question: 'Which agent is classified as a partial opioid agonist?',
     options: [
       'Morphine',
@@ -387,28 +852,28 @@ List<Question> analgesicAgentsQuestions = [
       'Remifentanil'
     ],
     correctAnswerIndex: 3,
-    explanation: 'Buprenorphine is a partial μ-agonist and κ-antagonist → used in opioid dependence treatment.',
+    explanation: 'Buprenorphine is a partial μ-agonist and a κ-antagonist → used in addiction treatment.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
-    id: 'analgesic_agents_027',
-    question: 'Which feature differentiates tramadol from classical opioids?',
+    id: 'analgesic_agents_058',
+    question: 'What distinguishes tramadol from classical opioids?',
     options: [
-      'Causes histamine release',
-      'Binds only to kappa receptors',
-      'Monoamine reuptake inhibition',
-      'Long duration of action',
-      'No central analgesic effect'
+      'It causes histamine release',
+      'It binds only to κ receptors',
+      'It has monoamine reuptake inhibitor activity',
+      'It has a long duration of action',
+      'It does not provide central analgesia'
     ],
     correctAnswerIndex: 2,
-    explanation: 'Tramadol is a weak μ-agonist and also inhibits serotonin and norepinephrine reuptake.',
+    explanation: 'Besides weak μ-agonism, tramadol inhibits serotonin and norepinephrine reuptake.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
-    id: 'analgesic_agents_028',
-    question: 'Which finding may develop after high-dose opioid administration?',
+    id: 'analgesic_agents_059',
+    question: 'Which finding may develop after administration of high-dose opioids?',
     options: [
       'Miosis',
       'Hyperventilation',
@@ -417,12 +882,12 @@ List<Question> analgesicAgentsQuestions = [
       'Hypertension'
     ],
     correctAnswerIndex: 0,
-    explanation: 'Classic triad of opioid overdose: miosis + respiratory depression + altered consciousness.',
+    explanation: 'Classic opioid toxicity triad: miosis + respiratory depression + altered mental status.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
-    id: 'analgesic_agents_029',
+    id: 'analgesic_agents_060',
     question: 'Which opioid has the shortest duration of action?',
     options: [
       'Fentanyl',
@@ -432,13 +897,13 @@ List<Question> analgesicAgentsQuestions = [
       'Morphine'
     ],
     correctAnswerIndex: 2,
-    explanation: 'Remifentanil → rapidly metabolized by esterases → ultra-short acting.',
+    explanation: 'Remifentanil is hydrolyzed by esterases → ultra-short acting; effect ends within minutes.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
-    id: 'analgesic_agents_030',
-    question: 'Which of the following is a withdrawal symptom of opioids?',
+    id: 'analgesic_agents_061',
+    question: 'Which of the following is a sign of opioid withdrawal?',
     options: [
       'Miosis',
       'Bradycardia',
@@ -447,58 +912,58 @@ List<Question> analgesicAgentsQuestions = [
       'Respiratory depression'
     ],
     correctAnswerIndex: 2,
-    explanation: 'Withdrawal symptoms include mydriasis, tachycardia, vomiting, diarrhea, anxiety.',
+    explanation: 'Withdrawal features include mydriasis, tachycardia, vomiting, diarrhea, anxiety, etc.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
-    id: 'analgesic_agents_031',
-    question: 'Chest wall rigidity after fentanyl administration is most likely due to:',
+    id: 'analgesic_agents_062',
+    question: 'What is the most likely cause of chest wall rigidity after fentanyl administration?',
     options: [
       'Bronchospasm',
       'Histamine release',
       'Dopamine activation',
       'Central increase in muscle tone',
-      'Acetylcholine reduction'
+      'Decreased acetylcholine'
     ],
     correctAnswerIndex: 3,
-    explanation: 'High-dose fentanyl increases central motor tone → chest wall rigidity.',
+    explanation: 'High-dose fentanyl increases central muscle tone → rigidity of chest muscles impeding ventilation.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
-    id: 'analgesic_agents_032',
+    id: 'analgesic_agents_063',
     question: 'Which statement about opioid use during labor is correct?',
     options: [
-      'Safe at all doses',
-      'Neonatal respiration is unaffected',
-      'Reversed by naloxone',
+      'Safe at any dose',
+      'The baby\'s respiration is unaffected',
+      'Effects can be reversed with naloxone',
       'Increases uterine contractions',
-      'Contraindicated in prematurity'
+      'Contraindicated in preterm infants'
     ],
     correctAnswerIndex: 2,
-    explanation: 'Neonatal respiratory depression can occur but is reversible with naloxone.',
+    explanation: 'Neonatal respiratory depression may occur after maternal opioid use → reversible with naloxone.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
-    id: 'analgesic_agents_033',
+    id: 'analgesic_agents_064',
     question: 'Which is a gastrointestinal effect of opioids?',
     options: [
-      'Cause diarrhea',
-      'Accelerate gastric emptying',
-      'Increase sphincter tone',
-      'Increase peristalsis',
-      'Cause ulcers'
+      'They cause diarrhea',
+      'They accelerate gastric emptying',
+      'They increase sphincter tone',
+      'They increase peristalsis',
+      'They are ulcerogenic'
     ],
     correctAnswerIndex: 2,
-    explanation: 'Opioids increase sphincter tone and reduce motility → constipation.',
+    explanation: 'Opioids increase sphincter tone and reduce GI motility → constipation.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
-    id: 'analgesic_agents_034',
-    question: 'Which opioid effect does NOT develop tolerance?',
+    id: 'analgesic_agents_065',
+    question: 'Which effect does not develop tolerance with opioids?',
     options: [
       'Analgesia',
       'Sedation',
@@ -507,13 +972,13 @@ List<Question> analgesicAgentsQuestions = [
       'Euphoria'
     ],
     correctAnswerIndex: 3,
-    explanation: 'Constipation persists without tolerance during chronic use.',
+    explanation: 'Tolerance does not develop to GI effects → constipation persists with chronic use.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
-    id: 'analgesic_agents_035',
-    question: 'What is the average duration of naloxone\'s effect?',
+    id: 'analgesic_agents_066',
+    question: 'What is the average duration of action of naloxone?',
     options: [
       '5–10 seconds',
       '5–15 minutes',
@@ -522,13 +987,13 @@ List<Question> analgesicAgentsQuestions = [
       '6–8 hours'
     ],
     correctAnswerIndex: 2,
-    explanation: 'Naloxone has a short duration (30–45 min) → may require repeat dosing.',
+    explanation: 'Naloxone acts briefly (30–45 min) → repeated doses may be needed for long-acting opioid toxicity.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
-    id: 'analgesic_agents_036',
-    question: 'Which of the following opioids is the most potent?',
+    id: 'analgesic_agents_067',
+    question: 'Which opioid agent is the most potent?',
     options: [
       'Morphine',
       'Fentanyl',
@@ -537,43 +1002,43 @@ List<Question> analgesicAgentsQuestions = [
       'Tramadol'
     ],
     correctAnswerIndex: 2,
-    explanation: 'Sufentanil is about 1000 times more potent than morphine.',
+    explanation: 'Sufentanil is ~1000× more potent than morphine → a high-potency, short-acting opioid.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
-    id: 'analgesic_agents_037',
+    id: 'analgesic_agents_068',
     question: 'Which is a long-term complication of opioid use?',
     options: [
       'Hypertension',
-      'Tolerance',
+      'Development of tolerance',
       'Bradykinesia',
       'Renal failure',
       'Hepatic fibrosis'
     ],
     correctAnswerIndex: 1,
-    explanation: 'Chronic opioid use leads to tolerance (esp. to analgesia, euphoria, sedation).',
+    explanation: 'Chronic opioid use leads to tolerance to many effects (especially analgesia, euphoria, sedation).',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
-    id: 'analgesic_agents_038',
+    id: 'analgesic_agents_069',
     question: 'Why must morphine be used cautiously in renal insufficiency?',
     options: [
       'Reduced protein binding',
       'Increased CYP450 activity',
       'Accumulation of active metabolites',
-      'High lipophilicity',
-      'Antagonist by-products'
+      'Its lipophilicity',
+      'Formation of an antagonist byproduct'
     ],
     correctAnswerIndex: 2,
-    explanation: 'Active metabolite M6G accumulates in renal failure → increased risk of respiratory depression.',
+    explanation: 'Morphine\'s active metabolites (M6G) are renally excreted; accumulation increases respiratory depression risk.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
-    id: 'analgesic_agents_039',
-    question: 'Which opioid most commonly causes chest wall rigidity?',
+    id: 'analgesic_agents_070',
+    question: 'After use of which opioid is the risk of chest wall rigidity highest?',
     options: [
       'Morphine',
       'Fentanyl',
@@ -582,43 +1047,43 @@ List<Question> analgesicAgentsQuestions = [
       'Methadone'
     ],
     correctAnswerIndex: 1,
-    explanation: 'High-dose fentanyl frequently causes chest wall rigidity → difficult ventilation.',
+    explanation: 'High-dose fentanyl can cause chest wall rigidity → complicates ventilation.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
-    id: 'analgesic_agents_040',
-    question: 'Which is the most likely effect of naloxone administration?',
+    id: 'analgesic_agents_071',
+    question: 'What is the most likely outcome of naloxone administration?',
     options: [
       'Bronchodilation',
-      'Transient increase in opioid effect',
+      'Transient increase in opioid effects',
       'Acute withdrawal syndrome',
       'Hypothermia',
-      'Prolonged analgesia'
+      'Lasting analgesia'
     ],
     correctAnswerIndex: 2,
-    explanation: 'In opioid-dependent patients, naloxone causes acute withdrawal syndrome (agitation, vomiting, tachycardia).',
+    explanation: 'In dependent patients, naloxone can precipitate abrupt withdrawal → agitation, vomiting, tachycardia, etc.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
-    id: 'analgesic_agents_041',
+    id: 'analgesic_agents_072',
     question: 'Which system is least affected by opioids?',
     options: [
-      'Respiratory',
-      'Gastrointestinal',
-      'Cardiovascular',
+      'Respiratory system',
+      'Gastrointestinal system',
+      'Cardiovascular system',
       'Central nervous system',
-      'Urogenital'
+      'Urogenital system'
     ],
     correctAnswerIndex: 2,
-    explanation: 'Opioids minimally affect the cardiovascular system; morphine may cause mild hypotension via histamine release.',
+    explanation: 'Opioids generally have minimal cardiovascular effects; morphine may cause mild hypotension via histamine.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
-    id: 'analgesic_agents_042',
-    question: 'Which opioid used during labor may cause the longest neonatal respiratory depression?',
+    id: 'analgesic_agents_073',
+    question: 'Which opioid used during labor may cause the most prolonged neonatal respiratory depression?',
     options: [
       'Morphine',
       'Meperidine',
@@ -627,28 +1092,28 @@ List<Question> analgesicAgentsQuestions = [
       'Fentanyl'
     ],
     correctAnswerIndex: 1,
-    explanation: 'Meperidine\'s metabolite normeperidine has long half-life → prolonged neonatal respiratory depression.',
+    explanation: 'Meperidine\'s metabolite (normeperidine) has a long half-life → risk of delayed neonatal respiratory depression.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
-    id: 'analgesic_agents_043',
+    id: 'analgesic_agents_074',
     question: 'Which statement about opioid receptors is correct?',
     options: [
-      'All are ion channels',
-      'Interact with NMDA receptors',
-      'All are G-protein coupled',
-      'Found only in peripheral tissues',
-      'Contain ligand-gated calcium channels'
+      'They are all ion channels',
+      'They interact with NMDA receptors',
+      'They are all G-protein-coupled',
+      'They are found only in peripheral tissues',
+      'They are ligand-gated calcium channels'
     ],
     correctAnswerIndex: 2,
-    explanation: 'μ, κ, δ opioid receptors are G-protein coupled, reducing intracellular cAMP.',
+    explanation: 'μ, κ, and δ opioid receptors are GPCRs → act by decreasing intracellular cAMP.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
-    id: 'analgesic_agents_044',
-    question: 'Which is a dose-dependent effect of opioids?',
+    id: 'analgesic_agents_075',
+    question: 'Which of the following is a dose-dependent opioid effect?',
     options: [
       'Hypoglycemia',
       'Bradycardia',
@@ -657,12 +1122,12 @@ List<Question> analgesicAgentsQuestions = [
       'Anemia'
     ],
     correctAnswerIndex: 1,
-    explanation: 'Opioids increase vagal tone in a dose-dependent manner → bradycardia.',
+    explanation: 'Opioids increase vagal tone in a dose-dependent manner, producing bradycardia at higher doses.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
-    id: 'analgesic_agents_045',
+    id: 'analgesic_agents_076',
     question: 'Which opioid has the highest lipophilicity?',
     options: [
       'Morphine',
@@ -672,12 +1137,12 @@ List<Question> analgesicAgentsQuestions = [
       'Tramadol'
     ],
     correctAnswerIndex: 3,
-    explanation: 'Fentanyl and sufentanil are highly lipophilic → rapid onset, short duration. Morphine is the least lipophilic.',
+    explanation: 'Fentanyl (and sufentanil) are highly lipophilic → rapid onset and short duration. Morphine is the least lipophilic.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
-    id: 'analgesic_agents_046',
+    id: 'analgesic_agents_077',
     question: 'Which receptor mediates spinal analgesia by opioids?',
     options: [
       'NMDA',
@@ -687,13 +1152,13 @@ List<Question> analgesicAgentsQuestions = [
       'Muscarinic'
     ],
     correctAnswerIndex: 1,
-    explanation: 'μ-receptors are responsible for both spinal and supraspinal analgesia.',
+    explanation: 'μ-receptors are key for analgesia at both spinal and supraspinal levels.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
-    id: 'analgesic_agents_047',
-    question: 'Which opioid may cause delirium, tremor, and seizures due to a neurotoxic metabolite?',
+    id: 'analgesic_agents_078',
+    question: 'Which opioid is atypical and may cause delirium, tremor, and seizures?',
     options: [
       'Meperidine',
       'Morphine',
@@ -702,13 +1167,13 @@ List<Question> analgesicAgentsQuestions = [
       'Remifentanil'
     ],
     correctAnswerIndex: 0,
-    explanation: 'Meperidine\'s metabolite normeperidine is neurotoxic → risk of seizures, esp. in elderly and renal failure patients.',
+    explanation: 'Meperidine\'s metabolite normeperidine is neurotoxic → neurological adverse effects, especially in elderly or renally impaired.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
-    id: 'analgesic_agents_048',
-    question: 'Which opioid has strong euphoric effects and high abuse potential?',
+    id: 'analgesic_agents_079',
+    question: 'Which opioid has strong euphoria and high dependence potential?',
     options: [
       'Sufentanil',
       'Morphine',
@@ -717,13 +1182,13 @@ List<Question> analgesicAgentsQuestions = [
       'Buprenorphine'
     ],
     correctAnswerIndex: 1,
-    explanation: 'Morphine is a full μ-agonist → produces strong euphoria, high risk of dependence.',
+    explanation: 'Morphine is a full μ-agonist; μ-mediated euphoria increases dependence potential.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
-    id: 'analgesic_agents_049',
-    question: 'Which opioid antagonist is long-acting and used in opioid dependence treatment?',
+    id: 'analgesic_agents_080',
+    question: 'Which opioid antagonist is long-acting and used in addiction treatment?',
     options: [
       'Naloxone',
       'Tramadol',
@@ -732,28 +1197,28 @@ List<Question> analgesicAgentsQuestions = [
       'Sufentanil'
     ],
     correctAnswerIndex: 2,
-    explanation: 'Naltrexone is a long-acting oral antagonist → used for maintenance therapy in dependence.',
+    explanation: 'Naltrexone is a long-acting oral opioid antagonist → more sustained effect than naloxone.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
-    id: 'analgesic_agents_050',
-    question: 'Which mechanism explains biliary colic after opioid administration?',
+    id: 'analgesic_agents_081',
+    question: 'What can cause biliary colic after opioid use?',
     options: [
-      'Spasm of the sphincter of Oddi',
+      'Sphincter of Oddi spasm',
       'Histamine release',
-      'Decreased gastric acid secretion',
+      'Reduced HCl secretion',
       'Increased hepatic blood flow',
-      'Decreased portal vein pressure'
+      'Decreased portal venous pressure'
     ],
     correctAnswerIndex: 0,
-    explanation: 'Opioids cause sphincter of Oddi spasm → biliary colic.',
+    explanation: 'Opioids contract the sphincter of Oddi, impeding bile flow → biliary colic.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
-    id: 'analgesic_agents_051',
-    question: 'Which of the following is NOT synthetic?',
+    id: 'analgesic_agents_082',
+    question: 'Which of the following opioid derivatives is not synthetic?',
     options: [
       'Morphine',
       'Fentanyl',
@@ -762,13 +1227,13 @@ List<Question> analgesicAgentsQuestions = [
       'Alfentanil'
     ],
     correctAnswerIndex: 0,
-    explanation: 'Morphine is a natural opioid derived from the opium poppy; others are synthetic or semi-synthetic.',
+    explanation: 'Morphine is a natural opioid derived from the opium poppy; the others are synthetic or semi-synthetic.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
-    id: 'analgesic_agents_052',
-    question: 'Which agent acts as a pure opioid antagonist with no analgesic effect?',
+    id: 'analgesic_agents_083',
+    question: 'Which agent acts purely as an opioid antagonist without analgesic effect?',
     options: [
       'Naltrexone',
       'Naloxone',
@@ -777,30 +1242,30 @@ List<Question> analgesicAgentsQuestions = [
       'Nalbuphine'
     ],
     correctAnswerIndex: 1,
-    explanation: 'Naloxone is a pure opioid antagonist → reverses opioid effects but has no analgesic properties.',
+    explanation: 'Naloxone is a pure antagonist at all opioid receptors and has no analgesic activity.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
-    id: 'analgesic_agents_053',
-    question: 'Which of the following is NOT a classic sign of opioid intoxication?',
+    id: 'analgesic_agents_084',
+    question: 'Which is not a classic finding of opioid intoxication?',
     options: [
-      'Altered consciousness',
+      'Altered mental status',
       'Respiratory depression',
       'Miosis',
       'Hyperthermia',
       'Bradycardia'
     ],
     correctAnswerIndex: 3,
-    explanation: 'Classic opioid overdose triad: altered consciousness + miosis + respiratory depression. Hypothermia may occur, not hyperthermia.',
+    explanation: 'Classic triad: altered mental status, miosis, respiratory depression. Hypothermia may occur, not hyperthermia.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
-    id: 'analgesic_agents_054',
-    question: 'Which of the following is NOT part of the central analgesic mechanism of opioids?',
+    id: 'analgesic_agents_085',
+    question: 'Which is not part of the central analgesic mechanism of opioids?',
     options: [
-      'PAG (periaqueductal gray) activation',
+      'Activation of the periaqueductal gray (PAG)',
       'Activation of descending inhibitory pathways',
       'Serotonin release in the medulla',
       'Increase in endogenous opioids',
@@ -812,8 +1277,8 @@ List<Question> analgesicAgentsQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'analgesic_agents_055',
-    question: 'Which opioid derivative also has SSRI effects and may cause serotonin syndrome?',
+    id: 'analgesic_agents_086',
+    question: 'Which opioid derivative also has SSRI-like effects and may cause serotonin syndrome?',
     options: [
       'Sufentanil',
       'Meperidine',
@@ -822,13 +1287,13 @@ List<Question> analgesicAgentsQuestions = [
       'Morphine'
     ],
     correctAnswerIndex: 1,
-    explanation: 'Meperidine inhibits serotonin reuptake → risk of serotonin syndrome especially with MAO inhibitors.',
+    explanation: 'Meperidine inhibits serotonin reuptake → concomitant use with MAO inhibitors increases serotonin syndrome risk.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
-    id: 'analgesic_agents_056',
-    question: 'Which of the following is a typical renal effect of opioids?',
+    id: 'analgesic_agents_087',
+    question: 'Which is a typical renal effect of opioids?',
     options: [
       'Polyuria',
       'Natriuresis',
@@ -837,28 +1302,28 @@ List<Question> analgesicAgentsQuestions = [
       'Glucosuria'
     ],
     correctAnswerIndex: 2,
-    explanation: 'Opioids increase ADH release → antidiuresis → reduced urine output.',
+    explanation: 'Opioids increase ADH release → antidiuresis → urine volume may decrease.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
-    id: 'analgesic_agents_057',
-    question: 'Which condition is most common in the newborn after maternal opioid administration during labor?',
+    id: 'analgesic_agents_088',
+    question: 'During labor, opioids most commonly cause which condition in the newborn?',
     options: [
       'Hypoglycemia',
       'Respiratory depression',
-      'Sepsis-like syndrome',
+      'Sepsis-like picture',
       'Cerebral palsy',
       'Hypothermia'
     ],
     correctAnswerIndex: 1,
-    explanation: 'Opioids cross the placenta → neonatal respiratory depression (treated with naloxone).',
+    explanation: 'Opioids cross the placenta → neonatal respiratory depression → treatable with naloxone.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
-    id: 'analgesic_agents_058',
-    question: 'Opioid-induced pruritus at the spinal level is mediated primarily by which receptor?',
+    id: 'analgesic_agents_089',
+    question: 'At the spinal level, opioid-induced pruritus is associated with which receptor?',
     options: [
       'NMDA',
       'Mu (μ)',
@@ -867,13 +1332,13 @@ List<Question> analgesicAgentsQuestions = [
       'GABA'
     ],
     correctAnswerIndex: 1,
-    explanation: 'Spinal μ-receptor activation contributes to pruritus, independent of histamine release.',
+    explanation: 'Spinal μ-receptor activation contributes to pruritus; this can occur independently of histamine.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
-    id: 'analgesic_agents_059',
-    question: 'Which opioid(s) may be used for preemptive analgesia?',
+    id: 'analgesic_agents_090',
+    question: 'Which of the following opioids can be used for preemptive analgesia?',
     options: [
       'Morphine',
       'Fentanyl',
@@ -882,13 +1347,13 @@ List<Question> analgesicAgentsQuestions = [
       'All of the above'
     ],
     correctAnswerIndex: 4,
-    explanation: 'Opioids administered before surgical stimulus raise the pain threshold → preemptive analgesia.',
+    explanation: 'Administering opioids before surgical stimulus provides preemptive analgesia → raises pain threshold.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
-    id: 'analgesic_agents_060',
-    question: 'Which is NOT a cause of mental status change during opioid use?',
+    id: 'analgesic_agents_091',
+    question: 'Which of the following is not a cause of mental status change with opioid use?',
     options: [
       'Overdose',
       'Neurotoxic metabolites',
@@ -897,13 +1362,13 @@ List<Question> analgesicAgentsQuestions = [
       'Opioid withdrawal'
     ],
     correctAnswerIndex: 3,
-    explanation: 'Opioids inhibit NMDA receptors; mental status changes are due to dose, metabolite accumulation, or withdrawal.',
+    explanation: 'Opioids inhibit NMDA receptors. Mental status changes are usually dose-related or due to metabolite accumulation.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
-    id: 'analgesic_agents_061',
-    question: 'Which route prolongs the analgesic effect of opioids most effectively?',
+    id: 'analgesic_agents_092',
+    question: 'Which route is more effective for prolonging the analgesic effect of opioids?',
     options: [
       'IM',
       'IV bolus',
@@ -912,13 +1377,13 @@ List<Question> analgesicAgentsQuestions = [
       'SC'
     ],
     correctAnswerIndex: 2,
-    explanation: 'Epidural or spinal administration targets spinal receptors directly → longer and stronger analgesia.',
+    explanation: 'Epidural or spinal administration targets spinal receptors directly → longer and more effective analgesia.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
-    id: 'analgesic_agents_062',
-    question: 'What is the main reason for the addictive potential of opioids?',
+    id: 'analgesic_agents_093',
+    question: 'What is the primary reason opioids are addictive?',
     options: [
       'Respiratory depression',
       'Increased dopamine release',
@@ -927,13 +1392,13 @@ List<Question> analgesicAgentsQuestions = [
       'Parasympathetic blockade'
     ],
     correctAnswerIndex: 1,
-    explanation: 'Opioids increase dopamine release in the mesolimbic reward system → basis of dependence.',
+    explanation: 'Opioids increase dopamine release in the mesolimbic reward system → drives addictive potential.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
-    id: 'analgesic_agents_063',
-    question: 'Which of the following is an agonist–antagonist opioid analgesic?',
+    id: 'analgesic_agents_094',
+    question: 'Which is an agonist–antagonist opioid analgesic?',
     options: [
       'Morphine',
       'Fentanyl',
@@ -942,57 +1407,57 @@ List<Question> analgesicAgentsQuestions = [
       'Methadone'
     ],
     correctAnswerIndex: 2,
-    explanation: 'Nalbuphine is a κ-agonist and μ-antagonist. Morphine/fentanyl/methadone are full μ-agonists; tramadol is a weak μ-agonist + SNRI.',
+    explanation: 'Nalbuphine is a κ-agonist and μ-antagonist. Morphine, fentanyl, methadone are full μ-agonists; tramadol is a weak μ-agonist + SNRI.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
-    id: 'analgesic_agents_064',
+    id: 'analgesic_agents_095',
     question: 'Which is an advantage of fentanyl over morphine?',
     options: [
-      'Longer duration of action',
+      'Longer duration',
       'Less histamine release',
       'More sedation',
-      'Higher oral bioavailability',
+      'High oral bioavailability',
       'Less respiratory depression'
     ],
     correctAnswerIndex: 1,
-    explanation: 'Fentanyl is more potent, lipophilic, and causes less histamine release than morphine.',
+    explanation: 'Fentanyl is more potent, more lipophilic, and causes less histamine release (less hypotension). Morphine releases more histamine and lasts longer.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
-    id: 'analgesic_agents_065',
-    question: 'Which of the following is NOT a feature of methadone?',
+    id: 'analgesic_agents_096',
+    question: 'Which is not a property of methadone?',
     options: [
       'Long elimination half-life',
       'NMDA receptor antagonism',
       'Potent serotonin reuptake inhibition',
-      'Used in opioid withdrawal therapy',
+      'Used for opioid withdrawal treatment',
       'High oral efficacy'
     ],
     correctAnswerIndex: 2,
-    explanation: 'Methadone is a μ-agonist + NMDA antagonist, long-acting, and useful in withdrawal. Tramadol/tapentadol inhibit serotonin/noradrenaline reuptake.',
+    explanation: 'Methadone is a long-acting μ-agonist with NMDA antagonism, used in withdrawal therapy. Tramadol/tapentadol have monoamine reuptake effects.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
-    id: 'analgesic_agents_066',
-    question: 'Which is a side effect of tramadol?',
+    id: 'analgesic_agents_097',
+    question: 'Which is an adverse effect of tramadol?',
     options: [
       'Hypertension',
-      'Increased seizure threshold',
+      'Raising seizure threshold',
       'Bradycardia',
       'Does not cause constipation',
       'Risk of serotonin syndrome'
     ],
     correctAnswerIndex: 4,
-    explanation: 'Tramadol may cause serotonin syndrome, lowers seizure threshold, and causes constipation.',
+    explanation: 'Tramadol inhibits serotonin reuptake → risk of serotonin syndrome; lowers seizure threshold, causes constipation, may cause hypotension.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
-    id: 'analgesic_agents_067',
+    id: 'analgesic_agents_098',
     question: 'What is the analgesic mechanism of NSAIDs?',
     options: [
       'Opioid receptor agonism',
@@ -1002,13 +1467,13 @@ List<Question> analgesicAgentsQuestions = [
       'Acetylcholinesterase inhibition'
     ],
     correctAnswerIndex: 1,
-    explanation: 'NSAIDs inhibit COX-2 → ↓ prostaglandins → analgesia.',
+    explanation: 'NSAIDs reduce prostaglandin synthesis via COX-2 inhibition → analgesia.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
-    id: 'analgesic_agents_068',
-    question: 'Which is a COX-2 selective NSAID?',
+    id: 'analgesic_agents_099',
+    question: 'Which is a COX-2–selective NSAID?',
     options: [
       'Ibuprofen',
       'Naproxen',
@@ -1017,13 +1482,13 @@ List<Question> analgesicAgentsQuestions = [
       'Aspirin'
     ],
     correctAnswerIndex: 3,
-    explanation: 'COX-2 selective: celecoxib, etoricoxib. Others are nonselective.',
+    explanation: 'COX-2 selective: celecoxib, etoricoxib. Others listed are nonselective COX inhibitors.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
-    id: 'analgesic_agents_069',
-    question: 'Which drug is used to treat acetaminophen toxicity?',
+    id: 'analgesic_agents_100',
+    question: 'What treats acetaminophen (paracetamol) toxicity?',
     options: [
       'Flumazenil',
       'Naloxone',
@@ -1032,73 +1497,73 @@ List<Question> analgesicAgentsQuestions = [
       'Vitamin K'
     ],
     correctAnswerIndex: 2,
-    explanation: 'N-acetylcysteine replenishes glutathione → detoxifies toxic metabolites.',
+    explanation: 'NAC replenishes glutathione and aids detoxification; APAP toxicity causes hepatic necrosis.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
-    id: 'analgesic_agents_070',
-    question: 'Which adverse effect is linked to meperidine\'s metabolite?',
+    id: 'analgesic_agents_101',
+    question: 'Which is a side effect caused by meperidine\'s metabolite?',
     options: [
       'Hepatotoxicity',
       'Seizures',
-      'Arrhythmia',
-      'Acute renal injury',
+      'Cardiac arrhythmia',
+      'Acute kidney injury',
       'Hypertension'
     ],
     correctAnswerIndex: 1,
-    explanation: 'Meperidine → normeperidine → neurotoxic → seizures, esp. in renal failure.',
+    explanation: 'Meperidine → normeperidine (neurotoxic) → lowers seizure threshold, especially with chronic use.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
-    id: 'analgesic_agents_071',
-    question: 'What is essential in opioid rotation?',
+    id: 'analgesic_agents_102',
+    question: 'What must be considered during opioid rotation?',
     options: [
-      'Accurate calculation of equianalgesic doses',
-      'New opioid should have slow onset',
-      'Cross-tolerance can be ignored',
-      'Receptor affinities are irrelevant',
-      'Parenteral conversion requires dose increase'
+      'Exact equianalgesic dose calculation',
+      'Choosing a new opioid with slow onset',
+      'Ignoring cross-tolerance',
+      'Ignoring receptor affinities',
+      'Increasing dose when switching to parenteral'
     ],
     correctAnswerIndex: 0,
-    explanation: 'Equianalgesic conversion is crucial; reduce new opioid dose by 25–50% due to cross-tolerance.',
+    explanation: 'Calculate equianalgesic doses; due to incomplete cross-tolerance, reduce the new opioid dose by ~25–50%.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
-    id: 'analgesic_agents_072',
-    question: 'Which is NOT correct about ketorolac?',
+    id: 'analgesic_agents_103',
+    question: 'Which statement about ketorolac is incorrect?',
     options: [
-      'Use limited to 5 days',
-      'Can be used parenterally for postop pain',
+      'Use for a maximum of 5 days',
+      'Can be used parenterally for postoperative pain',
       'Inhibits COX-1',
       'Safe in pregnancy',
-      'Contraindicated in renal failure'
+      'May cause GI ulceration'
     ],
     correctAnswerIndex: 3,
-    explanation: 'Ketorolac is contraindicated in pregnancy (3rd trimester).',
+    explanation: 'Ketorolac is contraindicated in late pregnancy (ductus arteriosus closure). COX-1 inhibition raises GI bleed risk.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
-    id: 'analgesic_agents_073',
+    id: 'analgesic_agents_104',
     question: 'Mechanism of gabapentin in neuropathic pain?',
     options: [
-      'NMDA blockade',
+      'NMDA receptor blockade',
       'Inhibition of voltage-gated calcium channels',
       'Dopamine reuptake inhibition',
       'Muscarinic receptor agonism',
-      'GABA-B activation'
+      'GABA-B receptor activation'
     ],
     correctAnswerIndex: 1,
-    explanation: 'Gabapentin binds α2δ subunit of calcium channels → ↓ neurotransmitter release.',
+    explanation: 'Gabapentin/pregabalin bind the α2δ subunit → reduce Ca²⁺ influx.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
-    id: 'analgesic_agents_074',
-    question: 'Which reduces risk of opioid-induced respiratory depression?',
+    id: 'analgesic_agents_105',
+    question: 'Which co-administered drug reduces the risk of opioid-induced respiratory depression?',
     options: [
       'Midazolam',
       'Naloxone',
@@ -1107,43 +1572,43 @@ List<Question> analgesicAgentsQuestions = [
       'Neostigmine'
     ],
     correctAnswerIndex: 1,
-    explanation: 'Naloxone is a μ-antagonist → reverses respiratory depression.',
+    explanation: 'Naloxone is a competitive μ-antagonist that reverses opioid-induced respiratory depression. (Ketamine doesn\'t depress respiration but doesn\'t reverse opioids.)',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
-    id: 'analgesic_agents_075',
-    question: 'Which is correct for transdermal fentanyl?',
+    id: 'analgesic_agents_106',
+    question: 'Which is true of transdermal fentanyl?',
     options: [
       'First-line for acute pain',
-      'Onset within 5 minutes',
-      'Heat increases absorption',
-      'No adjustment needed in renal failure',
-      'Applied every 48 hours'
+      'Onset in 5 minutes',
+      'Heat increases drug release',
+      'Needs dose adjustment in renal failure',
+      'Replaced every 48 hours'
     ],
     correctAnswerIndex: 2,
-    explanation: 'Transdermal fentanyl absorption increases with heat; applied every 72h, used for chronic pain.',
+    explanation: 'Systemic absorption increases with heat (hot baths, fever). For chronic pain; onset 12–24 h; change every 72 h.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
-    id: 'analgesic_agents_076',
-    question: 'Which lab finding indicates acetaminophen toxicity?',
+    id: 'analgesic_agents_107',
+    question: 'Which lab finding is seen in acetaminophen toxicity?',
     options: [
       'Hypoglycemia',
       'AST/ALT > 1000 IU/L',
       'Hypocalcemia',
       'Leukopenia',
-      'Hyponatremia'
+      'Hypernatremia'
     ],
     correctAnswerIndex: 1,
-    explanation: 'Marked AST/ALT elevation (>1000) = hepatic necrosis.',
+    explanation: 'APAP toxicity → hepatic necrosis with markedly elevated transaminases; NAC is the antidote.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
-    id: 'analgesic_agents_077',
-    question: 'Which metabolite of tramadol binds to opioid receptors?',
+    id: 'analgesic_agents_108',
+    question: 'Which is a tramadol metabolite that binds opioid receptors?',
     options: [
       'Normeperidine',
       'O-desmethyltramadol',
@@ -1152,43 +1617,43 @@ List<Question> analgesicAgentsQuestions = [
       'Norfentanyl'
     ],
     correctAnswerIndex: 1,
-    explanation: 'Tramadol → O-desmethyltramadol (via CYP2D6) → μ-agonist.',
+    explanation: 'Formed via CYP2D6; μ-agonist activity. Normeperidine is meperidine\'s neurotoxic metabolite.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
-    id: 'analgesic_agents_078',
-    question: 'Which renal effect is caused by NSAIDs?',
+    id: 'analgesic_agents_109',
+    question: 'Which is a renal effect of NSAIDs?',
     options: [
-      '↑ Renin secretion',
+      'Increased renin secretion',
       'Afferent arteriolar dilation',
-      '↓ Prostaglandin E2 synthesis',
-      '↑ Sodium excretion',
-      'Induce diuresis'
+      'Reduced prostaglandin E2 synthesis',
+      'Increased sodium excretion',
+      'Diuresis'
     ],
     correctAnswerIndex: 2,
-    explanation: 'NSAIDs ↓ renal prostaglandins → afferent vasoconstriction → AKI risk.',
+    explanation: 'Inhibiting vasodilatory PGs (PGE2, PGI2) → afferent vasoconstriction; risks: AKI, hyperkalemia, fluid retention.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
-    id: 'analgesic_agents_079',
-    question: 'Which is correct about metamizole (dipyrone)?',
+    id: 'analgesic_agents_110',
+    question: 'Which is true of metamizole (dipyrone)?',
     options: [
-      'COX-2 selective',
-      'Risk of agranulocytosis',
+      'Selective COX-2 inhibition',
+      'Carries a risk of agranulocytosis',
       'Safe in pregnancy',
       'Does not trigger asthma',
       'Cardioprotective'
     ],
     correctAnswerIndex: 1,
-    explanation: 'Metamizole → agranulocytosis risk → restricted in many countries.',
+    explanation: 'Metamizole is restricted in many countries due to agranulocytosis/allergy risk; nonselective COX inhibitor; may cause bronchospasm.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
-    id: 'analgesic_agents_080',
-    question: 'Which is a side effect of epidural opioids?',
+    id: 'analgesic_agents_111',
+    question: 'Which is a side effect of epidural opioid administration?',
     options: [
       'Hypertension',
       'Delayed respiratory depression',
@@ -1197,13 +1662,13 @@ List<Question> analgesicAgentsQuestions = [
       'Muscle rigidity'
     ],
     correctAnswerIndex: 1,
-    explanation: 'Epidural morphine → slow CSF spread → delayed respiratory depression (6–12h).',
+    explanation: 'Epidural morphine may cause respiratory depression 6–12 h later due to slow CSF spread.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
-    id: 'analgesic_agents_081',
-    question: 'What is the active metabolite of codeine?',
+    id: 'analgesic_agents_112',
+    question: 'Which is codeine\'s active metabolite?',
     options: [
       'Morphine',
       'Hydrocodone',
@@ -1212,73 +1677,73 @@ List<Question> analgesicAgentsQuestions = [
       'Buprenorphine'
     ],
     correctAnswerIndex: 0,
-    explanation: 'Codeine → morphine (via CYP2D6).',
+    explanation: 'Codeine → morphine via CYP2D6 (PMs: poor effect; UMs: toxicity risk).',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
-    id: 'analgesic_agents_082',
-    question: 'Which is true about buprenorphine?',
+    id: 'analgesic_agents_113',
+    question: 'Which is a characteristic of buprenorphine?',
     options: [
       'Full μ-agonist',
-      'Respiratory depression shows plateau at high dose',
-      'Oral bioavailability 90%',
-      'Completely antagonized by naloxone',
-      'Exacerbates withdrawal'
+      'Respiratory depression plateaus at high doses',
+      '~90% oral bioavailability',
+      'Fully antagonized by naloxone',
+      'Exacerbates opioid withdrawal symptoms'
     ],
     correctAnswerIndex: 1,
-    explanation: 'Buprenorphine = partial μ-agonist, κ-antagonist. Respiratory depression plateaus.',
+    explanation: 'Buprenorphine is a partial μ-agonist/κ-antagonist; sublingual use; limited reversibility with naloxone.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
-    id: 'analgesic_agents_083',
+    id: 'analgesic_agents_114',
     question: 'Mechanism of duloxetine?',
     options: [
       'Dopamine reuptake inhibition',
-      'Norepinephrine & serotonin reuptake inhibition',
-      'NMDA blockade',
-      'GABA-A activation',
+      'Norepinephrine and serotonin reuptake inhibition',
+      'NMDA receptor blockade',
+      'GABA-A receptor activation',
       'Muscarinic antagonism'
     ],
     correctAnswerIndex: 1,
-    explanation: 'Duloxetine = SNRI → used in neuropathic pain & depression.',
+    explanation: 'Duloxetine is an SNRI (used for neuropathic pain and depression).',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
-    id: 'analgesic_agents_084',
+    id: 'analgesic_agents_115',
     question: 'First-line treatment for local anesthetic systemic toxicity (LAST)?',
     options: [
       'Lidocaine',
       'Propranolol',
-      'Lipid emulsion (20% intralipid)',
+      '20% lipid emulsion (intralipid)',
       'Calcium gluconate',
       'Diazepam'
     ],
     correctAnswerIndex: 2,
-    explanation: 'Intralipid "lipid sink" therapy removes lipophilic anesthetics (e.g., bupivacaine).',
+    explanation: 'Lipid therapy "scavenges" lipophilic local anesthetics (e.g., bupivacaine).',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
-    id: 'analgesic_agents_085',
-    question: 'Which mechanism is linked to opioid-induced hyperalgesia?',
+    id: 'analgesic_agents_116',
+    question: 'Which is associated with opioid-induced hyperalgesia?',
     options: [
       'Delta receptor activation',
       'NMDA receptor activation',
       'GABA-A inhibition',
-      'α2 receptor downregulation',
+      'Alpha-2 receptor downregulation',
       'Muscarinic blockade'
     ],
     correctAnswerIndex: 1,
-    explanation: 'Chronic opioid use → NMDA activation → hyperalgesia; treated with ketamine.',
+    explanation: 'Chronic/high-dose opioid exposure activates NMDA pathways → hyperalgesia; ketamine (NMDA antagonist) can help.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
-    id: 'analgesic_agents_086',
-    question: 'Which is NOT a renal side effect of NSAIDs?',
+    id: 'analgesic_agents_117',
+    question: 'Which is not a renal adverse effect of NSAIDs?',
     options: [
       'Acute kidney injury',
       'Hyperkalemia',
@@ -1287,13 +1752,13 @@ List<Question> analgesicAgentsQuestions = [
       'Papillary necrosis'
     ],
     correctAnswerIndex: 3,
-    explanation: 'NSAIDs cause metabolic acidosis, not alkalosis.',
+    explanation: 'NSAIDs can cause AKI, hyperkalemia, sodium retention, and even metabolic acidosis (not alkalosis).',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
-    id: 'analgesic_agents_087',
-    question: 'Which lab finding may occur in acetaminophen toxicity?',
+    id: 'analgesic_agents_118',
+    question: 'Which lab finding appears in acetaminophen toxicity?',
     options: [
       'AST > ALT elevation',
       'Hypoglycemia',
@@ -1302,13 +1767,13 @@ List<Question> analgesicAgentsQuestions = [
       'Low ammonia'
     ],
     correctAnswerIndex: 0,
-    explanation: 'AST > ALT is typical, with coagulopathy and hypoglycemia possible.',
+    explanation: 'Both AST and ALT rise; often AST predominates. INR prolongation and hypoglycemia may accompany.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
-    id: 'analgesic_agents_088',
-    question: 'Which drug most increases sedation when combined with opioids?',
+    id: 'analgesic_agents_119',
+    question: 'Which co-medication most increases sedation when combined with opioids?',
     options: [
       'Metoclopramide',
       'Ondansetron',
@@ -1317,28 +1782,28 @@ List<Question> analgesicAgentsQuestions = [
       'Methylprednisolone'
     ],
     correctAnswerIndex: 2,
-    explanation: 'Hydroxyzine (antihistamine) strongly potentiates sedation.',
+    explanation: 'Hydroxyzine (antihistamine) adds sedative effects; ondansetron and ranitidine do not.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
-    id: 'analgesic_agents_089',
-    question: 'Which statement about ketorolac is FALSE?',
+    id: 'analgesic_agents_120',
+    question: 'Which statement about ketorolac is not correct?',
     options: [
       'Can be given parenterally',
-      'Not used for more than 5 days',
-      'Effective in postoperative pain',
-      'Enhances platelet function',
-      'May cause GI ulceration'
+      'Not used longer than 5 days',
+      'Effective for postoperative pain',
+      'Increases platelet function',
+      'Can cause GI ulceration'
     ],
     correctAnswerIndex: 3,
-    explanation: 'Ketorolac inhibits platelets (like aspirin) → bleeding risk.',
+    explanation: 'Ketorolac inhibits COX-1 and impairs platelet function; limit to ≤5 days due to GI/renal risks.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
-    id: 'analgesic_agents_090',
-    question: 'Which is an alternative analgesic in opioid intolerance?',
+    id: 'analgesic_agents_121',
+    question: 'Which is an alternative analgesic for patients intolerant to opioids?',
     options: [
       'Methadone',
       'Lidocaine infusion',
@@ -1347,22 +1812,22 @@ List<Question> analgesicAgentsQuestions = [
       'Atropine'
     ],
     correctAnswerIndex: 2,
-    explanation: 'Ketamine provides analgesia via NMDA antagonism in opioid-intolerant patients.',
+    explanation: 'Ketamine provides analgesia via NMDA antagonism when opioids are not tolerated.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),
   Question(
-    id: 'analgesic_agents_091',
-    question: 'Tapentadol\'s mechanism of action?',
+    id: 'analgesic_agents_122',
+    question: 'Mechanism of tapentadol?',
     options: [
-      'Pure μ-agonist',
-      'μ-agonist + norepinephrine reuptake inhibition',
-      'NMDA antagonist + serotonin reuptake inhibition',
-      'GABA-A agonist',
-      'α2-agonist'
+      'Pure μ-agonism',
+      'μ-agonism + norepinephrine reuptake inhibition',
+      'NMDA antagonism + serotonin reuptake inhibition',
+      'GABA-A agonism',
+      'Alpha-2 agonism'
     ],
     correctAnswerIndex: 1,
-    explanation: 'Tapentadol = μ-agonist + noradrenaline reuptake inhibitor.',
+    explanation: 'Tapentadol combines μ-agonism with NET inhibition; tramadol combines μ-agonism with 5-HT/NE reuptake inhibition.',
     category: 'Analgesic Agents',
     difficulty: 2
   ),

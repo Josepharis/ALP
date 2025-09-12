@@ -976,4 +976,244 @@ List<Question> kidneyPhysiologyAnesthesiaQuestions = [
     category: 'Kidney Physiology & Anesthesia',
     difficulty: 2
   ),
+  Question(
+    id: 'kidney_physiology_anesthesia_066',
+    question: 'Which agent best preserves renal perfusion during anesthesia?',
+    options: [
+      'Isoflurane',
+      'Sevoflurane',
+      'Propofol',
+      'Ketamine',
+      'Halothane'
+    ],
+    correctAnswerIndex: 1,
+    explanation: 'Sevoflurane has the least effect on renal blood flow among inhaled agents.',
+    category: 'Kidney Physiology & Anesthesia',
+    difficulty: 2
+  ),
+  Question(
+    id: 'kidney_physiology_anesthesia_067',
+    question: 'Which opioid has the least toxic effect in patients with limited renal reserve?',
+    options: [
+      'Morphine',
+      'Fentanyl',
+      'Meperidine',
+      'Hydromorphone',
+      'Codeine'
+    ],
+    correctAnswerIndex: 1,
+    explanation: 'Fentanyl does not rely on renal excretion of active metabolites, so it is safer in impaired renal function.',
+    category: 'Kidney Physiology & Anesthesia',
+    difficulty: 2
+  ),
+  Question(
+    id: 'kidney_physiology_anesthesia_068',
+    question: 'Why should sevoflurane be used cautiously in patients with impaired kidney function?',
+    options: [
+      'Isocyanate release',
+      'Formation of fluoride ions',
+      'Nitrite production',
+      'Hypocalcemia',
+      'Increased ammonia'
+    ],
+    correctAnswerIndex: 1,
+    explanation: 'Sevoflurane metabolism can generate inorganic fluoride ions; caution is advised in severe renal failure.',
+    category: 'Kidney Physiology & Anesthesia',
+    difficulty: 2
+  ),
+  Question(
+    id: 'kidney_physiology_anesthesia_069',
+    question: 'Which anesthetic agent has the lowest nephrotoxic potential?',
+    options: [
+      'Methoxyflurane',
+      'Sevoflurane',
+      'Desflurane',
+      'Halothane',
+      'Enflurane'
+    ],
+    correctAnswerIndex: 2,
+    explanation: 'Desflurane undergoes minimal metabolism and produces very little fluoride.',
+    category: 'Kidney Physiology & Anesthesia',
+    difficulty: 2
+  ),
+  Question(
+    id: 'kidney_physiology_anesthesia_070',
+    question: 'Which of the following medications increases the risk of nephrotoxicity?',
+    options: [
+      'Dexmedetomidine',
+      'Fentanyl',
+      'Gentamicin',
+      'Etomidate',
+      'Ketamine'
+    ],
+    correctAnswerIndex: 2,
+    explanation: 'Aminoglycosides (e.g., gentamicin) can cause renal tubular toxicity.',
+    category: 'Kidney Physiology & Anesthesia',
+    difficulty: 2
+  ),
+  Question(
+    id: 'kidney_physiology_anesthesia_071',
+    question: 'What is the most common cause of intraoperative oliguria?',
+    options: [
+      'Urinary tract obstruction',
+      'Renal failure',
+      'Hypovolemia',
+      'Infection',
+      'Hyperkalemia'
+    ],
+    correctAnswerIndex: 2,
+    explanation: 'Hypovolemia impairs renal perfusion and leads to oliguria.',
+    category: 'Kidney Physiology & Anesthesia',
+    difficulty: 2
+  ),
+  Question(
+    id: 'kidney_physiology_anesthesia_072',
+    question: 'What is the most commonly used anesthetic technique for renal transplantation surgery?',
+    options: [
+      'Total intravenous anesthesia',
+      'Spinal anesthesia',
+      'Epidural anesthesia',
+      'General anesthesia',
+      'Local anesthesia'
+    ],
+    correctAnswerIndex: 3,
+    explanation: 'General anesthesia is typically preferred in renal transplantation.',
+    category: 'Kidney Physiology & Anesthesia',
+    difficulty: 2
+  ),
+  Question(
+    id: 'kidney_physiology_anesthesia_073',
+    question: 'In which condition is urine output decreased but renal parenchymal function preserved?',
+    options: [
+      'Hypovolemia',
+      'Sepsis',
+      'Obstructive uropathy',
+      'Prerenal azotemia',
+      'Acute tubular necrosis'
+    ],
+    correctAnswerIndex: 3,
+    explanation: 'Prerenal azotemia arises from reduced perfusion with intact renal parenchyma.',
+    category: 'Kidney Physiology & Anesthesia',
+    difficulty: 2
+  ),
+  Question(
+    id: 'kidney_physiology_anesthesia_074',
+    question: 'What is the most accurate test for assessing the effects of anesthetic drugs on kidney function?',
+    options: [
+      'Serum creatinine',
+      'GFR calculation',
+      'BUN level',
+      'Creatinine clearance',
+      'Urine specific gravity'
+    ],
+    correctAnswerIndex: 1,
+    explanation: 'Estimated GFR is the most reliable overall indicator of renal function.',
+    category: 'Kidney Physiology & Anesthesia',
+    difficulty: 2
+  ),
+  Question(
+    id: 'kidney_physiology_anesthesia_075',
+    question: 'Which metabolic disturbance may develop after diuretic use?',
+    options: [
+      'Metabolic acidosis',
+      'Metabolic alkalosis',
+      'Respiratory acidosis',
+      'Hypocapnia',
+      'Hyperkalemia'
+    ],
+    correctAnswerIndex: 1,
+    explanation: 'Diuretics can cause metabolic alkalosis due to potassium and chloride loss.',
+    category: 'Kidney Physiology & Anesthesia',
+    difficulty: 2
+  ),
+  Question(
+    id: 'kidney_physiology_anesthesia_076',
+    question: 'Which neuromuscular blocker is safest in chronic kidney disease?',
+    options: [
+      'Vecuronium',
+      'Rocuronium',
+      'Atracurium',
+      'Succinylcholine',
+      'Pancuronium'
+    ],
+    correctAnswerIndex: 2,
+    explanation: 'Atracurium is eliminated via Hofmann degradation and is not dependent on renal excretion.',
+    category: 'Kidney Physiology & Anesthesia',
+    difficulty: 2
+  ),
+  Question(
+    id: 'kidney_physiology_anesthesia_077',
+    question: 'The active metabolites of which drug can accumulate in renal failure?',
+    options: [
+      'Fentanyl',
+      'Sufentanil',
+      'Morphine',
+      'Ketamine',
+      'Dexmedetomidine'
+    ],
+    correctAnswerIndex: 2,
+    explanation: 'Morphine\'s active metabolite (M6G) accumulates in renal failure and can cause respiratory depression.',
+    category: 'Kidney Physiology & Anesthesia',
+    difficulty: 2
+  ),
+  Question(
+    id: 'kidney_physiology_anesthesia_078',
+    question: 'Which inhalation agent is safest in acute kidney injury?',
+    options: [
+      'Sevoflurane',
+      'Halothane',
+      'Enflurane',
+      'Desflurane',
+      'Methoxyflurane'
+    ],
+    correctAnswerIndex: 3,
+    explanation: 'Desflurane undergoes minimal metabolism and produces very low levels of fluoride ions.',
+    category: 'Kidney Physiology & Anesthesia',
+    difficulty: 2
+  ),
+  Question(
+    id: 'kidney_physiology_anesthesia_079',
+    question: 'Which factor most reduces glomerular filtration rate (GFR) during anesthesia?',
+    options: [
+      'Increased central venous pressure',
+      'Hypothermia',
+      'Hypotension',
+      'Hypocapnia',
+      'Hyperchloremia'
+    ],
+    correctAnswerIndex: 2,
+    explanation: 'Systemic hypotension markedly reduces renal perfusion and GFR.',
+    category: 'Kidney Physiology & Anesthesia',
+    difficulty: 2
+  ),
+  Question(
+    id: 'kidney_physiology_anesthesia_080',
+    question: 'What is the best strategy to prevent nephrotoxicity when using sevoflurane?',
+    options: [
+      'Use high fresh gas flow oxygen',
+      'Use a low dose',
+      'Combine with propofol',
+      'Monitor metabolites',
+      'Use a CO₂ absorber other than soda lime'
+    ],
+    correctAnswerIndex: 4,
+    explanation: 'Sevoflurane can react with CO₂ absorbers to form Compound A, which may be nephrotoxic; using non–soda lime absorbers (or avoiding strong-base absorbers) reduces risk.',
+    category: 'Kidney Physiology & Anesthesia',
+    difficulty: 2
+  ),
+  Question(
+    id: 'kidney_physiology_anesthesia_081',
+    question: 'Which formula is most commonly used to estimate GFR?',
+    options: [
+      'Cockcroft–Gault',
+      'Harris–Benedict',
+      'CHA₂DS₂-VASc',
+      'Wells score',
+      'MELD score'
+    ],
+    correctAnswerIndex: 0,
+    explanation: 'The Cockcroft–Gault equation (using serum creatinine, age, sex, and weight) is widely used to estimate GFR.',
+    category: 'Kidney Physiology & Anesthesia',
+    difficulty: 2
+  ),
 ];

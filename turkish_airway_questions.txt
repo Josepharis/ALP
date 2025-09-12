@@ -1,0 +1,67 @@
+        'Zor entübasyonu öngörmede en yaygın kullanılan klinik sınıflama aşağıdakilerden hangisidir?',
+        'Cormack-Lehane sınıflamasında glottis açıklığının hiç görülmediği durum hangi sınıf olarak tanımlanır?',
+        'Tiromental mesafe ölçümünde zor entübasyon riski hangi değerle başlar?',
+        'Aşağıdakilerden hangisi hava yolu açıklığını sağlamak için kullanılan temel manevralardan biridir?',
+        'Hangi pozisyon, entübasyon öncesi hava yolu aksının hizalanmasını en iyi sağlar?',
+        'Aşağıdakilerden hangisi hava yolunun zorluk skorlamasında kullanılan bir sistemdir?',
+        'Aşağıdaki havayolu aygıtlarından hangisi kısa süreli havayolu kontrolü için uygundur, ancak hava yolu koruması sağlamaz?',
+        'Hangi yöntem bilinçli hastada havayolu açıklığını korumak için en uygundur?',
+        'Aşağıdakilerden hangisi zor entübasyon için en güçlü göstergedir?',
+        'Aşağıdakilerden hangisi hastayı havalandırmadan endotrakeal entübasyona geçilen senaryodur?',
+    options: [
+    options: [
+        'Aşağıdaki havayolu açıklığını artırma tekniklerinden hangisi bilinçli hastada uygulanması en zor olanıdır?',
+        'Laringoskopi sırasında hipertansif kriz gelişen hastada en olası mekanizma nedir?',
+        'Endotrakeal entübasyonda laringeal ödem gelişmişse en uygun tedavi aşağıdakilerden hangisidir?',
+        'LMA için ideal yerleştirme sonrası uç kısmı hangi anatomik yapıya dayanır?',
+        'Zor hava yolu öngörülen bir hastada, entübasyon öncesi ilk yaklaşım hangisi olmalıdır?',
+        'Hangi durumda burun kanülünden yüksek akımlı oksijen verilmesi (HFNO) endikedir?',
+        'Aşağıdaki pozisyonlardan hangisi aspirasyon riskini azaltmak için RSI sırasında tercih edilir?',
+        'Krikoid baskısı (Sellick manevrası) ile ilgili doğru ifade hangisidir?',
+        'Aşağıdakilerden hangisi bilinçli ve iş birliği yapabilen hastada hava yolu görüntülemesi için uygundur?',
+        'Trakeal entübasyon sırasında glottik açıklık zor görünüyorsa en uygun ilk müdahale nedir?',
+        'Hangi durum, entübasyonun hemen ardından bronkospazm geliştiğini düşündürür?',
+        'Hangi durumda fiberoptik bronkoskop ile entübasyon en uygun tercihtir?',
+        'Hava yolu yönetiminde Cormack-Lehane sınıf IIb görünümde hangi yapı kısmen görülebilir?',
+        'Hangi laringoskop tipi anterior yerleşimli glottisi olan hastalarda daha başarılı olabilir?',
+        'Zor hava yolu yönetimi algoritmasında, başarısız entübasyon ve maskeyle ventilasyon sağlanamayan hastada son adım nedir?',
+        'Aşağıdaki komplikasyonlardan hangisi krikotiroidotomiye özgüdür?',
+        'Fiberoptik entübasyon sırasında görüşü en çok bozan durum hangisidir?',
+        'Aşağıdakilerden hangisi entübasyon sırasında bradikardiye yol açabilir?',
+    options: [
+        'Çocuklarda entübasyon sırasında vagal refleks uyarısı sonucu gelişen bradikardi için ilk ilaç seçeneği nedir?',
+    options: [
+        'Fiberoptik entübasyon öncesi en uygun topikal anestetik ajan hangisidir?',
+        'Hava yolu yönetiminde "plan A başarısız olduysa plan B" ilkesini temel alan strateji aşağıdakilerden hangisidir?',
+    options: [
+    options: [
+        'Endotrakeal entübasyon sırasında doğru laringoskopi pozisyonu hangisidir?',
+        'Laringoskopi sırasında glottik görüntülemede en yaygın sınıflandırma hangisidir?',
+    options: [
+        'Aspirasyon riskinin yüksek olduğu hastalarda en uygun entübasyon yöntemi nedir?',
+    options: [
+        'Zor entübasyonun en güçlü prediktörlerinden biri aşağıdakilerden hangisidir?',
+        '"Difficult Airway Society" algoritmasına göre entübasyon başarısızsa ilk yapılması gereken nedir?',
+    options: [
+        'Zor hava yolu öngörüsünde thyromental mesafe kaç cm\'nin altındaysa risklidir?',
+    options: [
+        'Hava yolu yönetiminde nazofaringeal airway ile ilgili doğru ifade hangisidir?',
+    options: ['Glidescope', 'Bonfils', 'Airtraq', 'McGrath', 'C-MAC'],
+        'Zor hava yolu algoritmasında hasta entübe edilemiyor ve maske ile de ventilasyon yapılamıyorsa ilk yapılması gereken nedir?',
+    options: [
+    options: [
+    options: [
+    options: [
+    options: ['%40', '%60', '%80', '%90', '%100'],
+    options: [
+    options: [
+    options: [
+    options: [
+    options: [
+    options: [
+    options: [
+        'Hangisi pediatrik hastada hava yolu anatomik farklılıklarından değildir?',
+    options: ['Larengeal ödem', 'Astım', 'KOAH', 'Obezite', 'Gebelik'],
+        'Hangisi entübasyon sırasında kullanılan bıçak tiplerinden değildir?',
+        'Hangisi entübasyon sırasında kullanılan uygun tüp balon basıncıdır?',
+        'Hangisi entübasyon sırasında kullanılan uygun tüp balon hacmidir?',

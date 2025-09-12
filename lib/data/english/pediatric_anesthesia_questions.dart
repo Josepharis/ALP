@@ -603,36 +603,6 @@ List<Question> pediatricAnesthesiaQuestions = [
   ),
   Question(
     id: 'pediatric_anesthesia_041',
-    question: 'Which is NOT a reason for neonates\' increased sensitivity to anesthetics?',
-    options: [
-      'Immature neuromuscular junctions',
-      'Immature liver enzymes',
-      'Low cerebral blood flow',
-      'High body water content',
-      'Permeable BBB'
-    ],
-    correctAnswerIndex: 2,
-    explanation: 'Neonates actually have increased cerebral blood flow → stronger CNS effect.',
-    category: 'Pediatric Anesthesia',
-    difficulty: 2
-  ),
-  Question(
-    id: 'pediatric_anesthesia_042',
-    question: 'Which factor is the most common cause of respiratory arrest in neonates?',
-    options: [
-      'Hyperkalemia',
-      'Hypothermia',
-      'Hypoxia',
-      'Hyperglycemia',
-      'Acidosis'
-    ],
-    correctAnswerIndex: 2,
-    explanation: 'In neonates and infants, cardiac arrest is usually secondary to respiratory causes, especially hypoxia.',
-    category: 'Pediatric Anesthesia',
-    difficulty: 2
-  ),
-  Question(
-    id: 'pediatric_anesthesia_043',
     question: 'Primary respiratory control in neonates is most sensitive to:',
     options: [
       'Hypoxia',
@@ -647,7 +617,7 @@ List<Question> pediatricAnesthesiaQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'pediatric_anesthesia_044',
+    id: 'pediatric_anesthesia_042',
     question: 'At which age is oxygen consumption highest?',
     options: [
       'Neonate',
@@ -662,7 +632,7 @@ List<Question> pediatricAnesthesiaQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'pediatric_anesthesia_045',
+    id: 'pediatric_anesthesia_043',
     question: 'Which neonatal physiology is correct?',
     options: [
       'Sympathetic > parasympathetic tone',
@@ -677,7 +647,7 @@ List<Question> pediatricAnesthesiaQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'pediatric_anesthesia_046',
+    id: 'pediatric_anesthesia_044',
     question: 'Why do inhalation anesthetics act faster in pediatrics?',
     options: [
       'Less V/Q mismatch',
@@ -692,7 +662,7 @@ List<Question> pediatricAnesthesiaQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'pediatric_anesthesia_047',
+    id: 'pediatric_anesthesia_045',
     question: 'Why are children prone to hypothermia?',
     options: [
       'Low HR',
@@ -707,7 +677,7 @@ List<Question> pediatricAnesthesiaQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'pediatric_anesthesia_048',
+    id: 'pediatric_anesthesia_046',
     question: 'Classic formula for pediatric uncuffed ETT size?',
     options: [
       '(Age + 4) / 2',
@@ -722,7 +692,7 @@ List<Question> pediatricAnesthesiaQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'pediatric_anesthesia_049',
+    id: 'pediatric_anesthesia_047',
     question: 'First-choice IV fluid in pediatrics?',
     options: [
       '0.9% NaCl',
@@ -737,7 +707,7 @@ List<Question> pediatricAnesthesiaQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'pediatric_anesthesia_050',
+    id: 'pediatric_anesthesia_048',
     question: 'Best site for ABG sampling in neonates?',
     options: [
       'Ulnar artery',
@@ -752,7 +722,7 @@ List<Question> pediatricAnesthesiaQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'pediatric_anesthesia_051',
+    id: 'pediatric_anesthesia_049',
     question: 'Main contributor to pediatric airway obstruction?',
     options: [
       'Short stature',
@@ -767,7 +737,7 @@ List<Question> pediatricAnesthesiaQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'pediatric_anesthesia_052',
+    id: 'pediatric_anesthesia_050',
     question: 'Which anesthetic most often causes bradycardia in pediatrics?',
     options: [
       'Sevoflurane',
@@ -782,7 +752,7 @@ List<Question> pediatricAnesthesiaQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'pediatric_anesthesia_053',
+    id: 'pediatric_anesthesia_051',
     question: 'Why do pediatric drugs have larger Vd?',
     options: [
       'More muscle',
@@ -797,7 +767,7 @@ List<Question> pediatricAnesthesiaQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'pediatric_anesthesia_054',
+    id: 'pediatric_anesthesia_052',
     question: 'What increases sensitivity to inhalation anesthesia in pediatrics?',
     options: [
       'High GFR',
@@ -812,7 +782,7 @@ List<Question> pediatricAnesthesiaQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'pediatric_anesthesia_055',
+    id: 'pediatric_anesthesia_053',
     question: 'Why are neonates prone to hypoglycemia?',
     options: [
       'Impaired renal function',
@@ -827,7 +797,7 @@ List<Question> pediatricAnesthesiaQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'pediatric_anesthesia_056',
+    id: 'pediatric_anesthesia_054',
     question: 'Formula for neonatal ETT length (cm)?',
     options: [
       '(Weight × 2) + 8',
@@ -842,7 +812,7 @@ List<Question> pediatricAnesthesiaQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'pediatric_anesthesia_057',
+    id: 'pediatric_anesthesia_055',
     question: 'Common consequence of weak inspiratory muscles in neonates?',
     options: [
       'Fluid overload',
@@ -857,7 +827,7 @@ List<Question> pediatricAnesthesiaQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'pediatric_anesthesia_058',
+    id: 'pediatric_anesthesia_056',
     question: 'Main determinant of neonatal blood pressure?',
     options: [
       'Total body water',
@@ -872,7 +842,7 @@ List<Question> pediatricAnesthesiaQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'pediatric_anesthesia_059',
+    id: 'pediatric_anesthesia_057',
     question: 'Most common electrolyte imbalance in neonates?',
     options: [
       'Hyponatremia',
@@ -887,7 +857,7 @@ List<Question> pediatricAnesthesiaQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'pediatric_anesthesia_060',
+    id: 'pediatric_anesthesia_058',
     question: 'First step in pediatric bradycardia during anesthesia?',
     options: [
       'Give adrenaline',
@@ -902,7 +872,7 @@ List<Question> pediatricAnesthesiaQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'pediatric_anesthesia_061',
+    id: 'pediatric_anesthesia_059',
     question: 'What limits ventricular filling in neonates?',
     options: [
       'Hypothermia',
@@ -917,7 +887,7 @@ List<Question> pediatricAnesthesiaQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'pediatric_anesthesia_062',
+    id: 'pediatric_anesthesia_060',
     question: 'Likely cause of tachycardia during sevoflurane induction in children?',
     options: [
       'Hypothermia',
@@ -932,7 +902,7 @@ List<Question> pediatricAnesthesiaQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'pediatric_anesthesia_063',
+    id: 'pediatric_anesthesia_061',
     question: 'Why can infants often be intubated without neuromuscular blockers during induction?',
     options: [
       'Slow nerve conduction',
@@ -947,7 +917,7 @@ List<Question> pediatricAnesthesiaQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'pediatric_anesthesia_064',
+    id: 'pediatric_anesthesia_062',
     question: 'What is the most common response of neonates to hypoxia?',
     options: [
       'Tachycardia',
@@ -962,7 +932,7 @@ List<Question> pediatricAnesthesiaQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'pediatric_anesthesia_065',
+    id: 'pediatric_anesthesia_063',
     question: 'Most common adverse effect of sevoflurane anesthesia in pediatrics?',
     options: [
       'Hypotension',
@@ -977,7 +947,7 @@ List<Question> pediatricAnesthesiaQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'pediatric_anesthesia_066',
+    id: 'pediatric_anesthesia_064',
     question: 'Which is NOT a physiological difference between pediatric and adult patients?',
     options: [
       'Lower tidal volume',
@@ -992,7 +962,7 @@ List<Question> pediatricAnesthesiaQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'pediatric_anesthesia_067',
+    id: 'pediatric_anesthesia_065',
     question: 'Which inhalation agent has the strongest bronchodilator effect in pediatrics?',
     options: [
       'Isoflurane',
@@ -1007,7 +977,7 @@ List<Question> pediatricAnesthesiaQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'pediatric_anesthesia_068',
+    id: 'pediatric_anesthesia_066',
     question: 'What is the minimum fasting period for clear fluids in children?',
     options: [
       '1 hour',
@@ -1022,7 +992,7 @@ List<Question> pediatricAnesthesiaQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'pediatric_anesthesia_069',
+    id: 'pediatric_anesthesia_067',
     question: 'Best opioid for postoperative analgesia in children?',
     options: [
       'Tramadol',
@@ -1037,7 +1007,7 @@ List<Question> pediatricAnesthesiaQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'pediatric_anesthesia_070',
+    id: 'pediatric_anesthesia_068',
     question: 'Most common complication after anesthesia in preterm infants?',
     options: [
       'Bradycardia',
@@ -1052,7 +1022,7 @@ List<Question> pediatricAnesthesiaQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'pediatric_anesthesia_071',
+    id: 'pediatric_anesthesia_069',
     question: 'How is FRC preserved in neonates?',
     options: [
       'High respiratory rate',
@@ -1067,7 +1037,7 @@ List<Question> pediatricAnesthesiaQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'pediatric_anesthesia_072',
+    id: 'pediatric_anesthesia_070',
     question: 'Most critical pediatric airway difference?',
     options: [
       'Large tongue',
@@ -1082,7 +1052,7 @@ List<Question> pediatricAnesthesiaQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'pediatric_anesthesia_073',
+    id: 'pediatric_anesthesia_071',
     question: 'How does MAC change in neonates?',
     options: [
       '50% lower than adults',
@@ -1097,7 +1067,7 @@ List<Question> pediatricAnesthesiaQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'pediatric_anesthesia_074',
+    id: 'pediatric_anesthesia_072',
     question: 'Formula for ETT selection in pediatrics?',
     options: [
       '(Age / 4) + 4',
@@ -1112,7 +1082,7 @@ List<Question> pediatricAnesthesiaQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'pediatric_anesthesia_075',
+    id: 'pediatric_anesthesia_073',
     question: 'Best method to prevent intraoperative hypothermia in children?',
     options: [
       'OR temperature 25°C',
@@ -1127,7 +1097,7 @@ List<Question> pediatricAnesthesiaQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'pediatric_anesthesia_076',
+    id: 'pediatric_anesthesia_074',
     question: 'When is pediatric spinal anesthesia preferred?',
     options: [
       'Preterm infants <3 kg for hernia repair',
@@ -1142,7 +1112,7 @@ List<Question> pediatricAnesthesiaQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'pediatric_anesthesia_077',
+    id: 'pediatric_anesthesia_075',
     question: 'Until what age is risk of postoperative apnea present?',
     options: [
       '28 days',
@@ -1157,7 +1127,7 @@ List<Question> pediatricAnesthesiaQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'pediatric_anesthesia_078',
+    id: 'pediatric_anesthesia_076',
     question: 'Which is incorrect in anesthesia for congenital diaphragmatic hernia?',
     options: [
       'Avoid high-pressure ventilation',
@@ -1172,7 +1142,7 @@ List<Question> pediatricAnesthesiaQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'pediatric_anesthesia_079',
+    id: 'pediatric_anesthesia_077',
     question: 'Max safe pediatric local anesthetic dose?',
     options: [
       'Bupivacaine 1.5 mg/kg',
@@ -1187,7 +1157,7 @@ List<Question> pediatricAnesthesiaQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'pediatric_anesthesia_080',
+    id: 'pediatric_anesthesia_078',
     question: 'Contraindicated in post-tonsillectomy bleeding?',
     options: [
       'IV fluid resuscitation',
@@ -1202,7 +1172,7 @@ List<Question> pediatricAnesthesiaQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'pediatric_anesthesia_081',
+    id: 'pediatric_anesthesia_079',
     question: 'First gas used in neonatal resuscitation?',
     options: [
       '100% O₂',
@@ -1217,7 +1187,7 @@ List<Question> pediatricAnesthesiaQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'pediatric_anesthesia_082',
+    id: 'pediatric_anesthesia_080',
     question: 'Definition of hypotension in pediatrics?',
     options: [
       'SBP <80 mmHg',
@@ -1232,7 +1202,7 @@ List<Question> pediatricAnesthesiaQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'pediatric_anesthesia_083',
+    id: 'pediatric_anesthesia_081',
     question: 'Gold standard for malignant hyperthermia diagnosis?',
     options: [
       'Elevated CK',
@@ -1247,7 +1217,7 @@ List<Question> pediatricAnesthesiaQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'pediatric_anesthesia_084',
+    id: 'pediatric_anesthesia_082',
     question: 'Transfusion threshold in children?',
     options: [
       'Hb <10 g/dL',
@@ -1262,7 +1232,7 @@ List<Question> pediatricAnesthesiaQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'pediatric_anesthesia_085',
+    id: 'pediatric_anesthesia_083',
     question: 'Which pediatric pain scale is used in preverbal children?',
     options: [
       'VAS',
@@ -1277,7 +1247,7 @@ List<Question> pediatricAnesthesiaQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'pediatric_anesthesia_086',
+    id: 'pediatric_anesthesia_084',
     question: 'First-line treatment for intraoperative bradycardia in children?',
     options: [
       'Atropine 0.02 mg/kg',
@@ -1292,7 +1262,7 @@ List<Question> pediatricAnesthesiaQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'pediatric_anesthesia_087',
+    id: 'pediatric_anesthesia_085',
     question: 'Which statement about pediatric intubation is correct?',
     options: [
       'Cricoid pressure should not be applied',
@@ -1307,7 +1277,7 @@ List<Question> pediatricAnesthesiaQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'pediatric_anesthesia_088',
+    id: 'pediatric_anesthesia_086',
     question: 'Which parameter is NOT in Apgar score?',
     options: [
       'HR',
@@ -1322,7 +1292,7 @@ List<Question> pediatricAnesthesiaQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'pediatric_anesthesia_089',
+    id: 'pediatric_anesthesia_087',
     question: 'Most common complication after pediatric extubation?',
     options: [
       'Laryngospasm',
@@ -1337,7 +1307,7 @@ List<Question> pediatricAnesthesiaQuestions = [
     difficulty: 2
   ),
   Question(
-    id: 'pediatric_anesthesia_090',
+    id: 'pediatric_anesthesia_088',
     question: 'Safest local anesthetic in pediatric regional anesthesia?',
     options: [
       'Bupivacaine',

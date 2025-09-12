@@ -149,20 +149,6 @@ final List<Question> cardiovascularPhysiologyQuestions = [
   ),
   Question(
     question:
-        'Ejektif fraksiyon (EF) %25 olan bir hastada hangi klinik bulgu daha olasıdır?',
-    options: [
-      'Ortostatik hipertansiyon',
-      'Konfüzyon ve dispne',
-      'Bradikardi',
-      'Hipervolemiye bağlı taşikardi',
-      'Hipoksemi olmadan taşipne',
-    ],
-    correctAnswerIndex: 1,
-    explanation:
-        'EF %25 ciddi sistolik disfonksiyona işaret eder ve düşük perfüzyona bağlı konfüzyon, akciğer konjesyonuna bağlı dispne görülür.',
-  ),
-  Question(
-    question:
         'Kardiyak output artarken pulse basıncı da artıyorsa bu duruma örnek olarak hangisi verilebilir?',
     options: [
       'Aort darlığı',
@@ -231,21 +217,7 @@ final List<Question> cardiovascularPhysiologyQuestions = [
         'Arteriyel basınç = CO × SVR. Eğer CO artmış ama basınç düşüyorsa, SVR düşük olmalıdır → örneğin sepsis.',
   ),
   Question(
-    question: 'Hiperkapni (PaCO₂ ↑) kalp üzerinde nasıl bir etki yapar?',
-    options: [
-      'Vazokonstriksiyon',
-      'Vazodilatasyon ve taşikardi',
-      'Bradikardi ve hipotansiyon',
-      'Kontraktilite artışı',
-      'Otonomik inhibisyon',
-    ],
-    correctAnswerIndex: 1,
-    explanation:
-        'Hiperkapni sempatik sistemi aktive ederek taşikardi ve vazodilatasyona neden olur.',
-  ),
-  Question(
-    question:
-        'Pozitif basınçlı ventilasyon, hemodinami üzerinde nasıl bir etki yapar?',
+    question: 'Pozitif basınçlı ventilasyon, hemodinami üzerinde nasıl bir etki yapar?',
     options: [
       'Preload\'u artırır',
       'Venöz dönüşü artırır',
@@ -425,6 +397,124 @@ final List<Question> cardiovascularPhysiologyQuestions = [
   ),
   Question(
     question:
+        'Aşağıdaki parametrelerden hangisi Swan-Ganz kateteri ile direkt olarak ölçülemez?',
+    options: [
+      'Pulmoner arter basıncı',
+      'Kardiyak output',
+      'Pulmoner kapiller wedge basıncı',
+      'Sol atriyum basıncı',
+      'Santral venöz basınç',
+    ],
+    correctAnswerIndex: 3,
+    explanation:
+        'Sol atriyum basıncı, doğrudan ölçülemez; PCWP dolaylı bir göstergesidir.',
+  ),
+  Question(
+    question:
+        'Hangi volatil anestezik ajan, kardiyak sensitizasyon nedeniyle katekolaminle ilişkili aritmilere en çok eğilimlidir?',
+    options: ['Sevofluran', 'İzofluran', 'Desfluran', 'Halotan', 'Enfluran'],
+    correctAnswerIndex: 3,
+    explanation:
+        'Halotan, katekolaminlere karşı ventriküler aritmiye neden olabilecek şekilde miyokardı duyarlı hale getirir.',
+  ),
+  Question(
+    question: 'Aşağıdakilerden hangisi afterload\'un artmasına neden olur?',
+    options: [
+      'Hipotermi',
+      'Hipovolemi',
+      'Aort stenozu',
+      'Sepsis',
+      'Venodilatasyon',
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        'Aort stenozu, sol ventrikül çıkışını zorlaştırır, böylece afterload\'u artırır.',
+  ),
+  Question(
+    question:
+        'Aşağıdakilerden hangisi anestezi altında kompansatuvar bradikardiyi tetikleyebilir?',
+    options: [
+      'Hipotermi',
+      'Hipoksi',
+      'Yüz siniri uyarısı (örn. okülokardiyak refleks)',
+      'Sempatik aktivasyon',
+      'Anemi',
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        'Özellikle okülokardiyak refleks gibi vagal refleksler, anestezi sırasında bradikardiye neden olabilir.',
+  ),
+  Question(
+    question:
+        'Pulmoner kapiller wedge basıncı (PCWP) artarsa aşağıdaki hangi durumdan şüphelenilmelidir?',
+    options: [
+      'Hipovolemi',
+      'Sol ventrikül yetmezliği',
+      'Sağ kalp yetmezliği',
+      'Periferik vazodilatasyon',
+      'Aort koarktasyonu',
+    ],
+    correctAnswerIndex: 1,
+    explanation:
+        'PCWP, sol atriyal ve dolaylı olarak sol ventrikül diyastolik basıncını gösterir. Sol kalp yetmezliğinde artar.',
+  ),
+  Question(
+    question:
+        'Kardiyopulmoner bypass sırasında hemodilüsyonun başlıca olumsuz etkisi nedir?',
+    options: [
+      'Hiperkoagülasyon',
+      'Hiperkalemi',
+      'Düşük oksijen taşıma kapasitesi',
+      'Hipervolemi',
+      'Artmış viskozite',
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        'Hemodilüsyon, hemotokriti düşürür → oksijen taşıma kapasitesi azalır → doku hipoksisi gelişebilir.',
+  ),
+  Question(
+    question:
+        'Anestezi sırasında kalp debisini artıran en önemli fizyolojik parametre hangisidir?',
+    options: [
+      'Kalp hızı',
+      'Sistemik vasküler direnç',
+      'Sol atriyal basınç',
+      'Solunum sayısı',
+      'Perikardiyal sıvı miktarı',
+    ],
+    correctAnswerIndex: 0,
+    explanation:
+        'Kalp debisi = SV x HR formülüne göre kalp hızı direkt etkilidir.',
+  ),
+  Question(
+    question: 'Anestezi altında en sık görülen bradikardi nedeni nedir?',
+    options: [
+      'Kan kaybı',
+      'Hipoksi',
+      'Vagal uyarı',
+      'Hipervolemi',
+      'Hipoglisemi',
+    ],
+    correctAnswerIndex: 2,
+    explanation:
+        'Trakeal manipülasyon ve periton çekilmesi gibi durumlar vagal uyarıya yol açabilir.',
+  ),
+  Question(
+    question:
+        'Kardiyak output artışı için en uygun intravasküler sıvı tipi hangisidir?',
+    options: [
+      'Dekstroz 5%',
+      'İzotonik salin',
+      'Hipotonik solüsyon',
+      'Sodyum bikarbonat',
+      'Albumin',
+    ],
+    correctAnswerIndex: 4,
+    explanation:
+        'Koloid solüsyonlar (örneğin albumin) intravasküler volümde daha uzun süre kalır.',
+  ),
+  Question(
+    question:
         'Sol ventrikül ejeksiyon fraksiyonu %35 olan hastada hangi durum beklenir?',
     options: [
       'Normal sistolik fonksiyon',
@@ -450,17 +540,30 @@ final List<Question> cardiovascularPhysiologyQuestions = [
   ),
   Question(
     question:
-        'Aşağıdaki parametrelerden hangisi Swan-Ganz kateteri ile direkt olarak ölçülemez?',
+        'Ejektif fraksiyon (EF) %25 olan bir hastada hangi klinik bulgu daha olasıdır?',
     options: [
-      'Pulmoner arter basıncı',
-      'Kardiyak output',
-      'Pulmoner kapiller wedge basıncı',
-      'Sol atriyum basıncı',
-      'Santral venöz basınç',
+      'Ortostatik hipertansiyon',
+      'Konfüzyon ve dispne',
+      'Bradikardi',
+      'Hipervolemiye bağlı taşikardi',
+      'Hipoksemi olmadan taşipne',
     ],
-    correctAnswerIndex: 3,
+    correctAnswerIndex: 1,
     explanation:
-        'Sol atriyum basıncı, doğrudan ölçülemez; PCWP dolaylı bir göstergesidir.',
+        'EF %25 ciddi sistolik disfonksiyona işaret eder ve düşük perfüzyona bağlı konfüzyon, akciğer konjesyonuna bağlı dispne görülür.',
+  ),
+  Question(
+    question: 'Hiperkapni (PaCO₂ ↑) kalp üzerinde nasıl bir etki yapar?',
+    options: [
+      'Vazokonstriksiyon',
+      'Vazodilatasyon ve taşikardi',
+      'Bradikardi ve hipotansiyon',
+      'Kontraktilite artışı',
+      'Otonomik inhibisyon',
+    ],
+    correctAnswerIndex: 1,
+    explanation:
+        'Hiperkapni sempatik sistemi aktive ederek taşikardi ve vazodilatasyona neden olur.',
   ),
   Question(
     question:
@@ -504,7 +607,8 @@ final List<Question> cardiovascularPhysiologyQuestions = [
         'Dobutamin β1 agonisttir, kardiyak kontraktiliteyi artırarak kardiyojenik şokta etkilidir.',
   ),
   Question(
-    question: 'Myokardiyal kontraktiliteyi doğrudan artıran nedir?',
+    question:
+        'Aşağıdakilerden hangisi myokardiyal kontraktiliteyi doğrudan artırır?',
     options: [
       'Beta-1 adrenerjik stimülasyon',
       'Vagus siniri aktivasyonu',
@@ -555,14 +659,14 @@ final List<Question> cardiovascularPhysiologyQuestions = [
     question: 'Anestezide baroreseptör refleksi baskılanırsa ne olur?',
     options: [
       'Hipertansiyona karşı daha hızlı yanıt',
-      'Hipotansiyona karşı kompensasyon artar',
+      'Hipotansiyona karşı kompansasyon artar',
       'Kalp hızı düşer',
       'Taşikardi yanıtı zayıflar',
       'Refleks bradikardi artar',
     ],
     correctAnswerIndex: 3,
     explanation:
-        'Baroreseptör duyarlılığı azalınca hipotansiyona karşı kompensatuvar taşikardi azalır.',
+        'Baroreseptör duyarlılığı azalınca hipotansiyona karşı kompansatuvar taşikardi azalır.',
   ),
   Question(
     question:
@@ -593,7 +697,8 @@ final List<Question> cardiovascularPhysiologyQuestions = [
         'EF, sol ventrikülün sistolik performansını değerlendirmede kullanılır.',
   ),
   Question(
-    question: 'Kalp debisini artıran fizyolojik durum hangisidir?',
+    question:
+        'Aşağıdakilerden hangisi kalp debisini artıran fizyolojik bir durumdur?',
     options: [
       'Vagal tonus artışı',
       'Anestezi derinliğinin artması',
@@ -607,7 +712,7 @@ final List<Question> cardiovascularPhysiologyQuestions = [
   ),
   Question(
     question:
-        'Pulmoner vasküler direnci artırarak sağ ventrikül yükünü yükselten ilaç hangisidir?',
+        'Hangi ilaç pulmoner vasküler direnci artırarak sağ ventrikül yükünü yükseltebilir?',
     options: [
       'Dobutamin',
       'Adenozin',
@@ -646,66 +751,17 @@ final List<Question> cardiovascularPhysiologyQuestions = [
   ),
   Question(
     question:
-        'Hangi volatil anestezik ajan, kardiyak sensitizasyon nedeniyle katekolaminle ilişkili aritmilere en çok eğilimlidir?',
-    options: ['Sevofluran', 'İzofluran', 'Desfluran', 'Halotan', 'Enfluran'],
-    correctAnswerIndex: 3,
-    explanation:
-        'Halotan, katekolaminlere karşı ventriküler aritmiye neden olabilecek şekilde miyokardı duyarlı hale getirir.',
-  ),
-  Question(
-    question: 'Aşağıdakilerden hangisi afterload\'un artmasına neden olur?',
+        'Aşağıdakilerden hangisi arteriyel kan basıncını belirleyen ana faktörlerden biridir?',
     options: [
-      'Hipotermi',
-      'Hipovolemi',
-      'Aort stenozu',
-      'Sepsis',
-      'Venodilatasyon',
+      'Venöz kapakçıklar',
+      'Plazma ozmolaritesi',
+      'Kardiyak output',
+      'Solunum hızı',
+      'Santral sinir sistemi',
     ],
     correctAnswerIndex: 2,
     explanation:
-        'Aort stenozu, sol ventrikül çıkışını zorlaştırır, böylece afterload\'u artırır.',
-  ),
-  Question(
-    question:
-        'Aşağıdakilerden hangisi anestezi altında kompensatuvar bradikardiyi tetikleyebilir?',
-    options: [
-      'Hipotermi',
-      'Hipoksi',
-      'Yüz siniri uyarısı (örn. okülokardiyak refleks)',
-      'Sempatik aktivasyon',
-      'Anemi',
-    ],
-    correctAnswerIndex: 2,
-    explanation:
-        'Özellikle okülokardiyak refleks gibi vagal refleksler, anestezi sırasında bradikardiye neden olabilir.',
-  ),
-  Question(
-    question:
-        'Pulmoner kapiller wedge basıncı (PCWP) artarsa aşağıdaki hangi durumdan şüphelenilmelidir?',
-    options: [
-      'Hipovolemi',
-      'Sol ventrikül yetmezliği',
-      'Sağ kalp yetmezliği',
-      'Periferik vazodilatasyon',
-      'Aort koarktasyonu',
-    ],
-    correctAnswerIndex: 1,
-    explanation:
-        'PCWP, sol atriyal ve dolaylı olarak sol ventrikül diyastolik basıncını gösterir. Sol kalp yetmezliğinde artar.',
-  ),
-  Question(
-    question:
-        'Kardiyopulmoner bypass sırasında hemodilüsyonun başlıca olumsuz etkisi nedir?',
-    options: [
-      'Hiperkoagülasyon',
-      'Hiperkalemi',
-      'Düşük oksijen taşıma kapasitesi',
-      'Hipervolemi',
-      'Artmış viskozite',
-    ],
-    correctAnswerIndex: 2,
-    explanation:
-        'Hemodilüsyon, hemotokriti düşürür → oksijen taşıma kapasitesi azalır → doku hipoksisi gelişebilir.',
+        'Arteriyel kan basıncı = CO x SVR formülüne göre kardiyak output belirleyicidir.',
   ),
   Question(
     question:
@@ -747,7 +803,7 @@ final List<Question> cardiovascularPhysiologyQuestions = [
     explanation: 'Koroner dolum diyastolde olur; normal CPP >60 mmHg\'dır.',
   ),
   Question(
-    question: 'Hangisi "preload"ı en iyi temsil eden klinik ölçümdür?',
+    question: '"Preload"ı en iyi temsil eden klinik ölçüm hangisidir?',
     options: [
       'Pulmoner kapiller kama basıncı (PCWP)',
       'Sistemik vasküler direnç',
@@ -770,7 +826,7 @@ final List<Question> cardiovascularPhysiologyQuestions = [
     ],
     correctAnswerIndex: 0,
     explanation:
-        'Kardiyak pompa yetersizliği → düşük debi, yüksek dolum basınçları, kompensatuar vazokonstriksiyon.',
+        'Kardiyak pompa yetersizliği → düşük debi, yüksek dolum basınçları, kompansatuar vazokonstriksiyon.',
   ),
   Question(
     question: 'Hangisi pulmoner hipertansiyon tedavisinde kullanılmaz?',
@@ -905,536 +961,5 @@ final List<Question> cardiovascularPhysiologyQuestions = [
     correctAnswerIndex: 0,
     explanation:
         'EKG\'de S1Q3T3 paterni, ABG\'de hipoksi+respiratuar alkaloz erken bulgulardır.',
-  ),
-  Question(
-    question:
-        'Preload\'un en iyi göstergelerinden biri aşağıdakilerden hangisidir?',
-    options: [
-      'Kalp hızı',
-      'Santral venöz basınç (CVP)',
-      'Arter basıncı',
-      'Kardiyak output',
-      'Solunum sayısı',
-    ],
-    correctAnswerIndex: 1,
-    explanation:
-        'Preload\'un dolaylı göstergesi olan CVP, sağ kalbe dönen venöz doluşu temsil eder.',
-  ),
-  Question(
-    question:
-        'Sol ventrikül ejeksiyon fraksiyonu %35 olan hastada hangi durum beklenir?',
-    options: [
-      'Normal sistolik fonksiyon',
-      'Sistolik disfonksiyon',
-      'Diyastolik disfonksiyon',
-      'Pulmoner hipertansiyon',
-      'Aort darlığı',
-    ],
-    correctAnswerIndex: 1,
-    explanation: 'EF <40 olan durumlar sistolik disfonksiyonla uyumludur.',
-  ),
-  Question(
-    question: 'Valsalva manevrası sırasında venöz dönüş ne olur?',
-    options: [
-      'Artar',
-      'Değişmez',
-      'Azalır',
-      'Önce artar sonra azalır',
-      'Periferik direnç artar',
-    ],
-    correctAnswerIndex: 2,
-    explanation: 'Torasik basınç artışı nedeniyle venöz dönüş azalır.',
-  ),
-  Question(
-    question: 'Hiperkapni (PaCO₂ ↑) kalp üzerinde nasıl bir etki yapar?',
-    options: [
-      'Vazokonstriksiyon',
-      'Vazodilatasyon ve taşikardi',
-      'Bradikardi ve hipotansiyon',
-      'Kontraktilite artışı',
-      'Otonomik inhibisyon',
-    ],
-    correctAnswerIndex: 1,
-    explanation:
-        'Hiperkapni sempatik sistemi aktive ederek taşikardi ve vazodilatasyona neden olur.',
-  ),
-  Question(
-    question:
-        'Kardiyopulmoner baypas sırasında en sık kullanılan hipotermi tipi nedir?',
-    options: [
-      'Derin hipotermi (<20°C)',
-      'Hafif hipotermi (34–36°C)',
-      'Orta hipotermi (28–32°C)',
-      'Normotermi',
-      'Aşırı hipotermi (<10°C)',
-    ],
-    correctAnswerIndex: 2,
-    explanation:
-        'Orta dereceli hipotermi organ koruması sağlar ve yaygın olarak tercih edilir.',
-  ),
-  Question(
-    question:
-        'Kalp debisinin sürekliliğini sağlayan en önemli parametre hangisidir?',
-    options: [
-      'Aortik darlık',
-      'Sol atriyum basıncı',
-      'Venöz dönüş',
-      'Pulmoner vasküler direnç',
-      'Kardiyak kontraktilite',
-    ],
-    correctAnswerIndex: 2,
-    explanation:
-        'Venöz dönüş kalbin doluşunu etkileyerek CO üzerinde belirleyicidir.',
-  ),
-  Question(
-    question: 'Kardiyojenik şokta en sık kullanılan inotrop ajan hangisidir?',
-    options: [
-      'Fenilefrin',
-      'Noradrenalin',
-      'Dopamin',
-      'Dobutamin',
-      'Adrenalin',
-    ],
-    correctAnswerIndex: 3,
-    explanation:
-        'Dobutamin β1 agonisttir, kardiyak kontraktiliteyi artırarak kardiyojenik şokta etkilidir.',
-  ),
-  Question(
-    question:
-        'Aşağıdakilerden hangisi myokardiyal kontraktiliteyi doğrudan artırır?',
-    options: [
-      'Beta-1 adrenerjik stimülasyon',
-      'Vagus siniri aktivasyonu',
-      'Aortik kan basıncının düşmesi',
-      'Preload artışı',
-      'Postload azalması',
-    ],
-    correctAnswerIndex: 0,
-    explanation:
-        'β1 reseptör stimülasyonu (örneğin dobutamin ile) pozitif inotrop etki ile kontraktiliteyi artırır.',
-  ),
-  Question(
-    question:
-        'Anestezide kullanılan hangi inhalasyon ajanı en fazla hipotansiyona yol açabilir?',
-    options: ['İzofluran', 'Halotan', 'Sevofluran', 'Desfluran', 'N₂O'],
-    correctAnswerIndex: 0,
-    explanation:
-        'İzofluran, sistemik vazodilatasyon yaparak belirgin hipotansiyona neden olabilir.',
-  ),
-  Question(
-    question:
-        'Kalp hızı çok arttığında (örneğin >150/dk) kalp debisinde ne olur?',
-    options: [
-      'Artar',
-      'Değişmez',
-      'Hafif azalır',
-      'Belirgin azalır',
-      'Önce artar sonra azalır',
-    ],
-    correctAnswerIndex: 3,
-    explanation:
-        'Hızlı kalp atışı diyastolik doluşu kısaltır → stroke volume düşer → CO azalır.',
-  ),
-  Question(
-    question: 'Kardiyak output ölçümünde en sık kullanılan yöntem hangisidir?',
-    options: [
-      'Ekokardiyografi',
-      'Swan-Ganz kateteri (termodilüsyon)',
-      'Arteriyel kan basıncı',
-      'Elektrokardiyografi',
-      'Pulse oksimetre',
-    ],
-    correctAnswerIndex: 1,
-    explanation:
-        'Termodilüsyon yöntemiyle CO ölçümü genellikle Swan-Ganz kateteriyle yapılır.',
-  ),
-  Question(
-    question: 'Anestezide baroreseptör refleksi baskılanırsa ne olur?',
-    options: [
-      'Hipertansiyona karşı daha hızlı yanıt',
-      'Hipotansiyona karşı kompansasyon artar',
-      'Kalp hızı düşer',
-      'Taşikardi yanıtı zayıflar',
-      'Refleks bradikardi artar',
-    ],
-    correctAnswerIndex: 3,
-    explanation:
-        'Baroreseptör duyarlılığı azalınca hipotansiyona karşı kompensatuvar taşikardi azalır.',
-  ),
-  Question(
-    question:
-        'Düşük ejeksiyon fraksiyonu olan hastada anestezi sırasında en dikkat edilmesi gereken parametre?',
-    options: [
-      'Kalp hızı',
-      'SpO₂',
-      'Solunum sayısı',
-      'Arter basıncı',
-      'Kontraktilite',
-    ],
-    correctAnswerIndex: 4,
-    explanation:
-        'EF düşük olan hastada kontraktiliteyi korumak, kardiyak output için kritik önemdedir.',
-  ),
-  Question(
-    question:
-        'Kardiyak kontraktiliteyi değerlendirmede en uygun ölçüm hangisidir?',
-    options: [
-      'Kalp hızı',
-      'Santral venöz basınç',
-      'Ejektif fraksiyon (EF)',
-      'Arteriyel tansiyon',
-      'Pulmoner arter basıncı',
-    ],
-    correctAnswerIndex: 2,
-    explanation:
-        'EF, sol ventrikülün sistolik performansını değerlendirmede kullanılır.',
-  ),
-  Question(
-    question:
-        'Hangi ilaç pulmoner vasküler direnci artırarak sağ ventrikül yükünü yükseltebilir?',
-    options: [
-      'Dobutamin',
-      'Adenozin',
-      'Noradrenalin',
-      'Nitrat',
-      'Prostacyclin',
-    ],
-    correctAnswerIndex: 2,
-    explanation:
-        'Noradrenalin sistemik ve pulmoner vazokonstriksiyona yol açarak sağ ventrikül yükünü artırabilir.',
-  ),
-  Question(
-    question: 'Kalbin diyastol süresi ne ile ilişkilidir?',
-    options: [
-      'Kalp hızı',
-      'Preload',
-      'Kontraktilite',
-      'Afterload',
-      'Sol atriyum basıncı',
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'Kalp hızı arttıkça diyastol süresi kısalır.',
-  ),
-  Question(
-    question: 'Kalp hızı aniden düştüğünde stroke volüm ne olur?',
-    options: [
-      'Artar',
-      'Azalır',
-      'Değişmez',
-      'Önce artar sonra düşer',
-      'Sistol süresi uzar',
-    ],
-    correctAnswerIndex: 0,
-    explanation:
-        'Kalp hızı düştüğünde doluş süresi uzar, bu da stroke volume\'ü artırır.',
-  ),
-  Question(
-    question:
-        'Aşağıdakilerden hangisi arteriyel kan basıncını belirleyen ana faktörlerden biridir?',
-    options: [
-      'Venöz kapakçıklar',
-      'Plazma ozmolaritesi',
-      'Kardiyak output',
-      'Solunum hızı',
-      'Santral sinir sistemi',
-    ],
-    correctAnswerIndex: 2,
-    explanation:
-        'Arteriyel kan basıncı = CO x SVR formülüne göre kardiyak output belirleyicidir.',
-  ),
-  Question(
-    question:
-        'Anestezi sırasında kalp debisini artıran en önemli fizyolojik parametre hangisidir?',
-    options: [
-      'Kalp hızı',
-      'Sistemik vasküler direnç',
-      'Sol atriyal basınç',
-      'Solunum sayısı',
-      'Perikardiyal sıvı miktarı',
-    ],
-    correctAnswerIndex: 0,
-    explanation:
-        'Kalp debisi = SV x HR formülüne göre kalp hızı direkt etkilidir.',
-  ),
-  Question(
-    question: 'Anestezi altında en sık görülen bradikardi nedeni nedir?',
-    options: [
-      'Kan kaybı',
-      'Hipoksi',
-      'Vagal uyarı',
-      'Hipervolemi',
-      'Hipoglisemi',
-    ],
-    correctAnswerIndex: 2,
-    explanation:
-        'Trakeal manipülasyon ve periton çekilmesi gibi durumlar vagal uyarıya yol açabilir.',
-  ),
-  Question(
-    question:
-        'Kardiyak output artışı için en uygun intravasküler sıvı tipi hangisidir?',
-    options: [
-      'Dekstroz 5%',
-      'İzotonik salin',
-      'Hipotonik solüsyon',
-      'Sodyum bikarbonat',
-      'Albumin',
-    ],
-    correctAnswerIndex: 4,
-    explanation:
-        'Koloid solüsyonlar (örneğin albumin) intravasküler volümde daha uzun süre kalır.',
-  ),
-  Question(
-    question: 'Kardiyojenik şokta görülen hemodinamik profil hangisidir?',
-    options: [
-      '↓CO, ↑PCWP, ↑SVR',
-      '↑CO, ↓PCWP, ↓SVR',
-      '↑CO, ↑PCWP, ↑SVR',
-      '↓CO, ↓PCWP, ↓SVR',
-      'Normal CO, normal PCWP',
-    ],
-    correctAnswerIndex: 0,
-    explanation:
-        'Kardiyak pompa yetersizliği → düşük debi, yüksek dolum basınçları, kompensatuar vazokonstriksiyon.',
-  ),
-  Question(
-    question: 'Pulmoner hipertansiyon tedavisinde hangisi kullanılmaz?',
-    options: [
-      'Beta blokerler',
-      'Nitrik oksit',
-      'Prostasiklin',
-      'Sildenafil',
-      'Kalsiyum kanal blokerleri',
-    ],
-    correctAnswerIndex: 0,
-    explanation:
-        'Beta blokerler sağ kalp afterloadını artırarak durumu kötüleştirir; diğerleri pulmoner vazodilatördür.',
-  ),
-  Question(
-    question: 'Volüm yüklenmesinin en erken bulgusudur?',
-    options: [
-      'PCWP artışı',
-      'Periferik ödem',
-      'Pulmoner ödem',
-      'Oligüri',
-      'Hepatomegali',
-    ],
-    correctAnswerIndex: 0,
-    explanation:
-        'PCWP >18 mmHg pulmoner konjesyonu gösterir; klinik bulgular daha geç ortaya çıkar.',
-  ),
-  Question(
-    question: 'Mitral stenozda görülen hemodinamik profil hangisidir?',
-    options: [
-      '↑PCWP, ↓CO, pulmoner hipertansiyon',
-      '↓PCWP, ↑CO, sistemik hipotansiyon',
-      'Normal PCWP, normal CO',
-      '↑CVP, ↓PAOP',
-      '↓SVR, ↑PVR',
-    ],
-    correctAnswerIndex: 0,
-    explanation:
-        'Mitral darlık → sol atriyal basınç artışı → pulmoner venöz konjesyon → sağ kalp yüklenmesi.',
-  ),
-  Question(
-    question: 'Aort stenozunda kontrendike olan anestezik yaklaşım hangisidir?',
-    options: [
-      'Hipovolemi ve vazodilatasyon',
-      'Yavaş kalp hızı',
-      'Normovolemi',
-      'Yüksek sistemik vasküler direnç',
-      'Sinüs ritmi',
-    ],
-    correctAnswerIndex: 0,
-    explanation:
-        'AS\'de sabit CO nedeniyle SVR düşüşü ciddi hipotansiyon yapar; volüm ve SVR korunmalıdır.',
-  ),
-  Question(
-    question:
-        'Perioperatif miyokard infarktüsünün en sık görüldüğü dönem hangisidir?',
-    options: [
-      'Postoperatif 3. gün',
-      'İndüksiyon sırasında',
-      'Cerrahi kesi sırasında',
-      'Ekstübasyon sonrası',
-      'Anestezi başlangıcında',
-    ],
-    correctAnswerIndex: 0,
-    explanation:
-        'Stres yanıtın zirve yaptığı dönem; en sık postop 24-72 saatte görülür.',
-  ),
-  Question(
-    question:
-        'Perioperatif statin kullanımının kardiyoprotektif etki mekanizması nedir?',
-    options: [
-      'Plak stabilizasyonu + endotel fonksiyonunu düzeltme',
-      'Kan basıncını düşürme',
-      'Kalp hızını azaltma',
-      'Koagülasyonu inhibe etme',
-      'Bronkodilatasyon',
-    ],
-    correctAnswerIndex: 0,
-    explanation:
-        'Statinler inflamasyonu azaltarak perioperatif kardiyak olayları %30-50 önler.',
-  ),
-  Question(
-    question: 'Sağ kalp kateterizasyonunda ölçülemeyen parametre hangisidir?',
-    options: [
-      'Sol ventrikül end-diyastolik basınç (LVEDP)',
-      'Pulmoner arter basıncı',
-      'Kardiyak output',
-      'Santral venöz basınç',
-      'Pulmoner kapiller kama basıncı',
-    ],
-    correctAnswerIndex: 0,
-    explanation:
-        'PCWP ≈ LVEDP kabul edilir; direkt ölçüm için sol kalp kateterizasyonu gerekir.',
-  ),
-  Question(
-    question:
-        'Perioperatif atrial fibrilasyon tedavisinde ilk seçenek hangisidir?',
-    options: [
-      'Beta blokerler',
-      'Kalsiyum kanal blokerleri',
-      'Digoksin',
-      'Amiodaron',
-      'Elektriksel kardiyoversiyon',
-    ],
-    correctAnswerIndex: 0,
-    explanation:
-        'Hemorodinamik stabil hastalarda ilk seçenek; amiodaron ve CCB alternatiflerdir.',
-  ),
-  Question(
-    question:
-        'Anestezi sırasında pulmoner emboli şüphesinde ilk tanı yöntemi hangisidir?',
-    options: [
-      'EKG ve arteriyel kan gazı',
-      'D-dimer',
-      'BT pulmoner anjiyografi',
-      'Ventilasyon/perfüzyon sintigrafisi',
-      'Ekokardiyografi',
-    ],
-    correctAnswerIndex: 0,
-    explanation:
-        'EKG\'de S1Q3T3 paterni, ABG\'de hipoksi+respiratuar alkaloz erken bulgulardır.',
-  ),
-  Question(
-    question:
-        'Kalbin oksijen tüketimini en fazla etkileyen determinan hangisidir?',
-    options: [
-      'Duvar gerilimi',
-      'Kalp hızı',
-      'Kontraktilite',
-      'Afterload',
-      'Preload',
-    ],
-    correctAnswerIndex: 0,
-    explanation:
-        'Laplace yasasına göre duvar gerilimi (T) = (P × r) / 2h; miyokard O₂ tüketiminin %50\'sinden sorumludur.',
-  ),
-  Question(
-    question: 'Pulmoner vasküler direnci (PVR) artıran faktör hangisidir?',
-    options: [
-      'Hipoksi',
-      'Asetilkolin',
-      'Nitrik oksit',
-      'Prostasiklin',
-      'Alkaloz',
-    ],
-    correctAnswerIndex: 0,
-    explanation:
-        'Hipoksik pulmoner vazokonstriksiyon (Euler-Liljestrand refleksi) PVR\'yi artırır.',
-  ),
-  Question(
-    question: 'Koroner perfüzyon basıncı (CPP) nasıl hesaplanır?',
-    options: [
-      'CPP = Diyastolik AO basıncı - LVEDP',
-      'CPP = Sistolik AO basıncı - CVP',
-      'CPP = MAP - PCWP',
-      'CPP = PAOP - RVEDP',
-      'CPP = DBP - RAP',
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'Koroner dolum diyastolde olur; normal CPP >60 mmHg\'dır.',
-  ),
-  Question(
-    question: '"Preload"ı en iyi temsil eden klinik ölçüm hangisidir?',
-    options: [
-      'Pulmoner kapiller kama basıncı (PCWP)',
-      'Sistemik vasküler direnç',
-      'Ortalama arter basıncı',
-      'Santral venöz basınç',
-      'Kardiyak output',
-    ],
-    correctAnswerIndex: 0,
-    explanation:
-        'PCWP ≈ sol ventrikül end-diyastolik basınç (LVEDP); normal 8-12 mmHg.',
-  ),
-  Question(
-    question: 'Anestezi sırasında kardiyak arrestin en sık nedeni nedir?',
-    options: [
-      'Hipoksi',
-      'Hiperkalemi',
-      'Asidoz',
-      'Hipertansiyon',
-      'Hipertermi',
-    ],
-    correctAnswerIndex: 0,
-    explanation:
-        'Hava yolu komplikasyonlarına bağlı hipoksi, kardiyak arrestin önlenebilir en sık nedenidir.',
-  ),
-  Question(
-    question: 'Aşağıdakilerden hangisi afterload\'un artmasına neden olur?',
-    options: [
-      'Hipotermi',
-      'Hipovolemi',
-      'Aort stenozu',
-      'Sepsis',
-      'Venodilatasyon',
-    ],
-    correctAnswerIndex: 2,
-    explanation:
-        'Aort stenozu, sol ventrikül çıkışını zorlaştırır, böylece afterload\'u artırır.',
-  ),
-  Question(
-    question:
-        'Anestezi altında kompensatuvar bradikardiyi tetikleyebilen durum hangisidir?',
-    options: [
-      'Hipotermi',
-      'Hipoksi',
-      'Yüz siniri uyarısı (örn. okülokardiyak refleks)',
-      'Sempatik aktivasyon',
-      'Anemi',
-    ],
-    correctAnswerIndex: 2,
-    explanation:
-        'Özellikle okülokardiyak refleks gibi vagal refleksler, anestezi sırasında bradikardiye neden olabilir.',
-  ),
-  Question(
-    question:
-        'Pulmoner kapiller wedge basıncı (PCWP) artarsa hangi durumdan şüphelenilmelidir?',
-    options: [
-      'Hipovolemi',
-      'Sol ventrikül yetmezliği',
-      'Sağ kalp yetmezliği',
-      'Periferik vazodilatasyon',
-      'Aort koarktasyonu',
-    ],
-    correctAnswerIndex: 1,
-    explanation:
-        'PCWP, sol atriyal ve dolaylı olarak sol ventrikül diyastolik basıncını gösterir. Sol kalp yetmezliğinde artar.',
-  ),
-  Question(
-    question:
-        'Kardiyopulmoner bypass sırasında hemodilüsyonun başlıca olumsuz etkisi nedir?',
-    options: [
-      'Hiperkoagülasyon',
-      'Hiperkalemi',
-      'Düşük oksijen taşıma kapasitesi',
-      'Hipervolemi',
-      'Artmış viskozite',
-    ],
-    correctAnswerIndex: 2,
-    explanation:
-        'Hemodilüsyon, hemotokriti düşürür → oksijen taşıma kapasitesi azalır → doku hipoksisi gelişebilir.',
   ),
 ];

@@ -1156,4 +1156,64 @@ List<Question> neurophysiologyAnesthesiaQuestions = [
     category: 'Neurophysiology & Anesthesia',
     difficulty: 2
   ),
+  Question(
+    id: 'neurophysiology_anesthesia_078',
+    question: 'Which agent most reduces cerebral metabolic rate during anesthesia?',
+    options: [
+      'Ketamine',
+      'Sevoflurane',
+      'Nitrous oxide',
+      'Thiopental',
+      'Etomidate'
+    ],
+    correctAnswerIndex: 3,
+    explanation: 'Thiopental and propofol strongly suppress cerebral metabolism and lower ICP.',
+    category: 'Neurophysiology & Anesthesia',
+    difficulty: 2
+  ),
+  Question(
+    id: 'neurophysiology_anesthesia_079',
+    question: 'Which of the following is not part of the Cushing triad?',
+    options: [
+      'Hypertension',
+      'Bradycardia',
+      'Irregular respirations',
+      'Fever',
+      'Elevated ICP'
+    ],
+    correctAnswerIndex: 3,
+    explanation: 'The Cushing response consists of hypertension, bradycardia, and irregular respirations; fever is not included.',
+    category: 'Neurophysiology & Anesthesia',
+    difficulty: 2
+  ),
+  Question(
+    id: 'neurophysiology_anesthesia_080',
+    question: 'Which inhalation anesthetic is the safest during neurosurgery?',
+    options: [
+      'Isoflurane',
+      'Halothane',
+      'Sevoflurane',
+      'Nitrous oxide',
+      'Desflurane'
+    ],
+    correctAnswerIndex: 2,
+    explanation: 'Sevoflurane is preferred due to its low blood/gas solubility and relatively modest effect on ICP.',
+    category: 'Neurophysiology & Anesthesia',
+    difficulty: 2
+  ),
+  Question(
+    id: 'neurophysiology_anesthesia_081',
+    question: 'What is cerebral autoregulation?',
+    options: [
+      'Increase in cerebral metabolism',
+      'Decrease in oxygen-carrying capacity',
+      'Maintenance of a constant cerebral blood flow',
+      'Reduction of systemic blood pressure',
+      'Increase in CO₂ levels'
+    ],
+    correctAnswerIndex: 2,
+    explanation: 'Cerebral autoregulation keeps cerebral blood flow constant when MAP is between ~50–150 mmHg.',
+    category: 'Neurophysiology & Anesthesia',
+    difficulty: 2
+  ),
 ];
