@@ -906,7 +906,6 @@ class _HomeContentState extends State<HomeContent> {
         children: [
           // Sol taraf - Avatar ve kullanıcı bilgileri
           Expanded(
-            flex: 2,
             child: Row(
               children: [
                 Container(
@@ -954,13 +953,12 @@ class _HomeContentState extends State<HomeContent> {
               ],
             ),
           ),
+          const SizedBox(width: 8),
           // Sağ taraf - Puan butonu
-          Flexible(
-            child: _buildPointButton(
-              Icons.stars,
-              Colors.amber,
-              _calculateTotalPoints().toString(),
-            ),
+          _buildPointButton(
+            Icons.stars,
+            Colors.amber,
+            _calculateTotalPoints().toString(),
           ),
         ],
       ),
@@ -993,40 +991,32 @@ class _HomeContentState extends State<HomeContent> {
 
   Widget _buildPointButton(IconData icon, Color color, String points) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
       decoration: BoxDecoration(
         color: color.withOpacity(0.2),
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(12),
         border: Border.all(color: color.withOpacity(0.3), width: 1),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, color: color, size: 14),
-          const SizedBox(width: 2),
-          Flexible(
-            child: Text(
-              points,
-              style: TextStyle(
-                color: color, 
-                fontWeight: FontWeight.bold,
-                fontSize: 11,
-              ),
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
+          Icon(icon, color: color, size: 16),
+          const SizedBox(width: 4),
+          Text(
+            points,
+            style: TextStyle(
+              color: color, 
+              fontWeight: FontWeight.bold,
+              fontSize: 12,
             ),
           ),
-          const SizedBox(width: 1),
-          Flexible(
-            child: Text(
-              AppLocalizations.of(context)!.points,
-              style: TextStyle(
-                color: color, 
-                fontWeight: FontWeight.bold,
-                fontSize: 10,
-              ),
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
+          const SizedBox(width: 2),
+          Text(
+            AppLocalizations.of(context)!.points,
+            style: TextStyle(
+              color: color, 
+              fontWeight: FontWeight.bold,
+              fontSize: 11,
             ),
           ),
         ],

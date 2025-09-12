@@ -19,16 +19,12 @@ class NotificationService {
     final now = tz.TZDateTime.now(turkeyTime);
     print('Şu anki Türkiye saati: $now');
     
-    // Test bildirimi: Bugün 20:45
-    final testTime = tz.TZDateTime(turkeyTime, now.year, now.month, now.day, 20, 45);
-    print('🧪 Test bildirimi bugün 20:45 için planlanıyor: $testTime');
-    
     // Normal bildirim: 19:00
     final normalTime = tz.TZDateTime(turkeyTime, now.year, now.month, now.day, 19, 0);
     print('📅 Normal bildirim saati: $normalTime');
     
-    // Eğer belirlenen saatler geçtiyse, bir sonraki güne planla
-    final scheduledTimes = [testTime, normalTime].map((time) {
+    // Eğer belirlenen saat geçtiyse, bir sonraki güne planla
+    final scheduledTimes = [normalTime].map((time) {
       if (time.isBefore(now)) {
         final nextDay = time.add(const Duration(days: 1));
         print('Saat geçmiş, yarına planlanıyor: $nextDay');
@@ -161,17 +157,10 @@ class NotificationService {
     // Günlük bildirim planla
     for (int i = 0; i < scheduledTimes.length; i++) {
       final scheduledTime = scheduledTimes[i];
-      final notificationId = i; // 0: Test, 1: Normal
+      final notificationId = i;
       
-      // Test bildirimi için özel mesaj
-      String title, body;
-      if (i == 0) {
-        title = '🧪 Test Bildirimi!';
-        body = 'Bu bir test bildirimidir. Anestezi quiz uygulaması çalışıyor!';
-      } else {
-        title = 'Günlük Quiz Zamanı! 📚';
-        body = 'Bugünkü anestezi sorularını çözmeyi unutmayın!';
-      }
+      const title = 'Günlük Quiz Zamanı! 📚';
+      const body = 'Bugünkü anestezi sorularını çözmeyi unutmayın!';
       
       await _notifications.zonedSchedule(
         notificationId,
@@ -221,10 +210,4 @@ class NotificationService {
     }
   }
   
-  // Test bildirimi için yeniden planlama
-  Future<void> rescheduleTestNotification() async {
-    print('🧪 Test bildirimi yeniden planlanıyor...');
-    await scheduleDailyNotification();
-    print('✅ Test bildirimi yeniden planlandı');
-  }
 } 

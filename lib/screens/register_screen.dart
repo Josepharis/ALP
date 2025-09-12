@@ -98,11 +98,19 @@ class _RegisterScreenState extends State<RegisterScreen>
         );
 
         if (user != null && mounted) {
-          // Varsayılan kullanıcı ayarlarını oluştur
-          await _userService.createDefaultUserSettings();
+          try {
+            // Varsayılan kullanıcı ayarlarını oluştur
+            await _userService.createDefaultUserSettings();
+            print('✅ Varsayılan ayarlar oluşturuldu');
+          } catch (e) {
+            print('⚠️ Varsayılan ayarlar oluşturulamadı: $e');
+            // Ayarlar oluşturulamasa bile devam et
+          }
 
           // Ana sayfaya yönlendir
-          Navigator.of(context).pushReplacementNamed('/home');
+          if (mounted) {
+            Navigator.of(context).pushReplacementNamed('/home');
+          }
         }
       } catch (e) {
         setState(() {
@@ -523,22 +531,11 @@ class _RegisterScreenState extends State<RegisterScreen>
                                           if (value.length > 128) {
                                             return AppLocalizations.of(context)!.passwordTooLong;
                                           }
-                                          // Güçlü şifre kontrolleri
-                                          bool hasUppercase = value.contains(
-                                            RegExp(r'[A-Z]'),
-                                          );
-                                          bool hasLowercase = value.contains(
-                                            RegExp(r'[a-z]'),
-                                          );
-                                          bool hasDigits = value.contains(
-                                            RegExp(r'[0-9]'),
-                                          );
-                                          bool hasSpecialCharacters = value
-                                              .contains(
-                                                RegExp(
-                                                  r'[!@#$%^&*(),.?":{}|<>]',
-                                                ),
-                                              );
+                                          // Güçlü şifre kontrolleri (şimdilik kullanılmıyor)
+                                          // bool hasUppercase = value.contains(RegExp(r'[A-Z]'));
+                                          // bool hasLowercase = value.contains(RegExp(r'[a-z]'));
+                                          // bool hasDigits = value.contains(RegExp(r'[0-9]'));
+                                          // bool hasSpecialCharacters = value.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'));
 
                                           if (value.length >= 6 &&
                                               value.length < 8) {

@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import '../models/question.dart';
 
 class AdminService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -287,6 +286,123 @@ class AdminService {
         'legacyQuestions': 0,
         'questionsByCategory': <String, int>{},
         'organizedCategories': 0,
+      };
+    }
+  }
+
+  // Dil bazlı quiz istatistiklerini getir
+  Future<Map<String, dynamic>> getLanguageBasedQuizStatistics() async {
+    try {
+      // Tüm kategorileri getir (isActive filtresi olmadan)
+      final allCategoriesSnapshot = await _firestore
+          .collection('quizCategories')
+          .get();
+
+      int turkishQuestions = 0;
+      int englishQuestions = 0;
+      Map<String, int> turkishQuestionsByCategory = {};
+      Map<String, int> englishQuestionsByCategory = {};
+
+      print('🔍 Processing ${allCategoriesSnapshot.docs.length} categories...');
+
+      // Kategorileri işle - language field'ına göre dil belirle
+      for (final categoryDoc in allCategoriesSnapshot.docs) {
+        final data = categoryDoc.data();
+        final displayName = data['displayName'] as String;
+        final collectionName = data['collectionName'] as String? ?? '';
+        final questionCount = data['questionCount'] as int? ?? 0;
+        final language = data['language'] as String? ?? '';
+        
+        // Eğer language field'ı yoksa, collection name ve display name'e göre belirle
+        String determinedLanguage = language;
+        if (language.isEmpty) {
+          if (collectionName.startsWith('english_') || 
+              displayName.toLowerCase().contains('english') ||
+              displayName.toLowerCase().contains('ingilizce') ||
+              displayName.toLowerCase().contains('(english)')) {
+            determinedLanguage = 'english';
+          } else {
+            determinedLanguage = 'turkish';
+          }
+          
+          print('📝 Updating category "$displayName" with language: $determinedLanguage');
+          
+          // Language field'ını güncelle
+          await categoryDoc.reference.update({'language': determinedLanguage});
+        }
+        
+        // Belirlenen dile göre kategorilere ekle
+        if (determinedLanguage == 'english') {
+          englishQuestionsByCategory[displayName] = questionCount;
+          englishQuestions += questionCount;
+        } else {
+          turkishQuestionsByCategory[displayName] = questionCount;
+          turkishQuestions += questionCount;
+        }
+      }
+
+      print('Dil Bazlı Quiz İstatistikleri:');
+      print('- Türkçe sorular: $turkishQuestions');
+      print('- İngilizce sorular: $englishQuestions');
+      print('- Türkçe kategoriler: ${turkishQuestionsByCategory.length}');
+      print('- İngilizce kategoriler: ${englishQuestionsByCategory.length}');
+      print('- Türkçe kategoriler: ${turkishQuestionsByCategory.keys.toList()}');
+      print('- İngilizce kategoriler: ${englishQuestionsByCategory.keys.toList()}');
+
+      return {
+        'turkishQuestions': turkishQuestions,
+        'englishQuestions': englishQuestions,
+        'turkishQuestionsByCategory': turkishQuestionsByCategory,
+        'englishQuestionsByCategory': englishQuestionsByCategory,
+        'turkishCategories': turkishQuestionsByCategory.length,
+        'englishCategories': englishQuestionsByCategory.length,
+      };
+    } catch (e) {
+      print('Error getting language-based quiz statistics: $e');
+      return {
+        'turkishQuestions': 0,
+        'englishQuestions': 0,
+        'turkishQuestionsByCategory': <String, int>{},
+        'englishQuestionsByCategory': <String, int>{},
+        'turkishCategories': 0,
+        'englishCategories': 0,
+      };
+    }
+  }
+
+  // Belirli bir quiz kategorisinin detaylarını getir
+  Future<Map<String, dynamic>> getQuizCategoryDetails(String categoryName, String language) async {
+    try {
+      final categorySnapshot = await _firestore
+          .collection('quizCategories')
+          .where('displayName', isEqualTo: categoryName)
+          .where('language', isEqualTo: language)
+          .get();
+
+      if (categorySnapshot.docs.isEmpty) {
+        return {
+          'questionCount': 0,
+          'description': '',
+          'difficulty': '',
+          'lastUpdated': null,
+        };
+      }
+
+      final data = categorySnapshot.docs.first.data();
+      return {
+        'questionCount': data['questionCount'] ?? 0,
+        'description': data['description'] ?? '',
+        'difficulty': data['difficulty'] ?? 'medium',
+        'lastUpdated': data['lastUpdated'],
+        'collectionName': data['collectionName'] ?? '',
+      };
+    } catch (e) {
+      print('Error getting quiz category details: $e');
+      return {
+        'questionCount': 0,
+        'description': '',
+        'difficulty': '',
+        'lastUpdated': null,
       };
     }
   }

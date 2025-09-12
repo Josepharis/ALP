@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
+import 'dart:math' as math;
 import '../l10n/app_localizations.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import '../services/auth_service.dart';
 import '../services/admin_service.dart';
-import '../services/data_migration_service.dart';
 import '../services/real_data_migration_service.dart';
 import '../services/organized_data_service.dart';
-import '../theme/app_theme.dart';
+import '../services/multilingual_question_service.dart';
 import 'add_question_screen.dart';
 import 'edit_question_screen.dart';
 
@@ -22,7 +21,6 @@ class _AdminScreenState extends State<AdminScreen>
   late TabController _tabController;
   final AuthService _authService = AuthService();
   final AdminService _adminService = AdminService();
-  final DataMigrationService _migrationService = DataMigrationService();
   final RealDataMigrationService _realMigrationService =
       RealDataMigrationService();
   final OrganizedDataService _organizedDataService = OrganizedDataService();
@@ -30,12 +28,14 @@ class _AdminScreenState extends State<AdminScreen>
   int _selectedNavIndex = 0;
   Map<String, dynamic> _userStats = {};
   Map<String, dynamic> _quizStats = {};
+  Map<String, dynamic> _languageStats = {};
   List<String> _categories = [];
   List<Map<String, dynamic>> _organizedCategories = [];
   String _selectedCategory = '';
   String _selectedCollectionName = '';
   List<Map<String, dynamic>> _questions = [];
   bool _isLoading = true;
+  String _selectedLanguage = 'turkish'; // Questions yönetimi için dil seçimi
 
   @override
   void initState() {
@@ -56,6 +56,7 @@ class _AdminScreenState extends State<AdminScreen>
     await Future.wait([
       _loadUserStatistics(),
       _loadQuizStatistics(),
+      _loadLanguageStatistics(),
       _loadCategories(),
     ]);
 
@@ -65,6 +66,11 @@ class _AdminScreenState extends State<AdminScreen>
   Future<void> _loadUserStatistics() async {
     final stats = await _adminService.getUserStatistics();
     setState(() => _userStats = stats);
+  }
+
+  Future<void> _loadLanguageStatistics() async {
+    final stats = await _adminService.getLanguageBasedQuizStatistics();
+    setState(() => _languageStats = stats);
   }
 
   Future<void> _loadQuizStatistics() async {
@@ -91,9 +97,9 @@ class _AdminScreenState extends State<AdminScreen>
 
   Future<void> _loadCategories() async {
     try {
-      // Organize veri yapısından kategorileri yükle
+      // Seçilen dile göre kategorileri yükle
       final organizedCategories =
-          await _organizedDataService.getOrganizedCategories();
+          await _organizedDataService.getOrganizedCategoriesByLanguage(_selectedLanguage);
 
       // Eğer organize kategoriler varsa onları kullan
       if (organizedCategories.isNotEmpty) {
@@ -441,6 +447,10 @@ class _AdminScreenState extends State<AdminScreen>
           const SizedBox(height: 20),
           _buildStatsGrid(),
           const SizedBox(height: 30),
+          _buildLanguageStatsGrid(),
+          const SizedBox(height: 30),
+          _buildQuizCategoriesGrid(),
+          const SizedBox(height: 30),
           _buildRecentActivity(),
         ],
       ),
@@ -566,6 +576,522 @@ class _AdminScreenState extends State<AdminScreen>
     );
   }
 
+  Widget _buildLanguageStatsGrid() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          'Dil Bazlı Quiz İstatistikleri',
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+        ),
+        const SizedBox(height: 16),
+        GridView.builder(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            crossAxisSpacing: 16,
+            mainAxisSpacing: 16,
+            childAspectRatio: 1.1,
+          ),
+          itemCount: 2,
+          itemBuilder: (context, index) {
+            final isTurkish = index == 0;
+            final language = isTurkish ? 'Türkçe' : 'İngilizce';
+            final questionCount = isTurkish 
+                ? _languageStats['turkishQuestions'] ?? 0
+                : _languageStats['englishQuestions'] ?? 0;
+            final categoryCount = isTurkish
+                ? _languageStats['turkishCategories'] ?? 0
+                : _languageStats['englishCategories'] ?? 0;
+            final color = isTurkish ? Colors.red : Colors.blue;
+            final icon = isTurkish ? Icons.flag : Icons.language;
+
+            return Container(
+              padding: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(20),
+                border: Border.all(color: Colors.white.withOpacity(0.2)),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    blurRadius: 10,
+                    offset: const Offset(0, 5),
+                  ),
+                ],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: color.withOpacity(0.2),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Icon(
+                          icon,
+                          color: color,
+                          size: 20,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        '$questionCount',
+                        style: const TextStyle(
+                          fontSize: 28,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                      Text(
+                        language,
+                        style: const TextStyle(
+                          fontSize: 14,
+                          color: Colors.white70,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        '$categoryCount kategori',
+                        style: const TextStyle(
+                          fontSize: 12,
+                          color: Colors.white60,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
+      ],
+    );
+  }
+
+  Widget _buildQuizCategoriesGrid() {
+    final turkishCategories = _languageStats['turkishQuestionsByCategory'] as Map<String, int>? ?? {};
+    final englishCategories = _languageStats['englishQuestionsByCategory'] as Map<String, int>? ?? {};
+    
+    // Multilingual sırasına göre kategorileri sırala
+    final turkishOrderedCategories = _getOrderedTurkishCategories(turkishCategories);
+    final englishOrderedCategories = _getOrderedEnglishCategories(englishCategories);
+    
+    final maxLength = math.max(turkishOrderedCategories.length, englishOrderedCategories.length);
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          'Quiz Kategorileri Detayı',
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+        ),
+        const SizedBox(height: 16),
+        ListView.builder(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          itemCount: maxLength,
+          itemBuilder: (context, index) {
+            final turkishCategory = index < turkishOrderedCategories.length 
+                ? turkishOrderedCategories[index] 
+                : null;
+            final englishCategory = index < englishOrderedCategories.length 
+                ? englishOrderedCategories[index] 
+                : null;
+            
+            return Padding(
+              padding: const EdgeInsets.only(bottom: 12),
+              child: Row(
+                children: [
+                  // Sol taraf - Türkçe
+                  Expanded(
+                    child: turkishCategory != null
+                        ? _buildCategoryCard(
+                            turkishCategory['name']!,
+                            turkishCategory['count']!,
+                            'TR',
+                            Colors.blue,
+                            number: index + 1,
+                          )
+                        : const SizedBox(height: 80),
+                  ),
+                  const SizedBox(width: 12),
+                  // Sağ taraf - İngilizce
+                  Expanded(
+                    child: englishCategory != null
+                        ? _buildCategoryCard(
+                            englishCategory['name']!,
+                            englishCategory['count']!,
+                            'EN',
+                            Colors.green,
+                            number: index + 1,
+                          )
+                        : const SizedBox(height: 80),
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
+      ],
+    );
+  }
+
+  // Türkçe kategorileri multilingual sırasına göre sırala
+  List<Map<String, dynamic>> _getOrderedTurkishCategories(Map<String, int> categories) {
+    // MultilingualQuestionService'ten Türkçe kategorileri al
+    final turkishCategories = MultilingualQuestionService.getQuizCategories('turkish');
+    
+    final orderedCategories = <Map<String, dynamic>>[];
+    for (final category in turkishCategories) {
+      final name = category['title'] as String;
+      if (categories.containsKey(name)) {
+        orderedCategories.add({
+          'name': name,
+          'count': categories[name]!,
+        });
+      }
+    }
+    return orderedCategories;
+  }
+
+  // İngilizce kategorileri multilingual sırasına göre sırala
+  List<Map<String, dynamic>> _getOrderedEnglishCategories(Map<String, int> categories) {
+    // MultilingualQuestionService'ten İngilizce kategorileri al (63 kategori)
+    final englishCategories = MultilingualQuestionService.getQuizCategories('en');
+    
+    print('🔍 Debug: Found ${englishCategories.length} English categories in MultilingualQuestionService');
+    
+    final orderedCategories = <Map<String, dynamic>>[];
+    
+    // Sadece MultilingualQuestionService'teki kategorileri kullan (63 kategori)
+    for (final category in englishCategories) {
+      final name = category['title'] as String;
+      String? firebaseKey;
+      
+      // Firebase'deki tüm olası formatları kontrol et - daha kapsamlı eşleştirme
+      final possibleKeys = [
+        '$name (English)',  // En yaygın format
+        '${name.replaceAll(' & ', ' and ')} (English)',
+        '${name.replaceAll(' and ', ' & ')} (English)',
+        '${name.replaceAll(' - ', ' & ')} (English)',
+        '${name.replaceAll(' & ', ' - ')} (English)',
+        '${name.replaceAll(', ', ' & ')} (English)',
+        '${name.replaceAll(' & ', ', ')} (English)',
+        name,  // Direkt isim
+        name.replaceAll(' & ', ' and '),
+        name.replaceAll(' and ', ' & '),
+        name.replaceAll(' - ', ' & '),
+        name.replaceAll(' & ', ' - '),
+        name.replaceAll(', ', ' & '),
+        name.replaceAll(' & ', ', '),
+        // Ek varyasyonlar
+        '${name.replaceAll(' & ', ' and ')}',
+        '${name.replaceAll(' and ', ' & ')}',
+        '${name.replaceAll(' - ', ' & ')}',
+        '${name.replaceAll(' & ', ' - ')}',
+        '${name.replaceAll(', ', ' & ')}',
+        '${name.replaceAll(' & ', ', ')}',
+      ];
+      
+      // Ayrıca kısmi eşleştirme de dene - daha akıllı eşleştirme
+      final partialMatches = <String>[];
+      final nameWords = name.toLowerCase().split(' ').where((w) => w.length > 2).toList();
+      
+      for (final key in categories.keys) {
+        final keyLower = key.toLowerCase();
+        final keyWords = keyLower.split(' ').where((w) => w.length > 2).toList();
+        
+        // En az 2 kelime eşleşiyorsa kısmi eşleştirme olarak kabul et
+        int matchCount = 0;
+        for (final nameWord in nameWords) {
+          for (final keyWord in keyWords) {
+            if (nameWord == keyWord || 
+                nameWord.contains(keyWord) || 
+                keyWord.contains(nameWord)) {
+              matchCount++;
+              break;
+            }
+          }
+        }
+        
+        if (matchCount >= 2) {
+          partialMatches.add(key);
+        }
+      }
+      
+      // Önce tam eşleştirme dene
+      for (final key in possibleKeys) {
+        if (categories.containsKey(key)) {
+          firebaseKey = key;
+          break;
+        }
+      }
+      
+      // Tam eşleştirme yoksa kısmi eşleştirme dene
+      if (firebaseKey == null && partialMatches.isNotEmpty) {
+        // En uzun eşleşmeyi seç
+        firebaseKey = partialMatches.reduce((a, b) => a.length > b.length ? a : b);
+      }
+      
+      if (firebaseKey != null) {
+        orderedCategories.add({
+          'name': name, // Temiz isim
+          'count': categories[firebaseKey]!,
+        });
+        print('✅ Matched: $name -> $firebaseKey');
+      } else {
+        // Eğer Firebase'de eşleşme yoksa, 0 soru ile göster
+        orderedCategories.add({
+          'name': name,
+          'count': 0,
+        });
+        print('⚠️ No match for: $name (showing 0 questions)');
+        // Debug için mevcut Firebase anahtarlarını göster
+        print('   Available Firebase keys: ${categories.keys.where((k) => k.toLowerCase().contains(name.toLowerCase().split(' ')[0])).take(3).join(', ')}');
+      }
+    }
+    
+    print('🔍 Debug: Final ordered English categories: ${orderedCategories.length} (should be 63)');
+    return orderedCategories;
+  }
+
+  // Kategori kartı oluştur
+  Widget _buildCategoryCard(String name, int count, String language, Color color, {int? number}) {
+    return Container(
+        height: 120, // Yüksekliği daha da artırdık
+        decoration: BoxDecoration(
+          color: Colors.white.withOpacity(0.1),
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(color: color.withOpacity(0.3)),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(8),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  // Numara
+                  if (number != null) ...[
+                    Container(
+                      width: 24,
+                      height: 24,
+                      decoration: BoxDecoration(
+                        color: color.withOpacity(0.8),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Center(
+                        child: Text(
+                          '$number',
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 6),
+                  ],
+                  // Dil etiketi
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                    decoration: BoxDecoration(
+                      color: color,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Text(
+                      language,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 10,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  const Spacer(),
+                  Text(
+                    '$count soru',
+                    style: const TextStyle(
+                      color: Colors.white70,
+                      fontSize: 10,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 4),
+              Expanded(
+                child: Text(
+                  name,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 11,
+                    fontWeight: FontWeight.w500,
+                    height: 1.2,
+                  ),
+                  maxLines: 4,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ],
+          ),
+        ),
+    );
+  }
+
+  void _showQuizCategoryDetails(String categoryName, int turkishCount, int englishCount) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: Colors.indigo.shade900,
+        title: Text(
+          categoryName,
+          style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Soru Dağılımı:',
+              style: TextStyle(
+                color: Colors.white.withOpacity(0.8),
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            const SizedBox(height: 12),
+            Row(
+              children: [
+                Expanded(
+                  child: Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: Colors.red.withOpacity(0.2),
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(color: Colors.red.withOpacity(0.3)),
+                    ),
+                    child: Column(
+                      children: [
+                        const Icon(Icons.flag, color: Colors.red, size: 24),
+                        const SizedBox(height: 8),
+                        Text(
+                          'Türkçe',
+                          style: const TextStyle(
+                            color: Colors.red,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14,
+                          ),
+                        ),
+                        Text(
+                          '$turkishCount soru',
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: Colors.blue.withOpacity(0.2),
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(color: Colors.blue.withOpacity(0.3)),
+                    ),
+                    child: Column(
+                      children: [
+                        const Icon(Icons.language, color: Colors.blue, size: 24),
+                        const SizedBox(height: 8),
+                        Text(
+                          'İngilizce',
+                          style: const TextStyle(
+                            color: Colors.blue,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14,
+                          ),
+                        ),
+                        Text(
+                          '$englishCount soru',
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 16),
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    'Toplam:',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  Text(
+                    '${turkishCount + englishCount} soru',
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text(
+              'Kapat',
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget _buildRecentActivity() {
     return Container(
       width: double.infinity,
@@ -641,7 +1167,59 @@ class _AdminScreenState extends State<AdminScreen>
                 ),
               ),
             ),
-            const SizedBox(width: 12),
+            const SizedBox(width: 8),
+            Expanded(
+              child: ElevatedButton.icon(
+                onPressed: _showDeleteAllQuestionsDialog,
+                icon: const Icon(Icons.delete_forever, size: 20),
+                label: const Text('Tüm Soruları Sil'),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.red.shade600,
+                  foregroundColor: Colors.white,
+                  padding: const EdgeInsets.symmetric(vertical: 12),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 16),
+        Row(
+          children: [
+            Expanded(
+              child: ElevatedButton.icon(
+                onPressed: _showTurkishMigrationDialog,
+                icon: const Icon(Icons.flag, size: 20),
+                label: const Text('Türkçe Soruları Yükle'),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.blue.shade600,
+                  foregroundColor: Colors.white,
+                  padding: const EdgeInsets.symmetric(vertical: 12),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(width: 8),
+            Expanded(
+              child: ElevatedButton.icon(
+                onPressed: _showEnglishMigrationDialog,
+                icon: const Icon(Icons.flag, size: 20),
+                label: const Text('English Questions Load'),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.green.shade600,
+                  foregroundColor: Colors.white,
+                  padding: const EdgeInsets.symmetric(vertical: 12),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(width: 8),
             Expanded(
               child: ElevatedButton.icon(
                 onPressed: () {
@@ -667,10 +1245,149 @@ class _AdminScreenState extends State<AdminScreen>
           ],
         ),
         const SizedBox(height: 20),
+        _buildLanguageSelector(),
+        const SizedBox(height: 16),
         _buildCategorySelector(),
         const SizedBox(height: 20),
         Expanded(child: _buildQuestionsList()),
       ],
+    );
+  }
+
+  Widget _buildLanguageSelector() {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.white.withOpacity(0.1),
+        borderRadius: BorderRadius.circular(15),
+        border: Border.all(color: Colors.white.withOpacity(0.2)),
+      ),
+      child: Row(
+        children: [
+          const Icon(Icons.language, color: Colors.white, size: 20),
+          const SizedBox(width: 12),
+          const Text(
+            'Dil Seçimi:',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          const SizedBox(width: 16),
+          Expanded(
+            child: Row(
+              children: [
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        _selectedLanguage = 'turkish';
+                      });
+                      _loadCategories();
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                      decoration: BoxDecoration(
+                        color: _selectedLanguage == 'turkish' 
+                            ? Colors.red.withOpacity(0.3)
+                            : Colors.transparent,
+                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(
+                          color: _selectedLanguage == 'turkish' 
+                              ? Colors.red
+                              : Colors.white.withOpacity(0.3),
+                        ),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.flag,
+                            color: _selectedLanguage == 'turkish' 
+                                ? Colors.red
+                                : Colors.white.withOpacity(0.7),
+                            size: 14,
+                          ),
+                          const SizedBox(width: 6),
+                          Flexible(
+                            child: Text(
+                              'Türkçe',
+                              style: TextStyle(
+                                color: _selectedLanguage == 'turkish' 
+                                    ? Colors.red
+                                    : Colors.white.withOpacity(0.7),
+                                fontWeight: _selectedLanguage == 'turkish' 
+                                    ? FontWeight.bold
+                                    : FontWeight.normal,
+                                fontSize: 12,
+                              ),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        _selectedLanguage = 'english';
+                      });
+                      _loadCategories();
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                      decoration: BoxDecoration(
+                        color: _selectedLanguage == 'english' 
+                            ? Colors.blue.withOpacity(0.3)
+                            : Colors.transparent,
+                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(
+                          color: _selectedLanguage == 'english' 
+                              ? Colors.blue
+                              : Colors.white.withOpacity(0.3),
+                        ),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.language,
+                            color: _selectedLanguage == 'english' 
+                                ? Colors.blue
+                                : Colors.white.withOpacity(0.7),
+                            size: 14,
+                          ),
+                          const SizedBox(width: 6),
+                          Flexible(
+                            child: Text(
+                              'İngilizce',
+                              style: TextStyle(
+                                color: _selectedLanguage == 'english' 
+                                    ? Colors.blue
+                                    : Colors.white.withOpacity(0.7),
+                                fontWeight: _selectedLanguage == 'english' 
+                                    ? FontWeight.bold
+                                    : FontWeight.normal,
+                                fontSize: 12,
+                              ),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -1280,6 +1997,558 @@ class _AdminScreenState extends State<AdminScreen>
         false;
   }
 
+  Future<void> _showDeleteAllQuestionsDialog() async {
+    if (!mounted) return;
+
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: Colors.indigo.shade900,
+        title: Row(
+          children: [
+            Icon(Icons.warning, color: Colors.red, size: 24),
+            const SizedBox(width: 8),
+            const Text(
+              'Tüm Soruları Sil',
+              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+            ),
+          ],
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: Colors.red.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: Colors.red.withOpacity(0.3)),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Icon(Icons.warning, color: Colors.red, size: 16),
+                      const SizedBox(width: 8),
+                      const Text(
+                        'DİKKAT!',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.red,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 8),
+                  Text('• Tüm ${_quizStats['totalQuestions'] ?? 0} soru SİLİNECEK'),
+                  Text('• Tüm ${_quizStats['totalCategories'] ?? 0} kategori silinecek'),
+                  const Text('• Bu işlem GERİ ALINAMAZ'),
+                  const Text('• Sadece Firebase\'deki veriler silinir'),
+                ],
+              ),
+            ),
+            const SizedBox(height: 16),
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: Colors.blue.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Icon(Icons.info, color: Colors.blue, size: 16),
+                      const SizedBox(width: 8),
+                      const Text(
+                        'Hızlı İşlem',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.blue,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 8),
+                  const Text('• Koleksiyonları toplu silme'),
+                  const Text('• 2-3 saniyede tamamlanır'),
+                  const Text('• Yerel dosyalar etkilenmez'),
+                ],
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text(
+              'İptal',
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.pop(context);
+              _performDeleteAllQuestions();
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.red,
+              foregroundColor: Colors.white,
+            ),
+            child: const Text('Tümünü Sil'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future<void> _performDeleteAllQuestions() async {
+    // Show loading dialog
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => const AlertDialog(
+        backgroundColor: Colors.indigo,
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            CircularProgressIndicator(color: Colors.red),
+            SizedBox(height: 16),
+            Text(
+              'Tüm Sorular Siliniyor',
+              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 8),
+            Text(
+              'Lütfen bekleyin...',
+              style: TextStyle(color: Colors.white70),
+            ),
+          ],
+        ),
+      ),
+    );
+
+    try {
+      // Tüm verileri sil
+      await _organizedDataService.clearAllData();
+      
+      if (!mounted) return;
+      Navigator.pop(context); // Close loading dialog
+      
+      // Show success dialog
+      _showDeleteAllQuestionsSuccessDialog();
+      
+    } catch (e) {
+      if (!mounted) return;
+      Navigator.pop(context); // Close loading dialog
+      
+      // Show error dialog
+      _showDeleteAllQuestionsErrorDialog(e.toString());
+    }
+  }
+
+  void _showDeleteAllQuestionsSuccessDialog() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: Colors.indigo.shade900,
+        title: Row(
+          children: [
+            Icon(Icons.check_circle, color: Colors.green, size: 24),
+            const SizedBox(width: 8),
+            const Text(
+              'Başarılı!',
+              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+            ),
+          ],
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Text(
+              'Tüm sorular başarıyla silindi!',
+              style: TextStyle(color: Colors.white, fontSize: 16),
+            ),
+            const SizedBox(height: 8),
+            const Text(
+              'Artık Firebase tamamen temiz.',
+              style: TextStyle(color: Colors.green, fontWeight: FontWeight.w500),
+            ),
+          ],
+        ),
+        actions: [
+          ElevatedButton(
+            onPressed: () {
+              Navigator.pop(context);
+              _loadInitialData(); // Refresh the dashboard
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.green,
+              foregroundColor: Colors.white,
+            ),
+            child: const Text('Tamam'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _showDeleteAllQuestionsErrorDialog(String error) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: Colors.indigo.shade900,
+        title: Row(
+          children: [
+            Icon(Icons.error, color: Colors.red, size: 24),
+            const SizedBox(width: 8),
+            const Text(
+              'Hata!',
+              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+            ),
+          ],
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Text(
+              'Soruları silerken hata oluştu:',
+              style: TextStyle(color: Colors.white),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              error,
+              style: const TextStyle(color: Colors.red, fontSize: 12),
+            ),
+          ],
+        ),
+        actions: [
+          ElevatedButton(
+            onPressed: () => Navigator.pop(context),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.red,
+              foregroundColor: Colors.white,
+            ),
+            child: const Text('Tamam'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // Türkçe migration dialog
+  Future<void> _showTurkishMigrationDialog() async {
+    if (!mounted) return;
+
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: Colors.indigo.shade900,
+        title: Row(
+          children: [
+            Icon(Icons.flag, color: Colors.blue, size: 24),
+            const SizedBox(width: 8),
+            const Text(
+              'Türkçe Soruları Yükle',
+              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+            ),
+          ],
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Text(
+              'Türkçe soruları Firebase\'e yüklemek istediğinizden emin misiniz?',
+              style: TextStyle(color: Colors.white, fontSize: 16),
+            ),
+            const SizedBox(height: 16),
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: Colors.blue.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: const Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('• Ana data klasöründeki tüm Türkçe sorular yüklenecek'),
+                  Text('• Mevcut sorular korunacak'),
+                  Text('• İşlem 2-3 dakika sürebilir'),
+                ],
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text(
+              'İptal',
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.pop(context);
+              _performTurkishMigration();
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.blue,
+              foregroundColor: Colors.white,
+            ),
+            child: const Text('Yükle'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // İngilizce migration dialog
+  Future<void> _showEnglishMigrationDialog() async {
+    if (!mounted) return;
+
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: Colors.indigo.shade900,
+        title: Row(
+          children: [
+            Icon(Icons.flag, color: Colors.green, size: 24),
+            const SizedBox(width: 8),
+            const Text(
+              'English Questions Load',
+              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+            ),
+          ],
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Text(
+              'English questions from the english folder will be loaded to Firebase. Are you sure?',
+              style: TextStyle(color: Colors.white, fontSize: 16),
+            ),
+            const SizedBox(height: 16),
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: Colors.green.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: const Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('• All English questions from english/ folder will be loaded'),
+                  Text('• Existing questions will be preserved'),
+                  Text('• Process may take 2-3 minutes'),
+                ],
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text(
+              'Cancel',
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.pop(context);
+              _performEnglishMigration();
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.green,
+              foregroundColor: Colors.white,
+            ),
+            child: const Text('Load'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // Türkçe migration işlemi
+  Future<void> _performTurkishMigration() async {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => const AlertDialog(
+        backgroundColor: Colors.indigo,
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            CircularProgressIndicator(color: Colors.blue),
+            SizedBox(height: 16),
+            Text(
+              'Türkçe Sorular Yükleniyor',
+              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 8),
+            Text(
+              'Lütfen bekleyin...',
+              style: TextStyle(color: Colors.white70),
+            ),
+          ],
+        ),
+      ),
+    );
+
+    try {
+      final result = await _organizedDataService.migrateTurkishQuestions();
+      
+      if (!mounted) return;
+      Navigator.pop(context); // Close loading dialog
+      
+      _showMigrationSuccessDialog('Türkçe', result['totalMigrated'] ?? 0);
+      
+    } catch (e) {
+      if (!mounted) return;
+      Navigator.pop(context); // Close loading dialog
+      
+      _showMigrationErrorDialog('Türkçe', e.toString());
+    }
+  }
+
+  // İngilizce migration işlemi
+  Future<void> _performEnglishMigration() async {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => const AlertDialog(
+        backgroundColor: Colors.indigo,
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            CircularProgressIndicator(color: Colors.green),
+            SizedBox(height: 16),
+            Text(
+              'English Questions Loading',
+              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 8),
+            Text(
+              'Please wait...',
+              style: TextStyle(color: Colors.white70),
+            ),
+          ],
+        ),
+      ),
+    );
+
+    try {
+      final result = await _organizedDataService.migrateEnglishQuestions();
+      
+      if (!mounted) return;
+      Navigator.pop(context); // Close loading dialog
+      
+      _showMigrationSuccessDialog('English', result['totalMigrated'] ?? 0);
+      
+    } catch (e) {
+      if (!mounted) return;
+      Navigator.pop(context); // Close loading dialog
+      
+      _showMigrationErrorDialog('English', e.toString());
+    }
+  }
+
+  // Migration başarı dialog
+  void _showMigrationSuccessDialog(String language, int count) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: Colors.indigo.shade900,
+        title: Row(
+          children: [
+            Icon(Icons.check_circle, color: Colors.green, size: 24),
+            const SizedBox(width: 8),
+            const Text(
+              'Başarılı!',
+              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+            ),
+          ],
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              '$language soruları başarıyla yüklendi!',
+              style: const TextStyle(color: Colors.white, fontSize: 16),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              'Toplam $count soru yüklendi.',
+              style: const TextStyle(color: Colors.green, fontWeight: FontWeight.w500),
+            ),
+          ],
+        ),
+        actions: [
+          ElevatedButton(
+            onPressed: () {
+              Navigator.pop(context);
+              _loadInitialData(); // Refresh the dashboard
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.green,
+              foregroundColor: Colors.white,
+            ),
+            child: const Text('Tamam'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // Migration hata dialog
+  void _showMigrationErrorDialog(String language, String error) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: Colors.indigo.shade900,
+        title: Row(
+          children: [
+            Icon(Icons.error, color: Colors.red, size: 24),
+            const SizedBox(width: 8),
+            const Text(
+              'Hata!',
+              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+            ),
+          ],
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              '$language soruları yüklenirken hata oluştu:',
+              style: const TextStyle(color: Colors.white),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              error,
+              style: const TextStyle(color: Colors.red, fontSize: 12),
+            ),
+          ],
+        ),
+        actions: [
+          ElevatedButton(
+            onPressed: () => Navigator.pop(context),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.red,
+              foregroundColor: Colors.white,
+            ),
+            child: const Text('Tamam'),
+          ),
+        ],
+      ),
+    );
+  }
+
+
   Future<void> _showDataImportDialog() async {
     final existingCount =
         await _realMigrationService.getExistingQuestionsCount();
@@ -1361,6 +2630,7 @@ class _AdminScreenState extends State<AdminScreen>
           ),
     );
   }
+
 
   Future<void> _performOrganizedDataMigration() async {
     // Show loading dialog

@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'dart:io';
 import 'auth_service.dart';
@@ -143,12 +142,15 @@ class UserService {
     try {
       final userId = _authService.currentUser?.uid;
       if (userId == null) {
-        throw Exception('Kullanıcı giriş yapmamış');
+        print('❌ Kullanıcı giriş yapmamış');
+        return false;
       }
 
+      print('🔍 Kullanıcı dokümanı kontrol ediliyor: $userId');
       final userDoc = await _firestore.collection('users').doc(userId).get();
 
       if (!userDoc.exists) {
+        print('📝 Yeni kullanıcı ayarları oluşturuluyor...');
         // Temel kullanıcı verilerini oluştur
         await _firestore.collection('users').doc(userId).set({
           'displayName': _authService.currentUser?.displayName ?? 'Kullanıcı',
@@ -166,14 +168,16 @@ class UserService {
             'showActivityInLeaderboard': true,
             'shareUsageData': true,
           },
-        });
+        }, SetOptions(merge: true));
 
+        print('✅ Varsayılan kullanıcı ayarları oluşturuldu');
         return true;
+      } else {
+        print('ℹ️ Kullanıcı ayarları zaten mevcut');
+        return false; // Ayarlar zaten var
       }
-
-      return false; // Ayarlar zaten var
     } catch (e) {
-      print('createDefaultUserSettings hatası: $e');
+      print('❌ createDefaultUserSettings hatası: $e');
       return false;
     }
   }
