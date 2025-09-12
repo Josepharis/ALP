@@ -18,19 +18,16 @@ class _EditQuestionScreenState extends State<EditQuestionScreen> {
   late List<TextEditingController> _optionControllers;
   late TextEditingController _explanationController;
 
-  String _selectedCategory = '';
   String _selectedDifficulty = 'medium';
   int _correctAnswerIndex = 0;
   bool _isLoading = false;
 
   final List<String> _difficulties = ['easy', 'medium', 'hard'];
-  List<String> _categories = [];
 
   @override
   void initState() {
     super.initState();
     _initializeControllers();
-    _loadCategories();
   }
 
   void _initializeControllers() {
@@ -40,9 +37,38 @@ class _EditQuestionScreenState extends State<EditQuestionScreen> {
     _explanationController = TextEditingController(
       text: widget.question['explanation'] ?? '',
     );
-    _selectedCategory = widget.question['category'] ?? '';
-    _selectedDifficulty = widget.question['difficulty'] ?? 'medium';
-    _correctAnswerIndex = widget.question['correctAnswer'] ?? 0;
+    // Handle difficulty - could be int or String
+    final difficulty = widget.question['difficulty'];
+    if (difficulty is int) {
+      // Convert int to string difficulty
+      switch (difficulty) {
+        case 1:
+          _selectedDifficulty = 'easy';
+          break;
+        case 2:
+          _selectedDifficulty = 'medium';
+          break;
+        case 3:
+          _selectedDifficulty = 'hard';
+          break;
+        default:
+          _selectedDifficulty = 'medium';
+      }
+    } else if (difficulty is String) {
+      _selectedDifficulty = difficulty;
+    } else {
+      _selectedDifficulty = 'medium';
+    }
+    
+    // Handle correctAnswer - ensure it's int
+    final correctAnswer = widget.question['correctAnswer'];
+    if (correctAnswer is int) {
+      _correctAnswerIndex = correctAnswer;
+    } else if (correctAnswer is String) {
+      _correctAnswerIndex = int.tryParse(correctAnswer) ?? 0;
+    } else {
+      _correctAnswerIndex = 0;
+    }
 
     final options = List<String>.from(
       widget.question['options'] ?? ['', '', '', ''],
@@ -56,10 +82,6 @@ class _EditQuestionScreenState extends State<EditQuestionScreen> {
     }
   }
 
-  Future<void> _loadCategories() async {
-    final categories = await _adminService.getCategories();
-    setState(() => _categories = categories);
-  }
 
   @override
   void dispose() {
@@ -116,13 +138,7 @@ class _EditQuestionScreenState extends State<EditQuestionScreen> {
                       children: [
                         _buildQuestionField(),
                         const SizedBox(height: 16),
-                        Row(
-                          children: [
-                            Expanded(child: _buildCategoryDropdown()),
-                            const SizedBox(width: 16),
-                            Expanded(child: _buildDifficultyDropdown()),
-                          ],
-                        ),
+                        _buildDifficultyDropdown(),
                       ],
                     ),
                   ),
@@ -209,42 +225,6 @@ class _EditQuestionScreenState extends State<EditQuestionScreen> {
     );
   }
 
-  Widget _buildCategoryDropdown() {
-    return DropdownButtonFormField<String>(
-      value: _selectedCategory.isEmpty ? null : _selectedCategory,
-      style: const TextStyle(color: Colors.white),
-      dropdownColor: Colors.indigo.shade800,
-      decoration: InputDecoration(
-        labelText: 'Kategori',
-        labelStyle: const TextStyle(color: Colors.white70),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide(color: Colors.white.withOpacity(0.3)),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide(color: Colors.white.withOpacity(0.3)),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
-          borderSide: const BorderSide(color: Colors.blue),
-        ),
-      ),
-      items:
-          _categories.map((category) {
-            return DropdownMenuItem(value: category, child: Text(category));
-          }).toList(),
-      onChanged: (value) {
-        setState(() => _selectedCategory = value ?? '');
-      },
-      validator: (value) {
-        if (value == null || value.isEmpty) {
-          return 'Lütfen bir kategori seçin';
-        }
-        return null;
-      },
-    );
-  }
 
   Widget _buildDifficultyDropdown() {
     return DropdownButtonFormField<String>(
@@ -340,24 +320,48 @@ class _EditQuestionScreenState extends State<EditQuestionScreen> {
   }
 
   Widget _buildExplanationField() {
-    return TextFormField(
-      controller: _explanationController,
-      maxLines: 3,
-      style: const TextStyle(color: Colors.white),
-      decoration: InputDecoration(
-        labelText: 'Açıklama (Opsiyonel)',
-        labelStyle: const TextStyle(color: Colors.white70),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide(color: Colors.white.withOpacity(0.3)),
+    return Container(
+      constraints: const BoxConstraints(
+        minHeight: 120, // Minimum yükseklik
+        maxHeight: 300, // Maksimum yükseklik
+      ),
+      child: TextFormField(
+        controller: _explanationController,
+        maxLines: null, // Sınırsız satır
+        minLines: 3, // Minimum 3 satır
+        textAlignVertical: TextAlignVertical.top, // Üstten hizala
+        style: const TextStyle(
+          color: Colors.white,
+          fontSize: 14,
+          height: 1.4, // Satır aralığı
         ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide(color: Colors.white.withOpacity(0.3)),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
-          borderSide: const BorderSide(color: Colors.blue),
+        decoration: InputDecoration(
+          labelText: 'Açıklama (Opsiyonel)',
+          labelStyle: const TextStyle(color: Colors.white70),
+          hintText: 'Sorunun detaylı açıklamasını buraya yazabilirsiniz...',
+          hintStyle: TextStyle(
+            color: Colors.white.withOpacity(0.5),
+            fontSize: 13,
+          ),
+          alignLabelWithHint: true, // Label'ı üstte hizala
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 16,
+            vertical: 16,
+          ),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: BorderSide(color: Colors.white.withOpacity(0.3)),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: BorderSide(color: Colors.white.withOpacity(0.3)),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: const BorderSide(color: Colors.blue, width: 2),
+          ),
+          filled: true,
+          fillColor: Colors.white.withOpacity(0.05),
         ),
       ),
     );
@@ -414,6 +418,22 @@ class _EditQuestionScreenState extends State<EditQuestionScreen> {
 
     setState(() => _isLoading = true);
 
+    // Convert difficulty string back to int if needed
+    int difficultyInt;
+    switch (_selectedDifficulty) {
+      case 'easy':
+        difficultyInt = 1;
+        break;
+      case 'medium':
+        difficultyInt = 2;
+        break;
+      case 'hard':
+        difficultyInt = 3;
+        break;
+      default:
+        difficultyInt = 2;
+    }
+
     final questionData = {
       'question': _questionController.text.trim(),
       'options':
@@ -422,8 +442,8 @@ class _EditQuestionScreenState extends State<EditQuestionScreen> {
               .toList(),
       'correctAnswer': _correctAnswerIndex,
       'explanation': _explanationController.text.trim(),
-      'category': _selectedCategory,
-      'difficulty': _selectedDifficulty,
+      'category': widget.question['category'], // Keep original category
+      'difficulty': difficultyInt, // Save as int
     };
 
     final success = await _adminService.updateQuestion(

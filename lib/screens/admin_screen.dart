@@ -612,84 +612,147 @@ class _AdminScreenState extends State<AdminScreen>
       },
     ];
 
-    return GridView.builder(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        crossAxisSpacing: 16,
-        mainAxisSpacing: 16,
-        childAspectRatio: 1.2,
-      ),
-      itemCount: stats.length,
-      itemBuilder: (context, index) {
-        final stat = stats[index];
-        return Container(
-          padding: const EdgeInsets.all(20),
-          decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.1),
-            borderRadius: BorderRadius.circular(20),
-            border: Border.all(color: Colors.white.withOpacity(0.2)),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.1),
-                blurRadius: 10,
-                offset: const Offset(0, 5),
-              ),
-            ],
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        // Ekran boyutuna göre responsive grid
+        final screenWidth = constraints.maxWidth;
+        int crossAxisCount;
+        double childAspectRatio;
+        double spacing;
+
+        if (screenWidth > 1200) {
+          // Desktop - 4 sütun
+          crossAxisCount = 4;
+          childAspectRatio = 2.8;
+          spacing = 6;
+        } else if (screenWidth > 800) {
+          // Tablet - 3 sütun
+          crossAxisCount = 3;
+          childAspectRatio = 2.5;
+          spacing = 4;
+        } else {
+          // Telefon - 2 sütun (küçük ve büyük telefon)
+          crossAxisCount = 2;
+          childAspectRatio = screenWidth > 600 ? 2.2 : 2.0; // Çok daha küçük kartlar
+          spacing = screenWidth > 600 ? 4 : 3; // Çok daha az boşluk
+        }
+
+        return GridView.builder(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: crossAxisCount,
+            crossAxisSpacing: spacing,
+            mainAxisSpacing: spacing,
+            childAspectRatio: childAspectRatio,
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      color: (stat['color'] as Color).withOpacity(0.2),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Icon(
-                      stat['icon'] as IconData,
-                      color: stat['color'] as Color,
-                      size: 20,
-                    ),
-                  ),
-                ],
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    stat['value'] as String,
-                    style: const TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                  ),
-                  Text(
-                    stat['title'] as String,
-                    style: const TextStyle(
-                      fontSize: 12,
-                      color: Colors.white70,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  Text(
-                    stat['subtitle'] as String,
-                    style: const TextStyle(fontSize: 10, color: Colors.white60),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ],
-              ),
-            ],
-          ),
+          itemCount: stats.length,
+          itemBuilder: (context, index) {
+            final stat = stats[index];
+            return _buildResponsiveStatCard(stat, screenWidth);
+          },
         );
       },
+    );
+  }
+
+  Widget _buildResponsiveStatCard(Map<String, dynamic> stat, double screenWidth) {
+    // Ekran boyutuna göre padding ve font boyutları
+    final isSmallScreen = screenWidth < 600;
+    final isLargeScreen = screenWidth >= 1200;
+
+    return Container(
+      padding: EdgeInsets.all(isSmallScreen ? 6 : (isLargeScreen ? 10 : 8)),
+      decoration: BoxDecoration(
+        color: Colors.white.withOpacity(0.1),
+        borderRadius: BorderRadius.circular(isSmallScreen ? 6 : 8),
+        border: Border.all(color: Colors.white.withOpacity(0.2)),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            blurRadius: isSmallScreen ? 2 : 4,
+            offset: const Offset(0, 1),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          // Icon ve başlık satırı
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                padding: EdgeInsets.all(isSmallScreen ? 2 : 4),
+                decoration: BoxDecoration(
+                  color: (stat['color'] as Color).withOpacity(0.2),
+                  borderRadius: BorderRadius.circular(isSmallScreen ? 3 : 4),
+                ),
+                child: Icon(
+                  stat['icon'] as IconData,
+                  color: stat['color'] as Color,
+                  size: isSmallScreen ? 16 : (isLargeScreen ? 20 : 18),
+                ),
+              ),
+              if (isLargeScreen) ...[
+                // Büyük ekranlarda ek bilgi
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                  decoration: BoxDecoration(
+                    color: (stat['color'] as Color).withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Text(
+                    'Detay',
+                    style: TextStyle(
+                      color: (stat['color'] as Color),
+                      fontSize: 8,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              ],
+            ],
+          ),
+          
+          // Değer ve açıklama
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                stat['value'] as String,
+                style: TextStyle(
+                  fontSize: isSmallScreen ? 18 : (isLargeScreen ? 24 : 20),
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+              SizedBox(height: isSmallScreen ? 1 : 2),
+              Text(
+                stat['title'] as String,
+                style: TextStyle(
+                  fontSize: isSmallScreen ? 11 : (isLargeScreen ? 13 : 12),
+                  color: Colors.white70,
+                  fontWeight: FontWeight.w500,
+                ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+              SizedBox(height: isSmallScreen ? 0.5 : 1),
+              Text(
+                stat['subtitle'] as String,
+                style: TextStyle(
+                  fontSize: isSmallScreen ? 9 : (isLargeScreen ? 11 : 10),
+                  color: Colors.white60,
+                ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 
@@ -706,98 +769,149 @@ class _AdminScreenState extends State<AdminScreen>
           ),
         ),
         const SizedBox(height: 16),
-        GridView.builder(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            crossAxisSpacing: 16,
-            mainAxisSpacing: 16,
-            childAspectRatio: 1.1,
-          ),
-          itemCount: 2,
-          itemBuilder: (context, index) {
-            final isTurkish = index == 0;
-            final language = isTurkish ? 'Türkçe' : 'İngilizce';
-            final questionCount = isTurkish 
-                ? _languageStats['turkishQuestions'] ?? 0
-                : _languageStats['englishQuestions'] ?? 0;
-            final categoryCount = isTurkish
-                ? _languageStats['turkishCategories'] ?? 0
-                : _languageStats['englishCategories'] ?? 0;
-            final color = isTurkish ? Colors.red : Colors.blue;
-            final icon = isTurkish ? Icons.flag : Icons.language;
+        LayoutBuilder(
+          builder: (context, constraints) {
+            final screenWidth = constraints.maxWidth;
+            double childAspectRatio;
+            double spacing;
 
-            return Container(
-              padding: const EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.1),
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: Colors.white.withOpacity(0.2)),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
-                    blurRadius: 10,
-                    offset: const Offset(0, 5),
-                  ),
-                ],
+            if (screenWidth > 1200) {
+              // Desktop
+              childAspectRatio = 2.8;
+              spacing = 6;
+            } else if (screenWidth > 800) {
+              // Tablet
+              childAspectRatio = 2.5;
+              spacing = 4;
+            } else {
+              // Telefon
+              childAspectRatio = screenWidth > 600 ? 2.2 : 2.0;
+              spacing = screenWidth > 600 ? 4 : 3;
+            }
+
+            return GridView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: spacing,
+                mainAxisSpacing: spacing,
+                childAspectRatio: childAspectRatio,
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                          color: color.withOpacity(0.2),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Icon(
-                          icon,
-                          color: color,
-                          size: 20,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        '$questionCount',
-                        style: const TextStyle(
-                          fontSize: 28,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
-                      Text(
-                        language,
-                        style: const TextStyle(
-                          fontSize: 14,
-                          color: Colors.white70,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        '$categoryCount kategori',
-                        style: const TextStyle(
-                          fontSize: 12,
-                          color: Colors.white60,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+              itemCount: 2,
+              itemBuilder: (context, index) {
+                final isTurkish = index == 0;
+                final language = isTurkish ? 'Türkçe' : 'İngilizce';
+                final questionCount = isTurkish 
+                    ? _languageStats['turkishQuestions'] ?? 0
+                    : _languageStats['englishQuestions'] ?? 0;
+                final categoryCount = isTurkish
+                    ? _languageStats['turkishCategories'] ?? 0
+                    : _languageStats['englishCategories'] ?? 0;
+                final color = isTurkish ? Colors.red : Colors.blue;
+                final icon = isTurkish ? Icons.flag : Icons.language;
+
+                return _buildLanguageStatCard(
+                  language, 
+                  questionCount, 
+                  categoryCount, 
+                  color, 
+                  icon, 
+                  screenWidth
+                );
+              },
             );
           },
         ),
       ],
+    );
+  }
+
+  Widget _buildLanguageStatCard(
+    String language, 
+    int questionCount, 
+    int categoryCount, 
+    Color color, 
+    IconData icon, 
+    double screenWidth
+  ) {
+    final isSmallScreen = screenWidth < 600;
+    final isLargeScreen = screenWidth >= 1200;
+
+    return Container(
+      padding: EdgeInsets.all(isSmallScreen ? 6 : (isLargeScreen ? 10 : 8)),
+      decoration: BoxDecoration(
+        color: Colors.white.withOpacity(0.1),
+        borderRadius: BorderRadius.circular(isSmallScreen ? 6 : 8),
+        border: Border.all(color: Colors.white.withOpacity(0.2)),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            blurRadius: isSmallScreen ? 2 : 4,
+            offset: const Offset(0, 1),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          // Icon ve başlık satırı
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                padding: EdgeInsets.all(isSmallScreen ? 2 : 4),
+                decoration: BoxDecoration(
+                  color: color.withOpacity(0.2),
+                  borderRadius: BorderRadius.circular(isSmallScreen ? 3 : 4),
+                ),
+                child: Icon(
+                  icon,
+                  color: color,
+                  size: isSmallScreen ? 16 : (isLargeScreen ? 20 : 18),
+                ),
+              ),
+            ],
+          ),
+          
+          // Değer ve açıklama
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                '$questionCount',
+                style: TextStyle(
+                  fontSize: isSmallScreen ? 18 : (isLargeScreen ? 24 : 20),
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+              SizedBox(height: isSmallScreen ? 1 : 2),
+              Text(
+                language,
+                style: TextStyle(
+                  fontSize: isSmallScreen ? 11 : (isLargeScreen ? 13 : 12),
+                  color: Colors.white70,
+                  fontWeight: FontWeight.w500,
+                ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+              SizedBox(height: isSmallScreen ? 0.5 : 1),
+              Text(
+                '$categoryCount kategori',
+                style: TextStyle(
+                  fontSize: isSmallScreen ? 9 : (isLargeScreen ? 11 : 10),
+                  color: Colors.white60,
+                ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 
