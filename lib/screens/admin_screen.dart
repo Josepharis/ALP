@@ -740,7 +740,7 @@ class _AdminScreenState extends State<AdminScreen>
                     ? _languageStats['turkishCategories'] ?? 0
                     : _languageStats['englishCategories'] ?? 0;
                 final color = isTurkish ? Colors.red : Colors.blue;
-                final icon = isTurkish ? Icons.flag : Icons.language;
+                final icon = isTurkish ? Icons.flag_circle : Icons.language;
 
                 return _buildLanguageStatCard(
                   language, 
@@ -1261,7 +1261,7 @@ class _AdminScreenState extends State<AdminScreen>
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Icon(
-                            Icons.flag,
+                            Icons.flag_circle,
                             color: _selectedLanguage == 'turkish' 
                                 ? Colors.red
                                 : Colors.white.withOpacity(0.7),
