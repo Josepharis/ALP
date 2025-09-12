@@ -84,30 +84,21 @@ class _AdminScreenState extends State<AdminScreen>
 
       setState(() => _quizStats = combinedStats);
 
-      print('Admin Panel Quiz İstatistikleri:');
-      print('- Toplam sorular: ${combinedStats['totalQuestions']}');
-      print('- Toplam kategoriler: ${combinedStats['totalCategories']}');
     } catch (e) {
-      print('Error loading quiz statistics: $e');
       setState(() => _quizStats = {});
     }
   }
 
   Future<void> _loadCategories() async {
     try {
-      print('🔍 Loading categories for language: $_selectedLanguage');
-      
       // Seçilen dile göre kategorileri yükle
       // Language parameter mapping: 'turkish' -> 'turkish', 'english' -> 'english'
       final languageParam = _selectedLanguage == 'turkish' ? 'turkish' : 'english';
       final organizedCategories =
           await _organizedDataService.getOrganizedCategoriesByLanguage(languageParam);
 
-      print('📊 Found ${organizedCategories.length} organized categories');
-
       // Eğer organize kategoriler varsa onları kullan
       if (organizedCategories.isNotEmpty) {
-        print('✅ Using organized categories');
         setState(() {
           _organizedCategories = organizedCategories;
           _categories =
@@ -119,7 +110,6 @@ class _AdminScreenState extends State<AdminScreen>
             _selectedCategory = _categories.first;
             _selectedCollectionName =
                 organizedCategories.first['collectionName'] as String;
-            print('🎯 Selected category: $_selectedCategory (collection: $_selectedCollectionName)');
           }
         });
         // Kategoriler yüklendikten sonra soruları yükle
@@ -127,24 +117,15 @@ class _AdminScreenState extends State<AdminScreen>
             _loadQuestions();
         }
       } else {
-        print('⚠️ No organized categories found, trying alternative method');
-        
-        // Debug: Check what categories exist in the database
-        await _debugCategoriesInDatabase();
-        
         // Try alternative method to get all categories from Firestore
         final allCategories = await _getAllCategoriesFromFirestore();
         
         if (allCategories.isNotEmpty) {
-          print('✅ Found categories using alternative method');
-          
           // Filter by language
           final filteredCategories = allCategories.where((cat) {
             final language = cat['language'] as String? ?? 'turkish';
             return language == languageParam;
           }).toList();
-          
-          print('📊 Found ${filteredCategories.length} categories for language: $languageParam');
           
           setState(() {
             _organizedCategories = filteredCategories;
@@ -153,7 +134,6 @@ class _AdminScreenState extends State<AdminScreen>
             if (_categories.isNotEmpty) {
               _selectedCategory = _categories.first;
               _selectedCollectionName = filteredCategories.first['collectionName'] as String;
-              print('🎯 Selected alternative category: $_selectedCategory (collection: $_selectedCollectionName)');
             }
           });
           
@@ -162,18 +142,14 @@ class _AdminScreenState extends State<AdminScreen>
             _loadQuestions();
           }
       } else {
-          print('⚠️ No categories found with alternative method, trying admin service fallback');
-          
           // Final fallback: eski yöntem
         final categories = await _adminService.getCategories();
-          print('📊 Found ${categories.length} fallback categories');
           
         setState(() {
           _categories = categories;
             // Her zaman ilk kategoriyi seç
             if (categories.isNotEmpty) {
             _selectedCategory = categories.first;
-              print('🎯 Selected fallback category: $_selectedCategory');
           }
         });
           // Kategoriler yüklendikten sonra soruları yükle
@@ -183,78 +159,40 @@ class _AdminScreenState extends State<AdminScreen>
         }
       }
     } catch (e) {
-      print('❌ Error loading categories: $e');
+      // Error handling
     }
   }
 
   Future<void> _loadQuestions() async {
     if (_selectedCategory.isEmpty) {
-      print('⚠️ No category selected, skipping question loading');
       return;
     }
-
-    print('🔍 Loading questions for category: $_selectedCategory (collection: $_selectedCollectionName)');
 
     try {
       List<Map<String, dynamic>> questions;
 
       // Organize veri yapısı kullanılıyorsa
       if (_selectedCollectionName.isNotEmpty) {
-        print('📚 Using organized data service for collection: $_selectedCollectionName');
         questions = await _organizedDataService.getQuestionsByCategory(
           _selectedCollectionName,
         );
       } else {
-        print('📚 Using admin service for category: $_selectedCategory');
         // Fallback: eski yöntem
         questions = await _adminService.getQuestionsByCategory(
           _selectedCategory,
         );
       }
 
-      print('📊 Loaded ${questions.length} questions');
       setState(() => _questions = questions);
     } catch (e) {
-      print('❌ Error loading questions: $e');
       setState(() => _questions = []);
     }
   }
 
-  // Debug method to check what categories exist in the database
-  Future<void> _debugCategoriesInDatabase() async {
-    try {
-      print('🔍 Debug: Checking all categories in quizCategories collection...');
-      
-      // Get all categories without any filters
-      final allCategories = await _organizedDataService.getOrganizedCategories();
-      print('📊 Total categories in database (with isActive filter): ${allCategories.length}');
-      
-      for (final category in allCategories) {
-        print('  - ${category['displayName']} (collection: ${category['collectionName']}, active: ${category['isActive'] ?? 'unknown'})');
-      }
-      
-      // Also check all categories without isActive filter
-      print('🔍 Checking all categories without isActive filter...');
-      final allCategoriesNoFilter = await _getAllCategoriesFromFirestore();
-      print('📊 Total categories in database (no filter): ${allCategoriesNoFilter.length}');
-      
-      for (final category in allCategoriesNoFilter.take(5)) {
-        print('  - ${category['displayName']} (collection: ${category['collectionName']}, language: ${category['language']})');
-      }
-      if (allCategoriesNoFilter.length > 5) {
-        print('  ... and ${allCategoriesNoFilter.length - 5} more categories');
-      }
-      
-    } catch (e) {
-      print('❌ Error in debug categories: $e');
-    }
-  }
 
   // Alternative method to get categories without isActive filter
   Future<List<Map<String, dynamic>>> _getAllCategoriesFromFirestore() async {
     try {
-      print('🔍 Getting all categories from Firestore without isActive filter...');
-      
       // Use the existing method but modify the service to not require isActive
       // For now, let's try to get categories using a different approach
       final snapshot = await FirebaseFirestore.instance
@@ -274,10 +212,8 @@ class _AdminScreenState extends State<AdminScreen>
         };
       }).toList();
 
-      print('📊 Found ${categories.length} categories in Firestore');
       return categories;
     } catch (e) {
-      print('❌ Error getting all categories: $e');
       return [];
     }
   }
@@ -575,11 +511,6 @@ class _AdminScreenState extends State<AdminScreen>
   }
 
   Widget _buildStatsGrid() {
-    // Debug için istatistikleri yazdır
-    print('📊 Admin Dashboard Stats:');
-    print('_userStats: $_userStats');
-    print('_quizStats: $_quizStats');
-
     final stats = [
       {
         'title': AppLocalizations.of(context)!.totalUsers,
@@ -1010,8 +941,6 @@ class _AdminScreenState extends State<AdminScreen>
     // MultilingualQuestionService'ten İngilizce kategorileri al (63 kategori)
     final englishCategories = MultilingualQuestionService.getQuizCategories('en');
     
-    print('🔍 Debug: Found ${englishCategories.length} English categories in MultilingualQuestionService');
-    
     final orderedCategories = <Map<String, dynamic>>[];
     
     // Sadece MultilingualQuestionService'teki kategorileri kullan (63 kategori)
@@ -1089,20 +1018,15 @@ class _AdminScreenState extends State<AdminScreen>
           'name': name, // Temiz isim
           'count': categories[firebaseKey]!,
         });
-        print('✅ Matched: $name -> $firebaseKey');
       } else {
         // Eğer Firebase'de eşleşme yoksa, 0 soru ile göster
         orderedCategories.add({
           'name': name,
           'count': 0,
         });
-        print('⚠️ No match for: $name (showing 0 questions)');
-        // Debug için mevcut Firebase anahtarlarını göster
-        print('   Available Firebase keys: ${categories.keys.where((k) => k.toLowerCase().contains(name.toLowerCase().split(' ')[0])).take(3).join(', ')}');
       }
     }
     
-    print('🔍 Debug: Final ordered English categories: ${orderedCategories.length} (should be 63)');
     return orderedCategories;
   }
 
