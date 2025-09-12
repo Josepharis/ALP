@@ -4,7 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
 import 'dart:io';
 import 'dart:math';
-import 'package:flutter/foundation.dart' show kIsWeb;
 import '../services/organized_data_service.dart';
 import '../services/word_parser_service.dart';
 
@@ -46,6 +45,7 @@ class _AddQuestionScreenState extends State<AddQuestionScreen> {
   bool _isNewQuizSelected = false;
   List<Map<String, String>> _availableQuizzes = []; // {id, displayName}
   String _selectedQuizId = '';
+  String _selectedLanguage = 'turkish'; // Dil seçimi
 
   @override
   void initState() {
@@ -80,59 +80,55 @@ class _AddQuestionScreenState extends State<AddQuestionScreen> {
         _isLoading = true;
       });
 
-      print("Quiz'leri getirmeye başlıyorum...");
+      print("🔄 Firebase'den quiz'leri getiriyorum... (Dil: $_selectedLanguage)");
 
       List<Map<String, String>> quizList = [];
 
-      // 1. Organize veri yapısından kategorileri yükle (Admin screen'deki gibi)
+      // Firebase'deki tüm collection'ları kontrol et
       try {
-        final organizedCategories =
-            await _organizedDataService.getOrganizedCategories();
-        print("✅ Organize kategoriler bulundu: ${organizedCategories.length}");
-
-        if (organizedCategories.isNotEmpty) {
-          for (var category in organizedCategories) {
-            final displayName = category['displayName'] as String;
-            final collectionName = category['collectionName'] as String;
-
-            quizList.add({'id': collectionName, 'displayName': displayName});
-            print("📋 Kategori: $displayName -> $collectionName");
-          }
-        }
-      } catch (e) {
-        print("⚠️ Organize kategoriler yüklenirken hata: $e");
-      }
-
-      // 2. Eğer organize veriler yoksa, fallback kullan
-      if (quizList.isEmpty) {
-        print("⚠️ Organize kategoriler bulunamadı, fallback deneniyor...");
-
         final instance = FirebaseFirestore.instance;
-        final querySnapshot = await instance.collection('quizzes').get();
-        print("Legacy quizzes koleksiyonu bulundu: ${querySnapshot.size}");
+        
+        // 1. quizzes collection'ını kontrol et
+        final quizzesSnapshot = await instance.collection('quizzes').get();
+        print("📊 'quizzes' collection'ında: ${quizzesSnapshot.size} quiz");
+        
+        // 2. quizCategories collection'ını kontrol et
+        final categoriesSnapshot = await instance.collection('quizCategories').get();
+        print("📊 'quizCategories' collection'ında: ${categoriesSnapshot.size} kategori");
+        
+        // 3. questions collection'ını kontrol et (quiz ID'leri için)
+        final questionsSnapshot = await instance.collection('questions').get();
+        print("📊 'questions' collection'ında: ${questionsSnapshot.size} soru");
+        
+        // quizCategories collection'ından quiz'leri çek
+        final querySnapshot = categoriesSnapshot;
 
         for (var doc in querySnapshot.docs) {
           final data = doc.data();
-          final displayName =
-              (data['name'] as String?) ?? _createDisplayNameFromId(doc.id);
-          quizList.add({'id': doc.id, 'displayName': displayName});
-          print("🔄 Legacy quiz: ${doc.id} -> $displayName");
+          final displayName = data['displayName'] as String? ?? _createDisplayNameFromId(doc.id);
+          final language = data['language'] as String? ?? 'turkish';
+          
+          print("🔍 Kategori: $displayName (Dil: '$language', Aranan: '$_selectedLanguage')");
+          
+          // Dil filtresi uygula
+          if (language == _selectedLanguage) {
+            quizList.add({'id': doc.id, 'displayName': displayName});
+            print("✅ EKLENDİ: $displayName");
+          } else {
+            print("❌ ATLANDI: $displayName");
+          }
         }
-      }
 
-      // 3. Son durum: Hiçbir kategori bulunamadıysa
-      if (quizList.isEmpty) {
-        print("⚠️ Hiçbir kategori bulunamadı!");
+        print("✅ Seçilen dil için toplam quiz: ${quizList.length}");
+        for (var quiz in quizList) {
+          print("   • ${quiz['displayName']} (ID: ${quiz['id']})");
+        }
+      } catch (e) {
+        print("❌ Quiz'leri getirirken hata: $e");
       }
 
       setState(() {
         _availableQuizzes = quizList;
-
-        print("✅ TOPLAM QUIZ SAYISI: ${_availableQuizzes.length}");
-        print("📋 Quiz Listesi:");
-        for (var quiz in _availableQuizzes) {
-          print("   • ${quiz['displayName']} (ID: ${quiz['id']})");
-        }
 
         // İlk quiz varsa seç veya düzenleme modunda ise mevcut kategoriyi kullan
         if (widget.editMode && widget.category != null) {
@@ -324,6 +320,10 @@ class _AddQuestionScreenState extends State<AddQuestionScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // Dil seçimi
+          _buildLanguageSelector(),
+          const SizedBox(height: 24),
+          
           // Quiz tipi ve kategori satırı
           if (!isSmallScreen)
             Row(
@@ -406,6 +406,150 @@ class _AddQuestionScreenState extends State<AddQuestionScreen> {
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildLanguageSelector() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _buildSectionTitle('Dil Seçimi'),
+        const SizedBox(height: 12),
+        Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: Colors.white.withOpacity(0.1),
+            borderRadius: BorderRadius.circular(15),
+            border: Border.all(color: Colors.white.withOpacity(0.2)),
+          ),
+          child: Row(
+            children: [
+              const Icon(Icons.language, color: Colors.white, size: 20),
+              const SizedBox(width: 12),
+              const Text(
+                'Dil:',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            _selectedLanguage = 'turkish';
+                          });
+                          _fetchQuizzes(); // Kategorileri yeniden yükle
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                          decoration: BoxDecoration(
+                            color: _selectedLanguage == 'turkish' 
+                                ? Colors.red.withOpacity(0.3)
+                                : Colors.transparent,
+                            borderRadius: BorderRadius.circular(20),
+                            border: Border.all(
+                              color: _selectedLanguage == 'turkish' 
+                                  ? Colors.red
+                                  : Colors.white.withOpacity(0.3),
+                            ),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.flag,
+                                color: _selectedLanguage == 'turkish' 
+                                    ? Colors.red
+                                    : Colors.white.withOpacity(0.7),
+                                size: 14,
+                              ),
+                              const SizedBox(width: 6),
+                              Flexible(
+                                child: Text(
+                                  'Türkçe',
+                                  style: TextStyle(
+                                    color: _selectedLanguage == 'turkish' 
+                                        ? Colors.red
+                                        : Colors.white.withOpacity(0.7),
+                                    fontWeight: _selectedLanguage == 'turkish' 
+                                        ? FontWeight.bold
+                                        : FontWeight.normal,
+                                    fontSize: 12,
+                                  ),
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            _selectedLanguage = 'english';
+                          });
+                          _fetchQuizzes(); // Kategorileri yeniden yükle
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                          decoration: BoxDecoration(
+                            color: _selectedLanguage == 'english' 
+                                ? Colors.blue.withOpacity(0.3)
+                                : Colors.transparent,
+                            borderRadius: BorderRadius.circular(20),
+                            border: Border.all(
+                              color: _selectedLanguage == 'english' 
+                                  ? Colors.blue
+                                  : Colors.white.withOpacity(0.3),
+                            ),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.language,
+                                color: _selectedLanguage == 'english' 
+                                    ? Colors.blue
+                                    : Colors.white.withOpacity(0.7),
+                                size: 14,
+                              ),
+                              const SizedBox(width: 6),
+                              Flexible(
+                                child: Text(
+                                  'İngilizce',
+                                  style: TextStyle(
+                                    color: _selectedLanguage == 'english' 
+                                        ? Colors.blue
+                                        : Colors.white.withOpacity(0.7),
+                                    fontWeight: _selectedLanguage == 'english' 
+                                        ? FontWeight.bold
+                                        : FontWeight.normal,
+                                    fontSize: 12,
+                                  ),
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 
@@ -497,11 +641,35 @@ class _AddQuestionScreenState extends State<AddQuestionScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          'Henüz Quiz bulunmamaktadır',
-                          style: TextStyle(color: Colors.white70),
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.info_outline,
+                              color: Colors.orange,
+                              size: 20,
+                            ),
+                            const SizedBox(width: 8),
+                            Expanded(
+                              child: Text(
+                                'Bu dilde quiz bulunamadı',
+                                style: TextStyle(
+                                  color: Colors.orange,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                         const SizedBox(height: 8),
+                        Text(
+                          'Dil: ${_selectedLanguage == 'turkish' ? 'Türkçe' : 'İngilizce'}',
+                          style: TextStyle(
+                            color: Colors.white70,
+                            fontSize: 12,
+                          ),
+                        ),
+                        const SizedBox(height: 12),
                         InkWell(
                           onTap: () {
                             setState(() {
@@ -509,11 +677,30 @@ class _AddQuestionScreenState extends State<AddQuestionScreen> {
                               _selectedQuizType = 'Yeni Quiz';
                             });
                           },
-                          child: Text(
-                            AppLocalizations.of(context)!.clickNewQuiz,
-                            style: TextStyle(
-                              color: Colors.blue.shade300,
-                              decoration: TextDecoration.underline,
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                            decoration: BoxDecoration(
+                              color: Colors.blue.withOpacity(0.2),
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(color: Colors.blue.withOpacity(0.3)),
+                            ),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Icon(
+                                  Icons.add_circle_outline,
+                                  color: Colors.blue.shade300,
+                                  size: 16,
+                                ),
+                                const SizedBox(width: 8),
+                                Text(
+                                  'Yeni Quiz Oluştur',
+                                  style: TextStyle(
+                                    color: Colors.blue.shade300,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ),
@@ -566,103 +753,234 @@ class _AddQuestionScreenState extends State<AddQuestionScreen> {
   }
 
   void _showQuizSelectionDialog() {
+    String searchQuery = '';
+    List<Map<String, String>> filteredQuizzes = List.from(_availableQuizzes);
+    
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        backgroundColor: Colors.indigo.shade800,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-        ),
-        title: Row(
-          children: [
-            Icon(
-              Icons.quiz,
-              color: Colors.blue.shade300,
-              size: 24,
+      builder: (context) => StatefulBuilder(
+        builder: (context, setState) {
+          return AlertDialog(
+            backgroundColor: Colors.indigo.shade800,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
             ),
-            const SizedBox(width: 12),
-            const Expanded(
-              child: Text(
-                'Quiz Seçin',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
+            title: Row(
+              children: [
+                Icon(
+                  Icons.quiz,
+                  color: Colors.blue.shade300,
+                  size: 24,
                 ),
-              ),
-            ),
-            IconButton(
-              onPressed: () => Navigator.pop(context),
-              icon: const Icon(Icons.close, color: Colors.white70),
-              iconSize: 24,
-            ),
-          ],
-        ),
-        content: Container(
-          width: double.maxFinite,
-          constraints: const BoxConstraints(maxHeight: 400),
-          child: ListView.builder(
-            shrinkWrap: true,
-            itemCount: _availableQuizzes.length,
-            itemBuilder: (context, index) {
-              final quiz = _availableQuizzes[index];
-              final isSelected = quiz['displayName'] == _selectedCategory;
-              
-              return Container(
-                margin: const EdgeInsets.only(bottom: 8),
-                decoration: BoxDecoration(
-                  color: isSelected 
-                      ? Colors.blue.withOpacity(0.3)
-                      : Colors.white.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(
-                    color: isSelected 
-                        ? Colors.blue.shade400
-                        : Colors.white.withOpacity(0.2),
-                    width: isSelected ? 2 : 1,
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Quiz Seçin',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        'Dil: ${_selectedLanguage == 'turkish' ? 'Türkçe' : 'İngilizce'}',
+                        style: TextStyle(
+                          color: Colors.white70,
+                          fontSize: 12,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                child: ListTile(
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                  title: Text(
-                    quiz['displayName']!,
-                    style: TextStyle(
-                      color: isSelected ? Colors.blue.shade300 : Colors.white,
-                      fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-                      fontSize: 16,
+                IconButton(
+                  onPressed: () => Navigator.pop(context),
+                  icon: const Icon(Icons.close, color: Colors.white70),
+                  iconSize: 24,
+                ),
+              ],
+            ),
+            content: Container(
+              width: MediaQuery.of(context).size.width * 0.9,
+              height: MediaQuery.of(context).size.height * 0.7,
+              child: Column(
+                children: [
+                  // Arama çubuğu
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(color: Colors.white.withOpacity(0.3)),
+                    ),
+                    child: TextField(
+                      style: const TextStyle(color: Colors.white),
+                      decoration: InputDecoration(
+                        hintText: 'Quiz ara...',
+                        hintStyle: TextStyle(color: Colors.white.withOpacity(0.6)),
+                        prefixIcon: Icon(Icons.search, color: Colors.white.withOpacity(0.7)),
+                        border: InputBorder.none,
+                        contentPadding: const EdgeInsets.symmetric(vertical: 8),
+                      ),
+                      onChanged: (value) {
+                        setState(() {
+                          searchQuery = value.toLowerCase();
+                          filteredQuizzes = _availableQuizzes.where((quiz) {
+                            return quiz['displayName']!.toLowerCase().contains(searchQuery);
+                          }).toList();
+                        });
+                      },
                     ),
                   ),
-                  trailing: isSelected
-                      ? Icon(
-                          Icons.check_circle,
-                          color: Colors.blue.shade300,
-                          size: 24,
-                        )
-                      : null,
-                  onTap: () {
-                    final selectedQuiz = _availableQuizzes.firstWhere(
-                      (q) => q['displayName'] == quiz['displayName'],
-                    );
-                    setState(() {
-                      _selectedCategory = quiz['displayName']!;
-                      _selectedQuizId = selectedQuiz['id']!;
-                    });
-                    Navigator.pop(context);
-                  },
-                ),
-              );
-            },
-          ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            style: TextButton.styleFrom(
-              foregroundColor: Colors.white70,
+                  const SizedBox(height: 12),
+                  
+                  // Quiz sayısı
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                    decoration: BoxDecoration(
+                      color: Colors.blue.withOpacity(0.2),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(Icons.info_outline, size: 16, color: Colors.blue.shade300),
+                        const SizedBox(width: 4),
+                        Text(
+                          '${filteredQuizzes.length} quiz bulundu',
+                          style: TextStyle(
+                            color: Colors.blue.shade300,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 12,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  
+                  // Quiz listesi
+                  Expanded(
+                    child: filteredQuizzes.isEmpty
+                        ? Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  searchQuery.isEmpty ? Icons.quiz_outlined : Icons.search_off,
+                                  size: 64,
+                                  color: Colors.white.withOpacity(0.5),
+                                ),
+                                const SizedBox(height: 16),
+                                Text(
+                                  searchQuery.isEmpty 
+                                      ? 'Bu dilde quiz bulunamadı'
+                                      : 'Arama sonucu bulunamadı',
+                                  style: TextStyle(
+                                    color: Colors.white.withOpacity(0.7),
+                                    fontSize: 16,
+                                  ),
+                                ),
+                                const SizedBox(height: 8),
+                                Text(
+                                  searchQuery.isEmpty
+                                      ? 'Farklı bir dil seçin veya yeni quiz oluşturun'
+                                      : '"${searchQuery}" için sonuç bulunamadı',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: Colors.white.withOpacity(0.5),
+                                    fontSize: 12,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          )
+                        : ListView.builder(
+                            itemCount: filteredQuizzes.length,
+                            itemBuilder: (context, index) {
+                              final quiz = filteredQuizzes[index];
+                              final isSelected = quiz['displayName'] == _selectedCategory;
+                              
+                              return Container(
+                                margin: const EdgeInsets.only(bottom: 4),
+                                decoration: BoxDecoration(
+                                  color: isSelected 
+                                      ? Colors.blue.withOpacity(0.3)
+                                      : Colors.white.withOpacity(0.1),
+                                  borderRadius: BorderRadius.circular(12),
+                                  border: Border.all(
+                                    color: isSelected 
+                                        ? Colors.blue.shade400
+                                        : Colors.white.withOpacity(0.2),
+                                    width: isSelected ? 2 : 1,
+                                  ),
+                                ),
+                                child: ListTile(
+                                  contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                                  title: Text(
+                                    quiz['displayName']!,
+                                    style: TextStyle(
+                                      color: isSelected ? Colors.blue.shade300 : Colors.white,
+                                      fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
+                                      fontSize: 14,
+                                    ),
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                  trailing: isSelected
+                                      ? Icon(
+                                          Icons.check_circle,
+                                          color: Colors.blue.shade300,
+                                          size: 20,
+                                        )
+                                      : null,
+                                  onTap: () {
+                                    final selectedQuiz = _availableQuizzes.firstWhere(
+                                      (q) => q['displayName'] == quiz['displayName'],
+                                    );
+                                    setState(() {
+                                      _selectedCategory = quiz['displayName']!;
+                                      _selectedQuizId = selectedQuiz['id']!;
+                                    });
+                                    Navigator.pop(context);
+                                  },
+                                ),
+                              );
+                            },
+                          ),
+                  ),
+                ],
+              ),
             ),
-            child: const Text('İptal'),
-          ),
-        ],
+            actions: [
+              TextButton.icon(
+                onPressed: () => Navigator.pop(context),
+                icon: const Icon(Icons.close, size: 18),
+                label: const Text('İptal'),
+                style: TextButton.styleFrom(
+                  foregroundColor: Colors.white70,
+                ),
+              ),
+              if (_availableQuizzes.isEmpty)
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    setState(() {
+                      _isNewQuizSelected = true;
+                      _selectedQuizType = 'Yeni Quiz';
+                    });
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blue,
+                    foregroundColor: Colors.white,
+                  ),
+                  child: const Text('Yeni Quiz Oluştur'),
+                ),
+            ],
+          );
+        },
       ),
     );
   }
@@ -893,6 +1211,7 @@ class _AddQuestionScreenState extends State<AddQuestionScreen> {
           ],
           'correctAnswerIndex': _correctAnswerIndex,
           'explanation': _explanationController.text.trim(),
+          'language': _selectedLanguage, // Dil bilgisini ekle
           'updatedAt': FieldValue.serverTimestamp(),
         };
 
