@@ -1,0 +1,778 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import '../services/in_app_purchase_service.dart';
+
+class PremiumScreen extends StatefulWidget {
+  const PremiumScreen({super.key});
+
+  @override
+  State<PremiumScreen> createState() => _PremiumScreenState();
+}
+
+class _PremiumScreenState extends State<PremiumScreen> with TickerProviderStateMixin {
+  final InAppPurchaseService _purchaseService = InAppPurchaseService();
+  String _selectedPlan = 'monthly';
+  
+  late AnimationController _backgroundController;
+  late Animation<Color?> _backgroundColorAnimation;
+  late AnimationController _pulseController;
+
+  @override
+  void initState() {
+    super.initState();
+    
+    // Sistem UI'ını tam ekran yap (splash screen gibi)
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.light,
+        statusBarBrightness: Brightness.dark,
+        systemNavigationBarColor: Colors.transparent,
+        systemNavigationBarIconBrightness: Brightness.light,
+        systemNavigationBarDividerColor: Colors.transparent,
+      ),
+    );
+    
+    // Background gradient animasyonu (splash screen ile aynı)
+    _backgroundController = AnimationController(
+      duration: const Duration(seconds: 8),
+      vsync: this,
+    )..repeat(reverse: true);
+
+    _backgroundColorAnimation = ColorTween(
+      begin: const Color(0xFF1E88E5), // Tıbbi mavi
+      end: const Color(0xFF26C6DA), // Turkuaz
+    ).animate(
+      CurvedAnimation(parent: _backgroundController, curve: Curves.easeInOut),
+    );
+
+    // Pulse efekti
+    _pulseController = AnimationController(
+      duration: const Duration(milliseconds: 1200),
+      vsync: this,
+    )..repeat(reverse: true);
+  }
+
+  @override
+  void dispose() {
+    // Sistem UI'ını varsayılan haline döndür
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.light,
+        statusBarBrightness: Brightness.dark,
+        systemNavigationBarColor: Colors.transparent,
+        systemNavigationBarIconBrightness: Brightness.light,
+        systemNavigationBarDividerColor: Colors.transparent,
+      ),
+    );
+    
+    _backgroundController.dispose();
+    _pulseController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: AnimatedBuilder(
+        animation: _backgroundColorAnimation,
+        builder: (context, child) {
+          return Container(
+            width: double.infinity,
+            height: double.infinity,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  _backgroundColorAnimation.value ?? const Color(0xFF1E88E5),
+                  const Color(0xFF0D47A1), // Koyu tıbbi mavi
+                  const Color(0xFF1A237E), // Derin lacivert
+                ],
+                stops: const [0.0, 0.6, 1.0],
+              ),
+            ),
+            child: Stack(
+              children: [
+                SingleChildScrollView(
+                  padding: EdgeInsets.only(
+                    left: 16,
+                    right: 16,
+                    top: MediaQuery.of(context).padding.top + 20, // Status bar + minimal space
+                    bottom: MediaQuery.of(context).padding.bottom + 16, // Navigation bar + space
+                  ),
+                  child: Column(
+                    children: [
+                      _buildHeroSection(),
+                      const SizedBox(height: 8),
+                      _buildFeaturesGrid(),
+                      const SizedBox(height: 8),
+                      _buildPricingSection(),
+                      const SizedBox(height: 8),
+                      _buildFooter(),
+                    ],
+                  ),
+                ),
+                // Sağ üst köşede kapatma butonu
+                Positioned(
+                  top: MediaQuery.of(context).padding.top + 16,
+                  right: 16,
+                  child: GestureDetector(
+                    onTap: () => Navigator.pop(context),
+                    child: Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.15),
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(
+                          color: Colors.white.withOpacity(0.3),
+                          width: 1,
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.1),
+                            blurRadius: 8,
+                            offset: const Offset(0, 2),
+                          ),
+                        ],
+                      ),
+                      child: const Icon(
+                        Icons.close,
+                        color: Colors.white,
+                        size: 20,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+
+  Widget _buildHeroSection() {
+    return Column(
+      children: [
+        // Ana Logo - Daha kompakt
+        Container(
+          padding: const EdgeInsets.all(12),
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            gradient: RadialGradient(
+              colors: [
+                Colors.white.withOpacity(0.1),
+                Colors.transparent,
+              ],
+              stops: const [0.7, 1.0],
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.cyan.withOpacity(0.3),
+                blurRadius: 20,
+                spreadRadius: 5,
+              ),
+              BoxShadow(
+                color: Colors.blue.withOpacity(0.2),
+                blurRadius: 30,
+                spreadRadius: 10,
+              ),
+            ],
+          ),
+          child: Hero(
+            tag: 'app_logo',
+            child: Container(
+              width: 120,
+              height: 120,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    blurRadius: 10,
+                    spreadRadius: 2,
+                  ),
+                ],
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(60),
+                child: _buildMainLogo(),
+              ),
+            ),
+          ),
+        ),
+        
+        const SizedBox(height: 12),
+        
+        const Text(
+          'ALP Premium',
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+            letterSpacing: 1.5,
+            shadows: [
+              Shadow(
+                offset: Offset(0, 2),
+                blurRadius: 4,
+                color: Colors.black26,
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 4),
+        const Text(
+          'Tüm özelliklere erişim kazanın',
+          style: TextStyle(
+            fontSize: 14,
+            color: Colors.white70,
+            letterSpacing: 0.3,
+          ),
+          textAlign: TextAlign.center,
+        ),
+      ],
+    );
+  }
+
+  // Ana logo widget'ı - Kompakt versiyon
+  Widget _buildMainLogo() {
+        return Image.asset(
+      'assets/images/logo.png',
+      width: 120,
+      height: 120,
+      fit: BoxFit.cover,
+      errorBuilder: (context, error, stackTrace) {
+        // Logo dosyası yoksa fallback tasarım - ALP logosu
+        return Container(
+          width: 120,
+          height: 120,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                const Color(0xFF1E88E5),
+                const Color(0xFF26C6DA),
+                const Color(0xFF0D47A1),
+              ],
+              stops: const [0.0, 0.5, 1.0],
+            ),
+            borderRadius: BorderRadius.circular(60),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // Medical heart icon
+              Icon(
+                Icons.favorite,
+                color: Colors.red.shade400,
+                size: 20,
+              ),
+              const SizedBox(height: 4),
+              // ALP text
+              const Text(
+                'ALP',
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                  letterSpacing: 1.5,
+                  shadows: [
+                    Shadow(
+                      offset: Offset(0, 1),
+                      blurRadius: 2,
+                      color: Colors.black26,
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 2),
+              // Medical cross
+              Icon(
+                Icons.medical_services,
+                color: Colors.green.shade400,
+                size: 10,
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildFeaturesGrid() {
+    final features = [
+      {'icon': Icons.all_inclusive, 'title': 'Tüm Sorulara Erişim'},
+      {'icon': Icons.quiz, 'title': 'Sınırsız Quiz'},
+      {'icon': Icons.visibility, 'title': 'Detaylı Açıklamalar'},
+      {'icon': Icons.error_outline, 'title': 'Yanlış Soruları Görüntüle'},
+      {'icon': Icons.assignment_turned_in, 'title': 'Eksiklerinizi Çalışın'},
+      {'icon': Icons.analytics, 'title': 'Gelişmiş Analitik'},
+    ];
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          'Premium Özellikler',
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+            letterSpacing: 0.5,
+          ),
+        ),
+        GridView.builder(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          padding: EdgeInsets.zero,
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3,
+            childAspectRatio: 1.6,
+            crossAxisSpacing: 3,
+            mainAxisSpacing: 3,
+          ),
+          itemCount: features.length,
+          itemBuilder: (context, index) {
+            return _buildCompactFeatureCard(features[index]);
+          },
+        ),
+      ],
+    );
+  }
+
+  Widget _buildCompactFeatureCard(Map<String, dynamic> feature) {
+    return Container(
+      padding: const EdgeInsets.all(1),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            Colors.white.withOpacity(0.1),
+            Colors.white.withOpacity(0.05),
+          ],
+        ),
+        borderRadius: BorderRadius.circular(4),
+        border: Border.all(
+          color: Colors.white.withOpacity(0.2),
+          width: 0.5,
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            blurRadius: 1,
+            offset: const Offset(0, 1),
+          ),
+        ],
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            width: 16,
+            height: 16,
+            decoration: BoxDecoration(
+              gradient: const LinearGradient(
+                colors: [Colors.amber, Colors.orange],
+              ),
+              borderRadius: BorderRadius.circular(5),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.amber.withOpacity(0.3),
+                  blurRadius: 2,
+                  offset: const Offset(0, 1),
+                ),
+              ],
+            ),
+            child: Icon(
+              feature['icon'] as IconData,
+              color: Colors.white,
+              size: 10,
+            ),
+          ),
+          const SizedBox(height: 2),
+          Text(
+            feature['title'] as String,
+            style: const TextStyle(
+              fontSize: 9,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+            textAlign: TextAlign.center,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
+          const SizedBox(height: 2),
+          const Icon(
+            Icons.check_circle,
+            color: Colors.green,
+            size: 12,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildPricingSection() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          'Paket Seçenekleri',
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+            letterSpacing: 0.5,
+          ),
+        ),
+        _buildPricingCard(
+          id: 'monthly',
+          title: 'Aylık',
+          price: '\$10',
+          period: 'ay',
+          originalPrice: null,
+          isPopular: false,
+          productId: InAppPurchaseService.premiumMonthlyId,
+        ),
+        _buildPricingCard(
+          id: 'sixmonth',
+          title: '6 Aylık',
+          price: '\$50',
+          period: '6 ay',
+          originalPrice: '\$60',
+          isPopular: false,
+          productId: InAppPurchaseService.premiumSixMonthId,
+        ),
+        _buildPricingCard(
+          id: 'yearly',
+          title: 'Yıllık',
+          price: '\$90',
+          period: 'yıl',
+          originalPrice: '\$120',
+          isPopular: true,
+          productId: InAppPurchaseService.premiumYearlyId,
+        ),
+      ],
+    );
+  }
+
+  Widget _buildPricingCard({
+    required String id,
+    required String title,
+    required String price,
+    required String period,
+    required String? originalPrice,
+    required bool isPopular,
+    required String productId,
+  }) {
+    final isSelected = _selectedPlan == id;
+    
+    return GestureDetector(
+      onTap: () => setState(() => _selectedPlan = id),
+      child: Container(
+        padding: const EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          gradient: isSelected 
+              ? const LinearGradient(
+                  colors: [Colors.amber, Colors.orange],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                )
+              : LinearGradient(
+                  colors: [
+                    Colors.white.withOpacity(0.1),
+                    Colors.white.withOpacity(0.05),
+                  ],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(
+            color: isSelected 
+                ? Colors.amber 
+                : Colors.white.withOpacity(0.2),
+            width: isSelected ? 2 : 1,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: isSelected 
+                  ? Colors.amber.withOpacity(0.3)
+                  : Colors.black.withOpacity(0.1),
+              blurRadius: isSelected ? 8 : 6,
+              offset: const Offset(0, 2),
+            ),
+          ],
+        ),
+        child: Row(
+          children: [
+            Container(
+              width: 16,
+              height: 16,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: isSelected ? Colors.white : Colors.transparent,
+                border: Border.all(
+                  color: isSelected ? Colors.white : Colors.white70,
+                  width: 2,
+                ),
+              ),
+              child: isSelected
+                  ? const Icon(
+                      Icons.check,
+                      color: Colors.black,
+                      size: 10,
+                    )
+                  : null,
+            ),
+            const SizedBox(width: 8),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Text(
+                        title,
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          color: isSelected ? Colors.black : Colors.white,
+                        ),
+                      ),
+                      if (isPopular) ...[
+                        const SizedBox(width: 6),
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                          decoration: BoxDecoration(
+                            color: isSelected ? Colors.black : Colors.amber,
+                            borderRadius: BorderRadius.circular(6),
+                          ),
+                          child: Text(
+                            'POPÜLER',
+                            style: TextStyle(
+                              color: isSelected ? Colors.white : Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 8,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ],
+                  ),
+                  const SizedBox(height: 2),
+                  Row(
+                    children: [
+                      Text(
+                        price,
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: isSelected ? Colors.black : Colors.white,
+                        ),
+                      ),
+                      const SizedBox(width: 2),
+                      Text(
+                        '/$period',
+                        style: TextStyle(
+                          fontSize: 10,
+                          color: isSelected 
+                              ? Colors.black.withOpacity(0.7) 
+                              : Colors.white70,
+                        ),
+                      ),
+                      if (originalPrice != null) ...[
+                        const SizedBox(width: 6),
+                        Text(
+                          originalPrice,
+                          style: TextStyle(
+                            fontSize: 10,
+                            color: isSelected 
+                                ? Colors.black.withOpacity(0.5)
+                                : Colors.white54,
+                            decoration: TextDecoration.lineThrough,
+                          ),
+                        ),
+                      ],
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildFooter() {
+    return Column(
+      children: [
+        SizedBox(
+          width: double.infinity,
+          height: 60,
+          child: ElevatedButton(
+            onPressed: () => _purchaseSelectedPlan(),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.transparent,
+              foregroundColor: Colors.black,
+              padding: const EdgeInsets.symmetric(vertical: 16),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(18),
+              ),
+              elevation: 0,
+            ).copyWith(
+              backgroundColor: MaterialStateProperty.all(Colors.transparent),
+            ),
+            child: Container(
+              decoration: BoxDecoration(
+                gradient: const LinearGradient(
+                  colors: [Colors.amber, Colors.orange],
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                ),
+                borderRadius: BorderRadius.circular(18),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.amber.withOpacity(0.4),
+                    blurRadius: 12,
+                    offset: const Offset(0, 5),
+                  ),
+                ],
+              ),
+              child: const Center(
+                child: Text(
+                  'Premium\'a Geç',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 0.8,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+        const SizedBox(height: 8),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            TextButton(
+              onPressed: () => _purchaseService.restorePurchases(),
+              style: TextButton.styleFrom(
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+              child: const Text(
+                'Satın Almaları Geri Yükle',
+                style: TextStyle(
+                  color: Colors.cyan,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+            TextButton(
+              onPressed: () => _showTermsAndConditions(),
+              style: TextButton.styleFrom(
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+              child: const Text(
+                'Şartlar ve Koşullar',
+                style: TextStyle(
+                  color: Colors.cyan,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Future<void> _purchaseSelectedPlan() async {
+    String productId;
+    switch (_selectedPlan) {
+      case 'monthly':
+        productId = InAppPurchaseService.premiumMonthlyId;
+        break;
+      case 'sixmonth':
+        productId = InAppPurchaseService.premiumSixMonthId;
+        break;
+      case 'yearly':
+        productId = InAppPurchaseService.premiumYearlyId;
+        break;
+      default:
+        productId = InAppPurchaseService.premiumMonthlyId;
+    }
+
+    try {
+      final success = await _purchaseService.buyProductById(productId);
+      if (success) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Satın alma işlemi başlatıldı'),
+              backgroundColor: Colors.green,
+            ),
+          );
+        }
+      } else {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Satın alma işlemi başlatılamadı'),
+              backgroundColor: Colors.red,
+            ),
+          );
+        }
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Hata: $e'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    }
+  }
+
+  void _showTermsAndConditions() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: const Color(0xFF1A1A2E),
+        title: const Text(
+          'Şartlar ve Koşullar',
+          style: TextStyle(color: Colors.white),
+        ),
+        content: const SingleChildScrollView(
+          child: Text(
+            'Bu uygulama içi satın alım hizmeti Apple App Store ve Google Play Store şartlarına tabidir. Satın alımlar iade edilemez. Premium özellikler aktif olduğu sürece kullanılabilir.',
+            style: TextStyle(color: Colors.white70),
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Tamam', style: TextStyle(color: Colors.blue)),
+          ),
+        ],
+      ),
+    );
+  }
+}

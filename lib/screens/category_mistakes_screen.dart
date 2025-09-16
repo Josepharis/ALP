@@ -189,12 +189,7 @@ class _CategoryMistakesScreenState extends State<CategoryMistakesScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    if (question.explanation != null &&
-                        question.explanation!.isNotEmpty)
-                      Text(
-                        'Explanation available',
-                        style: TextStyle(color: Colors.blue[300], fontSize: 13),
-                      ),
+                    const SizedBox.shrink(),
                     Row(
                       children: [
                         // Eksiklerden Kaldır butonu

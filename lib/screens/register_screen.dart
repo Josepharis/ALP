@@ -193,20 +193,7 @@ class _RegisterScreenState extends State<RegisterScreen>
       return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
 
-    return PopScope(
-      canPop: true,
-      onPopInvokedWithResult: (didPop, result) async {
-        // Geri tuşuna basıldığında login sayfasına dön
-        if (didPop) {
-          try {
-            Navigator.of(context).pushReplacementNamed('/login');
-          } catch (e) {
-            print('Geri tuşu hatası: $e');
-            Navigator.of(context).pushReplacementNamed('/login');
-          }
-        }
-      },
-      child: Scaffold(
+    return Scaffold(
         body: Container(
           width: double.infinity,
           height: double.infinity,
@@ -218,47 +205,41 @@ class _RegisterScreenState extends State<RegisterScreen>
                 Positioned(
                   top: 16,
                   left: 16,
-                  child: Material(
-                    color: Colors.transparent,
-                    child: InkWell(
-                      borderRadius: BorderRadius.circular(30),
-                      onTap: () {
-                        print('Geri butonu tıklandı');
-                        try {
-                          if (Navigator.canPop(context)) {
-                            Navigator.pop(context);
-                          } else {
-                            Navigator.of(
-                              context,
-                            ).pushReplacementNamed('/login');
-                          }
-                        } catch (e) {
-                          print('Geri butonu navigate hatası: $e');
+                  child: GestureDetector(
+                    onTap: () {
+                      print('Geri butonu tıklandı');
+                      try {
+                        if (Navigator.canPop(context)) {
+                          Navigator.pop(context);
+                        } else {
                           Navigator.of(context).pushReplacementNamed('/login');
                         }
-                      },
-                      child: Container(
-                        padding: const EdgeInsets.all(12),
-                        decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.15),
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                            color: Colors.white.withOpacity(0.3),
-                            width: 1.5,
+                      } catch (e) {
+                        print('Geri butonu navigate hatası: $e');
+                        Navigator.of(context).pushReplacementNamed('/login');
+                      }
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.15),
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: Colors.white.withOpacity(0.3),
+                          width: 1.5,
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.1),
+                            blurRadius: 8,
+                            offset: const Offset(0, 2),
                           ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.1),
-                              blurRadius: 8,
-                              offset: const Offset(0, 2),
-                            ),
-                          ],
-                        ),
-                        child: const Icon(
-                          Icons.arrow_back_ios_new,
-                          color: Colors.white,
-                          size: 22,
-                        ),
+                        ],
+                      ),
+                      child: const Icon(
+                        Icons.arrow_back_ios_new,
+                        color: Colors.white,
+                        size: 22,
                       ),
                     ),
                   ),
@@ -877,8 +858,7 @@ class _RegisterScreenState extends State<RegisterScreen>
             ),
           ),
         ),
-      ),
-    );
+      );
   }
 
   // Animasyonlu metin alanı

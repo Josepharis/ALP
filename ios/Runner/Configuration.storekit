@@ -1,0 +1,227 @@
+{
+  "identifier" : "1234567890",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+    {
+      "displayPrice" : "29.99",
+      "familyShareable" : false,
+      "internalID" : "1234567890",
+      "localizations" : [
+        {
+          "description" : "ALP Premium aylık abonelik - Tüm premium özellikler",
+          "displayName" : "ALP Premium Aylık",
+          "locale" : "tr"
+        },
+        {
+          "description" : "ALP Premium monthly subscription - All premium features",
+          "displayName" : "ALP Premium Monthly",
+          "locale" : "en"
+        }
+      ],
+      "productID" : "premium_monthly",
+      "referenceName" : "Premium Monthly",
+      "type" : "RecurringSubscription"
+    },
+    {
+      "displayPrice" : "299.99",
+      "familyShareable" : false,
+      "internalID" : "1234567891",
+      "localizations" : [
+        {
+          "description" : "ALP Premium yıllık abonelik - Tüm premium özellikler + 2 ay ücretsiz",
+          "displayName" : "ALP Premium Yıllık",
+          "locale" : "tr"
+        },
+        {
+          "description" : "ALP Premium yearly subscription - All premium features + 2 months free",
+          "displayName" : "ALP Premium Yearly",
+          "locale" : "en"
+        }
+      ],
+      "productID" : "premium_yearly",
+      "referenceName" : "Premium Yearly",
+      "type" : "RecurringSubscription"
+    },
+    {
+      "displayPrice" : "599.99",
+      "familyShareable" : false,
+      "internalID" : "1234567892",
+      "localizations" : [
+        {
+          "description" : "ALP Premium yaşam boyu - Tüm premium özellikler + sınırsız erişim",
+          "displayName" : "ALP Premium Yaşam Boyu",
+          "locale" : "tr"
+        },
+        {
+          "description" : "ALP Premium lifetime - All premium features + unlimited access",
+          "displayName" : "ALP Premium Lifetime",
+          "locale" : "en"
+        }
+      ],
+      "productID" : "premium_lifetime",
+      "referenceName" : "Premium Lifetime",
+      "type" : "NonConsumable"
+    },
+    {
+      "displayPrice" : "9.99",
+      "familyShareable" : false,
+      "internalID" : "1234567893",
+      "localizations" : [
+        {
+          "description" : "Sınırsız soru erişimi - Tüm sorulara sınırsız erişim",
+          "displayName" : "Sınırsız Soru",
+          "locale" : "tr"
+        },
+        {
+          "description" : "Unlimited question access - Unlimited access to all questions",
+          "displayName" : "Unlimited Questions",
+          "locale" : "en"
+        }
+      ],
+      "productID" : "unlimited_questions",
+      "referenceName" : "Unlimited Questions",
+      "type" : "NonConsumable"
+    },
+    {
+      "displayPrice" : "4.99",
+      "familyShareable" : false,
+      "internalID" : "1234567894",
+      "localizations" : [
+        {
+          "description" : "Gelişmiş analitik - Detaylı performans analizi",
+          "displayName" : "Gelişmiş Analitik",
+          "locale" : "tr"
+        },
+        {
+          "description" : "Advanced analytics - Detailed performance analysis",
+          "displayName" : "Advanced Analytics",
+          "locale" : "en"
+        }
+      ],
+      "productID" : "advanced_analytics",
+      "referenceName" : "Advanced Analytics",
+      "type" : "NonConsumable"
+    },
+    {
+      "displayPrice" : "2.99",
+      "familyShareable" : false,
+      "internalID" : "1234567895",
+      "localizations" : [
+        {
+          "description" : "Reklamsız deneyim - Kesintisiz çalışma ortamı",
+          "displayName" : "Reklamsız Deneyim",
+          "locale" : "tr"
+        },
+        {
+          "description" : "Ad-free experience - Uninterrupted study environment",
+          "displayName" : "Ad-Free Experience",
+          "locale" : "en"
+        }
+      ],
+      "productID" : "ad_free",
+      "referenceName" : "Ad-Free Experience",
+      "type" : "NonConsumable"
+    },
+    {
+      "displayPrice" : "1.99",
+      "familyShareable" : false,
+      "internalID" : "1234567896",
+      "localizations" : [
+        {
+          "description" : "Öncelikli destek - 7/24 öncelikli müşteri desteği",
+          "displayName" : "Öncelikli Destek",
+          "locale" : "tr"
+        },
+        {
+          "description" : "Priority support - 24/7 priority customer support",
+          "displayName" : "Priority Support",
+          "locale" : "en"
+        }
+      ],
+      "productID" : "priority_support",
+      "referenceName" : "Priority Support",
+      "type" : "NonConsumable"
+    }
+  ],
+  "settings" : {
+    "_applicationInternalID" : "1234567890",
+    "_developerTeamID" : "YOUR_TEAM_ID",
+    "_failTransactionsEnabled" : false,
+    "_lastSynchronizedDate" : 738864000.0,
+    "_locale" : "tr",
+    "_storefront" : "TUR",
+    "_storeKitErrors" : [
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Load Products"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Purchase"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Verification"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "App Store Sync"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Subscription Status"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "App Transaction"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Manage Subscriptions Sheet"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Refund Request Sheet"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Offer Code Redeem Sheet"
+      }
+    ]
+  },
+  "subscriptionGroups" : [
+    {
+      "id" : "1234567890",
+      "localizations" : [
+        {
+          "displayName" : "ALP Premium",
+          "locale" : "tr"
+        },
+        {
+          "displayName" : "ALP Premium",
+          "locale" : "en"
+        }
+      ],
+      "name" : "Premium Subscription",
+      "subscriptions" : [
+        "premium_monthly",
+        "premium_yearly"
+      ]
+    }
+  ],
+  "version" : {
+    "major" : 3,
+    "minor" : 0
+  }
+}

@@ -2,11 +2,15 @@ import 'package:flutter/material.dart';
 import '../l10n/app_localizations.dart';
 import 'package:flutter/services.dart';
 import 'dart:math';
+import 'package:provider/provider.dart';
 
 import '../models/question.dart';
 import 'question_detail_screen.dart';
 import '../services/quiz_service.dart';
 import '../models/quiz.dart';
+import '../services/premium_access_service.dart';
+import '../services/premium_service.dart';
+import '../widgets/premium_lock_widget.dart';
 
 import '../utils/event_bus.dart';
 import '../utils/snackbar_utils.dart';
@@ -300,48 +304,66 @@ class _QuizScreenState extends State<QuizScreen>
 
   @override
   Widget build(BuildContext context) {
-    return PopScope(
-      canPop: false,
-      onPopInvokedWithResult: (didPop, result) async {
-        if (!didPop) {
-          final shouldPop = await _showExitConfirmationDialog();
-          if (shouldPop && context.mounted) {
-            Navigator.of(context).pop();
-          }
+    return Consumer<PremiumService>(
+      builder: (context, premiumService, child) {
+        final isPremium = premiumService.isPremium;
+        
+        // Premium kontrolü - 2. sorudan sonra premium gerekli
+        if (PremiumAccessService.shouldShowPremiumScreenWithTestMode(currentQuestionIndex, isPremium, premiumService.isTestMode)) {
+          print('🔒 Premium ekranı gösteriliyor - Test Modu: ${premiumService.isTestMode}, Premium: $isPremium, Soru: $currentQuestionIndex');
+          return _buildPremiumLockScreen();
         }
-      },
-      child: Scaffold(
-        extendBody: true,
-        body: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [Colors.blue.shade900, Colors.black],
-            ),
-          ),
-          child: SafeArea(
-            child: Column(
-              children: [
-                _buildHeader(),
-                _buildProgressBar(),
-                Expanded(
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        _buildQuestion(),
-                        _buildPremises(),
-                        _buildOptions(),
-                      ],
-                    ),
-                  ),
+        
+        // Test modu durumunu logla
+        if (premiumService.isTestMode) {
+          print('🧪 Test Modu Aktif - Tüm premium kontrolleri atlandı');
+        }
+        
+        return PopScope(
+          canPop: false,
+          onPopInvokedWithResult: (didPop, result) async {
+            if (!didPop) {
+              final shouldPop = await _showExitConfirmationDialog();
+              if (shouldPop && context.mounted) {
+                Navigator.of(context).pop();
+              }
+            }
+          },
+          child: Scaffold(
+            extendBody: true,
+            body: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [Colors.blue.shade900, Colors.black],
                 ),
-                _buildBottomButton(),
-              ],
+              ),
+              child: SafeArea(
+                child: Column(
+                  children: [
+                    _buildHeader(),
+                    _buildProgressBar(),
+                    _buildPremiumStatusBanner(isPremium),
+                    Expanded(
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            _buildQuestion(),
+                            _buildPremises(),
+                            _buildOptions(),
+                          ],
+                        ),
+                      ),
+                    ),
+                    _buildBottomButton(),
+                  ],
+                ),
+              ),
             ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 
@@ -843,12 +865,6 @@ class _QuizScreenState extends State<QuizScreen>
         'Quiz tamamlanıyor: kategori=${widget.categoryName}, skor=$score/${widget.questions.length}',
       );
 
-      // Önce EventBus ile bildirim gönder (ana sayfayı hemen yenilemek için)
-      EventBus().fireMistakesUpdated(true);
-      print(
-        "Quiz tamamlandı bildirimi hemen gönderildi - Ana sayfa yenilenecek",
-      );
-
       final result = await _quizService.completeQuiz(
         widget.categoryName,
         score,
@@ -861,8 +877,20 @@ class _QuizScreenState extends State<QuizScreen>
       if (result) {
         print('Quiz başarıyla tamamlandı ve veritabanına kaydedildi');
 
-        // Quiz tamamlandı, ana sayfaya dön
-        Navigator.pop(context);
+        // Quiz tamamlandıktan sonra EventBus ile bildirim gönder
+        // Bu sayede hem ana sayfa hem de quizler ekranı güncellenecek
+        EventBus().fireMistakesUpdated(true);
+        print("Quiz tamamlandı bildirimi gönderildi - Tüm sayfalar yenilenecek");
+
+        // Kısa bir gecikme ekle ki veritabanı güncellemesi tamamlansın
+        await Future.delayed(const Duration(milliseconds: 500));
+
+        // Quiz tamamlandı, sonuçları döndür ve ana sayfaya dön
+        Navigator.pop(context, {
+          'score': score,
+          'totalQuestions': widget.questions.length,
+          'successRate': (score / widget.questions.length) * 100,
+        });
         SnackBarUtils.showSuccessSnackBar(context, AppLocalizations.of(context)!.quizCompleted);
       } else {
         print('HATA: Quiz tamamlanamadı veya veritabanına kaydedilemedi');
@@ -876,5 +904,96 @@ class _QuizScreenState extends State<QuizScreen>
       if (!mounted) return;
       SnackBarUtils.showErrorSnackBar(context, 'Hata: $e');
     }
+  }
+
+  // Premium lock screen
+  Widget _buildPremiumLockScreen() {
+    return Scaffold(
+      extendBody: true,
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [Colors.blue.shade900, Colors.black],
+          ),
+        ),
+        child: SafeArea(
+          child: Column(
+            children: [
+              _buildHeader(),
+              Expanded(
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(24.0),
+                    child: PremiumLockWidget(
+                      message: PremiumAccessService.getPremiumRequiredMessage(),
+                      subtitle: PremiumAccessService.getPremiumIncentiveMessage(),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  // Premium status banner
+  Widget _buildPremiumStatusBanner(bool isPremium) {
+    return Consumer<PremiumService>(
+      builder: (context, premiumService, child) {
+        // Test modu aktifse banner gösterme
+        if (premiumService.isTestMode) return const SizedBox.shrink();
+        
+        if (isPremium) return const SizedBox.shrink();
+        
+        final remainingQuestions = PremiumAccessService.getRemainingFreeQuestions(
+          currentQuestionIndex, 
+          isPremium
+        );
+        
+        if (remainingQuestions <= 0) return const SizedBox.shrink();
+    
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      decoration: BoxDecoration(
+        gradient: const LinearGradient(
+          colors: [Colors.amber, Colors.orange],
+        ),
+        borderRadius: BorderRadius.circular(12),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.amber.withOpacity(0.3),
+            blurRadius: 8,
+            spreadRadius: 1,
+          ),
+        ],
+      ),
+      child: Row(
+        children: [
+          const Icon(
+            Icons.info_outline,
+            color: Colors.black,
+            size: 20,
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Text(
+              'Kalan ücretsiz soru hakkınız: $remainingQuestions',
+              style: const TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+                fontSize: 14,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+      },
+    );
   }
 }

@@ -826,25 +826,14 @@ class _AdminScreenState extends State<AdminScreen>
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                '$questionCount',
+                '$questionCount soru',
                 style: TextStyle(
                   fontSize: isSmallScreen ? 18 : (isLargeScreen ? 24 : 20),
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),
               ),
-              SizedBox(height: isSmallScreen ? 1 : 2),
-              Text(
-                language,
-                style: TextStyle(
-                  fontSize: isSmallScreen ? 11 : (isLargeScreen ? 13 : 12),
-                  color: Colors.white70,
-                  fontWeight: FontWeight.w500,
-                ),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-              SizedBox(height: isSmallScreen ? 0.5 : 1),
+              SizedBox(height: isSmallScreen ? 2 : 3),
               Text(
                 '$categoryCount kategori',
                 style: TextStyle(

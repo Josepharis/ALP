@@ -141,16 +141,19 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
         );
 
     // Aylık liderlik tablosu stream'ine abone ol
+    print('DEBUG: Aylık sıralama stream\'i başlatılıyor...');
     _monthlyLeaderboardSubscription = _leaderboardService
         .getMonthlyLeaderboardStream()
         .listen(
           (data) {
+            print('DEBUG: Aylık sıralama verisi geldi: ${data.length} kullanıcı');
             if (mounted) {
               setState(() {
                 _monthlyLeaderboardData = data;
                 // Aylık veri geldiğinde loading'i kapat
                 if (_selectedTabIndex == 1) {
                   _isLoading = false;
+                  print('DEBUG: Aylık tab aktif, loading kapatılıyor');
                 }
               });
               // Aylık tab seçiliyse animasyonu başlat
@@ -276,6 +279,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
     
     return GestureDetector(
       onTap: () {
+        print('DEBUG: Tab değişimi - Eski: $_selectedTabIndex, Yeni: $index');
         setState(() {
           _selectedTabIndex = index;
           _isLoading = true;
@@ -286,15 +290,19 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
         
         // Eğer veri zaten varsa loading'i hemen kapat
         if (index == 0 && _leaderboardData.isNotEmpty) {
+          print('DEBUG: Genel sıralama verisi mevcut, loading kapatılıyor');
           setState(() {
             _isLoading = false;
           });
           _animationController.forward();
         } else if (index == 1 && _monthlyLeaderboardData.isNotEmpty) {
+          print('DEBUG: Aylık sıralama verisi mevcut, loading kapatılıyor');
           setState(() {
             _isLoading = false;
           });
           _animationController.forward();
+        } else {
+          print('DEBUG: Veri yok, stream bekleniyor...');
         }
       },
       child: AnimatedContainer(
@@ -330,11 +338,16 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
   Widget _buildTopThree() {
     final currentData = _selectedTabIndex == 0 ? _leaderboardData : _monthlyLeaderboardData;
     
-    if (currentData.length < 3) return const SliverToBoxAdapter();
+    print('DEBUG: _buildTopThree - Veri sayısı: ${currentData.length}');
+    
+    if (currentData.isEmpty) {
+      print('DEBUG: Podium gösterilmiyor, veri boş');
+      return const SliverToBoxAdapter();
+    }
 
     final firstPlace = currentData[0];
-    final secondPlace = currentData[1];
-    final thirdPlace = currentData[2];
+    final secondPlace = currentData.length > 1 ? currentData[1] : null;
+    final thirdPlace = currentData.length > 2 ? currentData[2] : null;
 
     return SliverToBoxAdapter(
       child: Column(
@@ -391,7 +404,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
                         child: _buildCard(
                           user: firstPlace,
                           color: Colors.amber.shade600,
-                          label: AppLocalizations.of(context)!.first,
+                          label: "1.",
                           position: 1,
                         ),
                       ),
@@ -400,36 +413,39 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
                 ),
 
                 // İkinci ve Üçüncü - Altta yan yana (birincisiyle aynı boyut)
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    // İkinci Kart - birincisiyle aynı boyut
-                    SizedBox(
-                      width:
-                          MediaQuery.of(context).size.width *
-                          0.35, // 0.4'ten 0.35'e küçültüldü
-                      child: _buildCard(
-                        user: secondPlace,
-                        color: Colors.grey.shade500,
-                        label: AppLocalizations.of(context)!.second,
-                        position: 2,
-                      ),
-                    ),
+                if (secondPlace != null || thirdPlace != null)
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      // İkinci Kart - birincisiyle aynı boyut
+                      if (secondPlace != null)
+                        SizedBox(
+                          width:
+                              MediaQuery.of(context).size.width *
+                              0.35, // 0.4'ten 0.35'e küçültüldü
+                          child: _buildCard(
+                            user: secondPlace,
+                            color: Colors.grey.shade500,
+                            label: "2.",
+                            position: 2,
+                          ),
+                        ),
 
-                    // Üçüncü Kart - birincisiyle aynı boyut
-                    SizedBox(
-                      width:
-                          MediaQuery.of(context).size.width *
-                          0.35, // 0.4'ten 0.35'e küçültüldü
-                      child: _buildCard(
-                        user: thirdPlace,
-                        color: Colors.orange.shade700,
-                        label: AppLocalizations.of(context)!.third,
-                        position: 3,
-                      ),
-                    ),
-                  ],
-                ),
+                      // Üçüncü Kart - birincisiyle aynı boyut
+                      if (thirdPlace != null)
+                        SizedBox(
+                          width:
+                              MediaQuery.of(context).size.width *
+                              0.35, // 0.4'ten 0.35'e küçültüldü
+                          child: _buildCard(
+                            user: thirdPlace,
+                            color: Colors.orange.shade700,
+                            label: "3.",
+                            position: 3,
+                          ),
+                        ),
+                    ],
+                  ),
               ],
             ),
           ),
@@ -501,7 +517,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
     final iconSize =
         isTablet ? 10.0 : (isSmallScreen ? 6.0 : 8.0); // Daha da küçültüldü
     final labelSize =
-        isTablet ? 11.0 : (isSmallScreen ? 8.0 : 10.0); // Daha da küçültüldü
+        isTablet ? 20.0 : (isSmallScreen ? 16.0 : 18.0); // Rakam boyutu ciddi şekilde artırıldı
 
     return Container(
       decoration: BoxDecoration(
@@ -540,7 +556,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
                       children: [
                         Text(
                           rankEmoji,
-                          style: TextStyle(fontSize: isSmallScreen ? 12 : 14),
+                          style: TextStyle(fontSize: isSmallScreen ? 18 : 20),
                         ),
                         const SizedBox(width: 6),
                         Text(
@@ -631,17 +647,42 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
 
                       SizedBox(height: isSmallScreen ? 6 : 8),
 
-                      // İsim
-                      Text(
-                        displayName,
-                        style: GoogleFonts.poppins(
-                          color: Colors.white,
-                          fontSize: nameSize,
-                          fontWeight: FontWeight.w600,
-                        ),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        textAlign: TextAlign.center,
+                      // İsim + Sen yazısı
+                      Column(
+                        children: [
+                          Text(
+                            displayName,
+                            style: GoogleFonts.poppins(
+                              color: Colors.white,
+                              fontSize: nameSize,
+                              fontWeight: FontWeight.w600,
+                            ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            textAlign: TextAlign.center,
+                          ),
+                          if (user['isCurrentUser'] ?? false) ...[
+                            SizedBox(height: isSmallScreen ? 2 : 3),
+                            Container(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: isSmallScreen ? 4 : 6,
+                                vertical: isSmallScreen ? 1 : 2,
+                              ),
+                              decoration: BoxDecoration(
+                                color: Colors.amber.shade600,
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Text(
+                                'Sen',
+                                style: GoogleFonts.poppins(
+                                  color: Colors.white,
+                                  fontSize: isSmallScreen ? 7 : 8,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ],
                       ),
 
                       SizedBox(height: isSmallScreen ? 3 : 4),
@@ -694,7 +735,16 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
   Widget _buildLeaderboardList() {
     final currentData = _selectedTabIndex == 0 ? _leaderboardData : _monthlyLeaderboardData;
     
+    print('DEBUG: _buildLeaderboardList - Tab: $_selectedTabIndex, Veri sayısı: ${currentData.length}');
+    
+    if (currentData.isEmpty) {
+      print('DEBUG: Veri boş, boş widget döndürülüyor');
+      return const SliverToBoxAdapter();
+    }
+    
     if (currentData.length <= 3) {
+      print('DEBUG: Veri sayısı 3 veya daha az, boş liste döndürülüyor');
+      // 3 veya daha az kullanıcı varsa boş liste döndür (podium yeterli)
       return const SliverToBoxAdapter();
     }
 
@@ -704,26 +754,71 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
     );
 
     if (userIndex == -1 || userIndex < 3) {
-      // Kullanıcı bulunamadı veya zaten top 3'te ise normal listeyi göster
-      return SliverList(
-        delegate: SliverChildBuilderDelegate((context, index) {
-          final itemIndex = index + 3;
-          if (itemIndex >= currentData.length) return null;
+      // Kullanıcı bulunamadı veya zaten top 3'te ise sadece birkaç kişi göster (çevre mantığı)
+      final maxItems = 5; // Maksimum 5 kişi göster
+      final itemsToShow = (currentData.length - 3).clamp(0, maxItems);
+      final hasMoreItems = currentData.length > 3 + maxItems;
+      
+      return SliverToBoxAdapter(
+        child: Column(
+          children: [
+            // Gösterilecek kişiler
+            ...List.generate(itemsToShow, (index) {
+              final itemIndex = index + 3;
+              if (itemIndex >= currentData.length) return const SizedBox.shrink();
 
-          final user = currentData[itemIndex];
-          final rank = itemIndex + 1;
-          final displayName = user['displayName'] ?? 'İsimsiz';
-          final points = user['totalPoints'] ?? 0;
-          final isCurrentUser = user['isCurrentUser'] ?? false;
+              final user = currentData[itemIndex];
+              final rank = itemIndex + 1;
+              final displayName = user['displayName'] ?? 'İsimsiz';
+              final points = user['totalPoints'] ?? 0;
+              final isCurrentUser = user['isCurrentUser'] ?? false;
 
-          return _buildLeaderboardItem(
-            user,
-            rank,
-            displayName,
-            points,
-            isCurrentUser,
-          );
-        }, childCount: currentData.length - 3),
+              return _buildLeaderboardItem(
+                user,
+                rank,
+                displayName,
+                points,
+                isCurrentUser,
+              );
+            }),
+            
+            // Eğer daha fazla kişi varsa dikey "..." göster
+            if (hasMoreItems)
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                child: Center(
+                  child: Column(
+                    children: [
+                      Text(
+                        '•',
+                        style: TextStyle(
+                          color: Colors.grey.shade500,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        '•',
+                        style: TextStyle(
+                          color: Colors.grey.shade500,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        '•',
+                        style: TextStyle(
+                          color: Colors.grey.shade500,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+          ],
+        ),
       );
     }
 

@@ -8,6 +8,7 @@ class UserActivity {
   final int totalCorrectAnswers;
   final int totalWrongAnswers;
   final int totalPoints;
+  final bool isPremium;
   final DateTime lastUpdated;
 
   UserActivity({
@@ -18,6 +19,7 @@ class UserActivity {
     this.totalCorrectAnswers = 0,
     this.totalWrongAnswers = 0,
     this.totalPoints = 0,
+    this.isPremium = false,
     required this.lastUpdated,
   });
 
@@ -28,6 +30,7 @@ class UserActivity {
       quizProgress: {},
       dailyStreak: 1,
       totalPoints: 0,
+      isPremium: false,
       lastUpdated: DateTime.now(),
     );
   }
@@ -68,6 +71,7 @@ class UserActivity {
       totalCorrectAnswers: data['totalCorrectAnswers'] ?? 0,
       totalWrongAnswers: data['totalWrongAnswers'] ?? 0,
       totalPoints: data['totalPoints'] ?? 0,
+      isPremium: data['isPremium'] ?? false,
       lastUpdated:
           (data['lastUpdated'] as Timestamp?)?.toDate() ?? DateTime.now(),
     );
@@ -87,6 +91,7 @@ class UserActivity {
       'totalCorrectAnswers': totalCorrectAnswers,
       'totalWrongAnswers': totalWrongAnswers,
       'totalPoints': totalPoints,
+      'isPremium': isPremium,
       'lastUpdated': Timestamp.fromDate(lastUpdated),
     };
   }

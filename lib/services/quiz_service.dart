@@ -3,7 +3,8 @@ import 'dart:math';
  
 import 'package:anestezi/models/daily_question.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter/material.dart';
 import '../models/quiz.dart';
 import '../models/question.dart';
 import '../models/user_activity.dart';
@@ -50,7 +51,6 @@ import '../data/renal_physiology_anesthesia_questions.dart'; // Added
 import '../data/spinal_epidural_caudal_blocks_questions.dart'; // Added
 import '../data/safety_quality_performance_improvement_questions.dart'; // Added
 import '../data/fluid_management_blood_products_questions.dart'; // Added
-import '../data/maternal_fetal_physiology_anesthesia_questions.dart'; // Added
 import '../data/thoracic_surgery_anesthesia_questions.dart'; // Added
 import '../data/thermoregulation_hypothermia_malignant_hyperthermia_questions.dart'; // Added
 import '../data/outpatient_anesthesia_questions.dart'; // Added
@@ -60,20 +60,12 @@ import '../data/sepsis_ards_questions.dart'; // Added
 import '../data/coagulation_anticoagulant_questions.dart'; // Added
 import '../data/postanesthetic_care_questions.dart'; // Added
 import '../data/pediatric_anesthesia_questions.dart'; // Added
-import '../data/chronic_pain_treatment_questions.dart'; // Added
 import '../data/postoperative_care_mechanical_ventilation_questions.dart'; // Added
 import '../data/neurosurgery_anesthesia_questions.dart'; // Added
-import '../data/hepatic_physiology_anesthesia_questions.dart'; // Added
-import '../data/obstetric_anesthesia_questions.dart'; // Added
-import '../data/acid_base_management_questions.dart'; // Added
-import '../data/liver_disease_anesthesia_questions.dart'; // Added
-import '../data/neurophysiology_anesthesia_questions.dart'; // Added
-import '../data/perioperative_intensive_care_nutrition_questions.dart'; // Added
-import '../data/fluid_electrolyte_imbalance_management_questions.dart'; // Added
 import '../data/erc_2021_guidelines_questions.dart'; // Added
-import '../utils/event_bus.dart';
 import 'question_translation_service.dart';
 import 'multilingual_question_service.dart';
+import 'language_service.dart';
 
 
 class QuizService {
@@ -81,6 +73,40 @@ class QuizService {
   final AuthService _authService = AuthService();
   final QuestionTranslationService _translationService = QuestionTranslationService();
 
+
+  // Quiz'in attemptCount'unu artır
+  Future<bool> incrementQuizAttemptCount(String quizId) async {
+    try {
+      final userId = _authService.currentUser?.uid;
+      if (userId == null) {
+        throw Exception('Kullanıcı giriş yapmamış');
+      }
+
+      final ongoingQuizRef = _firestore
+          .collection('user_ongoing_quizzes')
+          .doc('${userId}_${quizId}');
+
+      final existingQuiz = await ongoingQuizRef.get();
+      
+      if (existingQuiz.exists) {
+        final data = existingQuiz.data() as Map<String, dynamic>;
+        final currentAttemptCount = data['attemptCount'] ?? 1;
+        
+        await ongoingQuizRef.update({
+          'attemptCount': currentAttemptCount + 1,
+          'updatedAt': Timestamp.now(),
+        });
+        
+        print('Quiz attemptCount artırıldı: ${currentAttemptCount + 1}');
+        return true;
+      }
+      
+      return false;
+    } catch (e) {
+      print('incrementQuizAttemptCount hatası: $e');
+      return false;
+    }
+  }
 
   // Kullanıcının quiz ilerlemesini kaydet
   Future<bool> saveQuizProgress(Quiz quiz) async {
@@ -121,9 +147,39 @@ class QuizService {
           'score': quiz.score ?? 0,
           'updatedAt': Timestamp.now(),
         });
-        print('Mevcut quiz güncellendiDuplicateID: ${quiz.id}');
+        print('Mevcut quiz güncellendi: ${quiz.id}');
       } else {
-        // Yeni quiz kaydı oluştur
+        // Yeni quiz kaydı oluştur - attemptCount'u hesapla
+        // Eğer bu kategori için tamamlanmış quiz varsa, attemptCount'u artır
+        int attemptCount = 1;
+        
+        // Aynı kategori için tamamlanmış quiz var mı kontrol et
+        final completedQuizQuery = await _firestore
+            .collection('user_completed_quizzes')
+            .where('userId', isEqualTo: userId)
+            .where('categoryName', isEqualTo: quiz.name)
+            .get();
+            
+        if (completedQuizQuery.docs.isNotEmpty) {
+          // Tamamlanmış quiz varsa, attemptCount'u artır
+          attemptCount = 2; // İlk tekrar çözme
+          
+          // Aynı kategori için devam eden quiz var mı kontrol et (başka bir quiz)
+          final ongoingQuizQuery = await _firestore
+              .collection('user_ongoing_quizzes')
+              .where('userId', isEqualTo: userId)
+              .where('quizName', isEqualTo: quiz.name)
+              .get();
+              
+          if (ongoingQuizQuery.docs.isNotEmpty) {
+            // Devam eden quiz varsa, onun attemptCount'unu al ve artır
+            final maxAttemptCount = ongoingQuizQuery.docs
+                .map((doc) => (doc.data()['attemptCount'] as int?) ?? 1)
+                .reduce((a, b) => a > b ? a : b);
+            attemptCount = maxAttemptCount + 1;
+          }
+        }
+        
         await ongoingQuizRef.set({
           'userId': userId,
           'quizId': quiz.id,
@@ -131,10 +187,11 @@ class QuizService {
           'currentQuestionIndex': quiz.currentQuestionIndex ?? 0,
           'totalQuestions': quiz.totalQuestions,
           'score': quiz.score ?? 0,
+          'attemptCount': attemptCount,
           'updatedAt': Timestamp.now(),
           'createdAt': Timestamp.now(),
         });
-        print('Yeni quiz kaydı oluşturuldu: ${quiz.id}');
+        print('Yeni quiz kaydı oluşturuldu: ${quiz.id}, attemptCount: $attemptCount');
       }
 
       // Sorunun ilerlemesini kaydet
@@ -363,6 +420,7 @@ class QuizService {
           totalQuestions: data['totalQuestions'] as int? ?? 0,
           currentQuestionIndex: data['currentQuestionIndex'] as int? ?? 0,
           score: data['score'] as int? ?? 0,
+          attemptCount: data['attemptCount'] as int? ?? 1,
           createdAt: (data['createdAt'] as Timestamp?)?.toDate(),
         );
 
@@ -732,11 +790,19 @@ class QuizService {
         await _firestore.collection('userActivities').doc(userId).update({
           'totalPoints': FieldValue.increment(20),
           'dailyQuestionsCorrect': FieldValue.increment(1),
+          'pointsHistory': FieldValue.arrayUnion([{
+            'points': 20,
+            'date': todayString,
+            'source': 'daily_question',
+            'timestamp': FieldValue.serverTimestamp(),
+          }]),
+          'lastUpdated': FieldValue.serverTimestamp(),
         });
         print('DEBUG: Kullanıcıya 20 puan eklendi');
       } else {
         await _firestore.collection('userActivities').doc(userId).update({
           'dailyQuestionsWrong': FieldValue.increment(1),
+          'lastUpdated': FieldValue.serverTimestamp(),
         });
         print('DEBUG: Yanlış cevap kaydedildi');
       }
@@ -806,18 +872,52 @@ class QuizService {
     }
   }
 
+  // Kategori adını normalize et (büyük/küçük harf, virgül, noktalama işaretleri)
+  String _normalizeCategoryName(String categoryName) {
+    return categoryName
+        .toLowerCase()
+        .replaceAll(',', '') // Virgülleri kaldır
+        .replaceAll(' ve ', ' ') // "ve" kelimesini kaldır
+        .replaceAll(RegExp(r'\s+'), ' ') // Çoklu boşlukları tek boşluğa çevir
+        .trim();
+  }
+
   // Kategori adına göre soruları getir
-  Future<List<Question>> getCategoryQuestions(String categoryName) async {
+  Future<List<Question>> getCategoryQuestions(String categoryName, {BuildContext? context}) async {
     print('DEBUG: getCategoryQuestions çağrıldı - Kategori: "$categoryName"');
     print('DEBUG: Lowercase kategori: "${categoryName.toLowerCase()}"');
+    
+    final normalizedCategoryName = _normalizeCategoryName(categoryName);
+    print('DEBUG: Normalized kategori: "$normalizedCategoryName"');
+
+    // Önce MultilingualQuestionService'den kategorileri kontrol et
+    try {
+      if (context != null) {
+        final languageService = Provider.of<LanguageService>(context, listen: false);
+        final categories = MultilingualQuestionService.getQuizCategories(languageService.currentLocale.languageCode);
+      
+        for (var category in categories) {
+          final title = category['title'] as String;
+          if (title == categoryName || title.toLowerCase() == categoryName.toLowerCase()) {
+            final questions = category['questions'] as List<Question>;
+            print('DEBUG: MultilingualQuestionService\'den bulundu: $title -> ${questions.length} soru');
+            return questions;
+          }
+        }
+      }
+    } catch (e) {
+      print('DEBUG: MultilingualQuestionService kontrolü başarısız: $e');
+    }
 
     // Kategori mapping - Firestore'dan gelen adları kod içindeki soru setleriyle eşleştir
     final categoryMapping = {
-      // Anestezi kategorileri (Türkçe)
+      // Anestezi kategorileri (Türkçe) - Büyük harfli versiyonlar da eklendi
       'anestezi': anesthesiaApplicationQuestions,
       'anestezi uygulama': anesthesiaApplicationQuestions,
       'anestezi uygulaması': anesthesiaApplicationQuestions,
       'anestezi uygulamasi': anesthesiaApplicationQuestions,
+      'Anestezi Uygulaması': anesthesiaApplicationQuestions, // Büyük harfli versiyon
+      'ANESTEZI UYGULAMASI': anesthesiaApplicationQuestions, // Tümü büyük harf
       
       // Anestezi kategorileri (İngilizce)
       'anesthesia application': anesthesiaApplicationQuestions,
@@ -829,21 +929,29 @@ class QuizService {
       'solunum': respiratorySystemQuestions,
       'solunum sistemleri': respiratorySystemQuestions,
       'solunum sistemi': respiratorySystemQuestions,
+      'Solunum Sistemleri': respiratorySystemQuestions, // Büyük harfli versiyon
+      'SOLUNUM SISTEMLERI': respiratorySystemQuestions, // Tümü büyük harf
 
       // Kardiyovasküler kategorileri
       'kardiyovasküler': cardiovascularMonitoringQuestions,
       'kardiyovasküler monitörizasyon': cardiovascularMonitoringQuestions,
       'kardiyovasküler monitorizasyon': cardiovascularMonitoringQuestions,
       'kardiyovaskuler monitörizasyon': cardiovascularMonitoringQuestions,
+      'Kardiyovasküler Monitörizasyon': cardiovascularMonitoringQuestions, // Büyük harfli versiyon
+      'KARDİYOVASKÜLER MONİTÖRİZASYON': cardiovascularMonitoringQuestions, // Tümü büyük harf
 
       // Farmakoloji kategorileri
       'farmakoloji': pharmacologicalPrinciplesQuestions,
       'farmakolojik prensipler': pharmacologicalPrinciplesQuestions,
       'farmakolojik prensip': pharmacologicalPrinciplesQuestions,
+      'Farmakolojik Prensipler': pharmacologicalPrinciplesQuestions, // Büyük harfli versiyon
+      'FARMAKOLOJIK PRENSIpLER': pharmacologicalPrinciplesQuestions, // Tümü büyük harf
 
       // Ameliyathane kategorileri
       'ameliyathane': operatingRoomEnvironmentQuestions,
       'ameliyathane ortamı': operatingRoomEnvironmentQuestions,
+      'Ameliyathane Ortamı': operatingRoomEnvironmentQuestions, // Büyük harfli versiyon
+      'AMELIYATHANE ORTAMI': operatingRoomEnvironmentQuestions, // Tümü büyük harf
 
       // Diğer kategoriler
       'kardiyovasküler dışı monitörizasyon':
@@ -1001,8 +1109,34 @@ class QuizService {
           'ileri yaşam desteği': erc2021GuidelinesQuestions,
         };
 
-    final lowerCategoryName = categoryName.toLowerCase();
-    final questions = categoryMapping[lowerCategoryName];
+    // Önce normalize edilmiş isimle ara
+    var questions = categoryMapping[normalizedCategoryName];
+    print('DEBUG: Normalize edilmiş isimle arama: "$normalizedCategoryName" -> ${questions != null ? "BULUNDU" : "BULUNAMADI"}');
+    
+    // Eğer bulunamazsa, orijinal lowercase ile de dene
+    if (questions == null) {
+      final lowerCategoryName = categoryName.toLowerCase();
+      questions = categoryMapping[lowerCategoryName];
+      print('DEBUG: Lowercase isimle arama: "$lowerCategoryName" -> ${questions != null ? "BULUNDU" : "BULUNAMADI"}');
+    }
+    
+    // Eğer hala bulunamazsa, orijinal isimle dene
+    if (questions == null) {
+      questions = categoryMapping[categoryName];
+      print('DEBUG: Orijinal isimle arama: "$categoryName" -> ${questions != null ? "BULUNDU" : "BULUNAMADI"}');
+    }
+    
+    // Eğer hala bulunamazsa, partial match dene
+    if (questions == null) {
+      final lowerCategoryName = categoryName.toLowerCase();
+      for (var key in categoryMapping.keys) {
+        if (key.toLowerCase().contains(lowerCategoryName) || lowerCategoryName.contains(key.toLowerCase())) {
+          questions = categoryMapping[key];
+          print('DEBUG: Partial match bulundu: "$key" -> ${questions?.length ?? 0} soru');
+          break;
+        }
+      }
+    }
 
     if (questions != null) {
       print('DEBUG: Kategori eşleşti! ${questions.length} soru bulundu');
@@ -1011,6 +1145,8 @@ class QuizService {
       print(
         'DEBUG: UYARI - Kategori eşleşmedi! "$categoryName" için boş liste döndürülüyor',
       );
+      print('DEBUG: Normalized: "$normalizedCategoryName"');
+      print('DEBUG: Lowercase: "${categoryName.toLowerCase()}"');
       print(
         'DEBUG: Kullanılabilir kategoriler: ${categoryMapping.keys.take(10).join(", ")}...',
       );
@@ -1036,17 +1172,13 @@ class QuizService {
         // Doğru cevap
         await _firestore.collection('userActivities').doc(userId).update({
           'totalPoints': FieldValue.increment(points), // Puanları ekle
-          'totalCorrectAnswers': FieldValue.increment(
-            1,
-          ), // Doğru cevap sayısını artır
+          'totalCorrectAnswers': FieldValue.increment(1), // Doğru cevap sayısını artır
         });
         print('Doğru cevap istatistiği güncellendi: $points puan eklendi');
       } else {
         // Yanlış cevap
         await _firestore.collection('userActivities').doc(userId).update({
-          'totalWrongAnswers': FieldValue.increment(
-            1,
-          ), // Yanlış cevap sayısını artır
+          'totalWrongAnswers': FieldValue.increment(1), // Yanlış cevap sayısını artır
         });
         print('Yanlış cevap istatistiği güncellendi');
       }
@@ -1404,6 +1536,9 @@ class QuizService {
 
       final successRate = (score / totalQuestions) * 100; // Başarı oranı
 
+      final now = DateTime.now();
+      final todayString = '${now.year}-${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')}';
+
       // Quiz ilerlemesini tamamlandı olarak işaretle
       await userActivityRef.set({
         'quizProgress': {
@@ -1419,13 +1554,17 @@ class QuizService {
             'lastUpdatedAt': Timestamp.now(),
           },
         },
-        'totalPoints': FieldValue.increment(
-          score * 10,
-        ), // Her doğru cevap için 10 puan
+        'totalPoints': FieldValue.increment(score * 10), // Her doğru cevap için 10 puan
+        'pointsHistory': FieldValue.arrayUnion([{
+          'points': score * 10,
+          'date': todayString,
+          'source': 'quiz_completion',
+          'timestamp': FieldValue.serverTimestamp(),
+        }]),
+        'lastUpdated': FieldValue.serverTimestamp(),
       }, SetOptions(merge: true));
 
       // Tamamlanan quizi user_completed_quizzes koleksiyonuna da kaydet
-      final now = DateTime.now();
       final completedQuizId = '${userId}_${finalQuizId}';
 
       print('Tamamlanan quiz kaydediliyor: $completedQuizId');

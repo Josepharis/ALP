@@ -9,6 +9,7 @@ import 'firebase_options.dart';
 import 'services/device_service.dart';
 import 'services/notification_service.dart';
 import 'services/language_service.dart';
+import 'services/premium_service.dart';
 import 'l10n/app_localizations.dart';
 
 import 'screens/splash_screen.dart';
@@ -16,9 +17,10 @@ import 'screens/login_screen.dart';
 import 'screens/register_screen.dart';
 import 'screens/home_screen.dart';
 import 'screens/admin_screen.dart';
-
-
-import 'theme/app_theme.dart';
+import 'screens/premium_screen.dart';
+import 'screens/test_premium_screen.dart';
+import 'screens/subscription_screen.dart';
+import 'screens/demo_premium_features_screen.dart';
 
 // Firebase background message handler
 @pragma('vm:entry-point')
@@ -80,7 +82,11 @@ void main() async {
     // Android bildirim durumunu kontrol et
     await notificationService.checkAndroidNotificationStatus();
     
-
+    // PremiumService'i initialize et
+    print('💎 Initializing PremiumService...');
+    final premiumService = PremiumService();
+    await premiumService.initialize();
+    print('✅ PremiumService initialized');
     
     print('✅ NotificationService initialized');
     
@@ -91,8 +97,11 @@ void main() async {
   }
 
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => LanguageService(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => LanguageService()),
+        ChangeNotifierProvider(create: (context) => PremiumService()),
+      ],
       child: const MyApp(),
     ),
   );
@@ -144,7 +153,10 @@ class MyApp extends StatelessWidget {
             '/login': (context) => const LoginScreen(),
             '/register': (context) => const RegisterScreen(),
             '/admin': (context) => const AdminScreen(),
-
+            '/premium': (context) => const PremiumScreen(),
+            '/subscription': (context) => const SubscriptionScreen(),
+            '/test-premium': (context) => const TestPremiumScreen(),
+            '/demo-premium': (context) => const DemoPremiumFeaturesScreen(),
           },
         );
       },

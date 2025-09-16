@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
 import '../l10n/app_localizations.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:file_picker/file_picker.dart';
-import 'dart:io';
-import 'dart:math';
-import '../services/organized_data_service.dart';
-import '../services/word_parser_service.dart';
 
 class AddQuestionScreen extends StatefulWidget {
   final bool editMode;
@@ -34,12 +29,11 @@ class _AddQuestionScreenState extends State<AddQuestionScreen> {
   final _option4Controller = TextEditingController();
   final _explanationController = TextEditingController();
   final _quizNameController = TextEditingController();
-  final OrganizedDataService _organizedDataService = OrganizedDataService();
-  final WordParserService _wordParserService = WordParserService();
 
   int _correctAnswerIndex = 0;
   String _selectedQuizType = 'Mevcut Quiz';
   String _selectedCategory = 'Anestezi';
+  String _difficultyLevel = 'medium'; // Zorluk seviyesi
   bool _isLoading = false;
   String _errorMessage = '';
   bool _isNewQuizSelected = false;
@@ -66,6 +60,7 @@ class _AddQuestionScreenState extends State<AddQuestionScreen> {
 
       _correctAnswerIndex = widget.questionData!['correctAnswerIndex'] ?? 0;
       _explanationController.text = widget.questionData!['explanation'] ?? '';
+      _difficultyLevel = widget.questionData!['difficulty'] ?? 'medium';
 
       if (widget.category != null) {
         _selectedCategory = widget.category!;
@@ -221,13 +216,7 @@ class _AddQuestionScreenState extends State<AddQuestionScreen> {
         title: Text(widget.editMode ? AppLocalizations.of(context)!.editQuestion : AppLocalizations.of(context)!.addNewQuestion),
         backgroundColor: Colors.indigo.shade900,
         elevation: 0,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.upload_file),
-            tooltip: AppLocalizations.of(context)!.uploadWordFile,
-            onPressed: _pickAndProcessWordFile,
-          ),
-        ],
+        actions: [],
       ),
       body: Container(
         decoration: BoxDecoration(
@@ -403,6 +392,53 @@ class _AddQuestionScreenState extends State<AddQuestionScreen> {
             controller: _explanationController,
             hint: AppLocalizations.of(context)!.explanationHint,
             maxLines: 3,
+          ),
+          const SizedBox(height: 24),
+
+          // Zorluk seviyesi
+          _buildSectionTitle('Zorluk Seviyesi'),
+          const SizedBox(height: 12),
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.white.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(color: Colors.white.withOpacity(0.2)),
+            ),
+            child: DropdownButtonFormField<String>(
+              decoration: const InputDecoration(
+                contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                border: InputBorder.none,
+              ),
+              dropdownColor: Colors.indigo.shade800,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 14,
+              ),
+              isExpanded: true,
+              icon: const Icon(Icons.keyboard_arrow_down, color: Colors.white70, size: 20),
+              value: _difficultyLevel,
+              items: const [
+                DropdownMenuItem(
+                  value: 'easy',
+                  child: Text('Kolay'),
+                ),
+                DropdownMenuItem(
+                  value: 'medium',
+                  child: Text('Orta'),
+                ),
+                DropdownMenuItem(
+                  value: 'hard',
+                  child: Text('Zor'),
+                ),
+              ],
+              onChanged: (value) {
+                if (value != null) {
+                  setState(() {
+                    _difficultyLevel = value;
+                  });
+                }
+              },
+            ),
           ),
         ],
       ),
@@ -1136,18 +1172,36 @@ class _AddQuestionScreenState extends State<AddQuestionScreen> {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: Colors.red.withOpacity(0.1),
+        color: _errorMessage.contains('başarılı') || _errorMessage.contains('bulundu') 
+            ? Colors.green.withOpacity(0.1)
+            : Colors.red.withOpacity(0.1),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.red.withOpacity(0.3)),
+        border: Border.all(
+          color: _errorMessage.contains('başarılı') || _errorMessage.contains('bulundu')
+              ? Colors.green.withOpacity(0.3)
+              : Colors.red.withOpacity(0.3)
+        ),
       ),
       child: Row(
         children: [
-          const Icon(Icons.error_outline, color: Colors.red),
+          Icon(
+            _errorMessage.contains('başarılı') || _errorMessage.contains('bulundu')
+                ? Icons.check_circle 
+                : Icons.error_outline, 
+            color: _errorMessage.contains('başarılı') || _errorMessage.contains('bulundu')
+                ? Colors.green 
+                : Colors.red
+          ),
           const SizedBox(width: 8),
           Expanded(
             child: Text(
               _errorMessage,
-              style: const TextStyle(color: Colors.red),
+              style: TextStyle(
+                color: _errorMessage.contains('başarılı') || _errorMessage.contains('bulundu')
+                    ? Colors.green 
+                    : Colors.red,
+                fontSize: 12,
+              ),
             ),
           ),
         ],
@@ -1211,6 +1265,7 @@ class _AddQuestionScreenState extends State<AddQuestionScreen> {
           ],
           'correctAnswerIndex': _correctAnswerIndex,
           'explanation': _explanationController.text.trim(),
+          'difficulty': _difficultyLevel, // Zorluk seviyesi
           'language': _selectedLanguage, // Dil bilgisini ekle
           'updatedAt': FieldValue.serverTimestamp(),
         };
@@ -1288,554 +1343,4 @@ class _AddQuestionScreenState extends State<AddQuestionScreen> {
       }
     }
   }
-
-  // Word dosyasını seçme ve işleme
-  Future<void> _pickAndProcessWordFile() async {
-    try {
-      setState(() {
-        _isLoading = true;
-        _errorMessage = '';
-      });
-
-      print("Word dosyası seçiliyor...");
-
-      // Kullanıcı dosya seçmeden önce bilgilendirme gösterelim
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Dosya seçimi açılıyor...'),
-          backgroundColor: Colors.blue,
-          duration: Duration(seconds: 1),
-        ),
-      );
-
-      FilePickerResult? result = await FilePicker.platform.pickFiles(
-        type: FileType.custom,
-        allowedExtensions: ['txt', 'doc', 'docx'],
-      );
-
-      if (result != null) {
-        final fileName = result.files.first.name;
-        print("Dosya seçildi: $fileName");
-        
-        // Dosya formatını kontrol et
-        if (!_wordParserService.isSupportedFormat(fileName)) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Desteklenmeyen dosya formatı!'),
-              backgroundColor: Colors.red,
-            ),
-          );
-          setState(() {
-            _isLoading = false;
-          });
-          return;
-        }
-
-        // Dosya işleme başlıyor...
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Dosya alındı, işleniyor...'),
-            backgroundColor: Colors.blue,
-          ),
-        );
-
-        // Dosyayı parse et
-        final file = File(result.files.first.path!);
-        final questions = await _wordParserService.parseWordFile(file);
-        
-        if (questions.isNotEmpty) {
-          // Soruları göster ve düzenleme ekranına yönlendir
-          await _showParsedQuestions(questions, fileName);
-        } else {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Dosyadan soru bulunamadı!'),
-              backgroundColor: Colors.orange,
-            ),
-          );
-        }
-
-        setState(() {
-          _isLoading = false;
-        });
-      } else {
-        print("Kullanıcı dosya seçmedi");
-        setState(() {
-          _isLoading = false;
-        });
-
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Dosya seçimi iptal edildi'),
-            backgroundColor: Colors.orange,
-          ),
-        );
-      }
-    } catch (e) {
-      print("Dosya seçilirken hata: $e");
-      setState(() {
-        _errorMessage = 'Dosya seçilirken hata oluştu: $e';
-        _isLoading = false;
-      });
-
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Hata: $e'), backgroundColor: Colors.red),
-      );
-    }
-  }
-
-                // Parse edilen soruları göster ve Firebase'e kaydetme seçenekleri sun
-              Future<void> _showParsedQuestions(List<Map<String, dynamic>> questions, String fileName) async {
-                await showDialog(
-                  context: context,
-                  builder: (context) => AlertDialog(
-                    title: Row(
-                      children: [
-                        Icon(Icons.file_upload, color: Colors.blue.shade300),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: Text(
-                            '$fileName - Parse Edilen Sorular',
-                            style: const TextStyle(fontSize: 16),
-                          ),
-                        ),
-                      ],
-                    ),
-                    content: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.all(12),
-                          decoration: BoxDecoration(
-                            color: Colors.green.withOpacity(0.1),
-                            borderRadius: BorderRadius.circular(8),
-                            border: Border.all(color: Colors.green.withOpacity(0.3)),
-                          ),
-                          child: Row(
-                            children: [
-                              Icon(Icons.check_circle, color: Colors.green.shade600),
-                              const SizedBox(width: 8),
-                              Expanded(
-                                child: Text(
-                                  'Toplam ${questions.length} soru başarıyla parse edildi!',
-                                  style: TextStyle(
-                                    color: Colors.green.shade600,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(height: 16),
-                        const Text(
-                          'Soru önizlemesi:',
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                        const SizedBox(height: 8),
-                        Container(
-                          height: 200,
-                          width: 400,
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: ListView.builder(
-                            itemCount: questions.take(3).length,
-                            itemBuilder: (context, index) {
-                              final question = questions[index];
-                              return ListTile(
-                                title: Text(
-                                  'Soru ${index + 1}: ${question['question'].toString().substring(0, min(50, question['question'].toString().length))}...',
-                                  style: const TextStyle(fontSize: 12),
-                                ),
-                                subtitle: Text(
-                                  'Şıklar: ${question['options'].length}, Doğru: ${String.fromCharCode(65 + (question['correctAnswer'] as int))}',
-                                  style: const TextStyle(fontSize: 10),
-                                ),
-                              );
-                            },
-                          ),
-                        ),
-                        const SizedBox(height: 16),
-                        const Text(
-                          'Bu soruları nasıl eklemek istiyorsunuz?',
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ),
-                    actions: [
-                      TextButton(
-                        onPressed: () => Navigator.pop(context),
-                        child: const Text('İptal'),
-                      ),
-                      ElevatedButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                          _navigateToBulkEdit(questions);
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.blue,
-                          foregroundColor: Colors.white,
-                        ),
-                        child: const Text('Düzenle ve Ekle'),
-                      ),
-                      ElevatedButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                          _showDirectSaveDialog(questions, fileName);
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.green,
-                          foregroundColor: Colors.white,
-                        ),
-                        child: const Text('Direkt Firebase\'e Kaydet'),
-                      ),
-                    ],
-                  ),
-                );
-              }
-
-                // Toplu düzenleme ekranına yönlendir
-              void _navigateToBulkEdit(List<Map<String, dynamic>> questions) {
-                // TODO: Toplu düzenleme ekranına yönlendir
-                // Şimdilik ilk soruyu düzenleme ekranına gönder
-                if (questions.isNotEmpty) {
-                  final firstQuestion = questions.first;
-                  
-                  // Soru verilerini form'a yükle
-                  _questionController.text = firstQuestion['question'] ?? '';
-                  
-                  final options = firstQuestion['options'] ?? [];
-                  if (options.isNotEmpty) {
-                    _option1Controller.text = options[0];
-                    if (options.length > 1) _option2Controller.text = options[1];
-                    if (options.length > 2) _option3Controller.text = options[2];
-                    if (options.length > 3) _option4Controller.text = options[3];
-                  }
-                  
-                  _correctAnswerIndex = (firstQuestion['correctAnswer'] ?? 0) as int;
-                  _explanationController.text = firstQuestion['explanation'] ?? '';
-                  
-                  // Kullanıcıya bilgi ver
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text('İlk soru form\'a yüklendi. Diğer sorular için tekrar dosya yükleyin.'),
-                      backgroundColor: Colors.blue,
-                    ),
-                  );
-                }
-              }
-
-              // Direkt Firebase'e kaydetme dialog'u
-              Future<void> _showDirectSaveDialog(List<Map<String, dynamic>> questions, String fileName) async {
-                final quizNameController = TextEditingController();
-                String selectedQuizId = '';
-                bool isNewQuiz = true;
-                
-                // Mevcut quiz'ler varsa seçenek olarak sun
-                if (_availableQuizzes.isNotEmpty) {
-                  isNewQuiz = false;
-                  selectedQuizId = _availableQuizzes.first['id']!;
-                }
-
-                await showDialog(
-                  context: context,
-                  builder: (context) => StatefulBuilder(
-                    builder: (context, setState) => AlertDialog(
-                      title: Row(
-                        children: [
-                          Icon(Icons.cloud_upload, color: Colors.green.shade600),
-                          const SizedBox(width: 8),
-                          const Expanded(
-                            child: Text(
-                              'Firebase\'e Direkt Kaydet',
-                              style: TextStyle(fontSize: 18),
-                            ),
-                          ),
-                        ],
-                      ),
-                      content: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.all(12),
-                            decoration: BoxDecoration(
-                              color: Colors.blue.withOpacity(0.1),
-                              borderRadius: BorderRadius.circular(8),
-                              border: Border.all(color: Colors.blue.withOpacity(0.3)),
-                            ),
-                            child: Row(
-                              children: [
-                                Icon(Icons.info, color: Colors.blue.shade600),
-                                const SizedBox(width: 8),
-                                Expanded(
-                                  child: Text(
-                                    '${questions.length} soru direkt Firebase\'e kaydedilecek',
-                                    style: TextStyle(
-                                      color: Colors.blue.shade600,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(height: 16),
-                          
-                          // Quiz seçimi
-                          if (_availableQuizzes.isNotEmpty) ...[
-                            Row(
-                              children: [
-                                Radio<bool>(
-                                  value: false,
-                                  groupValue: isNewQuiz,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      isNewQuiz = value!;
-                                    });
-                                  },
-                                  activeColor: Colors.blue,
-                                ),
-                                const Text('Mevcut Quiz Kullan'),
-                                const SizedBox(width: 16),
-                                Radio<bool>(
-                                  value: true,
-                                  groupValue: isNewQuiz,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      isNewQuiz = value!;
-                                    });
-                                  },
-                                  activeColor: Colors.blue,
-                                ),
-                                const Text('Yeni Quiz Oluştur'),
-                              ],
-                            ),
-                            const SizedBox(height: 16),
-                          ],
-                          
-                          // Quiz seçimi dropdown (mevcut quiz kullanılıyorsa)
-                          if (!isNewQuiz && _availableQuizzes.isNotEmpty) ...[
-                            const Text(
-                              'Quiz Seçin:',
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                            const SizedBox(height: 8),
-                            Container(
-                              decoration: BoxDecoration(
-                                color: Colors.grey.withOpacity(0.1),
-                                borderRadius: BorderRadius.circular(8),
-                                border: Border.all(color: Colors.grey.withOpacity(0.3)),
-                              ),
-                              child: DropdownButtonFormField<String>(
-                                decoration: const InputDecoration(
-                                  contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                                  border: InputBorder.none,
-                                ),
-                                value: selectedQuizId.isNotEmpty ? selectedQuizId : null,
-                                items: _availableQuizzes.map((quiz) {
-                                  return DropdownMenuItem(
-                                    value: quiz['id'],
-                                    child: Text(quiz['displayName']!),
-                                  );
-                                }).toList(),
-                                onChanged: (value) {
-                                  setState(() {
-                                    selectedQuizId = value!;
-                                  });
-                                },
-                              ),
-                            ),
-                            const SizedBox(height: 16),
-                          ],
-                          
-                          // Yeni quiz adı (yeni quiz oluşturuluyorsa)
-                          if (isNewQuiz) ...[
-                            const Text(
-                              'Yeni Quiz Adı:',
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                            const SizedBox(height: 8),
-                            TextField(
-                              controller: quizNameController,
-                              decoration: InputDecoration(
-                                hintText: 'Quiz adını girin...',
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                              ),
-                            ),
-                          ],
-                        ],
-                      ),
-                      actions: [
-                        TextButton(
-                          onPressed: () => Navigator.pop(context),
-                          child: const Text('İptal'),
-                        ),
-                        ElevatedButton(
-                          onPressed: () async {
-                            // Validasyon
-                            if (isNewQuiz && (quizNameController.text.trim().isEmpty)) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text('Lütfen quiz adını girin'),
-                                  backgroundColor: Colors.red,
-                                ),
-                              );
-                              return;
-                            }
-                            
-                            if (!isNewQuiz && selectedQuizId.isEmpty) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text('Lütfen quiz seçin'),
-                                  backgroundColor: Colors.red,
-                                ),
-                              );
-                              return;
-                            }
-                            
-                            Navigator.pop(context);
-                            
-                            // Firebase'e kaydet
-                            await _saveQuestionsToFirebase(
-                              questions,
-                              isNewQuiz ? quizNameController.text.trim() : selectedQuizId,
-                              isNewQuiz ? quizNameController.text.trim() : _availableQuizzes.firstWhere((q) => q['id'] == selectedQuizId)['displayName']!,
-                              isNewQuiz,
-                            );
-                          },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.green,
-                            foregroundColor: Colors.white,
-                          ),
-                          child: const Text('Kaydet'),
-                        ),
-                      ],
-                    ),
-                  ),
-                );
-                
-                quizNameController.dispose();
-              }
-
-              // Soruları Firebase'e kaydet
-              Future<void> _saveQuestionsToFirebase(
-                List<Map<String, dynamic>> questions,
-                String quizId,
-                String quizName,
-                bool isNewQuiz,
-              ) async {
-                try {
-                  setState(() {
-                    _isLoading = true;
-                    _errorMessage = '';
-                  });
-
-                  // Loading dialog göster
-                  showDialog(
-                    context: context,
-                    barrierDismissible: false,
-                    builder: (context) => AlertDialog(
-                      content: Row(
-                        children: [
-                          const CircularProgressIndicator(),
-                          const SizedBox(width: 16),
-                          Text('${questions.length} soru kaydediliyor...'),
-                        ],
-                      ),
-                    ),
-                  );
-
-                  // WordParserService ile Firebase'e kaydet
-                  final result = await _wordParserService.saveQuestionsToFirebase(
-                    questions,
-                    quizId,
-                    isNewQuiz ? quizName : quizId,
-                  );
-
-                  // Loading dialog'u kapat
-                  Navigator.pop(context);
-
-                  if (result['success'] == true) {
-                    // Başarılı
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(result['message']),
-                        backgroundColor: Colors.green,
-                        duration: const Duration(seconds: 5),
-                      ),
-                    );
-                    
-                    // Quiz listesini yenile
-                    await _fetchQuizzes();
-                    
-                    // Başarı dialog'u göster
-                    await showDialog(
-                      context: context,
-                      builder: (context) => AlertDialog(
-                        title: Row(
-                          children: [
-                            Icon(Icons.check_circle, color: Colors.green.shade600),
-                            const SizedBox(width: 8),
-                            const Text('Başarılı!'),
-                          ],
-                        ),
-                        content: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text('${result['totalQuestions']} soru başarıyla kaydedildi!'),
-                            const SizedBox(height: 8),
-                            Text('Quiz: ${result['quizName']}'),
-                            const SizedBox(height: 8),
-                            Text('Quiz ID: ${result['quizId']}'),
-                          ],
-                        ),
-                        actions: [
-                          ElevatedButton(
-                            onPressed: () => Navigator.pop(context),
-                            child: const Text('Tamam'),
-                          ),
-                        ],
-                      ),
-                    );
-                  } else {
-                    // Hata
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(result['message']),
-                        backgroundColor: Colors.red,
-                        duration: const Duration(seconds: 5),
-                      ),
-                    );
-                  }
-                } catch (e) {
-                  // Loading dialog'u kapat
-                  if (Navigator.canPop(context)) {
-                    Navigator.pop(context);
-                  }
-                  
-                  setState(() {
-                    _errorMessage = 'Sorular kaydedilirken hata oluştu: $e';
-                    _isLoading = false;
-                  });
-                  
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text('Hata: $e'),
-                      backgroundColor: Colors.red,
-                    ),
-                  );
-                } finally {
-                  setState(() {
-                    _isLoading = false;
-                  });
-                }
-              }
 }

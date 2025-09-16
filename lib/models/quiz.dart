@@ -15,6 +15,7 @@ class Quiz {
   final int? currentQuestionIndex;
   final int? score;
   final double? successRate;
+  final int? attemptCount;
 
   Quiz({
     required this.id,
@@ -30,6 +31,7 @@ class Quiz {
     this.currentQuestionIndex,
     this.score,
     this.successRate,
+    this.attemptCount,
   });
 
   factory Quiz.fromFirestore(
@@ -53,6 +55,7 @@ class Quiz {
       currentQuestionIndex: data['currentQuestionIndex'],
       score: data['score'],
       successRate: data['successRate'],
+      attemptCount: data['attemptCount'],
     );
   }
 
@@ -70,6 +73,7 @@ class Quiz {
       'currentQuestionIndex': currentQuestionIndex,
       'score': score,
       'successRate': successRate,
+      'attemptCount': attemptCount,
     };
   }
 
