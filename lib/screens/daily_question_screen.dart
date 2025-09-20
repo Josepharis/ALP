@@ -411,7 +411,7 @@ class _DailyQuestionScreenState extends State<DailyQuestionScreen>
                             style: const TextStyle(color: Colors.white70),
                           ),
                           Text(
-                            '${AppLocalizations.of(context)!.score}: +20',
+                            AppLocalizations.of(context)!.dailyQuestionScore,
                             style: TextStyle(color: Colors.white70),
                           ),
                         ],

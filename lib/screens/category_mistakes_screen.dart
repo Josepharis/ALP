@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'dart:math';
+import 'package:provider/provider.dart';
 import '../models/question.dart';
 import '../services/quiz_service.dart';
-import '../utils/snackbar_utils.dart';
-import 'quiz_screen.dart';
-import 'question_detail_screen.dart';
+import '../services/language_service.dart';
 import '../l10n/app_localizations.dart';
 
 class CategoryMistakesScreen extends StatefulWidget {
@@ -27,7 +25,9 @@ class _CategoryMistakesScreenState extends State<CategoryMistakesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Consumer<LanguageService>(
+      builder: (context, languageService, child) {
+        return Scaffold(
       backgroundColor: Colors.transparent,
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -95,6 +95,8 @@ class _CategoryMistakesScreenState extends State<CategoryMistakesScreen> {
                   : _buildQuestionsList(),
         ),
       ),
+    );
+      },
     );
   }
 
@@ -212,7 +214,7 @@ class _CategoryMistakesScreenState extends State<CategoryMistakesScreen> {
                                 ),
                                 const SizedBox(width: 4),
                                 Text(
-                                  'Kaldır',
+                                  AppLocalizations.of(context)!.remove,
                                   style: TextStyle(
                                     color: Colors.red.shade300,
                                     fontSize: 12,
@@ -231,7 +233,7 @@ class _CategoryMistakesScreenState extends State<CategoryMistakesScreen> {
                         ),
                         const SizedBox(width: 4),
                         Text(
-                          'Detaylar',
+                          AppLocalizations.of(context)!.details,
                           style: TextStyle(
                             color: Colors.blue[200],
                             fontSize: 13,
@@ -466,20 +468,20 @@ class _CategoryMistakesScreenState extends State<CategoryMistakesScreen> {
       builder:
           (context) => AlertDialog(
             backgroundColor: Colors.indigo.shade900,
-            title: const Text(
-              'Soruyu Kaldır',
-              style: TextStyle(color: Colors.white),
+            title: Text(
+              AppLocalizations.of(context)!.removeQuestion,
+              style: const TextStyle(color: Colors.white),
             ),
-            content: const Text(
-              'Bu soruyu eksikler listenizden kaldırmak istiyor musunuz?',
-              style: TextStyle(color: Colors.white70),
+            content: Text(
+              AppLocalizations.of(context)!.removeQuestionConfirm,
+              style: const TextStyle(color: Colors.white70),
             ),
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context),
-                child: const Text(
-                  'İptal',
-                  style: TextStyle(color: Colors.white70),
+                child: Text(
+                  AppLocalizations.of(context)!.cancel,
+                  style: const TextStyle(color: Colors.white70),
                 ),
               ),
               TextButton(
@@ -487,9 +489,9 @@ class _CategoryMistakesScreenState extends State<CategoryMistakesScreen> {
                   Navigator.pop(context);
                   await _removeQuestion(question);
                 },
-                child: const Text(
-                  'Kaldır',
-                  style: TextStyle(color: Colors.red),
+                child: Text(
+                  AppLocalizations.of(context)!.remove,
+                  style: const TextStyle(color: Colors.red),
                 ),
               ),
             ],
@@ -571,25 +573,6 @@ class _CategoryMistakesScreenState extends State<CategoryMistakesScreen> {
     }
   }
 
-  Color _getCategoryColor(String category) {
-    switch (category.toLowerCase()) {
-      case 'anestezi':
-        return Colors.indigo.shade700;
-      case 'kardiyovasküler':
-      case 'kardiyovasküler 1':
-        return Colors.blue.shade700;
-      case 'kardiyovasküler 2':
-        return Colors.purple.shade700;
-      case 'solunum':
-        return Colors.cyan.shade700;
-      case 'ameliyathane':
-        return Colors.indigo.shade600;
-      case 'anestezi istasyonu':
-        return Colors.blue.shade600;
-      default:
-        return Colors.indigo.shade600;
-    }
-  }
 
 
 }

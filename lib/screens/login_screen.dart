@@ -3,7 +3,6 @@ import '../theme/app_theme.dart';
 import 'package:flutter/gestures.dart';
 import './register_screen.dart';
 import '../services/auth_service.dart';
-import '../widgets/language_selector.dart';
 import '../l10n/app_localizations.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -62,6 +61,46 @@ class _LoginScreenState extends State<LoginScreen>
     super.dispose();
   }
 
+  // Hata mesajlarını çevir
+  String _getErrorMessage(dynamic error) {
+    final errorString = error.toString().toLowerCase();
+    
+    if (errorString.contains('user-not-found')) {
+      return AppLocalizations.of(context)!.userNotFoundShort;
+    } else if (errorString.contains('wrong-password')) {
+      return AppLocalizations.of(context)!.wrongPasswordShort;
+    } else if (errorString.contains('invalid-credential')) {
+      return AppLocalizations.of(context)!.invalidCredential;
+    } else if (errorString.contains('too-many-requests')) {
+      return AppLocalizations.of(context)!.tooManyRequests;
+    } else if (errorString.contains('account-disabled')) {
+      return AppLocalizations.of(context)!.accountDisabled;
+    } else if (errorString.contains('network')) {
+      return AppLocalizations.of(context)!.networkError;
+    } else if (errorString.contains('server')) {
+      return AppLocalizations.of(context)!.serverError;
+    } else {
+      return AppLocalizations.of(context)!.loginFailed;
+    }
+  }
+
+  // Şifre sıfırlama hata mesajlarını çevir
+  String _getPasswordResetErrorMessage(dynamic error) {
+    final errorString = error.toString().toLowerCase();
+    
+    if (errorString.contains('user-not-found')) {
+      return AppLocalizations.of(context)!.userNotFoundShort;
+    } else if (errorString.contains('network')) {
+      return AppLocalizations.of(context)!.networkError;
+    } else if (errorString.contains('server')) {
+      return AppLocalizations.of(context)!.serverError;
+    } else if (errorString.contains('too-many-requests')) {
+      return AppLocalizations.of(context)!.tooManyRequests;
+    } else {
+      return AppLocalizations.of(context)!.passwordResetFailed;
+    }
+  }
+
   // Giriş işlemini gerçekleştir
   Future<void> _signIn() async {
     if (_formKey.currentState?.validate() ?? false) {
@@ -89,7 +128,7 @@ class _LoginScreenState extends State<LoginScreen>
         }
       } catch (e) {
         setState(() {
-          _errorMessage = e.toString();
+          _errorMessage = _getErrorMessage(e);
         });
       } finally {
         if (mounted) {
@@ -105,7 +144,7 @@ class _LoginScreenState extends State<LoginScreen>
     final email = _emailController.text.trim();
     if (email.isEmpty) {
       setState(() {
-        _errorMessage = '❌ E-posta Adresi Gerekli\n\n💡 Şifre sıfırlama e-postası gönderebilmek için e-posta adresinizi girin.\n\nKayıt olduğunuz e-posta adresini kullanın.';
+        _errorMessage = AppLocalizations.of(context)!.emailRequiredForResetShort;
       });
       return;
     }
@@ -113,7 +152,7 @@ class _LoginScreenState extends State<LoginScreen>
     // E-posta formatı kontrolü
     if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(email)) {
       setState(() {
-        _errorMessage = '❌ E-posta Formatı Geçersiz\n\n💡 Lütfen geçerli bir e-posta adresi girin.\n\nÖrnek: kullanici@example.com';
+        _errorMessage = AppLocalizations.of(context)!.invalidEmailFormatShort;
       });
       return;
     }
@@ -141,7 +180,7 @@ class _LoginScreenState extends State<LoginScreen>
                 Icon(Icons.mark_email_read, color: Colors.green, size: 28),
                 SizedBox(width: 12),
                 Text(
-                  'E-posta Gönderildi!',
+                  AppLocalizations.of(context)!.emailSentSuccessfully,
                   style: TextStyle(
                     color: Colors.green,
                     fontWeight: FontWeight.bold,
@@ -154,7 +193,7 @@ class _LoginScreenState extends State<LoginScreen>
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Şifre sıfırlama e-postası gönderildi:',
+                  AppLocalizations.of(context)!.passwordResetEmailSent,
                   style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
                 ),
                 SizedBox(height: 8),
@@ -183,7 +222,7 @@ class _LoginScreenState extends State<LoginScreen>
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        '📧 Yapmanız gerekenler:',
+                        '📧 ${AppLocalizations.of(context)!.checkEmailInbox}',
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
@@ -216,17 +255,17 @@ class _LoginScreenState extends State<LoginScreen>
           ),
         );
       }
-    } catch (e) {
-      setState(() {
-        _errorMessage = e.toString();
-      });
-    } finally {
-      if (mounted) {
+      } catch (e) {
         setState(() {
-          _isLoading = false;
+          _errorMessage = _getPasswordResetErrorMessage(e);
         });
+      } finally {
+        if (mounted) {
+          setState(() {
+            _isLoading = false;
+          });
+        }
       }
-    }
   }
 
   Widget _buildGradientButton({
@@ -234,8 +273,16 @@ class _LoginScreenState extends State<LoginScreen>
     required VoidCallback onPressed,
     bool isLoading = false,
   }) {
+    final size = MediaQuery.of(context).size;
+    final isVerySmallScreen = size.width < 400;
+    final isSmallScreen = size.width < 600;
+    final hasAndroidNavigation = size.height < 700;
+    final isVeryShortScreen = size.height < 600;
+    
     return Container(
-      height: 55,
+      height: isVeryShortScreen ? 42 :
+              hasAndroidNavigation ? (isVerySmallScreen ? 42 : 46) :
+              isVerySmallScreen ? 48 : isSmallScreen ? 52 : 55,
       width: double.infinity,
       decoration: BoxDecoration(
         gradient: AppTheme.buttonGradient,
@@ -273,9 +320,10 @@ class _LoginScreenState extends State<LoginScreen>
                     const SizedBox(width: 8),
                     Text(
                       text,
-                      style: const TextStyle(
+                      style: TextStyle(
                         color: Colors.white,
-                        fontSize: 16,
+                        fontSize: isVerySmallScreen ? 14 : 
+                                 isSmallScreen ? 15 : 16,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -289,7 +337,43 @@ class _LoginScreenState extends State<LoginScreen>
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
     final size = MediaQuery.of(context).size;
-    final isSmallScreen = size.width < 600;
+    final screenWidth = size.width;
+    final screenHeight = size.height;
+    
+    // Android navigasyon tuşları için ekran yüksekliği kontrolü
+    final hasAndroidNavigation = screenHeight < 700; // Android navigasyon tuşları açık
+    final isVeryShortScreen = screenHeight < 600; // Çok kısa ekranlar
+    
+    // Responsive breakpoints
+    final isSmallScreen = screenWidth < 600;
+    final isVerySmallScreen = screenWidth < 400;
+    final isTablet = screenWidth >= 768;
+    
+    // Responsive dimensions - Android navigasyon tuşları durumunda daha küçük
+    final logoSize = isVeryShortScreen ? 100.0 :
+                     hasAndroidNavigation ? (isVerySmallScreen ? 100.0 : 120.0) :
+                     isVerySmallScreen ? 120.0 : 
+                     isSmallScreen ? 160.0 : 
+                     isTablet ? 200.0 : 220.0;
+    
+    final containerSize = isVeryShortScreen ? 120.0 :
+                         hasAndroidNavigation ? (isVerySmallScreen ? 120.0 : 150.0) :
+                         isVerySmallScreen ? 150.0 : 
+                         isSmallScreen ? 200.0 : 
+                         isTablet ? 250.0 : 300.0;
+    
+    final horizontalPadding = isVeryShortScreen ? 12.0 :
+                             hasAndroidNavigation ? (isVerySmallScreen ? 12.0 : 16.0) :
+                             isVerySmallScreen ? 16.0 :
+                             isSmallScreen ? 24.0 :
+                             isTablet ? screenWidth * 0.15 :
+                             screenWidth * 0.2;
+    
+    final formPadding = isVeryShortScreen ? 12.0 :
+                       hasAndroidNavigation ? (isVerySmallScreen ? 12.0 : 16.0) :
+                       isVerySmallScreen ? 16.0 :
+                       isSmallScreen ? 20.0 :
+                       isTablet ? 24.0 : 28.0;
 
     if (_animationController == null ||
         _fadeAnimation == null ||
@@ -310,7 +394,10 @@ class _LoginScreenState extends State<LoginScreen>
                 child: SingleChildScrollView(
                   child: Padding(
                     padding: EdgeInsets.symmetric(
-                      horizontal: isSmallScreen ? 24 : size.width * 0.1,
+                      horizontal: horizontalPadding,
+                      vertical: isVeryShortScreen ? 8 :
+                               hasAndroidNavigation ? 12 :
+                               isVerySmallScreen ? 16 : 24,
                     ),
                     child: FadeTransition(
                       opacity: _fadeAnimation!,
@@ -326,8 +413,8 @@ class _LoginScreenState extends State<LoginScreen>
                           children: [
                             // Arka plan ışıltıları
                             Container(
-                              width: 250,
-                              height: 250,
+                              width: containerSize,
+                              height: containerSize,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 gradient: RadialGradient(
@@ -348,8 +435,8 @@ class _LoginScreenState extends State<LoginScreen>
                                 return Transform.scale(
                                   scale: value,
                                   child: Container(
-                                    width: 220,
-                                    height: 220,
+                                    width: logoSize,
+                                    height: logoSize,
                                     decoration: BoxDecoration(
                                       shape: BoxShape.circle,
                                       color: Colors.white,
@@ -367,11 +454,11 @@ class _LoginScreenState extends State<LoginScreen>
                                       ],
                                     ),
                                     child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(110),
+                                      borderRadius: BorderRadius.circular(logoSize / 2),
                                       child: Image.asset(
                                         'assets/images/logo.png',
-                                        width: 220,
-                                        height: 220,
+                                        width: logoSize,
+                                        height: logoSize,
                                         fit: BoxFit.cover,
                                         errorBuilder: (
                                           context,
@@ -379,8 +466,8 @@ class _LoginScreenState extends State<LoginScreen>
                                           stackTrace,
                                         ) {
                                           return Container(
-                                            width: 220,
-                                            height: 220,
+                                            width: logoSize,
+                                            height: logoSize,
                                             decoration: BoxDecoration(
                                               gradient: LinearGradient(
                                                 begin: Alignment.topLeft,
@@ -393,7 +480,7 @@ class _LoginScreenState extends State<LoginScreen>
                                                 stops: const [0.0, 0.5, 1.0],
                                               ),
                                               borderRadius:
-                                                  BorderRadius.circular(110),
+                                                  BorderRadius.circular(logoSize / 2),
                                             ),
                                             child: Column(
                                               mainAxisAlignment:
@@ -402,23 +489,29 @@ class _LoginScreenState extends State<LoginScreen>
                                                 Icon(
                                                   Icons.favorite,
                                                   color: Colors.red.shade400,
-                                                  size: 36,
+                                                  size: isVerySmallScreen ? 20 : 
+                                                         isSmallScreen ? 28 : 
+                                                         isTablet ? 32 : 36,
                                                 ),
-                                                const SizedBox(height: 8),
-                                                const Text(
+                                                SizedBox(height: isVerySmallScreen ? 4 : 8),
+                                                Text(
                                                   'ALP',
                                                   style: TextStyle(
-                                                    fontSize: 32,
+                                                    fontSize: isVerySmallScreen ? 20 : 
+                                                             isSmallScreen ? 24 : 
+                                                             isTablet ? 28 : 32,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.white,
-                                                    letterSpacing: 3,
+                                                    letterSpacing: isVerySmallScreen ? 2 : 3,
                                                   ),
                                                 ),
-                                                const SizedBox(height: 4),
+                                                SizedBox(height: isVerySmallScreen ? 2 : 4),
                                                 Icon(
                                                   Icons.medical_services,
                                                   color: Colors.green.shade400,
-                                                  size: 24,
+                                                  size: isVerySmallScreen ? 16 : 
+                                                         isSmallScreen ? 20 : 
+                                                         isTablet ? 22 : 24,
                                                 ),
                                               ],
                                             ),
@@ -433,13 +526,18 @@ class _LoginScreenState extends State<LoginScreen>
                           ],
                         ),
 
-                        const SizedBox(height: 24),
+                        SizedBox(height: isVeryShortScreen ? 8 :
+                                     hasAndroidNavigation ? 12 :
+                                     isVerySmallScreen ? 16 : 24),
 
-                        const SizedBox(height: 40),
+                        SizedBox(height: isVeryShortScreen ? 16 :
+                                     hasAndroidNavigation ? 20 :
+                                     isVerySmallScreen ? 24 : 
+                                     isSmallScreen ? 32 : 40),
 
                         // Form alanı
                         Container(
-                          padding: const EdgeInsets.all(22),
+                          padding: EdgeInsets.all(formPadding),
                           decoration: BoxDecoration(
                             color: Colors.white.withOpacity(0.07),
                             borderRadius: BorderRadius.circular(20),
@@ -475,18 +573,21 @@ class _LoginScreenState extends State<LoginScreen>
                                         size: 20,
                                       ),
                                     ),
-                                    const SizedBox(width: 12),
-                                                                          Text(
-                                        localizations.login,
-                                        style: const TextStyle(
-                                        fontSize: 22,
+                                    SizedBox(width: isVerySmallScreen ? 8 : 12),
+                                    Text(
+                                      localizations.login,
+                                      style: TextStyle(
+                                        fontSize: isVerySmallScreen ? 18 : 
+                                                 isSmallScreen ? 20 : 22,
                                         fontWeight: FontWeight.bold,
                                         color: Colors.white,
                                       ),
                                     ),
                                   ],
                                 ),
-                                const SizedBox(height: 20),
+                                SizedBox(height: isVeryShortScreen ? 8 :
+                                             hasAndroidNavigation ? 12 :
+                                             isVerySmallScreen ? 16 : 20),
 
                                 // E-posta giriş alanı
                                                                   _buildAnimatedTextField(
@@ -507,7 +608,9 @@ class _LoginScreenState extends State<LoginScreen>
                                     return null;
                                   },
                                 ),
-                                const SizedBox(height: 16),
+                                SizedBox(height: isVeryShortScreen ? 8 :
+                                             hasAndroidNavigation ? 10 :
+                                             isVerySmallScreen ? 12 : 16),
 
                                 // Şifre giriş alanı
                                                                   _buildAnimatedTextField(
@@ -537,7 +640,9 @@ class _LoginScreenState extends State<LoginScreen>
                                     return null;
                                   },
                                 ),
-                                const SizedBox(height: 10),
+                                SizedBox(height: isVeryShortScreen ? 4 :
+                                             hasAndroidNavigation ? 6 :
+                                             isVerySmallScreen ? 8 : 10),
 
                                 // Şifremi Unuttum linki
                                 Align(
@@ -554,7 +659,9 @@ class _LoginScreenState extends State<LoginScreen>
                                     child: Text(localizations.forgotPassword),
                                   ),
                                 ),
-                                const SizedBox(height: 10),
+                                SizedBox(height: isVeryShortScreen ? 4 :
+                                             hasAndroidNavigation ? 6 :
+                                             isVerySmallScreen ? 8 : 10),
 
                                 // Hata mesajı
                                 if (_errorMessage.isNotEmpty)
@@ -569,75 +676,44 @@ class _LoginScreenState extends State<LoginScreen>
                                           opacity: value,
                                           child: Container(
                                             width: double.infinity,
-                                            padding: const EdgeInsets.all(16),
+                                            padding: EdgeInsets.all(
+                                              isVeryShortScreen ? 8 :
+                                              hasAndroidNavigation ? 10 :
+                                              isVerySmallScreen ? 10 : 12,
+                                            ),
                                             decoration: BoxDecoration(
-                                              gradient: LinearGradient(
-                                                colors: [
-                                                  Colors.red.withOpacity(0.1),
-                                                  Colors.red.withOpacity(0.05),
-                                                ],
+                                              color: Colors.red.withOpacity(0.1),
+                                              borderRadius: BorderRadius.circular(
+                                                isVeryShortScreen ? 6 : 8,
                                               ),
-                                              borderRadius:
-                                                  BorderRadius.circular(12),
                                               border: Border.all(
-                                                color: Colors.red.withOpacity(
-                                                  0.3,
-                                                ),
+                                                color: Colors.red.withOpacity(0.3),
                                                 width: 1,
                                               ),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Colors.red.withOpacity(
-                                                    0.1,
-                                                  ),
-                                                  blurRadius: 8,
-                                                  offset: const Offset(0, 2),
-                                                ),
-                                              ],
                                             ),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
+                                            child: Row(
                                               children: [
-                                                Row(
-                                                  children: [
-                                                    Container(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                            6,
-                                                          ),
-                                                      decoration: BoxDecoration(
-                                                        color: Colors.red
-                                                            .withOpacity(0.2),
-                                                        shape: BoxShape.circle,
-                                                      ),
-                                                      child: const Icon(
-                                                        Icons.warning_rounded,
-                                                        color: Colors.red,
-                                                        size: 18,
-                                                      ),
-                                                    ),
-                                                    const SizedBox(width: 12),
-                                                    const Expanded(
-                                                      child: Text(
-                                                        'Giriş Yapılamadı',
-                                                        style: TextStyle(
-                                                          color: Colors.red,
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
+                                                Icon(
+                                                  Icons.warning_rounded,
+                                                  color: Colors.red,
+                                                  size: isVeryShortScreen ? 14 :
+                                                         hasAndroidNavigation ? 16 :
+                                                         isVerySmallScreen ? 16 : 18,
                                                 ),
-                                                const SizedBox(height: 8),
-                                                Text(
-                                                  _errorMessage,
-                                                  style: const TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 14,
-                                                    height: 1.4,
+                                                SizedBox(width: isVeryShortScreen ? 6 :
+                                                             hasAndroidNavigation ? 8 :
+                                                             isVerySmallScreen ? 8 : 10),
+                                                Expanded(
+                                                  child: Text(
+                                                    _errorMessage,
+                                                    style: TextStyle(
+                                                      color: Colors.red,
+                                                      fontSize: isVeryShortScreen ? 11 :
+                                                               hasAndroidNavigation ? 12 :
+                                                               isVerySmallScreen ? 12 : 13,
+                                                      fontWeight: FontWeight.w500,
+                                                      height: 1.2,
+                                                    ),
                                                   ),
                                                 ),
                                               ],
@@ -648,7 +724,9 @@ class _LoginScreenState extends State<LoginScreen>
                                     },
                                   ),
                                 if (_errorMessage.isNotEmpty)
-                                  const SizedBox(height: 16),
+                                  SizedBox(height: isVeryShortScreen ? 4 :
+                                               hasAndroidNavigation ? 6 :
+                                               isVerySmallScreen ? 6 : 8),
 
                                 // Giriş yap butonu
                                 TweenAnimationBuilder<double>(
@@ -666,16 +744,20 @@ class _LoginScreenState extends State<LoginScreen>
                                     );
                                   },
                                 ),
-                                const SizedBox(height: 24),
+                                SizedBox(height: isVeryShortScreen ? 8 :
+                                             hasAndroidNavigation ? 12 :
+                                             isVerySmallScreen ? 16 : 
+                                             isSmallScreen ? 20 : 24),
 
                                 // Kayıt sayfasına yönlendirme
                                 Center(
                                   child: RichText(
                                     text: TextSpan(
                                       text: '${localizations.dontHaveAccount} ',
-                                      style: const TextStyle(
+                                      style: TextStyle(
                                         color: Colors.grey,
-                                        fontSize: 15,
+                                        fontSize: isVerySmallScreen ? 13 : 
+                                                 isSmallScreen ? 14 : 15,
                                       ),
                                       children: [
                                         TextSpan(
@@ -683,7 +765,8 @@ class _LoginScreenState extends State<LoginScreen>
                                           style: TextStyle(
                                             color: Colors.blue.shade300,
                                             fontWeight: FontWeight.bold,
-                                            fontSize: 15,
+                                            fontSize: isVerySmallScreen ? 13 : 
+                                                     isSmallScreen ? 14 : 15,
                                           ),
                                           recognizer:
                                               TapGestureRecognizer()
@@ -715,14 +798,7 @@ class _LoginScreenState extends State<LoginScreen>
               ),
               
               // Dil seçici - sağ üst köşe
-              Positioned(
-                top: 16,
-                right: 16,
-                child: LanguageSelector(
-                  isCompact: true,
-                  showLabel: false,
-                ),
-              ),
+              // Dil seçici kaldırıldı - artık uygulama başlangıcında seçiliyor
             ],
           ),
         ),
@@ -741,6 +817,11 @@ class _LoginScreenState extends State<LoginScreen>
     Widget? suffixIcon,
     String? Function(String?)? validator,
   }) {
+    final size = MediaQuery.of(context).size;
+    final isVerySmallScreen = size.width < 400;
+    final isSmallScreen = size.width < 600;
+    final hasAndroidNavigation = size.height < 700;
+    final isVeryShortScreen = size.height < 600;
     return TweenAnimationBuilder<double>(
       tween: Tween(begin: 0.0, end: 1.0),
       duration: const Duration(milliseconds: 500),
@@ -754,44 +835,64 @@ class _LoginScreenState extends State<LoginScreen>
               controller: controller,
               keyboardType: keyboardType,
               obscureText: obscureText,
-              style: const TextStyle(color: Colors.white),
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: isVeryShortScreen ? 13 :
+                         hasAndroidNavigation ? (isVerySmallScreen ? 13 : 14) :
+                         isVerySmallScreen ? 14 : 
+                         isSmallScreen ? 15 : 16,
+              ),
               decoration: InputDecoration(
                 labelText: label,
                 hintText: hint,
-                hintStyle: TextStyle(color: Colors.grey.withOpacity(0.5)),
+                hintStyle: TextStyle(
+                  color: Colors.grey.withOpacity(0.5),
+                  fontSize: isVeryShortScreen ? 12 :
+                           hasAndroidNavigation ? (isVerySmallScreen ? 12 : 13) :
+                           isVerySmallScreen ? 13 : 
+                           isSmallScreen ? 14 : 15,
+                ),
                 labelStyle: TextStyle(
                   color: Colors.blue.shade200,
                   fontWeight: FontWeight.w500,
+                  fontSize: isVeryShortScreen ? 12 :
+                           hasAndroidNavigation ? (isVerySmallScreen ? 12 : 13) :
+                           isVerySmallScreen ? 13 : 
+                           isSmallScreen ? 14 : 15,
                 ),
                 prefixIcon: Icon(icon, color: Colors.blue.shade300),
                 suffixIcon: suffixIcon,
                 enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(isVerySmallScreen ? 8 : 12),
                   borderSide: BorderSide(
                     color: Colors.blue.withOpacity(0.3),
                     width: 1.5,
                   ),
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(isVerySmallScreen ? 8 : 12),
                   borderSide: BorderSide(color: Colors.blue.shade400, width: 2),
                 ),
                 errorBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(isVerySmallScreen ? 8 : 12),
                   borderSide: BorderSide(
                     color: Colors.red.shade300,
                     width: 1.5,
                   ),
                 ),
                 focusedErrorBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(isVerySmallScreen ? 8 : 12),
                   borderSide: BorderSide(color: Colors.red.shade400, width: 2),
                 ),
                 filled: true,
                 fillColor: Colors.white.withOpacity(0.05),
-                contentPadding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 16,
+                contentPadding: EdgeInsets.symmetric(
+                  horizontal: isVeryShortScreen ? 10 :
+                             hasAndroidNavigation ? (isVerySmallScreen ? 10 : 12) :
+                             isVerySmallScreen ? 12 : 16,
+                  vertical: isVeryShortScreen ? 10 :
+                           hasAndroidNavigation ? (isVerySmallScreen ? 10 : 12) :
+                           isVerySmallScreen ? 12 : 16,
                 ),
               ),
               validator: validator,

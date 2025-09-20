@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'dart:math';
+import 'package:provider/provider.dart';
 import 'dart:async'; // StreamSubscription için import
 
 import '../services/auth_service.dart';
 import '../services/quiz_service.dart';
+import '../services/language_service.dart';
 import '../models/question.dart';
 import 'category_mistakes_screen.dart';
 import '../utils/event_bus.dart';
@@ -47,18 +48,19 @@ class _MistakesScreenState extends State<MistakesScreen> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // Dil değiştiğinde verileri yeniden yükle
+    _loadMistakes(forceRefresh: true);
+  }
+
+  @override
   void dispose() {
     // Aboneliği iptal et
     _mistakesSubscription.cancel();
     super.dispose();
   }
 
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    // Ekran tekrar görünür olduğunda verileri güncelle
-    _loadMistakes();
-  }
 
   Future<void> _loadMistakes({bool forceRefresh = false}) async {
     // Eğer halen yükleme yapılıyorsa, işlemi tekrarlama
@@ -112,7 +114,6 @@ class _MistakesScreenState extends State<MistakesScreen> {
           print("Firestore'da toplam belge sayısı: ${snapshot.docs.length}");
 
           if (snapshot.docs.isNotEmpty) {
-            print("İlk belgenin içeriği: ${snapshot.docs.first.data()}");
           }
         } catch (e) {
           print("Firestore koleksiyon kontrolü hatası: $e");
@@ -131,14 +132,10 @@ class _MistakesScreenState extends State<MistakesScreen> {
         }
 
         // Soruları kategorilerine göre grupla
-        print("Sorular kategorilere göre gruplandırılıyor...");
         final Map<String, List<Question>> groupedMistakes = {};
 
         for (var question in mistakeQuestions) {
           final category = question.category ?? 'Diğer'; // Will be localized in UI
-          print(
-            "Soru: ${question.question.substring(0, min(30, question.question.length))}... - Kategori: $category",
-          );
 
           if (!groupedMistakes.containsKey(category)) {
             groupedMistakes[category] = [];
@@ -179,15 +176,19 @@ class _MistakesScreenState extends State<MistakesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: _isLoading
-          ? const Center(child: CircularProgressIndicator())
-          : RefreshIndicator(
-              onRefresh: _loadMistakes,
-              child: _mistakesByCategory.isEmpty
-                  ? _buildEmptyView()
-                  : _buildCategoryCards(),
-            ),
+    return Consumer<LanguageService>(
+      builder: (context, languageService, child) {
+        return SafeArea(
+          child: _isLoading
+              ? const Center(child: CircularProgressIndicator())
+              : RefreshIndicator(
+                  onRefresh: _loadMistakes,
+                  child: _mistakesByCategory.isEmpty
+                      ? _buildEmptyView()
+                      : _buildCategoryCards(),
+                ),
+        );
+      },
     );
   }
 
@@ -230,13 +231,13 @@ class _MistakesScreenState extends State<MistakesScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Row(
+          Row(
             children: [
-              Icon(Icons.assignment_late, color: Colors.blue),
-              SizedBox(width: 8),
+              const Icon(Icons.assignment_late, color: Colors.blue),
+              const SizedBox(width: 8),
               Text(
-                'Eksikleriniz',
-                style: TextStyle(
+                AppLocalizations.of(context)!.yourDeficiencies,
+                style: const TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
@@ -246,7 +247,7 @@ class _MistakesScreenState extends State<MistakesScreen> {
           ),
           const SizedBox(height: 4),
           Text(
-            'Kategorilere göre yanlış cevapladığınız sorular',
+            AppLocalizations.of(context)!.mistakesByCategory,
             style: TextStyle(fontSize: 14, color: Colors.grey[400]),
           ),
           const SizedBox(height: 16),
@@ -312,7 +313,7 @@ class _MistakesScreenState extends State<MistakesScreen> {
                                   ),
                                   const SizedBox(height: 2),
                                   Text(
-                                    '${questions.length} Soru',
+                                    '${questions.length} ${AppLocalizations.of(context)!.questions}',
                                     style: TextStyle(
                                       fontSize: 12,
                                       color: Colors.white.withOpacity(0.8),
@@ -330,12 +331,12 @@ class _MistakesScreenState extends State<MistakesScreen> {
                                 color: Colors.white.withOpacity(0.2),
                                 borderRadius: BorderRadius.circular(16),
                               ),
-                              child: const Row(
+                              child: Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   Text(
-                                    'Çalış',
-                                    style: TextStyle(
+                                    AppLocalizations.of(context)!.study,
+                                    style: const TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.w500,
                                       fontSize: 12,

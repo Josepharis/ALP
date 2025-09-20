@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
+import 'package:provider/provider.dart';
 import '../l10n/app_localizations.dart';
 import '../services/auth_service.dart';
+import '../services/language_service.dart';
 
 import '../services/user_service.dart';
 import '../models/user_activity.dart';
@@ -437,7 +440,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
       // Kullanıcı verilerini yeniden yükle
       await _loadUserData();
 
-      print('DEBUG: Profil fotoğrafı başarıyla yüklendi');
     } catch (e) {
       print('Fotoğraf yükleme hatası: $e');
       if (mounted) {
@@ -602,6 +604,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           onTap: () => _showEditProfileModal(context),
                         ),
 
+                        // Dil seçici kaldırıldı - artık uygulama başlangıcında seçiliyor
+                        
+                        // Debug: Dil seçimini sıfırla (sadece test için)
+                        if (kDebugMode) ...[
+                          _buildSettingItem(
+                            'Debug: Dil Seçimini Sıfırla',
+                            Icons.refresh,
+                            context,
+                            onTap: () => _resetLanguageSelection(context),
+                          ),
+                        ],
+
                         _buildSettingItem(
                           AppLocalizations.of(context)!.myDevices,
                           Icons.devices,
@@ -762,18 +776,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 print('✅ Firebase çıkış tamamlandı');
                               } catch (e) {
                                 print('⚠️ Firebase çıkış hatası: $e');
+                                // Çıkış hatası olsa bile devam et
                               }
 
                               // 3. EN SON login sayfasına yönlendir
                               if (mounted) {
-                                Navigator.of(
-                                  context,
-                                  rootNavigator: true,
-                                ).pushNamedAndRemoveUntil(
-                                  '/login',
-                                  (route) => false,
-                                );
-                                print('✅ Login sayfasına yönlendirildi');
+                                try {
+                                  Navigator.of(
+                                    context,
+                                    rootNavigator: true,
+                                  ).pushNamedAndRemoveUntil(
+                                    '/login',
+                                    (route) => false,
+                                  );
+                                  print('✅ Login sayfasına yönlendirildi');
+                                } catch (e) {
+                                  print('⚠️ Navigasyon hatası: $e');
+                                  // Alternatif navigasyon yöntemi
+                                  if (mounted) {
+                                    Navigator.of(context).pushReplacementNamed('/login');
+                                  }
+                                }
                               }
                             }
                           },
@@ -1676,4 +1699,28 @@ class _ProfileScreenState extends State<ProfileScreen> {
       return '${date.day}/${date.month}/${date.year}';
     }
   }
+
+  // Dil seçici widget'ı kaldırıldı - artık uygulama başlangıcında seçiliyor
+
+  // Debug: Dil seçimini sıfırla
+  void _resetLanguageSelection(BuildContext context) async {
+    final languageService = Provider.of<LanguageService>(context, listen: false);
+    await languageService.resetLanguageSelection();
+    
+    if (context.mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(AppLocalizations.of(context)!.languageResetSuccess),
+          duration: Duration(seconds: 2),
+        ),
+      );
+      
+      // Uygulamayı yeniden başlat
+      Navigator.of(context).pushNamedAndRemoveUntil(
+        '/language-selection',
+        (route) => false,
+      );
+    }
+  }
+
 }

@@ -97,13 +97,11 @@ class QuizService {
           'updatedAt': Timestamp.now(),
         });
         
-        print('Quiz attemptCount artırıldı: ${currentAttemptCount + 1}');
         return true;
       }
       
       return false;
     } catch (e) {
-      print('incrementQuizAttemptCount hatası: $e');
       return false;
     }
   }
@@ -147,7 +145,6 @@ class QuizService {
           'score': quiz.score ?? 0,
           'updatedAt': Timestamp.now(),
         });
-        print('Mevcut quiz güncellendi: ${quiz.id}');
       } else {
         // Yeni quiz kaydı oluştur - attemptCount'u hesapla
         // Eğer bu kategori için tamamlanmış quiz varsa, attemptCount'u artır
@@ -161,8 +158,27 @@ class QuizService {
             .get();
             
         if (completedQuizQuery.docs.isNotEmpty) {
-          // Tamamlanmış quiz varsa, attemptCount'u artır
-          attemptCount = 2; // İlk tekrar çözme
+          // Bu kullanıcı için bu kategoriyi daha önce tamamlamış
+          // user_quiz_history'den totalCompletions sayısını al
+          try {
+            final historyDoc = await _firestore
+                .collection('user_quiz_history')
+                .doc('${userId}_${quiz.name.toLowerCase()}')
+                .get();
+                
+            if (historyDoc.exists) {
+              final data = historyDoc.data() as Map<String, dynamic>;
+              final totalCompletions = data['totalCompletions'] ?? 0;
+              attemptCount = totalCompletions + 1;
+              print('DEBUG: user_quiz_history totalCompletions: $totalCompletions, attemptCount: $attemptCount');
+            } else {
+              attemptCount = 2; // İlk tekrar çözme
+              print('DEBUG: user_quiz_history bulunamadı, attemptCount: $attemptCount');
+            }
+          } catch (e) {
+            attemptCount = 2; // Hata durumunda varsayılan değer
+            print('DEBUG: user_quiz_history hatası: $e, attemptCount: $attemptCount');
+          }
           
           // Aynı kategori için devam eden quiz var mı kontrol et (başka bir quiz)
           final ongoingQuizQuery = await _firestore
@@ -191,7 +207,6 @@ class QuizService {
           'updatedAt': Timestamp.now(),
           'createdAt': Timestamp.now(),
         });
-        print('Yeni quiz kaydı oluşturuldu: ${quiz.id}, attemptCount: $attemptCount');
       }
 
       // Sorunun ilerlemesini kaydet
@@ -218,7 +233,6 @@ class QuizService {
 
       return true;
     } catch (e) {
-      print('saveQuizProgress hatası: $e');
       return false;
     }
   }
@@ -248,7 +262,6 @@ class QuizService {
 
       return quizzes;
     } catch (e) {
-      print('getAllQuizzes hatası: $e');
       return [];
     }
   }
@@ -279,7 +292,6 @@ class QuizService {
 
       return Quiz.fromFirestore(docSnapshot, questionsList: questions);
     } catch (e) {
-      print('getQuizById hatası: $e');
       return null;
     }
   }
@@ -287,12 +299,10 @@ class QuizService {
   // Popüler quizleri getir
   Future<List<Quiz>> getPopularQuizzes({int limit = 5}) async {
     try {
-      print('DEBUG: getPopularQuizzes başlıyor...');
 
       // İlk kez çalışıyorsa temel popülarite değerlerini ayarla
       await _initializePopularityCounts();
 
-      print('DEBUG: Popüler quizler sorgulanıyor...');
       final querySnapshot =
           await _firestore
               .collection('quizzes')
@@ -300,13 +310,9 @@ class QuizService {
               .limit(limit)
               .get();
 
-      print('DEBUG: Sorgu sonucu: ${querySnapshot.docs.length} quiz bulundu');
 
       List<Quiz> quizzes = [];
       for (var doc in querySnapshot.docs) {
-        print(
-          'DEBUG: Quiz işleniyor - ID: ${doc.id}, Name: ${doc.data()['name']}, PopularityCount: ${doc.data()['popularityCount']}',
-        );
 
         // Her quiz için soru sayısını getir
         final questionsSnapshot =
@@ -322,15 +328,10 @@ class QuizService {
         );
 
         quizzes.add(quiz);
-        print(
-          'DEBUG: Quiz eklendi - Name: ${quiz.name}, PopularityCount: ${quiz.popularityCount}',
-        );
       }
 
-      print('DEBUG: Toplam ${quizzes.length} popüler quiz döndürülüyor');
       return quizzes;
     } catch (e) {
-      print('DEBUG: getPopularQuizzes hatası: $e');
       return [];
     }
   }
@@ -353,7 +354,6 @@ class QuizService {
         }
       }
     } catch (e) {
-      print('Popülarite değerleri başlatma hatası: $e');
     }
   }
 
@@ -434,12 +434,8 @@ class QuizService {
         ),
       );
 
-      print(
-        'Filtrelenmiş benzersiz devam eden quiz sayısı: ${ongoingQuizzes.length}',
-      );
       return ongoingQuizzes;
     } catch (e) {
-      print('getOngoingQuizzes hatası: $e');
       return [];
     }
   }
@@ -449,14 +445,11 @@ class QuizService {
     try {
       final userId = _authService.currentUser?.uid;
       if (userId == null) {
-        print('getCompletedQuizzes hatası: Kullanıcı giriş yapmamış');
         return [];
       }
 
-      print('Tamamlanan quizler getiriliyor...');
 
       // Öncelikle doğrudan user_completed_quizzes koleksiyonundan verileri çekelim
-      print('user_completed_quizzes koleksiyonundan veriler alınıyor...');
       final querySnapshot =
           await _firestore
               .collection('user_completed_quizzes')
@@ -467,16 +460,13 @@ class QuizService {
               ) // En son tamamlananlar önce
               .get();
 
-      print('Sorgu sonucu belge sayısı: ${querySnapshot.docs.length}');
 
       List<Quiz> completedQuizzes = [];
 
       if (querySnapshot.docs.isNotEmpty) {
-        print('user_completed_quizzes koleksiyonunda veriler bulundu');
 
         for (var doc in querySnapshot.docs) {
           final data = doc.data();
-          print('Belge: ${doc.id}, Data: $data');
 
           final quizId = data['quizId'] as String? ?? '';
           final categoryName = data['categoryName'] as String? ?? 'Quiz';
@@ -501,22 +491,15 @@ class QuizService {
           completedQuizzes.add(quiz);
         }
 
-        print(
-          'Tamamlanan quizler başarıyla yüklendi: ${completedQuizzes.length}',
-        );
         return completedQuizzes;
       }
 
       // Eğer user_completed_quizzes koleksiyonunda veri bulunamazsa, eski yöntemle devam et
-      print(
-        'user_completed_quizzes koleksiyonunda veri bulunamadı, eski yönteme geçiliyor...',
-      );
 
       final userActivityDoc =
           await _firestore.collection('userActivities').doc(userId).get();
 
       if (!userActivityDoc.exists) {
-        print('userActivities belgesinde de veri bulunamadı');
         return [];
       }
 
@@ -528,7 +511,6 @@ class QuizService {
 
         // Sadece tamamlanmış quizleri getir
         if (progress.isCompleted) {
-          print('QuizProgress içinde tamamlanmış quiz bulundu: $quizId');
 
           // Quiz nesnesini oluşturma - quizId'den kategori adını çıkar
           String categoryName = 'Quiz';
@@ -565,10 +547,8 @@ class QuizService {
         ),
       );
 
-      print('Toplam tamamlanan quiz sayısı: ${completedQuizzes.length}');
       return completedQuizzes;
     } catch (e) {
-      print('getCompletedQuizzes hatası: $e');
       return [];
     }
   }
@@ -576,7 +556,6 @@ class QuizService {
   // Günün sorusunu getir - Yeni sistem: Tüm kategorilerden rastgele
   Future<DailyQuestion?> getDailyQuestion([String? languageCode]) async {
     try {
-      print('DEBUG: Günün sorusu getiriliyor...');
 
       // Bugünün tarihini al
       final now = DateTime.now();
@@ -584,7 +563,6 @@ class QuizService {
       final todayString =
           '${today.year}-${today.month.toString().padLeft(2, '0')}-${today.day.toString().padLeft(2, '0')}';
 
-      print('DEBUG: Bugünün tarihi: $todayString');
 
       // Kullanıcının bugün günün sorusunu çözüp çözmediğini kontrol et (dil seçimine göre)
       final userId = _authService.currentUser?.uid;
@@ -597,7 +575,6 @@ class QuizService {
                 .get();
 
         if (userAnswerDoc.exists) {
-          print('DEBUG: Kullanıcı bugün günün sorusunu zaten çözmüş');
           // Kullanıcı bugün çözmüş, çözülmüş soruyu döndür
           final answerData = userAnswerDoc.data()!;
           final questionData = answerData['question'] as Map<String, dynamic>;
@@ -622,7 +599,6 @@ class QuizService {
           .get();
 
       if (dailyQuestionDoc.exists) {
-        print('DEBUG: Bugün için günün sorusu zaten mevcut');
         // Bugün için soru zaten seçilmiş
         final data = dailyQuestionDoc.data()!;
         final questionData = data['question'] as Map<String, dynamic>;
@@ -636,7 +612,6 @@ class QuizService {
         );
       }
 
-      print('DEBUG: Bugün için yeni günün sorusu seçiliyor...');
 
       // Dil seçimine göre doğru soru setlerini al
       List<Question> allQuestions = [];
@@ -709,7 +684,6 @@ class QuizService {
 
 
       if (allQuestions.isEmpty) {
-        print('DEBUG: Hiç soru bulunamadı!');
         return null;
       }
 
@@ -718,9 +692,6 @@ class QuizService {
       final selectedQuestion =
           allQuestions[random.nextInt(allQuestions.length)];
 
-      print(
-        'DEBUG: Rastgele soru seçildi: ${selectedQuestion.question.substring(0, 50)}...',
-      );
 
       // Günün sorusunu Firestore'a kaydet
       final dailyQuestion = DailyQuestion(
@@ -739,10 +710,8 @@ class QuizService {
         'createdAt': FieldValue.serverTimestamp(),
       });
 
-      print('DEBUG: Günün sorusu Firestore\'a kaydedildi');
       return dailyQuestion;
     } catch (e) {
-      print('DEBUG: getDailyQuestion hatası: $e');
       return null;
     }
   }
@@ -758,7 +727,6 @@ class QuizService {
     try {
       final userId = _authService.currentUser?.uid;
       if (userId == null) {
-        print('DEBUG: Kullanıcı giriş yapmamış');
         return false;
       }
 
@@ -767,7 +735,6 @@ class QuizService {
       final todayString =
           '${today.year}-${today.month.toString().padLeft(2, '0')}-${today.day.toString().padLeft(2, '0')}';
 
-      print('DEBUG: Günün sorusu yanıtlanıyor - Doğru: $isCorrect');
 
       // Kullanıcının cevabını kaydet (dil seçimine göre)
       final answerCollectionName = languageCode == 'en' ? 'daily_question_answers_en' : 'daily_question_answers';
@@ -787,29 +754,32 @@ class QuizService {
 
       // Doğruysa kullanıcıya puan ekle
       if (isCorrect) {
+        // Genel puanları güncelle
         await _firestore.collection('userActivities').doc(userId).update({
           'totalPoints': FieldValue.increment(20),
           'dailyQuestionsCorrect': FieldValue.increment(1),
-          'pointsHistory': FieldValue.arrayUnion([{
-            'points': 20,
-            'date': todayString,
-            'source': 'daily_question',
-            'timestamp': FieldValue.serverTimestamp(),
-          }]),
-          'lastUpdated': FieldValue.serverTimestamp(),
         });
-        print('DEBUG: Kullanıcıya 20 puan eklendi');
+        
+        // Aylık puanları güncelle
+        final year = now.year;
+        final month = now.month;
+        final monthlyDocId = '${userId}_${year}_${month}';
+        await _firestore.collection('user_monthly_points').doc(monthlyDocId).set({
+          'userId': userId,
+          'year': year,
+          'month': month,
+          'points': FieldValue.increment(20),
+          'lastUpdated': FieldValue.serverTimestamp(),
+        }, SetOptions(merge: true));
+        
       } else {
         await _firestore.collection('userActivities').doc(userId).update({
           'dailyQuestionsWrong': FieldValue.increment(1),
-          'lastUpdated': FieldValue.serverTimestamp(),
         });
-        print('DEBUG: Yanlış cevap kaydedildi');
       }
 
       return true;
     } catch (e) {
-      print('DEBUG: answerDailyQuestion hatası: $e');
       return false;
     }
   }
@@ -844,7 +814,6 @@ class QuizService {
 
       return userActivity;
     } catch (e) {
-      print('updateUserActivity hatası: $e');
       return null;
     }
   }
@@ -867,7 +836,6 @@ class QuizService {
 
       return UserActivity.fromFirestore(userActivityDoc);
     } catch (e) {
-      print('getUserActivity hatası: $e');
       return null;
     }
   }
@@ -884,11 +852,8 @@ class QuizService {
 
   // Kategori adına göre soruları getir
   Future<List<Question>> getCategoryQuestions(String categoryName, {BuildContext? context}) async {
-    print('DEBUG: getCategoryQuestions çağrıldı - Kategori: "$categoryName"');
-    print('DEBUG: Lowercase kategori: "${categoryName.toLowerCase()}"');
     
     final normalizedCategoryName = _normalizeCategoryName(categoryName);
-    print('DEBUG: Normalized kategori: "$normalizedCategoryName"');
 
     // Önce MultilingualQuestionService'den kategorileri kontrol et
     try {
@@ -900,13 +865,11 @@ class QuizService {
           final title = category['title'] as String;
           if (title == categoryName || title.toLowerCase() == categoryName.toLowerCase()) {
             final questions = category['questions'] as List<Question>;
-            print('DEBUG: MultilingualQuestionService\'den bulundu: $title -> ${questions.length} soru');
             return questions;
           }
         }
       }
     } catch (e) {
-      print('DEBUG: MultilingualQuestionService kontrolü başarısız: $e');
     }
 
     // Kategori mapping - Firestore'dan gelen adları kod içindeki soru setleriyle eşleştir
@@ -1111,19 +1074,16 @@ class QuizService {
 
     // Önce normalize edilmiş isimle ara
     var questions = categoryMapping[normalizedCategoryName];
-    print('DEBUG: Normalize edilmiş isimle arama: "$normalizedCategoryName" -> ${questions != null ? "BULUNDU" : "BULUNAMADI"}');
     
     // Eğer bulunamazsa, orijinal lowercase ile de dene
     if (questions == null) {
       final lowerCategoryName = categoryName.toLowerCase();
       questions = categoryMapping[lowerCategoryName];
-      print('DEBUG: Lowercase isimle arama: "$lowerCategoryName" -> ${questions != null ? "BULUNDU" : "BULUNAMADI"}');
     }
     
     // Eğer hala bulunamazsa, orijinal isimle dene
     if (questions == null) {
       questions = categoryMapping[categoryName];
-      print('DEBUG: Orijinal isimle arama: "$categoryName" -> ${questions != null ? "BULUNDU" : "BULUNAMADI"}');
     }
     
     // Eğer hala bulunamazsa, partial match dene
@@ -1132,24 +1092,14 @@ class QuizService {
       for (var key in categoryMapping.keys) {
         if (key.toLowerCase().contains(lowerCategoryName) || lowerCategoryName.contains(key.toLowerCase())) {
           questions = categoryMapping[key];
-          print('DEBUG: Partial match bulundu: "$key" -> ${questions?.length ?? 0} soru');
           break;
         }
       }
     }
 
     if (questions != null) {
-      print('DEBUG: Kategori eşleşti! ${questions.length} soru bulundu');
       return questions;
     } else {
-      print(
-        'DEBUG: UYARI - Kategori eşleşmedi! "$categoryName" için boş liste döndürülüyor',
-      );
-      print('DEBUG: Normalized: "$normalizedCategoryName"');
-      print('DEBUG: Lowercase: "${categoryName.toLowerCase()}"');
-      print(
-        'DEBUG: Kullanılabilir kategoriler: ${categoryMapping.keys.take(10).join(", ")}...',
-      );
       return [];
     }
   }
@@ -1159,33 +1109,41 @@ class QuizService {
     try {
       final userId = _authService.currentUser?.uid;
       if (userId == null) {
-        print('updateAnswerStatistics hatası: Kullanıcı giriş yapmamış');
         return false;
       }
 
-      print(
-        'İstatistik güncelleniyor: ${isCorrect ? "Doğru" : "Yanlış"} cevap, kullanıcı: $userId',
-      );
+
+      final now = DateTime.now();
+      final year = now.year;
+      final month = now.month;
 
       // Firestore'da kullanıcı istatistiklerini güncelle
       if (isCorrect) {
-        // Doğru cevap
+        // Doğru cevap - genel puanları güncelle
         await _firestore.collection('userActivities').doc(userId).update({
           'totalPoints': FieldValue.increment(points), // Puanları ekle
           'totalCorrectAnswers': FieldValue.increment(1), // Doğru cevap sayısını artır
         });
-        print('Doğru cevap istatistiği güncellendi: $points puan eklendi');
+        
+        // Aylık puanları güncelle
+        final monthlyDocId = '${userId}_${year}_${month}';
+        await _firestore.collection('user_monthly_points').doc(monthlyDocId).set({
+          'userId': userId,
+          'year': year,
+          'month': month,
+          'points': FieldValue.increment(points),
+          'lastUpdated': FieldValue.serverTimestamp(),
+        }, SetOptions(merge: true));
+        
       } else {
-        // Yanlış cevap
+        // Yanlış cevap - sadece genel istatistikleri güncelle
         await _firestore.collection('userActivities').doc(userId).update({
           'totalWrongAnswers': FieldValue.increment(1), // Yanlış cevap sayısını artır
         });
-        print('Yanlış cevap istatistiği güncellendi');
       }
 
       return true;
     } catch (e) {
-      print('updateAnswerStatistics hatası: $e');
       return false;
     }
   }
@@ -1200,16 +1158,12 @@ class QuizService {
     try {
       final userId = _authService.currentUser?.uid;
       if (userId == null) {
-        print('saveWrongAnswer hatası: Kullanıcı giriş yapmamış');
         return false;
       }
 
-      print('Yanlış cevap kaydediliyor - UserID: $userId');
-      print('Soru: ${question.question}');
 
       // Soruya kategori ekle (eğer yoksa)
       if (question.category == null || question.category!.isEmpty) {
-        print('Soru kategorisi yoktu, kategori ekleniyor: $category');
         question = Question(
           id: question.id,
           question: question.question,
@@ -1232,22 +1186,15 @@ class QuizService {
       if (questionId.isEmpty) {
         // ID yoksa yeni bir ID oluştur
         questionId = 'id_${DateTime.now().millisecondsSinceEpoch}';
-        print('Soru için yeni ID oluşturuldu: $questionId');
       } else {
-        print('Mevcut soru ID\'si kullanılıyor: $questionId');
       }
 
       // Sorunu zaten listelenip listelenmediğini kontrol et
-      print('Soru kayıt kontrolü yapılıyor: $questionId');
       final existingDoc = await mistakesCollectionRef.doc(questionId).get();
       if (existingDoc.exists) {
-        print('Bu soru zaten yanlışlar listesinde var: $questionId');
         return true;
       }
 
-      print(
-        'Soru kaydediliyor... ID: $questionId, Kategori: ${question.category ?? category}',
-      );
 
       // Soru verilerini oluştur
       final questionData = {
@@ -1260,7 +1207,6 @@ class QuizService {
         'timestamp': Timestamp.now(),
       };
 
-      print('Hazırlanan veri: $questionData');
 
       // Yeni yanlış cevabı kaydet
       await mistakesCollectionRef.doc(questionId).set(questionData);
@@ -1268,16 +1214,11 @@ class QuizService {
       // Doğrulama için veriyi tekrar oku
       final verifyDoc = await mistakesCollectionRef.doc(questionId).get();
       if (!verifyDoc.exists) {
-        print('HATA: Soru kaydedildi ancak doğrulama başarısız oldu!');
         return false;
       }
 
-      print(
-        'Doğrulama başarılı. Yanlış cevaplanan soru kaydedildi! ID: $questionId',
-      );
       return true;
     } catch (e) {
-      print('saveWrongAnswer hatası: $e');
       return false;
     }
   }
@@ -1287,7 +1228,6 @@ class QuizService {
     try {
       final userId = _authService.currentUser?.uid;
       if (userId == null) {
-        print('removeWrongAnswer hatası: Kullanıcı giriş yapmamış');
         return false;
       }
 
@@ -1300,10 +1240,8 @@ class QuizService {
       // Soruyu sil
       await mistakesCollectionRef.doc(questionId).delete();
 
-      print('Yanlış cevaplanan soru başarıyla listeden kaldırıldı');
       return true;
     } catch (e) {
-      print('removeWrongAnswer hatası: $e');
       return false;
     }
   }
@@ -1316,11 +1254,9 @@ class QuizService {
     try {
       final user = _authService.currentUser;
       if (user == null) {
-        print('getMistakeQuestions: Kullanıcı giriş yapmamış');
         return [];
       }
 
-      print('Yanlış cevaplanan sorular getiriliyor - UserID: ${user.uid}');
 
       // Kullanıcının yanlış soruları koleksiyonu
       final mistakesCollectionRef = _firestore
@@ -1331,21 +1267,17 @@ class QuizService {
       // Tüm yanlış soruları al - Cache sorununu önlemek için
       final querySnapshot = await mistakesCollectionRef.get();
 
-      print('Yanlış cevaplanan soru sayısı: ${querySnapshot.docs.length}');
 
       // Her bir belgeyi Question nesnesine dönüştür
       for (var doc in querySnapshot.docs) {
         try {
           final data = doc.data();
 
-          // Debug bilgisi ekle
-          print('Belge ID: ${doc.id}, Veri: $data');
 
           // Gerekli alanların varlığını kontrol et
           if (!data.containsKey('question') ||
               !data.containsKey('options') ||
               !data.containsKey('correctAnswerIndex')) {
-            print('Hatalı veri formatı: ${doc.id}');
             continue;
           }
 
@@ -1354,7 +1286,6 @@ class QuizService {
           final questionHash = _generateQuestionHash(questionText, data['options']);
           
           if (seenQuestionIds.contains(questionHash)) {
-            print('Tekrarlanan soru atlandı: ${questionText.substring(0, min(30, questionText.length))}...');
             continue;
           }
           seenQuestionIds.add(questionHash);
@@ -1366,7 +1297,6 @@ class QuizService {
           if (options is List) {
             optionsList = List<String>.from(options.map((e) => e.toString()));
           } else {
-            print('Options formatı hatalı: $options');
             continue;
           }
 
@@ -1381,18 +1311,12 @@ class QuizService {
           );
 
           mistakeQuestions.add(question);
-          print(
-            'Soru eklendi: ${question.question.substring(0, min(30, question.question.length))}...',
-          );
         } catch (e) {
-          print('Soru dönüştürme hatası: $e');
         }
       }
 
-      print('Toplam ${mistakeQuestions.length} benzersiz yanlış soru bulundu.');
       return mistakeQuestions;
     } catch (e) {
-      print('Yanlış soruları getirme hatası: $e');
       return [];
     }
   }
@@ -1409,11 +1333,9 @@ class QuizService {
     try {
       final user = _authService.currentUser;
       if (user == null) {
-        print('removeMistakeQuestion hatası: Kullanıcı giriş yapmamış');
         return false;
       }
 
-      print('Eksiklerden soru kaldırılıyor: $questionId');
 
       // Firestore'dan soruyu kaldır
       await _firestore
@@ -1423,10 +1345,8 @@ class QuizService {
           .doc(questionId)
           .delete();
 
-      print('Soru başarıyla eksiklerden kaldırıldı: $questionId');
       return true;
     } catch (e) {
-      print('Eksiklerden soru kaldırma hatası: $e');
       return false;
     }
   }
@@ -1436,23 +1356,19 @@ class QuizService {
     try {
       final userId = _authService.currentUser?.uid;
       if (userId == null) {
-        print('Veri taşıma hatası: Kullanıcı giriş yapmamış');
         return false;
       }
 
-      print('Eski yanlış sorular taşınıyor...');
 
       // Eski veri yapısından okuma
       final userActivityDoc =
           await _firestore.collection('userActivities').doc(userId).get();
       if (!userActivityDoc.exists) {
-        print('Taşınacak veri bulunamadı');
         return true; // Hata yok, sadece veri yok
       }
 
       final userData = userActivityDoc.data();
       if (userData == null || !userData.containsKey('mistakeQuestions')) {
-        print('mistakeQuestions alanı bulunamadı');
         return true; // Hata yok, sadece veri yok
       }
 
@@ -1460,7 +1376,6 @@ class QuizService {
         userData['mistakeQuestions'] ?? [],
       );
 
-      print('Taşınacak soru sayısı: ${mistakesList.length}');
       if (mistakesList.isEmpty) {
         return true; // Taşınacak veri yok
       }
@@ -1489,7 +1404,6 @@ class QuizService {
           });
           successCount++;
         } catch (e) {
-          print('Soru taşıma hatası: $e');
         }
       }
 
@@ -1500,10 +1414,8 @@ class QuizService {
         });
       }
 
-      print('$successCount soru başarıyla taşındı');
       return true;
     } catch (e) {
-      print('Veri taşıma hatası: $e');
       return false;
     }
   }
@@ -1518,7 +1430,6 @@ class QuizService {
     try {
       final userId = _authService.currentUser?.uid;
       if (userId == null) {
-        print('completeQuiz hatası: Kullanıcı giriş yapmamış');
         return false;
       }
 
@@ -1527,7 +1438,32 @@ class QuizService {
           quizId ??
           '${categoryName.toLowerCase().replaceAll(' ', '_')}_${DateTime.now().millisecondsSinceEpoch}';
 
-      print('Quiz tamamlanıyor: $finalQuizId, Skor: $score/$totalQuestions');
+      // Aynı quiz'in zaten tamamlanıp tamamlanmadığını kontrol et
+      final completedQuizId = '${userId}_${finalQuizId}';
+      final existingCompletedQuiz = await _firestore
+          .collection('user_completed_quizzes')
+          .doc(completedQuizId)
+          .get();
+          
+      if (existingCompletedQuiz.exists) {
+        print('Quiz zaten tamamlanmış: $completedQuizId');
+        return true; // Zaten tamamlanmış, başarılı olarak döndür
+      }
+
+      // Aynı kullanıcı için aynı kategoride son 30 saniye içinde tamamlanan quiz var mı kontrol et
+      final recentQuizQuery = await _firestore
+          .collection('user_completed_quizzes')
+          .where('userId', isEqualTo: userId)
+          .where('categoryName', isEqualTo: categoryName)
+          .where('completedAt', isGreaterThan: Timestamp.fromDate(DateTime.now().subtract(const Duration(seconds: 30))))
+          .limit(1)
+          .get();
+          
+      if (recentQuizQuery.docs.isNotEmpty) {
+        print('Aynı kategoride son 30 saniye içinde quiz tamamlanmış: $categoryName');
+        return true; // Çok yakın zamanda tamamlanmış, başarılı olarak döndür
+      }
+
 
       // Kullanıcı aktivitesini güncelle
       final userActivityRef = _firestore
@@ -1535,9 +1471,7 @@ class QuizService {
           .doc(userId);
 
       final successRate = (score / totalQuestions) * 100; // Başarı oranı
-
       final now = DateTime.now();
-      final todayString = '${now.year}-${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')}';
 
       // Quiz ilerlemesini tamamlandı olarak işaretle
       await userActivityRef.set({
@@ -1555,20 +1489,31 @@ class QuizService {
           },
         },
         'totalPoints': FieldValue.increment(score * 10), // Her doğru cevap için 10 puan
-        'pointsHistory': FieldValue.arrayUnion([{
-          'points': score * 10,
-          'date': todayString,
-          'source': 'quiz_completion',
-          'timestamp': FieldValue.serverTimestamp(),
-        }]),
+        'totalQuizzes': FieldValue.increment(1), // Toplam quiz sayısını artır
+        'lastUpdated': FieldValue.serverTimestamp(),
+      }, SetOptions(merge: true));
+
+      // Users koleksiyonundaki quizzesCompleted sayısını artır
+      await _firestore.collection('users').doc(userId).update({
+        'quizzesCompleted': FieldValue.increment(1),
+        'lastActivity': FieldValue.serverTimestamp(),
+      });
+
+      // Aylık puanları da güncelle
+      final monthlyPoints = score * 10;
+      final year = now.year;
+      final month = now.month;
+      final monthlyDocId = '${userId}_${year}_$month';
+      
+      await _firestore.collection('user_monthly_points').doc(monthlyDocId).set({
+        'userId': userId,
+        'year': year,
+        'month': month,
+        'points': FieldValue.increment(monthlyPoints),
         'lastUpdated': FieldValue.serverTimestamp(),
       }, SetOptions(merge: true));
 
       // Tamamlanan quizi user_completed_quizzes koleksiyonuna da kaydet
-      final completedQuizId = '${userId}_${finalQuizId}';
-
-      print('Tamamlanan quiz kaydediliyor: $completedQuizId');
-
       await _firestore
           .collection('user_completed_quizzes')
           .doc(completedQuizId)
@@ -1584,7 +1529,6 @@ class QuizService {
 
       // POPÜLERLİK SAYISINI ARTIR - Sadece ilk tamamlamada
       try {
-        print('DEBUG: Popülerlik sayısı artırılıyor - Kategori: $categoryName');
 
         // Önce kullanıcının bu kategoriyi daha önce tamamlayıp tamamlamadığını kontrol et
         final historyDoc =
@@ -1596,7 +1540,6 @@ class QuizService {
                 .get();
 
         if (!historyDoc.exists) {
-          print('DEBUG: İlk tamamlama, popülerlik artırılacak');
 
           // İlk tamamlama - popülerlik sayısını artır
           // Firestore'da kategori adına göre doküman bul ve güncelle
@@ -1609,20 +1552,16 @@ class QuizService {
 
           if (quizQuery.docs.isNotEmpty) {
             final quizDoc = quizQuery.docs.first;
-            print('DEBUG: Quiz dokümanı bulundu: ${quizDoc.id}');
 
             // Mevcut popülerlik sayısını al
             final currentCount = quizDoc.data()['popularityCount'] ?? 0;
             final newCount = currentCount + 1;
 
-            print('DEBUG: Mevcut sayı: $currentCount, Yeni sayı: $newCount');
 
             // Popülerlik sayısını artır
             await quizDoc.reference.update({'popularityCount': newCount});
 
-            print('DEBUG: Popülerlik sayısı güncellendi: $newCount');
           } else {
-            print('DEBUG: Quiz dokümanı bulunamadı - Yeni oluşturuluyor');
             // Eğer quiz dokümanı yoksa oluştur
             await _firestore.collection('quizzes').add({
               'name': categoryName,
@@ -1644,7 +1583,6 @@ class QuizService {
                 'totalCompletions': 1,
               });
         } else {
-          print('DEBUG: Daha önce tamamlanmış, popülerlik artırılmayacak');
 
           // Sadece kullanıcı geçmişini güncelle
           await historyDoc.reference.update({
@@ -1653,7 +1591,6 @@ class QuizService {
           });
         }
       } catch (e) {
-        print('DEBUG: HATA - Popülerlik güncelleme hatası: $e');
         // Popülerlik güncellenemezse bile quiz tamamlanmış olarak devam et
       }
 

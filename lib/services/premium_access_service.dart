@@ -53,12 +53,12 @@ class PremiumAccessService {
     return answeredQuestions >= maxFreeQuestions;
   }
   
-  /// Premium gerekli mesajı
+  /// Premium gerekli mesajı - Bu artık localization ile yönetilecek
   static String getPremiumRequiredMessage() {
     return "Daha fazla soru için Premium üyelik gerekli!\nİlk 2 soruyu ücretsiz deneyebilirsiniz.";
   }
   
-  /// Premium teşvik mesajı
+  /// Premium teşvik mesajı - Bu artık localization ile yönetilecek
   static String getPremiumIncentiveMessage() {
     return "Premium'a geçin ve tüm sorulara sınırsız erişim kazanın!";
   }

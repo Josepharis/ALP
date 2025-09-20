@@ -3,10 +3,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class LanguageService extends ChangeNotifier {
   static const String _languageKey = 'selected_language';
+  static const String _languageSelectedKey = 'language_selected';
   
   Locale _currentLocale = const Locale('tr'); // Varsayılan Türkçe
+  bool _isLanguageSelected = false;
   
   Locale get currentLocale => _currentLocale;
+  bool get isLanguageSelected => _isLanguageSelected;
   
   // Desteklenen diller
   static const List<Locale> supportedLocales = [
@@ -27,7 +30,11 @@ class LanguageService extends ChangeNotifier {
   };
   
   LanguageService() {
-    _loadSavedLanguage();
+    initializeLanguage();
+  }
+  
+  Future<void> initializeLanguage() async {
+    await _loadSavedLanguage();
   }
   
   // Kaydedilmiş dili yükle
@@ -35,11 +42,15 @@ class LanguageService extends ChangeNotifier {
     try {
       final prefs = await SharedPreferences.getInstance();
       final languageCode = prefs.getString(_languageKey);
+      final isSelected = prefs.getBool(_languageSelectedKey) ?? false;
+      
+      _isLanguageSelected = isSelected;
       
       if (languageCode != null) {
         _currentLocale = Locale(languageCode);
-        notifyListeners();
       }
+      
+      notifyListeners();
     } catch (e) {
       print('Dil yüklenirken hata: $e');
     }
@@ -51,13 +62,29 @@ class LanguageService extends ChangeNotifier {
     
     try {
       _currentLocale = locale;
+      _isLanguageSelected = true;
       
       final prefs = await SharedPreferences.getInstance();
       await prefs.setString(_languageKey, locale.languageCode);
+      await prefs.setBool(_languageSelectedKey, true);
       
       notifyListeners();
     } catch (e) {
       print('Dil kaydedilirken hata: $e');
+    }
+  }
+  
+  // Dil seçimini sıfırla (sadece test için)
+  Future<void> resetLanguageSelection() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.remove(_languageSelectedKey);
+      await prefs.remove(_languageKey);
+      _isLanguageSelected = false;
+      _currentLocale = const Locale('tr'); // Varsayılan dil
+      notifyListeners();
+    } catch (e) {
+      print('Dil seçimi sıfırlanırken hata: $e');
     }
   }
   

@@ -156,8 +156,6 @@ class _PremiumScreenState extends State<PremiumScreen> with TickerProviderStateM
         },
       ),
     );
-      },
-    );
   }
 
 
@@ -313,12 +311,12 @@ class _PremiumScreenState extends State<PremiumScreen> with TickerProviderStateM
 
   Widget _buildFeaturesGrid() {
     final features = [
-      {'icon': Icons.all_inclusive, 'title': AppLocalizations.of(context)!.accessAllQuestions},
-      {'icon': Icons.quiz, 'title': AppLocalizations.of(context)!.unlimitedQuiz},
-      {'icon': Icons.visibility, 'title': AppLocalizations.of(context)!.detailedExplanations},
-      {'icon': Icons.error_outline, 'title': AppLocalizations.of(context)!.viewWrongQuestions},
-      {'icon': Icons.assignment_turned_in, 'title': AppLocalizations.of(context)!.workOnDeficiencies},
-      {'icon': Icons.analytics, 'title': AppLocalizations.of(context)!.advancedAnalytics},
+      {'icon': Icons.all_inclusive, 'title': 'Tüm Sorulara Erişim'},
+      {'icon': Icons.quiz, 'title': 'Sınırsız Quiz'},
+      {'icon': Icons.visibility, 'title': 'Detaylı Açıklamalar'},
+      {'icon': Icons.error_outline, 'title': 'Yanlış Soruları Görüntüle'},
+      {'icon': Icons.assignment_turned_in, 'title': 'Eksiklerinizi Çalışın'},
+      {'icon': Icons.analytics, 'title': 'Gelişmiş Analitik'},
     ];
 
     return Column(
@@ -562,7 +560,7 @@ class _PremiumScreenState extends State<PremiumScreen> with TickerProviderStateM
                           ),
                           child: Text(
                             AppLocalizations.of(context)!.popular,
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: isSelected ? Colors.white : Colors.black,
                               fontWeight: FontWeight.bold,
                               fontSize: 8,
@@ -780,6 +778,8 @@ class _PremiumScreenState extends State<PremiumScreen> with TickerProviderStateM
           ),
         ],
       ),
+    );
+      },
     );
   }
 }

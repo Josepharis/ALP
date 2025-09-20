@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../l10n/app_localizations.dart';
 import '../models/tutorial_step.dart';
 
 class TutorialService {
@@ -7,33 +8,30 @@ class TutorialService {
   static const String _featuresShownKey = 'features_shown';
 
   // Tanıtım adımlarını oluştur
-  List<TutorialStep> getTutorialSteps() {
+  List<TutorialStep> getTutorialSteps(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return [
       TutorialStep(
-        title: 'Anestezi Uygulamasına Hoş Geldiniz',
-        description:
-            'Anestezi alanında bilgilerinizi test edin, yeni bilgiler öğrenin ve kendinizi geliştirin.',
+        title: l10n.tutorialWelcomeTitle,
+        description: l10n.tutorialWelcomeDescription,
         icon: Icons.medical_services,
         color: Colors.blue,
       ),
       TutorialStep(
-        title: 'Günün Sorusu',
-        description:
-            'Her gün yeni bir soru ile bilgilerinizi taze tutun ve günlük katılım puanları kazanın.',
+        title: l10n.tutorialDailyQuestionTitle,
+        description: l10n.tutorialDailyQuestionDescription,
         icon: Icons.calendar_today,
         color: Colors.orange,
       ),
       TutorialStep(
-        title: 'Popüler Quizler',
-        description:
-            'En çok çözülen quizleri keşfedin ve meslektaşlarınızla bilgi yarışında zirveye çıkın.',
+        title: l10n.tutorialPopularQuizzesTitle,
+        description: l10n.tutorialPopularQuizzesDescription,
         icon: Icons.trending_up,
         color: Colors.purple,
       ),
       TutorialStep(
-        title: 'Devam Eden Quizler',
-        description:
-            'Yarım kalan quizlerinize hızlıca erişerek kaldığınız yerden devam edin.',
+        title: l10n.tutorialOngoingQuizzesTitle,
+        description: l10n.tutorialOngoingQuizzesDescription,
         icon: Icons.play_circle_filled,
         color: Colors.green,
       ),

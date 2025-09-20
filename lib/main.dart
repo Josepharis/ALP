@@ -13,6 +13,7 @@ import 'services/premium_service.dart';
 import 'l10n/app_localizations.dart';
 
 import 'screens/splash_screen.dart';
+import 'screens/language_selection_screen.dart';
 import 'screens/login_screen.dart';
 import 'screens/register_screen.dart';
 import 'screens/home_screen.dart';
@@ -20,7 +21,6 @@ import 'screens/admin_screen.dart';
 import 'screens/premium_screen.dart';
 import 'screens/test_premium_screen.dart';
 import 'screens/subscription_screen.dart';
-import 'screens/demo_premium_features_screen.dart';
 
 // Firebase background message handler
 @pragma('vm:entry-point')
@@ -146,8 +146,9 @@ class MyApp extends StatelessWidget {
               bodyMedium: TextStyle(color: Colors.white),
             ),
           ),
-          initialRoute: '/splash',
+          initialRoute: '/language-selection',
           routes: {
+            '/language-selection': (context) => const LanguageSelectionScreen(),
             '/splash': (context) => const SplashScreen(),
             '/home': (context) => const HomeScreen(),
             '/login': (context) => const LoginScreen(),
@@ -156,7 +157,6 @@ class MyApp extends StatelessWidget {
             '/premium': (context) => const PremiumScreen(),
             '/subscription': (context) => const SubscriptionScreen(),
             '/test-premium': (context) => const TestPremiumScreen(),
-            '/demo-premium': (context) => const DemoPremiumFeaturesScreen(),
           },
         );
       },

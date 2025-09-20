@@ -127,82 +127,57 @@ class LeaderboardService {
     return getLeaderboard();
   }
 
-  // Aylık sıralamayı getir
+  // Aylık sıralamayı getir - Geçmişi koruyan sistem
   Future<List<Map<String, dynamic>>> getMonthlyLeaderboard() async {
     try {
       print('Aylık sıralama verileri yükleniyor...');
 
-      // Bu ayın başlangıcını hesapla
       final now = DateTime.now();
-      final startOfMonth = DateTime(now.year, now.month, 1);
-      final startOfMonthString = '${startOfMonth.year}-${startOfMonth.month.toString().padLeft(2, '0')}-${startOfMonth.day.toString().padLeft(2, '0')}';
+      final year = now.year;
+      final month = now.month;
 
-      print('DEBUG: Şu anki tarih: $now');
-      print('DEBUG: Bu ayın başlangıcı: $startOfMonth');
-      print('DEBUG: Bu ayın başlangıç stringi: $startOfMonthString');
 
-      // Tüm kullanıcı aktivitelerini al
-      final activitiesSnapshot = await _firestore.collection('userActivities').get();
-      print('DEBUG: Toplam aktivite sayısı: ${activitiesSnapshot.docs.length}');
+      // Ay başı kontrolü ve otomatik başlatma
+      await _initializeMonthlyDataIfNeeded(year, month);
 
       // Tüm kullanıcıları getir
       final userDocs = await _firestore.collection('users').get();
       final userMap = {for (var doc in userDocs.docs) doc.id: doc.data()};
 
+      // Aylık puanları getir
+      final monthlyPointsSnapshot = await _firestore
+          .collection('user_monthly_points')
+          .where('year', isEqualTo: year)
+          .where('month', isEqualTo: month)
+          .orderBy('points', descending: true)
+          .get();
+
+
       // Aylık sıralama verilerini oluştur
       List<Map<String, dynamic>> monthlyData = [];
       
-      for (var doc in activitiesSnapshot.docs) {
-        final activityData = doc.data();
-        final userId = activityData['userId'] as String? ?? doc.id;
+      for (var doc in monthlyPointsSnapshot.docs) {
+        final monthlyDataDoc = doc.data();
+        final userId = monthlyDataDoc['userId'] as String? ?? doc.id;
         final userData = userMap[userId] ?? {};
+        final points = monthlyDataDoc['points'] as int? ?? 0;
         
-        // Bu ayın puanlarını hesapla
-        int monthlyPoints = 0;
-        int monthlyCorrectAnswers = 0;
-        int monthlyWrongAnswers = 0;
-        
-        final pointsHistory = activityData['pointsHistory'] as List<dynamic>? ?? [];
-        for (var pointEntry in pointsHistory) {
-          final entry = pointEntry as Map<String, dynamic>;
-          final date = entry['date'] as String? ?? '';
-          final points = entry['points'] as int? ?? 0;
-          final source = entry['source'] as String? ?? '';
-          
-          // Bu ay içindeki puanları topla
-          if (date.compareTo(startOfMonthString) >= 0) {
-            monthlyPoints += points;
-            if (source == 'quiz' || source == 'daily_question') {
-              monthlyCorrectAnswers += 1;
-            }
-          }
-        }
-        
-        // Sadece bu ay puanı olan kullanıcıları ekle
-        if (monthlyPoints > 0) {
-          monthlyData.add({
-            'userId': userId,
-            'displayName': userData['displayName'] ?? 'İsimsiz Kullanıcı',
-            'profileImageUrl': userData['profileImageUrl'],
-            'title': userData['title'] ?? 'Anestezi Uzmanı',
-            'totalPoints': monthlyPoints,
-            'totalCorrectAnswers': monthlyCorrectAnswers,
-            'totalWrongAnswers': monthlyWrongAnswers,
-            'dailyStreak': activityData['dailyStreak'] ?? 0,
-            'isCurrentUser': userId == _auth.currentUser?.uid,
-          });
-        }
+        monthlyData.add({
+          'userId': userId,
+          'displayName': userData['displayName'] ?? 'İsimsiz Kullanıcı',
+          'profileImageUrl': userData['profileImageUrl'],
+          'title': userData['title'] ?? 'Anestezi Uzmanı',
+          'totalPoints': points,
+          'totalCorrectAnswers': 0, // Aylık doğru cevap sayısı
+          'totalWrongAnswers': 0, // Aylık yanlış cevap sayısı
+          'dailyStreak': 0, // Aylık streak
+          'isCurrentUser': userId == _auth.currentUser?.uid,
+        });
       }
 
-      // Puana göre sırala (yüksekten düşüğe)
-      monthlyData.sort(
-        (a, b) => (b['totalPoints'] as int).compareTo(a['totalPoints'] as int),
-      );
-
       // Sıralama numaralarını ekle
-      int rank = 1;
-      for (var userData in monthlyData) {
-        userData['rank'] = rank++;
+      for (int i = 0; i < monthlyData.length; i++) {
+        monthlyData[i]['rank'] = i + 1;
       }
 
       print(
@@ -212,6 +187,43 @@ class LeaderboardService {
     } catch (e) {
       print('getMonthlyLeaderboard hatası: $e');
       return [];
+    }
+  }
+
+  // Ay başı kontrolü ve otomatik başlatma
+  Future<void> _initializeMonthlyDataIfNeeded(int year, int month) async {
+    try {
+      // Bu ay için veri var mı kontrol et
+      final existingData = await _firestore
+          .collection('user_monthly_points')
+          .where('year', isEqualTo: year)
+          .where('month', isEqualTo: month)
+          .limit(1)
+          .get();
+
+      if (existingData.docs.isNotEmpty) {
+        return;
+      }
+
+
+      // Tüm aktif kullanıcıları getir
+      final usersSnapshot = await _firestore.collection('users').get();
+
+      // Her kullanıcı için bu ayın verisini oluştur
+      for (var userDoc in usersSnapshot.docs) {
+        final userId = userDoc.id;
+        final monthlyDocId = '${userId}_${year}_$month';
+        
+        await _firestore.collection('user_monthly_points').doc(monthlyDocId).set({
+          'userId': userId,
+          'year': year,
+          'month': month,
+          'points': 0, // Başlangıç puanı 0
+          'lastUpdated': FieldValue.serverTimestamp(),
+        }, SetOptions(merge: true));
+      }
+
+    } catch (e) {
     }
   }
 
@@ -302,13 +314,18 @@ class LeaderboardService {
         });
   }
 
-  // Aylık liderlik tablosu için stream
+  // Aylık liderlik tablosu için stream - Gerçek aylık sistem
   Stream<List<Map<String, dynamic>>> getMonthlyLeaderboardStream() {
+    
     return _firestore
-        .collection('userActivities')
+        .collection('user_monthly_points')
+        .where('year', isEqualTo: DateTime.now().year)
+        .where('month', isEqualTo: DateTime.now().month)
+        .orderBy('points', descending: true)
         .snapshots()
-        .asyncMap((activitiesSnapshot) async {
+        .asyncMap((monthlyPointsSnapshot) async {
           try {
+            
             // Auth durumunu kontrol et
             final currentUser = _auth.currentUser;
             if (currentUser == null) {
@@ -316,75 +333,13 @@ class LeaderboardService {
               return <Map<String, dynamic>>[];
             }
 
-            // Bu ayın başlangıcını hesapla
-            final now = DateTime.now();
-            final startOfMonth = DateTime(now.year, now.month, 1);
-            final startOfMonthString = '${startOfMonth.year}-${startOfMonth.month.toString().padLeft(2, '0')}-${startOfMonth.day.toString().padLeft(2, '0')}';
-
-            print('DEBUG: Şu anki tarih: $now');
-            print('DEBUG: Bu ayın başlangıcı: $startOfMonth');
-            print('DEBUG: Bu ayın başlangıç stringi: $startOfMonthString');
-            print('DEBUG: Toplam aktivite sayısı: ${activitiesSnapshot.docs.length}');
-
-            // Tüm kullanıcıları bir kerede getir
-            final userDocs = await _firestore.collection('users').get();
-            final userMap = {for (var doc in userDocs.docs) doc.id: doc.data()};
-
-            // Aylık sıralama verilerini oluştur
-            List<Map<String, dynamic>> monthlyData = [];
-            
-            for (var doc in activitiesSnapshot.docs) {
-              final activityData = doc.data();
-              final userId = activityData['userId'] as String? ?? doc.id;
-              final userData = userMap[userId] ?? {};
-              
-              // Bu ayın puanlarını hesapla
-              int monthlyPoints = 0;
-              int monthlyCorrectAnswers = 0;
-              int monthlyWrongAnswers = 0;
-              
-              final pointsHistory = activityData['pointsHistory'] as List<dynamic>? ?? [];
-              for (var pointEntry in pointsHistory) {
-                final entry = pointEntry as Map<String, dynamic>;
-                final date = entry['date'] as String? ?? '';
-                final points = entry['points'] as int? ?? 0;
-                final source = entry['source'] as String? ?? '';
-                
-                // Bu ay içindeki puanları topla
-                if (date.compareTo(startOfMonthString) >= 0) {
-                  monthlyPoints += points;
-                  if (source == 'quiz' || source == 'daily_question') {
-                    monthlyCorrectAnswers += 1;
-                  }
-                }
-              }
-              
-              // Sadece bu ay puanı olan kullanıcıları ekle
-              if (monthlyPoints > 0) {
-                monthlyData.add({
-                  'userId': userId,
-                  'displayName': userData['displayName'] ?? 'İsimsiz Kullanıcı',
-                  'profileImageUrl': userData['profileImageUrl'],
-                  'title': userData['title'] ?? 'Anestezi Uzmanı',
-                  'totalPoints': monthlyPoints,
-                  'totalCorrectAnswers': monthlyCorrectAnswers,
-                  'totalWrongAnswers': monthlyWrongAnswers,
-                  'dailyStreak': activityData['dailyStreak'] ?? 0,
-                  'isCurrentUser': userId == currentUser.uid,
-                });
-              }
+            // Eğer aylık veri yoksa veya azsa, tüm kullanıcıları göster
+            if (monthlyPointsSnapshot.docs.isEmpty) {
+              return await _getAllUsersWithZeroPoints(currentUser);
             }
 
-            // Puana göre sırala
-            monthlyData.sort((a, b) => (b['totalPoints'] as int).compareTo(a['totalPoints'] as int));
-
-            // Sıralama numaralarını ekle
-            for (int i = 0; i < monthlyData.length; i++) {
-              monthlyData[i]['rank'] = i + 1;
-            }
-
-            print('Aylık sıralama verileri işlendi, ${monthlyData.length} kullanıcı bulundu');
-            return monthlyData;
+            // Aylık veri var ama eksik kullanıcılar olabilir, tüm kullanıcıları göster
+            return await _getAllUsersWithMonthlyData(monthlyPointsSnapshot.docs, currentUser);
           } catch (e) {
             print('Monthly leaderboard stream hatası: $e');
             return <Map<String, dynamic>>[];
@@ -395,4 +350,89 @@ class LeaderboardService {
           return <Map<String, dynamic>>[];
         });
   }
+
+  // Tüm kullanıcıları 0 puanla getir
+  Future<List<Map<String, dynamic>>> _getAllUsersWithZeroPoints(User currentUser) async {
+    try {
+      // Tüm kullanıcıları getir
+      final userDocs = await _firestore.collection('users').get();
+
+      List<Map<String, dynamic>> monthlyData = [];
+      
+      for (var doc in userDocs.docs) {
+        final userData = doc.data();
+        final userId = doc.id;
+        
+        monthlyData.add({
+          'userId': userId,
+          'displayName': userData['displayName'] ?? 'İsimsiz Kullanıcı',
+          'profileImageUrl': userData['profileImageUrl'],
+          'title': userData['title'] ?? 'Anestezi Uzmanı',
+          'totalPoints': 0, // 0 puan
+          'totalCorrectAnswers': 0,
+          'totalWrongAnswers': 0,
+          'dailyStreak': 0,
+          'isCurrentUser': userId == currentUser.uid,
+          'rank': monthlyData.length + 1,
+        });
+      }
+
+      return monthlyData;
+    } catch (e) {
+      return [];
+    }
+  }
+
+  // Tüm kullanıcıları aylık veriyle birlikte getir (eksik olanlar 0 puanla)
+  Future<List<Map<String, dynamic>>> _getAllUsersWithMonthlyData(
+    List<QueryDocumentSnapshot> monthlyDocs, 
+    User currentUser
+  ) async {
+    try {
+      // Tüm kullanıcıları getir
+      final userDocs = await _firestore.collection('users').get();
+
+      // Aylık verileri map'e çevir
+      final monthlyMap = <String, Map<String, dynamic>>{};
+      for (var doc in monthlyDocs) {
+        final data = doc.data() as Map<String, dynamic>;
+        final userId = data['userId'] as String? ?? doc.id;
+        monthlyMap[userId] = data;
+      }
+
+      List<Map<String, dynamic>> monthlyData = [];
+      
+      for (var doc in userDocs.docs) {
+        final userData = doc.data();
+        final userId = doc.id;
+        final monthlyUserData = monthlyMap[userId];
+        
+        monthlyData.add({
+          'userId': userId,
+          'displayName': userData['displayName'] ?? 'İsimsiz Kullanıcı',
+          'profileImageUrl': userData['profileImageUrl'],
+          'title': userData['title'] ?? 'Anestezi Uzmanı',
+          'totalPoints': monthlyUserData?['points'] ?? 0, // Aylık puan varsa onu, yoksa 0
+          'totalCorrectAnswers': 0,
+          'totalWrongAnswers': 0,
+          'dailyStreak': 0,
+          'isCurrentUser': userId == currentUser.uid,
+          'rank': monthlyData.length + 1,
+        });
+      }
+
+      // Puana göre sırala
+      monthlyData.sort((a, b) => (b['totalPoints'] as int).compareTo(a['totalPoints'] as int));
+      
+      // Sıralama numaralarını güncelle
+      for (int i = 0; i < monthlyData.length; i++) {
+        monthlyData[i]['rank'] = i + 1;
+      }
+
+      return monthlyData;
+    } catch (e) {
+      return [];
+    }
+  }
+
 }

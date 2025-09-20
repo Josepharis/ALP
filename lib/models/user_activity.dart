@@ -140,11 +140,6 @@ class UserActivity {
         return date.isAtSameMomentAs(checkDate);
       });
 
-      // Debug için
-      print(
-        'Gün kontrol: indeks=$i, weekday=${i + 1}, tarih=${checkDate.toString().substring(0, 10)}, ' +
-            'giriş yapıldı mı=${weeklyStatus[i]}',
-      );
     }
 
     return weeklyStatus;

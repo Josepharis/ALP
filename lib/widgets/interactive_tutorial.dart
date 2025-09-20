@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
+import '../l10n/app_localizations.dart';
 import '../models/tutorial_step.dart';
-import '../theme/app_theme.dart';
 
 class InteractiveTutorial extends StatefulWidget {
   final List<TutorialStep> steps;
@@ -162,6 +162,7 @@ class _InteractiveTutorialState extends State<InteractiveTutorial>
   }
 
   Widget _buildHeader() {
+    final l10n = AppLocalizations.of(context)!;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
       decoration: BoxDecoration(
@@ -181,7 +182,7 @@ class _InteractiveTutorialState extends State<InteractiveTutorial>
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            'Anestezi Uygulaması',
+            l10n.tutorialAppTitle,
             style: TextStyle(
               color: Colors.white,
               fontSize: 18,
@@ -192,7 +193,7 @@ class _InteractiveTutorialState extends State<InteractiveTutorial>
             TextButton(
               onPressed: _skipTutorial,
               child: Text(
-                'Geç',
+                l10n.tutorialSkip,
                 style: TextStyle(
                   color: Colors.white.withOpacity(0.8),
                   fontSize: 14,
@@ -266,7 +267,7 @@ class _InteractiveTutorialState extends State<InteractiveTutorial>
                   borderRadius: BorderRadius.circular(30),
                 ),
               ),
-              child: const Text('Hemen Keşfet'),
+              child: Text(AppLocalizations.of(context)!.tutorialExploreNow),
             ),
         ],
       ),

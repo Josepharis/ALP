@@ -1204,7 +1204,7 @@ class _AdminScreenState extends State<AdminScreen>
           ],
         ),
         const SizedBox(height: 20),
-        _buildLanguageSelector(),
+        // Dil seçici kaldırıldı - artık uygulama başlangıcında seçiliyor
         const SizedBox(height: 16),
         _buildCategorySelector(),
         const SizedBox(height: 20),
@@ -1213,146 +1213,7 @@ class _AdminScreenState extends State<AdminScreen>
     );
   }
 
-  Widget _buildLanguageSelector() {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.1),
-        borderRadius: BorderRadius.circular(15),
-        border: Border.all(color: Colors.white.withOpacity(0.2)),
-      ),
-      child: Row(
-        children: [
-          const Icon(Icons.language, color: Colors.white, size: 20),
-          const SizedBox(width: 12),
-          const Text(
-            'Dil Seçimi:',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-          const SizedBox(width: 16),
-          Expanded(
-            child: Row(
-              children: [
-                Expanded(
-                  child: GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        _selectedLanguage = 'turkish';
-                        _selectedCategory = '';
-                        _selectedCollectionName = '';
-                        _questions.clear();
-                      });
-                      _loadCategories();
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-                      decoration: BoxDecoration(
-                        color: _selectedLanguage == 'turkish' 
-                            ? Colors.red.withOpacity(0.3)
-                            : Colors.transparent,
-                        borderRadius: BorderRadius.circular(20),
-                        border: Border.all(
-                          color: _selectedLanguage == 'turkish' 
-                              ? Colors.red
-                              : Colors.white.withOpacity(0.3),
-                        ),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            '🇹🇷',
-                            style: TextStyle(
-                              fontSize: 14,
-                            ),
-                          ),
-                          const SizedBox(width: 6),
-                          Flexible(
-                            child: Text(
-                              'Türkçe',
-                              style: TextStyle(
-                                color: _selectedLanguage == 'turkish' 
-                                    ? Colors.red
-                                    : Colors.white.withOpacity(0.7),
-                                fontWeight: _selectedLanguage == 'turkish' 
-                                    ? FontWeight.bold
-                                    : FontWeight.normal,
-                                fontSize: 12,
-                              ),
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        _selectedLanguage = 'english';
-                        _selectedCategory = '';
-                        _selectedCollectionName = '';
-                        _questions.clear();
-                      });
-                      _loadCategories();
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-                      decoration: BoxDecoration(
-                        color: _selectedLanguage == 'english' 
-                            ? Colors.blue.withOpacity(0.3)
-                            : Colors.transparent,
-                        borderRadius: BorderRadius.circular(20),
-                        border: Border.all(
-                          color: _selectedLanguage == 'english' 
-                              ? Colors.blue
-                              : Colors.white.withOpacity(0.3),
-                        ),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            '🇺🇸',
-                            style: TextStyle(
-                              fontSize: 14,
-                            ),
-                          ),
-                          const SizedBox(width: 6),
-                          Flexible(
-                            child: Text(
-                              'İngilizce',
-                              style: TextStyle(
-                                color: _selectedLanguage == 'english' 
-                                    ? Colors.blue
-                                    : Colors.white.withOpacity(0.7),
-                                fontWeight: _selectedLanguage == 'english' 
-                                    ? FontWeight.bold
-                                    : FontWeight.normal,
-                                fontSize: 12,
-                              ),
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+  // Dil seçici widget'ı kaldırıldı - artık uygulama başlangıcında seçiliyor
 
   Widget _buildCategorySelector() {
     return Container(

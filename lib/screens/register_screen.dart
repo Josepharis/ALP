@@ -73,6 +73,25 @@ class _RegisterScreenState extends State<RegisterScreen>
     super.dispose();
   }
 
+  // Hata mesajlarını çevir
+  String _getErrorMessage(dynamic error) {
+    final errorString = error.toString().toLowerCase();
+    
+    if (errorString.contains('email-already-in-use')) {
+      return AppLocalizations.of(context)!.emailAlreadyInUseShort;
+    } else if (errorString.contains('weak-password')) {
+      return AppLocalizations.of(context)!.weakPasswordShort;
+    } else if (errorString.contains('network')) {
+      return AppLocalizations.of(context)!.networkError;
+    } else if (errorString.contains('server')) {
+      return AppLocalizations.of(context)!.serverError;
+    } else if (errorString.contains('operation-not-allowed')) {
+      return AppLocalizations.of(context)!.operationNotAllowed;
+    } else {
+      return AppLocalizations.of(context)!.registrationFailed;
+    }
+  }
+
   // Kayıt işlemini gerçekleştir
   Future<void> _register() async {
     if (!_agreeToTerms) {
@@ -90,6 +109,9 @@ class _RegisterScreenState extends State<RegisterScreen>
       });
 
       try {
+        print('🔄 iOS simülatör: Kayıt işlemi başlatılıyor...');
+        
+        // iOS simülatör için çok basit kayıt işlemi
         final user = await _authService.registerWithEmailAndPassword(
           _emailController.text.trim(),
           _passwordController.text.trim(),
@@ -97,24 +119,21 @@ class _RegisterScreenState extends State<RegisterScreen>
           title: _titleController.text.trim(),
         );
 
-        if (user != null && mounted) {
-          try {
-            // Varsayılan kullanıcı ayarlarını oluştur
-            await _userService.createDefaultUserSettings();
-            print('✅ Varsayılan ayarlar oluşturuldu');
-          } catch (e) {
-            print('⚠️ Varsayılan ayarlar oluşturulamadı: $e');
-            // Ayarlar oluşturulamasa bile devam et
-          }
+        print('✅ iOS simülatör: Kullanıcı kaydı tamamlandı: ${user?.uid}');
 
-          // Ana sayfaya yönlendir
+        if (user != null && mounted) {
+          print('🔄 iOS simülatör: Ana sayfaya yönlendiriliyor...');
+          
+          // Çok basit navigasyon - ayarlar oluşturmayı atla
           if (mounted) {
             Navigator.of(context).pushReplacementNamed('/home');
+            print('✅ iOS simülatör: Ana sayfaya yönlendirildi');
           }
         }
       } catch (e) {
+        print('❌ iOS simülatör kayıt hatası: $e');
         setState(() {
-          _errorMessage = e.toString();
+          _errorMessage = _getErrorMessage(e);
         });
       } finally {
         if (mounted) {
@@ -131,8 +150,16 @@ class _RegisterScreenState extends State<RegisterScreen>
     required VoidCallback onPressed,
     bool isLoading = false,
   }) {
+    final size = MediaQuery.of(context).size;
+    final isVerySmallScreen = size.width < 400;
+    final isSmallScreen = size.width < 600;
+    final hasAndroidNavigation = size.height < 700;
+    final isVeryShortScreen = size.height < 600;
+    
     return Container(
-      height: 55,
+      height: isVeryShortScreen ? 36 :
+              hasAndroidNavigation ? (isVerySmallScreen ? 36 : 40) :
+              isVerySmallScreen ? 42 : isSmallScreen ? 46 : 50,
       width: double.infinity,
       decoration: BoxDecoration(
         gradient: AppTheme.buttonGradient,
@@ -170,9 +197,11 @@ class _RegisterScreenState extends State<RegisterScreen>
                     const SizedBox(width: 8),
                     Text(
                       text,
-                      style: const TextStyle(
+                      style: TextStyle(
                         color: Colors.white,
-                        fontSize: 16,
+                        fontSize: isVeryShortScreen ? 14 : 
+                                 hasAndroidNavigation ? (isVerySmallScreen ? 14 : 15) :
+                                 isVerySmallScreen ? 15 : 16,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -185,7 +214,37 @@ class _RegisterScreenState extends State<RegisterScreen>
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final isSmallScreen = size.width < 600;
+    final screenWidth = size.width;
+    final screenHeight = size.height;
+    
+    // Android navigasyon tuşları için ekran yüksekliği kontrolü
+    final hasAndroidNavigation = screenHeight < 700;
+    final isVeryShortScreen = screenHeight < 600;
+    
+    // Responsive breakpoints
+    final isSmallScreen = screenWidth < 600;
+    final isVerySmallScreen = screenWidth < 400;
+    final isTablet = screenWidth >= 768;
+    
+    // Responsive dimensions - Daha kompakt
+    final logoSize = isVeryShortScreen ? 50.0 :
+                     hasAndroidNavigation ? (isVerySmallScreen ? 50.0 : 55.0) :
+                     isVerySmallScreen ? 60.0 : 
+                     isSmallScreen ? 65.0 : 
+                     isTablet ? 70.0 : 75.0;
+    
+    final horizontalPadding = isVeryShortScreen ? 8.0 :
+                             hasAndroidNavigation ? (isVerySmallScreen ? 8.0 : 12.0) :
+                             isVerySmallScreen ? 12.0 :
+                             isSmallScreen ? 16.0 :
+                             isTablet ? screenWidth * 0.1 :
+                             screenWidth * 0.15;
+    
+    final formPadding = isVeryShortScreen ? 8.0 :
+                       hasAndroidNavigation ? (isVerySmallScreen ? 8.0 : 12.0) :
+                       isVerySmallScreen ? 12.0 :
+                       isSmallScreen ? 16.0 :
+                       isTablet ? 20.0 : 24.0;
 
     if (_animationController == null ||
         _fadeAnimation == null ||
@@ -201,57 +260,14 @@ class _RegisterScreenState extends State<RegisterScreen>
           child: SafeArea(
             child: Stack(
               children: [
-                // Geri dönüş butonu
-                Positioned(
-                  top: 16,
-                  left: 16,
-                  child: GestureDetector(
-                    onTap: () {
-                      print('Geri butonu tıklandı');
-                      try {
-                        if (Navigator.canPop(context)) {
-                          Navigator.pop(context);
-                        } else {
-                          Navigator.of(context).pushReplacementNamed('/login');
-                        }
-                      } catch (e) {
-                        print('Geri butonu navigate hatası: $e');
-                        Navigator.of(context).pushReplacementNamed('/login');
-                      }
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.all(12),
-                      decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.15),
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                          color: Colors.white.withOpacity(0.3),
-                          width: 1.5,
-                        ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.1),
-                            blurRadius: 8,
-                            offset: const Offset(0, 2),
-                          ),
-                        ],
-                      ),
-                      child: const Icon(
-                        Icons.arrow_back_ios_new,
-                        color: Colors.white,
-                        size: 22,
-                      ),
-                    ),
-                  ),
-                ),
-
                 // Ana içerik
                 Center(
                   child: SingleChildScrollView(
                     child: Padding(
                       padding: EdgeInsets.symmetric(
-                        horizontal: isSmallScreen ? 24 : size.width * 0.1,
-                        vertical: 16,
+                        horizontal: horizontalPadding,
+                        vertical: isVeryShortScreen ? 4 :
+                                 hasAndroidNavigation ? 6 : 8,
                       ),
                       child: FadeTransition(
                         opacity: _fadeAnimation!,
@@ -292,19 +308,20 @@ class _RegisterScreenState extends State<RegisterScreen>
                                         ],
                                       ),
                                       child: CircleAvatar(
-                                        radius: 42,
+                                        radius: logoSize / 2,
                                         backgroundColor: Colors.grey[900],
-                                        child: const Icon(
+                                        child: Icon(
                                           Icons.person_add,
                                           color: Colors.white,
-                                          size: 46,
+                                          size: logoSize * 0.6,
                                         ),
                                       ),
                                     ),
                                   );
                                 },
                               ),
-                              const SizedBox(height: 16),
+                              SizedBox(height: isVeryShortScreen ? 4 :
+                                           hasAndroidNavigation ? 6 : 8),
 
                               // Başlık
                               ShaderMask(
@@ -320,27 +337,35 @@ class _RegisterScreenState extends State<RegisterScreen>
                                 child: Text(
                                   AppLocalizations.of(context)!.createNewAccount,
                                   style: TextStyle(
-                                    fontSize: 26,
+                                    fontSize: isVeryShortScreen ? 20 :
+                                             hasAndroidNavigation ? 22 :
+                                             isVerySmallScreen ? 22 :
+                                             isSmallScreen ? 24 : 26,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.white,
                                   ),
                                 ),
                               ),
-                              const SizedBox(height: 8),
+                              SizedBox(height: isVeryShortScreen ? 2 :
+                                           hasAndroidNavigation ? 4 : 6),
 
                               Text(
                                 AppLocalizations.of(context)!.joinQuizApp,
                                 style: TextStyle(
-                                  fontSize: 14,
+                                  fontSize: isVeryShortScreen ? 12 :
+                                           hasAndroidNavigation ? 13 :
+                                           isVerySmallScreen ? 13 : 14,
                                   color: Colors.grey,
                                 ),
                                 textAlign: TextAlign.center,
                               ),
-                              const SizedBox(height: 24),
+                              SizedBox(height: isVeryShortScreen ? 6 :
+                                           hasAndroidNavigation ? 8 :
+                                           isVerySmallScreen ? 8 : 12),
 
                               // Form alanı
                               Container(
-                                padding: const EdgeInsets.all(22),
+                                padding: EdgeInsets.all(formPadding),
                                 decoration: BoxDecoration(
                                   color: Colors.white.withOpacity(0.07),
                                   borderRadius: BorderRadius.circular(20),
@@ -384,14 +409,18 @@ class _RegisterScreenState extends State<RegisterScreen>
                                           Text(
                                             AppLocalizations.of(context)!.signUp,
                                             style: TextStyle(
-                                              fontSize: 22,
+                                              fontSize: isVeryShortScreen ? 18 :
+                                                       hasAndroidNavigation ? 20 :
+                                                       isVerySmallScreen ? 20 : 22,
                                               fontWeight: FontWeight.bold,
                                               color: Colors.white,
                                             ),
                                           ),
                                         ],
                                       ),
-                                      const SizedBox(height: 20),
+                                      SizedBox(height: isVeryShortScreen ? 6 :
+                                                   hasAndroidNavigation ? 8 :
+                                                   isVerySmallScreen ? 8 : 12),
 
                                       // İsim alanı
                                       TextFormField(
@@ -426,7 +455,9 @@ class _RegisterScreenState extends State<RegisterScreen>
                                           return null;
                                         },
                                       ),
-                                      const SizedBox(height: 20),
+                                      SizedBox(height: isVeryShortScreen ? 6 :
+                                                   hasAndroidNavigation ? 8 :
+                                                   isVerySmallScreen ? 8 : 12),
 
                                       // Unvan alanı
                                       TextFormField(
@@ -456,7 +487,9 @@ class _RegisterScreenState extends State<RegisterScreen>
                                           return null;
                                         },
                                       ),
-                                      const SizedBox(height: 20),
+                                      SizedBox(height: isVeryShortScreen ? 6 :
+                                                   hasAndroidNavigation ? 8 :
+                                                   isVerySmallScreen ? 8 : 12),
 
                                       // Form alanları
                                       _buildAnimatedTextField(
@@ -479,7 +512,9 @@ class _RegisterScreenState extends State<RegisterScreen>
                                           return null;
                                         },
                                       ),
-                                      const SizedBox(height: 16),
+                                      SizedBox(height: isVeryShortScreen ? 4 :
+                                                   hasAndroidNavigation ? 6 :
+                                                   isVerySmallScreen ? 6 : 8),
 
                                       _buildAnimatedTextField(
                                         controller: _passwordController,
@@ -526,7 +561,9 @@ class _RegisterScreenState extends State<RegisterScreen>
                                           return null;
                                         },
                                       ),
-                                      const SizedBox(height: 16),
+                                      SizedBox(height: isVeryShortScreen ? 4 :
+                                                   hasAndroidNavigation ? 6 :
+                                                   isVerySmallScreen ? 6 : 8),
 
                                       _buildAnimatedTextField(
                                         controller: _confirmPasswordController,
@@ -560,7 +597,9 @@ class _RegisterScreenState extends State<RegisterScreen>
                                           return null;
                                         },
                                       ),
-                                      const SizedBox(height: 16),
+                                      SizedBox(height: isVeryShortScreen ? 4 :
+                                                   hasAndroidNavigation ? 6 :
+                                                   isVerySmallScreen ? 6 : 8),
 
                                       // Kullanım koşulları
                                       TweenAnimationBuilder<double>(
@@ -676,7 +715,9 @@ class _RegisterScreenState extends State<RegisterScreen>
                                           );
                                         },
                                       ),
-                                      const SizedBox(height: 16),
+                                      SizedBox(height: isVeryShortScreen ? 4 :
+                                                   hasAndroidNavigation ? 6 :
+                                                   isVerySmallScreen ? 6 : 8),
 
                                       // Hata mesajı
                                       if (_errorMessage.isNotEmpty)
@@ -693,96 +734,44 @@ class _RegisterScreenState extends State<RegisterScreen>
                                                 opacity: value,
                                                 child: Container(
                                                   width: double.infinity,
-                                                  padding: const EdgeInsets.all(
-                                                    16,
+                                                  padding: EdgeInsets.all(
+                                                    isVeryShortScreen ? 8 :
+                                                    hasAndroidNavigation ? 10 :
+                                                    isVerySmallScreen ? 10 : 12,
                                                   ),
                                                   decoration: BoxDecoration(
-                                                    gradient: LinearGradient(
-                                                      colors: [
-                                                        Colors.red.withOpacity(
-                                                          0.1,
-                                                        ),
-                                                        Colors.red.withOpacity(
-                                                          0.05,
-                                                        ),
-                                                      ],
+                                                    color: Colors.red.withOpacity(0.1),
+                                                    borderRadius: BorderRadius.circular(
+                                                      isVeryShortScreen ? 6 : 8,
                                                     ),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                          12,
-                                                        ),
                                                     border: Border.all(
-                                                      color: Colors.red
-                                                          .withOpacity(0.3),
+                                                      color: Colors.red.withOpacity(0.3),
                                                       width: 1,
                                                     ),
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                        color: Colors.red
-                                                            .withOpacity(0.1),
-                                                        blurRadius: 8,
-                                                        offset: const Offset(
-                                                          0,
-                                                          2,
-                                                        ),
-                                                      ),
-                                                    ],
                                                   ),
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
+                                                  child: Row(
                                                     children: [
-                                                      Row(
-                                                        children: [
-                                                          Container(
-                                                            padding:
-                                                                const EdgeInsets.all(
-                                                                  6,
-                                                                ),
-                                                            decoration:
-                                                                BoxDecoration(
-                                                                  color: Colors
-                                                                      .red
-                                                                      .withOpacity(
-                                                                        0.2,
-                                                                      ),
-                                                                  shape:
-                                                                      BoxShape
-                                                                          .circle,
-                                                                ),
-                                                            child: const Icon(
-                                                              Icons
-                                                                  .warning_rounded,
-                                                              color: Colors.red,
-                                                              size: 18,
-                                                            ),
-                                                          ),
-                                                          const SizedBox(
-                                                            width: 12,
-                                                          ),
-                                                          Expanded(
-                                                            child: Text(
-                                                              AppLocalizations.of(context)!.registrationFailed,
-                                                              style: TextStyle(
-                                                                color:
-                                                                    Colors.red,
-                                                                fontSize: 16,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ],
+                                                      Icon(
+                                                        Icons.warning_rounded,
+                                                        color: Colors.red,
+                                                        size: isVeryShortScreen ? 14 :
+                                                               hasAndroidNavigation ? 16 :
+                                                               isVerySmallScreen ? 16 : 18,
                                                       ),
-                                                      const SizedBox(height: 8),
-                                                      Text(
-                                                        _errorMessage,
-                                                        style: const TextStyle(
-                                                          color: Colors.white,
-                                                          fontSize: 14,
-                                                          height: 1.4,
+                                                      SizedBox(width: isVeryShortScreen ? 6 :
+                                                                   hasAndroidNavigation ? 8 :
+                                                                   isVerySmallScreen ? 8 : 10),
+                                                      Expanded(
+                                                        child: Text(
+                                                          _errorMessage,
+                                                          style: TextStyle(
+                                                            color: Colors.red,
+                                                            fontSize: isVeryShortScreen ? 11 :
+                                                                     hasAndroidNavigation ? 12 :
+                                                                     isVerySmallScreen ? 12 : 13,
+                                                            fontWeight: FontWeight.w500,
+                                                            height: 1.2,
+                                                          ),
                                                         ),
                                                       ),
                                                     ],
@@ -793,7 +782,9 @@ class _RegisterScreenState extends State<RegisterScreen>
                                           },
                                         ),
                                       if (_errorMessage.isNotEmpty)
-                                        const SizedBox(height: 16),
+                                        SizedBox(height: isVeryShortScreen ? 4 :
+                                                     hasAndroidNavigation ? 6 :
+                                                     isVerySmallScreen ? 6 : 8),
 
                                       // Kayıt ol butonu
                                       TweenAnimationBuilder<double>(
@@ -813,7 +804,9 @@ class _RegisterScreenState extends State<RegisterScreen>
                                           );
                                         },
                                       ),
-                                      const SizedBox(height: 20),
+                                      SizedBox(height: isVeryShortScreen ? 6 :
+                                                   hasAndroidNavigation ? 8 :
+                                                   isVerySmallScreen ? 8 : 12),
 
                                       // Giriş sayfasına yönlendirme
                                       Center(
@@ -854,6 +847,44 @@ class _RegisterScreenState extends State<RegisterScreen>
                     ),
                   ),
                 ),
+
+                // Geri dönüş butonu - en üstte olmalı
+                Positioned(
+                  top: 8,
+                  left: 8,
+                  child: GestureDetector(
+                    onTap: () {
+                      if (Navigator.canPop(context)) {
+                        Navigator.pop(context);
+                      } else {
+                        Navigator.of(context).pushReplacementNamed('/login');
+                      }
+                    },
+                    child: Container(
+                      padding: EdgeInsets.all(isVeryShortScreen ? 8 : 10),
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.15),
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: Colors.white.withOpacity(0.3),
+                          width: 1.5,
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.1),
+                            blurRadius: 8,
+                            offset: const Offset(0, 2),
+                          ),
+                        ],
+                      ),
+                      child: Icon(
+                        Icons.arrow_back_ios_new,
+                        color: Colors.white,
+                        size: isVeryShortScreen ? 16 : 18,
+                      ),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
@@ -874,6 +905,11 @@ class _RegisterScreenState extends State<RegisterScreen>
     Widget? suffixIcon,
     String? Function(String?)? validator,
   }) {
+    final size = MediaQuery.of(context).size;
+    final isVerySmallScreen = size.width < 400;
+    final isSmallScreen = size.width < 600;
+    final hasAndroidNavigation = size.height < 700;
+    final isVeryShortScreen = size.height < 600;
     return TweenAnimationBuilder<double>(
       tween: Tween(begin: 0.0, end: 1.0),
       duration: Duration(milliseconds: 500 + delay),
@@ -888,44 +924,64 @@ class _RegisterScreenState extends State<RegisterScreen>
               keyboardType: keyboardType,
               textCapitalization: textCapitalization,
               obscureText: obscureText,
-              style: const TextStyle(color: Colors.white),
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: isVeryShortScreen ? 13 :
+                         hasAndroidNavigation ? (isVerySmallScreen ? 13 : 14) :
+                         isVerySmallScreen ? 14 : 
+                         isSmallScreen ? 15 : 16,
+              ),
               decoration: InputDecoration(
                 labelText: label,
                 hintText: hint,
-                hintStyle: TextStyle(color: Colors.grey.withOpacity(0.5)),
+                hintStyle: TextStyle(
+                  color: Colors.grey.withOpacity(0.5),
+                  fontSize: isVeryShortScreen ? 12 :
+                           hasAndroidNavigation ? (isVerySmallScreen ? 12 : 13) :
+                           isVerySmallScreen ? 13 : 
+                           isSmallScreen ? 14 : 15,
+                ),
                 labelStyle: TextStyle(
                   color: Colors.blue.shade200,
                   fontWeight: FontWeight.w500,
+                  fontSize: isVeryShortScreen ? 12 :
+                           hasAndroidNavigation ? (isVerySmallScreen ? 12 : 13) :
+                           isVerySmallScreen ? 13 : 
+                           isSmallScreen ? 14 : 15,
                 ),
                 prefixIcon: Icon(icon, color: Colors.blue.shade300),
                 suffixIcon: suffixIcon,
                 enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(isVeryShortScreen ? 8 : 12),
                   borderSide: BorderSide(
                     color: Colors.blue.withOpacity(0.3),
                     width: 1.5,
                   ),
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(isVeryShortScreen ? 8 : 12),
                   borderSide: BorderSide(color: Colors.blue.shade400, width: 2),
                 ),
                 errorBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(isVeryShortScreen ? 8 : 12),
                   borderSide: BorderSide(
                     color: Colors.red.shade300,
                     width: 1.5,
                   ),
                 ),
                 focusedErrorBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(isVeryShortScreen ? 8 : 12),
                   borderSide: BorderSide(color: Colors.red.shade400, width: 2),
                 ),
                 filled: true,
                 fillColor: Colors.white.withOpacity(0.05),
-                contentPadding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 16,
+                contentPadding: EdgeInsets.symmetric(
+                  horizontal: isVeryShortScreen ? 8 :
+                             hasAndroidNavigation ? (isVerySmallScreen ? 8 : 10) :
+                             isVerySmallScreen ? 10 : 12,
+                  vertical: isVeryShortScreen ? 8 :
+                           hasAndroidNavigation ? (isVerySmallScreen ? 8 : 10) :
+                           isVerySmallScreen ? 10 : 12,
                 ),
               ),
               validator: validator,

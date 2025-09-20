@@ -1112,6 +1112,12 @@ abstract class AppLocalizations {
   /// **'Registration Failed'**
   String get registrationFailed;
 
+  /// Text shown while processing quiz completion
+  ///
+  /// In en, this message translates to:
+  /// **'Processing...'**
+  String get processing;
+
   /// Quiz completion error message
   ///
   /// In en, this message translates to:
@@ -1369,6 +1375,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'20 Points Earning Opportunity!'**
   String get earnPointsOpportunity;
+
+  /// Daily question points display
+  ///
+  /// In en, this message translates to:
+  /// **'20 Points'**
+  String get dailyQuestionPoints;
+
+  /// Daily question score display
+  ///
+  /// In en, this message translates to:
+  /// **'Score: +20'**
+  String get dailyQuestionScore;
 
   /// Error try again message
   ///
@@ -2179,6 +2197,558 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'About page will be added soon'**
   String get aboutPageComingSoon;
+
+  /// Tutorial welcome title
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome to Anesthesia Application'**
+  String get tutorialWelcomeTitle;
+
+  /// Tutorial welcome description
+  ///
+  /// In en, this message translates to:
+  /// **'Test your knowledge in anesthesia, learn new information and improve yourself.'**
+  String get tutorialWelcomeDescription;
+
+  /// Tutorial daily question title
+  ///
+  /// In en, this message translates to:
+  /// **'Daily Question'**
+  String get tutorialDailyQuestionTitle;
+
+  /// Tutorial daily question description
+  ///
+  /// In en, this message translates to:
+  /// **'Keep your knowledge fresh with a new question every day and earn daily participation points.'**
+  String get tutorialDailyQuestionDescription;
+
+  /// Tutorial popular quizzes title
+  ///
+  /// In en, this message translates to:
+  /// **'Popular Quizzes'**
+  String get tutorialPopularQuizzesTitle;
+
+  /// Tutorial popular quizzes description
+  ///
+  /// In en, this message translates to:
+  /// **'Discover the most solved quizzes and compete with your colleagues to reach the top.'**
+  String get tutorialPopularQuizzesDescription;
+
+  /// Tutorial ongoing quizzes title
+  ///
+  /// In en, this message translates to:
+  /// **'Ongoing Quizzes'**
+  String get tutorialOngoingQuizzesTitle;
+
+  /// Tutorial ongoing quizzes description
+  ///
+  /// In en, this message translates to:
+  /// **'Quickly access your unfinished quizzes and continue from where you left off.'**
+  String get tutorialOngoingQuizzesDescription;
+
+  /// Tutorial app title
+  ///
+  /// In en, this message translates to:
+  /// **'Anesthesia Application'**
+  String get tutorialAppTitle;
+
+  /// Tutorial skip button
+  ///
+  /// In en, this message translates to:
+  /// **'Skip'**
+  String get tutorialSkip;
+
+  /// Tutorial explore now button
+  ///
+  /// In en, this message translates to:
+  /// **'Explore Now'**
+  String get tutorialExploreNow;
+
+  /// Remaining free questions display
+  ///
+  /// In en, this message translates to:
+  /// **'Remaining free questions: {count}'**
+  String remainingFreeQuestions(int count);
+
+  /// No description provided for @premiumRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Premium Required'**
+  String get premiumRequired;
+
+  /// No description provided for @premiumRequiredMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Premium membership required for more questions!\nYou can try the first 2 questions for free.'**
+  String get premiumRequiredMessage;
+
+  /// No description provided for @premiumIncentiveMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Upgrade to Premium and get unlimited access to all questions!'**
+  String get premiumIncentiveMessage;
+
+  /// No description provided for @goToPremium.
+  ///
+  /// In en, this message translates to:
+  /// **'Go Premium'**
+  String get goToPremium;
+
+  /// No description provided for @testModeActive.
+  ///
+  /// In en, this message translates to:
+  /// **'TEST MODE ACTIVE'**
+  String get testModeActive;
+
+  /// No description provided for @testModeMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'This feature is accessible in test mode!'**
+  String get testModeMessage;
+
+  /// No description provided for @testSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Test Settings'**
+  String get testSettings;
+
+  /// No description provided for @securePayment.
+  ///
+  /// In en, this message translates to:
+  /// **'Secure Payment'**
+  String get securePayment;
+
+  /// No description provided for @cancelAnytime.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel anytime'**
+  String get cancelAnytime;
+
+  /// No description provided for @alppremium.
+  ///
+  /// In en, this message translates to:
+  /// **'ALP Premium'**
+  String get alppremium;
+
+  /// No description provided for @accessAllFeatures.
+  ///
+  /// In en, this message translates to:
+  /// **'Get access to all features'**
+  String get accessAllFeatures;
+
+  /// No description provided for @premiumFeatures.
+  ///
+  /// In en, this message translates to:
+  /// **'Premium Features'**
+  String get premiumFeatures;
+
+  /// No description provided for @packageOptions.
+  ///
+  /// In en, this message translates to:
+  /// **'Package Options'**
+  String get packageOptions;
+
+  /// No description provided for @monthly.
+  ///
+  /// In en, this message translates to:
+  /// **'Monthly'**
+  String get monthly;
+
+  /// No description provided for @sixMonthly.
+  ///
+  /// In en, this message translates to:
+  /// **'6 Monthly'**
+  String get sixMonthly;
+
+  /// No description provided for @yearly.
+  ///
+  /// In en, this message translates to:
+  /// **'Yearly'**
+  String get yearly;
+
+  /// No description provided for @month.
+  ///
+  /// In en, this message translates to:
+  /// **'month'**
+  String get month;
+
+  /// No description provided for @months.
+  ///
+  /// In en, this message translates to:
+  /// **'months'**
+  String get months;
+
+  /// No description provided for @year.
+  ///
+  /// In en, this message translates to:
+  /// **'year'**
+  String get year;
+
+  /// No description provided for @popular.
+  ///
+  /// In en, this message translates to:
+  /// **'POPULAR'**
+  String get popular;
+
+  /// No description provided for @restorePurchases.
+  ///
+  /// In en, this message translates to:
+  /// **'Restore Purchases'**
+  String get restorePurchases;
+
+  /// No description provided for @termsAndConditions.
+  ///
+  /// In en, this message translates to:
+  /// **'Terms and Conditions'**
+  String get termsAndConditions;
+
+  /// No description provided for @purchaseStarted.
+  ///
+  /// In en, this message translates to:
+  /// **'Purchase process started'**
+  String get purchaseStarted;
+
+  /// No description provided for @purchaseFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Purchase process could not be started'**
+  String get purchaseFailed;
+
+  /// No description provided for @termsContent.
+  ///
+  /// In en, this message translates to:
+  /// **'This in-app purchase service is subject to Apple App Store and Google Play Store terms. Purchases are non-refundable. Premium features are available as long as they are active.'**
+  String get termsContent;
+
+  /// No description provided for @accessAllQuestions.
+  ///
+  /// In en, this message translates to:
+  /// **'Access All Questions'**
+  String get accessAllQuestions;
+
+  /// No description provided for @unlimitedQuiz.
+  ///
+  /// In en, this message translates to:
+  /// **'Unlimited Quiz'**
+  String get unlimitedQuiz;
+
+  /// No description provided for @detailedExplanations.
+  ///
+  /// In en, this message translates to:
+  /// **'Detailed Explanations'**
+  String get detailedExplanations;
+
+  /// No description provided for @viewWrongQuestions.
+  ///
+  /// In en, this message translates to:
+  /// **'View Wrong Questions'**
+  String get viewWrongQuestions;
+
+  /// No description provided for @workOnDeficiencies.
+  ///
+  /// In en, this message translates to:
+  /// **'Work on Your Deficiencies'**
+  String get workOnDeficiencies;
+
+  /// No description provided for @advancedAnalytics.
+  ///
+  /// In en, this message translates to:
+  /// **'Advanced Analytics'**
+  String get advancedAnalytics;
+
+  /// No description provided for @yourDeficiencies.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Deficiencies'**
+  String get yourDeficiencies;
+
+  /// No description provided for @mistakesByCategory.
+  ///
+  /// In en, this message translates to:
+  /// **'Questions you answered incorrectly by category'**
+  String get mistakesByCategory;
+
+  /// No description provided for @study.
+  ///
+  /// In en, this message translates to:
+  /// **'Study'**
+  String get study;
+
+  /// No description provided for @details.
+  ///
+  /// In en, this message translates to:
+  /// **'Details'**
+  String get details;
+
+  /// No description provided for @remove.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove'**
+  String get remove;
+
+  /// No description provided for @removeQuestion.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove Question'**
+  String get removeQuestion;
+
+  /// No description provided for @removeQuestionConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Do you want to remove this question from your mistakes list?'**
+  String get removeQuestionConfirm;
+
+  /// No description provided for @appSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Anesthesia Level-up'**
+  String get appSubtitle;
+
+  /// No description provided for @loadingAnesthesiaData.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading your anesthesia data...'**
+  String get loadingAnesthesiaData;
+
+  /// No description provided for @emailRequiredForReset.
+  ///
+  /// In en, this message translates to:
+  /// **'Email Address Required'**
+  String get emailRequiredForReset;
+
+  /// No description provided for @emailRequiredForResetMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your email address to send a password reset email.\n\nUse the email address you registered with.'**
+  String get emailRequiredForResetMessage;
+
+  /// No description provided for @invalidEmailFormat.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid Email Format'**
+  String get invalidEmailFormat;
+
+  /// No description provided for @invalidEmailFormatMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid email address.\n\nExample: user@example.com'**
+  String get invalidEmailFormatMessage;
+
+  /// No description provided for @emailRequiredForResetShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Email address required'**
+  String get emailRequiredForResetShort;
+
+  /// No description provided for @invalidEmailFormatShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter valid email address'**
+  String get invalidEmailFormatShort;
+
+  /// No description provided for @emailSentSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Email Sent!'**
+  String get emailSentSuccessfully;
+
+  /// No description provided for @passwordResetEmailSent.
+  ///
+  /// In en, this message translates to:
+  /// **'Password reset email sent to:'**
+  String get passwordResetEmailSent;
+
+  /// No description provided for @loginFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Login Failed'**
+  String get loginFailed;
+
+  /// No description provided for @passwordResetFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Password Reset Failed'**
+  String get passwordResetFailed;
+
+  /// No description provided for @networkError.
+  ///
+  /// In en, this message translates to:
+  /// **'Network Connection Error'**
+  String get networkError;
+
+  /// No description provided for @networkErrorMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Please check your internet connection and try again.'**
+  String get networkErrorMessage;
+
+  /// No description provided for @serverError.
+  ///
+  /// In en, this message translates to:
+  /// **'Server Error'**
+  String get serverError;
+
+  /// No description provided for @serverErrorMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Unable to connect to server. Please try again later.'**
+  String get serverErrorMessage;
+
+  /// No description provided for @unknownError.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown Error'**
+  String get unknownError;
+
+  /// No description provided for @unknownErrorMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'An unexpected error occurred. Please try again.'**
+  String get unknownErrorMessage;
+
+  /// No description provided for @emailAlreadyInUse.
+  ///
+  /// In en, this message translates to:
+  /// **'Email Already in Use'**
+  String get emailAlreadyInUse;
+
+  /// No description provided for @emailAlreadyInUseMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'This email address is already registered. Try logging in or use a different email address.'**
+  String get emailAlreadyInUseMessage;
+
+  /// No description provided for @weakPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Weak Password'**
+  String get weakPassword;
+
+  /// No description provided for @weakPasswordMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Your password is too weak. Please choose a stronger password.'**
+  String get weakPasswordMessage;
+
+  /// No description provided for @userNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'User Not Found'**
+  String get userNotFound;
+
+  /// No description provided for @userNotFoundMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'No user found with this email address.'**
+  String get userNotFoundMessage;
+
+  /// No description provided for @wrongPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Wrong Password'**
+  String get wrongPassword;
+
+  /// No description provided for @wrongPasswordMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'The password you entered is incorrect. Please try again.'**
+  String get wrongPasswordMessage;
+
+  /// No description provided for @emailAlreadyInUseShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Email already registered'**
+  String get emailAlreadyInUseShort;
+
+  /// No description provided for @weakPasswordShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Password too weak'**
+  String get weakPasswordShort;
+
+  /// No description provided for @userNotFoundShort.
+  ///
+  /// In en, this message translates to:
+  /// **'User not found'**
+  String get userNotFoundShort;
+
+  /// No description provided for @wrongPasswordShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Wrong password'**
+  String get wrongPasswordShort;
+
+  /// No description provided for @tooManyRequests.
+  ///
+  /// In en, this message translates to:
+  /// **'Too Many Attempts'**
+  String get tooManyRequests;
+
+  /// No description provided for @tooManyRequestsMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'You have made too many failed attempts. Please wait a while and try again.'**
+  String get tooManyRequestsMessage;
+
+  /// No description provided for @accountDisabled.
+  ///
+  /// In en, this message translates to:
+  /// **'Account Disabled'**
+  String get accountDisabled;
+
+  /// No description provided for @accountDisabledMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Your account has been disabled. Please contact support team.'**
+  String get accountDisabledMessage;
+
+  /// No description provided for @invalidCredential.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid Credentials'**
+  String get invalidCredential;
+
+  /// No description provided for @invalidCredentialMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Email or password is incorrect. Please check your information.'**
+  String get invalidCredentialMessage;
+
+  /// No description provided for @operationNotAllowed.
+  ///
+  /// In en, this message translates to:
+  /// **'Operation Not Allowed'**
+  String get operationNotAllowed;
+
+  /// No description provided for @operationNotAllowedMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'This operation is not currently allowed. Please try again later.'**
+  String get operationNotAllowedMessage;
+
+  /// No description provided for @requiresRecentLogin.
+  ///
+  /// In en, this message translates to:
+  /// **'Recent Login Required'**
+  String get requiresRecentLogin;
+
+  /// No description provided for @requiresRecentLoginMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'You need to log in again for this operation.'**
+  String get requiresRecentLoginMessage;
+
+  /// No description provided for @languageResetSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Language selection reset. App will restart.'**
+  String get languageResetSuccess;
+
+  /// No description provided for @languageResetSuccessMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Language settings successfully reset. App will restart.'**
+  String get languageResetSuccessMessage;
 }
 
 class _AppLocalizationsDelegate

@@ -725,6 +725,10 @@
   "@quizCompleted": {
     "description": "Quiz completed message"
   },
+  "processing": "Processing...",
+  "@processing": {
+    "description": "Text shown while processing quiz completion"
+  },
   "quizCompletionError": "An error occurred while completing the quiz",
   "@quizCompletionError": {
     "description": "Quiz completion error message"
@@ -932,6 +936,14 @@
   "earnPointsOpportunity": "20 Points Earning Opportunity!",
   "@earnPointsOpportunity": {
     "description": "Earn points opportunity message"
+  },
+  "dailyQuestionPoints": "20 Points",
+  "@dailyQuestionPoints": {
+    "description": "Daily question points display"
+  },
+  "dailyQuestionScore": "Score: +20",
+  "@dailyQuestionScore": {
+    "description": "Daily question score display"
   },
   "errorTryAgain": "An error occurred, please try again",
   "@errorTryAgain": {
@@ -1632,5 +1644,143 @@
   "aboutPageComingSoon": "About page will be added soon",
   "@aboutPageComingSoon": {
     "description": "About page coming soon message"
-  }
+  },
+  "tutorialWelcomeTitle": "Welcome to Anesthesia Application",
+  "@tutorialWelcomeTitle": {
+    "description": "Tutorial welcome title"
+  },
+  "tutorialWelcomeDescription": "Test your knowledge in anesthesia, learn new information and improve yourself.",
+  "@tutorialWelcomeDescription": {
+    "description": "Tutorial welcome description"
+  },
+  "tutorialDailyQuestionTitle": "Daily Question",
+  "@tutorialDailyQuestionTitle": {
+    "description": "Tutorial daily question title"
+  },
+  "tutorialDailyQuestionDescription": "Keep your knowledge fresh with a new question every day and earn daily participation points.",
+  "@tutorialDailyQuestionDescription": {
+    "description": "Tutorial daily question description"
+  },
+  "tutorialPopularQuizzesTitle": "Popular Quizzes",
+  "@tutorialPopularQuizzesTitle": {
+    "description": "Tutorial popular quizzes title"
+  },
+  "tutorialPopularQuizzesDescription": "Discover the most solved quizzes and compete with your colleagues to reach the top.",
+  "@tutorialPopularQuizzesDescription": {
+    "description": "Tutorial popular quizzes description"
+  },
+  "tutorialOngoingQuizzesTitle": "Ongoing Quizzes",
+  "@tutorialOngoingQuizzesTitle": {
+    "description": "Tutorial ongoing quizzes title"
+  },
+  "tutorialOngoingQuizzesDescription": "Quickly access your unfinished quizzes and continue from where you left off.",
+  "@tutorialOngoingQuizzesDescription": {
+    "description": "Tutorial ongoing quizzes description"
+  },
+  "tutorialAppTitle": "Anesthesia Application",
+  "@tutorialAppTitle": {
+    "description": "Tutorial app title"
+  },
+  "tutorialSkip": "Skip",
+  "@tutorialSkip": {
+    "description": "Tutorial skip button"
+  },
+  "tutorialExploreNow": "Explore Now",
+  "@tutorialExploreNow": {
+    "description": "Tutorial explore now button"
+  },
+  "remainingFreeQuestions": "Remaining free questions: {count}",
+  "@remainingFreeQuestions": {
+    "description": "Remaining free questions display",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "compact"
+      }
+    }
+  },
+  "premiumRequired": "Premium Required",
+  "premiumRequiredMessage": "Premium membership required for more questions!\nYou can try the first 2 questions for free.",
+  "premiumIncentiveMessage": "Upgrade to Premium and get unlimited access to all questions!",
+  "goToPremium": "Go Premium",
+  "testModeActive": "TEST MODE ACTIVE",
+  "testModeMessage": "This feature is accessible in test mode!",
+  "testSettings": "Test Settings",
+  "securePayment": "Secure Payment",
+  "cancelAnytime": "Cancel anytime",
+  "alppremium": "ALP Premium",
+  "accessAllFeatures": "Get access to all features",
+  "premiumFeatures": "Premium Features",
+  "packageOptions": "Package Options",
+  "monthly": "Monthly",
+  "sixMonthly": "6 Monthly",
+  "yearly": "Yearly",
+  "month": "month",
+  "months": "months",
+  "year": "year",
+  "popular": "POPULAR",
+  "restorePurchases": "Restore Purchases",
+  "termsAndConditions": "Terms and Conditions",
+  "purchaseStarted": "Purchase process started",
+  "purchaseFailed": "Purchase process could not be started",
+  "termsContent": "This in-app purchase service is subject to Apple App Store and Google Play Store terms. Purchases are non-refundable. Premium features are available as long as they are active.",
+  "ok": "OK",
+  "accessAllQuestions": "Access All Questions",
+  "unlimitedQuiz": "Unlimited Quiz",
+  "detailedExplanations": "Detailed Explanations",
+  "viewWrongQuestions": "View Wrong Questions",
+  "workOnDeficiencies": "Work on Your Deficiencies",
+  "advancedAnalytics": "Advanced Analytics",
+  "yourDeficiencies": "Your Deficiencies",
+  "mistakesByCategory": "Questions you answered incorrectly by category",
+  "questions": "Questions",
+  "study": "Study",
+  "details": "Details",
+  "remove": "Remove",
+  "removeQuestion": "Remove Question",
+  "removeQuestionConfirm": "Do you want to remove this question from your mistakes list?",
+  "appSubtitle": "Anesthesia Level-up",
+  "loadingAnesthesiaData": "Loading your anesthesia data...",
+  "emailRequiredForReset": "Email Address Required",
+  "emailRequiredForResetMessage": "Please enter your email address to send a password reset email.\n\nUse the email address you registered with.",
+  "invalidEmailFormat": "Invalid Email Format",
+  "invalidEmailFormatMessage": "Please enter a valid email address.\n\nExample: user@example.com",
+  "emailRequiredForResetShort": "Email address required",
+  "invalidEmailFormatShort": "Enter valid email address",
+  "emailSentSuccessfully": "Email Sent!",
+  "passwordResetEmailSent": "Password reset email sent to:",
+  "checkEmailInbox": "Please check your email inbox and follow the instructions to reset your password.",
+  "registrationFailed": "Registration Failed",
+  "loginFailed": "Login Failed",
+  "passwordResetFailed": "Password Reset Failed",
+  "networkError": "Network Connection Error",
+  "networkErrorMessage": "Please check your internet connection and try again.",
+  "serverError": "Server Error",
+  "serverErrorMessage": "Unable to connect to server. Please try again later.",
+  "unknownError": "Unknown Error",
+  "unknownErrorMessage": "An unexpected error occurred. Please try again.",
+  "emailAlreadyInUse": "Email Already in Use",
+  "emailAlreadyInUseMessage": "This email address is already registered. Try logging in or use a different email address.",
+  "weakPassword": "Weak Password",
+  "weakPasswordMessage": "Your password is too weak. Please choose a stronger password.",
+  "userNotFound": "User Not Found",
+  "userNotFoundMessage": "No user found with this email address.",
+  "wrongPassword": "Wrong Password",
+  "wrongPasswordMessage": "The password you entered is incorrect. Please try again.",
+  "emailAlreadyInUseShort": "Email already registered",
+  "weakPasswordShort": "Password too weak",
+  "userNotFoundShort": "User not found",
+  "wrongPasswordShort": "Wrong password",
+  "tooManyRequests": "Too Many Attempts",
+  "tooManyRequestsMessage": "You have made too many failed attempts. Please wait a while and try again.",
+  "accountDisabled": "Account Disabled",
+  "accountDisabledMessage": "Your account has been disabled. Please contact support team.",
+  "invalidCredential": "Invalid Credentials",
+  "invalidCredentialMessage": "Email or password is incorrect. Please check your information.",
+  "operationNotAllowed": "Operation Not Allowed",
+  "operationNotAllowedMessage": "This operation is not currently allowed. Please try again later.",
+  "requiresRecentLogin": "Recent Login Required",
+  "requiresRecentLoginMessage": "You need to log in again for this operation.",
+  "languageResetSuccess": "Language selection reset. App will restart.",
+  "languageResetSuccessMessage": "Language settings successfully reset. App will restart."
 }

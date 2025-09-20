@@ -3,7 +3,7 @@ import 'dart:async';
 import 'dart:math';
 import '../services/auth_service.dart';
 import '../services/tutorial_service.dart';
-import '../theme/app_theme.dart';
+import '../l10n/app_localizations.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -580,7 +580,7 @@ class _SplashScreenState extends State<SplashScreen>
               const SizedBox(height: 12), // 8'den 12'ye
               // Subtitle - büyütüldü
               Text(
-                'Anesthesia Level-up',
+                AppLocalizations.of(context)!.appSubtitle,
                 style: TextStyle(
                   fontSize: 14, // 12'den 14'e büyütüldü
                   fontWeight: FontWeight.w500,
@@ -614,7 +614,7 @@ class _SplashScreenState extends State<SplashScreen>
         const SizedBox(width: 20),
         // Yükleniyor yazısı
         Text(
-          'Anestezi bilgileriniz yükleniyor...',
+          AppLocalizations.of(context)!.loadingAnesthesiaData,
           style: TextStyle(
             color: Colors.white.withOpacity(0.8),
             fontSize: 14,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../services/premium_service.dart';
+import '../l10n/app_localizations.dart';
 
 class PremiumLockWidget extends StatelessWidget {
   final String message;
@@ -75,9 +76,9 @@ class PremiumLockWidget extends StatelessWidget {
                 const SizedBox(height: 24),
                 
                 // Title
-                const Text(
-                  'TEST MODU AKTİF',
-                  style: TextStyle(
+                Text(
+                  AppLocalizations.of(context)!.testModeActive,
+                  style: const TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
@@ -100,9 +101,9 @@ class PremiumLockWidget extends StatelessWidget {
                 
                 const SizedBox(height: 8),
                 
-                const Text(
-                  'Bu özellik test modunda erişilebilir durumda!',
-                  style: TextStyle(
+                Text(
+                  AppLocalizations.of(context)!.testModeMessage,
+                  style: const TextStyle(
                     fontSize: 14,
                     color: Colors.green,
                     height: 1.4,
@@ -129,14 +130,14 @@ class PremiumLockWidget extends StatelessWidget {
                       ),
                       elevation: 0,
                     ),
-                    child: const Row(
+                    child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Icons.science, size: 20),
-                        SizedBox(width: 8),
+                        const Icon(Icons.science, size: 20),
+                        const SizedBox(width: 8),
                         Text(
-                          'Test Ayarları',
-                          style: TextStyle(
+                          AppLocalizations.of(context)!.testSettings,
+                          style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
                           ),
@@ -207,7 +208,7 @@ class PremiumLockWidget extends StatelessWidget {
           
           // Title
           Text(
-            'Premium Gerekli',
+            AppLocalizations.of(context)!.premiumRequired,
             style: const TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
@@ -260,14 +261,14 @@ class PremiumLockWidget extends StatelessWidget {
                 ),
                 elevation: 0,
               ),
-              child: const Row(
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.star, size: 20),
-                  SizedBox(width: 8),
+                  const Icon(Icons.star, size: 20),
+                  const SizedBox(width: 8),
                   Text(
-                    'Premium\'a Geç',
-                    style: TextStyle(
+                    AppLocalizations.of(context)!.goToPremium,
+                    style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                     ),
@@ -285,9 +286,9 @@ class PremiumLockWidget extends StatelessWidget {
             children: [
               Icon(Icons.security, color: Colors.green, size: 16),
               const SizedBox(width: 8),
-              const Text(
-                'Güvenli Ödeme',
-                style: TextStyle(
+              Text(
+                AppLocalizations.of(context)!.securePayment,
+                style: const TextStyle(
                   fontSize: 12,
                   color: Colors.white54,
                 ),
@@ -295,9 +296,9 @@ class PremiumLockWidget extends StatelessWidget {
               const SizedBox(width: 24),
               Icon(Icons.refresh, color: Colors.blue, size: 16),
               const SizedBox(width: 8),
-              const Text(
-                'İstediğiniz zaman iptal',
-                style: TextStyle(
+              Text(
+                AppLocalizations.of(context)!.cancelAnytime,
+                style: const TextStyle(
                   fontSize: 12,
                   color: Colors.white54,
                 ),

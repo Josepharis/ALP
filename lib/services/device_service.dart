@@ -173,7 +173,6 @@ class DeviceService {
 
         // Yeni cihazı kaydet
         await _registerNewDevice(deviceId, fcmToken, deviceName, platform);
-        print('✅ Yeni cihaz başarıyla kaydedildi');
       }
 
     } catch (e) {
@@ -231,7 +230,6 @@ class DeviceService {
         'deviceCount': FieldValue.increment(-1),
       });
 
-      print('✅ Cihaz başarıyla kaldırıldı: $deviceId');
       return true;
     } catch (e) {
       print('❌ Cihaz kaldırma hatası: $e');
@@ -254,7 +252,6 @@ class DeviceService {
         'deviceCount': FieldValue.increment(-1),
       });
       
-      print('✅ Cihaz kaydı başarıyla silindi: $deviceId');
     } catch (e) {
       print('❌ Cihaz kaydı silme hatası: $e');
       // Hata olsa bile devam et
@@ -272,7 +269,6 @@ class DeviceService {
         'deviceCount': FieldValue.increment(-1),
       });
       
-      print('✅ Cihaz kaydı başarıyla silindi: $deviceId');
     } catch (e) {
       print('❌ Cihaz kaydı silme hatası: $e');
       rethrow;
@@ -293,7 +289,6 @@ class DeviceService {
       try {
         final deviceId = await _generateDeviceId();
         await _updateExistingDevice(deviceId, newToken);
-        print('✅ Token başarıyla güncellendi');
       } catch (e) {
         print('❌ Token güncelleme hatası: $e');
       }

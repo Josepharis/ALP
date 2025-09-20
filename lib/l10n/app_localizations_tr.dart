@@ -118,7 +118,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get quiz => 'Quiz';
 
   @override
-  String get questions => 'Sorular';
+  String get questions => 'Soru';
 
   @override
   String get score => 'Puan';
@@ -534,7 +534,10 @@ class AppLocalizationsTr extends AppLocalizations {
   String get privacyPolicy => 'Gizlilik Politikasını';
 
   @override
-  String get registrationFailed => 'Kayıt Olunamadı';
+  String get registrationFailed => 'Kayıt Başarısız';
+
+  @override
+  String get processing => 'İşleniyor...';
 
   @override
   String get quizCompletionError => 'Quiz tamamlanırken bir hata oluştu';
@@ -667,6 +670,12 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get earnPointsOpportunity => '20 Puan Kazanma Fırsatı!';
+
+  @override
+  String get dailyQuestionPoints => '20 Puan';
+
+  @override
+  String get dailyQuestionScore => 'Puan: +20';
 
   @override
   String get errorTryAgain => 'Bir hata oluştu, tekrar deneyin';
@@ -1085,4 +1094,312 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get aboutPageComingSoon => 'Hakkında sayfası yakında eklenecek';
+
+  @override
+  String get tutorialWelcomeTitle => 'Anestezi Uygulamasına Hoş Geldiniz';
+
+  @override
+  String get tutorialWelcomeDescription =>
+      'Anestezi alanında bilgilerinizi test edin, yeni bilgiler öğrenin ve kendinizi geliştirin.';
+
+  @override
+  String get tutorialDailyQuestionTitle => 'Günün Sorusu';
+
+  @override
+  String get tutorialDailyQuestionDescription =>
+      'Her gün yeni bir soru ile bilgilerinizi taze tutun ve günlük katılım puanları kazanın.';
+
+  @override
+  String get tutorialPopularQuizzesTitle => 'Popüler Quizler';
+
+  @override
+  String get tutorialPopularQuizzesDescription =>
+      'En çok çözülen quizleri keşfedin ve meslektaşlarınızla bilgi yarışında zirveye çıkın.';
+
+  @override
+  String get tutorialOngoingQuizzesTitle => 'Devam Eden Quizler';
+
+  @override
+  String get tutorialOngoingQuizzesDescription =>
+      'Yarım kalan quizlerinize hızlıca erişerek kaldığınız yerden devam edin.';
+
+  @override
+  String get tutorialAppTitle => 'Anestezi Uygulaması';
+
+  @override
+  String get tutorialSkip => 'Geç';
+
+  @override
+  String get tutorialExploreNow => 'Hemen Keşfet';
+
+  @override
+  String remainingFreeQuestions(int count) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.compact(
+      locale: localeName,
+    );
+    final String countString = countNumberFormat.format(count);
+
+    return 'Kalan ücretsiz soru hakkınız: $countString';
+  }
+
+  @override
+  String get premiumRequired => 'Premium Gerekli';
+
+  @override
+  String get premiumRequiredMessage =>
+      'Daha fazla soru için Premium üyelik gerekli!\nİlk 2 soruyu ücretsiz deneyebilirsiniz.';
+
+  @override
+  String get premiumIncentiveMessage =>
+      'Premium\'a geçin ve tüm sorulara sınırsız erişim kazanın!';
+
+  @override
+  String get goToPremium => 'Premium\'a Geç';
+
+  @override
+  String get testModeActive => 'TEST MODU AKTİF';
+
+  @override
+  String get testModeMessage => 'Bu özellik test modunda erişilebilir durumda!';
+
+  @override
+  String get testSettings => 'Test Ayarları';
+
+  @override
+  String get securePayment => 'Güvenli Ödeme';
+
+  @override
+  String get cancelAnytime => 'İstediğiniz zaman iptal';
+
+  @override
+  String get alppremium => 'ALP Premium';
+
+  @override
+  String get accessAllFeatures => 'Tüm özelliklere erişim kazanın';
+
+  @override
+  String get premiumFeatures => 'Premium Özellikler';
+
+  @override
+  String get packageOptions => 'Paket Seçenekleri';
+
+  @override
+  String get monthly => 'Aylık';
+
+  @override
+  String get sixMonthly => '6 Aylık';
+
+  @override
+  String get yearly => 'Yıllık';
+
+  @override
+  String get month => 'ay';
+
+  @override
+  String get months => 'ay';
+
+  @override
+  String get year => 'yıl';
+
+  @override
+  String get popular => 'POPÜLER';
+
+  @override
+  String get restorePurchases => 'Satın Almaları Geri Yükle';
+
+  @override
+  String get termsAndConditions => 'Şartlar ve Koşullar';
+
+  @override
+  String get purchaseStarted => 'Satın alma işlemi başlatıldı';
+
+  @override
+  String get purchaseFailed => 'Satın alma işlemi başlatılamadı';
+
+  @override
+  String get termsContent =>
+      'Bu uygulama içi satın alım hizmeti Apple App Store ve Google Play Store şartlarına tabidir. Satın alımlar iade edilemez. Premium özellikler aktif olduğu sürece kullanılabilir.';
+
+  @override
+  String get accessAllQuestions => 'Tüm Sorulara Erişim';
+
+  @override
+  String get unlimitedQuiz => 'Sınırsız Quiz';
+
+  @override
+  String get detailedExplanations => 'Detaylı Açıklamalar';
+
+  @override
+  String get viewWrongQuestions => 'Yanlış Soruları Görüntüle';
+
+  @override
+  String get workOnDeficiencies => 'Eksiklerinizi Çalışın';
+
+  @override
+  String get advancedAnalytics => 'Gelişmiş Analitik';
+
+  @override
+  String get yourDeficiencies => 'Eksikleriniz';
+
+  @override
+  String get mistakesByCategory =>
+      'Kategorilere göre yanlış cevapladığınız sorular';
+
+  @override
+  String get study => 'Çalış';
+
+  @override
+  String get details => 'Detaylar';
+
+  @override
+  String get remove => 'Kaldır';
+
+  @override
+  String get removeQuestion => 'Soruyu Kaldır';
+
+  @override
+  String get removeQuestionConfirm =>
+      'Bu soruyu eksikler listenizden kaldırmak istiyor musunuz?';
+
+  @override
+  String get appSubtitle => 'Anesthesia Level-up';
+
+  @override
+  String get loadingAnesthesiaData => 'Anestezi bilgileriniz yükleniyor...';
+
+  @override
+  String get emailRequiredForReset => 'E-posta Adresi Gerekli';
+
+  @override
+  String get emailRequiredForResetMessage =>
+      'Şifre sıfırlama e-postası gönderebilmek için e-posta adresinizi girin.\n\nKayıt olduğunuz e-posta adresini kullanın.';
+
+  @override
+  String get invalidEmailFormat => 'E-posta Formatı Geçersiz';
+
+  @override
+  String get invalidEmailFormatMessage =>
+      'Lütfen geçerli bir e-posta adresi girin.\n\nÖrnek: kullanici@example.com';
+
+  @override
+  String get emailRequiredForResetShort => 'E-posta adresi gerekli';
+
+  @override
+  String get invalidEmailFormatShort => 'Geçerli e-posta adresi girin';
+
+  @override
+  String get emailSentSuccessfully => 'E-posta Gönderildi!';
+
+  @override
+  String get passwordResetEmailSent => 'Şifre sıfırlama e-postası gönderildi:';
+
+  @override
+  String get loginFailed => 'Giriş Başarısız';
+
+  @override
+  String get passwordResetFailed => 'Şifre Sıfırlama Başarısız';
+
+  @override
+  String get networkError => 'Ağ Bağlantı Hatası';
+
+  @override
+  String get networkErrorMessage =>
+      'İnternet bağlantınızı kontrol edin ve tekrar deneyin.';
+
+  @override
+  String get serverError => 'Sunucu Hatası';
+
+  @override
+  String get serverErrorMessage =>
+      'Sunucu ile bağlantı kurulamadı. Lütfen daha sonra tekrar deneyin.';
+
+  @override
+  String get unknownError => 'Bilinmeyen Hata';
+
+  @override
+  String get unknownErrorMessage =>
+      'Beklenmeyen bir hata oluştu. Lütfen tekrar deneyin.';
+
+  @override
+  String get emailAlreadyInUse => 'E-posta Adresi Kullanımda';
+
+  @override
+  String get emailAlreadyInUseMessage =>
+      'Bu e-posta adresi zaten kayıtlı. Giriş yapmayı deneyin veya farklı bir e-posta adresi kullanın.';
+
+  @override
+  String get weakPassword => 'Zayıf Şifre';
+
+  @override
+  String get weakPasswordMessage =>
+      'Şifreniz çok zayıf. Lütfen daha güçlü bir şifre seçin.';
+
+  @override
+  String get userNotFound => 'Kullanıcı Bulunamadı';
+
+  @override
+  String get userNotFoundMessage =>
+      'Bu e-posta adresi ile kayıtlı bir kullanıcı bulunamadı.';
+
+  @override
+  String get wrongPassword => 'Yanlış Şifre';
+
+  @override
+  String get wrongPasswordMessage =>
+      'Girdiğiniz şifre yanlış. Lütfen tekrar deneyin.';
+
+  @override
+  String get emailAlreadyInUseShort => 'E-posta adresi zaten kayıtlı';
+
+  @override
+  String get weakPasswordShort => 'Şifre çok zayıf';
+
+  @override
+  String get userNotFoundShort => 'Kullanıcı bulunamadı';
+
+  @override
+  String get wrongPasswordShort => 'Yanlış şifre';
+
+  @override
+  String get tooManyRequests => 'Çok Fazla Deneme';
+
+  @override
+  String get tooManyRequestsMessage =>
+      'Çok fazla başarısız deneme yaptınız. Lütfen bir süre bekleyip tekrar deneyin.';
+
+  @override
+  String get accountDisabled => 'Hesap Devre Dışı';
+
+  @override
+  String get accountDisabledMessage =>
+      'Hesabınız devre dışı bırakılmış. Lütfen destek ekibi ile iletişime geçin.';
+
+  @override
+  String get invalidCredential => 'Geçersiz Kimlik Bilgileri';
+
+  @override
+  String get invalidCredentialMessage =>
+      'E-posta veya şifre hatalı. Lütfen bilgilerinizi kontrol edin.';
+
+  @override
+  String get operationNotAllowed => 'İşlem İzni Yok';
+
+  @override
+  String get operationNotAllowedMessage =>
+      'Bu işlem şu anda izin verilmiyor. Lütfen daha sonra tekrar deneyin.';
+
+  @override
+  String get requiresRecentLogin => 'Yeniden Giriş Gerekli';
+
+  @override
+  String get requiresRecentLoginMessage =>
+      'Bu işlem için yeniden giriş yapmanız gerekiyor.';
+
+  @override
+  String get languageResetSuccess =>
+      'Dil seçimi sıfırlandı. Uygulama yeniden başlatılacak.';
+
+  @override
+  String get languageResetSuccessMessage =>
+      'Dil ayarları başarıyla sıfırlandı. Uygulama yeniden başlatılacak.';
 }

@@ -536,6 +536,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get registrationFailed => 'Registration Failed';
 
   @override
+  String get processing => 'Processing...';
+
+  @override
   String get quizCompletionError =>
       'An error occurred while completing the quiz';
 
@@ -666,6 +669,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get earnPointsOpportunity => '20 Points Earning Opportunity!';
+
+  @override
+  String get dailyQuestionPoints => '20 Points';
+
+  @override
+  String get dailyQuestionScore => 'Score: +20';
 
   @override
   String get errorTryAgain => 'An error occurred, please try again';
@@ -1085,4 +1094,311 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get aboutPageComingSoon => 'About page will be added soon';
+
+  @override
+  String get tutorialWelcomeTitle => 'Welcome to Anesthesia Application';
+
+  @override
+  String get tutorialWelcomeDescription =>
+      'Test your knowledge in anesthesia, learn new information and improve yourself.';
+
+  @override
+  String get tutorialDailyQuestionTitle => 'Daily Question';
+
+  @override
+  String get tutorialDailyQuestionDescription =>
+      'Keep your knowledge fresh with a new question every day and earn daily participation points.';
+
+  @override
+  String get tutorialPopularQuizzesTitle => 'Popular Quizzes';
+
+  @override
+  String get tutorialPopularQuizzesDescription =>
+      'Discover the most solved quizzes and compete with your colleagues to reach the top.';
+
+  @override
+  String get tutorialOngoingQuizzesTitle => 'Ongoing Quizzes';
+
+  @override
+  String get tutorialOngoingQuizzesDescription =>
+      'Quickly access your unfinished quizzes and continue from where you left off.';
+
+  @override
+  String get tutorialAppTitle => 'Anesthesia Application';
+
+  @override
+  String get tutorialSkip => 'Skip';
+
+  @override
+  String get tutorialExploreNow => 'Explore Now';
+
+  @override
+  String remainingFreeQuestions(int count) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.compact(
+      locale: localeName,
+    );
+    final String countString = countNumberFormat.format(count);
+
+    return 'Remaining free questions: $countString';
+  }
+
+  @override
+  String get premiumRequired => 'Premium Required';
+
+  @override
+  String get premiumRequiredMessage =>
+      'Premium membership required for more questions!\nYou can try the first 2 questions for free.';
+
+  @override
+  String get premiumIncentiveMessage =>
+      'Upgrade to Premium and get unlimited access to all questions!';
+
+  @override
+  String get goToPremium => 'Go Premium';
+
+  @override
+  String get testModeActive => 'TEST MODE ACTIVE';
+
+  @override
+  String get testModeMessage => 'This feature is accessible in test mode!';
+
+  @override
+  String get testSettings => 'Test Settings';
+
+  @override
+  String get securePayment => 'Secure Payment';
+
+  @override
+  String get cancelAnytime => 'Cancel anytime';
+
+  @override
+  String get alppremium => 'ALP Premium';
+
+  @override
+  String get accessAllFeatures => 'Get access to all features';
+
+  @override
+  String get premiumFeatures => 'Premium Features';
+
+  @override
+  String get packageOptions => 'Package Options';
+
+  @override
+  String get monthly => 'Monthly';
+
+  @override
+  String get sixMonthly => '6 Monthly';
+
+  @override
+  String get yearly => 'Yearly';
+
+  @override
+  String get month => 'month';
+
+  @override
+  String get months => 'months';
+
+  @override
+  String get year => 'year';
+
+  @override
+  String get popular => 'POPULAR';
+
+  @override
+  String get restorePurchases => 'Restore Purchases';
+
+  @override
+  String get termsAndConditions => 'Terms and Conditions';
+
+  @override
+  String get purchaseStarted => 'Purchase process started';
+
+  @override
+  String get purchaseFailed => 'Purchase process could not be started';
+
+  @override
+  String get termsContent =>
+      'This in-app purchase service is subject to Apple App Store and Google Play Store terms. Purchases are non-refundable. Premium features are available as long as they are active.';
+
+  @override
+  String get accessAllQuestions => 'Access All Questions';
+
+  @override
+  String get unlimitedQuiz => 'Unlimited Quiz';
+
+  @override
+  String get detailedExplanations => 'Detailed Explanations';
+
+  @override
+  String get viewWrongQuestions => 'View Wrong Questions';
+
+  @override
+  String get workOnDeficiencies => 'Work on Your Deficiencies';
+
+  @override
+  String get advancedAnalytics => 'Advanced Analytics';
+
+  @override
+  String get yourDeficiencies => 'Your Deficiencies';
+
+  @override
+  String get mistakesByCategory =>
+      'Questions you answered incorrectly by category';
+
+  @override
+  String get study => 'Study';
+
+  @override
+  String get details => 'Details';
+
+  @override
+  String get remove => 'Remove';
+
+  @override
+  String get removeQuestion => 'Remove Question';
+
+  @override
+  String get removeQuestionConfirm =>
+      'Do you want to remove this question from your mistakes list?';
+
+  @override
+  String get appSubtitle => 'Anesthesia Level-up';
+
+  @override
+  String get loadingAnesthesiaData => 'Loading your anesthesia data...';
+
+  @override
+  String get emailRequiredForReset => 'Email Address Required';
+
+  @override
+  String get emailRequiredForResetMessage =>
+      'Please enter your email address to send a password reset email.\n\nUse the email address you registered with.';
+
+  @override
+  String get invalidEmailFormat => 'Invalid Email Format';
+
+  @override
+  String get invalidEmailFormatMessage =>
+      'Please enter a valid email address.\n\nExample: user@example.com';
+
+  @override
+  String get emailRequiredForResetShort => 'Email address required';
+
+  @override
+  String get invalidEmailFormatShort => 'Enter valid email address';
+
+  @override
+  String get emailSentSuccessfully => 'Email Sent!';
+
+  @override
+  String get passwordResetEmailSent => 'Password reset email sent to:';
+
+  @override
+  String get loginFailed => 'Login Failed';
+
+  @override
+  String get passwordResetFailed => 'Password Reset Failed';
+
+  @override
+  String get networkError => 'Network Connection Error';
+
+  @override
+  String get networkErrorMessage =>
+      'Please check your internet connection and try again.';
+
+  @override
+  String get serverError => 'Server Error';
+
+  @override
+  String get serverErrorMessage =>
+      'Unable to connect to server. Please try again later.';
+
+  @override
+  String get unknownError => 'Unknown Error';
+
+  @override
+  String get unknownErrorMessage =>
+      'An unexpected error occurred. Please try again.';
+
+  @override
+  String get emailAlreadyInUse => 'Email Already in Use';
+
+  @override
+  String get emailAlreadyInUseMessage =>
+      'This email address is already registered. Try logging in or use a different email address.';
+
+  @override
+  String get weakPassword => 'Weak Password';
+
+  @override
+  String get weakPasswordMessage =>
+      'Your password is too weak. Please choose a stronger password.';
+
+  @override
+  String get userNotFound => 'User Not Found';
+
+  @override
+  String get userNotFoundMessage => 'No user found with this email address.';
+
+  @override
+  String get wrongPassword => 'Wrong Password';
+
+  @override
+  String get wrongPasswordMessage =>
+      'The password you entered is incorrect. Please try again.';
+
+  @override
+  String get emailAlreadyInUseShort => 'Email already registered';
+
+  @override
+  String get weakPasswordShort => 'Password too weak';
+
+  @override
+  String get userNotFoundShort => 'User not found';
+
+  @override
+  String get wrongPasswordShort => 'Wrong password';
+
+  @override
+  String get tooManyRequests => 'Too Many Attempts';
+
+  @override
+  String get tooManyRequestsMessage =>
+      'You have made too many failed attempts. Please wait a while and try again.';
+
+  @override
+  String get accountDisabled => 'Account Disabled';
+
+  @override
+  String get accountDisabledMessage =>
+      'Your account has been disabled. Please contact support team.';
+
+  @override
+  String get invalidCredential => 'Invalid Credentials';
+
+  @override
+  String get invalidCredentialMessage =>
+      'Email or password is incorrect. Please check your information.';
+
+  @override
+  String get operationNotAllowed => 'Operation Not Allowed';
+
+  @override
+  String get operationNotAllowedMessage =>
+      'This operation is not currently allowed. Please try again later.';
+
+  @override
+  String get requiresRecentLogin => 'Recent Login Required';
+
+  @override
+  String get requiresRecentLoginMessage =>
+      'You need to log in again for this operation.';
+
+  @override
+  String get languageResetSuccess =>
+      'Language selection reset. App will restart.';
+
+  @override
+  String get languageResetSuccessMessage =>
+      'Language settings successfully reset. App will restart.';
 }

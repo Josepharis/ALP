@@ -10,6 +10,7 @@ import '../services/quiz_service.dart';
 import '../models/quiz.dart';
 import '../services/premium_access_service.dart';
 import '../services/premium_service.dart';
+import '../services/language_service.dart';
 import '../widgets/premium_lock_widget.dart';
 
 import '../utils/event_bus.dart';
@@ -44,6 +45,7 @@ class _QuizScreenState extends State<QuizScreen>
   late AnimationController _animationController;
   late Animation<double> _animation;
   final QuizService _quizService = QuizService();
+  bool _isCompletingQuiz = false; // Quiz tamamlanma durumunu takip et
 
   @override
   void initState() {
@@ -99,7 +101,6 @@ class _QuizScreenState extends State<QuizScreen>
 
       // Ana sayfayı yenilemek için EventBus bildirimi gönder
       EventBus().fireMistakesUpdated(true);
-      print("Quiz ilerleme kaydedildi - Ana sayfa yenilenecek");
 
       // Başarılı mesajı (opsiyonel)
       SnackBarUtils.showSuccessSnackBar(
@@ -304,8 +305,10 @@ class _QuizScreenState extends State<QuizScreen>
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<PremiumService>(
-      builder: (context, premiumService, child) {
+    return Consumer<LanguageService>(
+      builder: (context, languageService, child) {
+        return Consumer<PremiumService>(
+          builder: (context, premiumService, child) {
         final isPremium = premiumService.isPremium;
         
         // Premium kontrolü - 2. sorudan sonra premium gerekli
@@ -362,6 +365,8 @@ class _QuizScreenState extends State<QuizScreen>
               ),
             ),
           ),
+        );
+          },
         );
       },
     );
@@ -655,18 +660,20 @@ class _QuizScreenState extends State<QuizScreen>
               child: Material(
                 color: Colors.transparent,
                 child: InkWell(
-                  onTap: isAnswered ? _nextQuestion : null,
+                  onTap: isAnswered && !_isCompletingQuiz ? _nextQuestion : null,
                   borderRadius: BorderRadius.circular(8),
                   child: Container(
                     padding: const EdgeInsets.symmetric(vertical: 8),
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
-                        colors: [Colors.blue.shade600, Colors.blue.shade700],
+                        colors: _isCompletingQuiz 
+                            ? [Colors.grey.shade600, Colors.grey.shade700]
+                            : [Colors.blue.shade600, Colors.blue.shade700],
                       ),
                       borderRadius: BorderRadius.circular(8),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.blue.withOpacity(0.3),
+                          color: (_isCompletingQuiz ? Colors.grey : Colors.blue).withOpacity(0.3),
                           blurRadius: 4,
                           offset: const Offset(0, 2),
                         ),
@@ -675,10 +682,23 @@ class _QuizScreenState extends State<QuizScreen>
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
+                        if (_isCompletingQuiz) ...[
+                          const SizedBox(
+                            width: 16,
+                            height: 16,
+                            child: CircularProgressIndicator(
+                              strokeWidth: 2,
+                              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                        ],
                         Text(
-                          currentQuestionIndex == widget.questions.length - 1
-                              ? AppLocalizations.of(context)!.finish
-                              : AppLocalizations.of(context)!.next,
+                          _isCompletingQuiz 
+                              ? AppLocalizations.of(context)!.processing
+                              : (currentQuestionIndex == widget.questions.length - 1
+                                  ? AppLocalizations.of(context)!.finish
+                                  : AppLocalizations.of(context)!.next),
                           style: const TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.w600,
@@ -686,7 +706,7 @@ class _QuizScreenState extends State<QuizScreen>
                           ),
                         ),
                         if (currentQuestionIndex <
-                            widget.questions.length - 1) ...[
+                            widget.questions.length - 1 && !_isCompletingQuiz) ...[
                           const SizedBox(width: 4),
                           const Icon(
                             Icons.arrow_forward_rounded,
@@ -812,7 +832,6 @@ class _QuizScreenState extends State<QuizScreen>
       );
 
       if (result) {
-        print("KAYIT BAŞARILI: Yanlış cevaplanan soru kaydedildi");
         print("===== YANLIŞ CEVAP KAYIT İŞLEMİ TAMAMLANDI =====");
 
         // Yanlış cevap kaydedildikten sonra EventBus ile bildirim gönder
@@ -846,6 +865,11 @@ class _QuizScreenState extends State<QuizScreen>
   }
 
   void _showQuizCompletedDialog() {
+    // Eğer zaten tamamlanıyorsa, tekrar başlatma
+    if (_isCompletingQuiz) {
+      return;
+    }
+
     final int totalScore = score;
     final int totalQuestions = widget.questions.length;
     final double percentage = (totalScore / totalQuestions) * 100;
@@ -860,6 +884,15 @@ class _QuizScreenState extends State<QuizScreen>
 
   // Quiz tamamlandığında yapılacak işlemler
   Future<void> _onCompleteQuiz() async {
+    // Eğer zaten tamamlanıyorsa, tekrar başlatma
+    if (_isCompletingQuiz) {
+      return;
+    }
+
+    setState(() {
+      _isCompletingQuiz = true;
+    });
+
     try {
       print(
         'Quiz tamamlanıyor: kategori=${widget.categoryName}, skor=$score/${widget.questions.length}',
@@ -875,8 +908,6 @@ class _QuizScreenState extends State<QuizScreen>
       if (!mounted) return;
 
       if (result) {
-        print('Quiz başarıyla tamamlandı ve veritabanına kaydedildi');
-
         // Quiz tamamlandıktan sonra EventBus ile bildirim gönder
         // Bu sayede hem ana sayfa hem de quizler ekranı güncellenecek
         EventBus().fireMistakesUpdated(true);
@@ -885,12 +916,25 @@ class _QuizScreenState extends State<QuizScreen>
         // Kısa bir gecikme ekle ki veritabanı güncellemesi tamamlansın
         await Future.delayed(const Duration(milliseconds: 500));
 
+        if (!mounted) return;
+
         // Quiz tamamlandı, sonuçları döndür ve ana sayfaya dön
-        Navigator.pop(context, {
-          'score': score,
-          'totalQuestions': widget.questions.length,
-          'successRate': (score / widget.questions.length) * 100,
-        });
+        // Navigation stack kontrolü ile güvenli dönüş
+        if (Navigator.canPop(context)) {
+          Navigator.pop(context, {
+            'score': score,
+            'totalQuestions': widget.questions.length,
+            'successRate': (score / widget.questions.length) * 100,
+          });
+        } else {
+          // Eğer pop yapılamıyorsa, ana sayfaya yönlendir
+          Navigator.pushNamedAndRemoveUntil(
+            context,
+            '/home',
+            (route) => false,
+          );
+        }
+        
         SnackBarUtils.showSuccessSnackBar(context, AppLocalizations.of(context)!.quizCompleted);
       } else {
         print('HATA: Quiz tamamlanamadı veya veritabanına kaydedilemedi');
@@ -903,6 +947,12 @@ class _QuizScreenState extends State<QuizScreen>
       print('_onCompleteQuiz hatası: $e');
       if (!mounted) return;
       SnackBarUtils.showErrorSnackBar(context, 'Hata: $e');
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isCompletingQuiz = false;
+        });
+      }
     }
   }
 
@@ -927,8 +977,8 @@ class _QuizScreenState extends State<QuizScreen>
                   child: Padding(
                     padding: const EdgeInsets.all(24.0),
                     child: PremiumLockWidget(
-                      message: PremiumAccessService.getPremiumRequiredMessage(),
-                      subtitle: PremiumAccessService.getPremiumIncentiveMessage(),
+                      message: AppLocalizations.of(context)!.premiumRequiredMessage,
+                      subtitle: AppLocalizations.of(context)!.premiumIncentiveMessage,
                     ),
                   ),
                 ),
@@ -982,7 +1032,7 @@ class _QuizScreenState extends State<QuizScreen>
           const SizedBox(width: 12),
           Expanded(
             child: Text(
-              'Kalan ücretsiz soru hakkınız: $remainingQuestions',
+              AppLocalizations.of(context)!.remainingFreeQuestions(remainingQuestions),
               style: const TextStyle(
                 color: Colors.black,
                 fontWeight: FontWeight.bold,

@@ -147,11 +147,19 @@ class UserService {
       }
 
       print('🔍 Kullanıcı dokümanı kontrol ediliyor: $userId');
-      final userDoc = await _firestore.collection('users').doc(userId).get();
+      
+      // Timeout ile Firestore işlemi
+      final userDoc = await _firestore.collection('users').doc(userId).get().timeout(
+        const Duration(seconds: 10),
+        onTimeout: () {
+          throw Exception('Firestore timeout - kullanıcı dokümanı kontrol edilemedi');
+        },
+      );
 
       if (!userDoc.exists) {
         print('📝 Yeni kullanıcı ayarları oluşturuluyor...');
-        // Temel kullanıcı verilerini oluştur
+        
+        // Temel kullanıcı verilerini oluştur - timeout ile
         await _firestore.collection('users').doc(userId).set({
           'displayName': _authService.currentUser?.displayName ?? 'Kullanıcı',
           'email': _authService.currentUser?.email ?? '',
@@ -168,7 +176,12 @@ class UserService {
             'showActivityInLeaderboard': true,
             'shareUsageData': true,
           },
-        }, SetOptions(merge: true));
+        }, SetOptions(merge: true)).timeout(
+          const Duration(seconds: 10),
+          onTimeout: () {
+            throw Exception('Firestore timeout - kullanıcı ayarları oluşturulamadı');
+          },
+        );
 
         print('✅ Varsayılan kullanıcı ayarları oluşturuldu');
         return true;
@@ -243,17 +256,14 @@ class UserService {
         // İndirme URL'sini al
         print('İndirme URL\'si alınıyor...');
         final downloadUrl = await uploadTask.ref.getDownloadURL();
-        print('İndirme URL\'si başarıyla alındı: $downloadUrl');
 
         // Kullanıcı profilini güncelle
         print('Kullanıcı profili güncelleniyor...');
         await updateUserProfile(photoURL: downloadUrl);
-        print('Kullanıcı profili güncellendi');
 
         // Firebase Auth'daki kullanıcı profilini güncelle
         print('Firebase Auth profili güncelleniyor...');
         await _authService.currentUser!.updatePhotoURL(downloadUrl);
-        print('Firebase Auth profili güncellendi');
 
         return downloadUrl;
       } catch (storageError) {

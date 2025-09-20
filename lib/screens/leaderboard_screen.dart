@@ -141,19 +141,16 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
         );
 
     // Aylık liderlik tablosu stream'ine abone ol
-    print('DEBUG: Aylık sıralama stream\'i başlatılıyor...');
     _monthlyLeaderboardSubscription = _leaderboardService
         .getMonthlyLeaderboardStream()
         .listen(
           (data) {
-            print('DEBUG: Aylık sıralama verisi geldi: ${data.length} kullanıcı');
             if (mounted) {
               setState(() {
                 _monthlyLeaderboardData = data;
                 // Aylık veri geldiğinde loading'i kapat
                 if (_selectedTabIndex == 1) {
                   _isLoading = false;
-                  print('DEBUG: Aylık tab aktif, loading kapatılıyor');
                 }
               });
               // Aylık tab seçiliyse animasyonu başlat
@@ -279,7 +276,6 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
     
     return GestureDetector(
       onTap: () {
-        print('DEBUG: Tab değişimi - Eski: $_selectedTabIndex, Yeni: $index');
         setState(() {
           _selectedTabIndex = index;
           _isLoading = true;
@@ -290,19 +286,16 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
         
         // Eğer veri zaten varsa loading'i hemen kapat
         if (index == 0 && _leaderboardData.isNotEmpty) {
-          print('DEBUG: Genel sıralama verisi mevcut, loading kapatılıyor');
           setState(() {
             _isLoading = false;
           });
           _animationController.forward();
         } else if (index == 1 && _monthlyLeaderboardData.isNotEmpty) {
-          print('DEBUG: Aylık sıralama verisi mevcut, loading kapatılıyor');
           setState(() {
             _isLoading = false;
           });
           _animationController.forward();
         } else {
-          print('DEBUG: Veri yok, stream bekleniyor...');
         }
       },
       child: AnimatedContainer(
@@ -338,10 +331,8 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
   Widget _buildTopThree() {
     final currentData = _selectedTabIndex == 0 ? _leaderboardData : _monthlyLeaderboardData;
     
-    print('DEBUG: _buildTopThree - Veri sayısı: ${currentData.length}');
     
     if (currentData.isEmpty) {
-      print('DEBUG: Podium gösterilmiyor, veri boş');
       return const SliverToBoxAdapter();
     }
 
@@ -735,15 +726,12 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
   Widget _buildLeaderboardList() {
     final currentData = _selectedTabIndex == 0 ? _leaderboardData : _monthlyLeaderboardData;
     
-    print('DEBUG: _buildLeaderboardList - Tab: $_selectedTabIndex, Veri sayısı: ${currentData.length}');
     
     if (currentData.isEmpty) {
-      print('DEBUG: Veri boş, boş widget döndürülüyor');
       return const SliverToBoxAdapter();
     }
     
     if (currentData.length <= 3) {
-      print('DEBUG: Veri sayısı 3 veya daha az, boş liste döndürülüyor');
       // 3 veya daha az kullanıcı varsa boş liste döndür (podium yeterli)
       return const SliverToBoxAdapter();
     }
