@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../utils/event_bus.dart';
 import 'device_service.dart' as device_service;
 import 'notification_service.dart';
+import 'tutorial_service.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -46,8 +47,18 @@ class AuthService {
         }
       }
 
-      print('✅ iOS simülatör: Kayıt işlemi tamamlandı (Firestore atlandı)');
-      return userCredential.user;
+            print('✅ iOS simülatör: Kayıt işlemi tamamlandı (Firestore atlandı)');
+            
+            // Yeni kullanıcı için tutorial'ı sıfırla
+            try {
+              final tutorialService = TutorialService();
+              await tutorialService.resetAllTutorials();
+              print('✅ iOS simülatör: Tutorial sıfırlandı');
+            } catch (e) {
+              print('⚠️ iOS simülatör: Tutorial sıfırlanamadı: $e');
+            }
+            
+            return userCredential.user;
     } on FirebaseAuthException catch (e) {
       print('❌ iOS simülatör: Firebase Auth hatası: $e');
       throw _handleAuthException(e);

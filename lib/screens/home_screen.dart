@@ -44,6 +44,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     GlobalKey<NavigatorState>(),
     GlobalKey<NavigatorState>(),
   ];
+  
+  // Arama için FocusNode
+  final FocusNode _searchFocusNode = FocusNode();
 
   @override
   void initState() {
@@ -75,6 +78,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   @override
   void dispose() {
     _tabController.dispose();
+    _searchFocusNode.dispose();
     super.dispose();
   }
 
@@ -396,6 +400,7 @@ class QuizListScreen extends StatefulWidget {
 
 class _QuizListScreenState extends State<QuizListScreen> {
   final TextEditingController _searchController = TextEditingController();
+  final FocusNode _searchFocusNode = FocusNode();
   final QuizService _quizService = QuizService();
   String _searchQuery = '';
   bool _isSearching = false;
@@ -438,6 +443,7 @@ class _QuizListScreenState extends State<QuizListScreen> {
   @override
   void dispose() {
     _searchController.dispose();
+    _searchFocusNode.dispose();
     _mistakesSubscription.cancel();
     super.dispose();
   }
@@ -513,7 +519,7 @@ class _QuizListScreenState extends State<QuizListScreen> {
         children: [
           // AppBar benzeri header
           Container(
-            padding: const EdgeInsets.all(20),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topLeft,
@@ -527,20 +533,20 @@ class _QuizListScreenState extends State<QuizListScreen> {
                 Row(
                   children: [
                     Container(
-                      padding: const EdgeInsets.all(8),
+                      padding: const EdgeInsets.all(6),
                       decoration: BoxDecoration(
                         color: Colors.white.withOpacity(0.2),
-                        borderRadius: BorderRadius.circular(12),
+                        borderRadius: BorderRadius.circular(10),
                       ),
-                      child: const Icon(Icons.quiz, color: Colors.white),
+                      child: const Icon(Icons.quiz, color: Colors.white, size: 20),
                     ),
                     const SizedBox(width: 12),
                     Expanded(
                       child: Text(
                         AppLocalizations.of(context)!.allQuizzes,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.white,
-                          fontSize: 20,
+                          fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -554,16 +560,25 @@ class _QuizListScreenState extends State<QuizListScreen> {
                             _searchController.clear();
                           }
                         });
+                        // Arama modu açıldığında TextField'a focus ver
+                        if (_isSearching) {
+                          Future.delayed(const Duration(milliseconds: 100), () {
+                            if (mounted) {
+                              _searchFocusNode.requestFocus();
+                            }
+                          });
+                        }
                       },
                       child: Container(
-                        padding: const EdgeInsets.all(8),
+                        padding: const EdgeInsets.all(6),
                         decoration: BoxDecoration(
                           color: Colors.white.withOpacity(0.2),
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius: BorderRadius.circular(10),
                         ),
                         child: Icon(
                           _isSearching ? Icons.close : Icons.search,
                           color: Colors.white,
+                          size: 20,
                         ),
                       ),
                     ),
@@ -571,15 +586,16 @@ class _QuizListScreenState extends State<QuizListScreen> {
                 ),
                 // Arama alanı
                 if (_isSearching) ...[
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 12),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
                     decoration: BoxDecoration(
                       color: Colors.white.withOpacity(0.2),
-                      borderRadius: BorderRadius.circular(25),
+                      borderRadius: BorderRadius.circular(20),
                     ),
                     child: TextField(
                       controller: _searchController,
+                      focusNode: _searchFocusNode,
                       onChanged: (value) {
                         setState(() {
                           _searchQuery = value;
@@ -590,7 +606,8 @@ class _QuizListScreenState extends State<QuizListScreen> {
                         hintText: 'Search quizzes...',
                         hintStyle: const TextStyle(color: Colors.white70),
                         border: InputBorder.none,
-                        icon: const Icon(Icons.search, color: Colors.white70),
+                        icon: const Icon(Icons.search, color: Colors.white70, size: 18),
+                        contentPadding: const EdgeInsets.symmetric(vertical: 8),
                       ),
                     ),
                   ),
@@ -631,6 +648,9 @@ class _QuizListScreenState extends State<QuizListScreen> {
 
         return Container(
           margin: const EdgeInsets.only(bottom: 16.0),
+          constraints: BoxConstraints(
+            minHeight: MediaQuery.of(context).size.width < 400 ? 80 : 90,
+          ),
           child: GestureDetector(
             onTap: () {
               if (isRetaking && ongoingQuiz != null) {
@@ -704,11 +724,11 @@ class _QuizListScreenState extends State<QuizListScreen> {
                 ],
               ),
               child: Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: EdgeInsets.all(MediaQuery.of(context).size.width < 400 ? 10.0 : 14.0),
                 child: Row(
                   children: [
                     Container(
-                      padding: const EdgeInsets.all(8),
+                      padding: EdgeInsets.all(MediaQuery.of(context).size.width < 400 ? 6 : 8),
                       decoration: BoxDecoration(
                         color: Colors.white.withOpacity(0.2),
                         borderRadius: BorderRadius.circular(12),
@@ -716,30 +736,32 @@ class _QuizListScreenState extends State<QuizListScreen> {
                       child: Icon(
                         isCompleted ? Icons.check_circle : category['icon'] as IconData,
                         color: Colors.white,
-                        size: 24,
+                        size: MediaQuery.of(context).size.width < 400 ? 18 : 22,
                       ),
                     ),
-                    const SizedBox(width: 12),
+                    SizedBox(width: MediaQuery.of(context).size.width < 400 ? 8 : 12),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             category['title'] as String,
-                            style: const TextStyle(
-                              fontSize: 16,
+                            style: TextStyle(
+                              fontSize: MediaQuery.of(context).size.width < 400 ? 11 : 13,
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
+                              height: 1.1,
                             ),
-                            maxLines: 1,
+                            maxLines: 2,
                             overflow: TextOverflow.ellipsis,
+                            textAlign: TextAlign.left,
                           ),
                           if (isRetaking && ongoingQuiz != null) ...[
                             // Tekrar çözülmeye başlanan quiz bilgisi
                             Text(
                               '${ongoingQuiz.currentQuestionIndex ?? 0}/${ongoingQuiz.totalQuestions} ${AppLocalizations.of(context)!.questions}',
                               style: TextStyle(
-                                fontSize: 12,
+                                fontSize: MediaQuery.of(context).size.width < 400 ? 9 : 10,
                                 color: Colors.white.withOpacity(0.8),
                                 fontWeight: FontWeight.w500,
                               ),
@@ -757,7 +779,7 @@ class _QuizListScreenState extends State<QuizListScreen> {
                                 Text(
                                   'Tamamlandı',
                                   style: TextStyle(
-                                    fontSize: 12,
+                                    fontSize: MediaQuery.of(context).size.width < 400 ? 9 : 10,
                                     color: Colors.white,
                                     fontWeight: FontWeight.w600,
                                   ),
@@ -769,7 +791,7 @@ class _QuizListScreenState extends State<QuizListScreen> {
                             Text(
                               '${ongoingQuiz.currentQuestionIndex ?? 0}/${ongoingQuiz.totalQuestions} ${AppLocalizations.of(context)!.questions}',
                               style: TextStyle(
-                                fontSize: 12,
+                                fontSize: MediaQuery.of(context).size.width < 400 ? 9 : 10,
                                 color: Colors.white.withOpacity(0.8),
                                 fontWeight: FontWeight.w500,
                               ),
@@ -779,7 +801,7 @@ class _QuizListScreenState extends State<QuizListScreen> {
                             Text(
                               '$questionCount ${AppLocalizations.of(context)!.questions}',
                               style: TextStyle(
-                                fontSize: 12,
+                                fontSize: MediaQuery.of(context).size.width < 400 ? 9 : 10,
                                 color: Colors.white.withOpacity(0.8),
                               ),
                             ),
@@ -1288,6 +1310,7 @@ class _HomeContentState extends State<HomeContent> {
   bool _isLoading = true;
   late StreamSubscription _mistakesSubscription;
   late ScrollController _scrollController;
+  bool _tutorialChecked = false; // Tutorial kontrol edildi mi?
 
   // Bottom safe area hesaplama helper method'u
   double _calculateBottomSafeArea(BuildContext context) {
@@ -1329,15 +1352,13 @@ class _HomeContentState extends State<HomeContent> {
       }
     });
 
-    // Tanıtımı göster
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _checkAndShowTutorial();
-    });
+    // Tutorial artık _loadData'dan sonra gösterilecek
   }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+    print('🔍 HomeScreen: didChangeDependencies çağrıldı');
     // Dil değiştiğinde verileri yeniden yükle
     _loadData();
   }
@@ -1351,23 +1372,46 @@ class _HomeContentState extends State<HomeContent> {
   }
 
   Future<void> _checkAndShowTutorial() async {
+    // Tutorial zaten kontrol edildiyse atla
+    if (_tutorialChecked) {
+      print('ℹ️ HomeScreen: Tutorial zaten kontrol edildi, atlanıyor');
+      return;
+    }
+    
+    _tutorialChecked = true; // Kontrol edildi olarak işaretle
+    print('🔍 HomeScreen: _checkAndShowTutorial başlatıldı');
+    
     // Ana tanıtımı kontrol et ve sadece o çalışsın
     final shouldShowTutorial = await _tutorialService.shouldShowTutorial();
+    print('🔍 HomeScreen: shouldShowTutorial = $shouldShowTutorial');
+    
     if (shouldShowTutorial) {
-      if (!mounted) return;
+      print('✅ HomeScreen: Tutorial gösterilecek');
+      if (!mounted) {
+        print('⚠️ HomeScreen: Widget mounted değil, tutorial atlanıyor');
+        return;
+      }
 
-      await Future.delayed(const Duration(milliseconds: 1000));
+      await Future.delayed(const Duration(milliseconds: 1500));
+      print('⏰ HomeScreen: 1.5 saniye beklendi');
 
-      if (!mounted) return;
+      if (!mounted) {
+        print('⚠️ HomeScreen: Widget mounted değil (2 saniye sonra), tutorial atlanıyor');
+        return;
+      }
 
+      print('🎯 HomeScreen: InteractiveTutorial.show çağrılıyor');
       // Ana tanıtımı göster
       await InteractiveTutorial.show(
         context,
         steps: _tutorialService.getTutorialSteps(context),
         onComplete: () {
+          print('✅ HomeScreen: Tutorial tamamlandı, markTutorialAsShown çağrılıyor');
           _tutorialService.markTutorialAsShown();
         },
       );
+    } else {
+      print('ℹ️ HomeScreen: Tutorial zaten gösterilmiş, atlanıyor');
     }
     // Feature showcases kaldırıldı - sadece ana tutorial çalışacak
   }
@@ -1425,6 +1469,14 @@ class _HomeContentState extends State<HomeContent> {
       if (mounted) {
         setState(() {
           _isLoading = false;
+        });
+        
+        // Tutorial'ı loading bittikten sonra göster (kısa bir gecikme ile)
+        Future.delayed(const Duration(milliseconds: 1000), () {
+          if (mounted) {
+            print('🔍 HomeScreen: Loading bitti, tutorial kontrol ediliyor');
+            _checkAndShowTutorial();
+          }
         });
       }
 
@@ -1545,10 +1597,10 @@ class _HomeContentState extends State<HomeContent> {
                           style: TextStyle(
                             fontSize: _calculateFontSize(_userName),
                             fontWeight: FontWeight.bold,
-                            height: 1.1,  // Satır yüksekliği azaltıldı
+                            height: 1.1,
                           ),
-                          maxLines: _userName.length > 15 ? 2 : 1,  // Uzun isimler için 2 satır
-                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,  // Her zaman tek satır
+                          overflow: TextOverflow.visible,  // ... koyma, görünür yap
                           textAlign: TextAlign.left,
                         ),
                       ),
@@ -1590,29 +1642,33 @@ class _HomeContentState extends State<HomeContent> {
     // Ekran boyutuna göre temel font boyutu
     double baseFontSize;
     if (screenWidth < 400) {
-      baseFontSize = 16.0;  // Çok küçük ekranlar
+      baseFontSize = 18.0;  // Çok küçük ekranlar
     } else if (screenWidth < 600) {
-      baseFontSize = 18.0;  // Küçük ekranlar
+      baseFontSize = 20.0;  // Küçük ekranlar
     } else if (screenWidth < 800) {
-      baseFontSize = 20.0;  // Orta ekranlar
+      baseFontSize = 22.0;  // Orta ekranlar
     } else {
-      baseFontSize = 22.0;  // Büyük ekranlar
+      baseFontSize = 24.0;  // Büyük ekranlar
     }
     
-    // İsim uzunluğuna göre ayarlama
+    // İsim uzunluğuna göre çok agresif küçültme - tam sığması için
     double lengthMultiplier;
     if (userName.length <= 5) {
-      lengthMultiplier = 1.2;  // Kısa isimler için büyük
+      lengthMultiplier = 1.0;  // Kısa isimler için normal
     } else if (userName.length <= 8) {
-      lengthMultiplier = 1.0;  // Normal isimler
+      lengthMultiplier = 0.85;  // Normal isimler
     } else if (userName.length <= 12) {
-      lengthMultiplier = 0.9;  // Uzun isimler
+      lengthMultiplier = 0.7;  // Uzun isimler
     } else if (userName.length <= 16) {
-      lengthMultiplier = 0.8;  // Çok uzun isimler
+      lengthMultiplier = 0.55;  // Çok uzun isimler
     } else if (userName.length <= 20) {
-      lengthMultiplier = 0.7;  // En uzun isimler
+      lengthMultiplier = 0.45;  // En uzun isimler
+    } else if (userName.length <= 25) {
+      lengthMultiplier = 0.35;  // Aşırı uzun isimler
+    } else if (userName.length <= 30) {
+      lengthMultiplier = 0.28;  // Çok aşırı uzun isimler
     } else {
-      lengthMultiplier = 0.6;  // Aşırı uzun isimler
+      lengthMultiplier = 0.22;  // En uzun isimler
     }
     
     // Ekran yüksekliği de dikkate alınır
@@ -1625,8 +1681,8 @@ class _HomeContentState extends State<HomeContent> {
     
     double finalFontSize = baseFontSize * lengthMultiplier * heightMultiplier;
     
-    // Minimum ve maksimum sınırlar
-    return finalFontSize.clamp(12.0, 28.0);
+    // Minimum ve maksimum sınırlar - çok düşük minimum
+    return finalFontSize.clamp(8.0, 24.0);
   }
 
   // Toplam puan hesaplama

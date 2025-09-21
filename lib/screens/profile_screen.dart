@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../l10n/app_localizations.dart';
 import '../services/auth_service.dart';
 import '../services/language_service.dart';
+import '../services/tutorial_service.dart';
 
 import '../services/user_service.dart';
 import '../models/user_activity.dart';
@@ -460,54 +461,28 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     final bottomPadding = MediaQuery.of(context).viewPadding.bottom;
 
-    return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [Colors.blue.shade900, Colors.black],
-        ),
-      ),
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          title: Text(AppLocalizations.of(context)!.profile),
-          actions: [
-            TextButton.icon(
-              onPressed: () => _showSettingsModal(context),
-              icon: const Icon(Icons.settings, color: Colors.white),
-              label: Text(
-                AppLocalizations.of(context)!.settings,
-                style: const TextStyle(color: Colors.white, fontSize: 14),
-              ),
-            ),
-            const SizedBox(width: 8),
-          ],
-        ),
-        body: LayoutBuilder(
-          builder: (context, constraints) {
-            return SingleChildScrollView(
-              physics: const AlwaysScrollableScrollPhysics(),
-              child: ConstrainedBox(
-                constraints: BoxConstraints(minHeight: constraints.maxHeight),
-                child: IntrinsicHeight(
-                  child: Padding(
-                    padding: EdgeInsets.only(bottom: bottomPadding + 80),
-                    child: Column(
-                      children: [
-                        _buildProfileHeader(),
-                        _buildStats(),
-                        const SizedBox(height: 20),
-                      ],
-                    ),
+    return SafeArea(
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          return SingleChildScrollView(
+            physics: const AlwaysScrollableScrollPhysics(),
+            child: ConstrainedBox(
+              constraints: BoxConstraints(minHeight: constraints.maxHeight),
+              child: IntrinsicHeight(
+                child: Padding(
+                  padding: EdgeInsets.only(bottom: bottomPadding + 80),
+                  child: Column(
+                    children: [
+                      _buildProfileHeader(),
+                      _buildStats(),
+                      const SizedBox(height: 20),
+                    ],
                   ),
                 ),
               ),
-            );
-          },
-        ),
+            ),
+          );
+        },
       ),
     );
   }
@@ -515,27 +490,30 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void _showSettingsModal(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final bottomPadding = MediaQuery.of(context).viewPadding.bottom;
-    final bottomNavBarHeight = 80.0; // Tahmini alt navigasyon çubuğu yüksekliği
+    final topPadding = MediaQuery.of(context).viewPadding.top;
+    final bottomNavBarHeight = 80.0; // Alt navigasyon çubuğu yüksekliği
 
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
       builder: (context) {
-        // Ekranın %65'ini modal kullanacak şekilde ayarla
-        final modalHeight = size.height * 0.65;
-
-        // Kullanılabilir ekran yüksekliğini hesapla (navigation bar hariç)
-        final availableHeight =
-            size.height - bottomNavBarHeight - bottomPadding;
-
-        // Modal yüksekliğini, kullanılabilir alandan fazla olmayacak şekilde sınırla
-        final finalHeight =
-            modalHeight < availableHeight ? modalHeight : availableHeight * 0.8;
+        // Kullanılabilir ekran yüksekliğini hesapla
+        final availableHeight = size.height - topPadding - bottomPadding;
+        
+        // Modal yüksekliğini hesapla - ekranın %75'i veya maksimum 600px
+        final modalHeight = math.min(availableHeight * 0.75, 600.0);
+        
+        // Minimum yükseklik garantisi
+        final finalHeight = math.max(modalHeight, 400.0);
 
         return Container(
           height: finalHeight,
-          margin: const EdgeInsets.only(bottom: 20), // Bottom navigation bar'dan uzaklaştır
+          margin: EdgeInsets.only(
+            bottom: bottomNavBarHeight + 20, // Alt navigasyon çubuğundan uzaklaştır
+            left: 16,
+            right: 16,
+          ),
           decoration: BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topLeft,
@@ -547,266 +525,272 @@ class _ProfileScreenState extends State<ProfileScreen> {
               topRight: Radius.circular(20),
             ),
           ),
-          child: Column(
-            children: [
-              // Başlık kısmı
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 12,
-                ),
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [Colors.indigo.shade800, Colors.purple.shade900],
+          child: SafeArea(
+            child: Column(
+              children: [
+                // Başlık kısmı
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 12,
                   ),
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(20),
-                    topRight: Radius.circular(20),
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [Colors.indigo.shade800, Colors.purple.shade900],
+                    ),
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20),
+                    ),
                   ),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      AppLocalizations.of(context)!.settings,
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                    ),
-                    IconButton(
-                      icon: const Icon(
-                        Icons.close,
-                        color: Colors.white,
-                        size: 20,
-                      ),
-                      onPressed: () => Navigator.pop(context),
-                      padding: EdgeInsets.zero,
-                      constraints: const BoxConstraints(),
-                    ),
-                  ],
-                ),
-              ),
-
-              // İçerik kısmı - tüm modalın geri kalanını kaplar
-              Expanded(
-                child: SingleChildScrollView(
-                  physics: const AlwaysScrollableScrollPhysics(),
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(12, 8, 12, 8),
-                    child: Column(
-                      children: [
-                        _buildSettingItem(
-                          AppLocalizations.of(context)!.editProfile,
-                          Icons.edit,
-                          context,
-                          onTap: () => _showEditProfileModal(context),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        AppLocalizations.of(context)!.settings,
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
                         ),
+                      ),
+                      IconButton(
+                        icon: const Icon(
+                          Icons.close,
+                          color: Colors.white,
+                          size: 20,
+                        ),
+                        onPressed: () => Navigator.pop(context),
+                        padding: EdgeInsets.zero,
+                        constraints: const BoxConstraints(),
+                      ),
+                    ],
+                  ),
+                ),
 
-                        // Dil seçici kaldırıldı - artık uygulama başlangıcında seçiliyor
-                        
-                        // Debug: Dil seçimini sıfırla (sadece test için)
-                        if (kDebugMode) ...[
+                // İçerik kısmı - tüm modalın geri kalanını kaplar
+                Expanded(
+                  child: SingleChildScrollView(
+                    physics: const BouncingScrollPhysics(),
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(12, 8, 12, 20),
+                      child: Column(
+                        children: [
                           _buildSettingItem(
-                            'Debug: Dil Seçimini Sıfırla',
-                            Icons.refresh,
+                            AppLocalizations.of(context)!.editProfile,
+                            Icons.edit,
                             context,
-                            onTap: () => _resetLanguageSelection(context),
+                            onTap: () => _showEditProfileModal(context),
                           ),
-                        ],
 
-                        _buildSettingItem(
-                          AppLocalizations.of(context)!.myDevices,
-                          Icons.devices,
-                          context,
-                          onTap: () => _showDeviceManagementModal(context),
-                        ),
-                        _buildSettingItem(
-                          AppLocalizations.of(context)!.privacy,
-                          Icons.lock,
-                          context,
-                          onTap: () => _showPrivacySettingsModal(context),
-                        ),
-                        _buildSettingItem(
-                          AppLocalizations.of(context)!.help,
-                          Icons.help,
-                          context,
-                          onTap: () => _showHelpModal(context),
-                        ),
-                        _buildSettingItem(
-                          AppLocalizations.of(context)!.logOut,
-                          Icons.exit_to_app,
-                          context,
-                          onTap: () async {
-                            // Çıkış onay dialogu göster
-                            final shouldSignOut = await showDialog<bool>(
-                              context: context,
-                              builder: (context) => AlertDialog(
-                                backgroundColor: Colors.transparent,
-                                content: Container(
-                                  decoration: BoxDecoration(
-                                    gradient: LinearGradient(
-                                      begin: Alignment.topLeft,
-                                      end: Alignment.bottomRight,
-                                      colors: [Colors.indigo.shade900, Colors.black],
-                                    ),
-                                    borderRadius: BorderRadius.circular(20),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.black.withOpacity(0.3),
-                                        blurRadius: 20,
-                                        spreadRadius: 5,
+                          // Debug: Dil seçimini sıfırla (sadece test için)
+                          if (kDebugMode) ...[
+                            _buildSettingItem(
+                              'Debug: Dil Seçimini Sıfırla',
+                              Icons.refresh,
+                              context,
+                              onTap: () => _resetLanguageSelection(context),
+                            ),
+                            _buildSettingItem(
+                              'Debug: Tutorial\'ı Sıfırla',
+                              Icons.help_outline,
+                              context,
+                              onTap: () => _resetTutorial(context),
+                            ),
+                          ],
+
+                          _buildSettingItem(
+                            AppLocalizations.of(context)!.myDevices,
+                            Icons.devices,
+                            context,
+                            onTap: () => _showDeviceManagementModal(context),
+                          ),
+                          _buildSettingItem(
+                            AppLocalizations.of(context)!.privacy,
+                            Icons.lock,
+                            context,
+                            onTap: () => _showPrivacySettingsModal(context),
+                          ),
+                          _buildSettingItem(
+                            AppLocalizations.of(context)!.help,
+                            Icons.help,
+                            context,
+                            onTap: () => _showHelpModal(context),
+                          ),
+                          _buildSettingItem(
+                            AppLocalizations.of(context)!.logOut,
+                            Icons.exit_to_app,
+                            context,
+                            onTap: () async {
+                              // Çıkış onay dialogu göster
+                              final shouldSignOut = await showDialog<bool>(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                  backgroundColor: Colors.transparent,
+                                  content: Container(
+                                    decoration: BoxDecoration(
+                                      gradient: LinearGradient(
+                                        begin: Alignment.topLeft,
+                                        end: Alignment.bottomRight,
+                                        colors: [Colors.indigo.shade900, Colors.black],
                                       ),
-                                    ],
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(24),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        // İkon
-                                        Container(
-                                          padding: const EdgeInsets.all(16),
-                                          decoration: BoxDecoration(
-                                            color: Colors.red.withOpacity(0.2),
-                                            shape: BoxShape.circle,
-                                          ),
-                                          child: const Icon(
-                                            Icons.logout,
-                                            color: Colors.red,
-                                            size: 32,
-                                          ),
-                                        ),
-                                        const SizedBox(height: 16),
-                                        // Başlık
-                                        Text(
-                                          AppLocalizations.of(context)!.logOutTitle,
-                                          style: const TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                        const SizedBox(height: 12),
-                                        // İçerik
-                                        Text(
-                                          AppLocalizations.of(context)!.logOutMessage,
-                                          style: const TextStyle(
-                                            color: Colors.white70,
-                                            fontSize: 16,
-                                          ),
-                                          textAlign: TextAlign.center,
-                                        ),
-                                        const SizedBox(height: 24),
-                                        // Butonlar
-                                        Row(
-                                          children: [
-                                            Expanded(
-                                              child: TextButton(
-                                                onPressed: () => Navigator.pop(context, false),
-                                                style: TextButton.styleFrom(
-                                                  padding: const EdgeInsets.symmetric(vertical: 12),
-                                                ),
-                                                child: Text(
-                                                  AppLocalizations.of(context)!.cancel,
-                                                  style: const TextStyle(
-                                                    color: Colors.white70,
-                                                    fontSize: 16,
-                                                    fontWeight: FontWeight.w500,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                            const SizedBox(width: 12),
-                                            Expanded(
-                                              child: ElevatedButton(
-                                                onPressed: () => Navigator.pop(context, true),
-                                                style: ElevatedButton.styleFrom(
-                                                  backgroundColor: Colors.red,
-                                                  padding: const EdgeInsets.symmetric(vertical: 12),
-                                                  shape: RoundedRectangleBorder(
-                                                    borderRadius: BorderRadius.circular(8),
-                                                  ),
-                                                ),
-                                                child: Text(
-                                                  AppLocalizations.of(context)!.logOut,
-                                                  style: const TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 16,
-                                                    fontWeight: FontWeight.w500,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ],
+                                      borderRadius: BorderRadius.circular(20),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black.withOpacity(0.3),
+                                          blurRadius: 20,
+                                          spreadRadius: 5,
                                         ),
                                       ],
                                     ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(24),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          // İkon
+                                          Container(
+                                            padding: const EdgeInsets.all(16),
+                                            decoration: BoxDecoration(
+                                              color: Colors.red.withOpacity(0.2),
+                                              shape: BoxShape.circle,
+                                            ),
+                                            child: const Icon(
+                                              Icons.logout,
+                                              color: Colors.red,
+                                              size: 32,
+                                            ),
+                                          ),
+                                          const SizedBox(height: 16),
+                                          // Başlık
+                                          Text(
+                                            AppLocalizations.of(context)!.logOutTitle,
+                                            style: const TextStyle(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                          const SizedBox(height: 12),
+                                          // İçerik
+                                          Text(
+                                            AppLocalizations.of(context)!.logOutMessage,
+                                            style: const TextStyle(
+                                              color: Colors.white70,
+                                              fontSize: 16,
+                                            ),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                          const SizedBox(height: 24),
+                                          // Butonlar
+                                          Row(
+                                            children: [
+                                              Expanded(
+                                                child: TextButton(
+                                                  onPressed: () => Navigator.pop(context, false),
+                                                  style: TextButton.styleFrom(
+                                                    padding: const EdgeInsets.symmetric(vertical: 12),
+                                                  ),
+                                                  child: Text(
+                                                    AppLocalizations.of(context)!.cancel,
+                                                    style: const TextStyle(
+                                                      color: Colors.white70,
+                                                      fontSize: 16,
+                                                      fontWeight: FontWeight.w500,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              const SizedBox(width: 12),
+                                              Expanded(
+                                                child: ElevatedButton(
+                                                  onPressed: () => Navigator.pop(context, true),
+                                                  style: ElevatedButton.styleFrom(
+                                                    backgroundColor: Colors.red,
+                                                    padding: const EdgeInsets.symmetric(vertical: 12),
+                                                    shape: RoundedRectangleBorder(
+                                                      borderRadius: BorderRadius.circular(8),
+                                                    ),
+                                                  ),
+                                                  child: Text(
+                                                    AppLocalizations.of(context)!.logOut,
+                                                    style: const TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 16,
+                                                      fontWeight: FontWeight.w500,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
                                   ),
                                 ),
-                              ),
-                            );
+                              );
 
-                            if (shouldSignOut == true) {
-                              print('🚪 Profile çıkış başlatılıyor...');
+                              if (shouldSignOut == true) {
+                                print('🚪 Profile çıkış başlatılıyor...');
 
-                              // 1. ÖNCE stream'leri iptal et
-                              try {
-                                print('📡 Stream\'ler iptal ediliyor...');
-                                if (_rankSubscription != null) {
-                                  await _rankSubscription!.cancel();
-                                  _rankSubscription = null;
-                                  print('✅ Rank stream iptal edildi');
-                                }
-                                if (_mistakesSubscription != null) {
-                                  await _mistakesSubscription!.cancel();
-                                  _mistakesSubscription = null;
-                                  print('✅ Mistakes stream iptal edildi');
-                                }
-                              } catch (e) {
-                                print(
-                                  '⚠️ Stream iptal hatası (devam ediliyor): $e',
-                                );
-                              }
-
-                              // 2. SONRA Firebase çıkış yap (bu işlem tüm stream'leri temizler)
-                              try {
-                                await _authService.signOut();
-                                print('✅ Firebase çıkış tamamlandı');
-                              } catch (e) {
-                                print('⚠️ Firebase çıkış hatası: $e');
-                                // Çıkış hatası olsa bile devam et
-                              }
-
-                              // 3. EN SON login sayfasına yönlendir
-                              if (mounted) {
+                                // 1. ÖNCE stream'leri iptal et
                                 try {
-                                  Navigator.of(
-                                    context,
-                                    rootNavigator: true,
-                                  ).pushNamedAndRemoveUntil(
-                                    '/login',
-                                    (route) => false,
-                                  );
-                                  print('✅ Login sayfasına yönlendirildi');
+                                  print('📡 Stream\'ler iptal ediliyor...');
+                                  if (_rankSubscription != null) {
+                                    await _rankSubscription!.cancel();
+                                    _rankSubscription = null;
+                                    print('✅ Rank stream iptal edildi');
+                                  }
+                                  if (_mistakesSubscription != null) {
+                                    await _mistakesSubscription!.cancel();
+                                    _mistakesSubscription = null;
+                                    print('✅ Mistakes stream iptal edildi');
+                                  }
                                 } catch (e) {
-                                  print('⚠️ Navigasyon hatası: $e');
-                                  // Alternatif navigasyon yöntemi
-                                  if (mounted) {
-                                    Navigator.of(context).pushReplacementNamed('/login');
+                                  print(
+                                    '⚠️ Stream iptal hatası (devam ediliyor): $e',
+                                  );
+                                }
+
+                                // 2. SONRA Firebase çıkış yap (bu işlem tüm stream'leri temizler)
+                                try {
+                                  await _authService.signOut();
+                                  print('✅ Firebase çıkış tamamlandı');
+                                } catch (e) {
+                                  print('⚠️ Firebase çıkış hatası: $e');
+                                  // Çıkış hatası olsa bile devam et
+                                }
+
+                                // 3. EN SON login sayfasına yönlendir
+                                if (mounted) {
+                                  try {
+                                    Navigator.of(
+                                      context,
+                                      rootNavigator: true,
+                                    ).pushNamedAndRemoveUntil(
+                                      '/login',
+                                      (route) => false,
+                                    );
+                                    print('✅ Login sayfasına yönlendirildi');
+                                  } catch (e) {
+                                    print('⚠️ Navigasyon hatası: $e');
+                                    // Alternatif navigasyon yöntemi
+                                    if (mounted) {
+                                      Navigator.of(context).pushReplacementNamed('/login');
+                                    }
                                   }
                                 }
                               }
-                            }
-                          },
-                        ),
-                      ],
+                            },
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         );
       },
@@ -1160,6 +1144,29 @@ class _ProfileScreenState extends State<ProfileScreen> {
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       child: Column(
         children: [
+          // Header with title and settings button
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                AppLocalizations.of(context)!.profile,
+                style: const TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+              TextButton.icon(
+                onPressed: () => _showSettingsModal(context),
+                icon: const Icon(Icons.settings, color: Colors.white, size: 20),
+                label: Text(
+                  AppLocalizations.of(context)!.settings,
+                  style: const TextStyle(color: Colors.white, fontSize: 14),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 20),
           Stack(
             children: [
               Container(
@@ -1394,11 +1401,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
     BuildContext context, {
     required Function() onTap,
   }) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isSmallScreen = screenWidth < 380;
+    
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        margin: const EdgeInsets.only(bottom: 8),
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+        margin: EdgeInsets.only(bottom: isSmallScreen ? 6 : 8),
+        padding: EdgeInsets.symmetric(
+          horizontal: isSmallScreen ? 10 : 12, 
+          vertical: isSmallScreen ? 8 : 10
+        ),
         decoration: BoxDecoration(
           color: Colors.white.withOpacity(0.1),
           borderRadius: BorderRadius.circular(12),
@@ -1406,20 +1419,35 @@ class _ProfileScreenState extends State<ProfileScreen> {
         child: Row(
           children: [
             Container(
-              padding: const EdgeInsets.all(6),
+              padding: EdgeInsets.all(isSmallScreen ? 5 : 6),
               decoration: BoxDecoration(
                 color: Colors.indigo.withOpacity(0.2),
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: Icon(icon, color: Colors.indigo.shade300, size: 20),
+              child: Icon(
+                icon, 
+                color: Colors.indigo.shade300, 
+                size: isSmallScreen ? 18 : 20
+              ),
             ),
-            const SizedBox(width: 12),
-            Text(
-              title,
-              style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+            SizedBox(width: isSmallScreen ? 10 : 12),
+            Expanded(
+              child: Text(
+                title,
+                style: TextStyle(
+                  fontSize: isSmallScreen ? 13 : 14, 
+                  fontWeight: FontWeight.w500,
+                  color: Colors.white,
+                ),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
             ),
-            const Spacer(),
-            Icon(Icons.chevron_right, color: Colors.grey.shade400, size: 18),
+            Icon(
+              Icons.chevron_right, 
+              color: Colors.grey.shade400, 
+              size: isSmallScreen ? 16 : 18
+            ),
           ],
         ),
       ),
@@ -1706,7 +1734,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void _resetLanguageSelection(BuildContext context) async {
     final languageService = Provider.of<LanguageService>(context, listen: false);
     await languageService.resetLanguageSelection();
-    
+
     if (context.mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -1714,12 +1742,37 @@ class _ProfileScreenState extends State<ProfileScreen> {
           duration: Duration(seconds: 2),
         ),
       );
-      
+
       // Uygulamayı yeniden başlat
       Navigator.of(context).pushNamedAndRemoveUntil(
         '/language-selection',
         (route) => false,
       );
+    }
+  }
+
+  void _resetTutorial(BuildContext context) async {
+    try {
+      final tutorialService = TutorialService();
+      await tutorialService.resetAllTutorials();
+      
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Tutorial sıfırlandı. Ana sayfaya döndüğünüzde tekrar gösterilecek.'),
+            duration: Duration(seconds: 2),
+          ),
+        );
+      }
+    } catch (e) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Tutorial sıfırlanırken hata oluştu: $e'),
+            duration: Duration(seconds: 2),
+          ),
+        );
+      }
     }
   }
 

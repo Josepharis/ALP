@@ -2222,18 +2222,6 @@ abstract class AppLocalizations {
   /// **'Keep your knowledge fresh with a new question every day and earn daily participation points.'**
   String get tutorialDailyQuestionDescription;
 
-  /// Tutorial popular quizzes title
-  ///
-  /// In en, this message translates to:
-  /// **'Popular Quizzes'**
-  String get tutorialPopularQuizzesTitle;
-
-  /// Tutorial popular quizzes description
-  ///
-  /// In en, this message translates to:
-  /// **'Discover the most solved quizzes and compete with your colleagues to reach the top.'**
-  String get tutorialPopularQuizzesDescription;
-
   /// Tutorial ongoing quizzes title
   ///
   /// In en, this message translates to:

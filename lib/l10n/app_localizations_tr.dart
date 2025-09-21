@@ -1110,13 +1110,6 @@ class AppLocalizationsTr extends AppLocalizations {
       'Her gün yeni bir soru ile bilgilerinizi taze tutun ve günlük katılım puanları kazanın.';
 
   @override
-  String get tutorialPopularQuizzesTitle => 'Popüler Quizler';
-
-  @override
-  String get tutorialPopularQuizzesDescription =>
-      'En çok çözülen quizleri keşfedin ve meslektaşlarınızla bilgi yarışında zirveye çıkın.';
-
-  @override
   String get tutorialOngoingQuizzesTitle => 'Devam Eden Quizler';
 
   @override

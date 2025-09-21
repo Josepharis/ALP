@@ -1661,14 +1661,6 @@
   "@tutorialDailyQuestionDescription": {
     "description": "Tutorial daily question description"
   },
-  "tutorialPopularQuizzesTitle": "Popular Quizzes",
-  "@tutorialPopularQuizzesTitle": {
-    "description": "Tutorial popular quizzes title"
-  },
-  "tutorialPopularQuizzesDescription": "Discover the most solved quizzes and compete with your colleagues to reach the top.",
-  "@tutorialPopularQuizzesDescription": {
-    "description": "Tutorial popular quizzes description"
-  },
   "tutorialOngoingQuizzesTitle": "Ongoing Quizzes",
   "@tutorialOngoingQuizzesTitle": {
     "description": "Tutorial ongoing quizzes title"

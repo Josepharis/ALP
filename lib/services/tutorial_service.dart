@@ -24,12 +24,6 @@ class TutorialService {
         color: Colors.orange,
       ),
       TutorialStep(
-        title: l10n.tutorialPopularQuizzesTitle,
-        description: l10n.tutorialPopularQuizzesDescription,
-        icon: Icons.trending_up,
-        color: Colors.purple,
-      ),
-      TutorialStep(
         title: l10n.tutorialOngoingQuizzesTitle,
         description: l10n.tutorialOngoingQuizzesDescription,
         icon: Icons.play_circle_filled,
@@ -114,10 +108,11 @@ class TutorialService {
     try {
       final prefs = await SharedPreferences.getInstance();
       final hasShown = prefs.getBool(_tutorialShownKey) ?? false;
-      print('shouldShowTutorial: $hasShown');
+      print('🔍 TutorialService: shouldShowTutorial - hasShown: $hasShown');
+      print('🔍 TutorialService: _tutorialShownKey: $_tutorialShownKey');
       return !hasShown;
     } catch (e) {
-      print('shouldShowTutorial error: $e');
+      print('❌ TutorialService: shouldShowTutorial error: $e');
       return true; // Hata durumunda tanıtımı göster
     }
   }

@@ -107,14 +107,41 @@ class _InteractiveTutorialState extends State<InteractiveTutorial>
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
+    final screenWidth = screenSize.width;
+    final screenHeight = screenSize.height;
+    
+    // Responsive boyutlar
+    final isSmallScreen = screenWidth < 400;
+    final isVerySmallScreen = screenWidth < 350;
+    final isShortScreen = screenHeight < 600;
+    final hasAndroidNavigation = MediaQuery.of(context).padding.bottom > 0;
+    
+    // Responsive dialog boyutları
+    double dialogWidth = screenWidth * 0.9;
+    double dialogHeight = screenHeight * 0.6;
+    
+    if (isVerySmallScreen) {
+      dialogWidth = screenWidth * 0.95;
+      dialogHeight = screenHeight * 0.7; // Küçük ekranlarda daha yüksek
+    } else if (isSmallScreen) {
+      dialogWidth = screenWidth * 0.92;
+      dialogHeight = screenHeight * 0.65;
+    }
+    
+    if (isShortScreen || hasAndroidNavigation) {
+      dialogHeight = screenHeight * 0.75; // Kısa ekranlarda daha yüksek
+    }
 
     return Dialog(
       backgroundColor: Colors.transparent,
       elevation: 0,
-      insetPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
+      insetPadding: EdgeInsets.symmetric(
+        horizontal: isVerySmallScreen ? 10 : 20, 
+        vertical: isShortScreen ? 16 : 24
+      ),
       child: Container(
-        width: screenSize.width * 0.9,
-        height: screenSize.height * 0.6,
+        width: dialogWidth,
+        height: dialogHeight,
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topLeft,
@@ -163,8 +190,15 @@ class _InteractiveTutorialState extends State<InteractiveTutorial>
 
   Widget _buildHeader() {
     final l10n = AppLocalizations.of(context)!;
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isVerySmallScreen = screenWidth < 350;
+    final isSmallScreen = screenWidth < 400;
+    
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+      padding: EdgeInsets.symmetric(
+        horizontal: isVerySmallScreen ? 12 : (isSmallScreen ? 16 : 20), 
+        vertical: isVerySmallScreen ? 8 : 12
+      ),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topLeft,
@@ -185,7 +219,7 @@ class _InteractiveTutorialState extends State<InteractiveTutorial>
             l10n.tutorialAppTitle,
             style: TextStyle(
               color: Colors.white,
-              fontSize: 18,
+              fontSize: isVerySmallScreen ? 14 : (isSmallScreen ? 16 : 18),
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -196,7 +230,7 @@ class _InteractiveTutorialState extends State<InteractiveTutorial>
                 l10n.tutorialSkip,
                 style: TextStyle(
                   color: Colors.white.withOpacity(0.8),
-                  fontSize: 14,
+                  fontSize: isVerySmallScreen ? 12 : (isSmallScreen ? 13 : 14),
                 ),
               ),
             ),
@@ -206,29 +240,43 @@ class _InteractiveTutorialState extends State<InteractiveTutorial>
   }
 
   Widget _buildStep(TutorialStep step) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+    final isVerySmallScreen = screenWidth < 350;
+    final isSmallScreen = screenWidth < 400;
+    final isShortScreen = screenHeight < 600;
+    
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+      padding: EdgeInsets.symmetric(
+        horizontal: isVerySmallScreen ? 16 : (isSmallScreen ? 20 : 24), 
+        vertical: isVerySmallScreen ? 12 : 16
+      ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(step.icon, size: 64, color: step.color),
-          const SizedBox(height: 24),
+          Icon(
+            step.icon, 
+            size: isVerySmallScreen ? 48 : (isSmallScreen ? 56 : 64), 
+            color: step.color
+          ),
+          SizedBox(height: isVerySmallScreen ? 16 : (isSmallScreen ? 20 : 24)),
           Text(
             step.title,
             textAlign: TextAlign.center,
-            style: const TextStyle(
+            style: TextStyle(
               color: Colors.white,
-              fontSize: 24,
+              fontSize: isVerySmallScreen ? 18 : (isSmallScreen ? 20 : 24),
               fontWeight: FontWeight.bold,
             ),
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: isVerySmallScreen ? 12 : 16),
           Text(
             step.description,
             textAlign: TextAlign.center,
             style: TextStyle(
               color: Colors.white.withOpacity(0.8),
-              fontSize: 16,
+              fontSize: isVerySmallScreen ? 12 : (isSmallScreen ? 14 : 16),
+              height: isShortScreen ? 1.3 : 1.4,
             ),
           ),
           const SizedBox(height: 24),
@@ -259,15 +307,20 @@ class _InteractiveTutorialState extends State<InteractiveTutorial>
               style: ElevatedButton.styleFrom(
                 backgroundColor: step.color,
                 foregroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 24,
-                  vertical: 12,
+                padding: EdgeInsets.symmetric(
+                  horizontal: isVerySmallScreen ? 16 : (isSmallScreen ? 20 : 24),
+                  vertical: isVerySmallScreen ? 8 : (isSmallScreen ? 10 : 12),
                 ),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30),
+                  borderRadius: BorderRadius.circular(isVerySmallScreen ? 20 : 30),
                 ),
               ),
-              child: Text(AppLocalizations.of(context)!.tutorialExploreNow),
+              child: Text(
+                AppLocalizations.of(context)!.tutorialExploreNow,
+                style: TextStyle(
+                  fontSize: isVerySmallScreen ? 12 : (isSmallScreen ? 13 : 14),
+                ),
+              ),
             ),
         ],
       ),
@@ -275,8 +328,15 @@ class _InteractiveTutorialState extends State<InteractiveTutorial>
   }
 
   Widget _buildControls() {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isVerySmallScreen = screenWidth < 350;
+    final isSmallScreen = screenWidth < 400;
+    
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+      padding: EdgeInsets.symmetric(
+        horizontal: isVerySmallScreen ? 16 : (isSmallScreen ? 20 : 24), 
+        vertical: isVerySmallScreen ? 12 : 16
+      ),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topLeft,
@@ -295,17 +355,21 @@ class _InteractiveTutorialState extends State<InteractiveTutorial>
         children: [
           _currentIndex > 0
               ? IconButton(
-                icon: const Icon(Icons.arrow_back_rounded, color: Colors.white),
+                icon: Icon(
+                  Icons.arrow_back_rounded, 
+                  color: Colors.white,
+                  size: isVerySmallScreen ? 20 : (isSmallScreen ? 22 : 24),
+                ),
                 onPressed: _previousPage,
               )
-              : const SizedBox(width: 48),
+              : SizedBox(width: isVerySmallScreen ? 40 : 48),
           Row(
             children: List.generate(
               widget.steps.length,
               (index) => Container(
-                margin: const EdgeInsets.symmetric(horizontal: 4),
-                width: 8,
-                height: 8,
+                margin: EdgeInsets.symmetric(horizontal: isVerySmallScreen ? 3 : 4),
+                width: isVerySmallScreen ? 6 : 8,
+                height: isVerySmallScreen ? 6 : 8,
                 decoration: BoxDecoration(
                   color:
                       _currentIndex == index
@@ -322,6 +386,7 @@ class _InteractiveTutorialState extends State<InteractiveTutorial>
                   ? Icons.arrow_forward_rounded
                   : Icons.check_circle_rounded,
               color: Colors.white,
+              size: isVerySmallScreen ? 20 : (isSmallScreen ? 22 : 24),
             ),
             onPressed: _nextPage,
           ),

@@ -203,31 +203,44 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
   }
 
   Widget _buildHeader() {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isSmallScreen = screenWidth < 380;
+    
     return SliverToBoxAdapter(
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 16, 20, 16),
+        padding: EdgeInsets.fromLTRB(
+          isSmallScreen ? 16 : 20, 
+          isSmallScreen ? 12 : 16, 
+          isSmallScreen ? 16 : 20, 
+          isSmallScreen ? 12 : 16
+        ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              padding: const EdgeInsets.all(10),
+              padding: EdgeInsets.all(isSmallScreen ? 8 : 10),
               decoration: BoxDecoration(
                 color: Colors.amber.shade600,
                 borderRadius: BorderRadius.circular(12),
               ),
-              child: const Icon(
+              child: Icon(
                 Icons.emoji_events_rounded,
                 color: Colors.white,
-                size: 28,
+                size: isSmallScreen ? 24 : 28,
               ),
             ),
-            const SizedBox(width: 12),
-            Text(
-              AppLocalizations.of(context)!.ranking,
-              style: GoogleFonts.poppins(
-                fontSize: 28,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
+            SizedBox(width: isSmallScreen ? 8 : 12),
+            Flexible(
+              child: Text(
+                AppLocalizations.of(context)!.ranking,
+                style: GoogleFonts.poppins(
+                  fontSize: isSmallScreen ? 24 : 28,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.center,
               ),
             ),
           ],
@@ -237,9 +250,15 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
   }
 
   Widget _buildTabSelector() {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isSmallScreen = screenWidth < 380;
+    
     return SliverToBoxAdapter(
       child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        margin: EdgeInsets.symmetric(
+          horizontal: isSmallScreen ? 12 : 16, 
+          vertical: isSmallScreen ? 8 : 10
+        ),
         decoration: BoxDecoration(
           color: Colors.white.withOpacity(0.1),
           borderRadius: BorderRadius.circular(12),
@@ -273,6 +292,8 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
     required IconData icon,
   }) {
     final isSelected = _selectedTabIndex == index;
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isSmallScreen = screenWidth < 380;
     
     return GestureDetector(
       onTap: () {
@@ -300,27 +321,32 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
       },
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
-        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+        padding: EdgeInsets.symmetric(
+          vertical: isSmallScreen ? 8 : 12, 
+          horizontal: isSmallScreen ? 6 : 12
+        ),
         decoration: BoxDecoration(
           color: isSelected ? Colors.amber.shade600 : Colors.transparent,
           borderRadius: BorderRadius.circular(10),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
           children: [
             Icon(
               icon,
               color: isSelected ? Colors.white : Colors.white70,
-              size: 18,
+              size: isSmallScreen ? 14 : 16,
             ),
-            const SizedBox(width: 8),
+            SizedBox(width: isSmallScreen ? 3 : 6),
             Text(
               text,
               style: GoogleFonts.poppins(
                 color: isSelected ? Colors.white : Colors.white70,
-                fontSize: 14,
+                fontSize: isSmallScreen ? 11 : 13,
                 fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
               ),
+              textAlign: TextAlign.center,
             ),
           ],
         ),
@@ -345,8 +371,13 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
         children: [
           // Liderler Buton
           Container(
-            margin: const EdgeInsets.only(bottom: 15),
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            margin: EdgeInsets.only(
+              bottom: MediaQuery.of(context).size.width < 380 ? 12 : 15
+            ),
+            padding: EdgeInsets.symmetric(
+              horizontal: MediaQuery.of(context).size.width < 380 ? 12 : 16, 
+              vertical: MediaQuery.of(context).size.width < 380 ? 6 : 8
+            ),
             decoration: BoxDecoration(
               color: Colors.blue.shade900,
               borderRadius: BorderRadius.circular(20),
@@ -354,44 +385,47 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Icon(
+                Icon(
                   Icons.emoji_events_rounded,
                   color: Colors.amber,
-                  size: 18,
+                  size: MediaQuery.of(context).size.width < 380 ? 16 : 18,
                 ),
-                const SizedBox(width: 8),
-                Text(
-                  _selectedTabIndex == 0 
-                    ? AppLocalizations.of(context)!.leaders
-                    : AppLocalizations.of(context)!.monthlyLeaders,
-                  style: GoogleFonts.poppins(
-                    color: Colors.white,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
+                SizedBox(width: MediaQuery.of(context).size.width < 380 ? 6 : 8),
+                Flexible(
+                  child: Text(
+                    _selectedTabIndex == 0 
+                      ? AppLocalizations.of(context)!.leaders
+                      : AppLocalizations.of(context)!.monthlyLeaders,
+                    style: GoogleFonts.poppins(
+                      color: Colors.white,
+                      fontSize: MediaQuery.of(context).size.width < 380 ? 12 : 14,
+                      fontWeight: FontWeight.w600,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
               ],
             ),
           ),
 
-          // Kartlar düzeni - Hepsi aynı boyutta ve daha küçük
+          // Kartlar düzeni - Responsive boyutlandırma
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16), // 20'den 16'ya
+            padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width < 380 ? 12 : 16),
             child: Column(
               children: [
-                // Birinci - Ortada (diğerleriyle aynı boyut)
+                // Birinci - Ortada
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    // Birinci kart - diğerleriyle aynı boyut
                     SizedBox(
-                      width:
-                          MediaQuery.of(context).size.width *
-                          0.35, // 0.4'ten 0.35'e küçültüldü
+                      width: MediaQuery.of(context).size.width < 380 
+                          ? MediaQuery.of(context).size.width * 0.4
+                          : MediaQuery.of(context).size.width * 0.35,
                       child: Container(
-                        margin: const EdgeInsets.only(
-                          bottom: 8,
-                        ), // Daha az margin
+                        margin: EdgeInsets.only(
+                          bottom: MediaQuery.of(context).size.width < 380 ? 6 : 8,
+                        ),
                         child: _buildCard(
                           user: firstPlace,
                           color: Colors.amber.shade600,
@@ -403,17 +437,17 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
                   ],
                 ),
 
-                // İkinci ve Üçüncü - Altta yan yana (birincisiyle aynı boyut)
+                // İkinci ve Üçüncü - Altta yan yana
                 if (secondPlace != null || thirdPlace != null)
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      // İkinci Kart - birincisiyle aynı boyut
+                      // İkinci Kart
                       if (secondPlace != null)
                         SizedBox(
-                          width:
-                              MediaQuery.of(context).size.width *
-                              0.35, // 0.4'ten 0.35'e küçültüldü
+                          width: MediaQuery.of(context).size.width < 380 
+                              ? MediaQuery.of(context).size.width * 0.4
+                              : MediaQuery.of(context).size.width * 0.35,
                           child: _buildCard(
                             user: secondPlace,
                             color: Colors.grey.shade500,
@@ -422,12 +456,12 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
                           ),
                         ),
 
-                      // Üçüncü Kart - birincisiyle aynı boyut
+                      // Üçüncü Kart
                       if (thirdPlace != null)
                         SizedBox(
-                          width:
-                              MediaQuery.of(context).size.width *
-                              0.35, // 0.4'ten 0.35'e küçültüldü
+                          width: MediaQuery.of(context).size.width < 380 
+                              ? MediaQuery.of(context).size.width * 0.4
+                              : MediaQuery.of(context).size.width * 0.35,
                           child: _buildCard(
                             user: thirdPlace,
                             color: Colors.orange.shade700,
@@ -494,21 +528,14 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
         rankEmoji = "🏆";
     }
 
-    // Responsive boyutlar - Tüm kartlar aynı boyutta ve daha küçük
-    final avatarSize =
-        isTablet ? 50.0 : (isSmallScreen ? 35.0 : 42.0); // Daha da küçültüldü
-    final innerAvatarSize =
-        isTablet ? 42.0 : (isSmallScreen ? 29.0 : 36.0); // Daha da küçültüldü
-    final fontSize =
-        isTablet ? 14.0 : (isSmallScreen ? 12.0 : 16.0); // Daha da küçültüldü
-    final nameSize =
-        isTablet ? 12.0 : (isSmallScreen ? 9.0 : 11.0); // Daha da küçültüldü
-    final pointsSize =
-        isTablet ? 11.0 : (isSmallScreen ? 8.0 : 10.0); // Daha da küçültüldü
-    final iconSize =
-        isTablet ? 10.0 : (isSmallScreen ? 6.0 : 8.0); // Daha da küçültüldü
-    final labelSize =
-        isTablet ? 20.0 : (isSmallScreen ? 16.0 : 18.0); // Rakam boyutu ciddi şekilde artırıldı
+    // Responsive boyutlar - Daha iyi küçük ekran desteği
+    final avatarSize = isTablet ? 50.0 : (isSmallScreen ? 32.0 : 40.0);
+    final innerAvatarSize = isTablet ? 42.0 : (isSmallScreen ? 26.0 : 34.0);
+    final fontSize = isTablet ? 14.0 : (isSmallScreen ? 11.0 : 14.0);
+    final nameSize = isTablet ? 12.0 : (isSmallScreen ? 8.0 : 10.0);
+    final pointsSize = isTablet ? 11.0 : (isSmallScreen ? 7.0 : 9.0);
+    final iconSize = isTablet ? 10.0 : (isSmallScreen ? 6.0 : 8.0);
+    final labelSize = isTablet ? 20.0 : (isSmallScreen ? 14.0 : 16.0);
 
     return Container(
       decoration: BoxDecoration(
@@ -823,8 +850,14 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
         children: [
           // "Senin Çevren" başlığı
           Container(
-            margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            margin: EdgeInsets.symmetric(
+              horizontal: MediaQuery.of(context).size.width < 380 ? 16 : 20, 
+              vertical: MediaQuery.of(context).size.width < 380 ? 10 : 12
+            ),
+            padding: EdgeInsets.symmetric(
+              horizontal: MediaQuery.of(context).size.width < 380 ? 12 : 16, 
+              vertical: MediaQuery.of(context).size.width < 380 ? 6 : 8
+            ),
             decoration: BoxDecoration(
               color: Colors.blue.shade900,
               borderRadius: BorderRadius.circular(20),
@@ -832,16 +865,24 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Icon(Icons.people_outline, color: Colors.white, size: 18),
-                const SizedBox(width: 8),
-                Text(
-                  _selectedTabIndex == 0 
-                    ? AppLocalizations.of(context)!.yourCircle
-                    : AppLocalizations.of(context)!.monthlyCircle,
-                  style: GoogleFonts.poppins(
-                    color: Colors.white,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
+                Icon(
+                  Icons.people_outline, 
+                  color: Colors.white, 
+                  size: MediaQuery.of(context).size.width < 380 ? 16 : 18
+                ),
+                SizedBox(width: MediaQuery.of(context).size.width < 380 ? 6 : 8),
+                Flexible(
+                  child: Text(
+                    _selectedTabIndex == 0 
+                      ? AppLocalizations.of(context)!.yourCircle
+                      : AppLocalizations.of(context)!.monthlyCircle,
+                    style: GoogleFonts.poppins(
+                      color: Colors.white,
+                      fontSize: MediaQuery.of(context).size.width < 380 ? 12 : 14,
+                      fontWeight: FontWeight.w600,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
               ],
@@ -875,9 +916,17 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
     int points,
     bool isCurrentUser,
   ) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isSmallScreen = screenWidth < 380;
+    
     return Container(
-      margin: const EdgeInsets.fromLTRB(20, 0, 20, 12),
-      padding: const EdgeInsets.all(12),
+      margin: EdgeInsets.fromLTRB(
+        isSmallScreen ? 16 : 20, 
+        0, 
+        isSmallScreen ? 16 : 20, 
+        isSmallScreen ? 8 : 12
+      ),
+      padding: EdgeInsets.all(isSmallScreen ? 10 : 12),
       decoration: BoxDecoration(
         color:
             isCurrentUser
@@ -889,8 +938,8 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
       child: Row(
         children: [
           Container(
-            width: 32,
-            height: 32,
+            width: isSmallScreen ? 28 : 32,
+            height: isSmallScreen ? 28 : 32,
             decoration: BoxDecoration(
               color:
                   isCurrentUser
@@ -903,13 +952,13 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
                 '$rank',
                 style: GoogleFonts.poppins(
                   color: Colors.white,
-                  fontSize: 14,
+                  fontSize: isSmallScreen ? 12 : 14,
                   fontWeight: FontWeight.w500,
                 ),
               ),
             ),
           ),
-          const SizedBox(width: 12),
+          SizedBox(width: isSmallScreen ? 10 : 12),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -918,7 +967,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
                   displayName,
                   style: GoogleFonts.poppins(
                     color: Colors.white,
-                    fontSize: 14,
+                    fontSize: isSmallScreen ? 12 : 14,
                     fontWeight: FontWeight.w500,
                   ),
                   maxLines: 1,
@@ -928,7 +977,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
                   '$points ${AppLocalizations.of(context)!.points.toLowerCase()}',
                   style: GoogleFonts.poppins(
                     color: Colors.white70,
-                    fontSize: 12,
+                    fontSize: isSmallScreen ? 10 : 12,
                   ),
                 ),
               ],
@@ -936,7 +985,10 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
           ),
           if (isCurrentUser)
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              padding: EdgeInsets.symmetric(
+                horizontal: isSmallScreen ? 6 : 8, 
+                vertical: isSmallScreen ? 3 : 4
+              ),
               decoration: BoxDecoration(
                 color: Colors.blue.shade700,
                 borderRadius: BorderRadius.circular(8),
@@ -945,7 +997,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
                 AppLocalizations.of(context)!.you,
                 style: GoogleFonts.poppins(
                   color: Colors.white,
-                  fontSize: 10,
+                  fontSize: isSmallScreen ? 9 : 10,
                   fontWeight: FontWeight.w500,
                 ),
               ),
