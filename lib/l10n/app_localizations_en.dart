@@ -208,6 +208,26 @@ class AppLocalizationsEn extends AppLocalizations {
   String get leaderboard => 'Leaderboard';
 
   @override
+  String get information => 'Information';
+
+  @override
+  String get informationSubtitle => 'Useful information and resources';
+
+  @override
+  String get comingSoon => 'Coming Soon';
+
+  @override
+  String get informationDescription =>
+      'This section will contain useful information, guides, and resources to help you with your studies.';
+
+  @override
+  String get anesthesiaHistory => 'Anesthesia History';
+
+  @override
+  String get anesthesiaHistoryDescription =>
+      'Important milestones and developments in anesthesia history';
+
+  @override
   String get selectFromGallery => 'Select from\nGallery';
 
   @override

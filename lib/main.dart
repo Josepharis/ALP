@@ -22,6 +22,56 @@ import 'screens/premium_screen.dart';
 import 'screens/test_premium_screen.dart';
 import 'screens/subscription_screen.dart';
 
+// AppInitializer widget'ı - dil seçimini kontrol eder
+class AppInitializer extends StatefulWidget {
+  const AppInitializer({super.key});
+
+  @override
+  State<AppInitializer> createState() => _AppInitializerState();
+}
+
+class _AppInitializerState extends State<AppInitializer> {
+  bool _isInitialized = false;
+  Widget? _initialRoute;
+
+  @override
+  void initState() {
+    super.initState();
+    _initializeApp();
+  }
+
+  Future<void> _initializeApp() async {
+    final languageService = Provider.of<LanguageService>(context, listen: false);
+    
+    // LanguageService'in yüklenmesini bekle
+    await languageService.initializeLanguage();
+    
+    if (mounted) {
+      setState(() {
+        _isInitialized = true;
+        // Dil seçimi yapılmışsa splash screen'e, yapılmamışsa dil seçimi ekranına git
+        _initialRoute = languageService.isLanguageSelected 
+            ? const SplashScreen() 
+            : const LanguageSelectionScreen();
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (!_isInitialized) {
+      // Yüklenirken loading göster
+      return const Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
+    
+    return _initialRoute!;
+  }
+}
+
 // Firebase background message handler
 @pragma('vm:entry-point')
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
@@ -146,7 +196,7 @@ class MyApp extends StatelessWidget {
               bodyMedium: TextStyle(color: Colors.white),
             ),
           ),
-          initialRoute: '/language-selection',
+          home: const AppInitializer(),
           routes: {
             '/language-selection': (context) => const LanguageSelectionScreen(),
             '/splash': (context) => const SplashScreen(),

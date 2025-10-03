@@ -265,6 +265,30 @@
   "@leaderboard": {
     "description": "Leaderboard tab title"
   },
+  "information": "Information",
+  "@information": {
+    "description": "Information tab title"
+  },
+  "informationSubtitle": "Useful information and resources",
+  "@informationSubtitle": {
+    "description": "Information screen subtitle"
+  },
+  "comingSoon": "Coming Soon",
+  "@comingSoon": {
+    "description": "Coming soon message"
+  },
+  "informationDescription": "This section will contain useful information, guides, and resources to help you with your studies.",
+  "@informationDescription": {
+    "description": "Information screen description"
+  },
+  "anesthesiaHistory": "Anesthesia History",
+  "@anesthesiaHistory": {
+    "description": "Anesthesia history section title"
+  },
+  "anesthesiaHistoryDescription": "Important milestones and developments in anesthesia history",
+  "@anesthesiaHistoryDescription": {
+    "description": "Anesthesia history section description"
+  },
   "selectFromGallery": "Select from\nGallery",
   "@selectFromGallery": {
     "description": "Select from gallery option"

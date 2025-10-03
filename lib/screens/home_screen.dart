@@ -24,6 +24,7 @@ import '../screens/quiz_screen.dart';
 import '../screens/mistakes_screen.dart';
 import '../screens/leaderboard_screen.dart';
 import '../screens/profile_screen.dart';
+import '../screens/information_screen.dart';
 
 import '../screens/daily_question_screen.dart';
 
@@ -43,6 +44,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     GlobalKey<NavigatorState>(),
     GlobalKey<NavigatorState>(),
     GlobalKey<NavigatorState>(),
+    GlobalKey<NavigatorState>(),
   ];
   
   // Arama için FocusNode
@@ -51,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 5, vsync: this);
+    _tabController = TabController(length: 6, vsync: this);
     // Başlangıçta ana sayfayı göster
     _currentIndex = 0;
     
@@ -112,6 +114,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     _buildOffstageNavigator(2),
                     _buildOffstageNavigator(3),
                     _buildOffstageNavigator(4),
+                    _buildOffstageNavigator(5),
                   ],
                 ),
               ),
@@ -247,9 +250,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   items: [
                     _buildNavItem(Icons.home_rounded, AppLocalizations.of(context)!.homePage, 0),
                     _buildNavItem(Icons.quiz_rounded, AppLocalizations.of(context)!.quizzes, 1),
-                    _buildNavItem(Icons.assignment_late_rounded, AppLocalizations.of(context)!.missing, 2),
-                    _buildNavItem(Icons.leaderboard_rounded, AppLocalizations.of(context)!.leaderboard, 3),
-                    _buildNavItem(Icons.person_rounded, AppLocalizations.of(context)!.profile, 4),
+                    _buildNavItem(Icons.info_outline_rounded, AppLocalizations.of(context)!.information, 2),
+                    _buildNavItem(Icons.assignment_late_rounded, AppLocalizations.of(context)!.missing, 3),
+                    _buildNavItem(Icons.leaderboard_rounded, AppLocalizations.of(context)!.leaderboard, 4),
+                    _buildNavItem(Icons.person_rounded, AppLocalizations.of(context)!.profile, 5),
                   ],
                 ),
               ),
@@ -344,7 +348,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   }
 }
 
-enum TabItem { home, quizzes, mistakes, leaderboard, profile }
+enum TabItem { home, quizzes, information, mistakes, leaderboard, profile }
 
 class TabNavigator extends StatelessWidget {
   const TabNavigator({
@@ -365,6 +369,9 @@ class TabNavigator extends StatelessWidget {
         break;
       case TabItem.quizzes:
         child = const QuizListScreen();
+        break;
+      case TabItem.information:
+        child = const InformationScreen();
         break;
       case TabItem.mistakes:
         child = const MistakesScreen();
@@ -2250,7 +2257,7 @@ class _HomeContentState extends State<HomeContent> {
           SizedBox(height: isShortScreen ? 6 : 8),
           // Yatay kaydırmalı quiz kartları
           SizedBox(
-            height: isShortScreen ? 110 : (isVerySmallScreen ? 120 : 130),
+            height: isShortScreen ? 100 : (isVerySmallScreen ? 110 : 115),
             child:
                 quizzesToShow.isEmpty
                     ? Center(
@@ -2277,14 +2284,14 @@ class _HomeContentState extends State<HomeContent> {
                         return Container(
                           width: isVerySmallScreen ? 180 : (isSmallScreen ? 200 : 220),
                           margin: EdgeInsets.only(
-                            right: isVerySmallScreen ? 8 : 12,
+                            right: isVerySmallScreen ? 4 : 6,
                           ),
                           child: GestureDetector(
                             onTap: () => _continueQuiz(quiz),
                             child: Container(
                               padding: EdgeInsets.all(
-                                isVerySmallScreen ? 6 : (isSmallScreen ? 7 : 8),
-                              ), // Padding daha da azaltıldı
+                                isVerySmallScreen ? 5 : (isSmallScreen ? 6 : 7),
+                              ), // Padding optimize edildi
                               decoration: BoxDecoration(
                                 gradient: LinearGradient(
                                   colors: [
@@ -2312,8 +2319,8 @@ class _HomeContentState extends State<HomeContent> {
                                     children: [
                                       Container(
                                         padding: const EdgeInsets.all(
-                                          6,
-                                        ), // Padding azaltıldı
+                                          4,
+                                        ), // Padding optimize edildi
                                         decoration: BoxDecoration(
                                           color: Colors.white.withOpacity(0.2),
                                           borderRadius: BorderRadius.circular(
@@ -2361,8 +2368,8 @@ class _HomeContentState extends State<HomeContent> {
                                     ],
                                   ),
                                   const SizedBox(
-                                    height: 10,
-                                  ), // Boşluk azaltıldı
+                                    height: 6,
+                                  ), // Boşluk optimize edildi
                                   Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
@@ -2391,7 +2398,7 @@ class _HomeContentState extends State<HomeContent> {
                                       ),
                                     ],
                                   ),
-                                  const SizedBox(height: 8), // Boşluk azaltıldı
+                                  const SizedBox(height: 5), // Boşluk optimize edildi
                                   ClipRRect(
                                     borderRadius: BorderRadius.circular(
                                       6,
@@ -2405,7 +2412,7 @@ class _HomeContentState extends State<HomeContent> {
                                           const AlwaysStoppedAnimation<Color>(
                                             Colors.white,
                                           ),
-                                      minHeight: 4, // Height azaltıldı
+                                      minHeight: 3, // Height optimize edildi
                                     ),
                                   ),
                                 ],

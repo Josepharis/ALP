@@ -488,6 +488,42 @@ abstract class AppLocalizations {
   /// **'Leaderboard'**
   String get leaderboard;
 
+  /// Information tab title
+  ///
+  /// In en, this message translates to:
+  /// **'Information'**
+  String get information;
+
+  /// Information screen subtitle
+  ///
+  /// In en, this message translates to:
+  /// **'Useful information and resources'**
+  String get informationSubtitle;
+
+  /// Coming soon message
+  ///
+  /// In en, this message translates to:
+  /// **'Coming Soon'**
+  String get comingSoon;
+
+  /// Information screen description
+  ///
+  /// In en, this message translates to:
+  /// **'This section will contain useful information, guides, and resources to help you with your studies.'**
+  String get informationDescription;
+
+  /// Anesthesia history section title
+  ///
+  /// In en, this message translates to:
+  /// **'Anesthesia History'**
+  String get anesthesiaHistory;
+
+  /// Anesthesia history section description
+  ///
+  /// In en, this message translates to:
+  /// **'Important milestones and developments in anesthesia history'**
+  String get anesthesiaHistoryDescription;
+
   /// Select from gallery option
   ///
   /// In en, this message translates to:

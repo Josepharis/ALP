@@ -209,6 +209,26 @@ class AppLocalizationsTr extends AppLocalizations {
   String get leaderboard => 'Sıralama';
 
   @override
+  String get information => 'Bilgiler';
+
+  @override
+  String get informationSubtitle => 'Faydalı bilgiler ve kaynaklar';
+
+  @override
+  String get comingSoon => 'Yakında';
+
+  @override
+  String get informationDescription =>
+      'Bu bölüm çalışmalarınızda size yardımcı olacak faydalı bilgiler, rehberler ve kaynaklar içerecektir.';
+
+  @override
+  String get anesthesiaHistory => 'Anestezi Tarihçesi';
+
+  @override
+  String get anesthesiaHistoryDescription =>
+      'Anestezi tarihindeki önemli kilometre taşları ve gelişmeler';
+
+  @override
   String get selectFromGallery => 'Galeriden\nSeç';
 
   @override

@@ -46,27 +46,11 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen>
       curve: Curves.easeOutCubic,
     ));
     
-    // Dil seçimi yapılmış mı kontrol et
-    _checkLanguageSelection();
-    
     // Animasyonları başlat
     _fadeController.forward();
     _slideController.forward();
   }
   
-  void _checkLanguageSelection() async {
-    if (mounted) {
-      final languageService = Provider.of<LanguageService>(context, listen: false);
-      
-      // LanguageService'in yüklenmesini bekle
-      await languageService.initializeLanguage();
-      
-      if (mounted && languageService.isLanguageSelected) {
-        // Dil seçimi yapılmışsa splash screen'e geç
-        Navigator.of(context).pushReplacementNamed('/splash');
-      }
-    }
-  }
 
   @override
   void dispose() {

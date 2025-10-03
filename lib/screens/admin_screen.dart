@@ -250,109 +250,128 @@ class _AdminScreenState extends State<AdminScreen>
   }
 
   Widget _buildAppBar() {
-    return Container(
-      padding: const EdgeInsets.all(20),
-      child: Row(
-        children: [
-          Container(
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.15),
-              borderRadius: BorderRadius.circular(15),
-            ),
-            child: const Icon(
-              Icons.admin_panel_settings,
-              color: Colors.white,
-              size: 24,
-            ),
-          ),
-          const SizedBox(width: 16),
-          const Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Admin Panel',
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final screenWidth = constraints.maxWidth;
+        final isSmallScreen = screenWidth < 600;
+        final isVerySmallScreen = screenWidth < 400;
+        
+        return Container(
+          padding: EdgeInsets.all(isVerySmallScreen ? 12 : (isSmallScreen ? 16 : 20)),
+          child: Row(
+            children: [
+              Container(
+                padding: EdgeInsets.all(isVerySmallScreen ? 8 : (isSmallScreen ? 10 : 12)),
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.15),
+                  borderRadius: BorderRadius.circular(isVerySmallScreen ? 10 : 15),
                 ),
-                Text(
-                  'Sistem Yönetimi',
-                  style: TextStyle(fontSize: 14, color: Colors.white70),
+                child: Icon(
+                  Icons.admin_panel_settings,
+                  color: Colors.white,
+                  size: isVerySmallScreen ? 18 : (isSmallScreen ? 20 : 24),
                 ),
-              ],
-            ),
-          ),
-          IconButton(
-            onPressed: () async {
-              // Çıkış onay dialogu göster
-              final shouldSignOut = await showDialog<bool>(
-                context: context,
-                builder:
-                    (context) => AlertDialog(
-                      title: Text(AppLocalizations.of(context)!.adminLogout),
-                      content: Text(
-                        AppLocalizations.of(context)!.adminLogoutConfirm,
+              ),
+              SizedBox(width: isVerySmallScreen ? 8 : (isSmallScreen ? 12 : 16)),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Admin Panel',
+                      style: TextStyle(
+                        fontSize: isVerySmallScreen ? 18 : (isSmallScreen ? 20 : 24),
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
                       ),
-                      actions: [
-                        TextButton(
-                          onPressed: () => Navigator.pop(context, false),
-                          child: Text(AppLocalizations.of(context)!.cancel),
-                        ),
-                        TextButton(
-                          onPressed: () => Navigator.pop(context, true),
-                          child: Text(AppLocalizations.of(context)!.logout),
-                        ),
-                      ],
                     ),
-              );
-
-              if (shouldSignOut == true) {
-                try {
-                  await _authService.signOut();
-                  if (mounted) {
-                    Navigator.of(context).pushReplacementNamed('/login');
-                  }
-                } catch (e) {
-                  if (mounted) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text('${AppLocalizations.of(context)!.logoutError}: $e'),
-                        backgroundColor: Colors.red,
+                    Text(
+                      'Sistem Yönetimi',
+                      style: TextStyle(
+                        fontSize: isVerySmallScreen ? 11 : (isSmallScreen ? 12 : 14), 
+                        color: Colors.white70,
                       ),
-                    );
+                    ),
+                  ],
+                ),
+              ),
+              IconButton(
+                onPressed: () async {
+                  // Çıkış onay dialogu göster
+                  final shouldSignOut = await showDialog<bool>(
+                    context: context,
+                    builder:
+                        (context) => AlertDialog(
+                          title: Text(AppLocalizations.of(context)!.adminLogout),
+                          content: Text(
+                            AppLocalizations.of(context)!.adminLogoutConfirm,
+                          ),
+                          actions: [
+                            TextButton(
+                              onPressed: () => Navigator.pop(context, false),
+                              child: Text(AppLocalizations.of(context)!.cancel),
+                            ),
+                            TextButton(
+                              onPressed: () => Navigator.pop(context, true),
+                              child: Text(AppLocalizations.of(context)!.logout),
+                            ),
+                          ],
+                        ),
+                  );
+
+                  if (shouldSignOut == true) {
+                    try {
+                      await _authService.signOut();
+                      if (mounted) {
+                        Navigator.of(context).pushReplacementNamed('/login');
+                      }
+                    } catch (e) {
+                      if (mounted) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('${AppLocalizations.of(context)!.logoutError}: $e'),
+                            backgroundColor: Colors.red,
+                          ),
+                        );
+                      }
+                    }
                   }
-                }
-              }
-            },
-            icon: const Icon(Icons.logout, color: Colors.white),
-          ),
-        ],
-      ),
-    );
-  }
+                },
+                icon: Icon(
+                  Icons.logout, 
+                  color: Colors.white,
+                  size: isVerySmallScreen ? 18 : (isSmallScreen ? 20 : 24),
+                ),
+              ),
+            ],
+          ));
+        },
+      );
+    }
 
   Widget _buildNavigation() {
-    final navItems = [
-      {'icon': Icons.dashboard_outlined, 'label': 'Dashboard'},
-      {'icon': Icons.quiz_outlined, 'label': 'Questions'},
-      {'icon': Icons.analytics_outlined, 'label': AppLocalizations.of(context)!.analytics},
-    ];
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final screenWidth = constraints.maxWidth;
+        final isSmallScreen = screenWidth < 600;
+        final isVerySmallScreen = screenWidth < 400;
+        
+        final navItems = [
+          {'icon': Icons.dashboard_outlined, 'label': 'Dashboard'},
+          {'icon': Icons.quiz_outlined, 'label': 'Questions'},
+          {'icon': Icons.analytics_outlined, 'label': AppLocalizations.of(context)!.analytics},
+        ];
 
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 20),
-      padding: const EdgeInsets.all(8),
-      decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.1),
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: Colors.white.withOpacity(0.2)),
-      ),
-      child: Row(
-        children:
-            navItems.asMap().entries.map((entry) {
+        return Container(
+          margin: EdgeInsets.symmetric(horizontal: isVerySmallScreen ? 12 : (isSmallScreen ? 16 : 20)),
+          padding: EdgeInsets.all(isVerySmallScreen ? 6 : (isSmallScreen ? 7 : 8)),
+          decoration: BoxDecoration(
+            color: Colors.white.withOpacity(0.1),
+            borderRadius: BorderRadius.circular(isVerySmallScreen ? 15 : 20),
+            border: Border.all(color: Colors.white.withOpacity(0.2)),
+          ),
+          child: Row(
+            children: navItems.asMap().entries.map((entry) {
               final index = entry.key;
               final item = entry.value;
               final isSelected = _selectedNavIndex == index;
@@ -361,13 +380,14 @@ class _AdminScreenState extends State<AdminScreen>
                 child: GestureDetector(
                   onTap: () => setState(() => _selectedNavIndex = index),
                   child: Container(
-                    padding: const EdgeInsets.symmetric(vertical: 12),
+                    padding: EdgeInsets.symmetric(
+                      vertical: isVerySmallScreen ? 8 : (isSmallScreen ? 10 : 12),
+                    ),
                     decoration: BoxDecoration(
-                      color:
-                          isSelected
-                              ? Colors.white.withOpacity(0.2)
-                              : Colors.transparent,
-                      borderRadius: BorderRadius.circular(15),
+                      color: isSelected
+                          ? Colors.white.withOpacity(0.2)
+                          : Colors.transparent,
+                      borderRadius: BorderRadius.circular(isVerySmallScreen ? 10 : 15),
                     ),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
@@ -375,19 +395,21 @@ class _AdminScreenState extends State<AdminScreen>
                         Icon(
                           item['icon'] as IconData,
                           color: isSelected ? Colors.white : Colors.white60,
-                          size: 20,
+                          size: isVerySmallScreen ? 16 : (isSmallScreen ? 18 : 20),
                         ),
-                        const SizedBox(height: 4),
+                        SizedBox(height: isVerySmallScreen ? 2 : 4),
                         Text(
                           item['label'] as String,
                           style: TextStyle(
                             color: isSelected ? Colors.white : Colors.white60,
-                            fontSize: 10,
-                            fontWeight:
-                                isSelected
-                                    ? FontWeight.w600
-                                    : FontWeight.normal,
+                            fontSize: isVerySmallScreen ? 8 : (isSmallScreen ? 9 : 10),
+                            fontWeight: isSelected
+                                ? FontWeight.w600
+                                : FontWeight.normal,
                           ),
+                          textAlign: TextAlign.center,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ],
                     ),
@@ -395,15 +417,22 @@ class _AdminScreenState extends State<AdminScreen>
                 ),
               );
             }).toList(),
-      ),
+          ),
+        );
+      },
     );
   }
 
   Widget _buildContent() {
-    return Padding(
-      padding: const EdgeInsets.all(20),
-      child:
-          (() {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final screenWidth = constraints.maxWidth;
+        final isSmallScreen = screenWidth < 600;
+        final isVerySmallScreen = screenWidth < 400;
+        
+        return Padding(
+          padding: EdgeInsets.all(isVerySmallScreen ? 12 : (isSmallScreen ? 16 : 20)),
+          child: (() {
             switch (_selectedNavIndex) {
               case 0:
                 return _buildDashboard();
@@ -415,6 +444,8 @@ class _AdminScreenState extends State<AdminScreen>
                 return _buildDashboard();
             }
           })(),
+        );
+      },
     );
   }
 
@@ -1165,55 +1196,167 @@ class _AdminScreenState extends State<AdminScreen>
   }
 
   Widget _buildQuestionsManagement() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Text(
-          'Soru Yönetimi',
-          style: TextStyle(
-            fontSize: 22,
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-          ),
-        ),
-        const SizedBox(height: 16),
-        Row(
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final screenWidth = constraints.maxWidth;
+        final isSmallScreen = screenWidth < 600;
+        final isVerySmallScreen = screenWidth < 400;
+        
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Expanded(
-              child: ElevatedButton.icon(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const AddQuestionScreen(),
-                    ),
-                  ).then((_) => _loadQuestions());
-                },
-                icon: const Icon(Icons.add, size: 20),
-                label: const Text('Yeni Soru Ekle'),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blue.shade600,
-                  foregroundColor: Colors.white,
-                  padding: const EdgeInsets.symmetric(vertical: 12),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                ),
+            Text(
+              'Soru Yönetimi',
+              style: TextStyle(
+                fontSize: isVerySmallScreen ? 16 : (isSmallScreen ? 18 : 22),
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
               ),
             ),
+            SizedBox(height: isVerySmallScreen ? 12 : (isSmallScreen ? 14 : 16)),
+            
+            // Dil seçici
+            _buildLanguageSelector(),
+            SizedBox(height: isVerySmallScreen ? 12 : (isSmallScreen ? 14 : 16)),
+            
+            Row(
+              children: [
+                Expanded(
+                  child: ElevatedButton.icon(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const AddQuestionScreen(),
+                        ),
+                      ).then((_) => _loadQuestions());
+                    },
+                    icon: Icon(Icons.add, size: isVerySmallScreen ? 16 : (isSmallScreen ? 18 : 20)),
+                    label: Text(
+                      'Yeni Soru Ekle',
+                      style: TextStyle(
+                        fontSize: isVerySmallScreen ? 12 : (isSmallScreen ? 13 : 14),
+                      ),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blue.shade600,
+                      foregroundColor: Colors.white,
+                      padding: EdgeInsets.symmetric(
+                        vertical: isVerySmallScreen ? 8 : (isSmallScreen ? 10 : 12),
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(isVerySmallScreen ? 10 : 15),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: isVerySmallScreen ? 12 : (isSmallScreen ? 14 : 16)),
+            _buildCategorySelector(),
+            SizedBox(height: isVerySmallScreen ? 12 : (isSmallScreen ? 14 : 16)),
+            Expanded(child: _buildQuestionsList()),
           ],
-        ),
-        const SizedBox(height: 20),
-        // Dil seçici kaldırıldı - artık uygulama başlangıcında seçiliyor
-        const SizedBox(height: 16),
-        _buildCategorySelector(),
-        const SizedBox(height: 20),
-        Expanded(child: _buildQuestionsList()),
-      ],
+        );
+      },
     );
   }
 
-  // Dil seçici widget'ı kaldırıldı - artık uygulama başlangıcında seçiliyor
+  Widget _buildLanguageSelector() {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final screenWidth = constraints.maxWidth;
+        final isSmallScreen = screenWidth < 600;
+        final isVerySmallScreen = screenWidth < 400;
+        
+        return Container(
+          padding: EdgeInsets.all(isVerySmallScreen ? 12 : (isSmallScreen ? 14 : 16)),
+          decoration: BoxDecoration(
+            color: Colors.white.withOpacity(0.1),
+            borderRadius: BorderRadius.circular(isVerySmallScreen ? 10 : 15),
+            border: Border.all(color: Colors.white.withOpacity(0.2)),
+          ),
+          child: Row(
+            children: [
+              Icon(
+                Icons.language, 
+                color: Colors.white, 
+                size: isVerySmallScreen ? 16 : (isSmallScreen ? 18 : 20),
+              ),
+              SizedBox(width: isVerySmallScreen ? 8 : (isSmallScreen ? 10 : 12)),
+              Expanded(
+                child: DropdownButton<String>(
+                  value: _selectedLanguage,
+                  hint: Text(
+                    'Dil Seçin',
+                    style: TextStyle(
+                      color: Colors.white60,
+                      fontSize: isVerySmallScreen ? 12 : (isSmallScreen ? 13 : 14),
+                    ),
+                  ),
+                  isExpanded: true,
+                  dropdownColor: Colors.indigo.shade800,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: isVerySmallScreen ? 12 : (isSmallScreen ? 13 : 14),
+                  ),
+                  underline: Container(),
+                  icon: Icon(
+                    Icons.keyboard_arrow_down,
+                    color: Colors.white70,
+                    size: isVerySmallScreen ? 16 : (isSmallScreen ? 18 : 20),
+                  ),
+                  items: [
+                    DropdownMenuItem<String>(
+                      value: 'turkish',
+                      child: Row(
+                        children: [
+                          Text('🇹🇷', style: TextStyle(fontSize: isVerySmallScreen ? 14 : 16)),
+                          SizedBox(width: isVerySmallScreen ? 6 : 8),
+                          Text(
+                            'Türkçe',
+                            style: TextStyle(
+                              fontSize: isVerySmallScreen ? 12 : (isSmallScreen ? 13 : 14),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    DropdownMenuItem<String>(
+                      value: 'english',
+                      child: Row(
+                        children: [
+                          Text('🇺🇸', style: TextStyle(fontSize: isVerySmallScreen ? 14 : 16)),
+                          SizedBox(width: isVerySmallScreen ? 6 : 8),
+                          Text(
+                            'English',
+                            style: TextStyle(
+                              fontSize: isVerySmallScreen ? 12 : (isSmallScreen ? 13 : 14),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                  onChanged: (value) {
+                    if (value != null && value != _selectedLanguage) {
+                      setState(() {
+                        _selectedLanguage = value;
+                        _selectedCategory = '';
+                        _selectedCollectionName = '';
+                        _questions.clear();
+                      });
+                      _loadCategories();
+                    }
+                  },
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
 
   Widget _buildCategorySelector() {
     return Container(
