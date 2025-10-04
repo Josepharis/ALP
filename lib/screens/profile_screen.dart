@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 import 'package:provider/provider.dart';
 import '../l10n/app_localizations.dart';
 import '../services/auth_service.dart';
@@ -583,21 +582,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             onTap: () => _showEditProfileModal(context),
                           ),
 
-                          // Debug: Dil seçimini sıfırla (sadece test için)
-                          if (kDebugMode) ...[
-                            _buildSettingItem(
-                              'Debug: Dil Seçimini Sıfırla',
-                              Icons.refresh,
-                              context,
-                              onTap: () => _resetLanguageSelection(context),
-                            ),
-                            _buildSettingItem(
-                              'Debug: Tutorial\'ı Sıfırla',
-                              Icons.help_outline,
-                              context,
-                              onTap: () => _resetTutorial(context),
-                            ),
-                          ],
+                          // Dil seçimini sıfırla
+                          _buildSettingItem(
+                            'Dil Seçimini Sıfırla',
+                            Icons.refresh,
+                            context,
+                            onTap: () => _resetLanguageSelection(context),
+                          ),
+                          _buildSettingItem(
+                            'Tutorial\'ı Sıfırla',
+                            Icons.help_outline,
+                            context,
+                            onTap: () => _resetTutorial(context),
+                          ),
 
                           _buildSettingItem(
                             AppLocalizations.of(context)!.myDevices,
