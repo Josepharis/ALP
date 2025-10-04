@@ -751,6 +751,81 @@ class _InformationScreenState extends State<InformationScreen> {
 
     return Scaffold(
       backgroundColor: Colors.transparent,
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        titleSpacing: 0,
+        title: Container(
+          padding: const EdgeInsets.only(left: 8),
+          child: Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(6),
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.2),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: const Icon(Icons.info_outline_rounded, color: Colors.white, size: 20),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Text(
+                  AppLocalizations.of(context)!.information,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        actions: [
+          // Search button
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                _isSearching = !_isSearching;
+                if (_isSearching) {
+                  _searchFocusNode.requestFocus();
+                } else {
+                  _searchController.clear();
+                  _performSearch('');
+                }
+              });
+            },
+            child: Container(
+              margin: const EdgeInsets.only(right: 16),
+              padding: EdgeInsets.all(isSmallScreen ? 6 : 8),
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [Colors.white.withOpacity(0.1), Colors.white.withOpacity(0.05)],
+                ),
+                borderRadius: BorderRadius.circular(isSmallScreen ? 10 : 12),
+                border: Border.all(
+                  color: Colors.white.withOpacity(0.2),
+                ),
+              ),
+              child: Icon(
+                _isSearching ? Icons.close_rounded : Icons.search_rounded,
+                color: Colors.white,
+                size: isSmallScreen ? 16 : 18,
+              ),
+            ),
+          ),
+        ],
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [Colors.blue.shade900, Colors.black],
+            ),
+          ),
+        ),
+      ),
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -762,65 +837,6 @@ class _InformationScreenState extends State<InformationScreen> {
         child: SafeArea(
           child: Column(
             children: [
-              // Compact Header
-              Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: isSmallScreen ? 16 : 20,
-                  vertical: isSmallScreen ? 8 : 12,
-                ),
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.info_outline_rounded,
-                      color: Colors.white,
-                      size: isSmallScreen ? 20 : 24,
-                    ),
-                    SizedBox(width: isSmallScreen ? 12 : 16),
-                    Expanded(
-                      child: Text(
-                        AppLocalizations.of(context)!.information,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                    // Search button
-                    GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          _isSearching = !_isSearching;
-                          if (_isSearching) {
-                            _searchFocusNode.requestFocus();
-                          } else {
-                            _searchController.clear();
-                            _performSearch('');
-                          }
-                        });
-                      },
-                      child: Container(
-                        padding: EdgeInsets.all(isSmallScreen ? 6 : 8),
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [Colors.white.withOpacity(0.1), Colors.white.withOpacity(0.05)],
-                          ),
-                          borderRadius: BorderRadius.circular(isSmallScreen ? 10 : 12),
-                          border: Border.all(
-                            color: Colors.white.withOpacity(0.2),
-                          ),
-                        ),
-                        child: Icon(
-                          _isSearching ? Icons.close_rounded : Icons.search_rounded,
-                          color: Colors.white,
-                          size: isSmallScreen ? 16 : 18,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              
               // Search bar
               if (_isSearching) ...[
                 const SizedBox(height: 12),
