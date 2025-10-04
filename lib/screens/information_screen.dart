@@ -987,24 +987,6 @@ class _InformationScreenState extends State<InformationScreen> {
                   ),
                 ),
               ),
-              Container(
-                padding: EdgeInsets.symmetric(
-                  horizontal: isSmallScreen ? 6 : 8,
-                  vertical: isSmallScreen ? 2 : 4,
-                ),
-                decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.15),
-                  borderRadius: BorderRadius.circular(isSmallScreen ? 12 : 16),
-                ),
-                child: Text(
-                  '${categories.length}',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: isSmallScreen ? 10 : 12,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ),
               SizedBox(width: isSmallScreen ? 6 : 8),
               Icon(
                 Icons.arrow_forward_ios_rounded,
@@ -1190,24 +1172,6 @@ class _InformationDetailScreenState extends State<InformationDetailScreen> {
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: isSmallScreen ? 16 : 18,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                ),
-                Container(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: isSmallScreen ? 8 : 10,
-                    vertical: isSmallScreen ? 4 : 6,
-                  ),
-                  decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.2),
-                    borderRadius: BorderRadius.circular(isSmallScreen ? 16 : 20),
-                  ),
-                  child: Text(
-                    '${category.items.length}',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: isSmallScreen ? 11 : 12,
                       fontWeight: FontWeight.w400,
                     ),
                   ),
