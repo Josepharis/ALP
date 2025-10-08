@@ -36,9 +36,7 @@ class _MistakesScreenState extends State<MistakesScreen> {
 
     // EventBus'a abone ol - yanlış cevap olay bildirimleri için dinleyici ekle
     _mistakesSubscription = EventBus().mistakesUpdatedStream.listen((event) {
-      print(
-        "Eksikler sayfası: Yanlış cevap bildirimi alındı, veriler yenileniyor...",
-      );
+      // Eksikler sayfası: Yanlış cevap bildirimi alındı, veriler yenileniyor
       if (event.isMistakesUpdated) {
         _loadMistakes(forceRefresh: true);
       }
@@ -65,9 +63,7 @@ class _MistakesScreenState extends State<MistakesScreen> {
   Future<void> _loadMistakes({bool forceRefresh = false}) async {
     // Eğer halen yükleme yapılıyorsa, işlemi tekrarlama
     if (_isLoading) {
-      print(
-        "_loadMistakes: Zaten yükleme işlemi devam ediyor, işlem iptal edildi",
-      );
+      // Zaten yükleme işlemi devam ediyor, işlem iptal edildi
       return;
     }
 
@@ -77,53 +73,41 @@ class _MistakesScreenState extends State<MistakesScreen> {
 
     try {
       final user = _authService.currentUser;
-      print(
-        "Eksikler yükleniyor... Kullanıcı giriş yapmış mı? ${user != null} (Zorla yenileme: $forceRefresh)",
-      );
+      // Eksikler yükleniyor
 
       if (user != null) {
-        print("Kullanıcı ID: ${user.uid}");
 
         // Önce eski verileri taşı (eğer varsa)
-        print("Eski verileri kontrol ediyorum ve taşıyorum...");
         final migrateResult = await _quizService.migrateMistakeQuestions();
-        print(
-          "Veri taşıma sonucu: ${migrateResult ? 'Başarılı' : 'Başarısız veya taşınacak veri yok'}",
-        );
+        // Veri taşıma tamamlandı
 
         // Widget mount kontrolü ekle
         if (!mounted) return;
 
         // Tüm yanlış soruları getir - önbellekten getir veya zorla yenile
-        print("Yanlış sorular getiriliyor... (Zorla yenileme: $forceRefresh)");
         final mistakeQuestions = await _quizService.getMistakeQuestions();
-        print("Yanlış soru sayısı: ${mistakeQuestions.length}");
 
         // Widget mount kontrolü ekle
         if (!mounted) return;
 
         // Firestore'da doğrudan koleksiyonu kontrol et
         try {
-          print("Firestore koleksiyonunu doğrudan kontrol ediyorum...");
           final mistakesRef = FirebaseFirestore.instance
               .collection('user_mistakes')
               .doc(user.uid)
               .collection('questions');
 
           final snapshot = await mistakesRef.get();
-          print("Firestore'da toplam belge sayısı: ${snapshot.docs.length}");
 
           if (snapshot.docs.isNotEmpty) {
           }
         } catch (e) {
-          print("Firestore koleksiyon kontrolü hatası: $e");
         }
 
         // Widget mount kontrolü ekle
         if (!mounted) return;
 
         if (mistakeQuestions.isEmpty) {
-          print("Yanlış soru bulunamadı!");
           setState(() {
             _mistakesByCategory = {};
             _isLoading = false;
@@ -143,12 +127,7 @@ class _MistakesScreenState extends State<MistakesScreen> {
           groupedMistakes[category]!.add(question);
         }
 
-        print(
-          "Gruplama tamamlandı. Kategori sayısı: ${groupedMistakes.length}",
-        );
-        for (var entry in groupedMistakes.entries) {
-          print("Kategori: ${entry.key} - Soru sayısı: ${entry.value.length}");
-        }
+        // Gruplama tamamlandı
 
         // Son bir mount kontrolü
         if (!mounted) return;
@@ -158,13 +137,11 @@ class _MistakesScreenState extends State<MistakesScreen> {
           _isLoading = false;
         });
       } else {
-        print("Kullanıcı giriş yapmamış!");
         setState(() {
           _isLoading = false;
         });
       }
     } catch (e) {
-      print('Eksikler yükleme hatası: $e');
       // Son bir mount kontrolü
       if (!mounted) return;
 

@@ -725,7 +725,8 @@
   "@passwordMismatch": {
     "description": "Password mismatch validation"
   },
-  "acceptAll": "I accept all ",
+  "acceptAll": "",
+  "iAgree": "I agree",
   "@acceptAll": {
     "description": "Accept all text"
   },
@@ -1798,5 +1799,35 @@
   "requiresRecentLogin": "Recent Login Required",
   "requiresRecentLoginMessage": "You need to log in again for this operation.",
   "languageResetSuccess": "Language selection reset. App will restart.",
-  "languageResetSuccessMessage": "Language settings successfully reset. App will restart."
+  "languageResetSuccessMessage": "Language settings successfully reset. App will restart.",
+  "informationPremiumMessage": "Information section is available only for premium users",
+  "informationPremiumSubtitle": "Unlock comprehensive medical information and resources with premium access",
+  "testModeActive": "Test Mode Active",
+  "testModeMessage": "All premium features are unlocked for testing purposes",
+  "testSettings": "Test Settings",
+  "privacyTermsTitle": "Privacy and Terms",
+  "privacyPolicyTitle": "Privacy Policy",
+  "privacyPolicyContent": "This application applies the highest standards to protect users' personal data. Collected data is used only to improve service quality and provide personalized experience. Your data is not shared with third parties and is stored on secure servers.",
+  "termsOfServiceTitle": "Terms of Service",
+  "termsOfServiceContent": "By using this application, you agree to our terms of service. The application is for educational purposes only and does not constitute medical advice. Users should behave responsibly and avoid misuse of the application.",
+  "copyrightTitle": "Copyright and Patent Protection",
+  "copyrightContent": "All questions, content and materials in this application are protected by copyright. Questions have patent rights and unauthorized sharing is strictly prohibited. Copying, reproducing or distributing any content may result in legal action.",
+  "legalConsequencesTitle": "Legal Consequences",
+  "legalConsequencesContent": "In case of unauthorized sharing of content in this application, legal action will be initiated due to copyright infringement. Compensation may be claimed from violators and criminal liability may arise. Additionally, the application account will be permanently closed.",
+  "dataProtectionTitle": "Data Protection",
+  "dataProtectionContent": "Your personal data is protected under GDPR (General Data Protection Regulation). Your data is stored only as long as necessary and processed securely. You have the right to delete, correct or request access to your data.",
+  "userResponsibilitiesTitle": "User Responsibilities",
+  "userResponsibilitiesContent": "Users should use the application only for personal educational purposes. Sharing content, taking screenshots or publishing on other platforms is strictly prohibited. Users are responsible for ensuring account security.",
+  "appRightsTitle": "Application Rights",
+  "appRightsContent": "The application owner has all necessary legal rights to protect content. Patent applications have been made and are under international protection. In case of violation, action will be taken within the framework of international law.",
+  "contactUs": "Contact Us",
+  "contactInfo": "You can contact us for your questions. If you want to get legal consultation, you can use the contact information below.",
+  "copyEmail": "Copy Email",
+  "copyPhone": "Copy Phone",
+  "emailCopied": "Email address copied",
+  "phoneCopied": "Phone number copied",
+  "privacyPolicy": "Privacy Policy",
+  "termsOfService": "Terms of Service",
+  "agreeToTerms": "I agree to the terms",
+  "agreeToPrivacy": "I agree to the privacy policy"
 }

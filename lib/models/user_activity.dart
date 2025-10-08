@@ -57,7 +57,6 @@ class UserActivity {
             progress as Map<String, dynamic>,
           );
         } catch (e) {
-          print('Quiz progress dönüştürme hatası: $e');
           // Hatalı quiz ilerlemesini atla
         }
       });
@@ -256,7 +255,6 @@ class QuizProgress {
                 )
                 .toList();
       } catch (e) {
-        print('Cevapları dönüştürme hatası: $e');
       }
     }
 

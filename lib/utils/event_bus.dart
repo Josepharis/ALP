@@ -51,9 +51,7 @@ class EventBus {
         }
         _mistakesUpdatedController = null;
       }
-      print('EventBus kaynakları temizlendi');
     } catch (e) {
-      print('EventBus dispose hatası: $e');
     } finally {
       // Hata olsa da instance'ı sıfırla
       _mistakesUpdatedController = null;
@@ -68,7 +66,6 @@ class EventBus {
         _instance!.dispose();
       }
     } catch (e) {
-      print('EventBus güvenli dispose hatası: $e');
     } finally {
       // Her durumda instance'ı null yap
       _instance = null;

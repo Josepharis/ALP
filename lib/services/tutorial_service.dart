@@ -108,11 +108,8 @@ class TutorialService {
     try {
       final prefs = await SharedPreferences.getInstance();
       final hasShown = prefs.getBool(_tutorialShownKey) ?? false;
-      print('🔍 TutorialService: shouldShowTutorial - hasShown: $hasShown');
-      print('🔍 TutorialService: _tutorialShownKey: $_tutorialShownKey');
       return !hasShown;
     } catch (e) {
-      print('❌ TutorialService: shouldShowTutorial error: $e');
       return true; // Hata durumunda tanıtımı göster
     }
   }
@@ -122,9 +119,7 @@ class TutorialService {
     try {
       final prefs = await SharedPreferences.getInstance();
       await prefs.setBool(_tutorialShownKey, true);
-      print('Tutorial marked as shown');
     } catch (e) {
-      print('markTutorialAsShown error: $e');
     }
   }
 
@@ -135,7 +130,6 @@ class TutorialService {
       final featuresShown = prefs.getStringList(_featuresShownKey) ?? [];
       return !featuresShown.contains(featureKey);
     } catch (e) {
-      print('shouldShowFeature error: $e');
       return true; // Hata durumunda özelliği göster
     }
   }
@@ -150,7 +144,6 @@ class TutorialService {
         await prefs.setStringList(_featuresShownKey, featuresShown);
       }
     } catch (e) {
-      print('markFeatureAsShown error: $e');
     }
   }
 

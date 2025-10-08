@@ -1,4 +1,4 @@
-package com.example.anestezi
+package com.yftsoftware.anestezi
 
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine

@@ -37,7 +37,6 @@ class DeviceService {
         return 'web_${DateTime.now().millisecondsSinceEpoch}';
       }
     } catch (e) {
-      print('Device ID oluşturma hatası: $e');
       return 'unknown_${DateTime.now().millisecondsSinceEpoch}';
     }
   }
@@ -55,7 +54,6 @@ class DeviceService {
         return 'Web Browser';
       }
     } catch (e) {
-      print('Device name alma hatası: $e');
       return 'Bilinmeyen Cihaz';
     }
   }
@@ -83,7 +81,6 @@ class DeviceService {
       
       return registeredDevices?.length ?? 0;
     } catch (e) {
-      print('Cihaz sayısı alma hatası: $e');
       return 0;
     }
   }
@@ -107,7 +104,6 @@ class DeviceService {
           .map((entry) => DeviceInfo.fromMap(entry.value as Map<String, dynamic>))
           .toList();
     } catch (e) {
-      print('Kullanıcı cihazları alma hatası: $e');
       return [];
     }
   }
@@ -127,7 +123,6 @@ class DeviceService {
       
       return registeredDevices?.containsKey(deviceId) ?? false;
     } catch (e) {
-      print('Cihaz kayıt kontrolü hatası: $e');
       return false;
     }
   }
@@ -149,9 +144,6 @@ class DeviceService {
       final deviceName = await _getDeviceName();
       final platform = _getPlatformName();
 
-      print('🔍 Cihaz kaydı kontrol ediliyor...');
-      print('Device ID: $deviceId');
-      print('FCM Token: ${fcmToken.substring(0, 20)}...');
 
       // Cihaz zaten kayıtlı mı kontrol et
       final isRegistered = await isDeviceRegistered(deviceId);
@@ -159,7 +151,6 @@ class DeviceService {
       if (isRegistered) {
         // Mevcut cihaz - sadece token ve login zamanını güncelle
         await _updateExistingDevice(deviceId, fcmToken);
-        print('✅ Mevcut cihaz güncellenmiştir');
       } else {
         // Yeni cihaz - önce limit kontrolü yap
         final deviceCount = await getUserDeviceCount();
@@ -176,7 +167,6 @@ class DeviceService {
       }
 
     } catch (e) {
-      print('❌ Cihaz kaydı hatası: $e');
       rethrow;
     }
   }
@@ -232,7 +222,6 @@ class DeviceService {
 
       return true;
     } catch (e) {
-      print('❌ Cihaz kaldırma hatası: $e');
       return false;
     }
   }
@@ -253,7 +242,6 @@ class DeviceService {
       });
       
     } catch (e) {
-      print('❌ Cihaz kaydı silme hatası: $e');
       // Hata olsa bile devam et
     }
   }
@@ -270,7 +258,6 @@ class DeviceService {
       });
       
     } catch (e) {
-      print('❌ Cihaz kaydı silme hatası: $e');
       rethrow;
     }
   }
@@ -284,13 +271,11 @@ class DeviceService {
   // FCM token yenileme listener'ı kur
   void setupTokenRefreshListener() {
     _messaging.onTokenRefresh.listen((newToken) async {
-      print('🔄 FCM Token yenilendi: ${newToken.substring(0, 20)}...');
       
       try {
         final deviceId = await _generateDeviceId();
         await _updateExistingDevice(deviceId, newToken);
       } catch (e) {
-        print('❌ Token güncelleme hatası: $e');
       }
     });
   }
@@ -307,7 +292,6 @@ class DeviceService {
       sound: true,
     );
 
-    print('📱 Bildirim izni durumu: ${settings.authorizationStatus}');
     return settings.authorizationStatus == AuthorizationStatus.authorized;
   }
 } 

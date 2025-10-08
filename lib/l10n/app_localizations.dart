@@ -1127,8 +1127,14 @@ abstract class AppLocalizations {
   /// Accept all text
   ///
   /// In en, this message translates to:
-  /// **'I accept all '**
+  /// **''**
   String get acceptAll;
+
+  /// No description provided for @iAgree.
+  ///
+  /// In en, this message translates to:
+  /// **'I agree'**
+  String get iAgree;
 
   /// Terms of use link
   ///
@@ -2321,13 +2327,13 @@ abstract class AppLocalizations {
   /// No description provided for @testModeActive.
   ///
   /// In en, this message translates to:
-  /// **'TEST MODE ACTIVE'**
+  /// **'Test Mode Active'**
   String get testModeActive;
 
   /// No description provided for @testModeMessage.
   ///
   /// In en, this message translates to:
-  /// **'This feature is accessible in test mode!'**
+  /// **'All premium features are unlocked for testing purposes'**
   String get testModeMessage;
 
   /// No description provided for @testSettings.
@@ -2773,6 +2779,162 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Language settings successfully reset. App will restart.'**
   String get languageResetSuccessMessage;
+
+  /// No description provided for @informationPremiumMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Information section is available only for premium users'**
+  String get informationPremiumMessage;
+
+  /// No description provided for @informationPremiumSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Unlock comprehensive medical information and resources with premium access'**
+  String get informationPremiumSubtitle;
+
+  /// No description provided for @privacyTermsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy and Terms'**
+  String get privacyTermsTitle;
+
+  /// No description provided for @privacyPolicyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy Policy'**
+  String get privacyPolicyTitle;
+
+  /// No description provided for @privacyPolicyContent.
+  ///
+  /// In en, this message translates to:
+  /// **'This application applies the highest standards to protect users\' personal data. Collected data is used only to improve service quality and provide personalized experience. Your data is not shared with third parties and is stored on secure servers.'**
+  String get privacyPolicyContent;
+
+  /// No description provided for @termsOfServiceTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Terms of Service'**
+  String get termsOfServiceTitle;
+
+  /// No description provided for @termsOfServiceContent.
+  ///
+  /// In en, this message translates to:
+  /// **'By using this application, you agree to our terms of service. The application is for educational purposes only and does not constitute medical advice. Users should behave responsibly and avoid misuse of the application.'**
+  String get termsOfServiceContent;
+
+  /// No description provided for @copyrightTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Copyright and Patent Protection'**
+  String get copyrightTitle;
+
+  /// No description provided for @copyrightContent.
+  ///
+  /// In en, this message translates to:
+  /// **'All questions, content and materials in this application are protected by copyright. Questions have patent rights and unauthorized sharing is strictly prohibited. Copying, reproducing or distributing any content may result in legal action.'**
+  String get copyrightContent;
+
+  /// No description provided for @legalConsequencesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Legal Consequences'**
+  String get legalConsequencesTitle;
+
+  /// No description provided for @legalConsequencesContent.
+  ///
+  /// In en, this message translates to:
+  /// **'In case of unauthorized sharing of content in this application, legal action will be initiated due to copyright infringement. Compensation may be claimed from violators and criminal liability may arise. Additionally, the application account will be permanently closed.'**
+  String get legalConsequencesContent;
+
+  /// No description provided for @dataProtectionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Data Protection'**
+  String get dataProtectionTitle;
+
+  /// No description provided for @dataProtectionContent.
+  ///
+  /// In en, this message translates to:
+  /// **'Your personal data is protected under GDPR (General Data Protection Regulation). Your data is stored only as long as necessary and processed securely. You have the right to delete, correct or request access to your data.'**
+  String get dataProtectionContent;
+
+  /// No description provided for @userResponsibilitiesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'User Responsibilities'**
+  String get userResponsibilitiesTitle;
+
+  /// No description provided for @userResponsibilitiesContent.
+  ///
+  /// In en, this message translates to:
+  /// **'Users should use the application only for personal educational purposes. Sharing content, taking screenshots or publishing on other platforms is strictly prohibited. Users are responsible for ensuring account security.'**
+  String get userResponsibilitiesContent;
+
+  /// No description provided for @appRightsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Application Rights'**
+  String get appRightsTitle;
+
+  /// No description provided for @appRightsContent.
+  ///
+  /// In en, this message translates to:
+  /// **'The application owner has all necessary legal rights to protect content. Patent applications have been made and are under international protection. In case of violation, action will be taken within the framework of international law.'**
+  String get appRightsContent;
+
+  /// No description provided for @contactUs.
+  ///
+  /// In en, this message translates to:
+  /// **'Contact Us'**
+  String get contactUs;
+
+  /// No description provided for @contactInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'You can contact us for your questions. If you want to get legal consultation, you can use the contact information below.'**
+  String get contactInfo;
+
+  /// No description provided for @copyEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Copy Email'**
+  String get copyEmail;
+
+  /// No description provided for @copyPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'Copy Phone'**
+  String get copyPhone;
+
+  /// No description provided for @emailCopied.
+  ///
+  /// In en, this message translates to:
+  /// **'Email address copied'**
+  String get emailCopied;
+
+  /// No description provided for @phoneCopied.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone number copied'**
+  String get phoneCopied;
+
+  /// No description provided for @termsOfService.
+  ///
+  /// In en, this message translates to:
+  /// **'Terms of Service'**
+  String get termsOfService;
+
+  /// No description provided for @agreeToTerms.
+  ///
+  /// In en, this message translates to:
+  /// **'I agree to the terms'**
+  String get agreeToTerms;
+
+  /// No description provided for @agreeToPrivacy.
+  ///
+  /// In en, this message translates to:
+  /// **'I agree to the privacy policy'**
+  String get agreeToPrivacy;
 }
 
 class _AppLocalizationsDelegate

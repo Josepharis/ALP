@@ -44,35 +44,28 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
 
   @override
   void dispose() {
-    print('Leaderboard screen dispose ediliyor...');
     try {
       if (_leaderboardSubscription != null) {
         _leaderboardSubscription!.cancel();
         _leaderboardSubscription = null;
-        print('✅ Leaderboard stream iptal edildi');
       }
     } catch (e) {
-      print('⚠️ Leaderboard stream iptal hatası: $e');
     }
 
     try {
       if (_monthlyLeaderboardSubscription != null) {
         _monthlyLeaderboardSubscription!.cancel();
         _monthlyLeaderboardSubscription = null;
-        print('✅ Monthly leaderboard stream iptal edildi');
       }
     } catch (e) {
-      print('⚠️ Monthly leaderboard stream iptal hatası: $e');
     }
 
     try {
       if (_rankSubscription != null) {
         _rankSubscription!.cancel();
         _rankSubscription = null;
-        print('✅ Rank stream iptal edildi');
       }
     } catch (e) {
-      print('⚠️ Rank stream iptal hatası: $e');
     }
 
     // Monthly rank subscription şimdilik kullanılmıyor
@@ -80,16 +73,13 @@ class _LeaderboardScreenState extends State<LeaderboardScreen>
     //   if (_monthlyRankSubscription != null) {
     //     _monthlyRankSubscription!.cancel();
     //     _monthlyRankSubscription = null;
-    //     print('✅ Monthly rank stream iptal edildi');
     //   }
     // } catch (e) {
-    //   print('⚠️ Monthly rank stream iptal hatası: $e');
     // }
 
     _animationController.dispose();
     _scrollController.dispose();
     WidgetsBinding.instance.removeObserver(this);
-    print('✅ Leaderboard screen dispose tamamlandı');
     super.dispose();
   }
 

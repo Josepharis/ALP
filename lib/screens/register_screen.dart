@@ -5,7 +5,7 @@ import '../l10n/app_localizations.dart';
 import '../theme/app_theme.dart';
 import 'package:flutter/gestures.dart';
 import '../services/auth_service.dart';
-import '../services/user_service.dart';
+import '../screens/privacy_terms_screen.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
@@ -29,7 +29,6 @@ class _RegisterScreenState extends State<RegisterScreen>
   String _errorMessage = '';
 
   final AuthService _authService = AuthService();
-  final UserService _userService = UserService();
 
   AnimationController? _animationController;
   Animation<double>? _fadeAnimation;
@@ -109,7 +108,6 @@ class _RegisterScreenState extends State<RegisterScreen>
       });
 
       try {
-        print('🔄 iOS simülatör: Kayıt işlemi başlatılıyor...');
         
         // iOS simülatör için çok basit kayıt işlemi
         final user = await _authService.registerWithEmailAndPassword(
@@ -119,19 +117,15 @@ class _RegisterScreenState extends State<RegisterScreen>
           title: _titleController.text.trim(),
         );
 
-        print('✅ iOS simülatör: Kullanıcı kaydı tamamlandı: ${user?.uid}');
 
         if (user != null && mounted) {
-          print('🔄 iOS simülatör: Ana sayfaya yönlendiriliyor...');
           
           // Çok basit navigasyon - ayarlar oluşturmayı atla
           if (mounted) {
             Navigator.of(context).pushReplacementNamed('/home');
-            print('✅ iOS simülatör: Ana sayfaya yönlendirildi');
           }
         }
       } catch (e) {
-        print('❌ iOS simülatör kayıt hatası: $e');
         setState(() {
           _errorMessage = _getErrorMessage(e);
         });
@@ -653,60 +647,103 @@ class _RegisterScreenState extends State<RegisterScreen>
                                                   const SizedBox(width: 8),
                                                   Expanded(
                                                     child: RichText(
-                                                      text: TextSpan(
-                                                        text: AppLocalizations.of(context)!.acceptAll,
-                                                        style: const TextStyle(
-                                                          color: Colors.grey,
-                                                          fontSize: 13,
-                                                        ),
-                                                        children: [
-                                                          TextSpan(
-                                                            text:
-                                                                AppLocalizations.of(context)!.termsOfUse,
-                                                            style: TextStyle(
-                                                              color:
-                                                                  Colors
-                                                                      .blue
-                                                                      .shade300,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold,
+                                                      text: Localizations.localeOf(context).languageCode == 'tr' 
+                                                        ? TextSpan(
+                                                            text: AppLocalizations.of(context)!.acceptAll,
+                                                            style: const TextStyle(
+                                                              color: Colors.grey,
                                                               fontSize: 13,
                                                             ),
-                                                            recognizer:
-                                                                TapGestureRecognizer()
+                                                            children: [
+                                                              TextSpan(
+                                                                text: AppLocalizations.of(context)!.termsOfService,
+                                                                style: TextStyle(
+                                                                  color: Colors.blue.shade300,
+                                                                  fontWeight: FontWeight.bold,
+                                                                  decoration: TextDecoration.underline,
+                                                                ),
+                                                                recognizer: TapGestureRecognizer()
                                                                   ..onTap = () {
-                                                                    // Kullanım koşulları sayfasına yönlendir
+                                                                    Navigator.push(
+                                                                      context,
+                                                                      MaterialPageRoute(
+                                                                        builder: (context) => const PrivacyTermsScreen(),
+                                                                      ),
+                                                                    );
                                                                   },
-                                                          ),
-                                                          TextSpan(
-                                                            text: ' ${AppLocalizations.of(context)!.and} ',
-                                                          ),
-                                                          TextSpan(
-                                                            text:
-                                                                AppLocalizations.of(context)!.privacyPolicy,
-                                                            style: TextStyle(
-                                                              color:
-                                                                  Colors
-                                                                      .blue
-                                                                      .shade300,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold,
+                                                              ),
+                                                              const TextSpan(text: ' ve '),
+                                                              TextSpan(
+                                                                text: AppLocalizations.of(context)!.privacyPolicy,
+                                                                style: TextStyle(
+                                                                  color: Colors.blue.shade300,
+                                                                  fontWeight: FontWeight.bold,
+                                                                  decoration: TextDecoration.underline,
+                                                                ),
+                                                                recognizer: TapGestureRecognizer()
+                                                                  ..onTap = () {
+                                                                    Navigator.push(
+                                                                      context,
+                                                                      MaterialPageRoute(
+                                                                        builder: (context) => const PrivacyTermsScreen(),
+                                                                      ),
+                                                                    );
+                                                                  },
+                                                              ),
+                                                              TextSpan(
+                                                                text: ' ${AppLocalizations.of(context)!.iAgree}',
+                                                                style: const TextStyle(
+                                                                  color: Colors.grey,
+                                                                  fontSize: 13,
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          )
+                                                        : TextSpan(
+                                                            text: AppLocalizations.of(context)!.iAgree,
+                                                            style: const TextStyle(
+                                                              color: Colors.grey,
                                                               fontSize: 13,
                                                             ),
-                                                            recognizer:
-                                                                TapGestureRecognizer()
+                                                            children: [
+                                                              const TextSpan(text: ' to '),
+                                                              TextSpan(
+                                                                text: AppLocalizations.of(context)!.termsOfService,
+                                                                style: TextStyle(
+                                                                  color: Colors.blue.shade300,
+                                                                  fontWeight: FontWeight.bold,
+                                                                  decoration: TextDecoration.underline,
+                                                                ),
+                                                                recognizer: TapGestureRecognizer()
                                                                   ..onTap = () {
-                                                                    // Gizlilik politikası sayfasına yönlendir
+                                                                    Navigator.push(
+                                                                      context,
+                                                                      MaterialPageRoute(
+                                                                        builder: (context) => const PrivacyTermsScreen(),
+                                                                      ),
+                                                                    );
                                                                   },
+                                                              ),
+                                                              const TextSpan(text: ' and '),
+                                                              TextSpan(
+                                                                text: AppLocalizations.of(context)!.privacyPolicy,
+                                                                style: TextStyle(
+                                                                  color: Colors.blue.shade300,
+                                                                  fontWeight: FontWeight.bold,
+                                                                  decoration: TextDecoration.underline,
+                                                                ),
+                                                                recognizer: TapGestureRecognizer()
+                                                                  ..onTap = () {
+                                                                    Navigator.push(
+                                                                      context,
+                                                                      MaterialPageRoute(
+                                                                        builder: (context) => const PrivacyTermsScreen(),
+                                                                      ),
+                                                                    );
+                                                                  },
+                                                              ),
+                                                            ],
                                                           ),
-                                                          TextSpan(
-                                                            text:
-                                                                ' ${AppLocalizations.of(context)!.accept}.',
-                                                          ),
-                                                        ],
-                                                      ),
                                                     ),
                                                   ),
                                                 ],

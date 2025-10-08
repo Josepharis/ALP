@@ -545,13 +545,16 @@ class AppLocalizationsTr extends AppLocalizations {
       '❌ Şifreler eşleşmiyor\n💡 Aynı şifreyi tekrar girin';
 
   @override
-  String get acceptAll => 'Tüm ';
+  String get acceptAll => '';
+
+  @override
+  String get iAgree => 'kabul ediyorum';
 
   @override
   String get termsOfUse => 'Kullanım Koşullarını';
 
   @override
-  String get privacyPolicy => 'Gizlilik Politikasını';
+  String get privacyPolicy => 'Gizlilik Politikası';
 
   @override
   String get registrationFailed => 'Kayıt Başarısız';
@@ -1170,10 +1173,10 @@ class AppLocalizationsTr extends AppLocalizations {
   String get goToPremium => 'Premium\'a Geç';
 
   @override
-  String get testModeActive => 'TEST MODU AKTİF';
+  String get testModeActive => 'Test Modu Aktif';
 
   @override
-  String get testModeMessage => 'Bu özellik test modunda erişilebilir durumda!';
+  String get testModeMessage => 'Tüm premium özellikler test amaçlı açılmıştır';
 
   @override
   String get testSettings => 'Test Ayarları';
@@ -1415,4 +1418,92 @@ class AppLocalizationsTr extends AppLocalizations {
   @override
   String get languageResetSuccessMessage =>
       'Dil ayarları başarıyla sıfırlandı. Uygulama yeniden başlatılacak.';
+
+  @override
+  String get informationPremiumMessage =>
+      'Bilgiler bölümü sadece premium kullanıcılara açıktır';
+
+  @override
+  String get informationPremiumSubtitle =>
+      'Premium erişim ile kapsamlı tıbbi bilgi ve kaynakların kilidini açın';
+
+  @override
+  String get privacyTermsTitle => 'Gizlilik ve Koşullar';
+
+  @override
+  String get privacyPolicyTitle => 'Gizlilik Politikası';
+
+  @override
+  String get privacyPolicyContent =>
+      'Bu uygulama, kullanıcıların kişisel verilerini korumak için en yüksek standartları uygular. Toplanan veriler sadece hizmet kalitesini artırmak ve kişiselleştirilmiş deneyim sunmak için kullanılır. Verileriniz üçüncü taraflarla paylaşılmaz ve güvenli sunucularda saklanır.';
+
+  @override
+  String get termsOfServiceTitle => 'Hizmet Koşulları';
+
+  @override
+  String get termsOfServiceContent =>
+      'Bu uygulamayı kullanarak, hizmet koşullarımızı kabul etmiş olursunuz. Uygulama sadece eğitim amaçlıdır ve tıbbi tavsiye niteliği taşımaz. Kullanıcılar sorumlu bir şekilde davranmalı ve uygulamanın kötüye kullanımından kaçınmalıdır.';
+
+  @override
+  String get copyrightTitle => 'Telif Hakkı ve Patent Koruması';
+
+  @override
+  String get copyrightContent =>
+      'Bu uygulamadaki tüm sorular, içerikler ve materyaller telif hakkı ile korunmaktadır. Soruların patent hakları mevcuttur ve izinsiz paylaşımı kesinlikle yasaktır. Herhangi bir içeriğin kopyalanması, çoğaltılması veya dağıtılması yasal işlem başlatılmasına neden olabilir.';
+
+  @override
+  String get legalConsequencesTitle => 'Hukuki Sonuçlar';
+
+  @override
+  String get legalConsequencesContent =>
+      'Bu uygulamadaki içeriklerin izinsiz paylaşılması durumunda, telif hakkı ihlali nedeniyle hukuki işlem başlatılacaktır. İhlal eden kişilerden tazminat talep edilebilir ve cezai sorumluluk doğabilir. Ayrıca, uygulama hesabı kalıcı olarak kapatılacaktır.';
+
+  @override
+  String get dataProtectionTitle => 'Veri Koruma';
+
+  @override
+  String get dataProtectionContent =>
+      'Kişisel verileriniz KVKK (Kişisel Verilerin Korunması Kanunu) kapsamında korunmaktadır. Verileriniz sadece gerekli olduğu kadar saklanır ve güvenli şekilde işlenir. Verilerinizi silme, düzeltme veya erişim talep etme hakkınız bulunmaktadır.';
+
+  @override
+  String get userResponsibilitiesTitle => 'Kullanıcı Sorumlulukları';
+
+  @override
+  String get userResponsibilitiesContent =>
+      'Kullanıcılar, uygulamayı sadece kişisel eğitim amaçlı kullanmalıdır. İçeriklerin paylaşılması, ekran görüntüsü alınması veya başka platformlarda yayınlanması kesinlikle yasaktır. Kullanıcılar, hesap güvenliğini sağlamakla yükümlüdür.';
+
+  @override
+  String get appRightsTitle => 'Uygulama Hakları';
+
+  @override
+  String get appRightsContent =>
+      'Uygulama sahibi, içeriklerin korunması için gerekli tüm yasal haklara sahiptir. Patent başvuruları yapılmıştır ve uluslararası koruma altındadır. İhlal durumunda, uluslararası hukuk çerçevesinde işlem yapılacaktır.';
+
+  @override
+  String get contactUs => 'İletişim';
+
+  @override
+  String get contactInfo =>
+      'Sorularınız için bizimle iletişime geçebilirsiniz. Hukuki konularda danışmanlık almak istiyorsanız, aşağıdaki iletişim bilgilerini kullanabilirsiniz.';
+
+  @override
+  String get copyEmail => 'E-posta Kopyala';
+
+  @override
+  String get copyPhone => 'Telefon Kopyala';
+
+  @override
+  String get emailCopied => 'E-posta adresi kopyalandı';
+
+  @override
+  String get phoneCopied => 'Telefon numarası kopyalandı';
+
+  @override
+  String get termsOfService => 'Hizmet Koşulları';
+
+  @override
+  String get agreeToTerms => 'Koşulları kabul ediyorum';
+
+  @override
+  String get agreeToPrivacy => 'Gizlilik politikasını kabul ediyorum';
 }

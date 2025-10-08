@@ -112,7 +112,6 @@ class OrganizedDataService {
   // Tüm soruları ve kategorileri toplu sil (Batch limit aşımı ile)
   Future<void> clearAllData() async {
     try {
-      print('🗑️ Starting bulk delete of all data...');
       
       // 1. Tüm quiz kategorilerini sil
       await _deleteCollectionInBatches('quizCategories');
@@ -123,9 +122,7 @@ class OrganizedDataService {
       // 3. Kısa bekleme
       await Future.delayed(const Duration(seconds: 1));
       
-      print('🎉 All data cleared successfully!');
     } catch (e) {
-      print('❌ Error clearing data: $e');
       rethrow;
     }
   }
@@ -147,7 +144,6 @@ class OrganizedDataService {
         break;
       }
       
-      print('Deleting ${snapshot.docs.length} documents from $collectionName...');
       
       final batch = _firestore.batch();
       for (final doc in snapshot.docs) {
@@ -156,7 +152,6 @@ class OrganizedDataService {
       
       await batch.commit();
       totalDeleted += snapshot.docs.length;
-      print('✅ Deleted $totalDeleted documents from $collectionName');
       
       // Eğer batch size'dan az document varsa, daha fazla yok
       if (snapshot.docs.length < batchSize) {
@@ -167,7 +162,6 @@ class OrganizedDataService {
       await Future.delayed(const Duration(milliseconds: 100));
     }
     
-    print('🎯 Total deleted from $collectionName: $totalDeleted documents');
   }
 
   // Quiz kategorilerini organize şekilde aktarma
@@ -654,7 +648,6 @@ class OrganizedDataService {
         final collectionName = category['collectionName'] as String;
         final questions = category['questions'] as dynamic;
 
-        print('Migrating category: $displayName -> $collectionName');
 
         if (questions is List && questions.isNotEmpty) {
           // Önce category meta bilgisini kaydet
@@ -664,7 +657,6 @@ class OrganizedDataService {
             questions.length,
           );
 
-          print('Found ${questions.length} questions in $displayName');
 
           for (int i = 0; i < questions.length; i++) {
             try {
@@ -679,13 +671,11 @@ class OrganizedDataService {
               );
               totalMigrated++;
             } catch (e) {
-              print('Error migrating question ${i + 1} from $displayName: $e');
               totalErrors++;
             }
           }
           migratedCategories.add(displayName);
         } else {
-          print('Warning: $displayName does not contain questions');
         }
       }
 
@@ -696,7 +686,6 @@ class OrganizedDataService {
         'categories': migratedCategories,
       };
     } catch (e) {
-      print('Error in migrateOrganizedQuestions: $e');
       return {
         'success': false,
         'error': e.toString(),
@@ -723,7 +712,6 @@ class OrganizedDataService {
         'isActive': true,
       }, SetOptions(merge: true));
     } catch (e) {
-      print('Error creating category meta: $e');
     }
   }
 
@@ -747,9 +735,7 @@ class OrganizedDataService {
                 .get();
 
         if (existingQuery.docs.isNotEmpty) {
-          print(
-            'Question already exists, skipping: ${question['question']?.toString().substring(0, min(50, question['question']?.toString().length ?? 0))}...',
-          );
+          // Question already exists, skipping
           return;
         }
       }
@@ -777,7 +763,6 @@ class OrganizedDataService {
           .collection('items')
           .add(questionData);
     } catch (e) {
-      print('Error migrating organized question: $e');
       rethrow;
     }
   }
@@ -848,7 +833,6 @@ class OrganizedDataService {
         };
       }).toList();
     } catch (e) {
-      print('Error getting organized categories: $e');
       return [];
     }
   }
@@ -893,7 +877,6 @@ class OrganizedDataService {
         };
       }).toList();
     } catch (e) {
-      print('Error getting organized categories by language: $e');
       return [];
     }
   }
@@ -927,7 +910,6 @@ class OrganizedDataService {
         };
       }).toList();
     } catch (e) {
-      print('Error getting questions by category: $e');
       return [];
     }
   }
@@ -946,7 +928,6 @@ class OrganizedDataService {
           .delete();
       return true;
     } catch (e) {
-      print('Error deleting organized question: $e');
       return false;
     }
   }
@@ -970,7 +951,6 @@ class OrganizedDataService {
           });
       return true;
     } catch (e) {
-      print('Error updating organized question: $e');
       return false;
     }
   }
@@ -1021,8 +1001,6 @@ class OrganizedDataService {
         },
       ];
 
-      print('🇹🇷 Starting Turkish questions migration...');
-      print('Found ${turkishCategories.length} Turkish categories');
 
       for (final category in turkishCategories) {
         try {
@@ -1030,7 +1008,6 @@ class OrganizedDataService {
           final collectionName = category['collectionName'] as String;
           final questions = category['questions'] as List<Question>;
 
-          print('Migrating: $displayName (${questions.length} questions)');
 
           // Kategori bilgilerini kaydet
           await _firestore.collection('quizCategories').doc(collectionName).set({
@@ -1056,18 +1033,12 @@ class OrganizedDataService {
 
           migratedCategories.add(displayName);
           totalMigrated += questions.length;
-          print('✅ Migrated: $displayName - ${questions.length} questions');
 
         } catch (e) {
-          print('❌ Error migrating category ${category['displayName']}: $e');
           totalErrors++;
         }
       }
 
-      print('🎉 Turkish migration completed!');
-      print('Total migrated: $totalMigrated questions');
-      print('Total errors: $totalErrors');
-      print('Migrated categories: ${migratedCategories.length}');
 
       return {
         'totalMigrated': totalMigrated,
@@ -1077,7 +1048,6 @@ class OrganizedDataService {
       };
 
     } catch (e) {
-      print('❌ Error in Turkish migration: $e');
       rethrow;
     }
   }
@@ -1288,8 +1258,6 @@ class OrganizedDataService {
         },
       ];
 
-      print('🇺🇸 Starting English questions migration...');
-      print('Found ${englishCategories.length} English categories');
 
       for (final category in englishCategories) {
         try {
@@ -1297,7 +1265,6 @@ class OrganizedDataService {
           final collectionName = category['collectionName'] as String;
           final questions = category['questions'] as List<Question>;
 
-          print('Migrating: $displayName (${questions.length} questions)');
 
           // Kategori bilgilerini kaydet
           await _firestore.collection('quizCategories').doc(collectionName).set({
@@ -1323,18 +1290,12 @@ class OrganizedDataService {
 
           migratedCategories.add(displayName);
           totalMigrated += questions.length;
-          print('✅ Migrated: $displayName - ${questions.length} questions');
 
         } catch (e) {
-          print('❌ Error migrating category ${category['displayName']}: $e');
           totalErrors++;
         }
       }
 
-      print('🎉 English migration completed!');
-      print('Total migrated: $totalMigrated questions');
-      print('Total errors: $totalErrors');
-      print('Migrated categories: ${migratedCategories.length}');
 
       return {
         'totalMigrated': totalMigrated,
@@ -1344,7 +1305,6 @@ class OrganizedDataService {
       };
 
     } catch (e) {
-      print('❌ Error in English migration: $e');
       rethrow;
     }
   }
@@ -1374,7 +1334,6 @@ class OrganizedDataService {
         'questionsByCategory': questionsByCategory,
       };
     } catch (e) {
-      print('Error getting organized statistics: $e');
       return {
         'totalQuestions': 0,
         'totalCategories': 0,

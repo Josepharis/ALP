@@ -241,7 +241,6 @@ class _SplashScreenState extends State<SplashScreen>
             Navigator.of(context).pushReplacementNamed('/home');
           }
         } catch (e) {
-          print('Admin kontrol hatası: $e');
           // Hata durumunda ana sayfaya yönlendir
           if (mounted) {
             Navigator.of(context).pushReplacementNamed('/home');
@@ -254,7 +253,6 @@ class _SplashScreenState extends State<SplashScreen>
         }
       }
     } catch (e) {
-      print('Splash screen kontrol hatası: $e');
       // Hata durumunda login sayfasına yönlendir
       if (mounted) {
         Navigator.of(context).pushReplacementNamed('/login');
@@ -274,7 +272,6 @@ class _SplashScreenState extends State<SplashScreen>
         // Eğer currentUser null değilse veya Firebase Auth hazırsa devam et
         break;
       } catch (e) {
-        print('Auth bekleme denemesi ${attempts + 1}: $e');
         attempts++;
         await Future.delayed(const Duration(milliseconds: 300));
       }

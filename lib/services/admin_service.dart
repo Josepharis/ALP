@@ -74,12 +74,6 @@ class AdminService {
           recentQuizAttemptsSnapshot.docs.length +
           recentCompletedQuizzesSnapshot.docs.length;
 
-      print('Kullanıcı İstatistikleri:');
-      print('- Toplam kullanıcılar: $totalUsers');
-      print('- Son 7 gün yeni: $newUsersLastWeek');
-      print('- Son 24 saat aktif: $activeUsersToday');
-      print('- Toplam quiz denemesi: $totalQuizzes');
-      print('- Son 7 gün quiz: $recentQuizzes');
 
       return {
         'totalUsers': totalUsers,
@@ -89,7 +83,6 @@ class AdminService {
         'recentQuizzes': recentQuizzes,
       };
     } catch (e) {
-      print('Error getting user statistics: $e');
       return {
         'totalUsers': 0,
         'newUsersLastWeek': 0,
@@ -122,7 +115,6 @@ class AdminService {
         };
       }).toList();
     } catch (e) {
-      print('Error getting users: $e');
       return [];
     }
   }
@@ -142,7 +134,6 @@ class AdminService {
 
       return categories.toList()..sort();
     } catch (e) {
-      print('Error getting categories: $e');
       return [];
     }
   }
@@ -173,7 +164,6 @@ class AdminService {
         };
       }).toList();
     } catch (e) {
-      print('Error getting questions by category: $e');
       return [];
     }
   }
@@ -188,7 +178,6 @@ class AdminService {
       });
       return true;
     } catch (e) {
-      print('Error adding question: $e');
       return false;
     }
   }
@@ -206,7 +195,6 @@ class AdminService {
       });
       return true;
     } catch (e) {
-      print('Error updating question: $e');
       return false;
     }
   }
@@ -217,7 +205,6 @@ class AdminService {
       await _firestore.collection('questions').doc(questionId).delete();
       return true;
     } catch (e) {
-      print('Error deleting question: $e');
       return false;
     }
   }
@@ -263,11 +250,6 @@ class AdminService {
       allQuestionsByCategory.addAll(organizedQuestionsByCategory);
       allQuestionsByCategory.addAll(legacyQuestionsByCategory);
 
-      print('Quiz İstatistikleri:');
-      print('- Organize sorular: $organizedQuestions');
-      print('- Eski format sorular: $legacyQuestions');
-      print('- Toplam sorular: $totalQuestions');
-      print('- Toplam kategoriler: $totalCategories');
 
       return {
         'totalQuestions': totalQuestions,
@@ -278,7 +260,6 @@ class AdminService {
         'organizedCategories': organizedCategories,
       };
     } catch (e) {
-      print('Error getting quiz statistics: $e');
       return {
         'totalQuestions': 0,
         'totalCategories': 0,
@@ -303,7 +284,6 @@ class AdminService {
       Map<String, int> turkishQuestionsByCategory = {};
       Map<String, int> englishQuestionsByCategory = {};
 
-      print('🔍 Processing ${allCategoriesSnapshot.docs.length} categories...');
 
       // Kategorileri işle - language field'ına göre dil belirle
       for (final categoryDoc in allCategoriesSnapshot.docs) {
@@ -325,7 +305,6 @@ class AdminService {
             determinedLanguage = 'turkish';
           }
           
-          print('📝 Updating category "$displayName" with language: $determinedLanguage');
           
           // Language field'ını güncelle
           await categoryDoc.reference.update({'language': determinedLanguage});
@@ -341,13 +320,6 @@ class AdminService {
         }
       }
 
-      print('Dil Bazlı Quiz İstatistikleri:');
-      print('- Türkçe sorular: $turkishQuestions');
-      print('- İngilizce sorular: $englishQuestions');
-      print('- Türkçe kategoriler: ${turkishQuestionsByCategory.length}');
-      print('- İngilizce kategoriler: ${englishQuestionsByCategory.length}');
-      print('- Türkçe kategoriler: ${turkishQuestionsByCategory.keys.toList()}');
-      print('- İngilizce kategoriler: ${englishQuestionsByCategory.keys.toList()}');
 
       return {
         'turkishQuestions': turkishQuestions,
@@ -358,7 +330,6 @@ class AdminService {
         'englishCategories': englishQuestionsByCategory.length,
       };
     } catch (e) {
-      print('Error getting language-based quiz statistics: $e');
       return {
         'turkishQuestions': 0,
         'englishQuestions': 0,
@@ -397,7 +368,6 @@ class AdminService {
         'collectionName': data['collectionName'] ?? '',
       };
     } catch (e) {
-      print('Error getting quiz category details: $e');
       return {
         'questionCount': 0,
         'description': '',
@@ -438,9 +408,7 @@ class AdminService {
         'score': FieldValue.increment(score),
       });
 
-      print('Quiz completion recorded for user: $userId');
     } catch (e) {
-      print('Error recording quiz completion: $e');
     }
   }
 
@@ -457,9 +425,7 @@ class AdminService {
         'lastActivity': FieldValue.serverTimestamp(),
       });
 
-      print('User login recorded: $userId');
     } catch (e) {
-      print('Error recording user login: $e');
     }
   }
 

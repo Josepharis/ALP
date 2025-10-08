@@ -164,7 +164,6 @@ class _DailyQuestionScreenState extends State<DailyQuestionScreen>
         _showResultDialog(isCorrect);
       }
     } catch (e) {
-      print('Günün sorusu yanıtlama hatası: $e');
       SnackBarUtils.showErrorSnackBar(
         context,
         AppLocalizations.of(context)!.errorTryAgain,

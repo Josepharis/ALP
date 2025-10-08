@@ -53,8 +53,6 @@ class _QuizScreenState extends State<QuizScreen>
     currentQuestionIndex = widget.initialQuestionIndex;
     score = widget.initialScore;
 
-    print('Toplam soru sayısı: ${widget.questions.length}');
-    print('Başlangıç sorusu: $currentQuestionIndex, Başlangıç puanı: $score');
 
     _animationController = AnimationController(
       vsync: this,
@@ -108,7 +106,6 @@ class _QuizScreenState extends State<QuizScreen>
         AppLocalizations.of(context)!.quizProgressSaved,
       );
     } catch (e) {
-      print('Quiz ilerleme kaydetme hatası: $e');
     }
   }
 
@@ -292,10 +289,8 @@ class _QuizScreenState extends State<QuizScreen>
       // Doğru cevapların puanlarını ve profil güncellemesini yap
       try {
         // Profil ekranına dönüş için hazırlık yap
-        print("Quiz'den çıkılıyor, profil yenilenecek");
         return true;
       } catch (e) {
-        print('Quiz çıkış hatası: $e');
         return true;
       }
     }
@@ -313,13 +308,11 @@ class _QuizScreenState extends State<QuizScreen>
         
         // Premium kontrolü - 2. sorudan sonra premium gerekli
         if (PremiumAccessService.shouldShowPremiumScreenWithTestMode(currentQuestionIndex, isPremium, premiumService.isTestMode)) {
-          print('🔒 Premium ekranı gösteriliyor - Test Modu: ${premiumService.isTestMode}, Premium: $isPremium, Soru: $currentQuestionIndex');
           return _buildPremiumLockScreen();
         }
         
         // Test modu durumunu logla
         if (premiumService.isTestMode) {
-          print('🧪 Test Modu Aktif - Tüm premium kontrolleri atlandı');
         }
         
         return PopScope(
@@ -729,7 +722,6 @@ class _QuizScreenState extends State<QuizScreen>
   // Süre bittiğinde çalışacak metod
   void _handleTimeExpired() {
     if (!isAnswered) {
-      print('SÜRE BİTTİ - Soru otomatik olarak yanlış sayılacak');
       
       // Soruyu yanlış olarak işaretle
       setState(() {
@@ -743,7 +735,6 @@ class _QuizScreenState extends State<QuizScreen>
       // Cevap istatistiklerini güncelle
       _quizService.updateAnswerStatistics(false, 0).then((success) {
         if (!success) {
-          print('Süre bitimi - Cevap istatistiği kaydetme işlemi başarısız oldu');
         }
       });
 
@@ -764,9 +755,7 @@ class _QuizScreenState extends State<QuizScreen>
       final isCorrect =
           index == widget.questions[currentQuestionIndex].correctAnswerIndex;
 
-      print(
-        "CEVAP: ${isCorrect ? AppLocalizations.of(context)!.correct.toUpperCase() : AppLocalizations.of(context)!.incorrect.toUpperCase()} - Soru: ${widget.questions[currentQuestionIndex].question}",
-      );
+      // Cevap seçildi
 
       setState(() {
         selectedAnswerIndex = index;
@@ -775,7 +764,6 @@ class _QuizScreenState extends State<QuizScreen>
           score++;
         } else {
           // Yanlış cevap verildiğinde soruyu kaydet
-          print("YANLIŞ CEVAP VERİLDİ! Kaydediliyor...");
           _saveWrongAnswer();
         }
       });
@@ -787,14 +775,11 @@ class _QuizScreenState extends State<QuizScreen>
           isCorrect ? 10 : 0,
         );
         if (!success) {
-          print('Cevap istatistiği kaydetme işlemi başarısız oldu');
+          // Kaydetme başarısız
         } else {
-          print(
-            'Cevap istatistiği başarıyla kaydedildi: ${isCorrect ? "Doğru" : "Yanlış"}',
-          );
+          // Cevap istatistiği başarıyla kaydedildi
         }
       } catch (e) {
-        print('Cevap istatistiği kaydetme hatası: $e');
       }
 
       _animationController.stop();
@@ -808,43 +793,26 @@ class _QuizScreenState extends State<QuizScreen>
 
 
 
-      print("===== YANLIŞ CEVAP KAYIT İŞLEMİ BAŞLATILIYOR =====");
-      print(
-        "SORU KAYDETME BAŞLADI: ${currentQuestion.question.substring(0, min(30, currentQuestion.question.length))}...",
-      );
-      print("Soru ID: ${currentQuestion.id ?? 'ID YOK'}");
-      print("Kategori: ${widget.categoryName}");
-      print("Seçenekler sayısı: ${currentQuestion.options.length}");
-      print("Doğru cevap indeksi: ${currentQuestion.correctAnswerIndex}");
-      print(
-        "Açıklama var mı: ${currentQuestion.explanation != null && currentQuestion.explanation!.isNotEmpty ? 'Evet' : 'Hayır'}",
-      );
+      // Soru kaydetme başladı
 
       if (currentQuestion.id == null || currentQuestion.id!.isEmpty) {
-        print("UYARI: Sorunun ID'si boş! Otomatik ID oluşturulacak.");
+        // Uyarı: Sorunun ID'si boş
       }
 
       // Yanlış cevabı kaydet
-      print("QuizService.saveWrongAnswer fonksiyonu çağrılıyor...");
       final result = await _quizService.saveWrongAnswer(
         currentQuestion,
         widget.categoryName,
       );
 
       if (result) {
-        print("===== YANLIŞ CEVAP KAYIT İŞLEMİ TAMAMLANDI =====");
 
         // Yanlış cevap kaydedildikten sonra EventBus ile bildirim gönder
         // Bu sayede Eksikler sayfası otomatik olarak güncellenecek
         EventBus().fireMistakesUpdated(true);
-        print("Eksikler sayfası güncelleme bildirimi gönderildi");
       } else {
-        print("KAYIT BAŞARISIZ: Yanlış cevap kaydedilemedi!");
-        print("===== YANLIŞ CEVAP KAYIT İŞLEMİ BAŞARISIZ =====");
       }
     } catch (e) {
-      print('HATA - Yanlış cevabı kaydetme hatası: $e');
-      print("===== YANLIŞ CEVAP KAYIT İŞLEMİ HATA İLE SONUÇLANDI =====");
     }
   }
 
@@ -874,9 +842,7 @@ class _QuizScreenState extends State<QuizScreen>
     final int totalQuestions = widget.questions.length;
     final double percentage = (totalScore / totalQuestions) * 100;
 
-    print(
-      'Quiz tamamlandı: Skor=$totalScore/$totalQuestions, Başarı=%${percentage.toStringAsFixed(0)}',
-    );
+    // Quiz tamamlandı
 
     // Quiz'i tamamla
     _onCompleteQuiz();
@@ -894,9 +860,7 @@ class _QuizScreenState extends State<QuizScreen>
     });
 
     try {
-      print(
-        'Quiz tamamlanıyor: kategori=${widget.categoryName}, skor=$score/${widget.questions.length}',
-      );
+      // Quiz tamamlanıyor
 
       final result = await _quizService.completeQuiz(
         widget.categoryName,
@@ -911,7 +875,6 @@ class _QuizScreenState extends State<QuizScreen>
         // Quiz tamamlandıktan sonra EventBus ile bildirim gönder
         // Bu sayede hem ana sayfa hem de quizler ekranı güncellenecek
         EventBus().fireMistakesUpdated(true);
-        print("Quiz tamamlandı bildirimi gönderildi - Tüm sayfalar yenilenecek");
 
         // Kısa bir gecikme ekle ki veritabanı güncellemesi tamamlansın
         await Future.delayed(const Duration(milliseconds: 500));
@@ -937,14 +900,12 @@ class _QuizScreenState extends State<QuizScreen>
         
         SnackBarUtils.showSuccessSnackBar(context, AppLocalizations.of(context)!.quizCompleted);
       } else {
-        print('HATA: Quiz tamamlanamadı veya veritabanına kaydedilemedi');
         SnackBarUtils.showErrorSnackBar(
           context,
           AppLocalizations.of(context)!.quizCompletionError,
         );
       }
     } catch (e) {
-      print('_onCompleteQuiz hatası: $e');
       if (!mounted) return;
       SnackBarUtils.showErrorSnackBar(context, 'Hata: $e');
     } finally {

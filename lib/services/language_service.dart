@@ -52,7 +52,6 @@ class LanguageService extends ChangeNotifier {
       
       notifyListeners();
     } catch (e) {
-      print('Dil yüklenirken hata: $e');
     }
   }
   
@@ -70,7 +69,6 @@ class LanguageService extends ChangeNotifier {
       
       notifyListeners();
     } catch (e) {
-      print('Dil kaydedilirken hata: $e');
     }
   }
   
@@ -84,7 +82,6 @@ class LanguageService extends ChangeNotifier {
       _currentLocale = const Locale('tr'); // Varsayılan dil
       notifyListeners();
     } catch (e) {
-      print('Dil seçimi sıfırlanırken hata: $e');
     }
   }
   

@@ -132,10 +132,8 @@ class RealDataMigrationService {
         final category = questionSet['category'] as String;
         final questions = questionSet['questions'] as dynamic;
 
-        print('Migrating category: $category');
 
         if (questions is List) {
-          print('Found ${questions.length} questions in $category');
 
           for (final question in questions) {
             try {
@@ -143,13 +141,11 @@ class RealDataMigrationService {
               await _migrateQuestion(questionMap, category);
               totalMigrated++;
             } catch (e) {
-              print('Error migrating question from $category: $e');
               totalErrors++;
             }
           }
           migratedCategories.add(category);
         } else {
-          print('Warning: $category does not contain a list of questions');
         }
       }
 
@@ -160,7 +156,6 @@ class RealDataMigrationService {
         'categories': migratedCategories,
       };
     } catch (e) {
-      print('Error in migrateAllRealQuestions: $e');
       return {
         'success': false,
         'error': e.toString(),
@@ -211,9 +206,7 @@ class RealDataMigrationService {
             .get();
 
     if (existingQuery.docs.isNotEmpty) {
-      print(
-        'Question already exists, skipping: ${question['question']?.toString().substring(0, min(50, question['question']?.toString().length ?? 0))}...',
-      );
+      // Question already exists, skipping
       return;
     }
 
@@ -258,7 +251,6 @@ class RealDataMigrationService {
       final snapshot = await _firestore.collection('questions').get();
       return snapshot.docs.length;
     } catch (e) {
-      print('Error getting existing questions count: $e');
       return 0;
     }
   }
@@ -275,7 +267,6 @@ class RealDataMigrationService {
       await batch.commit();
       return true;
     } catch (e) {
-      print('Error clearing all questions: $e');
       return false;
     }
   }

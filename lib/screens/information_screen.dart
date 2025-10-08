@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../l10n/app_localizations.dart';
 import '../services/language_service.dart';
+import '../services/premium_service.dart';
+import '../widgets/premium_lock_widget.dart';
 import '../data/spot/anesthesia_history_data.dart';
 import '../data/spot/operating_room_data.dart';
 import '../data/spot/respiratory_systems_data.dart';
@@ -687,7 +689,6 @@ class _InformationScreenState extends State<InformationScreen> {
     
     _filteredSections = _allSections;
     
-    print('Total sections: ${_allSections.length}');
     setState(() {});
   }
 
@@ -857,7 +858,6 @@ class _InformationScreenState extends State<InformationScreen> {
               Expanded(
                 child: Builder(
                   builder: (context) {
-                    print('Filtered sections length: ${_filteredSections.length}');
                     return _filteredSections.isEmpty
                         ? _buildEmptyState()
                         : ListView.builder(
@@ -1276,6 +1276,48 @@ class _InformationDetailScreenState extends State<InformationDetailScreen> {
           ],
         ),
       ),
+    );
+  }
+}
+
+// Premium wrapper for InformationScreen
+class PremiumInformationScreen extends StatelessWidget {
+  const PremiumInformationScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<PremiumService>(
+      builder: (context, premiumService, child) {
+        // Premium kontrolü - Bilgiler bölümü sadece premium kullanıcılara açık
+        if (!premiumService.isPremium) {
+          return Scaffold(
+            backgroundColor: Colors.transparent,
+            body: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [Colors.blue.shade900, Colors.black],
+                ),
+              ),
+              child: SafeArea(
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: PremiumLockWidget(
+                      message: AppLocalizations.of(context)!.informationPremiumMessage,
+                      subtitle: AppLocalizations.of(context)!.informationPremiumSubtitle,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          );
+        }
+
+        // Premium kullanıcılar için normal InformationScreen'i göster
+        return const InformationScreen();
+      },
     );
   }
 }

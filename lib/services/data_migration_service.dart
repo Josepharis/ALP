@@ -41,7 +41,6 @@ class DataMigrationService {
       ];
 
       for (final category in categories) {
-        print('Processing category: $category');
 
         // Her kategorideki soruları kontrol et
         final categoryQuestions = await _getCategoryQuestions(category);
@@ -51,7 +50,6 @@ class DataMigrationService {
               await _migrateQuestion(question, category);
               totalMigrated++;
             } catch (e) {
-              print('Error migrating question from $category: $e');
               totalErrors++;
             }
           }
@@ -66,7 +64,6 @@ class DataMigrationService {
         'categories': migratedCategories,
       };
     } catch (e) {
-      print('Error in migrateAllQuestions: $e');
       return {
         'success': false,
         'error': e.toString(),
@@ -112,9 +109,7 @@ class DataMigrationService {
             .get();
 
     if (existingQuery.docs.isNotEmpty) {
-      print(
-        'Question already exists, skipping: ${question['question']?.toString().substring(0, 50)}...',
-      );
+      // Question already exists, skipping
       return;
     }
 
@@ -158,7 +153,6 @@ class DataMigrationService {
       final snapshot = await _firestore.collection('questions').get();
       return snapshot.docs.length;
     } catch (e) {
-      print('Error getting existing questions count: $e');
       return 0;
     }
   }
@@ -175,7 +169,6 @@ class DataMigrationService {
 
       return categoryStats;
     } catch (e) {
-      print('Error getting category stats: $e');
       return {};
     }
   }
@@ -192,7 +185,6 @@ class DataMigrationService {
       await batch.commit();
       return true;
     } catch (e) {
-      print('Error clearing all questions: $e');
       return false;
     }
   }
@@ -201,6 +193,5 @@ class DataMigrationService {
   Future<void> migrateFromQuizService() async {
     // Bu fonksiyon QuizService'deki getQuestionsByCategory metodunu kullanarak
     // soruları Firestore'a aktarabilir
-    print('Migration from QuizService not implemented yet');
   }
 }

@@ -544,7 +544,10 @@ class AppLocalizationsEn extends AppLocalizations {
       '❌ Passwords do not match\n💡 Enter the same password again';
 
   @override
-  String get acceptAll => 'I accept all ';
+  String get acceptAll => '';
+
+  @override
+  String get iAgree => 'I agree';
 
   @override
   String get termsOfUse => 'Terms of Use';
@@ -1170,10 +1173,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get goToPremium => 'Go Premium';
 
   @override
-  String get testModeActive => 'TEST MODE ACTIVE';
+  String get testModeActive => 'Test Mode Active';
 
   @override
-  String get testModeMessage => 'This feature is accessible in test mode!';
+  String get testModeMessage =>
+      'All premium features are unlocked for testing purposes';
 
   @override
   String get testSettings => 'Test Settings';
@@ -1414,4 +1418,92 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get languageResetSuccessMessage =>
       'Language settings successfully reset. App will restart.';
+
+  @override
+  String get informationPremiumMessage =>
+      'Information section is available only for premium users';
+
+  @override
+  String get informationPremiumSubtitle =>
+      'Unlock comprehensive medical information and resources with premium access';
+
+  @override
+  String get privacyTermsTitle => 'Privacy and Terms';
+
+  @override
+  String get privacyPolicyTitle => 'Privacy Policy';
+
+  @override
+  String get privacyPolicyContent =>
+      'This application applies the highest standards to protect users\' personal data. Collected data is used only to improve service quality and provide personalized experience. Your data is not shared with third parties and is stored on secure servers.';
+
+  @override
+  String get termsOfServiceTitle => 'Terms of Service';
+
+  @override
+  String get termsOfServiceContent =>
+      'By using this application, you agree to our terms of service. The application is for educational purposes only and does not constitute medical advice. Users should behave responsibly and avoid misuse of the application.';
+
+  @override
+  String get copyrightTitle => 'Copyright and Patent Protection';
+
+  @override
+  String get copyrightContent =>
+      'All questions, content and materials in this application are protected by copyright. Questions have patent rights and unauthorized sharing is strictly prohibited. Copying, reproducing or distributing any content may result in legal action.';
+
+  @override
+  String get legalConsequencesTitle => 'Legal Consequences';
+
+  @override
+  String get legalConsequencesContent =>
+      'In case of unauthorized sharing of content in this application, legal action will be initiated due to copyright infringement. Compensation may be claimed from violators and criminal liability may arise. Additionally, the application account will be permanently closed.';
+
+  @override
+  String get dataProtectionTitle => 'Data Protection';
+
+  @override
+  String get dataProtectionContent =>
+      'Your personal data is protected under GDPR (General Data Protection Regulation). Your data is stored only as long as necessary and processed securely. You have the right to delete, correct or request access to your data.';
+
+  @override
+  String get userResponsibilitiesTitle => 'User Responsibilities';
+
+  @override
+  String get userResponsibilitiesContent =>
+      'Users should use the application only for personal educational purposes. Sharing content, taking screenshots or publishing on other platforms is strictly prohibited. Users are responsible for ensuring account security.';
+
+  @override
+  String get appRightsTitle => 'Application Rights';
+
+  @override
+  String get appRightsContent =>
+      'The application owner has all necessary legal rights to protect content. Patent applications have been made and are under international protection. In case of violation, action will be taken within the framework of international law.';
+
+  @override
+  String get contactUs => 'Contact Us';
+
+  @override
+  String get contactInfo =>
+      'You can contact us for your questions. If you want to get legal consultation, you can use the contact information below.';
+
+  @override
+  String get copyEmail => 'Copy Email';
+
+  @override
+  String get copyPhone => 'Copy Phone';
+
+  @override
+  String get emailCopied => 'Email address copied';
+
+  @override
+  String get phoneCopied => 'Phone number copied';
+
+  @override
+  String get termsOfService => 'Terms of Service';
+
+  @override
+  String get agreeToTerms => 'I agree to the terms';
+
+  @override
+  String get agreeToPrivacy => 'I agree to the privacy policy';
 }

@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import '../l10n/app_localizations.dart';
 import '../services/auth_service.dart';
-import '../services/language_service.dart';
-import '../services/tutorial_service.dart';
 
 import '../services/user_service.dart';
 import '../models/user_activity.dart';
@@ -55,7 +52,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
     // EventBus dinleyicisi ekle - hızlı güncelleme için
     _mistakesSubscription = EventBus().mistakesUpdatedStream.listen((event) {
-      print("EventBus: Profil hızlı güncelleniyor...");
       if (mounted) {
         // Hemen setState yaparak loading'i kapat
         setState(() {
@@ -84,30 +80,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   void dispose() {
-    print('Profile screen dispose edilmeye başlıyor...');
 
     // StreamSubscription'ları güvenli şekilde iptal et
     try {
       if (_rankSubscription != null) {
         _rankSubscription!.cancel();
         _rankSubscription = null;
-        print('✅ Dispose: Rank subscription iptal edildi');
       }
     } catch (e) {
-      print('Dispose: Rank subscription iptal hatası: $e');
     }
 
     try {
       if (_mistakesSubscription != null) {
         _mistakesSubscription!.cancel();
         _mistakesSubscription = null;
-        print('✅ Dispose: Mistakes subscription iptal edildi');
       }
     } catch (e) {
-      print('Dispose: Mistakes subscription iptal hatası: $e');
     }
 
-    print('Profile screen dispose tamamlandı');
     super.dispose();
   }
 
@@ -135,7 +125,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
         try {
           _userActivity = UserActivity.fromFirestore(userActivityDoc);
         } catch (e) {
-          print('UserActivity dönüştürme hatası: $e');
         }
       }
 
@@ -143,7 +132,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
         setState(() {});
       }
     } catch (e) {
-      print('Kullanıcı verileri yükleme hatası: $e');
     }
   }
 
@@ -299,7 +287,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
             await _uploadImage();
           }
         } catch (e) {
-          print('Görsel seçme hatası: $e');
           if (mounted) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
@@ -317,7 +304,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
         }
       }
     } catch (e) {
-      print('Dialog açma hatası: $e');
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -415,7 +401,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
           final oldImageRef = _storage.refFromURL(user.photoURL!);
           await oldImageRef.delete();
         } catch (e) {
-          print('Eski fotoğraf silinirken hata: $e');
         }
       }
 
@@ -441,7 +426,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
       await _loadUserData();
 
     } catch (e) {
-      print('Fotoğraf yükleme hatası: $e');
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(AppLocalizations.of(context)!.photoUploadError)),
@@ -582,19 +566,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             onTap: () => _showEditProfileModal(context),
                           ),
 
-                          // Dil seçimini sıfırla
-                          _buildSettingItem(
-                            'Dil Seçimini Sıfırla',
-                            Icons.refresh,
-                            context,
-                            onTap: () => _resetLanguageSelection(context),
-                          ),
-                          _buildSettingItem(
-                            'Tutorial\'ı Sıfırla',
-                            Icons.help_outline,
-                            context,
-                            onTap: () => _resetTutorial(context),
-                          ),
 
                           _buildSettingItem(
                             AppLocalizations.of(context)!.myDevices,
@@ -729,33 +700,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               );
 
                               if (shouldSignOut == true) {
-                                print('🚪 Profile çıkış başlatılıyor...');
 
                                 // 1. ÖNCE stream'leri iptal et
                                 try {
-                                  print('📡 Stream\'ler iptal ediliyor...');
                                   if (_rankSubscription != null) {
                                     await _rankSubscription!.cancel();
                                     _rankSubscription = null;
-                                    print('✅ Rank stream iptal edildi');
                                   }
                                   if (_mistakesSubscription != null) {
                                     await _mistakesSubscription!.cancel();
                                     _mistakesSubscription = null;
-                                    print('✅ Mistakes stream iptal edildi');
                                   }
                                 } catch (e) {
-                                  print(
-                                    '⚠️ Stream iptal hatası (devam ediliyor): $e',
-                                  );
+                                  // Stream iptal hatası (devam ediliyor)
                                 }
 
                                 // 2. SONRA Firebase çıkış yap (bu işlem tüm stream'leri temizler)
                                 try {
                                   await _authService.signOut();
-                                  print('✅ Firebase çıkış tamamlandı');
                                 } catch (e) {
-                                  print('⚠️ Firebase çıkış hatası: $e');
                                   // Çıkış hatası olsa bile devam et
                                 }
 
@@ -769,9 +732,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       '/login',
                                       (route) => false,
                                     );
-                                    print('✅ Login sayfasına yönlendirildi');
                                   } catch (e) {
-                                    print('⚠️ Navigasyon hatası: $e');
                                     // Alternatif navigasyon yöntemi
                                     if (mounted) {
                                       Navigator.of(context).pushReplacementNamed('/login');
@@ -1727,50 +1688,5 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   // Dil seçici widget'ı kaldırıldı - artık uygulama başlangıcında seçiliyor
 
-  // Debug: Dil seçimini sıfırla
-  void _resetLanguageSelection(BuildContext context) async {
-    final languageService = Provider.of<LanguageService>(context, listen: false);
-    await languageService.resetLanguageSelection();
-
-    if (context.mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(AppLocalizations.of(context)!.languageResetSuccess),
-          duration: Duration(seconds: 2),
-        ),
-      );
-
-      // Uygulamayı yeniden başlat
-      Navigator.of(context).pushNamedAndRemoveUntil(
-        '/language-selection',
-        (route) => false,
-      );
-    }
-  }
-
-  void _resetTutorial(BuildContext context) async {
-    try {
-      final tutorialService = TutorialService();
-      await tutorialService.resetAllTutorials();
-      
-      if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Tutorial sıfırlandı. Ana sayfaya döndüğünüzde tekrar gösterilecek.'),
-            duration: Duration(seconds: 2),
-          ),
-        );
-      }
-    } catch (e) {
-      if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Tutorial sıfırlanırken hata oluştu: $e'),
-            duration: Duration(seconds: 2),
-          ),
-        );
-      }
-    }
-  }
 
 }

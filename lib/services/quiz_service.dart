@@ -170,14 +170,11 @@ class QuizService {
               final data = historyDoc.data() as Map<String, dynamic>;
               final totalCompletions = data['totalCompletions'] ?? 0;
               attemptCount = totalCompletions + 1;
-              print('DEBUG: user_quiz_history totalCompletions: $totalCompletions, attemptCount: $attemptCount');
             } else {
               attemptCount = 2; // İlk tekrar çözme
-              print('DEBUG: user_quiz_history bulunamadı, attemptCount: $attemptCount');
             }
           } catch (e) {
             attemptCount = 2; // Hata durumunda varsayılan değer
-            print('DEBUG: user_quiz_history hatası: $e, attemptCount: $attemptCount');
           }
           
           // Aynı kategori için devam eden quiz var mı kontrol et (başka bir quiz)
@@ -348,9 +345,7 @@ class QuizService {
           final randomCount =
               [5, 8, 12, 15, 20, 25, 30][DateTime.now().millisecond % 7];
           await doc.reference.update({'popularityCount': randomCount});
-          print(
-            '${doc.id} için başlangıç popülarite değeri atandı: $randomCount',
-          );
+          // Başlangıç popülarite değeri atandı
         }
       }
     } catch (e) {
@@ -1446,7 +1441,6 @@ class QuizService {
           .get();
           
       if (existingCompletedQuiz.exists) {
-        print('Quiz zaten tamamlanmış: $completedQuizId');
         return true; // Zaten tamamlanmış, başarılı olarak döndür
       }
 
@@ -1460,7 +1454,6 @@ class QuizService {
           .get();
           
       if (recentQuizQuery.docs.isNotEmpty) {
-        print('Aynı kategoride son 30 saniye içinde quiz tamamlanmış: $categoryName');
         return true; // Çok yakın zamanda tamamlanmış, başarılı olarak döndür
       }
 
@@ -1607,7 +1600,6 @@ class QuizService {
 
       return true;
     } catch (e) {
-      print('completeQuiz hatası: $e');
       return false;
     }
   }

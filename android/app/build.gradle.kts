@@ -8,8 +8,16 @@ plugins {
     id("dev.flutter.flutter-gradle-plugin")
 }
 
+// Keystore bilgileri
+val keystoreProperties = mapOf(
+    "keyAlias" to "release",
+    "keyPassword" to "MyApp2024!",
+    "storeFile" to "release-key.keystore",
+    "storePassword" to "MyApp2024!"
+)
+
 android {
-    namespace = "com.example.anestezi"
+    namespace = "com.yftsoftware.anestezi"
     compileSdk = 35
     ndkVersion = "27.0.12077973" // En güncel NDK versiyonu
 
@@ -25,7 +33,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "com.example.anestezi"
+        applicationId = "com.yftsoftware.anestezi"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = 23
@@ -39,11 +47,18 @@ android {
         }
     }
 
+    signingConfigs {
+        create("release") {
+            keyAlias = keystoreProperties["keyAlias"] as String
+            keyPassword = keystoreProperties["keyPassword"] as String
+            storeFile = file(keystoreProperties["storeFile"] as String)
+            storePassword = keystoreProperties["storePassword"] as String
+        }
+    }
+
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig = signingConfigs.getByName("debug")
+            signingConfig = signingConfigs.getByName("release")
             isMinifyEnabled = false
             isShrinkResources = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")

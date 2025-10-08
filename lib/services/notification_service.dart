@@ -17,20 +17,16 @@ class NotificationService {
     // Türkiye saati için özel timezone
     final turkeyTime = tz.getLocation('Europe/Istanbul');
     final now = tz.TZDateTime.now(turkeyTime);
-    print('Şu anki Türkiye saati: $now');
     
     // Normal bildirim: 19:00
     final normalTime = tz.TZDateTime(turkeyTime, now.year, now.month, now.day, 19, 0);
-    print('📅 Normal bildirim saati: $normalTime');
     
     // Eğer belirlenen saat geçtiyse, bir sonraki güne planla
     final scheduledTimes = [normalTime].map((time) {
       if (time.isBefore(now)) {
         final nextDay = time.add(const Duration(days: 1));
-        print('Saat geçmiş, yarına planlanıyor: $nextDay');
         return nextDay;
       } else {
-        print('Bugün için planlanıyor: $time');
         return time;
       }
     }).toList();
@@ -39,7 +35,6 @@ class NotificationService {
   }
 
   Future<void> initialize() async {
-    print('Notification service başlatılıyor...');
     tz.initializeTimeZones();
 
     // Android için daha detaylı ayarlar
@@ -59,7 +54,6 @@ class NotificationService {
     await _notifications.initialize(
       settings,
       onDidReceiveNotificationResponse: (NotificationResponse response) {
-        print('Notification tapped: ${response.payload}');
       },
     );
     
@@ -74,24 +68,19 @@ class NotificationService {
       // İlk kez planlanıyor
       await scheduleDailyNotification();
       await prefs.setBool(NOTIFICATION_SCHEDULED_KEY, true);
-      print('Bildirimler ilk kez planlandı');
     } else {
       // Planlanan bildirimleri kontrol et
       final pendingNotifications = await _notifications.pendingNotificationRequests();
       if (pendingNotifications.isEmpty) {
         // Bildirimler silinmiş veya kaybolmuş, yeniden planla
         await scheduleDailyNotification();
-        print('Bildirimler yeniden planlandı');
       } else {
-        print('Bildirimler zaten planlanmış. Aktif bildirim sayısı: ${pendingNotifications.length}');
       }
     }
     
-    print('Notification service başlatıldı');
   }
 
   Future<bool> requestPermissions() async {
-    print('Bildirim izinleri isteniyor...');
     
     // iOS için izinleri iste
     if (await _notifications.resolvePlatformSpecificImplementation<IOSFlutterLocalNotificationsPlugin>() != null) {
@@ -101,7 +90,6 @@ class NotificationService {
         badge: true,
         sound: true,
       );
-      print('iOS bildirim izinleri sonucu: $result');
     }
 
     // Android 13 ve üzeri için izinleri iste
@@ -110,14 +98,12 @@ class NotificationService {
     
     if (androidImplementation != null) {
       final bool? granted = await androidImplementation.requestNotificationsPermission();
-      print('Android bildirim izinleri sonucu: $granted');
     }
 
     return true;
   }
 
   Future<void> scheduleDailyNotification() async {
-    print('Günlük bildirimler planlanıyor...');
     // Önce tüm bildirimleri temizle
     await cancelAllNotifications();
 
@@ -173,39 +159,31 @@ class NotificationService {
         matchDateTimeComponents: DateTimeComponents.time,
       );
 
-      print('Bildirim ${i + 1} planlandı: ${scheduledTime.toString()} - $title');
     }
     
     // Planlanan bildirimleri kontrol et
     final pendingNotifications = await _notifications.pendingNotificationRequests();
-    print('Toplam planlanan bildirim sayısı: ${pendingNotifications.length}');
     for (var notification in pendingNotifications) {
-      print('Planlanan bildirim ID: ${notification.id}');
     }
   }
 
   Future<void> cancelAllNotifications() async {
-    print('Tüm bildirimler iptal ediliyor...');
     await _notifications.cancelAll();
     // Bildirimlerin iptal edildiğini kaydet
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool(NOTIFICATION_SCHEDULED_KEY, false);
-    print('Tüm bildirimler iptal edildi');
   }
 
 
 
   // Android bildirim durumunu kontrol et
   Future<void> checkAndroidNotificationStatus() async {
-    print('Android bildirim durumu kontrol ediliyor...');
     
     final androidImplementation = _notifications.resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>();
     if (androidImplementation != null) {
       final areNotificationsEnabled = await androidImplementation.areNotificationsEnabled();
-      print('Android bildirimler aktif mi: $areNotificationsEnabled');
       
       if (areNotificationsEnabled == false) {
-        print('⚠️ Android bildirimler devre dışı! Kullanıcıdan izin istenmeli.');
       }
     }
   }

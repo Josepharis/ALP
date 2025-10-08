@@ -75,7 +75,6 @@ class _AddQuestionScreenState extends State<AddQuestionScreen> {
         _isLoading = true;
       });
 
-      print("🔄 Firebase'den quiz'leri getiriyorum... (Dil: $_selectedLanguage)");
 
       List<Map<String, String>> quizList = [];
 
@@ -85,15 +84,12 @@ class _AddQuestionScreenState extends State<AddQuestionScreen> {
         
         // 1. quizzes collection'ını kontrol et
         final quizzesSnapshot = await instance.collection('quizzes').get();
-        print("📊 'quizzes' collection'ında: ${quizzesSnapshot.size} quiz");
         
         // 2. quizCategories collection'ını kontrol et
         final categoriesSnapshot = await instance.collection('quizCategories').get();
-        print("📊 'quizCategories' collection'ında: ${categoriesSnapshot.size} kategori");
         
         // 3. questions collection'ını kontrol et (quiz ID'leri için)
         final questionsSnapshot = await instance.collection('questions').get();
-        print("📊 'questions' collection'ında: ${questionsSnapshot.size} soru");
         
         // quizCategories collection'ından quiz'leri çek
         final querySnapshot = categoriesSnapshot;
@@ -103,23 +99,17 @@ class _AddQuestionScreenState extends State<AddQuestionScreen> {
           final displayName = data['displayName'] as String? ?? _createDisplayNameFromId(doc.id);
           final language = data['language'] as String? ?? 'turkish';
           
-          print("🔍 Kategori: $displayName (Dil: '$language', Aranan: '$_selectedLanguage')");
           
           // Dil filtresi uygula
           if (language == _selectedLanguage) {
             quizList.add({'id': doc.id, 'displayName': displayName});
-            print("✅ EKLENDİ: $displayName");
           } else {
-            print("❌ ATLANDI: $displayName");
           }
         }
 
-        print("✅ Seçilen dil için toplam quiz: ${quizList.length}");
         for (var quiz in quizList) {
-          print("   • ${quiz['displayName']} (ID: ${quiz['id']})");
         }
       } catch (e) {
-        print("❌ Quiz'leri getirirken hata: $e");
       }
 
       setState(() {
@@ -139,14 +129,12 @@ class _AddQuestionScreenState extends State<AddQuestionScreen> {
 
       // Eğer quiz listesi boşsa, UI'da "yeni quiz" seçeneğine geçiş yapılmasını sağla
       if (_availableQuizzes.isEmpty) {
-        print("⚠️ Hiç quiz bulunamadı, yeni quiz moduna geçiliyor");
         setState(() {
           _isNewQuizSelected = true;
           _selectedQuizType = 'Yeni Quiz';
         });
       }
     } catch (e) {
-      print("⚠️ Quizler yüklenirken ciddi bir hata: $e");
       setState(() {
         _isLoading = false;
         _errorMessage = "Quiz'ler yüklenirken hata oluştu: $e";

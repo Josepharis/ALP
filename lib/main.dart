@@ -76,21 +76,16 @@ class _AppInitializerState extends State<AppInitializer> {
 @pragma('vm:entry-point')
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  print('📱 Background message alındı: ${message.messageId}');
-  print('📱 Başlık: ${message.notification?.title}');
-  print('📱 İçerik: ${message.notification?.body}');
 }
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  print('🔄 Flutter binding initialized');
 
   // Android sistem UI ayarlarını yapılandır
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
-  print('📱 Device orientation set to portrait');
 
   // Sistem UI overlay stilini ayarla (günün sorusu ekranı kendi rengini ayarlayacak)
   SystemChrome.setSystemUIOverlayStyle(
@@ -103,28 +98,20 @@ void main() async {
       systemNavigationBarDividerColor: Colors.transparent,
     ),
   );
-  print('🎨 System UI style configured');
 
   try {
-    print('🔥 Firebase initialization starting...');
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
     );
-    print('✅ Firebase successfully initialized');
 
     // FCM background message handler'ı kur
-    print('📩 Setting up FCM background message handler...');
     FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-    print('✅ FCM background handler setup complete');
     
     // DeviceService'i initialize et
-    print('📱 Initializing DeviceService...');
     final deviceService = DeviceService();
     deviceService.setupTokenRefreshListener();
-    print('✅ DeviceService initialized');
     
     // NotificationService'i initialize et
-    print('🔔 Initializing NotificationService...');
     final notificationService = NotificationService();
     await notificationService.initialize();
     await notificationService.requestPermissions();
@@ -133,17 +120,11 @@ void main() async {
     await notificationService.checkAndroidNotificationStatus();
     
     // PremiumService'i initialize et
-    print('💎 Initializing PremiumService...');
     final premiumService = PremiumService();
     await premiumService.initialize();
-    print('✅ PremiumService initialized');
     
-    print('✅ NotificationService initialized');
     
   } catch (e, stackTrace) {
-    print('❌ Firebase initialization error:');
-    print('Error: $e');
-    print('Stack trace: $stackTrace');
   }
 
   runApp(
@@ -155,7 +136,6 @@ void main() async {
       child: const MyApp(),
     ),
   );
-  print('📱 Application started');
 }
 
 class MyApp extends StatelessWidget {

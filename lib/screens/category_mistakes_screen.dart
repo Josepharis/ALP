@@ -537,7 +537,6 @@ class _CategoryMistakesScreenState extends State<CategoryMistakesScreen> {
         }
       }
     } catch (e) {
-      print('Soru kaldırma hatası: $e');
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(

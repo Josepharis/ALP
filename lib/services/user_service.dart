@@ -30,7 +30,6 @@ class UserService {
 
       return userDoc.data();
     } catch (e) {
-      print('getUserProfile hatası: $e');
       return null;
     }
   }
@@ -76,7 +75,6 @@ class UserService {
 
       return true;
     } catch (e) {
-      print('updateUserProfile hatası: $e');
       return false;
     }
   }
@@ -104,7 +102,6 @@ class UserService {
 
       return true;
     } catch (e) {
-      print('updateNotificationSettings hatası: $e');
       return false;
     }
   }
@@ -132,7 +129,6 @@ class UserService {
 
       return true;
     } catch (e) {
-      print('updatePrivacySettings hatası: $e');
       return false;
     }
   }
@@ -142,11 +138,9 @@ class UserService {
     try {
       final userId = _authService.currentUser?.uid;
       if (userId == null) {
-        print('❌ Kullanıcı giriş yapmamış');
         return false;
       }
 
-      print('🔍 Kullanıcı dokümanı kontrol ediliyor: $userId');
       
       // Timeout ile Firestore işlemi
       final userDoc = await _firestore.collection('users').doc(userId).get().timeout(
@@ -157,7 +151,6 @@ class UserService {
       );
 
       if (!userDoc.exists) {
-        print('📝 Yeni kullanıcı ayarları oluşturuluyor...');
         
         // Temel kullanıcı verilerini oluştur - timeout ile
         await _firestore.collection('users').doc(userId).set({
@@ -183,14 +176,11 @@ class UserService {
           },
         );
 
-        print('✅ Varsayılan kullanıcı ayarları oluşturuldu');
         return true;
       } else {
-        print('ℹ️ Kullanıcı ayarları zaten mevcut');
         return false; // Ayarlar zaten var
       }
     } catch (e) {
-      print('❌ createDefaultUserSettings hatası: $e');
       return false;
     }
   }
@@ -198,25 +188,18 @@ class UserService {
   // Profil resmi yükleme
   Future<String?> uploadProfileImage(File imageFile) async {
     try {
-      print('UserService.uploadProfileImage başlatıldı');
 
       final userId = _authService.currentUser?.uid;
       if (userId == null) {
-        print('Hata: Kullanıcı giriş yapmamış');
         throw Exception('Kullanıcı giriş yapmamış');
       }
 
-      print('Kullanıcı ID: $userId');
-      print('Resim dosyası yolu: ${imageFile.path}');
 
       // Dosya uzantısını al
       final fileExtension = imageFile.path.split('.').last.toLowerCase();
-      print('Dosya uzantısı: $fileExtension');
 
       if (!['jpg', 'jpeg', 'png', 'webp'].contains(fileExtension)) {
-        print(
-          'Hata: Desteklenmeyen dosya formatı. Sadece jpg, jpeg, png ve webp formatları destekleniyor.',
-        );
+        // Hata: Desteklenmeyen dosya formatı
         throw Exception(
           'Desteklenmeyen dosya formatı. Sadece jpg, jpeg, png ve webp formatları destekleniyor.',
         );
@@ -224,54 +207,42 @@ class UserService {
 
       // Dosyanın varlığını doğrula
       if (!await imageFile.exists()) {
-        print('Hata: Dosya bulunamadı veya erişilemiyor');
         throw Exception('Dosya bulunamadı veya erişilemiyor');
       }
 
       // Dosya boyutunu kontrol et
       final fileSize = await imageFile.length();
       final fileSizeInMB = fileSize / (1024 * 1024);
-      print('Dosya boyutu: ${fileSizeInMB.toStringAsFixed(2)} MB');
 
       if (fileSizeInMB > 5) {
-        print('Hata: Dosya boyutu çok büyük. Maksimum 5MB olmalı.');
         throw Exception('Dosya boyutu çok büyük. Maksimum 5MB olmalı.');
       }
 
       // Firebase Storage referansı
-      print('Firebase Storage referansı oluşturuluyor...');
       final storageRef = FirebaseStorage.instance
           .ref()
           .child('profile_images')
           .child('$userId.$fileExtension');
 
-      print('Storage referansı: ${storageRef.fullPath}');
 
       // Resmi yükle
-      print('Resim yükleme işlemi başlatılıyor...');
       try {
         final uploadTask = await storageRef.putFile(imageFile);
-        print('Resim yükleme tamamlandı. Durum: ${uploadTask.state}');
 
         // İndirme URL'sini al
-        print('İndirme URL\'si alınıyor...');
         final downloadUrl = await uploadTask.ref.getDownloadURL();
 
         // Kullanıcı profilini güncelle
-        print('Kullanıcı profili güncelleniyor...');
         await updateUserProfile(photoURL: downloadUrl);
 
         // Firebase Auth'daki kullanıcı profilini güncelle
-        print('Firebase Auth profili güncelleniyor...');
         await _authService.currentUser!.updatePhotoURL(downloadUrl);
 
         return downloadUrl;
       } catch (storageError) {
-        print('Firebase Storage hatası: $storageError');
         throw Exception('Firebase Storage hatası: $storageError');
       }
     } catch (e) {
-      print('Profil resmi yükleme hatası: $e');
       return null;
     }
   }

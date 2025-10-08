@@ -27,7 +27,6 @@ class AuthService {
     String? title,
   }) async {
     try {
-      print('🔄 iOS simülatör: Sadece Firebase Auth kayıt...');
       
       // Sadece temel Firebase Auth kaydı - Firestore işlemlerini atla
       final userCredential = await _auth.createUserWithEmailAndPassword(
@@ -35,35 +34,27 @@ class AuthService {
         password: password,
       );
 
-      print('✅ iOS simülatör: Firebase Auth kayıt tamamlandı');
 
       // Display name güncelle (basit)
       if (userCredential.user != null && displayName != null && displayName.isNotEmpty) {
         try {
           await userCredential.user!.updateDisplayName(displayName);
-          print('✅ iOS simülatör: Display name güncellendi');
         } catch (e) {
-          print('⚠️ iOS simülatör: Display name güncellenemedi: $e');
         }
       }
 
-            print('✅ iOS simülatör: Kayıt işlemi tamamlandı (Firestore atlandı)');
             
             // Yeni kullanıcı için tutorial'ı sıfırla
             try {
               final tutorialService = TutorialService();
               await tutorialService.resetAllTutorials();
-              print('✅ iOS simülatör: Tutorial sıfırlandı');
             } catch (e) {
-              print('⚠️ iOS simülatör: Tutorial sıfırlanamadı: $e');
             }
             
             return userCredential.user;
     } on FirebaseAuthException catch (e) {
-      print('❌ iOS simülatör: Firebase Auth hatası: $e');
       throw _handleAuthException(e);
     } catch (e) {
-      print('❌ iOS simülatör: Kayıt hatası: $e');
       
       // Ağ bağlantısı kontrolü
       if (e.toString().toLowerCase().contains('network') || 
@@ -98,14 +89,12 @@ class AuthService {
         // Cihaz kaydını yap (maksimum 2 cihaz kontrolü ile)
         try {
           await _deviceService.registerOrUpdateDevice();
-          print('✅ Cihaz kaydı başarılı');
         } catch (e) {
           if (e is device_service.DeviceLimitExceededException) {
             // Cihaz limiti aşıldı, kullanıcıyı çıkış yap
             await _auth.signOut();
             throw '❌ Cihaz Limiti Aşıldı\n\n💡 Bu hesaba en fazla 2 cihazdan giriş yapabilirsiniz.\n\nYeni cihaz eklemek için profil ayarlarından mevcut cihazlardan birini kaldırın veya destek ekibi ile iletişime geçin.';
           }
-          print('⚠️ Cihaz kaydı hatası (devam ediliyor): $e');
           // Cihaz kaydı hatası olsa bile giriş işlemine devam et
         }
       }
@@ -114,7 +103,6 @@ class AuthService {
     } on FirebaseAuthException catch (e) {
       throw _handleAuthException(e);
     } catch (e) {
-      print('Giriş hatası: $e');
       
       // Ağ bağlantısı kontrolü
       if (e.toString().toLowerCase().contains('network') || 
@@ -140,7 +128,6 @@ class AuthService {
     String email,
   ) async {
     try {
-      print('🔄 iOS simülatör: Kullanıcı dokümanı oluşturuluyor...');
       
       // iOS simülatör için ekstra güvenlik
       await Future.delayed(const Duration(milliseconds: 100));
@@ -157,12 +144,10 @@ class AuthService {
       }, SetOptions(merge: true)).timeout(
         const Duration(seconds: 20), // iOS için daha uzun timeout
         onTimeout: () {
-          print('⚠️ iOS simülatör: Kullanıcı dokümanı timeout');
           throw Exception('iOS simülatör: Firestore timeout - kullanıcı dokümanı oluşturulamadı');
         },
       );
 
-      print('✅ iOS simülatör: Kullanıcı dokümanı oluşturuldu');
 
       // iOS simülatör için aktivite dokümanını geciktir
       await Future.delayed(const Duration(milliseconds: 200));
@@ -180,16 +165,12 @@ class AuthService {
       }, SetOptions(merge: true)).timeout(
         const Duration(seconds: 20), // iOS için daha uzun timeout
         onTimeout: () {
-          print('⚠️ iOS simülatör: Kullanıcı aktivitesi timeout');
           throw Exception('iOS simülatör: Firestore timeout - kullanıcı aktivitesi oluşturulamadı');
         },
       );
       
-      print('✅ iOS simülatör: Kullanıcı dokümanları başarıyla oluşturuldu');
     } catch (e) {
-      print('❌ iOS simülatör: Kullanıcı dokümanı oluşturma hatası: $e');
       // iOS simülatörde hata olsa bile devam et
-      print('⚠️ iOS simülatör: Doküman oluşturulamadı ama devam ediliyor');
       // Hata fırlatma, sadece logla
     }
   }
@@ -213,7 +194,6 @@ class AuthService {
         });
       }
     } catch (e) {
-      print('Kullanıcı dokümanı kontrol hatası: $e');
     }
   }
 
@@ -229,7 +209,6 @@ class AuthService {
       }
       return false;
     } catch (e) {
-      print('Admin kontrol hatası: $e');
       return false;
     }
   }
@@ -237,53 +216,38 @@ class AuthService {
   // Güvenli çıkış yapma
   Future<void> signOut() async {
     try {
-      print('🚪 Çıkış işlemi başlatılıyor...');
 
       // 1. Önce EventBus'ı temizle (tüm stream'leri iptal eder)
-      print('🧹 EventBus temizleniyor...');
       EventBus.safeDispose();
-      print('✅ EventBus temizlendi');
 
       // 2. Bildirimleri iptal et
-      print('🔔 Bildirimler iptal ediliyor...');
       try {
         final notificationService = NotificationService();
         await notificationService.cancelAllNotifications();
-        print('✅ Bildirimler iptal edildi');
       } catch (e) {
-        print('⚠️ Bildirim iptal hatası (devam ediliyor): $e');
       }
 
       // 3. Firebase Auth'dan çıkış yap (en önemli işlem)
-      print('🔑 Firebase Auth\'dan çıkış yapılıyor...');
       await _auth.signOut();
-      print('✅ Firebase Auth çıkış tamamlandı');
 
       // 4. Firestore işlemlerini güvenli şekilde temizle
-      print('📡 Firestore temizleniyor...');
       try {
         // Sadece persistence'ı temizle, terminate etme
         await _firestore.clearPersistence();
-        print('✅ Firestore temizlendi');
       } catch (e) {
-        print('⚠️ Firestore temizleme hatası (devam ediliyor): $e');
         // Firestore temizleme hatası olsa bile devam et
       }
 
     } catch (e) {
-      print('❌ Çıkış işlemi hatası: $e');
       
       // Ağ bağlantısı kontrolü
       if (e.toString().toLowerCase().contains('network') || 
           e.toString().toLowerCase().contains('connection') ||
           e.toString().toLowerCase().contains('timeout')) {
-        print('⚠️ Ağ bağlantısı hatası, çıkış işlemi devam ediliyor...');
         // Ağ hatası olsa bile çıkış işlemini tamamla
         try {
           await _auth.signOut();
-          print('✅ Firebase Auth çıkış tamamlandı (ağ hatası sonrası)');
         } catch (e2) {
-          print('❌ Firebase Auth çıkış hatası: $e2');
         }
         return; // Hata fırlatma, sadece logla
       }
@@ -291,13 +255,10 @@ class AuthService {
       // Diğer hatalar için de çıkış işlemini tamamlamaya çalış
       try {
         await _auth.signOut();
-        print('✅ Firebase Auth çıkış tamamlandı (hata sonrası)');
       } catch (e2) {
-        print('❌ Firebase Auth çıkış hatası: $e2');
       }
       
       // Hata fırlatma, sadece logla
-      print('⚠️ Çıkış işlemi tamamlandı (bazı hatalar oluştu)');
     }
   }
 

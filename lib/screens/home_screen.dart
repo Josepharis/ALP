@@ -14,7 +14,6 @@ import '../services/user_service.dart';
 import '../services/tutorial_service.dart';
 import '../services/language_service.dart';
 import '../services/multilingual_question_service.dart';
-import '../services/premium_service.dart';
 
 import '../utils/event_bus.dart';
 import '../utils/snackbar_utils.dart';
@@ -64,16 +63,15 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   // iOS simülatör için ayarlar oluştur
   Future<void> _createUserSettingsIfNeeded() async {
     try {
-      print('🔄 iOS simülatör: Home screen\'de ayarlar kontrol ediliyor...');
       final userService = UserService();
       final settingsCreated = await userService.createDefaultUserSettings();
       if (settingsCreated) {
-        print('✅ iOS simülatör: Ayarlar home screen\'de oluşturuldu');
+        // Ayarlar oluşturuldu
       } else {
-        print('ℹ️ iOS simülatör: Ayarlar zaten mevcut');
+        // Ayarlar zaten mevcut
       }
     } catch (e) {
-      print('⚠️ iOS simülatör: Home screen\'de ayarlar oluşturulamadı: $e');
+      // Hata durumunda sessizce devam et
     }
   }
 
@@ -276,7 +274,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     // Responsive boyutlar
     final isSmallScreen = screenWidth < 400;
     final isVerySmallScreen = screenWidth < 350;
-    final isShortScreen = screenHeight < 600;
 
     return BottomNavigationBarItem(
       icon: AnimatedContainer(
@@ -465,7 +462,7 @@ class _QuizListScreenState extends State<QuizListScreen> {
         });
       }
     } catch (e) {
-      print('Devam eden quizler yüklenirken hata: $e');
+      // Devam eden quizler yüklenirken hata
     }
   }
 
@@ -913,7 +910,7 @@ class _QuizListScreenState extends State<QuizListScreen> {
         _loadCompletedQuizzes();
       });
     } catch (e) {
-      print('Quiz tekrar çözme hatası: $e');
+      // Quiz tekrar çözme hatası
       SnackBarUtils.showErrorSnackBar(
         context,
         'Quiz tekrar çözülürken bir hata oluştu',
@@ -1339,7 +1336,7 @@ class _HomeContentState extends State<HomeContent> {
 
     // EventBus dinleyicisi ekle - hızlı güncelleme için
     _mistakesSubscription = EventBus().mistakesUpdatedStream.listen((event) {
-      print("EventBus: Ana sayfa hızlı güncelleniyor...");
+      // EventBus: Ana sayfa hızlı güncelleniyor
       if (mounted) {
         // Kısa loading göster
         setState(() {
@@ -1365,7 +1362,7 @@ class _HomeContentState extends State<HomeContent> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    print('🔍 HomeScreen: didChangeDependencies çağrıldı');
+    // didChangeDependencies çağrıldı
     // Dil değiştiğinde verileri yeniden yükle
     _loadData();
   }
@@ -1381,44 +1378,34 @@ class _HomeContentState extends State<HomeContent> {
   Future<void> _checkAndShowTutorial() async {
     // Tutorial zaten kontrol edildiyse atla
     if (_tutorialChecked) {
-      print('ℹ️ HomeScreen: Tutorial zaten kontrol edildi, atlanıyor');
+      // Tutorial zaten kontrol edildi, atlanıyor
       return;
     }
     
     _tutorialChecked = true; // Kontrol edildi olarak işaretle
-    print('🔍 HomeScreen: _checkAndShowTutorial başlatıldı');
     
     // Ana tanıtımı kontrol et ve sadece o çalışsın
     final shouldShowTutorial = await _tutorialService.shouldShowTutorial();
-    print('🔍 HomeScreen: shouldShowTutorial = $shouldShowTutorial');
     
     if (shouldShowTutorial) {
-      print('✅ HomeScreen: Tutorial gösterilecek');
       if (!mounted) {
-        print('⚠️ HomeScreen: Widget mounted değil, tutorial atlanıyor');
         return;
       }
 
       await Future.delayed(const Duration(milliseconds: 1500));
-      print('⏰ HomeScreen: 1.5 saniye beklendi');
 
       if (!mounted) {
-        print('⚠️ HomeScreen: Widget mounted değil (2 saniye sonra), tutorial atlanıyor');
         return;
       }
 
-      print('🎯 HomeScreen: InteractiveTutorial.show çağrılıyor');
       // Ana tanıtımı göster
       await InteractiveTutorial.show(
         context,
         steps: _tutorialService.getTutorialSteps(context),
         onComplete: () {
-          print('✅ HomeScreen: Tutorial tamamlandı, markTutorialAsShown çağrılıyor');
           _tutorialService.markTutorialAsShown();
         },
       );
-    } else {
-      print('ℹ️ HomeScreen: Tutorial zaten gösterilmiş, atlanıyor');
     }
     // Feature showcases kaldırıldı - sadece ana tutorial çalışacak
   }
@@ -1481,7 +1468,7 @@ class _HomeContentState extends State<HomeContent> {
         // Tutorial'ı loading bittikten sonra göster (kısa bir gecikme ile)
         Future.delayed(const Duration(milliseconds: 1000), () {
           if (mounted) {
-            print('🔍 HomeScreen: Loading bitti, tutorial kontrol ediliyor');
+            // Loading bitti, tutorial kontrol et
             _checkAndShowTutorial();
           }
         });
@@ -1515,7 +1502,7 @@ class _HomeContentState extends State<HomeContent> {
       // Quiz verilerini arka planda yükle
       await Future.wait(quizFutures);
     } catch (e) {
-      print('Veri yükleme hatası: $e');
+      // Veri yükleme hatası
       if (mounted) {
         setState(() {
           _isLoading = false;
@@ -1617,9 +1604,6 @@ class _HomeContentState extends State<HomeContent> {
               ],
             ),
           ),
-          const SizedBox(width: 8),
-          // Test butonu (her zaman görünür)
-          _buildTestButton(),
           const SizedBox(width: 8),
           // Sağ taraf - Puan butonu
           _buildPointButton(
@@ -1738,63 +1722,6 @@ class _HomeContentState extends State<HomeContent> {
     );
   }
 
-  Widget _buildTestButton() {
-    return Consumer<PremiumService>(
-      builder: (context, premiumService, child) {
-        return GestureDetector(
-          onTap: () {
-            premiumService.toggleTestMode();
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(
-                  premiumService.isTestMode 
-                    ? 'Test Modu AÇIK - Tüm premium özellikler aktif!' 
-                    : 'Test Modu KAPALI - Normal premium kontrolü aktif',
-                  style: const TextStyle(color: Colors.white),
-                ),
-                backgroundColor: premiumService.isTestMode ? Colors.green : Colors.orange,
-                duration: const Duration(seconds: 2),
-              ),
-            );
-          },
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
-            decoration: BoxDecoration(
-              color: premiumService.isTestMode 
-                ? Colors.green.withOpacity(0.2)
-                : Colors.red.withOpacity(0.2),
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(
-                color: premiumService.isTestMode 
-                  ? Colors.green.withOpacity(0.3)
-                  : Colors.red.withOpacity(0.3), 
-                width: 1
-              ),
-            ),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Icon(
-                  premiumService.isTestMode ? Icons.check_circle : Icons.cancel,
-                  color: premiumService.isTestMode ? Colors.green : Colors.red,
-                  size: 16,
-                ),
-                const SizedBox(width: 4),
-                Text(
-                  'TEST',
-                  style: TextStyle(
-                    color: premiumService.isTestMode ? Colors.green : Colors.red,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 10,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        );
-      },
-    );
-  }
 
   // Demo butonu kaldırıldı
 
@@ -1814,9 +1741,7 @@ class _HomeContentState extends State<HomeContent> {
     
     // Responsive font boyutları
     final titleFontSize = isVerySmallScreen ? 14.0 : (isSmallScreen ? 15.0 : 16.0);
-    final dayFontSize = isVerySmallScreen ? 10.0 : (isSmallScreen ? 11.0 : 12.0);
     final iconSize = isVerySmallScreen ? 16.0 : (isSmallScreen ? 17.0 : 18.0);
-    final dayIconSize = isVerySmallScreen ? 20.0 : (isSmallScreen ? 22.0 : 24.0);
     
     // Kullanıcı aktivitesi henüz yoksa varsayılan değerler göster
     List<bool> weeklyStatus =
@@ -2430,13 +2355,6 @@ class _HomeContentState extends State<HomeContent> {
 
   // Tüm devam eden quizleri göster
   void _showAllOngoingQuizzes(BuildContext context) {
-    // Debug amaçlı log
-    print('Tüm devam eden quizler sayısı: ${_ongoingQuizzes.length}');
-    for (int i = 0; i < _ongoingQuizzes.length; i++) {
-      print(
-        'Modal Quiz $i - ID: ${_ongoingQuizzes[i].id} - Name: ${_ongoingQuizzes[i].name}',
-      );
-    }
 
     showModalBottomSheet(
       context: context,

@@ -8,29 +8,22 @@ class LeaderboardService {
   // Tüm sıralamayı getir
   Future<List<Map<String, dynamic>>> getLeaderboard() async {
     try {
-      print('Sıralama verileri yükleniyor...');
 
       // Önce tüm kullanıcıları getirelim
       final userDocs = await _firestore.collection('users').get();
-      print(
-        'Kullanıcı bilgileri yüklendi. Bulunan toplam kullanıcı sayısı: ${userDocs.docs.length}',
-      );
+      // Kullanıcı bilgileri yüklendi
 
       // Kullanıcı verilerinden bir map oluşturalım
       final Map<String, Map<String, dynamic>> userMap = {};
       for (var doc in userDocs.docs) {
         userMap[doc.id] = doc.data();
-        print(
-          'Kullanıcı eklendi: ${doc.id} - ${doc.data()['displayName'] ?? 'İsimsiz'}',
-        );
+        // Kullanıcı eklendi
       }
 
       // Aktivite verilerini alalım
       final activitiesSnapshot =
           await _firestore.collection('userActivities').get();
-      print(
-        'Aktivite verileri yüklendi. Aktivitesi olan kullanıcı sayısı: ${activitiesSnapshot.docs.length}',
-      );
+      // Aktivite verileri yüklendi
 
       // Aktivite verilerinden bir map oluşturalım
       final Map<String, Map<String, dynamic>> activityMap = {};
@@ -78,12 +71,9 @@ class LeaderboardService {
         userData['rank'] = rank++;
       }
 
-      print(
-        'Sıralama verileri işlendi, ${leaderboardData.length} kullanıcı bulundu',
-      );
+      // Sıralama verileri işlendi
       return leaderboardData;
     } catch (e) {
-      print('getLeaderboard hatası: $e');
       return [];
     }
   }
@@ -116,7 +106,6 @@ class LeaderboardService {
 
       return 0; // Kullanıcı bulunamazsa sıfır dön
     } catch (e) {
-      print('getUserRank hatası: $e');
       return 0;
     }
   }
@@ -130,7 +119,6 @@ class LeaderboardService {
   // Aylık sıralamayı getir - Geçmişi koruyan sistem
   Future<List<Map<String, dynamic>>> getMonthlyLeaderboard() async {
     try {
-      print('Aylık sıralama verileri yükleniyor...');
 
       final now = DateTime.now();
       final year = now.year;
@@ -180,12 +168,9 @@ class LeaderboardService {
         monthlyData[i]['rank'] = i + 1;
       }
 
-      print(
-        'Aylık sıralama verileri işlendi, ${monthlyData.length} kullanıcı bulundu',
-      );
+      // Aylık sıralama verileri işlendi
       return monthlyData;
     } catch (e) {
-      print('getMonthlyLeaderboard hatası: $e');
       return [];
     }
   }
@@ -239,7 +224,6 @@ class LeaderboardService {
             // Auth durumunu kontrol et
             final currentUser = _auth.currentUser;
             if (currentUser == null) {
-              print('Kullanıcı çıkış yapmış, boş liste döndürülüyor');
               return <Map<String, dynamic>>[];
             }
 
@@ -266,12 +250,10 @@ class LeaderboardService {
               };
             }).toList();
           } catch (e) {
-            print('Leaderboard stream hatası: $e');
             return <Map<String, dynamic>>[];
           }
         })
         .handleError((error) {
-          print('Leaderboard stream Firestore hatası: $error');
           return <Map<String, dynamic>>[];
         });
   }
@@ -287,7 +269,6 @@ class LeaderboardService {
             // Auth durumunu kontrol et
             final currentUserId = _auth.currentUser?.uid;
             if (currentUserId == null) {
-              print('Kullanıcı çıkış yapmış, rank 0 döndürülüyor');
               return 0;
             }
 
@@ -303,13 +284,11 @@ class LeaderboardService {
             }
             return 0; // Kullanıcı bulunamazsa
           } catch (e) {
-            print('getUserRankStream hatası: $e');
             return 0;
           }
         })
         .handleError((error) {
           // Firestore permission hataları vs. için güvenli fallback
-          print('getUserRankStream Firestore hatası: $error');
           return 0; // Hata durumunda sıfır döndür
         });
   }
@@ -329,7 +308,6 @@ class LeaderboardService {
             // Auth durumunu kontrol et
             final currentUser = _auth.currentUser;
             if (currentUser == null) {
-              print('Kullanıcı çıkış yapmış, boş liste döndürülüyor');
               return <Map<String, dynamic>>[];
             }
 
@@ -341,12 +319,10 @@ class LeaderboardService {
             // Aylık veri var ama eksik kullanıcılar olabilir, tüm kullanıcıları göster
             return await _getAllUsersWithMonthlyData(monthlyPointsSnapshot.docs, currentUser);
           } catch (e) {
-            print('Monthly leaderboard stream hatası: $e');
             return <Map<String, dynamic>>[];
           }
         })
         .handleError((error) {
-          print('Monthly leaderboard stream Firestore hatası: $error');
           return <Map<String, dynamic>>[];
         });
   }
