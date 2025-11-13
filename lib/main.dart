@@ -7,6 +7,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:timezone/data/latest.dart' as tz;
 import 'firebase_options.dart';
 import 'services/device_service.dart';
 import 'services/notification_service.dart';
@@ -84,6 +85,17 @@ class _AppInitializerState extends State<AppInitializer> {
 @pragma('vm:entry-point')
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  
+  // Timezone'ları initialize et (background handler ayrı isolate'de çalışır)
+  tz.initializeTimeZones();
+  
+  // NotificationService'i kullanarak bildirimi göster
+  final notificationService = NotificationService();
+  await notificationService.showRemoteNotification(
+    title: message.notification?.title ?? 'Yeni Bildirim',
+    body: message.notification?.body ?? '',
+    data: message.data,
+  );
 }
 
 void main() async {
@@ -127,12 +139,24 @@ void main() async {
     // Android bildirim durumunu kontrol et
     await notificationService.checkAndroidNotificationStatus();
     
+    // FCM foreground message handler'ı kur
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      debugPrint('Foreground mesaj alındı: ${message.messageId}');
+      // Bildirimi göster
+      notificationService.showRemoteNotification(
+        title: message.notification?.title ?? 'Yeni Bildirim',
+        body: message.notification?.body ?? '',
+        data: message.data,
+      );
+    });
+    
     // PremiumService'i initialize et
     final premiumService = PremiumService();
     await premiumService.initialize();
     
     
-  } catch (e, stackTrace) {
+  } catch (e) {
+    debugPrint('Initialization error: $e');
   }
 
   runApp(
@@ -192,20 +216,23 @@ class _DeviceRemovalListenerState extends State<DeviceRemovalListener> {
   }
 
   void _startDeviceRemovalListener() {
-    _deviceService.startDeviceRemovalListener(() async {
-      // Cihaz kaldırıldı - otomatik çıkış yap
-      try {
-        await _authService.signOut();
-        // Global navigator ile login'e yönlendir
-        if (navigatorKey.currentState != null) {
-          navigatorKey.currentState!.pushNamedAndRemoveUntil('/login', (route) => false);
+    // Giriş yapıldıktan sonra kısa bir süre bekle - cihaz kaydının tamamlanması için
+    Future.delayed(const Duration(seconds: 2), () {
+      _deviceService.startDeviceRemovalListener(() async {
+        // Cihaz kaldırıldı - otomatik çıkış yap
+        try {
+          await _authService.signOut();
+          // Global navigator ile login'e yönlendir
+          if (navigatorKey.currentState != null) {
+            navigatorKey.currentState!.pushNamedAndRemoveUntil('/login', (route) => false);
+          }
+        } catch (e) {
+          // Hata olsa bile login ekranına git
+          if (navigatorKey.currentState != null) {
+            navigatorKey.currentState!.pushNamedAndRemoveUntil('/login', (route) => false);
+          }
         }
-      } catch (e) {
-        // Hata olsa bile login ekranına git
-        if (navigatorKey.currentState != null) {
-          navigatorKey.currentState!.pushNamedAndRemoveUntil('/login', (route) => false);
-        }
-      }
+      });
     });
   }
 

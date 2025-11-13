@@ -215,5 +215,52 @@ class NotificationService {
       }
     }
   }
+
+  // Firebase Messaging remote notification'ı göster
+  Future<void> showRemoteNotification({
+    required String title,
+    required String body,
+    Map<String, dynamic>? data,
+  }) async {
+    const androidDetails = AndroidNotificationDetails(
+      'remote_notifications',
+      'Push Bildirimleri',
+      channelDescription: 'Uzak sunucudan gelen bildirimler',
+      importance: Importance.max,
+      priority: Priority.high,
+      enableVibration: true,
+      playSound: true,
+      showWhen: true,
+      autoCancel: true,
+      channelShowBadge: true,
+      icon: '@mipmap/launcher_icon',
+      enableLights: true,
+      ledColor: Colors.blue,
+      ledOnMs: 1000,
+      ledOffMs: 500,
+    );
+
+    const iosDetails = DarwinNotificationDetails(
+      presentAlert: true,
+      presentBadge: true,
+      presentSound: true,
+    );
+
+    const details = NotificationDetails(
+      android: androidDetails,
+      iOS: iosDetails,
+    );
+
+    // Benzersiz ID oluştur (timestamp kullan)
+    final notificationId = DateTime.now().millisecondsSinceEpoch.remainder(100000);
+
+    await _notifications.show(
+      notificationId,
+      title,
+      body,
+      details,
+      payload: data != null ? data.toString() : null,
+    );
+  }
   
 } 
