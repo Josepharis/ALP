@@ -1082,6 +1082,21 @@ class AppLocalizationsEn extends AppLocalizations {
   String get noRegisteredDevices => 'No registered devices found';
 
   @override
+  String get thisDevice => 'This Device';
+
+  @override
+  String get registered => 'Registered';
+
+  @override
+  String get lastLogin => 'Last Login';
+
+  @override
+  String get android => 'ANDROID';
+
+  @override
+  String get ios => 'IOS';
+
+  @override
   String get errorLoadingDevices => 'Error loading devices';
 
   @override
@@ -1506,4 +1521,14 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get agreeToPrivacy => 'I agree to the privacy policy';
+
+  @override
+  String get deleteAccount => 'Delete Account';
+
+  @override
+  String get deleteAccountTitle => 'Delete Account';
+
+  @override
+  String get deleteAccountMessage =>
+      'Are you sure you want to delete your account?\n\nThis action cannot be undone and all your data will be permanently deleted.';
 }

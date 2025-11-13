@@ -1289,34 +1289,51 @@ class PremiumInformationScreen extends StatelessWidget {
     return Consumer<PremiumService>(
       builder: (context, premiumService, child) {
         // Premium kontrolü - Bilgiler bölümü sadece premium kullanıcılara açık
-        if (!premiumService.isPremium) {
-          return Scaffold(
-            backgroundColor: Colors.transparent,
-            body: Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [Colors.blue.shade900, Colors.black],
-                ),
-              ),
-              child: SafeArea(
-                child: Center(
-                  child: Padding(
-                    padding: const EdgeInsets.all(20),
-                    child: PremiumLockWidget(
-                      message: AppLocalizations.of(context)!.informationPremiumMessage,
-                      subtitle: AppLocalizations.of(context)!.informationPremiumSubtitle,
+        // Async kontrol için FutureBuilder kullan
+        return FutureBuilder<bool>(
+          future: premiumService.hasPremiumAccess(),
+          builder: (context, snapshot) {
+            // Loading durumunda sync kontrolü kullan
+            final isPremium = snapshot.hasData 
+                ? snapshot.data! 
+                : premiumService.isPremium;
+            
+            // Test modu kontrolü
+            if (premiumService.isTestMode) {
+              return const InformationScreen();
+            }
+            
+            // Premium kontrolü - Bilgiler bölümü sadece premium kullanıcılara açık
+            if (!isPremium) {
+              return Scaffold(
+                backgroundColor: Colors.transparent,
+                body: Container(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [Colors.blue.shade900, Colors.black],
+                    ),
+                  ),
+                  child: SafeArea(
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(20),
+                        child: PremiumLockWidget(
+                          message: AppLocalizations.of(context)!.informationPremiumMessage,
+                          subtitle: AppLocalizations.of(context)!.informationPremiumSubtitle,
+                        ),
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ),
-          );
-        }
+              );
+            }
 
-        // Premium kullanıcılar için normal InformationScreen'i göster
-        return const InformationScreen();
+            // Premium kullanıcılar için normal InformationScreen'i göster
+            return const InformationScreen();
+          },
+        );
       },
     );
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../services/language_service.dart';
 
 class LanguageSelectionScreen extends StatefulWidget {
@@ -65,8 +66,20 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen>
     // Dil seçimini kaydet
     await languageService.changeLanguage(locale);
     
-    // Kısa bir gecikme sonrası devam et
-    await Future.delayed(const Duration(milliseconds: 500));
+    // SharedPreferences'a kaydedildiğinden emin ol
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('selected_language', locale.languageCode);
+    
+    // Kayıt işleminin tamamlandığından emin olmak için bekle
+    await Future.delayed(const Duration(milliseconds: 300));
+    
+    // Tekrar kontrol et
+    final saved = prefs.getString('selected_language');
+    if (saved != locale.languageCode) {
+      // Hala kaydedilmemişse tekrar kaydet
+      await prefs.setString('selected_language', locale.languageCode);
+      await Future.delayed(const Duration(milliseconds: 200));
+    }
     
     if (mounted) {
       // Ana uygulama akışına devam et

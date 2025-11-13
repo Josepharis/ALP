@@ -58,6 +58,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     
     // iOS simülatör için ayarları burada oluştur
     _createUserSettingsIfNeeded();
+    
+    // NOT: Cihaz kaldırma listener'ı artık main.dart'ta global olarak çalışıyor
   }
   
   // iOS simülatör için ayarlar oluştur
@@ -77,6 +79,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   @override
   void dispose() {
+    // NOT: Cihaz kaldırma listener'ı main.dart'ta global olarak yönetiliyor
     _tabController.dispose();
     _searchFocusNode.dispose();
     super.dispose();
@@ -368,7 +371,7 @@ class TabNavigator extends StatelessWidget {
         child = const QuizListScreen();
         break;
       case TabItem.information:
-        child = const InformationScreen();
+        child = const PremiumInformationScreen();
         break;
       case TabItem.mistakes:
         child = const MistakesScreen();

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALP - Hesap Silme</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #1E88E5, #26C6DA);
+            min-height: 100vh;
+            color: white;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        h1 {
+            color: #fff;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 28px;
+        }
+        .warning {
+            background: rgba(255, 0, 0, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #ff4444;
+            margin: 20px 0;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        input, textarea, select {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        textarea {
+            height: 100px;
+            resize: vertical;
+        }
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+        }
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+            margin-right: 10px;
+        }
+        button {
+            width: 100%;
+            padding: 15px;
+            background: #ff4444;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #cc3333;
+        }
+        button:disabled {
+            background: #666;
+            cursor: not-allowed;
+        }
+        .success {
+            background: rgba(0, 255, 0, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #44ff44;
+            margin: 20px 0;
+            display: none;
+        }
+        .error {
+            background: rgba(255, 0, 0, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #ff4444;
+            margin: 20px 0;
+            display: none;
+        }
+        .loading {
+            text-align: center;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🗑️ Hesap Silme</h1>
+        
+        <div class="warning">
+            <strong>⚠️ UYARI:</strong> Hesabınızı silmek istediğinizden emin misiniz? Bu işlem geri alınamaz ve tüm verileriniz kalıcı olarak silinecektir.
+        </div>
+
+        <form id="deleteForm">
+            <div class="form-group">
+                <label for="email">E-posta Adresiniz:</label>
+                <input type="email" id="email" name="email" required placeholder="ornek@email.com">
+            </div>
+
+            <div class="form-group">
+                <label for="reason">Hesabınızı silme sebebi:</label>
+                <select id="reason" name="reason" required>
+                    <option value="">Sebep seçin...</option>
+                    <option value="privacy">Gizlilik endişeleri</option>
+                    <option value="not_useful">Uygulama faydalı değil</option>
+                    <option value="technical_issues">Teknik sorunlar</option>
+                    <option value="premium_issues">Premium abonelik sorunları</option>
+                    <option value="other">Diğer</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="details">Ek açıklama (isteğe bağlı):</label>
+                <textarea id="details" name="details" placeholder="Daha detaylı açıklama yapabilirsiniz..."></textarea>
+            </div>
+
+            <div class="checkbox-group">
+                <input type="checkbox" id="confirm" name="confirm" required>
+                <label for="confirm">Hesabımı silmek istediğimi ve bu işlemin geri alınamaz olduğunu onaylıyorum.</label>
+            </div>
+
+            <button type="submit" id="deleteBtn">Hesabı Sil</button>
+        </form>
+
+        <div class="loading" id="loading">
+            <p>Hesabınız siliniyor, lütfen bekleyin...</p>
+        </div>
+
+        <div class="success" id="success">
+            <strong>✅ Başarılı!</strong> Hesabınız başarıyla silindi. Tüm verileriniz kalıcı olarak kaldırıldı.
+        </div>
+
+        <div class="error" id="error">
+            <strong>❌ Hata!</strong> Hesap silme işlemi sırasında bir hata oluştu. Lütfen tekrar deneyin veya yftsoftware@gmail.com adresine e-posta gönderin.
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('deleteForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const reason = document.getElementById('reason').value;
+            const details = document.getElementById('details').value;
+            const confirm = document.getElementById('confirm').checked;
+            
+            if (!confirm) {
+                alert('Lütfen onay kutusunu işaretleyin.');
+                return;
+            }
+            
+            // Form'u gizle, loading göster
+            document.getElementById('deleteForm').style.display = 'none';
+            document.getElementById('loading').style.display = 'block';
+            
+            try {
+                // Firebase Admin SDK ile hesap silme işlemi
+                const response = await fetch('https://us-central1-anestezi.cloudfunctions.net/deleteUserAccount', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        email: email,
+                        reason: reason,
+                        details: details
+                    })
+                });
+                
+                if (response.ok) {
+                    document.getElementById('loading').style.display = 'none';
+                    document.getElementById('success').style.display = 'block';
+                } else {
+                    throw new Error('Hesap silme işlemi başarısız');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('error').style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>

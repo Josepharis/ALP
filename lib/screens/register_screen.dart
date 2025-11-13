@@ -72,22 +72,32 @@ class _RegisterScreenState extends State<RegisterScreen>
     super.dispose();
   }
 
-  // Hata mesajlarını çevir
+  // Hata mesajlarını çevir - auth_service'den gelen detaylı mesajları kullan
   String _getErrorMessage(dynamic error) {
+    // Eğer error zaten bir string ise (auth_service'den gelen detaylı mesaj), direkt kullan
+    if (error is String) {
+      return error;
+    }
+    
+    // Eğer error bir exception ise, string'e çevir ve kontrol et
     final errorString = error.toString().toLowerCase();
     
     if (errorString.contains('email-already-in-use')) {
-      return AppLocalizations.of(context)!.emailAlreadyInUseShort;
+      return '❌ Bu e-posta adresi zaten başka bir hesap tarafından kullanılıyor.\n\n💡 Farklı bir e-posta adresi deneyin veya mevcut hesabınızla giriş yapın.';
     } else if (errorString.contains('weak-password')) {
-      return AppLocalizations.of(context)!.weakPasswordShort;
+      return '❌ Şifreniz çok zayıf.\n\n💡 Şifreniz en az 6 karakter olmalı ve güçlü olmalıdır. Büyük-küçük harf, rakam ve özel karakter kullanın.';
     } else if (errorString.contains('network')) {
-      return AppLocalizations.of(context)!.networkError;
+      return '❌ İnternet Bağlantısı Sorunu\n\n💡 İnternet bağlantınızı kontrol edin ve tekrar deneyin.\n\nWi-Fi veya mobil verilerinizin açık olduğundan emin olun.';
     } else if (errorString.contains('server')) {
-      return AppLocalizations.of(context)!.serverError;
+      return '❌ Sunucu Hatası\n\n💡 Sunucuya bağlanılamıyor. Lütfen daha sonra tekrar deneyin.';
     } else if (errorString.contains('operation-not-allowed')) {
-      return AppLocalizations.of(context)!.operationNotAllowed;
+      return '❌ Bu giriş yöntemi şu anda kullanılamıyor.\n\n💡 Destek ekibi ile iletişime geçin.';
+    } else if (errorString.contains('invalid-email')) {
+      return '❌ Geçersiz e-posta adresi formatı.\n\n💡 Lütfen geçerli bir e-posta adresi girin (örnek: kullanici@email.com)';
+    } else if (errorString.contains('user-not-found')) {
+      return '❌ Bu e-posta adresi ile kayıtlı bir hesap bulunamadı.\n\n💡 Lütfen e-posta adresinizi kontrol edin veya yeni bir hesap oluşturun.';
     } else {
-      return AppLocalizations.of(context)!.registrationFailed;
+      return '❌ Kayıt İşlemi Başarısız\n\n💡 Beklenmeyen bir hata oluştu. Lütfen:\n• Bilgilerinizi kontrol edin\n• İnternet bağlantınızı kontrol edin\n• Birkaç dakika sonra tekrar deneyin\n\nSorun devam ederse destek ekibi ile iletişime geçin.';
     }
   }
 

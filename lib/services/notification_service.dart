@@ -2,6 +2,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class NotificationService {
@@ -84,7 +85,7 @@ class NotificationService {
     
     // iOS için izinleri iste
     if (await _notifications.resolvePlatformSpecificImplementation<IOSFlutterLocalNotificationsPlugin>() != null) {
-      final bool? result = await _notifications.resolvePlatformSpecificImplementation<IOSFlutterLocalNotificationsPlugin>()
+      await _notifications.resolvePlatformSpecificImplementation<IOSFlutterLocalNotificationsPlugin>()
           ?.requestPermissions(
         alert: true,
         badge: true,
@@ -97,73 +98,100 @@ class NotificationService {
         _notifications.resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>();
     
     if (androidImplementation != null) {
-      final bool? granted = await androidImplementation.requestNotificationsPermission();
+      await androidImplementation.requestNotificationsPermission();
     }
 
     return true;
   }
 
   Future<void> scheduleDailyNotification() async {
-    // Önce tüm bildirimleri temizle
-    await cancelAllNotifications();
+    try {
+      // Önce tüm bildirimleri temizle
+      await cancelAllNotifications();
 
-    const androidDetails = AndroidNotificationDetails(
-      'daily_reminder',
-      'Günlük Hatırlatıcı',
-      channelDescription: 'Günlük quiz hatırlatıcısı',
-      importance: Importance.max,
-      priority: Priority.high,
-      enableVibration: true,
-      playSound: true,
-      showWhen: true,
-      autoCancel: false,
-      ongoing: false,
-      channelShowBadge: true,
-      icon: '@mipmap/launcher_icon',
-      // Android release mod için ek ayarlar
-      enableLights: true,
-      ledColor: Colors.blue,
-      ledOnMs: 1000,
-      ledOffMs: 500,
-    );
-
-    const iosDetails = DarwinNotificationDetails(
-      presentAlert: true,
-      presentBadge: true,
-      presentSound: true,
-    );
-
-    const details = NotificationDetails(
-      android: androidDetails,
-      iOS: iosDetails,
-    );
-
-    final scheduledTimes = _notificationTimes;
-    
-    // Günlük bildirim planla
-    for (int i = 0; i < scheduledTimes.length; i++) {
-      final scheduledTime = scheduledTimes[i];
-      final notificationId = i;
-      
-      const title = 'Günlük Quiz Zamanı! 📚';
-      const body = 'Bugünkü anestezi sorularını çözmeyi unutmayın!';
-      
-      await _notifications.zonedSchedule(
-        notificationId,
-        title,
-        body,
-        scheduledTime,
-        details,
-        androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
-        uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
-        matchDateTimeComponents: DateTimeComponents.time,
+      const androidDetails = AndroidNotificationDetails(
+        'daily_reminder',
+        'Günlük Hatırlatıcı',
+        channelDescription: 'Günlük quiz hatırlatıcısı',
+        importance: Importance.max,
+        priority: Priority.high,
+        enableVibration: true,
+        playSound: true,
+        showWhen: true,
+        autoCancel: false,
+        ongoing: false,
+        channelShowBadge: true,
+        icon: '@mipmap/launcher_icon',
+        // Android release mod için ek ayarlar
+        enableLights: true,
+        ledColor: Colors.blue,
+        ledOnMs: 1000,
+        ledOffMs: 500,
       );
 
-    }
-    
-    // Planlanan bildirimleri kontrol et
-    final pendingNotifications = await _notifications.pendingNotificationRequests();
-    for (var notification in pendingNotifications) {
+      const iosDetails = DarwinNotificationDetails(
+        presentAlert: true,
+        presentBadge: true,
+        presentSound: true,
+      );
+
+      const details = NotificationDetails(
+        android: androidDetails,
+        iOS: iosDetails,
+      );
+
+      final scheduledTimes = _notificationTimes;
+      
+      // Günlük bildirim planla
+      for (int i = 0; i < scheduledTimes.length; i++) {
+        final scheduledTime = scheduledTimes[i];
+        final notificationId = i;
+        
+        const title = 'Günlük Quiz Zamanı! 📚';
+        const body = 'Bugünkü anestezi sorularını çözmeyi unutmayın!';
+        
+        try {
+          // Önce exact mode ile dene
+          await _notifications.zonedSchedule(
+            notificationId,
+            title,
+            body,
+            scheduledTime,
+            details,
+            androidScheduleMode: AndroidScheduleMode.exact,
+            uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
+            matchDateTimeComponents: DateTimeComponents.time,
+          );
+        } catch (e) {
+          // Exact alarm izni yoksa inexact mode kullan
+          if (e.toString().contains('exact_alarms_not_permitted') ||
+              e.toString().contains('exact_alarm')) {
+            // Inexact mode ile tekrar dene
+            await _notifications.zonedSchedule(
+              notificationId,
+              title,
+              body,
+              scheduledTime,
+              details,
+              androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
+              uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
+              matchDateTimeComponents: DateTimeComponents.time,
+            );
+          } else {
+            // Diğer hatalar için yeniden fırlat
+            rethrow;
+          }
+        }
+      }
+      
+      // Planlanan bildirimleri kontrol et
+      final pendingNotifications = await _notifications.pendingNotificationRequests();
+      // Bildirimler başarıyla planlandı
+      debugPrint('${pendingNotifications.length} bildirim planlandı');
+    } catch (e) {
+      // Bildirim planlama hatası - logla ama uygulamayı durdurma
+      debugPrint('Bildirim planlama hatası: $e');
+      // Hata fırlatma - giriş işlemini engellememeli
     }
   }
 

@@ -426,6 +426,8 @@ class _PremiumScreenState extends State<PremiumScreen> with TickerProviderStateM
   }
 
   Widget _buildPricingSection() {
+    final double screenWidth = MediaQuery.of(context).size.width;
+    final double gap = screenWidth < 360 ? 6 : 10; // responsive spacing
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -447,6 +449,7 @@ class _PremiumScreenState extends State<PremiumScreen> with TickerProviderStateM
           isPopular: false,
           productId: InAppPurchaseService.premiumMonthlyId,
         ),
+        SizedBox(height: gap),
         _buildPricingCard(
           id: 'sixmonth',
           title: AppLocalizations.of(context)!.sixMonthly,
@@ -456,6 +459,7 @@ class _PremiumScreenState extends State<PremiumScreen> with TickerProviderStateM
           isPopular: false,
           productId: InAppPurchaseService.premiumSixMonthId,
         ),
+        SizedBox(height: gap),
         _buildPricingCard(
           id: 'yearly',
           title: AppLocalizations.of(context)!.yearly,
@@ -710,6 +714,11 @@ class _PremiumScreenState extends State<PremiumScreen> with TickerProviderStateM
   }
 
   Future<void> _purchaseSelectedPlan() async {
+    // Servisin initialize edildiğinden emin ol
+    if (!_purchaseService.isAvailable) {
+      await _purchaseService.initialize();
+    }
+
     String productId;
     switch (_selectedPlan) {
       case 'monthly':
@@ -723,6 +732,23 @@ class _PremiumScreenState extends State<PremiumScreen> with TickerProviderStateM
         break;
       default:
         productId = InAppPurchaseService.premiumMonthlyId;
+    }
+
+    // Ürünün yüklendiğini kontrol et
+    final product = _purchaseService.getProduct(productId);
+    if (product == null) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Ürün yüklenemedi: $productId. Lütfen tekrar deneyin.'),
+            backgroundColor: Colors.orange,
+            duration: const Duration(seconds: 3),
+          ),
+        );
+      }
+      // Ürünleri yeniden yükle
+      await _purchaseService.initialize();
+      return;
     }
 
     try {
@@ -740,8 +766,9 @@ class _PremiumScreenState extends State<PremiumScreen> with TickerProviderStateM
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text(AppLocalizations.of(context)!.purchaseFailed),
+              content: Text('Satın alma başlatılamadı. Lütfen Google Play Console\'da ürünün aktif olduğundan ve doğru tanımlandığından emin olun.'),
               backgroundColor: Colors.red,
+              duration: const Duration(seconds: 5),
             ),
           );
         }
@@ -752,6 +779,7 @@ class _PremiumScreenState extends State<PremiumScreen> with TickerProviderStateM
           SnackBar(
             content: Text('Hata: $e'),
             backgroundColor: Colors.red,
+            duration: const Duration(seconds: 5),
           ),
         );
       }

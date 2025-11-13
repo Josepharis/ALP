@@ -2168,6 +2168,36 @@ abstract class AppLocalizations {
   /// **'No registered devices found'**
   String get noRegisteredDevices;
 
+  /// Current device label
+  ///
+  /// In en, this message translates to:
+  /// **'This Device'**
+  String get thisDevice;
+
+  /// Device registration date label
+  ///
+  /// In en, this message translates to:
+  /// **'Registered'**
+  String get registered;
+
+  /// Last login date label
+  ///
+  /// In en, this message translates to:
+  /// **'Last Login'**
+  String get lastLogin;
+
+  /// Android platform name
+  ///
+  /// In en, this message translates to:
+  /// **'ANDROID'**
+  String get android;
+
+  /// iOS platform name
+  ///
+  /// In en, this message translates to:
+  /// **'IOS'**
+  String get ios;
+
   /// Error loading devices message
   ///
   /// In en, this message translates to:
@@ -2935,6 +2965,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'I agree to the privacy policy'**
   String get agreeToPrivacy;
+
+  /// Delete account button text
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Account'**
+  String get deleteAccount;
+
+  /// Delete account dialog title
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Account'**
+  String get deleteAccountTitle;
+
+  /// Delete account confirmation message
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete your account?\n\nThis action cannot be undone and all your data will be permanently deleted.'**
+  String get deleteAccountMessage;
 }
 
 class _AppLocalizationsDelegate

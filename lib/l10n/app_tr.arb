@@ -405,6 +405,26 @@
   "myDevices": "Cihazlarım",
   "myDevicesSubtitle": "Maksimum 2 cihazdan giriş yapabilirsiniz",
   "noRegisteredDevices": "Kayıtlı cihaz bulunamadı",
+  "thisDevice": "Bu Cihaz",
+  "@thisDevice": {
+    "description": "Current device label"
+  },
+  "registered": "Kayıt Tarihi",
+  "@registered": {
+    "description": "Device registration date label"
+  },
+  "lastLogin": "Son Giriş",
+  "@lastLogin": {
+    "description": "Last login date label"
+  },
+  "android": "ANDROID",
+  "@android": {
+    "description": "Android platform name"
+  },
+  "ios": "IOS",
+  "@ios": {
+    "description": "iOS platform name"
+  },
   "errorLoadingDevices": "Cihazlar yüklenirken hata oluştu",
   "currentDevice": "Mevcut Cihaz",
   "lastActive": "Son Aktif",
@@ -549,5 +569,8 @@
   "privacyPolicy": "Gizlilik Politikası",
   "termsOfService": "Hizmet Koşulları",
   "agreeToTerms": "Koşulları kabul ediyorum",
-  "agreeToPrivacy": "Gizlilik politikasını kabul ediyorum"
+  "agreeToPrivacy": "Gizlilik politikasını kabul ediyorum",
+  "deleteAccount": "Hesabı Sil",
+  "deleteAccountTitle": "Hesabı Sil",
+  "deleteAccountMessage": "Hesabınızı silmek istediğinizden emin misiniz?\n\nBu işlem geri alınamaz ve tüm verileriniz kalıcı olarak silinecektir."
 }

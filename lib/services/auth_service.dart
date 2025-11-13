@@ -1,9 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import '../utils/event_bus.dart';
 import 'device_service.dart' as device_service;
 import 'notification_service.dart';
 import 'tutorial_service.dart';
+import 'in_app_purchase_service.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -28,14 +31,13 @@ class AuthService {
   }) async {
     try {
       
-      // Sadece temel Firebase Auth kaydı - Firestore işlemlerini atla
+      // Firebase Auth ile kullanıcı oluştur
       final userCredential = await _auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
 
-
-      // Display name güncelle (basit)
+      // Display name güncelle
       if (userCredential.user != null && displayName != null && displayName.isNotEmpty) {
         try {
           await userCredential.user!.updateDisplayName(displayName);
@@ -43,15 +45,35 @@ class AuthService {
         }
       }
 
+      // Firestore'a kullanıcı bilgilerini kaydet
+      if (userCredential.user != null) {
+        try {
+          await _createUserDocument(
+            userCredential.user!,
+            displayName,
+            title,
+            email,
+          );
+        } catch (e) {
+          // Firestore hatası olsa bile kayıt işlemini tamamla
+        }
+        
+        // Yeni kullanıcı için cihaz kaydını yap
+        try {
+          await _deviceService.registerOrUpdateDevice();
+        } catch (e) {
+          // Cihaz kaydı hatası olsa bile kayıt işlemini tamamla
+        }
+      }
             
-            // Yeni kullanıcı için tutorial'ı sıfırla
-            try {
-              final tutorialService = TutorialService();
-              await tutorialService.resetAllTutorials();
-            } catch (e) {
-            }
-            
-            return userCredential.user;
+      // Yeni kullanıcı için tutorial'ı sıfırla
+      try {
+        final tutorialService = TutorialService();
+        await tutorialService.resetAllTutorials();
+      } catch (e) {
+      }
+      
+      return userCredential.user;
     } on FirebaseAuthException catch (e) {
       throw _handleAuthException(e);
     } catch (e) {
@@ -79,8 +101,15 @@ class AuthService {
       );
       
       // Schedule daily notifications after successful login
-      final notificationService = NotificationService();
-      await notificationService.scheduleDailyNotification();
+      // Bildirim hatası giriş işlemini engellememeli
+      try {
+        final notificationService = NotificationService();
+        await notificationService.scheduleDailyNotification();
+      } catch (e) {
+        // Bildirim planlama hatası olsa bile giriş işlemine devam et
+        // Özellikle exact_alarms_not_permitted hatası için
+        debugPrint('Bildirim planlama hatası (giriş devam ediyor): $e');
+      }
       
       // Giriş başarılıysa kullanıcı dokümanını kontrol et ve oluştur
       if (userCredential.user != null) {
@@ -97,17 +126,33 @@ class AuthService {
           }
           // Cihaz kaydı hatası olsa bile giriş işlemine devam et
         }
+        
+        // Premium satın alımlarını Firestore'dan yükle
+        try {
+          final inAppPurchaseService = await _getInAppPurchaseService();
+          await inAppPurchaseService.restorePurchases();
+        } catch (e) {
+          // Premium yükleme hatası olsa bile giriş işlemine devam et
+        }
+        
+        // NOT: Cihaz kaldırma listener'ı home_screen.dart'ta başlatılacak
+        // Çünkü navigasyon için context gerekiyor
       }
 
       return userCredential.user;
     } on FirebaseAuthException catch (e) {
       throw _handleAuthException(e);
     } catch (e) {
+      // Hata detaylarını logla - debug için
+      debugPrint('Giriş hatası (detay): $e');
+      debugPrint('Hata tipi: ${e.runtimeType}');
       
       // Ağ bağlantısı kontrolü
-      if (e.toString().toLowerCase().contains('network') || 
-          e.toString().toLowerCase().contains('connection') ||
-          e.toString().toLowerCase().contains('timeout')) {
+      final errorString = e.toString().toLowerCase();
+      if (errorString.contains('network') || 
+          errorString.contains('connection') ||
+          errorString.contains('timeout') ||
+          errorString.contains('socket')) {
         throw '❌ İnternet Bağlantısı Sorunu\n\n💡 İnternet bağlantınızı kontrol edin ve tekrar deneyin.\n\nWi-Fi veya mobil verilerinizin açık olduğundan emin olun.';
       }
       
@@ -116,7 +161,15 @@ class AuthService {
         rethrow; // Cihaz limiti hatasını olduğu gibi fırlat
       }
       
-      throw '❌ Giriş İşlemi Başarısız\n\n💡 Beklenmeyen bir hata oluştu. Lütfen:\n• E-posta ve şifrenizi kontrol edin\n• İnternet bağlantınızı kontrol edin\n• Birkaç dakika sonra tekrar deneyin\n\nSorun devam ederse destek ekibi ile iletişime geçin.';
+      // Auth state ile ilgili hatalar
+      if (errorString.contains('auth') && errorString.contains('state') ||
+          errorString.contains('user') && errorString.contains('null') ||
+          errorString.contains('already') && errorString.contains('use')) {
+        throw '❌ Oturum Sorunu\n\n💡 Lütfen uygulamayı kapatıp tekrar açın ve giriş yapmayı deneyin.\n\nSorun devam ederse birkaç saniye bekleyip tekrar deneyin.';
+      }
+      
+      // Daha detaylı hata mesajı
+      throw '❌ Giriş İşlemi Başarısız\n\n💡 Beklenmeyen bir hata oluştu.\n\nLütfen:\n• E-posta ve şifrenizi kontrol edin\n• İnternet bağlantınızı kontrol edin\n• Birkaç saniye bekleyip tekrar deneyin\n• Uygulamayı kapatıp açmayı deneyin\n\nSorun devam ederse destek ekibi ile iletişime geçin.\n\nHata: ${e.toString().substring(0, e.toString().length > 100 ? 100 : e.toString().length)}';
     }
   }
 
@@ -136,7 +189,7 @@ class AuthService {
       await _firestore.collection('users').doc(user.uid).set({
         'email': email,
         'displayName': displayName ?? 'Kullanıcı',
-        'title': title ?? 'Anestezi Uzmanı',
+        'title': title ?? 'Anestezi Uzmanı', // Kullanıcının girdiği unvanı kullan
         'isAdmin': false,
         'createdAt': FieldValue.serverTimestamp(),
         'isProfileComplete': false,
@@ -216,7 +269,6 @@ class AuthService {
   // Güvenli çıkış yapma
   Future<void> signOut() async {
     try {
-
       // 1. Önce EventBus'ı temizle (tüm stream'leri iptal eder)
       EventBus.safeDispose();
 
@@ -227,16 +279,72 @@ class AuthService {
       } catch (e) {
       }
 
-      // 3. Firebase Auth'dan çıkış yap (en önemli işlem)
+      // 3. Cihaz kaldırma listener'ını durdur
+      try {
+        _deviceService.stopDeviceRemovalListener();
+      } catch (e) {
+        // Listener durdurma hatası olsa bile devam et
+      }
+
+      // 3.5. Cihaz kaydını SİLME - Aynı cihaz farklı hesaplarda tutulabilmeli
+      // Çıkış yapıldığında cihaz kaydı silinmemeli, sadece auth state temizlenmeli
+      // Böylece aynı FCM token farklı hesaplarda kullanılabilir
+
+      // 3.5. Premium bilgilerini temizle (cihaz bazlı)
+      try {
+        final inAppPurchaseService = await _getInAppPurchaseService();
+        await inAppPurchaseService.clearPurchases();
+      } catch (e) {
+        // Premium temizleme hatası olsa bile devam et
+      }
+
+      // 4. Firebase Auth'dan çıkış yap (en önemli işlem)
       await _auth.signOut();
 
-      // 4. Firestore işlemlerini güvenli şekilde temizle
+      // 5. Auth state'in tamamen temizlendiğinden emin ol
+      // Gerçek cihazlarda daha uzun süre bekle
+      int attempts = 0;
+      const maxAttempts = 30; // Gerçek cihazlar için daha fazla deneme
+      while (attempts < maxAttempts && _auth.currentUser != null) {
+        await Future.delayed(const Duration(milliseconds: 100));
+        attempts++;
+      }
+
+      // 6. Firestore persistence'ı temizle - çıkış sonrası otomatik girişi engellemek için
+      // clearPersistence aktif listener'lar varken başarısız olabilir
+      // Bu yüzden sadece belirli durumlarda deniyoruz
       try {
-        // Sadece persistence'ı temizle, terminate etme
-        await _firestore.clearPersistence();
+        // Tüm listener'ların kapanması için daha uzun bekle
+        await Future.delayed(const Duration(milliseconds: 500));
+        
+        // clearPersistence sadece debug modda ve aktif listener yoksa çağır
+        // Release modda veya listener'lar varsa atla
+        if (kDebugMode) {
+          try {
+            // Önce listener'ların kapanmasını bekle
+            await Future.delayed(const Duration(milliseconds: 200));
+            await _firestore.clearPersistence();
+          } on FirebaseException catch (e) {
+            // Firebase hatalarını sessizce handle et
+            // failed-precondition hatası normal - aktif listener'lar varken oluşur
+            if (e.code != 'failed-precondition') {
+              debugPrint('Firestore persistence temizleme hatası: ${e.code}');
+            }
+          } catch (e) {
+            // Diğer hataları logla ama devam et
+            debugPrint('Firestore persistence temizleme hatası: $e');
+          }
+        }
+        // Release modda clearPersistence'ı atla - gerçek cihazlarda sorun yaratabilir
       } catch (e) {
         // Firestore temizleme hatası olsa bile devam et
+        // clearPersistence bazen hata verebilir (örneğin aktif listener'lar varsa)
+        // Bu normal bir durum, hata mesajını gösterme
       }
+
+      // 7. Ek bir bekleme - auth state'in tamamen temizlendiğinden emin ol
+      // Gerçek cihazlarda daha uzun süre bekle
+      await Future.delayed(const Duration(milliseconds: 500));
 
     } catch (e) {
       
@@ -260,6 +368,11 @@ class AuthService {
       
       // Hata fırlatma, sadece logla
     }
+  }
+
+  // InAppPurchaseService'i lazy load et
+  Future<InAppPurchaseService> _getInAppPurchaseService() async {
+    return InAppPurchaseService();
   }
 
   // Şifre sıfırlama

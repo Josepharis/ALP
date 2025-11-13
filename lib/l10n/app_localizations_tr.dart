@@ -1082,6 +1082,21 @@ class AppLocalizationsTr extends AppLocalizations {
   String get noRegisteredDevices => 'Kayıtlı cihaz bulunamadı';
 
   @override
+  String get thisDevice => 'Bu Cihaz';
+
+  @override
+  String get registered => 'Kayıt Tarihi';
+
+  @override
+  String get lastLogin => 'Son Giriş';
+
+  @override
+  String get android => 'ANDROID';
+
+  @override
+  String get ios => 'IOS';
+
+  @override
   String get errorLoadingDevices => 'Cihazlar yüklenirken hata oluştu';
 
   @override
@@ -1506,4 +1521,14 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get agreeToPrivacy => 'Gizlilik politikasını kabul ediyorum';
+
+  @override
+  String get deleteAccount => 'Hesabı Sil';
+
+  @override
+  String get deleteAccountTitle => 'Hesabı Sil';
+
+  @override
+  String get deleteAccountMessage =>
+      'Hesabınızı silmek istediğinizden emin misiniz?\n\nBu işlem geri alınamaz ve tüm verileriniz kalıcı olarak silinecektir.';
 }

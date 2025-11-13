@@ -16,15 +16,22 @@ class PremiumService extends ChangeNotifier {
     await _purchaseService.initialize();
   }
 
-  // Check if user has premium access
-  bool hasPremiumAccess() {
+  // Check if user has premium access (async - checks Firestore)
+  Future<bool> hasPremiumAccess() async {
     // Test modu aktifse her zaman true döndür
     if (_isTestMode) return true;
-    return _purchaseService.hasPremiumAccess();
+    return await _purchaseService.hasPremiumAccess();
+  }
+  
+  // Synchronous version for backward compatibility
+  bool hasPremiumAccessSync() {
+    // Test modu aktifse her zaman true döndür
+    if (_isTestMode) return true;
+    return _purchaseService.hasPremiumAccessSync();
   }
 
-  // Alias for hasPremiumAccess for easier access
-  bool get isPremium => hasPremiumAccess();
+  // Alias for hasPremiumAccess for easier access (sync - uses cached value)
+  bool get isPremium => hasPremiumAccessSync();
 
   // Check if user has monthly subscription
   bool hasMonthlySubscription() {

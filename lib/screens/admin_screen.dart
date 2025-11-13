@@ -40,10 +40,12 @@ class _AdminScreenState extends State<AdminScreen>
     super.initState();
     _tabController = TabController(length: 3, vsync: this);
     _loadInitialData();
+    // NOT: Cihaz kaldırma listener'ı artık main.dart'ta global olarak çalışıyor
   }
 
   @override
   void dispose() {
+    // NOT: Cihaz kaldırma listener'ı main.dart'ta global olarak yönetiliyor
     _tabController.dispose();
     super.dispose();
   }

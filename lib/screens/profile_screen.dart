@@ -38,6 +38,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   int _currentRank = 0;
 
   bool _isLoading = false;
+  bool _deviceCheckDone = false; // Cihaz kontrolü yapıldı mı?
 
   Map<String, dynamic>? _userProfile;
   UserActivity? _userActivity;
@@ -586,6 +587,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             onTap: () => _showHelpModal(context),
                           ),
                           _buildSettingItem(
+                            AppLocalizations.of(context)!.deleteAccount,
+                            Icons.delete_forever,
+                            context,
+                            onTap: () => _showDeleteAccountDialog(context),
+                          ),
+                          _buildSettingItem(
                             AppLocalizations.of(context)!.logOut,
                             Icons.exit_to_app,
                             context,
@@ -873,8 +880,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void _showPrivacySettingsModal(BuildContext context) {
     bool showProfile =
         _userProfile?['privacySettings']?['showProfileToOthers'] ?? true;
-    bool showInLeaderboard =
-        _userProfile?['privacySettings']?['showActivityInLeaderboard'] ?? true;
     bool shareUsage =
         _userProfile?['privacySettings']?['shareUsageData'] ?? true;
 
@@ -926,15 +931,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
 
                   SwitchListTile(
-                    title: Text(AppLocalizations.of(context)!.showInLeaderboard),
-                    value: showInLeaderboard,
-                    onChanged: (value) {
-                      setState(() => showInLeaderboard = value);
-                    },
-                    activeColor: Colors.indigo,
-                  ),
-
-                  SwitchListTile(
                     title: Text(AppLocalizations.of(context)!.shareUsageData),
                     subtitle: Text(
                       AppLocalizations.of(context)!.shareUsageDataSubtitle,
@@ -952,7 +948,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       final success = await _userService
                           .updatePrivacySettings(
                             showProfileToOthers: showProfile,
-                            showActivityInLeaderboard: showInLeaderboard,
+                            showActivityInLeaderboard: true, // Varsayılan olarak true, artık kullanıcı değiştiremez
                             shareUsageData: shareUsage,
                           );
 
@@ -1413,12 +1409,42 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   // Cihaz yönetimi modalı
-  void _showDeviceManagementModal(BuildContext context) {
+  void _showDeviceManagementModal(BuildContext parentContext) {
+    // Modal açıldığında cihaz kaydını kontrol et ve gerekirse kaydet (sadece bir kez)
+    if (!_deviceCheckDone) {
+      _deviceCheckDone = true;
+      WidgetsBinding.instance.addPostFrameCallback((_) async {
+        try {
+          final devices = await _deviceService.getUserDevices();
+          if (devices.isEmpty) {
+            // Cihaz yoksa kaydetmeyi dene
+            await _deviceService.registerOrUpdateDevice();
+            // Kayıt sonrası listeyi yenile
+            if (mounted) {
+              setState(() {
+                _deviceCheckDone = false; // Reset flag for next time
+              });
+            }
+          }
+        } catch (e) {
+          debugPrint('Cihaz kaydı kontrolü hatası: $e');
+          if (mounted) {
+            setState(() {
+              _deviceCheckDone = false; // Reset flag on error
+            });
+          }
+        }
+      });
+    }
+    
     showModalBottomSheet(
-      context: context,
+      context: parentContext,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
-      builder: (context) => Container(
+      builder: (modalContext) => StatefulBuilder(
+        builder: (context, setModalState) {
+          // Modal içinde FutureBuilder için state
+          return Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topLeft,
@@ -1445,7 +1471,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   children: [
                     IconButton(
                       icon: const Icon(Icons.close, color: Colors.white),
-                      onPressed: () => Navigator.pop(context),
+                      onPressed: () {
+                        // Modal kapanırken flag'i resetle
+                        _deviceCheckDone = false;
+                        Navigator.pop(context);
+                      },
                     ),
                     Text(
                       AppLocalizations.of(context)!.myDevices,
@@ -1480,10 +1510,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                       if (snapshot.hasError) {
                         return Center(
-                          child: Text(
-                            '${AppLocalizations.of(context)!.errorLoadingDevices}:\n${snapshot.error}',
-                            style: const TextStyle(color: Colors.red),
-                            textAlign: TextAlign.center,
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Text(
+                              '${AppLocalizations.of(context)!.errorLoadingDevices}:\n${snapshot.error}',
+                              style: const TextStyle(color: Colors.red),
+                              textAlign: TextAlign.center,
+                            ),
                           ),
                         );
                       }
@@ -1492,26 +1525,54 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                       if (devices.isEmpty) {
                         return Center(
-                          child: Text(
-                            AppLocalizations.of(context)!.noRegisteredDevices,
-                            style: const TextStyle(color: Colors.grey),
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.devices_other,
+                                  size: 48,
+                                  color: Colors.grey[400],
+                                ),
+                                const SizedBox(height: 12),
+                                Text(
+                                  AppLocalizations.of(context)!.noRegisteredDevices,
+                                  style: TextStyle(
+                                    color: Colors.grey[400],
+                                    fontSize: 14,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ],
+                            ),
                           ),
                         );
                       }
 
-                      return ListView.builder(
-                        itemCount: devices.length,
-                        itemBuilder: (context, index) {
-                          final device = devices[index];
-                          return _buildDeviceCard(device, (value) {});
+                      return RefreshIndicator(
+                        onRefresh: () async {
+                          // Cihaz listesini yenile
+                          setModalState(() {});
                         },
+                        child: ListView.builder(
+                          itemCount: devices.length,
+                          itemBuilder: (context, index) {
+                            final device = devices[index];
+                            return _buildDeviceCard(device, setModalState, parentContext);
+                          },
+                        ),
                       );
                     },
                   ),
                 ),
                 const SizedBox(height: 20),
                 ElevatedButton(
-                  onPressed: () => Navigator.pop(context),
+                  onPressed: () {
+                    // Modal kapanırken flag'i resetle
+                    _deviceCheckDone = false;
+                    Navigator.pop(context);
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.indigo,
                     minimumSize: const Size(double.infinity, 50),
@@ -1524,15 +1585,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ],
             ),
           ),
-        ),
+        ));
+        },
       ),
     );
   }
 
-  Widget _buildDeviceCard(DeviceInfo device, StateSetter setState) {
-    final isCurrentDevice = device.lastLoginAt.isAfter(DateTime.now().subtract(const Duration(minutes: 5)));
+  Widget _buildDeviceCard(DeviceInfo device, StateSetter setState, BuildContext parentContext) {
+    return FutureBuilder<String>(
+      future: _deviceService.getCurrentDeviceId(),
+      builder: (context, snapshot) {
+        // Mevcut cihazı deviceId ile kontrol et
+        final currentDeviceId = snapshot.data ?? '';
+        final isCurrentDevice = device.deviceId == currentDeviceId;
 
-    return Container(
+        return Container(
       margin: const EdgeInsets.only(bottom: 12),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -1570,7 +1637,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                     ),
                     Text(
-                      device.platform.toUpperCase(),
+                      device.platform.toLowerCase() == 'android'
+                          ? AppLocalizations.of(context)!.android
+                          : device.platform.toLowerCase() == 'ios'
+                              ? AppLocalizations.of(context)!.ios
+                              : device.platform.toUpperCase(),
                       style: TextStyle(
                         fontSize: 12,
                         color: Colors.grey[400],
@@ -1586,9 +1657,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     color: Colors.green.withOpacity(0.2),
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  child: const Text(
-                    'This Device',
-                    style: TextStyle(
+                  child: Text(
+                    AppLocalizations.of(context)!.thisDevice,
+                    style: const TextStyle(
                       fontSize: 12,
                       color: Colors.green,
                       fontWeight: FontWeight.bold,
@@ -1605,14 +1676,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Registered: ${_formatDate(device.registeredAt)}',
+                    '${AppLocalizations.of(context)!.registered}: ${_formatDate(device.registeredAt)}',
                     style: TextStyle(
                       fontSize: 12,
                       color: Colors.grey[400],
                     ),
                   ),
                   Text(
-                    'Last Login: ${_formatDate(device.lastLoginAt)}',
+                    '${AppLocalizations.of(context)!.lastLogin}: ${_formatDate(device.lastLoginAt)}',
                     style: TextStyle(
                       fontSize: 12,
                       color: Colors.grey[400],
@@ -1620,54 +1691,175 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ],
               ),
-              if (!isCurrentDevice)
-                IconButton(
-                  icon: const Icon(Icons.delete_outline, color: Colors.red),
-                  onPressed: () async {
-                    final confirmed = await showDialog<bool>(
-                      context: context,
-                      builder: (context) => AlertDialog(
-                        backgroundColor: Colors.indigo.shade900,
-                        title: Text(
-                          AppLocalizations.of(context)!.logoutFromDevice,
-                          style: const TextStyle(color: Colors.white),
-                        ),
-                        content: Text(
-                          AppLocalizations.of(context)!.logoutFromDeviceMessage,
-                          style: const TextStyle(color: Colors.white70),
-                        ),
-                        actions: [
-                          TextButton(
-                            onPressed: () => Navigator.pop(context, false),
-                            child: Text(
-                              AppLocalizations.of(context)!.cancel,
-                              style: const TextStyle(color: Colors.white),
-                            ),
+              // Silme butonu her zaman göster - mevcut cihazsa çıkış yap, değilse kaldır
+              IconButton(
+                icon: const Icon(Icons.delete_outline, color: Colors.red),
+                onPressed: () async {
+                  final confirmed = await showDialog<bool>(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      backgroundColor: Colors.indigo.shade900,
+                      title: Text(
+                        isCurrentDevice 
+                            ? AppLocalizations.of(context)!.logout
+                            : AppLocalizations.of(context)!.logoutFromDevice,
+                        style: const TextStyle(color: Colors.white),
+                      ),
+                      content: Text(
+                        isCurrentDevice
+                            ? 'Bu cihazdan çıkış yapmak istediğinizden emin misiniz?'
+                            : AppLocalizations.of(context)!.logoutFromDeviceMessage,
+                        style: const TextStyle(color: Colors.white70),
+                      ),
+                      actions: [
+                        TextButton(
+                          onPressed: () => Navigator.pop(context, false),
+                          child: Text(
+                            AppLocalizations.of(context)!.cancel,
+                            style: const TextStyle(color: Colors.white),
                           ),
-                          ElevatedButton(
-                            onPressed: () => Navigator.pop(context, true),
-                            style: ElevatedButton.styleFrom(
+                        ),
+                        ElevatedButton(
+                          onPressed: () => Navigator.pop(context, true),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.red,
+                          ),
+                          child: Text(
+                            isCurrentDevice
+                                ? AppLocalizations.of(context)!.logout
+                                : AppLocalizations.of(context)!.logoutFromDevice,
+                            style: const TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+
+                  if (confirmed == true) {
+                    try {
+                      // Önce Firestore'dan cihazı kaldır (mevcut cihazda da farklı cihazda da)
+                      final success = await _deviceService.removeDevice(device.deviceId);
+                      
+                      if (isCurrentDevice) {
+                        // Mevcut cihazsa hem Firestore'dan kaldır hem de çıkış yap
+                        // Önce modal'ı kapat - parent context kullan
+                        try {
+                          Navigator.of(parentContext, rootNavigator: false).pop(); // Modal'ı kapat
+                        } catch (e) {
+                          // Modal zaten kapanmış olabilir
+                          debugPrint('Modal kapatma hatası: $e');
+                        }
+                        
+                        // Kısa bir bekleme - modal'ın kapanması için
+                        await Future.delayed(const Duration(milliseconds: 300));
+                        
+                        // Çıkış yap
+                        await _authService.signOut();
+                        
+                        // Login ekranına git - root navigator kullan
+                        if (mounted) {
+                          try {
+                            // Root navigator kullan - modal context'inden bağımsız
+                            final rootNavigator = Navigator.of(parentContext, rootNavigator: true);
+                            rootNavigator.pushNamedAndRemoveUntil('/login', (route) => false);
+                          } catch (e) {
+                            // Context geçersiz olabilir, alternatif yöntem dene
+                            try {
+                              // Global navigator key kullan
+                              final navigatorKey = Navigator.of(context, rootNavigator: true);
+                              navigatorKey.pushNamedAndRemoveUntil('/login', (route) => false);
+                            } catch (e2) {
+                              // Hata durumunda sadece logla
+                              debugPrint('Navigasyon hatası: $e2');
+                            }
+                          }
+                        }
+                      } else {
+                        // Farklı cihazsa sadece Firestore'dan kaldır
+                        // Listener otomatik olarak o cihazdan çıkış yapacak
+                        if (success) {
+                          // Başarılı mesajı göster
+                          if (mounted) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: const Text('Cihaz başarıyla kaldırıldı'),
+                                backgroundColor: Colors.green,
+                              ),
+                            );
+                          }
+                          // Listeyi yenile - modal state'i kullan
+                          setState(() {});
+                        } else {
+                          // Hata mesajı göster
+                          if (mounted) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: const Text('Cihaz kaldırılırken bir hata oluştu'),
+                                backgroundColor: Colors.red,
+                              ),
+                            );
+                          }
+                        }
+                      }
+                    } catch (e) {
+                      if (mounted) {
+                        // Hata durumunda mevcut cihazsa yine de çıkış yap
+                        if (isCurrentDevice) {
+                          // Önce modal'ı kapat - parent context kullan
+                          try {
+                            Navigator.of(parentContext, rootNavigator: false).pop(); // Modal'ı kapat
+                            await Future.delayed(const Duration(milliseconds: 300));
+                          } catch (e3) {
+                            // Modal kapatma hatası - devam et
+                            debugPrint('Modal kapatma hatası: $e3');
+                          }
+                          
+                          try {
+                            await _authService.signOut();
+                            if (mounted) {
+                              try {
+                                // Root navigator kullan - modal context'inden bağımsız
+                                final rootNavigator = Navigator.of(parentContext, rootNavigator: true);
+                                rootNavigator.pushNamedAndRemoveUntil('/login', (route) => false);
+                              } catch (e4) {
+                                // Context geçersiz olabilir, alternatif yöntem dene
+                                try {
+                                  final navigatorKey = Navigator.of(context, rootNavigator: true);
+                                  navigatorKey.pushNamedAndRemoveUntil('/login', (route) => false);
+                                } catch (e5) {
+                                  debugPrint('Navigasyon hatası: $e5');
+                                }
+                              }
+                            }
+                          } catch (e2) {
+                            if (mounted) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text('Hata: ${e.toString()}'),
+                                  backgroundColor: Colors.red,
+                                ),
+                              );
+                            }
+                          }
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text('Hata: ${e.toString()}'),
                               backgroundColor: Colors.red,
                             ),
-                            child: Text(
-                              AppLocalizations.of(context)!.logoutFromDevice,
-                              style: const TextStyle(color: Colors.white),
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-
-                    if (confirmed == true) {
-                      await _deviceService.removeDevice(device.deviceId);
-                      setState(() {}); // Refresh the list
+                          );
+                        }
+                      }
                     }
-                  },
-                ),
+                  }
+                },
+              ),
             ],
           ),
         ],
       ),
+        );
+      },
     );
   }
 
@@ -1688,5 +1880,143 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   // Dil seçici widget'ı kaldırıldı - artık uygulama başlangıcında seçiliyor
 
+  void _showDeleteAccountDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: Colors.transparent,
+        content: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [Colors.red.shade900, Colors.black],
+            ),
+            borderRadius: BorderRadius.circular(20),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.3),
+                blurRadius: 20,
+                spreadRadius: 5,
+              ),
+            ],
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(24),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // İkon
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: Colors.red.withOpacity(0.2),
+                    shape: BoxShape.circle,
+                  ),
+                  child: const Icon(
+                    Icons.delete_forever,
+                    color: Colors.red,
+                    size: 32,
+                  ),
+                ),
+                const SizedBox(height: 16),
+                // Başlık
+                Text(
+                  AppLocalizations.of(context)!.deleteAccountTitle,
+                  style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+                const SizedBox(height: 12),
+                // İçerik
+                Text(
+                  AppLocalizations.of(context)!.deleteAccountMessage,
+                  style: const TextStyle(
+                    fontSize: 14,
+                    color: Colors.white70,
+                    height: 1.4,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 20),
+                // Butonlar
+                Row(
+                  children: [
+                    Expanded(
+                      child: TextButton(
+                        onPressed: () => Navigator.pop(context),
+                        style: TextButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                        child: Text(
+                          AppLocalizations.of(context)!.cancel,
+                          style: const TextStyle(
+                            color: Colors.white70,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                          _openDeleteAccountPage();
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.red,
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                        child: Text(
+                          AppLocalizations.of(context)!.deleteAccount,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _openDeleteAccountPage() {
+    // Web sayfasını aç
+    final url = 'https://anestezi.web.app/delete-account.html';
+    
+    // URL launcher kullanarak web sayfasını aç
+    // url_launcher paketi gerekli
+    // Bu örnekte basit bir snackbar gösteriyoruz
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Hesap silme sayfası: $url'),
+        action: SnackBarAction(
+          label: 'Kopyala',
+          onPressed: () {
+            // Clipboard'a kopyala
+            // Clipboard.setData(ClipboardData(text: url));
+          },
+        ),
+        duration: const Duration(seconds: 5),
+      ),
+    );
+  }
 
 }

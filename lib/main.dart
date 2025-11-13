@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/foundation.dart';
+import 'dart:async';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'firebase_options.dart';
 import 'services/device_service.dart';
 import 'services/notification_service.dart';
 import 'services/language_service.dart';
 import 'services/premium_service.dart';
+import 'services/auth_service.dart';
 import 'l10n/app_localizations.dart';
 
 import 'screens/splash_screen.dart';
@@ -41,16 +44,21 @@ class _AppInitializerState extends State<AppInitializer> {
   }
 
   Future<void> _initializeApp() async {
-    final languageService = Provider.of<LanguageService>(context, listen: false);
+    // Önce SharedPreferences'tan direkt kontrol et - en garantili yöntem
+    final prefs = await SharedPreferences.getInstance();
+    final languageKey = 'selected_language';
+    final languageCode = prefs.getString(languageKey);
+    final hasLanguageSelected = languageCode != null && languageCode.isNotEmpty;
     
-    // LanguageService'in yüklenmesini bekle
+    // LanguageService'i de initialize et
+    final languageService = Provider.of<LanguageService>(context, listen: false);
     await languageService.initializeLanguage();
     
     if (mounted) {
       setState(() {
         _isInitialized = true;
         // Dil seçimi yapılmışsa splash screen'e, yapılmamışsa dil seçimi ekranına git
-        _initialRoute = languageService.isLanguageSelected 
+        _initialRoute = hasLanguageSelected 
             ? const SplashScreen() 
             : const LanguageSelectionScreen();
       });
@@ -138,6 +146,82 @@ void main() async {
   );
 }
 
+// Global navigator key - her yerden erişilebilir
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+
+// Global device removal listener widget
+class DeviceRemovalListener extends StatefulWidget {
+  final Widget child;
+  
+  const DeviceRemovalListener({super.key, required this.child});
+
+  @override
+  State<DeviceRemovalListener> createState() => _DeviceRemovalListenerState();
+}
+
+class _DeviceRemovalListenerState extends State<DeviceRemovalListener> {
+  final DeviceService _deviceService = DeviceService();
+  final AuthService _authService = AuthService();
+  StreamSubscription? _authStateSubscription;
+
+  @override
+  void initState() {
+    super.initState();
+    // Auth state değişikliklerini dinle
+    _authStateSubscription = _authService.authStateChanges.listen((user) {
+      if (user != null) {
+        // Kullanıcı giriş yaptı - listener'ı başlat
+        _startDeviceRemovalListener();
+      } else {
+        // Kullanıcı çıkış yaptı - listener'ı durdur
+        _deviceService.stopDeviceRemovalListener();
+      }
+    });
+    
+    // İlk yüklemede de kontrol et
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _startListenerIfLoggedIn();
+    });
+  }
+
+  void _startListenerIfLoggedIn() {
+    final currentUser = _authService.currentUser;
+    if (currentUser != null) {
+      _startDeviceRemovalListener();
+    }
+  }
+
+  void _startDeviceRemovalListener() {
+    _deviceService.startDeviceRemovalListener(() async {
+      // Cihaz kaldırıldı - otomatik çıkış yap
+      try {
+        await _authService.signOut();
+        // Global navigator ile login'e yönlendir
+        if (navigatorKey.currentState != null) {
+          navigatorKey.currentState!.pushNamedAndRemoveUntil('/login', (route) => false);
+        }
+      } catch (e) {
+        // Hata olsa bile login ekranına git
+        if (navigatorKey.currentState != null) {
+          navigatorKey.currentState!.pushNamedAndRemoveUntil('/login', (route) => false);
+        }
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _authStateSubscription?.cancel();
+    _deviceService.stopDeviceRemovalListener();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return widget.child;
+  }
+}
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -145,49 +229,52 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<LanguageService>(
       builder: (context, languageService, child) {
-        return MaterialApp(
-          title: 'ALP',
-          debugShowCheckedModeBanner: false,
-          
-          // Localization delegates
-          localizationsDelegates: const [
-            AppLocalizations.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          
-          // Supported locales
-          supportedLocales: LanguageService.supportedLocales,
-          
-          // Current locale
-          locale: languageService.currentLocale,
-          
-          theme: ThemeData(
-            brightness: Brightness.dark,
-            scaffoldBackgroundColor: Colors.black,
-            primaryColor: Colors.indigo,
-            colorScheme: ColorScheme.dark(
-              primary: Colors.indigo,
-              secondary: Colors.blueAccent,
+        return DeviceRemovalListener(
+          child: MaterialApp(
+            navigatorKey: navigatorKey,
+            title: 'ALP',
+            debugShowCheckedModeBanner: false,
+            
+            // Localization delegates
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            
+            // Supported locales
+            supportedLocales: LanguageService.supportedLocales,
+            
+            // Current locale
+            locale: languageService.currentLocale,
+            
+            theme: ThemeData(
+              brightness: Brightness.dark,
+              scaffoldBackgroundColor: Colors.black,
+              primaryColor: Colors.indigo,
+              colorScheme: ColorScheme.dark(
+                primary: Colors.indigo,
+                secondary: Colors.blueAccent,
+              ),
+              textTheme: const TextTheme(
+                bodyLarge: TextStyle(color: Colors.white),
+                bodyMedium: TextStyle(color: Colors.white),
+              ),
             ),
-            textTheme: const TextTheme(
-              bodyLarge: TextStyle(color: Colors.white),
-              bodyMedium: TextStyle(color: Colors.white),
-            ),
+            home: const AppInitializer(),
+            routes: {
+              '/language-selection': (context) => const LanguageSelectionScreen(),
+              '/splash': (context) => const SplashScreen(),
+              '/home': (context) => const HomeScreen(),
+              '/login': (context) => const LoginScreen(),
+              '/register': (context) => const RegisterScreen(),
+              '/admin': (context) => const AdminScreen(),
+              '/premium': (context) => const PremiumScreen(),
+              '/subscription': (context) => const SubscriptionScreen(),
+              '/test-premium': (context) => const TestPremiumScreen(),
+            },
           ),
-          home: const AppInitializer(),
-          routes: {
-            '/language-selection': (context) => const LanguageSelectionScreen(),
-            '/splash': (context) => const SplashScreen(),
-            '/home': (context) => const HomeScreen(),
-            '/login': (context) => const LoginScreen(),
-            '/register': (context) => const RegisterScreen(),
-            '/admin': (context) => const AdminScreen(),
-            '/premium': (context) => const PremiumScreen(),
-            '/subscription': (context) => const SubscriptionScreen(),
-            '/test-premium': (context) => const TestPremiumScreen(),
-          },
         );
       },
     );

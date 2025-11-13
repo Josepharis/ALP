@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -20,6 +21,9 @@ class DeviceService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseMessaging _messaging = FirebaseMessaging.instance;
   final DeviceInfoPlugin _deviceInfo = DeviceInfoPlugin();
+  
+  StreamSubscription? _deviceRemovalListener;
+  String? _currentDeviceId;
 
   static const int MAX_DEVICES = 2;
 
@@ -66,6 +70,56 @@ class DeviceService {
     return 'unknown';
   }
 
+  // Mevcut cihazın ID'sini al (public metod)
+  Future<String> getCurrentDeviceId() async {
+    if (_currentDeviceId == null) {
+      _currentDeviceId = await _generateDeviceId();
+    }
+    return _currentDeviceId!;
+  }
+
+  // Cihaz kaldırma listener'ını başlat
+  // Kullanıcının cihaz listesini dinler, eğer mevcut cihaz listeden kaldırılırsa otomatik çıkış yapar
+  void startDeviceRemovalListener(Function() onDeviceRemoved) {
+    final userId = _auth.currentUser?.uid;
+    if (userId == null) return;
+
+    // Önce mevcut listener'ı iptal et
+    _deviceRemovalListener?.cancel();
+
+    // Kullanıcı dokümanını dinle
+    _deviceRemovalListener = _firestore
+        .collection('users')
+        .doc(userId)
+        .snapshots()
+        .listen((snapshot) async {
+      if (!snapshot.exists) return;
+
+      final data = snapshot.data();
+      final registeredDevices = data?['registeredDevices'] as Map<String, dynamic>?;
+
+      if (registeredDevices == null) {
+        // Cihaz listesi yoksa, mevcut cihaz kaldırılmış demektir
+        // Mevcut cihaz listede yoksa çıkış yap
+        onDeviceRemoved();
+        return;
+      }
+
+      // Mevcut cihazın listede olup olmadığını kontrol et
+      final currentDeviceId = await getCurrentDeviceId();
+      if (!registeredDevices.containsKey(currentDeviceId)) {
+        // Mevcut cihaz listeden kaldırılmış - çıkış yap
+        onDeviceRemoved();
+      }
+    });
+  }
+
+  // Cihaz kaldırma listener'ını durdur
+  void stopDeviceRemovalListener() {
+    _deviceRemovalListener?.cancel();
+    _deviceRemovalListener = null;
+  }
+
   // Kullanıcının kayıtlı cihaz sayısını kontrol et
   Future<int> getUserDeviceCount() async {
     final userId = _auth.currentUser?.uid;
@@ -98,11 +152,25 @@ class DeviceService {
       final data = userDoc.data();
       final registeredDevices = data?['registeredDevices'] as Map<String, dynamic>?;
       
-      if (registeredDevices == null) return [];
+      if (registeredDevices == null || registeredDevices.isEmpty) return [];
 
-      return registeredDevices.entries
-          .map((entry) => DeviceInfo.fromMap(entry.value as Map<String, dynamic>))
+      // Tüm cihazları listeye çevir ve son giriş zamanına göre sırala
+      final devices = registeredDevices.entries
+          .map((entry) {
+            try {
+              return DeviceInfo.fromMap(entry.value as Map<String, dynamic>);
+            } catch (e) {
+              // Geçersiz cihaz kaydını atla
+              return null;
+            }
+          })
+          .whereType<DeviceInfo>()
           .toList();
+
+      // Son giriş zamanına göre sırala (en yeni en üstte)
+      devices.sort((a, b) => b.lastLoginAt.compareTo(a.lastLoginAt));
+
+      return devices;
     } catch (e) {
       return [];
     }
@@ -133,10 +201,17 @@ class DeviceService {
     if (userId == null) throw Exception('Kullanıcı giriş yapmamış');
 
     try {
-      // FCM token al
-      final fcmToken = await _messaging.getToken();
-      if (fcmToken == null) {
-        throw Exception('FCM token alınamadı');
+      // FCM token al - token alınamazsa cihaz kaydı yapılamaz
+      String? fcmToken;
+      try {
+        fcmToken = await _messaging.getToken();
+        if (fcmToken == null || fcmToken.isEmpty) {
+          debugPrint('FCM token null veya boş, cihaz kaydı yapılamıyor');
+          return;
+        }
+      } catch (e) {
+        debugPrint('FCM token alınamadı, cihaz kaydı yapılamıyor: $e');
+        return; // FCM token olmadan cihaz kaydı yapma
       }
 
       // Cihaz bilgilerini topla
@@ -144,16 +219,28 @@ class DeviceService {
       final deviceName = await _getDeviceName();
       final platform = _getPlatformName();
 
+      debugPrint('Cihaz kaydı başlatılıyor - DeviceId: $deviceId, DeviceName: $deviceName, Platform: $platform');
 
       // Cihaz zaten kayıtlı mı kontrol et
       final isRegistered = await isDeviceRegistered(deviceId);
 
       if (isRegistered) {
-        // Mevcut cihaz - sadece token ve login zamanını güncelle
-        await _updateExistingDevice(deviceId, fcmToken);
+        debugPrint('Cihaz zaten kayıtlı, güncelleniyor...');
+        // Mevcut cihaz - token ve login zamanını güncelle
+        try {
+          await _updateExistingDevice(deviceId, fcmToken);
+          debugPrint('Cihaz başarıyla güncellendi');
+        } catch (e) {
+          // Güncelleme başarısız olursa, yeni cihaz olarak kaydet
+          debugPrint('Cihaz güncelleme başarısız, yeni kayıt olarak denenecek: $e');
+          await _registerNewDevice(deviceId, fcmToken, deviceName, platform);
+          debugPrint('Cihaz yeni kayıt olarak kaydedildi');
+        }
       } else {
+        debugPrint('Yeni cihaz kaydediliyor...');
         // Yeni cihaz - önce limit kontrolü yap
         final deviceCount = await getUserDeviceCount();
+        debugPrint('Mevcut cihaz sayısı: $deviceCount');
         
         if (deviceCount >= MAX_DEVICES) {
           throw DeviceLimitExceededException(
@@ -164,10 +251,17 @@ class DeviceService {
 
         // Yeni cihazı kaydet
         await _registerNewDevice(deviceId, fcmToken, deviceName, platform);
+        debugPrint('Yeni cihaz başarıyla kaydedildi');
       }
 
     } catch (e) {
-      rethrow;
+      // DeviceLimitExceededException'ı fırlat
+      if (e is DeviceLimitExceededException) {
+        rethrow;
+      }
+      debugPrint('Cihaz kaydı hatası: $e');
+      // Diğer hatalar için exception fırlatma, sadece logla
+      // Çünkü cihaz kaydı kritik değil, kullanıcı giriş yapabilmeli
     }
   }
 
@@ -190,12 +284,34 @@ class DeviceService {
       lastLoginAt: DateTime.now(),
     );
 
+    debugPrint('Yeni cihaz bilgileri: $deviceInfo');
+
+    // Mevcut cihazları al ve yeni cihazı ekle
+    final userDoc = await _firestore.collection('users').doc(userId).get();
+    Map<String, dynamic> existingDevices = {};
+    
+    if (userDoc.exists && userDoc.data() != null) {
+      final data = userDoc.data()!;
+      final devices = data['registeredDevices'];
+      if (devices != null && devices is Map) {
+        existingDevices = Map<String, dynamic>.from(devices);
+      }
+    }
+    
+    debugPrint('Mevcut cihaz sayısı (kayıt öncesi): ${existingDevices.length}');
+    
+    // Yeni cihazı ekle
+    existingDevices[deviceId] = deviceInfo.toMap();
+    
+    debugPrint('Yeni cihaz sayısı (kayıt sonrası): ${existingDevices.length}');
+    
+    // Firestore'a kaydet
     await _firestore.collection('users').doc(userId).set({
-      'registeredDevices': {
-        deviceId: deviceInfo.toMap(),
-      },
-      'deviceCount': FieldValue.increment(1),
+      'registeredDevices': existingDevices,
+      'deviceCount': existingDevices.length,
     }, SetOptions(merge: true));
+    
+    debugPrint('Cihaz Firestore\'a kaydedildi - UserId: $userId, DeviceId: $deviceId');
   }
 
   // Mevcut cihaz güncelleme
@@ -203,9 +319,27 @@ class DeviceService {
     final userId = _auth.currentUser?.uid;
     if (userId == null) throw Exception('Kullanıcı giriş yapmamış');
 
+    // Mevcut cihaz bilgilerini al
+    final userDoc = await _firestore.collection('users').doc(userId).get();
+    if (!userDoc.exists || userDoc.data() == null) {
+      throw Exception('Kullanıcı dokümanı bulunamadı');
+    }
+
+    final data = userDoc.data()!;
+    final registeredDevices = data['registeredDevices'] as Map<String, dynamic>?;
+    
+    if (registeredDevices == null || !registeredDevices.containsKey(deviceId)) {
+      throw Exception('Cihaz kaydı bulunamadı');
+    }
+
+    // Cihaz bilgilerini güncelle
+    final deviceData = Map<String, dynamic>.from(registeredDevices[deviceId] as Map<String, dynamic>);
+    deviceData['fcmToken'] = fcmToken;
+    deviceData['lastLoginAt'] = FieldValue.serverTimestamp();
+
+    // Güncellenmiş cihaz bilgilerini kaydet
     await _firestore.collection('users').doc(userId).update({
-      'registeredDevices.$deviceId.fcmToken': fcmToken,
-      'registeredDevices.$deviceId.lastLoginAt': FieldValue.serverTimestamp(),
+      'registeredDevices.$deviceId': deviceData,
     });
   }
 

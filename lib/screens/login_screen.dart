@@ -61,26 +61,36 @@ class _LoginScreenState extends State<LoginScreen>
     super.dispose();
   }
 
-  // Hata mesajlarını çevir
+  // Hata mesajlarını çevir - auth_service'den gelen detaylı mesajları kullan
   String _getErrorMessage(dynamic error) {
+    // Eğer error zaten bir string ise (auth_service'den gelen detaylı mesaj), direkt kullan
+    if (error is String) {
+      return error;
+    }
+    
+    // Eğer error bir exception ise, string'e çevir ve kontrol et
     final errorString = error.toString().toLowerCase();
     
     if (errorString.contains('user-not-found')) {
-      return AppLocalizations.of(context)!.userNotFoundShort;
+      return '❌ Bu e-posta adresi ile kayıtlı bir hesap bulunamadı.\n\n💡 Lütfen e-posta adresinizi kontrol edin veya yeni bir hesap oluşturun.';
     } else if (errorString.contains('wrong-password')) {
-      return AppLocalizations.of(context)!.wrongPasswordShort;
+      return '❌ Girdiğiniz şifre hatalı.\n\n💡 Şifrenizi kontrol edin. Eğer şifrenizi unuttuysanız "Şifremi Unuttum" seçeneğini kullanabilirsiniz.';
     } else if (errorString.contains('invalid-credential')) {
-      return AppLocalizations.of(context)!.invalidCredential;
+      return '❌ Geçersiz giriş bilgileri.\n\n💡 E-posta ve şifrenizi kontrol edip tekrar deneyin.';
     } else if (errorString.contains('too-many-requests')) {
-      return AppLocalizations.of(context)!.tooManyRequests;
-    } else if (errorString.contains('account-disabled')) {
-      return AppLocalizations.of(context)!.accountDisabled;
+      return '❌ Çok fazla deneme yapıldı.\n\n💡 Bir süre bekleyin ve tekrar deneyin.';
+    } else if (errorString.contains('account-disabled') || errorString.contains('user-disabled')) {
+      return '❌ Bu hesap devre dışı bırakılmış.\n\n💡 Destek ekibi ile iletişime geçin.';
     } else if (errorString.contains('network')) {
-      return AppLocalizations.of(context)!.networkError;
+      return '❌ İnternet Bağlantısı Sorunu\n\n💡 İnternet bağlantınızı kontrol edin ve tekrar deneyin.\n\nWi-Fi veya mobil verilerinizin açık olduğundan emin olun.';
     } else if (errorString.contains('server')) {
-      return AppLocalizations.of(context)!.serverError;
+      return '❌ Sunucu Hatası\n\n💡 Sunucuya bağlanılamıyor. Lütfen daha sonra tekrar deneyin.';
+    } else if (errorString.contains('invalid-email')) {
+      return '❌ Geçersiz e-posta adresi formatı.\n\n💡 Lütfen geçerli bir e-posta adresi girin (örnek: kullanici@email.com)';
+    } else if (errorString.contains('email-already-in-use')) {
+      return '❌ Bu e-posta adresi zaten başka bir hesap tarafından kullanılıyor.\n\n💡 Farklı bir e-posta adresi deneyin veya mevcut hesabınızla giriş yapın.';
     } else {
-      return AppLocalizations.of(context)!.loginFailed;
+      return '❌ Giriş İşlemi Başarısız\n\n💡 Beklenmeyen bir hata oluştu. Lütfen:\n• E-posta ve şifrenizi kontrol edin\n• İnternet bağlantınızı kontrol edin\n• Birkaç dakika sonra tekrar deneyin\n\nSorun devam ederse destek ekibi ile iletişime geçin.';
     }
   }
 
@@ -110,26 +120,39 @@ class _LoginScreenState extends State<LoginScreen>
       });
 
       try {
+        // Firebase Auth zaten mevcut kullanıcıyı otomatik olarak değiştirecektir
+        // Gerçek cihazlarda çıkış yapıp hemen giriş yapmak sorun yaratabilir
+        // Bu yüzden direkt giriş yapmayı deniyoruz
+        // Eğer mevcut kullanıcı varsa ve farklı bir hesaba giriş yapılıyorsa,
+        // Firebase Auth otomatik olarak kullanıcıyı değiştirecektir
+        
         final user = await _authService.signInWithEmailAndPassword(
           _emailController.text.trim(),
           _passwordController.text.trim(),
         );
 
         if (user != null && mounted) {
+          // Auth state'in güncellendiğinden emin ol
+          await Future.delayed(const Duration(milliseconds: 100));
+          
           // Admin kontrolü
           final isAdmin = await _authService.isUserAdmin();
 
           // Kullanıcı tipine göre yönlendirme
-          if (isAdmin) {
-            Navigator.of(context).pushReplacementNamed('/admin');
-          } else {
-            Navigator.of(context).pushReplacementNamed('/home');
+          if (mounted) {
+            if (isAdmin) {
+              Navigator.of(context).pushReplacementNamed('/admin');
+            } else {
+              Navigator.of(context).pushReplacementNamed('/home');
+            }
           }
         }
       } catch (e) {
-        setState(() {
-          _errorMessage = _getErrorMessage(e);
-        });
+        if (mounted) {
+          setState(() {
+            _errorMessage = _getErrorMessage(e);
+          });
+        }
       } finally {
         if (mounted) {
           setState(() {
