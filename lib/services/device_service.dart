@@ -87,6 +87,9 @@ class DeviceService {
     // Önce mevcut listener'ı iptal et
     _deviceRemovalListener?.cancel();
 
+    // İlk kontrol için flag - giriş yapıldıktan sonra ilk kontrolü atla
+    bool isFirstCheck = true;
+
     // Kullanıcı dokümanını dinle
     _deviceRemovalListener = _firestore
         .collection('users')
@@ -94,6 +97,14 @@ class DeviceService {
         .snapshots()
         .listen((snapshot) async {
       if (!snapshot.exists) return;
+
+      // İlk kontrolü atla - giriş yapıldığında cihaz kaydı yapılıyor olabilir
+      if (isFirstCheck) {
+        isFirstCheck = false;
+        // İlk kontrol için kısa bir bekleme - cihaz kaydının tamamlanması için
+        await Future.delayed(const Duration(seconds: 1));
+        return;
+      }
 
       final data = snapshot.data();
       final registeredDevices = data?['registeredDevices'] as Map<String, dynamic>?;

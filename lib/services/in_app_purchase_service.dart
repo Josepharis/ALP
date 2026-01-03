@@ -1,8 +1,10 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'premium_service.dart';
 
 class InAppPurchaseService {
   static final InAppPurchaseService _instance = InAppPurchaseService._internal();
@@ -14,17 +16,41 @@ class InAppPurchaseService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   late StreamSubscription<List<PurchaseDetails>> _subscription;
   
-  // Product IDs
-  static const String monthlySubscriptionId = 'monthly';
-  static const String sixMonthSubscriptionId = 'sixmonth';
-  static const String yearlySubscriptionId = 'yearly';
-  static const String lifetimePurchaseId = 'lifetime_premium';
+  // Product IDs - Platform specific
+  // iOS Product IDs
+  static const String _iosMonthlySubscriptionId = 'com.alp.premium.monthly';
+  static const String _iosSixMonthSubscriptionId = 'com.alp.premium.6months';
+  static const String _iosYearlySubscriptionId = 'com.alp.premium.yearly';
+  
+  // Android Product IDs (unchanged)
+  static const String _androidMonthlySubscriptionId = 'monthly';
+  static const String _androidSixMonthSubscriptionId = 'sixmonth';
+  static const String _androidYearlySubscriptionId = 'yearly';
+  static const String _androidLifetimePurchaseId = 'lifetime_premium';
+  
+  // Platform-aware getters
+  static String get monthlySubscriptionId {
+    return Platform.isIOS ? _iosMonthlySubscriptionId : _androidMonthlySubscriptionId;
+  }
+  
+  static String get sixMonthSubscriptionId {
+    return Platform.isIOS ? _iosSixMonthSubscriptionId : _androidSixMonthSubscriptionId;
+  }
+  
+  static String get yearlySubscriptionId {
+    return Platform.isIOS ? _iosYearlySubscriptionId : _androidYearlySubscriptionId;
+  }
+  
+  static String get lifetimePurchaseId {
+    // Lifetime is Android only for now
+    return _androidLifetimePurchaseId;
+  }
   
   // Legacy aliases for compatibility
-  static const String premiumMonthlyId = monthlySubscriptionId;
-  static const String premiumSixMonthId = sixMonthSubscriptionId;
-  static const String premiumYearlyId = yearlySubscriptionId;
-  static const String premiumLifetimeId = lifetimePurchaseId;
+  static String get premiumMonthlyId => monthlySubscriptionId;
+  static String get premiumSixMonthId => sixMonthSubscriptionId;
+  static String get premiumYearlyId => yearlySubscriptionId;
+  static String get premiumLifetimeId => lifetimePurchaseId;
 
   // Available products
   List<ProductDetails> _products = [];
@@ -63,11 +89,12 @@ class InAppPurchaseService {
 
   // Load available products
   Future<void> _loadProducts() async {
-    const Set<String> productIds = {
+    final Set<String> productIds = {
       monthlySubscriptionId,
       sixMonthSubscriptionId,
       yearlySubscriptionId,
-      lifetimePurchaseId,
+      // Only include lifetime on Android
+      if (!Platform.isIOS) lifetimePurchaseId,
     };
 
     try {
@@ -90,12 +117,43 @@ class InAppPurchaseService {
 
   // Restore previous purchases
   Future<void> restorePurchases() async {
-    await _inAppPurchase.restorePurchases();
-    
-    // After restoring, sync with Firestore
     final userId = _auth.currentUser?.uid;
+    
+    // If user is logged in, ONLY load from Firestore
+    // Do NOT restore from Google Play as it may show purchases from different accounts
+    // Each Firebase Auth account should only see its own purchases
     if (userId != null) {
+      _purchases.clear();
+      debugPrint('User logged in, loading purchases from Firestore only for user: $userId');
+      
+      // Load purchases from Firestore for this user
+      await _loadPurchasesFromFirestore(userId);
+      
+      // Sync premium status
       await _syncPurchasesWithFirestore(userId);
+      return; // Don't restore from Google Play for logged-in users
+    }
+    
+    // No user logged in, restore from Google Play (for anonymous/offline use)
+    await _inAppPurchase.restorePurchases();
+  }
+  
+  // Load purchases from Firestore for a specific user
+  Future<void> _loadPurchasesFromFirestore(String userId) async {
+    try {
+      final purchasesSnapshot = await _firestore
+          .collection('users')
+          .doc(userId)
+          .collection('purchases')
+          .get();
+      
+      debugPrint('Loaded ${purchasesSnapshot.docs.length} purchase(s) from Firestore for user: $userId');
+      
+      // Note: We can't recreate PurchaseDetails from Firestore data
+      // So we rely on Firestore premium status check in hasPremiumAccess()
+      // Local _purchases list remains empty for logged-in users
+    } catch (e) {
+      debugPrint('Error loading purchases from Firestore: $e');
     }
   }
   
@@ -165,11 +223,41 @@ class InAppPurchaseService {
           await _inAppPurchase.completePurchase(purchaseDetails);
         }
         
-        // Add to purchases list
-        _purchases.add(purchaseDetails);
+        final userId = _auth.currentUser?.uid;
+        
+        // If user is logged in, check if this purchase belongs to current user
+        // For restored purchases, verify it's in Firestore for current user
+        if (userId != null) {
+          // If this is a restored purchase, check if it belongs to current user
+          if (purchaseDetails.status == PurchaseStatus.restored) {
+            final purchaseId = purchaseDetails.purchaseID ?? '';
+            if (purchaseId.isNotEmpty) {
+              // Check if this purchase exists in Firestore for current user
+              final purchaseDoc = await _firestore
+                  .collection('users')
+                  .doc(userId)
+                  .collection('purchases')
+                  .where('purchaseId', isEqualTo: purchaseId)
+                  .limit(1)
+                  .get();
+              
+              if (purchaseDoc.docs.isEmpty) {
+                // This purchase doesn't belong to current user, ignore it
+                debugPrint('Restored purchase $purchaseId does not belong to user $userId, ignoring');
+                return;
+              }
+            }
+          }
         
         // Save to Firestore for current user
         await _savePurchaseToFirestore(purchaseDetails);
+          // Don't add to local purchases for logged-in users
+          // This prevents false positives from purchases made with different Google Play accounts
+          debugPrint('Purchase saved to Firestore for user: $userId (not added to local list)');
+        } else {
+          // No user logged in, add to local purchases
+          _purchases.add(purchaseDetails);
+        }
       }
     }
   }
@@ -185,38 +273,83 @@ class InAppPurchaseService {
     try {
       final purchaseId = purchaseDetails.purchaseID ?? '';
       final verificationData = purchaseDetails.verificationData.serverVerificationData;
+      
+      // For promotion codes, purchaseID might be empty, so use a unique identifier
+      // Combine productID with timestamp to ensure uniqueness
+      final uniqueId = purchaseId.isNotEmpty 
+          ? purchaseId 
+          : '${purchaseDetails.productID}_${DateTime.now().millisecondsSinceEpoch}';
+      
       final purchaseData = {
         'productId': purchaseDetails.productID,
         'purchaseId': purchaseId,
+        'uniqueId': uniqueId, // For promotion codes and other purchases without purchaseID
         'status': purchaseDetails.status.toString(),
         'transactionDate': purchaseDetails.transactionDate ?? DateTime.now().millisecondsSinceEpoch.toString(),
         'purchasedAt': FieldValue.serverTimestamp(),
         'verificationData': verificationData.isNotEmpty ? verificationData : '',
+        'isPromotionCode': purchaseId.isEmpty, // Mark promotion code purchases
       };
 
       // Save to user's purchases collection
-      final docId = purchaseId.isNotEmpty ? purchaseId : purchaseDetails.productID;
+      // Use uniqueId as document ID to handle promotion codes properly
       await _firestore
           .collection('users')
           .doc(userId)
           .collection('purchases')
-          .doc(docId)
+          .doc(uniqueId)
           .set(purchaseData, SetOptions(merge: true));
 
+      debugPrint('Purchase saved to Firestore for user: $userId, uniqueId: $uniqueId, isPromotionCode: ${purchaseId.isEmpty}');
+
       // Update user's premium status
+      // This is critical for promotion codes to work
       await _updateUserPremiumStatus(userId);
+      
+      // Premium durumu güncellendi, PremiumService'i bilgilendir
+      _notifyPremiumStatusChanged();
       
       debugPrint('Purchase saved to Firestore for user: $userId');
     } catch (e) {
       debugPrint('Error saving purchase to Firestore: $e');
+      // Even if saving fails, try to update premium status
+      // This ensures promotion codes work even if there's a temporary error
+      try {
+        await _updateUserPremiumStatus(userId);
+      } catch (e2) {
+        debugPrint('Error updating premium status after save failure: $e2');
+      }
     }
   }
   
   // Update user's premium status in Firestore
   Future<void> _updateUserPremiumStatus(String userId) async {
     try {
-      // Check if user has any active purchases (use sync version for local check)
-      final hasPremium = hasPremiumAccessSync();
+      // Check if user has any active purchases in Firestore
+      // This is important for promotion codes and restored purchases
+      final purchasesSnapshot = await _firestore
+          .collection('users')
+          .doc(userId)
+          .collection('purchases')
+          .get();
+      
+      // Check if user has any valid purchases
+      bool hasPremium = false;
+      if (purchasesSnapshot.docs.isNotEmpty) {
+        // User has at least one purchase, so they have premium access
+        hasPremium = true;
+        debugPrint('User $userId has ${purchasesSnapshot.docs.length} purchase(s) in Firestore');
+      } else {
+        // Also check local purchases as fallback (for users not logged in)
+        // But for logged-in users, we rely on Firestore
+        final currentUserId = _auth.currentUser?.uid;
+        if (currentUserId == null) {
+          hasPremium = _purchases.any((purchase) => 
+            purchase.status == PurchaseStatus.purchased || 
+            purchase.status == PurchaseStatus.restored
+          );
+        }
+      }
       
       await _firestore.collection('users').doc(userId).update({
         'isPremium': hasPremium,
@@ -224,8 +357,38 @@ class InAppPurchaseService {
       });
       
       debugPrint('Premium status updated for user: $userId, isPremium: $hasPremium');
+      
+      // Premium durumu güncellendi, PremiumService'i bilgilendir
+      _notifyPremiumStatusChanged();
     } catch (e) {
       debugPrint('Error updating premium status: $e');
+      // On error, try to set premium to true if we just saved a purchase
+      // This ensures promotion codes work even if there's a temporary error
+      try {
+        await _firestore.collection('users').doc(userId).update({
+          'isPremium': true,
+          'premiumUpdatedAt': FieldValue.serverTimestamp(),
+        });
+        debugPrint('Premium status set to true as fallback for user: $userId');
+        
+        // Premium durumu güncellendi, PremiumService'i bilgilendir
+        _notifyPremiumStatusChanged();
+      } catch (e2) {
+        debugPrint('Error setting premium status as fallback: $e2');
+      }
+    }
+  }
+  
+  // Premium durumu değiştiğinde PremiumService'i bilgilendir
+  void _notifyPremiumStatusChanged() {
+    // PremiumService singleton instance'ını al ve refresh et
+    try {
+      Future.microtask(() {
+        final premiumService = PremiumService();
+        premiumService.refreshPremiumStatus();
+      });
+    } catch (e) {
+      debugPrint('Error notifying premium status change: $e');
     }
   }
 
@@ -238,9 +401,16 @@ class InAppPurchaseService {
 
   // Check if product is a subscription
   bool _isSubscription(String productId) {
+    // Check both iOS and Android IDs
     return productId == monthlySubscriptionId ||
            productId == sixMonthSubscriptionId ||
-           productId == yearlySubscriptionId;
+           productId == yearlySubscriptionId ||
+           productId == _iosMonthlySubscriptionId ||
+           productId == _iosSixMonthSubscriptionId ||
+           productId == _iosYearlySubscriptionId ||
+           productId == _androidMonthlySubscriptionId ||
+           productId == _androidSixMonthSubscriptionId ||
+           productId == _androidYearlySubscriptionId;
   }
 
   // Buy a product by ProductDetails
@@ -354,41 +524,40 @@ class InAppPurchaseService {
     }
 
     try {
-      // First check Firestore for user's premium status
+      // If user is logged in, ONLY check Firestore for user's premium status
+      // Do NOT check local purchases as they might be from a different Google Play account
       final userDoc = await _firestore.collection('users').doc(userId).get();
       if (userDoc.exists) {
         final data = userDoc.data();
         final isPremium = data?['isPremium'] as bool? ?? false;
-        if (isPremium) {
-          return true;
-        }
+        return isPremium;
       }
 
-      // Fallback to local purchases check
-      return _purchases.any((purchase) => 
-        purchase.status == PurchaseStatus.purchased || 
-        purchase.status == PurchaseStatus.restored
-      );
+      // User document doesn't exist, user is not premium
+      return false;
     } catch (e) {
       debugPrint('Error checking premium access: $e');
-      // Fallback to local purchases
-      return _purchases.any((purchase) => 
-        purchase.status == PurchaseStatus.purchased || 
-        purchase.status == PurchaseStatus.restored
-      );
+      // If there's an error checking Firestore, return false for logged-in users
+      // to prevent false positives from local purchases
+      return false;
     }
   }
   
   // Synchronous version for backward compatibility
   // Note: This checks local purchases only. For accurate user-specific check, use hasPremiumAccess() async version
+  // IMPORTANT: For logged-in users, this should NOT be used as it may return false positives
+  // from purchases made with a different Google Play account
   bool hasPremiumAccessSync() {
-    // First check if there's a logged in user and try to get cached premium status
     final userId = _auth.currentUser?.uid;
     if (userId != null) {
-      // We can't do async operations here, so we rely on local purchases
-      // The async version will check Firestore
+      // User is logged in - we should NOT check local purchases
+      // as they might be from a different Google Play account
+      // Return false to force async check via hasPremiumAccess()
+      // This prevents false positives
+      return false;
     }
     
+    // No user logged in, check local purchases
     return _purchases.any((purchase) => 
       purchase.status == PurchaseStatus.purchased || 
       purchase.status == PurchaseStatus.restored

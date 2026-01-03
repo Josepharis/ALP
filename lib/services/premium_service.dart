@@ -89,6 +89,14 @@ class PremiumService extends ChangeNotifier {
   // Restore purchases
   Future<void> restorePurchases() async {
     await _purchaseService.restorePurchases();
+    // Premium durumu değişmiş olabilir, listener'ları bilgilendir
+    notifyListeners();
+  }
+  
+  // Premium durumunu yenile ve listener'ları bilgilendir
+  // Satın alma tamamlandığında çağrılmalı
+  Future<void> refreshPremiumStatus() async {
+    notifyListeners();
   }
 
   // Check if in-app purchase is available

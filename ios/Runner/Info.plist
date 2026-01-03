@@ -72,7 +72,6 @@
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>
-		<string>background-processing</string>
 	</array>
 	
 	<!-- Privacy Usage Descriptions -->

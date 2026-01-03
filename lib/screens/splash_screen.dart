@@ -3,7 +3,6 @@ import 'dart:async';
 import 'dart:math';
 import '../services/auth_service.dart';
 import '../services/tutorial_service.dart';
-import '../services/device_service.dart';
 import '../l10n/app_localizations.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -229,19 +228,8 @@ class _SplashScreenState extends State<SplashScreen>
 
       if (currentUser != null) {
         try {
-          // Cihazın hala kayıtlı olup olmadığını kontrol et
-          final deviceService = DeviceService();
-          final currentDeviceId = await deviceService.getCurrentDeviceId();
-          final isDeviceRegistered = await deviceService.isDeviceRegistered(currentDeviceId);
-          
-          if (!isDeviceRegistered) {
-            // Cihaz kaldırılmış - çıkış yap ve login'e yönlendir
-            if (mounted) {
-              await _authService.signOut();
-              Navigator.of(context).pushReplacementNamed('/login');
-            }
-            return;
-          }
+          // NOT: Cihaz kontrolü yapılmıyor - çünkü giriş yapıldığında cihaz zaten kaydedilecek
+          // Eğer cihaz kaldırılmışsa, global listener otomatik olarak çıkış yapacak
           
           // Kullanıcı admin mi kontrol et
           final isAdmin = await _authService.isUserAdmin();

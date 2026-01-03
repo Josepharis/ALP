@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import '../l10n/app_localizations.dart';
 import 'package:flutter/services.dart';
@@ -304,17 +305,38 @@ class _QuizScreenState extends State<QuizScreen>
       builder: (context, languageService, child) {
         return Consumer<PremiumService>(
           builder: (context, premiumService, child) {
-        final isPremium = premiumService.isPremium;
+            // Premium kontrolü - Async kontrol kullan (InformationScreen gibi)
+            // Bu önemli çünkü giriş yapılmış kullanıcılar için sync kontrol false döndürüyor
+            return FutureBuilder<bool>(
+              future: premiumService.hasPremiumAccess(),
+              builder: (context, snapshot) {
+                // Loading durumunda sync kontrolü kullan
+                final isPremium = snapshot.hasData 
+                    ? snapshot.data! 
+                    : premiumService.isPremium;
+                
+                // Test modu kontrolü
+                if (premiumService.isTestMode) {
+                  // Test modu aktifse premium kontrolünü atla
+                  return _buildQuizContent(true);
+                }
         
         // Premium kontrolü - 2. sorudan sonra premium gerekli
         if (PremiumAccessService.shouldShowPremiumScreenWithTestMode(currentQuestionIndex, isPremium, premiumService.isTestMode)) {
           return _buildPremiumLockScreen();
         }
         
-        // Test modu durumunu logla
-        if (premiumService.isTestMode) {
-        }
-        
+                return _buildQuizContent(isPremium);
+              },
+            );
+          },
+        );
+      },
+    );
+  }
+  
+  // Quiz içeriğini oluştur
+  Widget _buildQuizContent(bool isPremium) {
         return PopScope(
           canPop: false,
           onPopInvokedWithResult: (didPop, result) async {
@@ -358,10 +380,6 @@ class _QuizScreenState extends State<QuizScreen>
               ),
             ),
           ),
-        );
-          },
-        );
-      },
     );
   }
 

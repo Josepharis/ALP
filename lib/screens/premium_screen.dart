@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../services/in_app_purchase_service.dart';
+import '../services/premium_service.dart';
 import '../services/language_service.dart';
 import '../l10n/app_localizations.dart';
 
@@ -79,6 +80,23 @@ class _PremiumScreenState extends State<PremiumScreen> with TickerProviderStateM
   Widget build(BuildContext context) {
     return Consumer<LanguageService>(
       builder: (context, languageService, child) {
+        return Consumer<PremiumService>(
+          builder: (context, premiumService, child) {
+            // Premium durumunu kontrol et - eğer premium ise ekranı kapat
+            return FutureBuilder<bool>(
+              future: premiumService.hasPremiumAccess(),
+              builder: (context, snapshot) {
+                final isPremium = snapshot.hasData ? snapshot.data! : false;
+                
+                // Eğer premium ise ekranı kapat
+                if (isPremium && mounted) {
+                  WidgetsBinding.instance.addPostFrameCallback((_) {
+                    if (mounted && Navigator.canPop(context)) {
+                      Navigator.of(context).pop();
+                    }
+                  });
+                }
+                
         return Scaffold(
       body: AnimatedBuilder(
         animation: _backgroundColorAnimation,
@@ -155,6 +173,10 @@ class _PremiumScreenState extends State<PremiumScreen> with TickerProviderStateM
           );
         },
       ),
+                );
+              },
+            );
+          },
     );
       },
     );
@@ -761,6 +783,9 @@ class _PremiumScreenState extends State<PremiumScreen> with TickerProviderStateM
               backgroundColor: Colors.green,
             ),
           );
+          
+          // Satın alma işlemi başlatıldı
+          // Premium durumu güncellendiğinde Consumer otomatik olarak ekranı kapatacak
         }
       } else {
         if (mounted) {
@@ -785,6 +810,9 @@ class _PremiumScreenState extends State<PremiumScreen> with TickerProviderStateM
       }
     }
   }
+
+  // Premium durumunu kontrol et ve eğer premium ise ekranı kapat
+  // Consumer ile otomatik olarak çağrılacak
 
   void _showTermsAndConditions() {
     showDialog(

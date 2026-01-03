@@ -1281,8 +1281,14 @@ class _InformationDetailScreenState extends State<InformationDetailScreen> {
 }
 
 // Premium wrapper for InformationScreen
-class PremiumInformationScreen extends StatelessWidget {
+class PremiumInformationScreen extends StatefulWidget {
   const PremiumInformationScreen({super.key});
+
+  @override
+  State<PremiumInformationScreen> createState() => _PremiumInformationScreenState();
+}
+
+class _PremiumInformationScreenState extends State<PremiumInformationScreen> {
 
   @override
   Widget build(BuildContext context) {

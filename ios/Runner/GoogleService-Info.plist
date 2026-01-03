@@ -9,7 +9,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.example.anestezi</string>
+	<string>com.yftsoftware.anestezi</string>
 	<key>PROJECT_ID</key>
 	<string>anestezi</string>
 	<key>STORAGE_BUCKET</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:1097697803791:ios:877cea48a29d8caffaad7a</string>
+	<string>1:1097697803791:ios:c7faefdeb643cf75faad7a</string>
 </dict>
 </plist>
