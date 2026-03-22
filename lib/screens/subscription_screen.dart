@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:in_app_purchase/in_app_purchase.dart';
+import 'dart:async';
 import '../services/in_app_purchase_service.dart';
+import '../services/premium_service.dart';
 
 class SubscriptionScreen extends StatefulWidget {
   const SubscriptionScreen({super.key});
@@ -14,12 +17,82 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> with TickerProv
   late Animation<Offset> _slideAnimation;
   
   final InAppPurchaseService _purchaseService = InAppPurchaseService();
-  int _selectedPlan = 1; // 0: Aylık, 1: Yıllık, 2: Yaşam Boyu
+  final PremiumService _premiumService = PremiumService();
+  final InAppPurchase _inAppPurchase = InAppPurchase.instance;
+  int _selectedPlan = 1; // 0: Aylık, 1: 6 Aylık, 2: Yıllık
+  StreamSubscription<List<PurchaseDetails>>? _purchaseSubscription;
+  bool _isProcessingPurchase = false;
   
   @override
   void initState() {
     super.initState();
     _setupAnimations();
+    _listenToPurchases();
+  }
+  
+  void _listenToPurchases() {
+    // Purchase stream'i dinle
+    _purchaseSubscription = _inAppPurchase.purchaseStream.listen(
+      (List<PurchaseDetails> purchaseDetailsList) {
+        _handlePurchaseUpdates(purchaseDetailsList);
+      },
+      onDone: () {
+        _purchaseSubscription?.cancel();
+      },
+      onError: (error) {
+        debugPrint('Purchase stream error: $error');
+      },
+    );
+  }
+  
+  void _handlePurchaseUpdates(List<PurchaseDetails> purchaseDetailsList) async {
+    for (final PurchaseDetails purchaseDetails in purchaseDetailsList) {
+      if (purchaseDetails.status == PurchaseStatus.purchased ||
+          purchaseDetails.status == PurchaseStatus.restored) {
+        debugPrint('✅ Purchase completed: ${purchaseDetails.productID}');
+        
+        // Premium durumunu kontrol et - DAHA UZUN BEKLE
+        await Future.delayed(const Duration(seconds: 2)); // Firestore güncellemesi için daha uzun bekle
+        
+        final hasPremium = await _premiumService.hasPremiumAccess();
+        debugPrint('Premium status after purchase: $hasPremium');
+        
+        if (hasPremium && mounted) {
+          // Premium durumu aktif, ekranı kapat
+          setState(() {
+            _isProcessingPurchase = true;
+          });
+          
+          // Başarı mesajı göster
+          if (mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('🎉 Premium üyeliğiniz aktif edildi!'),
+                backgroundColor: Colors.green,
+                duration: Duration(seconds: 2),
+              ),
+            );
+          }
+          
+          // Ekranı kapat
+          await Future.delayed(const Duration(milliseconds: 800));
+          
+          if (mounted) {
+            Navigator.of(context).pop(true); // true = premium aktif
+          }
+        }
+      } else if (purchaseDetails.status == PurchaseStatus.error) {
+        debugPrint('❌ Purchase error: ${purchaseDetails.error}');
+        if (mounted && !_isProcessingPurchase) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Satın alma hatası: ${purchaseDetails.error?.message ?? "Bilinmeyen hata"}'),
+              backgroundColor: Colors.red,
+            ),
+          );
+        }
+      }
+    }
   }
   
   void _setupAnimations() {
@@ -49,6 +122,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> with TickerProv
   
   @override
   void dispose() {
+    _purchaseSubscription?.cancel();
     _animationController.dispose();
     super.dispose();
   }
@@ -642,7 +716,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> with TickerProv
             ],
           ),
           child: ElevatedButton(
-            onPressed: () => _purchaseSelectedPlan(),
+            onPressed: _isProcessingPurchase ? null : () => _purchaseSelectedPlan(),
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.transparent,
               shadowColor: Colors.transparent,
@@ -651,21 +725,30 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> with TickerProv
                 borderRadius: BorderRadius.circular(12),
               ),
             ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Icon(Icons.star, color: Colors.black, size: 20),
-                const SizedBox(width: 8),
-                Text(
-                  'Premium\'a Başla',
-                  style: TextStyle(
-                    fontSize: isTablet ? 16 : 15,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
+            child: _isProcessingPurchase
+                ? const SizedBox(
+                    height: 20,
+                    width: 20,
+                    child: CircularProgressIndicator(
+                      strokeWidth: 2,
+                      valueColor: AlwaysStoppedAnimation<Color>(Colors.black),
+                    ),
+                  )
+                : Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Icon(Icons.star, color: Colors.black, size: 20),
+                      const SizedBox(width: 8),
+                      Text(
+                        'Premium\'a Başla',
+                        style: TextStyle(
+                          fontSize: isTablet ? 16 : 15,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-              ],
-            ),
           ),
         ),
         
@@ -730,7 +813,10 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> with TickerProv
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             TextButton(
-              onPressed: () => _purchaseService.restorePurchases(),
+              onPressed: () async {
+                debugPrint('🔄 Restore button pressed by user');
+                await _purchaseService.restorePurchases();
+              },
               child: Text(
                 'Satın Almaları Geri Yükle',
                 style: TextStyle(
@@ -758,6 +844,11 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> with TickerProv
   }
   
   Future<void> _purchaseSelectedPlan() async {
+    if (_isProcessingPurchase) {
+      debugPrint('⚠️ Satın alma zaten devam ediyor, yeni işlem başlatılmadı');
+      return; // Zaten bir satın alma işlemi devam ediyor
+    }
+    
     final productIds = [
       InAppPurchaseService.premiumMonthlyId,
       InAppPurchaseService.premiumSixMonthId,
@@ -765,34 +856,73 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> with TickerProv
     ];
     
     final selectedProductId = productIds[_selectedPlan];
+    debugPrint('🛒 User selected plan index: $_selectedPlan ($selectedProductId)');
+    
+    setState(() {
+      _isProcessingPurchase = true;
+    });
     
     try {
-      final success = await _purchaseService.buyProductById(selectedProductId);
-      if (success) {
+      // Önce servisi initialize et (ürünleri yükle)
+      debugPrint('🔧 Initializing purchase service...');
+      await _purchaseService.initialize();
+      
+      // Ürün mevcut mu kontrol et
+      final product = _purchaseService.getProduct(selectedProductId);
+      if (product == null) {
+        debugPrint('❌ Ürün bulunamadı: $selectedProductId');
         if (mounted) {
+          setState(() {
+            _isProcessingPurchase = false;
+          });
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: Text('Satın alma işlemi başlatıldı'),
-              backgroundColor: Colors.green,
+              content: Text('Ürün yüklenemedi. Lütfen internet bağlantınızı kontrol edip tekrar deneyin.'),
+              backgroundColor: Colors.orange,
+              duration: Duration(seconds: 3),
             ),
           );
         }
+        return;
+      }
+      
+      debugPrint('✅ Ürün bulundu: ${product.title} - ${product.price}');
+      
+      // Satın almayı başlat
+      debugPrint('🚀 Starting purchase...');
+      final success = await _purchaseService.buyProductById(selectedProductId);
+      
+      if (success) {
+        if (mounted) {
+          // Satın alma işlemi başlatıldı, stream listener zaten dinliyor
+          // Başarı mesajı stream listener'dan gelecek
+          debugPrint('✅ Satın alma işlemi başlatıldı: $selectedProductId');
+        }
       } else {
         if (mounted) {
+          setState(() {
+            _isProcessingPurchase = false;
+          });
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: Text('Satın alma işlemi başlatılamadı'),
-              backgroundColor: Colors.red,
+              content: Text('Satın alma işlemi başlatılamadı. Lütfen tekrar deneyin.'),
+              backgroundColor: Colors.orange,
+              duration: Duration(seconds: 2),
             ),
           );
         }
       }
     } catch (e) {
+      debugPrint('❌ Purchase error: $e');
       if (mounted) {
+        setState(() {
+          _isProcessingPurchase = false;
+        });
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Hata: $e'),
+            content: Text('Bir hata oluştu. Lütfen tekrar deneyin.\n\nHata: ${e.toString()}'),
             backgroundColor: Colors.red,
+            duration: const Duration(seconds: 3),
           ),
         );
       }

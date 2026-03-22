@@ -1252,6 +1252,43 @@ class AppLocalizationsTr extends AppLocalizations {
       'Bu uygulama içi satın alım hizmeti Apple App Store ve Google Play Store şartlarına tabidir. Satın alımlar iade edilemez. Premium özellikler aktif olduğu sürece kullanılabilir.';
 
   @override
+  String get termsLegalIntro =>
+      'Abonelik, ilgili mağaza şartlarına ve aşağıdaki belgelere tabidir. Satın alma veya abone ol butonuna basarak bu koşulları kabul etmiş olursunuz.';
+
+  @override
+  String get termsPrivacyPolicy => 'Gizlilik Politikası';
+
+  @override
+  String get termsEula => 'Kullanım Şartları (EULA)';
+
+  @override
+  String get termsBulletStore =>
+      'İşlemler Apple App Store / Google Play Store üzerinden yapılır ve mağaza kurallarına tabidir.';
+
+  @override
+  String get termsBulletRefund =>
+      'Ödeme sonrası iade yalnızca ilgili mağazanın politikası çerçevesinde talep edilebilir.';
+
+  @override
+  String get termsBulletDisclaimer =>
+      'Uygulama ve premium içerik \"olduğu gibi\" sunulur; yasal çerçevede izin verilen azami ölçüde garanti verilmez.';
+
+  @override
+  String get subscriptionInfoTitle => 'Abonelik hakkında';
+
+  @override
+  String get subscriptionAutoRenew =>
+      'Abonelik seçtiğiniz dönem sonunda otomatik yenilenir.';
+
+  @override
+  String get subscriptionCancelAnytime =>
+      'İstediğiniz zaman Ayarlar üzerinden iptal edebilirsiniz.';
+
+  @override
+  String get subscriptionChargedToAccount =>
+      'Ödeme Apple ID veya Google Play hesabınıza yansıtılır.';
+
+  @override
   String get accessAllQuestions => 'Tüm Sorulara Erişim';
 
   @override
@@ -1531,4 +1568,85 @@ class AppLocalizationsTr extends AppLocalizations {
   @override
   String get deleteAccountMessage =>
       'Hesabınızı silmek istediğinizden emin misiniz?\n\nBu işlem geri alınamaz ve tüm verileriniz kalıcı olarak silinecektir.';
+
+  @override
+  String get detailedInformation => 'Detaylı Bilgi';
+
+  @override
+  String get references => 'Kaynaklar';
+
+  @override
+  String get noExplanationAvailable =>
+      'Bu soru için detaylı açıklama mevcut değil.';
+
+  @override
+  String get guestLogin => 'Misafir Girişi';
+
+  @override
+  String get guestLoginDescription =>
+      'Kayıt olmadan uygulamayı deneyebilirsiniz';
+
+  @override
+  String get subscriptionStatus => 'Abonelik Durumu';
+
+  @override
+  String get youAreSubscribed => 'Premium Üyesiniz';
+
+  @override
+  String get youAreNotSubscribed => 'Premium Üyesi Değilsiniz';
+
+  @override
+  String get subscriptionType => 'Abonelik Türü';
+
+  @override
+  String get expiresOn => 'Bitiş Tarihi';
+
+  @override
+  String get cancelSubscription => 'Aboneliği İptal Et';
+
+  @override
+  String get subscriptionInfo => 'Abonelik Bilgileri';
+
+  @override
+  String get monthlySubscription => 'Aylık Abonelik';
+
+  @override
+  String get yearlySubscription => 'Yıllık Abonelik';
+
+  @override
+  String get sixMonthSubscription => '6 Aylık Abonelik';
+
+  @override
+  String get lifetimePurchase => 'Yaşam Boyu Premium';
+
+  @override
+  String get cancelSubscriptionMessage =>
+      'Aboneliğinizi iptal etmek için cihazınızın ayarlarına gitmeniz gerekmektedir.';
+
+  @override
+  String get openSettings => 'Ayarları Aç';
+
+  @override
+  String get subscriptionExpired => 'Abonelik Süresi Doldu';
+
+  @override
+  String get active => 'Aktif';
+
+  @override
+  String get guestRegisterTitle => 'Hesabınızı Oluşturun';
+
+  @override
+  String get guestRegisterMessage =>
+      'Devam etmek için hesabınızı oluşturun. Mevcut ilerlemeniz korunacak!';
+
+  @override
+  String get guestRegisterSubtitle =>
+      'Kayıt olduktan sonra premium satın alabilirsiniz';
+
+  @override
+  String get upgradeGuestAccount => 'Hesabınızı Oluşturun';
+
+  @override
+  String get upgradeGuestAccountMessage =>
+      'Mevcut misafir hesabınızı kayıtlı hesaba dönüştürün. Tüm verileriniz korunacak!';
 }

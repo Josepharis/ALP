@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'in_app_purchase_service.dart';
 
@@ -96,7 +97,11 @@ class PremiumService extends ChangeNotifier {
   // Premium durumunu yenile ve listener'ları bilgilendir
   // Satın alma tamamlandığında çağrılmalı
   Future<void> refreshPremiumStatus() async {
+    // Önce cache'i güncelle - Firestore'dan en güncel değeri al
+    await _purchaseService.hasPremiumAccess();
+    // Sonra tüm listener'ları bilgilendir (UI güncellenir)
     notifyListeners();
+    debugPrint('✅ Premium status refreshed and listeners notified');
   }
 
   // Check if in-app purchase is available

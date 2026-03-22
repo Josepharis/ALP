@@ -95,11 +95,5 @@
 		</dict>
 	</array>
 	
-	<!-- StoreKit Configuration -->
-	<key>SKStoreKitConfiguration</key>
-	<dict>
-		<key>SKStoreKitConfigurationFile</key>
-		<string>Configuration.storekit</string>
-	</dict>
 </dict>
 </plist>

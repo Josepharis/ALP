@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/question.dart';
+import '../l10n/app_localizations.dart';
 
 class QuestionDetailScreen extends StatelessWidget {
   final Question question;
@@ -13,25 +14,25 @@ class QuestionDetailScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: const Text('Detailed Information'),
+        title: Text(AppLocalizations.of(context)!.detailedInformation),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildQuestionCard(),
+            _buildQuestionCard(context),
             const SizedBox(height: 16),
-            _buildExplanationCard(),
+            _buildExplanationCard(context),
             const SizedBox(height: 16),
-            _buildReferencesCard(),
+            _buildReferencesCard(context),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildQuestionCard() {
+  Widget _buildQuestionCard(BuildContext context) {
     return Card(
       color: Colors.white.withOpacity(0.1),
       child: Padding(
@@ -39,9 +40,9 @@ class QuestionDetailScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'Question',
-              style: TextStyle(
+            Text(
+              AppLocalizations.of(context)!.question,
+              style: const TextStyle(
                 color: Colors.white70,
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
@@ -58,7 +59,7 @@ class QuestionDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildExplanationCard() {
+  Widget _buildExplanationCard(BuildContext context) {
     return Card(
       color: Colors.white.withOpacity(0.1),
       child: Padding(
@@ -66,9 +67,9 @@ class QuestionDetailScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'Explanation',
-              style: TextStyle(
+            Text(
+              AppLocalizations.of(context)!.explanation,
+              style: const TextStyle(
                 color: Colors.white70,
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
@@ -77,7 +78,7 @@ class QuestionDetailScreen extends StatelessWidget {
             const SizedBox(height: 8),
             Text(
               question.explanation ??
-                  'No detailed explanation available for this question.',
+                  AppLocalizations.of(context)!.noExplanationAvailable,
               style: const TextStyle(color: Colors.white, fontSize: 16),
             ),
           ],
@@ -86,7 +87,7 @@ class QuestionDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildReferencesCard() {
+  Widget _buildReferencesCard(BuildContext context) {
     if (question.references == null || question.references!.isEmpty) {
       return const SizedBox.shrink();
     }
@@ -98,9 +99,9 @@ class QuestionDetailScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'References',
-              style: TextStyle(
+            Text(
+              AppLocalizations.of(context)!.references,
+              style: const TextStyle(
                 color: Colors.white70,
                 fontSize: 16,
                 fontWeight: FontWeight.bold,

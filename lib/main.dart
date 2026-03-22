@@ -13,6 +13,7 @@ import 'services/device_service.dart';
 import 'services/notification_service.dart';
 import 'services/language_service.dart';
 import 'services/premium_service.dart';
+import 'services/in_app_purchase_service.dart';
 import 'services/auth_service.dart';
 import 'l10n/app_localizations.dart';
 
@@ -91,11 +92,13 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   
   // NotificationService'i kullanarak bildirimi göster
   final notificationService = NotificationService();
-  await notificationService.showRemoteNotification(
-    title: message.notification?.title ?? 'Yeni Bildirim',
-    body: message.notification?.body ?? '',
-    data: message.data,
-  );
+  if (message.notification != null) {
+    await notificationService.showRemoteNotification(
+      title: message.notification?.title ?? 'Yeni Bildirim',
+      body: message.notification?.body ?? '',
+      data: message.data,
+    );
+  }
 }
 
 void main() async {
@@ -107,10 +110,10 @@ void main() async {
     DeviceOrientation.portraitDown,
   ]);
 
-  // Sistem UI overlay stilini ayarla (günün sorusu ekranı kendi rengini ayarlayacak)
+  // Sistem UI overlay stilini ayarla
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent, // Varsayılan şeffaf
+      statusBarColor: Colors.transparent,
       statusBarIconBrightness: Brightness.light,
       statusBarBrightness: Brightness.dark,
       systemNavigationBarColor: Colors.transparent,
@@ -131,29 +134,17 @@ void main() async {
     final deviceService = DeviceService();
     deviceService.setupTokenRefreshListener();
     
-    // NotificationService'i initialize et
+    // NotificationService'i initialize et (FCM kurulumu bunun içinde yapılıyor)
     final notificationService = NotificationService();
     await notificationService.initialize();
-    await notificationService.requestPermissions();
     
-    // Android bildirim durumunu kontrol et
-    await notificationService.checkAndroidNotificationStatus();
-    
-    // FCM foreground message handler'ı kur
-    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-      debugPrint('Foreground mesaj alındı: ${message.messageId}');
-      // Bildirimi göster
-      notificationService.showRemoteNotification(
-        title: message.notification?.title ?? 'Yeni Bildirim',
-        body: message.notification?.body ?? '',
-        data: message.data,
-      );
-    });
+    // InAppPurchaseService'i initialize et
+    final inAppPurchaseService = InAppPurchaseService();
+    await inAppPurchaseService.initialize();
     
     // PremiumService'i initialize et
     final premiumService = PremiumService();
     await premiumService.initialize();
-    
     
   } catch (e) {
     debugPrint('Initialization error: $e');

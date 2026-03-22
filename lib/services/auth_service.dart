@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -5,7 +6,6 @@ import 'package:flutter/foundation.dart';
 import '../utils/event_bus.dart';
 import 'device_service.dart' as device_service;
 import 'notification_service.dart';
-import 'tutorial_service.dart';
 import 'in_app_purchase_service.dart';
 
 class AuthService {
@@ -29,63 +29,134 @@ class AuthService {
     String? displayName,
     String? title,
   }) async {
+    User? createdUser;
+    bool isFirestoreSuccess = false;
+    
     try {
+      // Input validation
+      if (email.isEmpty || password.isEmpty) {
+        throw '❌ E-posta ve şifre boş olamaz.';
+      }
+      
+      debugPrint('🔐 Kayıt işlemi başlıyor: $email');
       
       // Firebase Auth ile kullanıcı oluştur
       final userCredential = await _auth.createUserWithEmailAndPassword(
-        email: email,
+        email: email.trim(),
         password: password,
+      ).timeout(
+        const Duration(seconds: 20), // Daha kısa timeout
+        onTimeout: () {
+          throw '❌ İşlem zaman aşımına uğradı.\n\n💡 İnternet bağlantınızı kontrol edin ve tekrar deneyin.';
+        },
       );
 
-      // Display name güncelle
-      if (userCredential.user != null && displayName != null && displayName.isNotEmpty) {
+      createdUser = userCredential.user;
+      
+      if (createdUser == null) {
+        throw '❌ Kullanıcı oluşturulamadı.\n\n💡 Lütfen tekrar deneyin.';
+      }
+
+      debugPrint('✅ Firebase Auth kullanıcısı oluşturuldu: ${createdUser.uid}');
+
+      // Display name güncelle - kritik değil
+      if (displayName != null && displayName.trim().isNotEmpty) {
         try {
-          await userCredential.user!.updateDisplayName(displayName);
+          await createdUser.updateDisplayName(displayName.trim()).timeout(
+            const Duration(seconds: 5),
+            onTimeout: () {
+              debugPrint('⏰ Display name güncelleme timeout');
+            },
+          );
+          debugPrint('✅ Display name güncellendi');
         } catch (e) {
+          debugPrint('⚠️ Display name güncelleme hatası: $e');
         }
       }
 
-      // Firestore'a kullanıcı bilgilerini kaydet
-      if (userCredential.user != null) {
-        try {
-          await _createUserDocument(
-            userCredential.user!,
-            displayName,
-            title,
-            email,
-          );
-        } catch (e) {
-          // Firestore hatası olsa bile kayıt işlemini tamamla
-        }
-        
-        // Yeni kullanıcı için cihaz kaydını yap
-        try {
-          await _deviceService.registerOrUpdateDevice();
-        } catch (e) {
-          // Cihaz kaydı hatası olsa bile kayıt işlemini tamamla
-        }
-      }
-            
-      // Yeni kullanıcı için tutorial'ı sıfırla
+      // Firestore'a kullanıcı bilgilerini kaydet - KRİTİK
       try {
-        final tutorialService = TutorialService();
-        await tutorialService.resetAllTutorials();
+        await _createUserDocument(
+          createdUser,
+          displayName,
+          title,
+          email,
+        );
+        isFirestoreSuccess = true;
+        debugPrint('✅ Firestore dokümanı oluşturuldu');
       } catch (e) {
+        debugPrint('❌ Firestore dokümanı oluşturulamadı: $e');
+        // Firestore başarısız olduysa kullanıcıyı geri al
+        throw '❌ Hesap oluşturma tamamlanamadı.\n\n💡 Lütfen tekrar deneyin.';
       }
       
-      return userCredential.user;
+      // Cihaz kaydı ve Tutorial'ı ARKA PLANA taşıdım
+      // Bu işlemler kritik değil ve kayıt sonrası yapılabilir
+      // NOT: Bunları da arka planda yapma, ilk home screen açıldığında yapılacak
+      
+      debugPrint('✅ Kayıt işlemi başarıyla tamamlandı');
+      
+      // KAYIT SONRASI: Cihaz kaydını YAP - bu önemli!
+      // Cihaz kaydı yapılmazsa DeviceRemovalListener sorun çıkarır
+      try {
+        await _deviceService.registerOrUpdateDevice().timeout(
+          const Duration(seconds: 10),
+          onTimeout: () => debugPrint('⏰ Cihaz kaydı timeout (devam ediliyor)'),
+        );
+        debugPrint('✅ Cihaz kaydı tamamlandı (kayıt sonrası)');
+      } catch (e) {
+        debugPrint('⚠️ Cihaz kaydı hatası (devam ediliyor): $e');
+        // Hata olsa bile kayıt tamamlandı, giriş yapabilir
+      }
+      
+      return createdUser;
+      
     } on FirebaseAuthException catch (e) {
+      debugPrint('❌ FirebaseAuth hatası: ${e.code} - ${e.message}');
+      
+      // Kullanıcı oluşturulduysa geri al
+      if (createdUser != null) {
+        try {
+          await createdUser.delete().timeout(const Duration(seconds: 5));
+          debugPrint('🔄 Kullanıcı silindi (rollback)');
+        } catch (deleteError) {
+          debugPrint('⚠️ Kullanıcı silme hatası: $deleteError');
+        }
+      }
+      
       throw _handleAuthException(e);
+      
     } catch (e) {
+      debugPrint('❌ Genel kayıt hatası: $e');
+      
+      // Kullanıcı oluşturulduysa ama Firestore başarısız olduysa geri al
+      if (createdUser != null && !isFirestoreSuccess) {
+        try {
+          await createdUser.delete().timeout(const Duration(seconds: 5));
+          debugPrint('🔄 Kullanıcı silindi (Firestore hatası)');
+        } catch (deleteError) {
+          debugPrint('⚠️ Kullanıcı silme hatası: $deleteError');
+        }
+      }
+      
+      // Hata mesajını kontrol et
+      final errorString = e.toString().toLowerCase();
       
       // Ağ bağlantısı kontrolü
-      if (e.toString().toLowerCase().contains('network') || 
-          e.toString().toLowerCase().contains('connection') ||
-          e.toString().toLowerCase().contains('timeout')) {
-        throw '❌ İnternet Bağlantısı Sorunu\n\n💡 İnternet bağlantınızı kontrol edin ve tekrar deneyin.\n\nWi-Fi veya mobil verilerinizin açık olduğundan emin olun.';
+      if (errorString.contains('network') || 
+          errorString.contains('connection') ||
+          errorString.contains('timeout') ||
+          errorString.contains('socket')) {
+        throw '❌ İnternet Bağlantısı Sorunu\n\n💡 İnternet bağlantınızı kontrol edin ve tekrar deneyin.';
       }
       
-      throw '❌ Kayıt İşlemi Başarısız\n\n💡 Beklenmeyen bir hata oluştu. Lütfen:\n• Bilgilerinizi kontrol edin\n• İnternet bağlantınızı kontrol edin\n• Birkaç dakika sonra tekrar deneyin\n\nSorun devam ederse destek ekibi ile iletişime geçin.';
+      // String hatası ise direkt fırlat
+      if (e is String) {
+        throw e;
+      }
+      
+      // Genel hata mesajı
+      throw '❌ Kayıt İşlemi Başarısız\n\n💡 Beklenmeyen bir hata oluştu. Lütfen:\n• Bilgilerinizi kontrol edin\n• İnternet bağlantınızı kontrol edin\n• Birkaç saniye bekleyip tekrar deneyin\n\nSorun devam ederse destek ekibi ile iletişime geçin.';
     }
   }
 
@@ -100,76 +171,140 @@ class AuthService {
         password: password,
       );
       
-      // Schedule daily notifications after successful login
-      // Bildirim hatası giriş işlemini engellememeli
-      try {
-        final notificationService = NotificationService();
-        await notificationService.scheduleDailyNotification();
-      } catch (e) {
-        // Bildirim planlama hatası olsa bile giriş işlemine devam et
-        // Özellikle exact_alarms_not_permitted hatası için
-        debugPrint('Bildirim planlama hatası (giriş devam ediyor): $e');
-      }
-      
-      // Giriş başarılıysa kullanıcı dokümanını kontrol et ve oluştur
+      // Giriş başarılı - basit kontrol
       if (userCredential.user != null) {
+        // Sadece users dokümanını kontrol et
         await _ensureUserDocument(userCredential.user!);
         
-        // Cihaz kaydını yap (maksimum 2 cihaz kontrolü ile)
+        // Cihaz kaydı - kritik değil
         try {
           await _deviceService.registerOrUpdateDevice();
         } catch (e) {
           if (e is device_service.DeviceLimitExceededException) {
-            // Cihaz limiti aşıldı, kullanıcıyı çıkış yap
             await _auth.signOut();
-            throw '❌ Cihaz Limiti Aşıldı\n\n💡 Bu hesaba en fazla 2 cihazdan giriş yapabilirsiniz.\n\nYeni cihaz eklemek için profil ayarlarından mevcut cihazlardan birini kaldırın veya destek ekibi ile iletişime geçin.';
+            throw '❌ Cihaz Limiti Aşıldı\n\n💡 Bu hesaba en fazla 2 cihazdan giriş yapabilirsiniz.';
           }
-          // Cihaz kaydı hatası olsa bile giriş işlemine devam et
+          debugPrint('⚠️ Cihaz kaydı hatası (devam ediliyor): $e');
         }
         
-        // Premium satın alımlarını Firestore'dan yükle
+        // Premium yükle - iOS'ta ÖNEMLİ (subscription restore için)
         try {
+          debugPrint('📦 Restoring purchases for iOS...');
           final inAppPurchaseService = await _getInAppPurchaseService();
           await inAppPurchaseService.restorePurchases();
+          
+          // Premium durumunu kontrol et ve cache'i güncelle
+          final hasPremium = await inAppPurchaseService.hasPremiumAccess();
+          debugPrint('✅ Premium status after restore: $hasPremium');
         } catch (e) {
-          // Premium yükleme hatası olsa bile giriş işlemine devam et
+          debugPrint('⚠️ Premium yükleme hatası (devam ediliyor): $e');
         }
         
-        // NOT: Cihaz kaldırma listener'ı home_screen.dart'ta başlatılacak
-        // Çünkü navigasyon için context gerekiyor
+        // Bildirim ayarla - kritik değil
+        try {
+          final notificationService = NotificationService();
+          await notificationService.scheduleDailyNotification();
+        } catch (e) {
+          debugPrint('⚠️ Bildirim hatası (devam ediliyor): $e');
+        }
       }
 
       return userCredential.user;
     } on FirebaseAuthException catch (e) {
       throw _handleAuthException(e);
     } catch (e) {
-      // Hata detaylarını logla - debug için
-      debugPrint('Giriş hatası (detay): $e');
-      debugPrint('Hata tipi: ${e.runtimeType}');
+      debugPrint('Giriş hatası: $e');
       
-      // Ağ bağlantısı kontrolü
       final errorString = e.toString().toLowerCase();
       if (errorString.contains('network') || 
           errorString.contains('connection') ||
-          errorString.contains('timeout') ||
-          errorString.contains('socket')) {
-        throw '❌ İnternet Bağlantısı Sorunu\n\n💡 İnternet bağlantınızı kontrol edin ve tekrar deneyin.\n\nWi-Fi veya mobil verilerinizin açık olduğundan emin olun.';
+          errorString.contains('timeout')) {
+        throw '❌ İnternet Bağlantısı Sorunu\n\n💡 İnternet bağlantınızı kontrol edin.';
       }
       
-      // Cihaz limiti hatası zaten yukarıda yakalandı, diğer hatalar için genel mesaj
-      if (e.toString().contains('Cihaz Limiti Aşıldı')) {
-        rethrow; // Cihaz limiti hatasını olduğu gibi fırlat
+      if (errorString.contains('cihaz limiti')) {
+        rethrow;
       }
       
-      // Auth state ile ilgili hatalar
-      if (errorString.contains('auth') && errorString.contains('state') ||
-          errorString.contains('user') && errorString.contains('null') ||
-          errorString.contains('already') && errorString.contains('use')) {
-        throw '❌ Oturum Sorunu\n\n💡 Lütfen uygulamayı kapatıp tekrar açın ve giriş yapmayı deneyin.\n\nSorun devam ederse birkaç saniye bekleyip tekrar deneyin.';
+      throw '❌ Giriş İşlemi Başarısız\n\n💡 Lütfen tekrar deneyin.';
+    }
+  }
+
+  // Misafir girişi (Anonymous Authentication)
+  Future<User?> signInAnonymously() async {
+    try {
+      debugPrint('👤 Misafir girişi başlıyor...');
+      
+      final userCredential = await _auth.signInAnonymously().timeout(
+        const Duration(seconds: 20),
+        onTimeout: () {
+          throw '❌ İşlem zaman aşımına uğradı.\n\n💡 İnternet bağlantınızı kontrol edin ve tekrar deneyin.';
+        },
+      );
+
+      if (userCredential.user == null) {
+        throw '❌ Misafir girişi başarısız.\n\n💡 Lütfen tekrar deneyin.';
+      }
+
+      final user = userCredential.user!;
+      debugPrint('✅ Misafir kullanıcı oluşturuldu: ${user.uid}');
+
+      // Misafir kullanıcı için Firestore dokümanı oluştur
+      try {
+        await _createGuestUserDocument(user);
+        debugPrint('✅ Misafir kullanıcı dokümanı oluşturuldu');
+      } catch (e) {
+        debugPrint('❌ Misafir kullanıcı dokümanı oluşturulamadı: $e');
+        // Doküman oluşturulamazsa bile giriş yapabilir, sadece logla
+      }
+
+      // Cihaz kaydı - kritik değil
+      try {
+        await _deviceService.registerOrUpdateDevice();
+      } catch (e) {
+        debugPrint('⚠️ Cihaz kaydı hatası (devam ediliyor): $e');
+      }
+
+      // Premium yükle - iOS'ta ÖNEMLİ (subscription restore için)
+      try {
+        debugPrint('📦 Restoring purchases for guest user...');
+        final inAppPurchaseService = await _getInAppPurchaseService();
+        await inAppPurchaseService.restorePurchases();
+        
+        // Premium durumunu kontrol et ve cache'i güncelle
+        final hasPremium = await inAppPurchaseService.hasPremiumAccess();
+        debugPrint('✅ Premium status after restore: $hasPremium');
+      } catch (e) {
+        debugPrint('⚠️ Premium yükleme hatası (devam ediliyor): $e');
+      }
+
+      // Bildirim ayarla - kritik değil
+      try {
+        final notificationService = NotificationService();
+        await notificationService.scheduleDailyNotification();
+      } catch (e) {
+        debugPrint('⚠️ Bildirim hatası (devam ediliyor): $e');
+      }
+
+      return user;
+    } on FirebaseAuthException catch (e) {
+      debugPrint('❌ FirebaseAuth hatası: ${e.code} - ${e.message}');
+      throw _handleAuthException(e);
+    } catch (e) {
+      debugPrint('❌ Misafir girişi hatası: $e');
+      
+      final errorString = e.toString().toLowerCase();
+      if (errorString.contains('network') || 
+          errorString.contains('connection') ||
+          errorString.contains('timeout')) {
+        throw '❌ İnternet Bağlantısı Sorunu\n\n💡 İnternet bağlantınızı kontrol edin ve tekrar deneyin.';
       }
       
-      // Daha detaylı hata mesajı
-      throw '❌ Giriş İşlemi Başarısız\n\n💡 Beklenmeyen bir hata oluştu.\n\nLütfen:\n• E-posta ve şifrenizi kontrol edin\n• İnternet bağlantınızı kontrol edin\n• Birkaç saniye bekleyip tekrar deneyin\n• Uygulamayı kapatıp açmayı deneyin\n\nSorun devam ederse destek ekibi ile iletişime geçin.\n\nHata: ${e.toString().substring(0, e.toString().length > 100 ? 100 : e.toString().length)}';
+      if (e is String) {
+        throw e;
+      }
+      
+      throw '❌ Misafir Girişi Başarısız\n\n💡 Lütfen tekrar deneyin.';
     }
   }
 
@@ -180,51 +315,139 @@ class AuthService {
     String? title,
     String email,
   ) async {
+    // Null check
+    if (user.uid.isEmpty) {
+      throw 'Kullanıcı UID boş';
+    }
+    
+    debugPrint('📝 Firestore dokümanı oluşturuluyor...');
+    
+    // Kullanıcı dokümanını oluştur - timeout'u artır ve retry mekanizması ekle
     try {
-      
-      // iOS simülatör için ekstra güvenlik
-      await Future.delayed(const Duration(milliseconds: 100));
-      
-      // Kullanıcı dokümanını oluştur - iOS için daha uzun timeout
       await _firestore.collection('users').doc(user.uid).set({
-        'email': email,
-        'displayName': displayName ?? 'Kullanıcı',
-        'title': title ?? 'Anestezi Uzmanı', // Kullanıcının girdiği unvanı kullan
+        'email': email.trim(),
+        'displayName': (displayName?.trim() ?? 'Kullanıcı').isEmpty 
+            ? 'Kullanıcı' 
+            : displayName!.trim(),
+        'title': (title?.trim() ?? 'Anestezi Uzmanı').isEmpty 
+            ? 'Anestezi Uzmanı' 
+            : title!.trim(),
         'isAdmin': false,
         'createdAt': FieldValue.serverTimestamp(),
         'isProfileComplete': false,
         'lastLoginAt': FieldValue.serverTimestamp(),
+        'isPremium': false,
+        'premiumUpdatedAt': FieldValue.serverTimestamp(),
       }, SetOptions(merge: true)).timeout(
-        const Duration(seconds: 20), // iOS için daha uzun timeout
+        const Duration(seconds: 30), // Timeout'u 30 saniyeye çıkar
         onTimeout: () {
-          throw Exception('iOS simülatör: Firestore timeout - kullanıcı dokümanı oluşturulamadı');
+          debugPrint('⚠️ Firestore users timeout, retrying...');
+          throw 'Firestore timeout';
         },
       );
-
-
-      // iOS simülatör için aktivite dokümanını geciktir
-      await Future.delayed(const Duration(milliseconds: 200));
-
-      // Kullanıcı aktivitesi oluştur - iOS için daha uzun timeout
-      await _firestore.collection('userActivities').doc(user.uid).set({
-        'userId': user.uid,
-        'totalPoints': 0,
-        'totalCorrectAnswers': 0,
-        'totalWrongAnswers': 0,
-        'dailyStreak': 0,
-        'loginDays': [FieldValue.serverTimestamp()],
-        'lastUpdated': FieldValue.serverTimestamp(),
-        'quizProgress': {},
-      }, SetOptions(merge: true)).timeout(
-        const Duration(seconds: 20), // iOS için daha uzun timeout
-        onTimeout: () {
-          throw Exception('iOS simülatör: Firestore timeout - kullanıcı aktivitesi oluşturulamadı');
-        },
-      );
-      
+      debugPrint('✅ Users dokümanı oluşturuldu');
     } catch (e) {
-      // iOS simülatörde hata olsa bile devam et
-      // Hata fırlatma, sadece logla
+      debugPrint('❌ Users dokümanı oluşturma hatası: $e');
+      // Retry mekanizması - bir kez daha dene
+      try {
+        await Future.delayed(const Duration(milliseconds: 500));
+        await _firestore.collection('users').doc(user.uid).set({
+          'email': email.trim(),
+          'displayName': (displayName?.trim() ?? 'Kullanıcı').isEmpty 
+              ? 'Kullanıcı' 
+              : displayName!.trim(),
+          'title': (title?.trim() ?? 'Anestezi Uzmanı').isEmpty 
+              ? 'Anestezi Uzmanı' 
+              : title!.trim(),
+          'isAdmin': false,
+          'createdAt': FieldValue.serverTimestamp(),
+          'isProfileComplete': false,
+          'lastLoginAt': FieldValue.serverTimestamp(),
+          'isPremium': false,
+          'premiumUpdatedAt': FieldValue.serverTimestamp(),
+        }, SetOptions(merge: true)).timeout(
+          const Duration(seconds: 30),
+        );
+        debugPrint('✅ Users dokümanı retry ile oluşturuldu');
+      } catch (e2) {
+        debugPrint('❌ Users dokümanı retry hatası: $e2');
+        throw '❌ Hesap oluşturma tamamlanamadı.\n\n💡 İnternet bağlantınızı kontrol edin ve tekrar deneyin.';
+      }
+    }
+
+    debugPrint('✅ Users dokümanı oluşturuldu - kayıt tamamlandı!');
+    
+    // userActivities'i KAYIT SIRASINDA OLUŞTURMA!
+    // İlk giriş yapıldığında _ensureUserActivityDocument() ile oluşturulacak
+  }
+
+  // Misafir kullanıcı dokümanı oluştur
+  Future<void> _createGuestUserDocument(User user) async {
+    if (user.uid.isEmpty) {
+      throw 'Kullanıcı UID boş';
+    }
+    
+    debugPrint('📝 Misafir kullanıcı dokümanı oluşturuluyor...');
+    
+    try {
+      // Önce dokümanın var olup olmadığını kontrol et
+      final userDoc = await _firestore.collection('users').doc(user.uid).get();
+      
+      if (!userDoc.exists) {
+        // Yeni misafir kullanıcı - doküman oluştur
+        await _firestore.collection('users').doc(user.uid).set({
+          'email': null, // Misafir kullanıcının email'i yok
+          'displayName': 'Misafir Kullanıcı',
+          'title': 'Misafir',
+          'isAdmin': false,
+          'isGuest': true, // Misafir kullanıcı işareti
+          'createdAt': FieldValue.serverTimestamp(),
+          'isProfileComplete': false,
+          'lastLoginAt': FieldValue.serverTimestamp(),
+          'isPremium': false,
+          'premiumUpdatedAt': FieldValue.serverTimestamp(),
+        }, SetOptions(merge: true)).timeout(
+          const Duration(seconds: 30),
+          onTimeout: () {
+            debugPrint('⚠️ Firestore misafir kullanıcı timeout, retrying...');
+            throw 'Firestore timeout';
+          },
+        );
+        debugPrint('✅ Misafir kullanıcı dokümanı oluşturuldu');
+      } else {
+        // Mevcut misafir kullanıcı - sadece lastLoginAt güncelle
+        await _firestore.collection('users').doc(user.uid).update({
+          'lastLoginAt': FieldValue.serverTimestamp(),
+        });
+        debugPrint('✅ Misafir kullanıcı dokümanı güncellendi');
+      }
+    } catch (e) {
+      debugPrint('❌ Misafir kullanıcı dokümanı oluşturma hatası: $e');
+      // Retry mekanizması
+      try {
+        await Future.delayed(const Duration(milliseconds: 500));
+        final userDoc = await _firestore.collection('users').doc(user.uid).get();
+        if (!userDoc.exists) {
+          await _firestore.collection('users').doc(user.uid).set({
+            'email': null,
+            'displayName': 'Misafir Kullanıcı',
+            'title': 'Misafir',
+            'isAdmin': false,
+            'isGuest': true,
+            'createdAt': FieldValue.serverTimestamp(),
+            'isProfileComplete': false,
+            'lastLoginAt': FieldValue.serverTimestamp(),
+            'isPremium': false,
+            'premiumUpdatedAt': FieldValue.serverTimestamp(),
+          }, SetOptions(merge: true)).timeout(
+            const Duration(seconds: 30),
+          );
+          debugPrint('✅ Misafir kullanıcı dokümanı retry ile oluşturuldu');
+        }
+      } catch (e2) {
+        debugPrint('❌ Misafir kullanıcı dokümanı retry hatası: $e2');
+        // Hata olsa bile devam et, kritik değil
+      }
     }
   }
 
@@ -246,7 +469,11 @@ class AuthService {
           'lastLoginAt': FieldValue.serverTimestamp(),
         });
       }
+      
+      // userActivities'i BURADA OLUŞTURMA!
+      // İlk quiz çözülürken veya profile gidildiğinde oluşturulacak
     } catch (e) {
+      debugPrint('⚠️ _ensureUserDocument hatası: $e');
     }
   }
 
@@ -382,6 +609,124 @@ class AuthService {
     } on FirebaseAuthException catch (e) {
       throw _handleAuthException(e);
     }
+  }
+
+  // Misafir kullanıcının hesabını email/password ile bağla (link account)
+  Future<User?> linkGuestAccountWithEmailPassword(
+    String email,
+    String password, {
+    String? displayName,
+    String? title,
+  }) async {
+    final currentUser = _auth.currentUser;
+    
+    if (currentUser == null) {
+      throw '❌ Kullanıcı giriş yapmamış.\n\n💡 Lütfen önce misafir girişi yapın.';
+    }
+
+    // Misafir kullanıcı kontrolü
+    if (!currentUser.isAnonymous) {
+      throw '❌ Bu hesap zaten kayıtlı.\n\n💡 Bu işlem sadece misafir hesapları için geçerlidir.';
+    }
+
+    try {
+      debugPrint('🔗 Misafir hesabı bağlanıyor: $email');
+      
+      // Email/password credential oluştur
+      final credential = EmailAuthProvider.credential(
+        email: email.trim(),
+        password: password,
+      );
+
+      // Misafir hesabını email/password ile bağla
+      final userCredential = await currentUser.linkWithCredential(credential).timeout(
+        const Duration(seconds: 20),
+        onTimeout: () {
+          throw '❌ İşlem zaman aşımına uğradı.\n\n💡 İnternet bağlantınızı kontrol edin ve tekrar deneyin.';
+        },
+      );
+
+      final linkedUser = userCredential.user;
+      if (linkedUser == null) {
+        throw '❌ Hesap bağlama başarısız.\n\n💡 Lütfen tekrar deneyin.';
+      }
+
+      debugPrint('✅ Misafir hesabı başarıyla bağlandı: ${linkedUser.uid}');
+
+      // Display name güncelle
+      if (displayName != null && displayName.trim().isNotEmpty) {
+        try {
+          await linkedUser.updateDisplayName(displayName.trim()).timeout(
+            const Duration(seconds: 5),
+            onTimeout: () {
+              debugPrint('⏰ Display name güncelleme timeout');
+            },
+          );
+          debugPrint('✅ Display name güncellendi');
+        } catch (e) {
+          debugPrint('⚠️ Display name güncelleme hatası: $e');
+        }
+      }
+
+      // Firestore'da misafir işaretini kaldır ve email ekle
+      try {
+        await _firestore.collection('users').doc(linkedUser.uid).update({
+          'email': email.trim(),
+          'displayName': (displayName?.trim() ?? 'Kullanıcı').isEmpty 
+              ? 'Kullanıcı' 
+              : displayName!.trim(),
+          'title': (title?.trim() ?? 'Anestezi Uzmanı').isEmpty 
+              ? 'Anestezi Uzmanı' 
+              : title!.trim(),
+          'isGuest': false, // Misafir işaretini kaldır
+          'lastLoginAt': FieldValue.serverTimestamp(),
+        });
+        debugPrint('✅ Firestore dokümanı güncellendi (misafir → normal)');
+      } catch (e) {
+        debugPrint('⚠️ Firestore güncelleme hatası: $e');
+        // Hata olsa bile devam et, kritik değil
+      }
+
+      // Cihaz kaydı
+      try {
+        await _deviceService.registerOrUpdateDevice();
+      } catch (e) {
+        debugPrint('⚠️ Cihaz kaydı hatası (devam ediliyor): $e');
+      }
+
+      return linkedUser;
+    } on FirebaseAuthException catch (e) {
+      debugPrint('❌ FirebaseAuth hatası: ${e.code} - ${e.message}');
+      
+      // Email zaten kullanılıyorsa özel mesaj
+      if (e.code == 'email-already-in-use') {
+        throw '❌ Bu e-posta adresi zaten başka bir hesap tarafından kullanılıyor.\n\n💡 Farklı bir e-posta adresi deneyin veya mevcut hesabınızla giriş yapın.';
+      }
+      
+      throw _handleAuthException(e);
+    } catch (e) {
+      debugPrint('❌ Hesap bağlama hatası: $e');
+      
+      final errorString = e.toString().toLowerCase();
+      if (errorString.contains('network') || 
+          errorString.contains('connection') ||
+          errorString.contains('timeout')) {
+        throw '❌ İnternet Bağlantısı Sorunu\n\n💡 İnternet bağlantınızı kontrol edin ve tekrar deneyin.';
+      }
+      
+      if (e is String) {
+        throw e;
+      }
+      
+      throw '❌ Hesap Bağlama Başarısız\n\n💡 Lütfen tekrar deneyin.';
+    }
+  }
+
+  // Kullanıcının misafir olup olmadığını kontrol et
+  bool get isGuestUser {
+    final user = currentUser;
+    if (user == null) return false;
+    return user.isAnonymous;
   }
 
   // Firebase Auth hatalarını Türkçe'ye çevirme

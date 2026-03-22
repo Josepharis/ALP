@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import '../l10n/app_localizations.dart';
 
 
@@ -8,7 +9,9 @@ import '../services/auth_service.dart';
 import '../screens/privacy_terms_screen.dart';
 
 class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({Key? key}) : super(key: key);
+  final bool isGuestUpgrade;
+  
+  const RegisterScreen({Key? key, this.isGuestUpgrade = false}) : super(key: key);
 
   @override
   _RegisterScreenState createState() => _RegisterScreenState();
@@ -103,48 +106,152 @@ class _RegisterScreenState extends State<RegisterScreen>
 
   // Kayıt işlemini gerçekleştir
   Future<void> _register() async {
+    // Widget dispose edilmişse işlemi durdur
+    if (!mounted) return;
+    
     if (!_agreeToTerms) {
+      if (!mounted) return;
       setState(() {
-        _errorMessage =
-            AppLocalizations.of(context)!.termsRequired;
+        _errorMessage = AppLocalizations.of(context)!.termsRequired;
       });
       return;
     }
 
     if (_formKey.currentState?.validate() ?? false) {
+      if (!mounted) return;
+      
       setState(() {
         _isLoading = true;
         _errorMessage = '';
       });
 
       try {
+        // Input validation
+        final email = _emailController.text.trim();
+        final password = _passwordController.text.trim();
+        final displayName = _nameController.text.trim();
+        final title = _titleController.text.trim();
         
-        // iOS simülatör için çok basit kayıt işlemi
-        final user = await _authService.registerWithEmailAndPassword(
-          _emailController.text.trim(),
-          _passwordController.text.trim(),
-          displayName: _nameController.text.trim(),
-          title: _titleController.text.trim(),
-        );
-
-
-        if (user != null && mounted) {
-          
-          // Çok basit navigasyon - ayarlar oluşturmayı atla
-          if (mounted) {
-            Navigator.of(context).pushReplacementNamed('/home');
-          }
-        }
-      } catch (e) {
-        setState(() {
-          _errorMessage = _getErrorMessage(e);
-        });
-      } finally {
-        if (mounted) {
+        if (email.isEmpty || password.isEmpty) {
+          if (!mounted) return;
           setState(() {
+            _errorMessage = '❌ E-posta ve şifre boş olamaz.';
+            _isLoading = false;
+          });
+          return;
+        }
+        
+        debugPrint('🔐 Kayıt başlatılıyor...');
+        
+        // Kayıt işlemi - misafir yükseltme veya normal kayıt
+        User? user;
+        try {
+          if (widget.isGuestUpgrade) {
+            // Misafir hesabını email/password ile bağla
+            debugPrint('👤 Misafir hesabı yükseltiliyor...');
+            user = await _authService.linkGuestAccountWithEmailPassword(
+              email,
+              password,
+              displayName: displayName.isNotEmpty ? displayName : null,
+              title: title.isNotEmpty ? title : null,
+            ).timeout(
+              const Duration(seconds: 60),
+              onTimeout: () {
+                throw '❌ İşlem zaman aşımına uğradı.\n\n💡 İnternet bağlantınızı kontrol edin ve tekrar deneyin.';
+              },
+            );
+            debugPrint('✅ Misafir hesabı başarıyla yükseltildi');
+          } else {
+            // Normal kayıt işlemi
+            user = await _authService.registerWithEmailAndPassword(
+              email,
+              password,
+              displayName: displayName.isNotEmpty ? displayName : null,
+              title: title.isNotEmpty ? title : null,
+            ).timeout(
+              const Duration(seconds: 60), // Timeout'u 60 saniyeye çıkar
+              onTimeout: () {
+                throw '❌ İşlem zaman aşımına uğradı.\n\n💡 İnternet bağlantınızı kontrol edin ve tekrar deneyin.';
+              },
+            );
+          }
+        } catch (e) {
+          // Hata durumunda loading'i kapat ve hatayı göster
+          if (!mounted) return;
+          setState(() {
+            _errorMessage = _getErrorMessage(e);
+            _isLoading = false;
+          });
+          return;
+        }
+
+        if (!mounted) return;
+
+        // Kullanıcı oluşturulduysa navigasyon yap
+        if (user != null) {
+          debugPrint('✅ Kayıt başarılı, navigasyon yapılıyor...');
+          
+          // Loading'i kapat
+          if (mounted) {
+            setState(() {
+              _isLoading = false;
+            });
+          }
+          
+          // Kısa bekleme - navigasyon için
+          await Future.delayed(const Duration(milliseconds: 300));
+          
+          if (!mounted) return;
+          
+          // Navigator'ı güvenli şekilde kullan
+          try {
+            if (widget.isGuestUpgrade) {
+              // Misafir yükseltme: Quiz'e geri dön (pop)
+              Navigator.of(context).pop(true); // true = başarılı
+            } else {
+              // Normal kayıt: Ana sayfaya git
+              Navigator.of(context, rootNavigator: true).pushNamedAndRemoveUntil('/home', (route) => false);
+            }
+          } catch (navError) {
+            debugPrint('⚠️ Navigasyon hatası: $navError');
+            // Navigasyon hatası olsa bile kullanıcı oluşturuldu
+            if (mounted) {
+              // Alternatif navigasyon yöntemi
+              try {
+                if (widget.isGuestUpgrade) {
+                  Navigator.of(context).pop(true);
+                } else {
+                  Navigator.of(context).pushReplacementNamed('/home');
+                }
+              } catch (e) {
+                // Son çare: context'i yeniden al
+                if (mounted) {
+                  if (widget.isGuestUpgrade) {
+                    Navigator.of(context).pop(true);
+                  } else {
+                    Navigator.of(context, rootNavigator: true).pushNamedAndRemoveUntil('/home', (route) => false);
+                  }
+                }
+              }
+            }
+          }
+        } else {
+          if (!mounted) return;
+          setState(() {
+            _errorMessage = '❌ Kullanıcı oluşturulamadı.\n\n💡 Lütfen tekrar deneyin.';
             _isLoading = false;
           });
         }
+      } catch (e) {
+        debugPrint('❌ Kayıt hatası: $e');
+        
+        if (!mounted) return;
+        
+        // Hata mesajını göster
+        setState(() {
+          _errorMessage = _getErrorMessage(e);
+          _isLoading = false;
+        });
       }
     }
   }
@@ -339,7 +446,9 @@ class _RegisterScreenState extends State<RegisterScreen>
                                       end: Alignment.bottomRight,
                                     ).createShader(bounds),
                                 child: Text(
-                                  AppLocalizations.of(context)!.createNewAccount,
+                                  widget.isGuestUpgrade 
+                                      ? AppLocalizations.of(context)!.upgradeGuestAccount
+                                      : AppLocalizations.of(context)!.createNewAccount,
                                   style: TextStyle(
                                     fontSize: isVeryShortScreen ? 20 :
                                              hasAndroidNavigation ? 22 :
@@ -354,7 +463,9 @@ class _RegisterScreenState extends State<RegisterScreen>
                                            hasAndroidNavigation ? 4 : 6),
 
                               Text(
-                                AppLocalizations.of(context)!.joinQuizApp,
+                                widget.isGuestUpgrade
+                                    ? AppLocalizations.of(context)!.upgradeGuestAccountMessage
+                                    : AppLocalizations.of(context)!.joinQuizApp,
                                 style: TextStyle(
                                   fontSize: isVeryShortScreen ? 12 :
                                            hasAndroidNavigation ? 13 :

@@ -9,6 +9,7 @@ import android.provider.Settings
 import android.net.Uri
 import android.os.PowerManager
 import android.content.Context
+import androidx.core.view.WindowCompat
 
 class MainActivity : FlutterActivity() {
     private val CHANNEL = "notification_permissions"
@@ -44,6 +45,11 @@ class MainActivity : FlutterActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        
+        // Enable edge-to-edge display for Android 15+ (SDK 35)
+        // This ensures proper display on devices with Android 15 and later
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+        
         // Bildirim izinlerini kontrol et
         checkNotificationPermissions()
     }

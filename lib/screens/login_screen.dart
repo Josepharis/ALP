@@ -163,6 +163,40 @@ class _LoginScreenState extends State<LoginScreen>
     }
   }
 
+  // Misafir girişi işlemini gerçekleştir
+  Future<void> _signInAsGuest() async {
+    setState(() {
+      _isLoading = true;
+      _errorMessage = '';
+    });
+
+    try {
+      final user = await _authService.signInAnonymously();
+
+      if (user != null && mounted) {
+        // Auth state'in güncellendiğinden emin ol
+        await Future.delayed(const Duration(milliseconds: 100));
+        
+        // Misafir kullanıcılar admin olamaz, direkt ana sayfaya yönlendir
+        if (mounted) {
+          Navigator.of(context).pushReplacementNamed('/home');
+        }
+      }
+    } catch (e) {
+      if (mounted) {
+        setState(() {
+          _errorMessage = _getErrorMessage(e);
+        });
+      }
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
+      }
+    }
+  }
+
   Future<void> _resetPassword() async {
     final email = _emailController.text.trim();
     if (email.isEmpty) {
@@ -769,6 +803,62 @@ class _LoginScreenState extends State<LoginScreen>
                                 ),
                                 SizedBox(height: isVeryShortScreen ? 8 :
                                              hasAndroidNavigation ? 12 :
+                                             isVerySmallScreen ? 16 : 
+                                             isSmallScreen ? 20 : 24),
+
+                                // Misafir girişi butonu
+                                Container(
+                                  width: double.infinity,
+                                  height: isVeryShortScreen ? 42 :
+                                          hasAndroidNavigation ? (isVerySmallScreen ? 42 : 46) :
+                                          isVerySmallScreen ? 48 : isSmallScreen ? 52 : 55,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white.withOpacity(0.1),
+                                    borderRadius: BorderRadius.circular(16),
+                                    border: Border.all(
+                                      color: Colors.white.withOpacity(0.3),
+                                      width: 1.5,
+                                    ),
+                                  ),
+                                  child: ElevatedButton(
+                                    onPressed: _isLoading ? null : _signInAsGuest,
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.transparent,
+                                      disabledBackgroundColor: Colors.transparent,
+                                      shadowColor: Colors.transparent,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(16),
+                                      ),
+                                    ),
+                                    child: _isLoading
+                                        ? const SizedBox(
+                                            height: 24,
+                                            width: 24,
+                                            child: CircularProgressIndicator(
+                                              color: Colors.white,
+                                              strokeWidth: 3,
+                                            ),
+                                          )
+                                        : Row(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            children: [
+                                              const Icon(Icons.person_outline, color: Colors.white),
+                                              const SizedBox(width: 8),
+                                              Text(
+                                                localizations.guestLogin,
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: isVerySmallScreen ? 14 : 
+                                                           isSmallScreen ? 15 : 16,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                  ),
+                                ),
+                                SizedBox(height: isVeryShortScreen ? 12 :
+                                             hasAndroidNavigation ? 16 :
                                              isVerySmallScreen ? 16 : 
                                              isSmallScreen ? 20 : 24),
 

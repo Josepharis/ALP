@@ -15,6 +15,11 @@ import 'dart:math' as math;
 import '../utils/event_bus.dart';
 import '../services/device_service.dart';
 import '../models/device_info.dart';
+import '../services/premium_service.dart';
+import '../services/in_app_purchase_service.dart';
+import 'premium_screen.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'dart:io' show Platform;
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -43,6 +48,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Map<String, dynamic>? _userProfile;
   UserActivity? _userActivity;
   File? _imageFile;
+  final PremiumService _premiumService = PremiumService();
+  bool? _isPremium;
+  Map<String, dynamic>? _subscriptionInfo;
 
   @override
   void initState() {
@@ -62,6 +70,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
         _loadUserData();
       }
     });
+    
+    // PremiumService listener ekle - premium durumu değiştiğinde yenile
+    _premiumService.addListener(_onPremiumStatusChanged);
+  }
+  
+  void _onPremiumStatusChanged() {
+    if (mounted) {
+      debugPrint('🔄 Premium status changed, refreshing profile...');
+      _loadUserData();
+    }
   }
 
   void _subscribeToRank() {
@@ -81,6 +99,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   void dispose() {
+
+    // PremiumService listener'ı kaldır
+    _premiumService.removeListener(_onPremiumStatusChanged);
 
     // StreamSubscription'ları güvenli şekilde iptal et
     try {
@@ -129,10 +150,85 @@ class _ProfileScreenState extends State<ProfileScreen> {
         }
       }
 
+      // Abonelik durumunu kontrol et
+      await _loadSubscriptionInfo();
+
       if (mounted) {
         setState(() {});
       }
     } catch (e) {
+    }
+  }
+
+  Future<void> _loadSubscriptionInfo() async {
+    try {
+      final userId = _authService.currentUser?.uid;
+      if (userId == null) {
+        _isPremium = false;
+        _subscriptionInfo = null;
+        return;
+      }
+
+      // Premium durumunu kontrol et
+      _isPremium = await _premiumService.hasPremiumAccess();
+
+      if (_isPremium == true) {
+        // Abonelik bilgilerini Firestore'dan çek
+        final purchasesSnapshot = await _firestore
+            .collection('users')
+            .doc(userId)
+            .collection('purchases')
+            .orderBy('purchasedAt', descending: true)
+            .limit(1)
+            .get();
+
+        if (purchasesSnapshot.docs.isNotEmpty) {
+          final purchaseData = purchasesSnapshot.docs.first.data();
+          final productId = purchaseData['productId'] as String? ?? '';
+          final transactionDate = purchaseData['transactionDate'] as String?;
+          
+          // Abonelik türünü belirle
+          String subscriptionType = '';
+          if (productId == InAppPurchaseService.monthlySubscriptionId) {
+            subscriptionType = 'monthly';
+          } else if (productId == InAppPurchaseService.yearlySubscriptionId) {
+            subscriptionType = 'yearly';
+          } else if (productId == InAppPurchaseService.sixMonthSubscriptionId) {
+            subscriptionType = 'sixMonth';
+          } else if (productId == InAppPurchaseService.lifetimePurchaseId) {
+            subscriptionType = 'lifetime';
+          }
+
+          // Bitiş tarihini hesapla (basit bir tahmin - gerçek uygulamada receipt doğrulaması gerekir)
+          DateTime? expiresOn;
+          if (transactionDate != null && subscriptionType != 'lifetime') {
+            try {
+              final purchaseDate = DateTime.fromMillisecondsSinceEpoch(int.parse(transactionDate));
+              if (subscriptionType == 'monthly') {
+                expiresOn = purchaseDate.add(const Duration(days: 30));
+              } else if (subscriptionType == 'sixMonth') {
+                expiresOn = purchaseDate.add(const Duration(days: 180));
+              } else if (subscriptionType == 'yearly') {
+                expiresOn = purchaseDate.add(const Duration(days: 365));
+              }
+            } catch (e) {
+              // Tarih parse hatası
+            }
+          }
+
+          _subscriptionInfo = {
+            'type': subscriptionType,
+            'productId': productId,
+            'expiresOn': expiresOn,
+            'isLifetime': subscriptionType == 'lifetime',
+          };
+        }
+      } else {
+        _subscriptionInfo = null;
+      }
+    } catch (e) {
+      _isPremium = false;
+      _subscriptionInfo = null;
     }
   }
 
@@ -485,11 +581,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
         // Kullanılabilir ekran yüksekliğini hesapla
         final availableHeight = size.height - topPadding - bottomPadding;
         
-        // Modal yüksekliğini hesapla - ekranın %75'i veya maksimum 600px
-        final modalHeight = math.min(availableHeight * 0.75, 600.0);
+        // Modal yüksekliğini hesapla - ekranın %85'i veya maksimum 700px
+        // Daha fazla alan ver ki tüm içerik gözüksün
+        final modalHeight = math.min(availableHeight * 0.85, 700.0);
         
-        // Minimum yükseklik garantisi
-        final finalHeight = math.max(modalHeight, 400.0);
+        // Minimum yükseklik garantisi - küçük ekranlar için
+        final finalHeight = math.max(modalHeight, 500.0);
 
         return Container(
           height: finalHeight,
@@ -557,7 +654,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   child: SingleChildScrollView(
                     physics: const BouncingScrollPhysics(),
                     child: Padding(
-                      padding: const EdgeInsets.fromLTRB(12, 8, 12, 20),
+                      padding: EdgeInsets.fromLTRB(
+                        12, 
+                        8, 
+                        12, 
+                        bottomPadding + 20, // Alt padding + navigation bar için ekstra alan
+                      ),
                       child: Column(
                         children: [
                           _buildSettingItem(
@@ -567,6 +669,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             onTap: () => _showEditProfileModal(context),
                           ),
 
+                          // Abonelik durumu bölümü
+                          _buildSubscriptionStatusItem(context),
 
                           _buildSettingItem(
                             AppLocalizations.of(context)!.myDevices,
@@ -1408,6 +1512,506 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
+  Widget _buildSubscriptionStatusItem(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isSmallScreen = screenWidth < 380;
+    
+    return GestureDetector(
+      onTap: () => _showSubscriptionStatusModal(context),
+      child: Container(
+        margin: EdgeInsets.only(bottom: isSmallScreen ? 6 : 8),
+        padding: EdgeInsets.symmetric(
+          horizontal: isSmallScreen ? 10 : 12, 
+          vertical: isSmallScreen ? 8 : 10
+        ),
+        decoration: BoxDecoration(
+          color: Colors.white.withOpacity(0.1),
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(
+            color: (_isPremium == true) ? Colors.green.withOpacity(0.5) : Colors.grey.withOpacity(0.3),
+            width: 1,
+          ),
+        ),
+        child: Row(
+          children: [
+            Container(
+              padding: EdgeInsets.all(isSmallScreen ? 5 : 6),
+              decoration: BoxDecoration(
+                color: (_isPremium == true) 
+                    ? Colors.green.withOpacity(0.2) 
+                    : Colors.orange.withOpacity(0.2),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Icon(
+                (_isPremium == true) ? Icons.workspace_premium : Icons.info_outline, 
+                color: (_isPremium == true) ? Colors.green.shade300 : Colors.orange.shade300, 
+                size: isSmallScreen ? 18 : 20
+              ),
+            ),
+            SizedBox(width: isSmallScreen ? 10 : 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    AppLocalizations.of(context)!.subscriptionStatus,
+                    style: TextStyle(
+                      fontSize: isSmallScreen ? 13 : 14, 
+                      fontWeight: FontWeight.w500,
+                      color: Colors.white,
+                    ),
+                  ),
+                  if (_isPremium == true)
+                    Text(
+                      AppLocalizations.of(context)!.youAreSubscribed,
+                      style: TextStyle(
+                        fontSize: isSmallScreen ? 11 : 12,
+                        color: Colors.green.shade300,
+                      ),
+                    )
+                  else
+                    Text(
+                      AppLocalizations.of(context)!.youAreNotSubscribed,
+                      style: TextStyle(
+                        fontSize: isSmallScreen ? 11 : 12,
+                        color: Colors.grey.shade400,
+                      ),
+                    ),
+                ],
+              ),
+            ),
+            Icon(
+              Icons.chevron_right, 
+              color: Colors.grey.shade400, 
+              size: isSmallScreen ? 16 : 18
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _showSubscriptionStatusModal(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final bottomPadding = MediaQuery.of(context).viewPadding.bottom;
+    final bottomNavBarHeight = 80.0;
+    
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) => Container(
+        constraints: BoxConstraints(
+          maxHeight: size.height * 0.85,
+        ),
+        margin: EdgeInsets.only(
+          bottom: bottomNavBarHeight + 20,
+          left: 16,
+          right: 16,
+        ),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [Colors.indigo.shade900, Colors.black],
+          ),
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(30),
+            topRight: Radius.circular(30),
+          ),
+        ),
+        child: SafeArea(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // Başlık
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      AppLocalizations.of(context)!.subscriptionStatus,
+                      style: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.close, color: Colors.white, size: 20),
+                      onPressed: () => Navigator.pop(context),
+                      padding: EdgeInsets.zero,
+                      constraints: const BoxConstraints(),
+                    ),
+                  ],
+                ),
+              ),
+              // İçerik - scroll edilebilir
+              Flexible(
+                child: SingleChildScrollView(
+                  padding: EdgeInsets.only(
+                    left: 20,
+                    right: 20,
+                    bottom: bottomPadding + 20,
+                  ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      if (_isPremium == true && _subscriptionInfo != null)
+                        _buildSubscriptionInfo(context)
+                      else
+                        _buildNoSubscriptionInfo(context),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSubscriptionInfo(BuildContext context) {
+    final subscriptionType = _subscriptionInfo!['type'] as String;
+    final expiresOn = _subscriptionInfo!['expiresOn'] as DateTime?;
+    final isLifetime = _subscriptionInfo!['isLifetime'] as bool? ?? false;
+
+    String typeText = '';
+    switch (subscriptionType) {
+      case 'monthly':
+        typeText = AppLocalizations.of(context)!.monthlySubscription;
+        break;
+      case 'yearly':
+        typeText = AppLocalizations.of(context)!.yearlySubscription;
+        break;
+      case 'sixMonth':
+        typeText = AppLocalizations.of(context)!.sixMonthSubscription;
+        break;
+      case 'lifetime':
+        typeText = AppLocalizations.of(context)!.lifetimePurchase;
+        break;
+    }
+
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: Colors.green.withOpacity(0.2),
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(color: Colors.green.withOpacity(0.5)),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Row(
+                children: [
+                  Icon(Icons.check_circle, color: Colors.green.shade300),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      AppLocalizations.of(context)!.youAreSubscribed,
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.green.shade300,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16),
+              _buildInfoRow(
+                AppLocalizations.of(context)!.subscriptionType,
+                typeText,
+                Icons.card_membership,
+              ),
+              if (!isLifetime && expiresOn != null)
+                _buildInfoRow(
+                  AppLocalizations.of(context)!.expiresOn,
+                  _formatSubscriptionDate(expiresOn),
+                  Icons.calendar_today,
+                )
+              else if (isLifetime)
+                _buildInfoRow(
+                  AppLocalizations.of(context)!.expiresOn,
+                  AppLocalizations.of(context)!.active,
+                  Icons.all_inclusive,
+                ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 20),
+        SizedBox(
+          width: double.infinity,
+          child: ElevatedButton.icon(
+            onPressed: () => _showCancelSubscriptionDialog(context),
+            icon: const Icon(Icons.cancel_outlined, color: Colors.white),
+            label: Text(
+              AppLocalizations.of(context)!.cancelSubscription,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.red.shade600,
+              foregroundColor: Colors.white,
+              padding: const EdgeInsets.symmetric(vertical: 16),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+              elevation: 4,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildNoSubscriptionInfo(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: Colors.orange.withOpacity(0.2),
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(color: Colors.orange.withOpacity(0.5)),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Row(
+                children: [
+                  Icon(Icons.info_outline, color: Colors.orange.shade300),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      AppLocalizations.of(context)!.youAreNotSubscribed,
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.orange.shade300,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 12),
+              Text(
+                AppLocalizations.of(context)!.premiumIncentiveMessage,
+                style: const TextStyle(
+                  color: Colors.white70,
+                  fontSize: 14,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 20),
+        SizedBox(
+          width: double.infinity,
+          child: ElevatedButton.icon(
+            onPressed: () async {
+              Navigator.pop(context); // Modal'ı kapat
+              // Premium ekranını full screen dialog olarak aç
+              await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const PremiumScreen(),
+                  fullscreenDialog: true, // Full screen dialog - navigation bar yok
+                ),
+              );
+              // Premium ekranından döndükten sonra verileri yenile
+              if (mounted) {
+                await _loadUserData();
+              }
+            },
+            icon: const Icon(Icons.workspace_premium, color: Colors.white),
+            label: Text(
+              AppLocalizations.of(context)!.goToPremium,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.indigo.shade600,
+              foregroundColor: Colors.white,
+              padding: const EdgeInsets.symmetric(vertical: 16),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+              elevation: 4,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildInfoRow(String label, String value, IconData icon) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 12),
+      child: Row(
+        children: [
+          Icon(icon, color: Colors.white70, size: 20),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  label,
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Colors.grey.shade400,
+                  ),
+                ),
+                Text(
+                  value,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _showCancelSubscriptionDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: Colors.transparent,
+        content: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [Colors.indigo.shade900, Colors.black],
+            ),
+            borderRadius: BorderRadius.circular(20),
+          ),
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(
+                Icons.info_outline,
+                color: Colors.orange.shade300,
+                size: 48,
+              ),
+              const SizedBox(height: 16),
+              Text(
+                AppLocalizations.of(context)!.cancelSubscription,
+                style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+              const SizedBox(height: 12),
+              Text(
+                AppLocalizations.of(context)!.cancelSubscriptionMessage,
+                style: const TextStyle(
+                  color: Colors.white70,
+                  fontSize: 14,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 20),
+              Row(
+                children: [
+                  Expanded(
+                    child: TextButton(
+                      onPressed: () => Navigator.pop(context),
+                      child: Text(
+                        AppLocalizations.of(context)!.cancel,
+                        style: const TextStyle(color: Colors.white70),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                        _openSubscriptionSettings();
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.indigo,
+                      ),
+                      child: Text(AppLocalizations.of(context)!.openSettings),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _openSubscriptionSettings() async {
+    try {
+      if (Platform.isIOS) {
+        // iOS için App Store ayarlarına yönlendir
+        final url = Uri.parse('https://apps.apple.com/account/subscriptions');
+        if (await canLaunchUrl(url)) {
+          await launchUrl(url, mode: LaunchMode.externalApplication);
+        } else {
+          if (mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text('Ayarlar açılamadı. Lütfen manuel olarak App Store > Hesabım > Abonelikler bölümüne gidin.'),
+                backgroundColor: Colors.orange,
+              ),
+            );
+          }
+        }
+      } else if (Platform.isAndroid) {
+        // Android için Google Play ayarlarına yönlendir
+        final url = Uri.parse('https://play.google.com/store/account/subscriptions');
+        if (await canLaunchUrl(url)) {
+          await launchUrl(url, mode: LaunchMode.externalApplication);
+        } else {
+          if (mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text('Ayarlar açılamadı. Lütfen manuel olarak Google Play Store > Abonelikler bölümüne gidin.'),
+                backgroundColor: Colors.orange,
+              ),
+            );
+          }
+        }
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Bir hata oluştu: $e'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    }
+  }
+
   // Cihaz yönetimi modalı
   void _showDeviceManagementModal(BuildContext parentContext) {
     // Modal açıldığında cihaz kaydını kontrol et ve gerekirse kaydet (sadece bir kez)
@@ -1874,6 +2478,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
     } else if (difference.inDays < 7) {
       return '${difference.inDays} gün önce';
     } else {
+      return '${date.day}/${date.month}/${date.year}';
+    }
+  }
+
+  String _formatSubscriptionDate(DateTime date) {
+    // Abonelik bitiş tarihi için daha detaylı format
+    final now = DateTime.now();
+    final difference = date.difference(now);
+    
+    if (difference.isNegative) {
+      // Tarih geçmişte
+      return '${date.day}/${date.month}/${date.year} (Süresi Doldu)';
+    } else if (difference.inDays < 30) {
+      // 30 günden az kaldı
+      return '${date.day}/${date.month}/${date.year} (${difference.inDays} gün kaldı)';
+    } else {
+      // Normal format
       return '${date.day}/${date.month}/${date.year}';
     }
   }

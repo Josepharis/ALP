@@ -109,10 +109,12 @@ class DeviceService {
       final data = snapshot.data();
       final registeredDevices = data?['registeredDevices'] as Map<String, dynamic>?;
 
-      if (registeredDevices == null) {
-        // Cihaz listesi yoksa, mevcut cihaz kaldırılmış demektir
-        // Mevcut cihaz listede yoksa çıkış yap
-        onDeviceRemoved();
+      // KAYIT SONRASI: Eğer cihaz listesi yoksa henüz cihaz kaydı yapılmamış olabilir
+      // Bu durumda çıkış yapma! Sadece boş map ise çıkış yap
+      if (registeredDevices == null || registeredDevices.isEmpty) {
+        // İlk kayıt sonrası cihaz kaydı yapılana kadar bekle
+        // Çıkış yapma - bu yeni kayıt olmuş kullanıcı olabilir
+        debugPrint('⚠️ registeredDevices bulunamadı veya boş - henüz kayıt yapılmamış olabilir');
         return;
       }
 
@@ -120,6 +122,7 @@ class DeviceService {
       final currentDeviceId = await getCurrentDeviceId();
       if (!registeredDevices.containsKey(currentDeviceId)) {
         // Mevcut cihaz listeden kaldırılmış - çıkış yap
+        debugPrint('❌ Cihaz listeden kaldırılmış: $currentDeviceId');
         onDeviceRemoved();
       }
     });

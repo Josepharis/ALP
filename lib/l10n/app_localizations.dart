@@ -2348,7 +2348,7 @@ abstract class AppLocalizations {
   /// **'Upgrade to Premium and get unlimited access to all questions!'**
   String get premiumIncentiveMessage;
 
-  /// No description provided for @goToPremium.
+  /// Go to premium button
   ///
   /// In en, this message translates to:
   /// **'Go Premium'**
@@ -2479,6 +2479,66 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'This in-app purchase service is subject to Apple App Store and Google Play Store terms. Purchases are non-refundable. Premium features are available as long as they are active.'**
   String get termsContent;
+
+  /// No description provided for @termsLegalIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'Subscription is subject to the applicable store terms and the documents below. By tapping Subscribe or Purchase you agree to these terms.'**
+  String get termsLegalIntro;
+
+  /// No description provided for @termsPrivacyPolicy.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy Policy'**
+  String get termsPrivacyPolicy;
+
+  /// No description provided for @termsEula.
+  ///
+  /// In en, this message translates to:
+  /// **'Terms of Use (EULA)'**
+  String get termsEula;
+
+  /// No description provided for @termsBulletStore.
+  ///
+  /// In en, this message translates to:
+  /// **'Transactions are processed through Apple App Store / Google Play Store and are subject to store policies.'**
+  String get termsBulletStore;
+
+  /// No description provided for @termsBulletRefund.
+  ///
+  /// In en, this message translates to:
+  /// **'Refunds after payment may only be requested in accordance with the applicable store\'s refund policy.'**
+  String get termsBulletRefund;
+
+  /// No description provided for @termsBulletDisclaimer.
+  ///
+  /// In en, this message translates to:
+  /// **'The app and premium content are provided \"as is\"; no warranty is given to the maximum extent permitted by law.'**
+  String get termsBulletDisclaimer;
+
+  /// No description provided for @subscriptionInfoTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'About your subscription'**
+  String get subscriptionInfoTitle;
+
+  /// No description provided for @subscriptionAutoRenew.
+  ///
+  /// In en, this message translates to:
+  /// **'Subscription automatically renews at the end of each period unless cancelled.'**
+  String get subscriptionAutoRenew;
+
+  /// No description provided for @subscriptionCancelAnytime.
+  ///
+  /// In en, this message translates to:
+  /// **'You can cancel anytime from your device Settings.'**
+  String get subscriptionCancelAnytime;
+
+  /// No description provided for @subscriptionChargedToAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment will be charged to your Apple ID or Google Play account.'**
+  String get subscriptionChargedToAccount;
 
   /// No description provided for @accessAllQuestions.
   ///
@@ -2983,6 +3043,156 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Are you sure you want to delete your account?\n\nThis action cannot be undone and all your data will be permanently deleted.'**
   String get deleteAccountMessage;
+
+  /// Detailed information title
+  ///
+  /// In en, this message translates to:
+  /// **'Detailed Information'**
+  String get detailedInformation;
+
+  /// References section title
+  ///
+  /// In en, this message translates to:
+  /// **'References'**
+  String get references;
+
+  /// No explanation available message
+  ///
+  /// In en, this message translates to:
+  /// **'No detailed explanation available for this question.'**
+  String get noExplanationAvailable;
+
+  /// Guest login button text
+  ///
+  /// In en, this message translates to:
+  /// **'Guest Login'**
+  String get guestLogin;
+
+  /// Guest login description
+  ///
+  /// In en, this message translates to:
+  /// **'Try the app without registration'**
+  String get guestLoginDescription;
+
+  /// Subscription status title
+  ///
+  /// In en, this message translates to:
+  /// **'Subscription Status'**
+  String get subscriptionStatus;
+
+  /// You are subscribed message
+  ///
+  /// In en, this message translates to:
+  /// **'You are a Premium Member'**
+  String get youAreSubscribed;
+
+  /// You are not subscribed message
+  ///
+  /// In en, this message translates to:
+  /// **'You are not a Premium Member'**
+  String get youAreNotSubscribed;
+
+  /// Subscription type label
+  ///
+  /// In en, this message translates to:
+  /// **'Subscription Type'**
+  String get subscriptionType;
+
+  /// Expires on label
+  ///
+  /// In en, this message translates to:
+  /// **'Expires On'**
+  String get expiresOn;
+
+  /// Cancel subscription button
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel Subscription'**
+  String get cancelSubscription;
+
+  /// Subscription info title
+  ///
+  /// In en, this message translates to:
+  /// **'Subscription Information'**
+  String get subscriptionInfo;
+
+  /// Monthly subscription type
+  ///
+  /// In en, this message translates to:
+  /// **'Monthly Subscription'**
+  String get monthlySubscription;
+
+  /// Yearly subscription type
+  ///
+  /// In en, this message translates to:
+  /// **'Yearly Subscription'**
+  String get yearlySubscription;
+
+  /// Six month subscription type
+  ///
+  /// In en, this message translates to:
+  /// **'6 Month Subscription'**
+  String get sixMonthSubscription;
+
+  /// Lifetime purchase type
+  ///
+  /// In en, this message translates to:
+  /// **'Lifetime Premium'**
+  String get lifetimePurchase;
+
+  /// Cancel subscription message
+  ///
+  /// In en, this message translates to:
+  /// **'To cancel your subscription, you need to go to your device settings.'**
+  String get cancelSubscriptionMessage;
+
+  /// Open settings button
+  ///
+  /// In en, this message translates to:
+  /// **'Open Settings'**
+  String get openSettings;
+
+  /// Subscription expired message
+  ///
+  /// In en, this message translates to:
+  /// **'Subscription Expired'**
+  String get subscriptionExpired;
+
+  /// Active status
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get active;
+
+  /// Guest register title
+  ///
+  /// In en, this message translates to:
+  /// **'Create Your Account'**
+  String get guestRegisterTitle;
+
+  /// Guest register message
+  ///
+  /// In en, this message translates to:
+  /// **'Create your account to continue. Your current progress will be saved!'**
+  String get guestRegisterMessage;
+
+  /// Guest register subtitle
+  ///
+  /// In en, this message translates to:
+  /// **'After registration, you can purchase premium'**
+  String get guestRegisterSubtitle;
+
+  /// Upgrade guest account title
+  ///
+  /// In en, this message translates to:
+  /// **'Create Your Account'**
+  String get upgradeGuestAccount;
+
+  /// Upgrade guest account message
+  ///
+  /// In en, this message translates to:
+  /// **'Convert your guest account to a registered account. All your data will be preserved!'**
+  String get upgradeGuestAccountMessage;
 }
 
 class _AppLocalizationsDelegate

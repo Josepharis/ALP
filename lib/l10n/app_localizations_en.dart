@@ -1253,6 +1253,43 @@ class AppLocalizationsEn extends AppLocalizations {
       'This in-app purchase service is subject to Apple App Store and Google Play Store terms. Purchases are non-refundable. Premium features are available as long as they are active.';
 
   @override
+  String get termsLegalIntro =>
+      'Subscription is subject to the applicable store terms and the documents below. By tapping Subscribe or Purchase you agree to these terms.';
+
+  @override
+  String get termsPrivacyPolicy => 'Privacy Policy';
+
+  @override
+  String get termsEula => 'Terms of Use (EULA)';
+
+  @override
+  String get termsBulletStore =>
+      'Transactions are processed through Apple App Store / Google Play Store and are subject to store policies.';
+
+  @override
+  String get termsBulletRefund =>
+      'Refunds after payment may only be requested in accordance with the applicable store\'s refund policy.';
+
+  @override
+  String get termsBulletDisclaimer =>
+      'The app and premium content are provided \"as is\"; no warranty is given to the maximum extent permitted by law.';
+
+  @override
+  String get subscriptionInfoTitle => 'About your subscription';
+
+  @override
+  String get subscriptionAutoRenew =>
+      'Subscription automatically renews at the end of each period unless cancelled.';
+
+  @override
+  String get subscriptionCancelAnytime =>
+      'You can cancel anytime from your device Settings.';
+
+  @override
+  String get subscriptionChargedToAccount =>
+      'Payment will be charged to your Apple ID or Google Play account.';
+
+  @override
   String get accessAllQuestions => 'Access All Questions';
 
   @override
@@ -1531,4 +1568,84 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get deleteAccountMessage =>
       'Are you sure you want to delete your account?\n\nThis action cannot be undone and all your data will be permanently deleted.';
+
+  @override
+  String get detailedInformation => 'Detailed Information';
+
+  @override
+  String get references => 'References';
+
+  @override
+  String get noExplanationAvailable =>
+      'No detailed explanation available for this question.';
+
+  @override
+  String get guestLogin => 'Guest Login';
+
+  @override
+  String get guestLoginDescription => 'Try the app without registration';
+
+  @override
+  String get subscriptionStatus => 'Subscription Status';
+
+  @override
+  String get youAreSubscribed => 'You are a Premium Member';
+
+  @override
+  String get youAreNotSubscribed => 'You are not a Premium Member';
+
+  @override
+  String get subscriptionType => 'Subscription Type';
+
+  @override
+  String get expiresOn => 'Expires On';
+
+  @override
+  String get cancelSubscription => 'Cancel Subscription';
+
+  @override
+  String get subscriptionInfo => 'Subscription Information';
+
+  @override
+  String get monthlySubscription => 'Monthly Subscription';
+
+  @override
+  String get yearlySubscription => 'Yearly Subscription';
+
+  @override
+  String get sixMonthSubscription => '6 Month Subscription';
+
+  @override
+  String get lifetimePurchase => 'Lifetime Premium';
+
+  @override
+  String get cancelSubscriptionMessage =>
+      'To cancel your subscription, you need to go to your device settings.';
+
+  @override
+  String get openSettings => 'Open Settings';
+
+  @override
+  String get subscriptionExpired => 'Subscription Expired';
+
+  @override
+  String get active => 'Active';
+
+  @override
+  String get guestRegisterTitle => 'Create Your Account';
+
+  @override
+  String get guestRegisterMessage =>
+      'Create your account to continue. Your current progress will be saved!';
+
+  @override
+  String get guestRegisterSubtitle =>
+      'After registration, you can purchase premium';
+
+  @override
+  String get upgradeGuestAccount => 'Create Your Account';
+
+  @override
+  String get upgradeGuestAccountMessage =>
+      'Convert your guest account to a registered account. All your data will be preserved!';
 }

@@ -481,6 +481,16 @@
   "purchaseStarted": "Satın alma işlemi başlatıldı",
   "purchaseFailed": "Satın alma işlemi başlatılamadı",
   "termsContent": "Bu uygulama içi satın alım hizmeti Apple App Store ve Google Play Store şartlarına tabidir. Satın alımlar iade edilemez. Premium özellikler aktif olduğu sürece kullanılabilir.",
+  "termsLegalIntro": "Abonelik, ilgili mağaza şartlarına ve aşağıdaki belgelere tabidir. Satın alma veya abone ol butonuna basarak bu koşulları kabul etmiş olursunuz.",
+  "termsPrivacyPolicy": "Gizlilik Politikası",
+  "termsEula": "Kullanım Şartları (EULA)",
+  "termsBulletStore": "İşlemler Apple App Store / Google Play Store üzerinden yapılır ve mağaza kurallarına tabidir.",
+  "termsBulletRefund": "Ödeme sonrası iade yalnızca ilgili mağazanın politikası çerçevesinde talep edilebilir.",
+  "termsBulletDisclaimer": "Uygulama ve premium içerik \"olduğu gibi\" sunulur; yasal çerçevede izin verilen azami ölçüde garanti verilmez.",
+  "subscriptionInfoTitle": "Abonelik hakkında",
+  "subscriptionAutoRenew": "Abonelik seçtiğiniz dönem sonunda otomatik yenilenir.",
+  "subscriptionCancelAnytime": "İstediğiniz zaman Ayarlar üzerinden iptal edebilirsiniz.",
+  "subscriptionChargedToAccount": "Ödeme Apple ID veya Google Play hesabınıza yansıtılır.",
   "ok": "Tamam",
   "accessAllQuestions": "Tüm Sorulara Erişim",
   "unlimitedQuiz": "Sınırsız Quiz",
@@ -572,5 +582,100 @@
   "agreeToPrivacy": "Gizlilik politikasını kabul ediyorum",
   "deleteAccount": "Hesabı Sil",
   "deleteAccountTitle": "Hesabı Sil",
-  "deleteAccountMessage": "Hesabınızı silmek istediğinizden emin misiniz?\n\nBu işlem geri alınamaz ve tüm verileriniz kalıcı olarak silinecektir."
+  "deleteAccountMessage": "Hesabınızı silmek istediğinizden emin misiniz?\n\nBu işlem geri alınamaz ve tüm verileriniz kalıcı olarak silinecektir.",
+  "detailedInformation": "Detaylı Bilgi",
+  "references": "Kaynaklar",
+  "noExplanationAvailable": "Bu soru için detaylı açıklama mevcut değil.",
+  "guestLogin": "Misafir Girişi",
+  "@guestLogin": {
+    "description": "Guest login button text"
+  },
+  "guestLoginDescription": "Kayıt olmadan uygulamayı deneyebilirsiniz",
+  "@guestLoginDescription": {
+    "description": "Guest login description"
+  },
+  "subscriptionStatus": "Abonelik Durumu",
+  "@subscriptionStatus": {
+    "description": "Subscription status title"
+  },
+  "youAreSubscribed": "Premium Üyesiniz",
+  "@youAreSubscribed": {
+    "description": "You are subscribed message"
+  },
+  "youAreNotSubscribed": "Premium Üyesi Değilsiniz",
+  "@youAreNotSubscribed": {
+    "description": "You are not subscribed message"
+  },
+  "subscriptionType": "Abonelik Türü",
+  "@subscriptionType": {
+    "description": "Subscription type label"
+  },
+  "expiresOn": "Bitiş Tarihi",
+  "@expiresOn": {
+    "description": "Expires on label"
+  },
+  "cancelSubscription": "Aboneliği İptal Et",
+  "@cancelSubscription": {
+    "description": "Cancel subscription button"
+  },
+  "goToPremium": "Premium'a Geç",
+  "@goToPremium": {
+    "description": "Go to premium button"
+  },
+  "subscriptionInfo": "Abonelik Bilgileri",
+  "@subscriptionInfo": {
+    "description": "Subscription info title"
+  },
+  "monthlySubscription": "Aylık Abonelik",
+  "@monthlySubscription": {
+    "description": "Monthly subscription type"
+  },
+  "yearlySubscription": "Yıllık Abonelik",
+  "@yearlySubscription": {
+    "description": "Yearly subscription type"
+  },
+  "sixMonthSubscription": "6 Aylık Abonelik",
+  "@sixMonthSubscription": {
+    "description": "Six month subscription type"
+  },
+  "lifetimePurchase": "Yaşam Boyu Premium",
+  "@lifetimePurchase": {
+    "description": "Lifetime purchase type"
+  },
+  "cancelSubscriptionMessage": "Aboneliğinizi iptal etmek için cihazınızın ayarlarına gitmeniz gerekmektedir.",
+  "@cancelSubscriptionMessage": {
+    "description": "Cancel subscription message"
+  },
+  "openSettings": "Ayarları Aç",
+  "@openSettings": {
+    "description": "Open settings button"
+  },
+  "subscriptionExpired": "Abonelik Süresi Doldu",
+  "@subscriptionExpired": {
+    "description": "Subscription expired message"
+  },
+  "active": "Aktif",
+  "@active": {
+    "description": "Active status"
+  },
+  "guestRegisterTitle": "Hesabınızı Oluşturun",
+  "@guestRegisterTitle": {
+    "description": "Guest register title"
+  },
+  "guestRegisterMessage": "Devam etmek için hesabınızı oluşturun. Mevcut ilerlemeniz korunacak!",
+  "@guestRegisterMessage": {
+    "description": "Guest register message"
+  },
+  "guestRegisterSubtitle": "Kayıt olduktan sonra premium satın alabilirsiniz",
+  "@guestRegisterSubtitle": {
+    "description": "Guest register subtitle"
+  },
+  "upgradeGuestAccount": "Hesabınızı Oluşturun",
+  "@upgradeGuestAccount": {
+    "description": "Upgrade guest account title"
+  },
+  "upgradeGuestAccountMessage": "Mevcut misafir hesabınızı kayıtlı hesaba dönüştürün. Tüm verileriniz korunacak!",
+  "@upgradeGuestAccountMessage": {
+    "description": "Upgrade guest account message"
+  }
 }

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -16,10 +17,19 @@ class InAppPurchaseService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   late StreamSubscription<List<PurchaseDetails>> _subscription;
   
+  // Restore reject notification stream
+  final _restoreRejectController = StreamController<String>.broadcast();
+  Stream<String> get restoreRejectStream => _restoreRejectController.stream;
+  
+  // Satın alma başarıyla Firestore'a kaydedildiğinde tetiklenir (UI kapatmak için)
+  final _purchaseSuccessController = StreamController<String>.broadcast();
+  Stream<String> get purchaseSuccessStream => _purchaseSuccessController.stream;
+  
   // Product IDs - Platform specific
-  // iOS Product IDs
-  static const String _iosMonthlySubscriptionId = 'com.alp.premium.monthly';
-  static const String _iosSixMonthSubscriptionId = 'com.alp.premium.6months';
+  // iOS Product IDs - App Store Connect'te tanımlı Product ID'ler
+  // NOT: Bundle ID ile eşleşmesi zorunlu değil, sadece App Store Connect'teki ile eşleşmeli
+  static const String _iosMonthlySubscriptionId = 'com.yftsoftware.monthly'; // Aylık abonelik
+  static const String _iosSixMonthSubscriptionId = 'com.alp.premium.6months'; // 6 aylık abonelik
   static const String _iosYearlySubscriptionId = 'com.alp.premium.yearly';
   
   // Android Product IDs (unchanged)
@@ -59,32 +69,109 @@ class InAppPurchaseService {
   // Purchase status
   bool _isAvailable = false;
   bool get isAvailable => _isAvailable;
+  
+  // Initialization status - prevent multiple initializations
+  bool _isInitialized = false;
+  bool get isInitialized => _isInitialized;
 
   // Purchase details
   List<PurchaseDetails> _purchases = [];
   List<PurchaseDetails> get purchases => _purchases;
+  
+  // Premium durumu cache'i - performans için
+  bool? _cachedPremiumStatus;
+  String? _cachedUserId;
+  
+  // İşlenen purchase'ları track et (duplicate prevention)
+  final Set<String> _processedPurchases = {};
+  // İşlem devam eden purchase'lar (async işlem sırasında duplicate'ları engellemek için)
+  final Set<String> _processingPurchases = {};
+  // Processing timestamp'leri (restored transaction'ların tekrar işlenmesine izin vermek için)
+  final Map<String, DateTime> _processingTimestamps = {};
+  // Manuel restore flag - sadece kullanıcı butona bastığında restore'ları işle
+  bool _isManualRestore = false;
+  // Satın alma butonu basıldığı zaman - bu flag aktif olduğu sürece gelen TÜM transaction'lar kabul edilir
+  bool _isPurchaseButtonPressed = false;
 
   // Initialize the service
   Future<void> initialize() async {
-    _isAvailable = await _inAppPurchase.isAvailable();
-    
-    if (!_isAvailable) {
-      debugPrint('In-app purchase not available');
+    // Prevent multiple initializations
+    if (_isInitialized) {
+      debugPrint('⚠️ Service already initialized, skipping...');
       return;
     }
+    
+    debugPrint('🔧 Initializing InAppPurchaseService...');
+    
+    try {
+      _isAvailable = await _inAppPurchase.isAvailable().timeout(
+        const Duration(seconds: 10),
+        onTimeout: () {
+          debugPrint('⏰ isAvailable() timeout');
+          return false;
+        },
+      );
+      
+      if (!_isAvailable) {
+        debugPrint('❌ In-app purchase not available');
+        return;
+      }
 
-    // Listen to purchase updates
-    _subscription = _inAppPurchase.purchaseStream.listen(
-      _onPurchaseUpdate,
-      onDone: () => _subscription.cancel(),
-      onError: (error) => debugPrint('Purchase stream error: $error'),
-    );
+      // Listen to purchase updates (only once)
+      _subscription = _inAppPurchase.purchaseStream.listen(
+        _onPurchaseUpdate,
+        onDone: () => _subscription.cancel(),
+        onError: (error) => debugPrint('Purchase stream error: $error'),
+      );
 
-    // Load products
+      // Load products (with timeout - TestFlight için daha uzun)
+      debugPrint('📦 Loading products...');
+      await _loadProducts().timeout(
+        const Duration(seconds: 60), // TestFlight için 60 saniye
+        onTimeout: () {
+          debugPrint('⏰ Product loading timeout (60s)');
+          debugPrint('⚠️ This may happen in TestFlight if products are not configured in App Store Connect');
+          // Continue anyway, products might load later
+        },
+      );
+
+      // CRITICAL: DO NOT call restorePurchases() automatically
+      // iOS will automatically send unfinished transactions through purchaseStream
+      // We'll complete them without activating premium (see _handlePurchase)
+      debugPrint('🧹 Purchase stream listener active - unfinished transactions will be handled automatically');
+      
+      // Load purchase status from Firestore if user is logged in
+      final userId = _auth.currentUser?.uid;
+      if (userId != null) {
+        debugPrint('📥 Loading purchase status from Firestore for user: $userId');
+        await _syncPurchasesWithFirestore(userId).timeout(
+          const Duration(seconds: 10),
+          onTimeout: () {
+            debugPrint('⏰ Firestore sync timeout (continuing anyway)');
+          },
+        );
+      }
+      
+      // Mark as initialized
+      _isInitialized = true;
+      debugPrint('✅ InAppPurchaseService initialized successfully');
+      debugPrint('   Products loaded: ${_products.length}');
+      debugPrint('   Product IDs: ${_products.map((p) => p.id).toList()}');
+      
+    } catch (e) {
+      debugPrint('❌ Error initializing InAppPurchaseService: $e');
+      // Mark as initialized anyway to prevent repeated failed attempts
+      _isInitialized = true;
+    }
+  }
+  
+  // Note: Unfinished transactions are automatically handled by iOS
+  // They come through purchaseStream and are completed in _handlePurchase
+  // No manual cleanup needed - iOS StoreKit handles this automatically
+
+  // Public method to reload products (useful for retry)
+  Future<void> reloadProducts() async {
     await _loadProducts();
-
-    // Restore previous purchases
-    await restorePurchases();
   }
 
   // Load available products
@@ -97,45 +184,198 @@ class InAppPurchaseService {
       if (!Platform.isIOS) lifetimePurchaseId,
     };
 
-    try {
-      final ProductDetailsResponse response = await _inAppPurchase.queryProductDetails(productIds);
-      
-      if (response.notFoundIDs.isNotEmpty) {
-        debugPrint('Products not found: ${response.notFoundIDs}');
-      }
+    // iOS için retry logic - TestFlight ve production için daha fazla retry
+    // Production'da App Store Connect API'ye erişim daha yavaş olabilir
+    int maxRetries = Platform.isIOS ? 5 : 1; // TestFlight için 5 deneme
+    int retryDelay = Platform.isIOS ? 3 : 0; // Her denemede 3 saniye bekle
+    
+    for (int attempt = 1; attempt <= maxRetries; attempt++) {
+      try {
+        debugPrint('Loading products for platform: ${Platform.isIOS ? "iOS" : "Android"} (Attempt $attempt/$maxRetries)');
+        debugPrint('Product IDs to load: $productIds');
+        
+        if (Platform.isIOS && attempt > 1) {
+          debugPrint('⏳ Waiting ${retryDelay}s before retry...');
+          await Future.delayed(Duration(seconds: retryDelay));
+        }
+        
+        // Production/TestFlight için daha uzun timeout
+        final ProductDetailsResponse response = await _inAppPurchase.queryProductDetails(productIds).timeout(
+          const Duration(seconds: 30), // Production için 30 saniye timeout
+          onTimeout: () {
+            debugPrint('⏰ queryProductDetails timeout (Attempt $attempt/$maxRetries)');
+            throw TimeoutException('Ürün sorgulama zaman aşımına uğradı', const Duration(seconds: 30));
+          },
+        );
+        
+        if (response.notFoundIDs.isNotEmpty) {
+          debugPrint('⚠️ Products not found: ${response.notFoundIDs}');
+          debugPrint('   🔍 DEBUG INFO:');
+          debugPrint('      - Requested: $productIds');
+          debugPrint('      - Not Found: ${response.notFoundIDs}');
+          debugPrint('      - Found: ${response.productDetails.length} products');
+          debugPrint('      - Error: ${response.error}');
+          if (Platform.isIOS) {
+            debugPrint('⚠️ iOS: Make sure these product IDs are configured in App Store Connect:');
+            for (final id in response.notFoundIDs) {
+              debugPrint('   - $id');
+            }
+            debugPrint('⚠️ SANDBOX KONTROLÜ:');
+            debugPrint('   🔐 Sandbox hesabı kontrolü için:');
+            debugPrint('   1. Settings → App Store → Sandbox Account');
+            debugPrint('   2. Sandbox test hesabı ile giriş yapılmış mı?');
+            debugPrint('   3. Normal App Store hesabından çıkış yapılmış mı?');
+            debugPrint('   4. Cihazı yeniden başlattınız mı?');
+            debugPrint('⚠️ TestFlight Troubleshooting:');
+            debugPrint('   1. App Store Connect → Your App → In-App Purchases');
+            debugPrint('   2. Check if products are in "Waiting for Review" or "Approved" status');
+            debugPrint('   3. Make sure product IDs match exactly: $productIds');
+            debugPrint('   4. "Waiting for Review" ürünler bazen API\'de aktif olmayabilir');
+            debugPrint('   5. Use a Sandbox test account for testing');
+            debugPrint('   ⚠️ ÖNEMLİ: "Waiting for Review" ürünler bazen TestFlight\'ta çalışmaz!');
+            debugPrint('   💡 ÇÖZÜM 1: 24-48 saat bekleyin (API güncellemesi için)');
+            debugPrint('   💡 ÇÖZÜM 2: Ürünleri "Approved" durumuna getirin');
+            debugPrint('   💡 ÇÖZÜM 3: Versiyonu Remove from Review yapıp tekrar Submit edin');
+            if (attempt < maxRetries) {
+              debugPrint('   Retrying in ${retryDelay}s...');
+              continue;
+            } else {
+              debugPrint('   ⚠️ All retry attempts failed.');
+              debugPrint('   💡 "Waiting for Review" ürünler API\'de aktif olmayabilir.');
+              debugPrint('   💡 ÇÖZÜM: 24-48 saat bekleyin veya ürünleri onaylatın.');
+            }
+          }
+        }
 
-      if (response.error != null) {
-        debugPrint('Error loading products: ${response.error}');
-      }
+        if (response.error != null) {
+          debugPrint('❌ Error loading products: ${response.error}');
+          debugPrint('   Error code: ${response.error!.code}');
+          debugPrint('   Error message: ${response.error!.message}');
+          debugPrint('   Error details: ${response.error!.details}');
+          debugPrint('   ⚠️ TestFlight: This might be a network issue or App Store Connect configuration problem');
+          debugPrint('   🔍 DEBUG INFO:');
+          debugPrint('      - Response error: ${response.error}');
+          debugPrint('      - Requested Product IDs: $productIds');
+          debugPrint('      - Not Found IDs: ${response.notFoundIDs}');
+          debugPrint('      - Found Products: ${response.productDetails.length}');
+          if (Platform.isIOS && attempt < maxRetries) {
+            debugPrint('   Retrying in ${retryDelay}s...');
+            continue;
+          } else {
+            debugPrint('   ❌ All retry attempts failed. Check App Store Connect configuration.');
+            debugPrint('   💡 "Waiting for Review" ürünler bazen API\'de aktif olmayabilir.');
+            debugPrint('   💡 ÇÖZÜM: 24-48 saat bekleyin veya ürünleri "Approved" durumuna getirin.');
+          }
+        }
 
-      _products = response.productDetails;
-      debugPrint('Loaded ${_products.length} products: ${_products.map((p) => p.id).toList()}');
-    } catch (e) {
-      debugPrint('Exception loading products: $e');
+        _products = response.productDetails;
+        debugPrint('✅ Loaded ${_products.length} products: ${_products.map((p) => p.id).toList()}');
+        
+        // Her ürün için detaylı bilgi
+        for (var product in _products) {
+          debugPrint('   📦 ${product.id}: ${product.title} - ${product.price}');
+        }
+        
+        if (_products.isNotEmpty) {
+          // Başarılı, retry döngüsünden çık
+          debugPrint('✅ Products loaded successfully!');
+          break;
+        } else {
+          debugPrint('⚠️ No products loaded - response.productDetails is empty');
+          debugPrint('   This means App Store Connect returned no products for IDs: $productIds');
+        }
+        
+        if (_products.isEmpty && Platform.isIOS) {
+          debugPrint('⚠️ WARNING: No products loaded on iOS (Attempt $attempt/$maxRetries)');
+          if (attempt < maxRetries) {
+            debugPrint('   Retrying in ${retryDelay}s...');
+            continue;
+          } else {
+            debugPrint('⚠️ TestFlight/Production Troubleshooting:');
+            debugPrint('   1. App Store Connect → Your App → In-App Purchases');
+            debugPrint('   2. Verify products exist and are in "Ready to Submit" or "Approved" status');
+            debugPrint('   3. Product IDs must match exactly: $productIds');
+            debugPrint('   4. Wait 24-48 hours after creating/updating products');
+            debugPrint('   5. Use Sandbox test account (Settings → App Store → Sandbox Account)');
+            debugPrint('   6. Check internet connection (WiFi or cellular)');
+            debugPrint('   7. Try restarting the app');
+            debugPrint('   ⚠️ ÖNEMLİ: "Ready to Submit" ürünler TestFlight\'ta çalışmayabilir!');
+            debugPrint('   💡 ÇÖZÜM:');
+            debugPrint('      a) App Store Connect → Versions → Yeni versiyon oluşturun');
+            debugPrint('      b) In-App Purchases and Subscriptions → 3 ürünü seçin');
+            debugPrint('      c) Submit for Review → HEMEN iptal edin');
+            debugPrint('      d) Bu işlem ürünlerin API\'de aktif olmasını sağlar');
+            debugPrint('      e) TestFlight\'ta tekrar deneyin');
+          }
+        }
+      } catch (e) {
+        debugPrint('❌ Exception loading products (Attempt $attempt/$maxRetries): $e');
+        if (e is TimeoutException) {
+          debugPrint('   ⏰ Timeout occurred - App Store Connect API may be slow');
+          debugPrint('   💡 This is common in TestFlight. Retrying...');
+        }
+        if (Platform.isIOS && attempt < maxRetries) {
+          debugPrint('   Retrying in ${retryDelay}s...');
+          continue;
+        } else if (Platform.isIOS) {
+          debugPrint('   ❌ iOS-specific: Check App Store Connect configuration');
+          debugPrint('   💡 Products must be created and approved in App Store Connect');
+          debugPrint('   💡 Wait 24-48 hours after creating products');
+        }
+      }
     }
   }
 
-  // Restore previous purchases
+  // Restore previous purchases (sadece kullanıcı butona bastığında çağrılır)
   Future<void> restorePurchases() async {
     final userId = _auth.currentUser?.uid;
     
-    // If user is logged in, ONLY load from Firestore
-    // Do NOT restore from Google Play as it may show purchases from different accounts
-    // Each Firebase Auth account should only see its own purchases
-    if (userId != null) {
-      _purchases.clear();
-      debugPrint('User logged in, loading purchases from Firestore only for user: $userId');
-      
-      // Load purchases from Firestore for this user
-      await _loadPurchasesFromFirestore(userId);
-      
-      // Sync premium status
-      await _syncPurchasesWithFirestore(userId);
-      return; // Don't restore from Google Play for logged-in users
-    }
+    // Manuel restore flag'ini aktif et
+    _isManualRestore = true;
+    debugPrint('🔄 Manual restore initiated by user');
     
-    // No user logged in, restore from Google Play (for anonymous/offline use)
-    await _inAppPurchase.restorePurchases();
+    try {
+      // iOS: Always restore from App Store to get purchase history
+      // Android: Only restore from Google Play if user is not logged in
+      if (Platform.isIOS) {
+        debugPrint('iOS: Restoring purchases from App Store...');
+        await _inAppPurchase.restorePurchases();
+        
+        // Restore işlemi tamamlanması için kısa bir bekleme
+        await Future.delayed(const Duration(milliseconds: 500));
+        
+        // Also load from Firestore if user is logged in
+        if (userId != null) {
+          debugPrint('iOS: User logged in, also loading purchases from Firestore for user: $userId');
+          await _loadPurchasesFromFirestore(userId);
+          await _syncPurchasesWithFirestore(userId);
+        }
+        return;
+      }
+    
+      // Android: If user is logged in, ONLY load from Firestore
+      // Do NOT restore from Google Play as it may show purchases from different accounts
+      // Each Firebase Auth account should only see its own purchases
+      if (userId != null) {
+        _purchases.clear();
+        debugPrint('Android: User logged in, loading purchases from Firestore only for user: $userId');
+        
+        // Load purchases from Firestore for this user
+        await _loadPurchasesFromFirestore(userId);
+        
+        // Sync premium status
+        await _syncPurchasesWithFirestore(userId);
+        return; // Don't restore from Google Play for logged-in users
+      }
+      
+      // Android: No user logged in, restore from Google Play (for anonymous/offline use)
+      debugPrint('Android: No user logged in, restoring from Google Play...');
+      await _inAppPurchase.restorePurchases();
+    } finally {
+      // Restore işlemi tamamlandı, flag'i kapat
+      _isManualRestore = false;
+      debugPrint('✅ Manual restore completed');
+    }
   }
   
   // Load purchases from Firestore for a specific user
@@ -172,23 +412,38 @@ class InAppPurchaseService {
         // Note: We can't create fake PurchaseDetails, so we rely on Firestore check
         // in hasPremiumAccess() method
         
-        debugPrint('Premium status synced from Firestore for user: $userId, isPremium: $isPremium');
+        // Cache'i güncelle - sync işlemi sırasında
+        _cachedPremiumStatus = isPremium;
+        _cachedUserId = userId;
+        
+        debugPrint('✅ Premium status synced from Firestore for user: $userId, isPremium: $isPremium');
+        debugPrint('✅ Cache updated during sync: isPremium=$isPremium, userId=$userId');
       } else {
         // User document doesn't exist, create it with premium: false
         await _firestore.collection('users').doc(userId).set({
           'isPremium': false,
           'premiumUpdatedAt': FieldValue.serverTimestamp(),
         }, SetOptions(merge: true));
+        
+        // Cache'i güncelle
+        _cachedPremiumStatus = false;
+        _cachedUserId = userId;
+        debugPrint('✅ User document created with isPremium=false, cache updated');
       }
     } catch (e) {
-      debugPrint('Error syncing purchases with Firestore: $e');
+      debugPrint('❌ Error syncing purchases with Firestore: $e');
     }
   }
   
   // Clear all purchases (called on sign out)
   Future<void> clearPurchases() async {
     _purchases.clear();
-    debugPrint('Local purchases cleared');
+    _processedPurchases.clear();
+    _processingPurchases.clear();
+    _processingTimestamps.clear();
+    _isManualRestore = false;
+    _isPurchaseButtonPressed = false;
+    debugPrint('Local purchases, processed purchases, and timestamps cache cleared');
   }
 
   // Handle purchase updates
@@ -200,306 +455,538 @@ class InAppPurchaseService {
 
   // Handle individual purchase
   Future<void> _handlePurchase(PurchaseDetails purchaseDetails) async {
-    if (purchaseDetails.status == PurchaseStatus.pending) {
-      debugPrint('Purchase pending: ${purchaseDetails.productID}');
+    final purchaseId = purchaseDetails.purchaseID ?? '';
+    final productId = purchaseDetails.productID;
+    final status = purchaseDetails.status;
+    
+    // Duplicate prevention: Aynı purchase'ı birden fazla kez işleme
+    final uniqueKey = '${purchaseId}_${productId}_${status.toString()}';
+    
+    // Şu anda işleniyor mu kontrol et (async işlem sırasında duplicate'ları engelle)
+    if (_processingPurchases.contains(uniqueKey)) {
+      debugPrint('⚠️ Purchase already being processed, skipping duplicate: $productId, ID: "$purchaseId", Status: $status');
       return;
     }
-
-    if (purchaseDetails.status == PurchaseStatus.error) {
-      debugPrint('Purchase error: ${purchaseDetails.error}');
+    
+    // Zaten işlenmiş mi kontrol et - AMA sadece purchased için
+    // Restored transaction'lar tekrar işlenebilir (kullanıcı butona basınca)
+    if (status == PurchaseStatus.purchased && _processedPurchases.contains(uniqueKey)) {
+      debugPrint('⚠️ Already processed PURCHASED transaction, skipping: $productId, ID: "$purchaseId"');
       return;
     }
-
-    if (purchaseDetails.status == PurchaseStatus.purchased ||
-        purchaseDetails.status == PurchaseStatus.restored) {
-      debugPrint('Purchase successful: ${purchaseDetails.productID}');
-      
-      // Verify purchase
-      final bool valid = await _verifyPurchase(purchaseDetails);
-      
-      if (valid) {
-        // Complete the purchase
-        if (purchaseDetails.pendingCompletePurchase) {
-          await _inAppPurchase.completePurchase(purchaseDetails);
-        }
-        
-        final userId = _auth.currentUser?.uid;
-        
-        // If user is logged in, check if this purchase belongs to current user
-        // For restored purchases, verify it's in Firestore for current user
-        if (userId != null) {
-          // If this is a restored purchase, check if it belongs to current user
-          if (purchaseDetails.status == PurchaseStatus.restored) {
-            final purchaseId = purchaseDetails.purchaseID ?? '';
-            if (purchaseId.isNotEmpty) {
-              // Check if this purchase exists in Firestore for current user
-              final purchaseDoc = await _firestore
-                  .collection('users')
-                  .doc(userId)
-                  .collection('purchases')
-                  .where('purchaseId', isEqualTo: purchaseId)
-                  .limit(1)
-                  .get();
-              
-              if (purchaseDoc.docs.isEmpty) {
-                // This purchase doesn't belong to current user, ignore it
-                debugPrint('Restored purchase $purchaseId does not belong to user $userId, ignoring');
-                return;
-              }
-            }
-          }
-        
-        // Save to Firestore for current user
-        await _savePurchaseToFirestore(purchaseDetails);
-          // Don't add to local purchases for logged-in users
-          // This prevents false positives from purchases made with different Google Play accounts
-          debugPrint('Purchase saved to Firestore for user: $userId (not added to local list)');
+    
+    // Restored için: Sadece SON 5 saniye içinde işlendiyse skip et (gerçek duplicate)
+    if (status == PurchaseStatus.restored && _processedPurchases.contains(uniqueKey)) {
+      // Check if recently processed (within 5 seconds)
+      final recentlyProcessedKey = 'timestamp_$uniqueKey';
+      final lastProcessedTime = _processingTimestamps[recentlyProcessedKey];
+      if (lastProcessedTime != null) {
+        final timeSinceProcessed = DateTime.now().difference(lastProcessedTime);
+        if (timeSinceProcessed.inSeconds < 5) {
+          debugPrint('⚠️ Already processed RESTORED transaction recently (${timeSinceProcessed.inSeconds}s ago), skipping: $productId');
+          return;
         } else {
-          // No user logged in, add to local purchases
-          _purchases.add(purchaseDetails);
+          debugPrint('💡 Previously processed RESTORED transaction, but allowing re-processing (${timeSinceProcessed.inSeconds}s ago)');
+          // Remove from processed to allow re-processing
+          _processedPurchases.remove(uniqueKey);
         }
       }
+    }
+    
+    // İşlem başladığını işaretle
+    _processingPurchases.add(uniqueKey);
+    
+    try {
+      debugPrint('📦 Processing purchase: $productId, ID: "$purchaseId", Status: $status');
+    
+    // Eski product ID'leri ignore et (artık kullanılmıyor)
+    const deprecatedProductIds = ['com.yftsoftware.anestezi']; // Eski ID'ler
+    if (deprecatedProductIds.contains(productId)) {
+      debugPrint('   ⚠️ Deprecated product ID detected, ignoring: $productId');
+      debugPrint('   💡 This product ID is no longer in use. Please use the new product IDs.');
+      _processingPurchases.remove(uniqueKey);
+      return;
+    }
+    
+    // Handle different statuses FIRST, then complete if needed
+    if (status == PurchaseStatus.pending) {
+      debugPrint('   ⏳ Purchase pending, waiting...');
+      // Pending durumunda processing'den çıkar ama processed'e ekleme (hala işleniyor)
+      // NOT: Pending transaction'ları complete ETME
+      _processingPurchases.remove(uniqueKey);
+      return;
+    }
+
+    if (status == PurchaseStatus.error) {
+      debugPrint('   ❌ Purchase error: ${purchaseDetails.error}');
+      // Error durumunda processing'den çıkar (tekrar deneme şansı olsun)
+      // NOT: Error transaction'ları complete ETME
+      _processingPurchases.remove(uniqueKey);
+      return;
+    }
+
+    if (status == PurchaseStatus.canceled) {
+      debugPrint('   🚫 Purchase cancelled by user');
+      // Canceled durumunda processing'den çıkar (tekrar deneme şansı olsun)
+      // NOT: Canceled transaction'ları complete ETME
+      _processingPurchases.remove(uniqueKey);
+      return;
+    }
+
+    // Handle successful NEW purchases
+    if (status == PurchaseStatus.purchased) {
+      debugPrint('   ✅ NEW Purchase detected (PurchaseStatus.purchased)');
+      debugPrint('   💡 This is a BRAND NEW purchase, not a restore');
+      
+      final userId = _auth.currentUser?.uid;
+      
+      if (userId == null) {
+        debugPrint('   ⚠️ No user logged in, cannot save purchase');
+        _processingPurchases.remove(uniqueKey);
+        return;
+      }
+      
+      // For BRAND NEW purchases: Save directly without cross-account check
+      // This transaction didn't exist before, so it can't belong to another account
+      try {
+        await _savePurchaseToFirestore(purchaseDetails);
+        debugPrint('   💾 NEW purchase saved and premium activated');
+        
+        // Complete the transaction AFTER saving to Firestore
+        if (purchaseDetails.pendingCompletePurchase) {
+          debugPrint('   ✓ Completing purchased transaction: $productId');
+          try {
+            await _inAppPurchase.completePurchase(purchaseDetails);
+            debugPrint('   ✅ Transaction completed successfully');
+          } catch (e) {
+            debugPrint('   ⚠️ Error completing purchase: $e');
+          }
+        }
+        
+        // Mark as processed with timestamp
+        _processedPurchases.add(uniqueKey);
+        _processingTimestamps['timestamp_$uniqueKey'] = DateTime.now();
+        debugPrint('   ✅ Marked as processed at ${DateTime.now()}');
+        
+        // Clear flags after successful purchase
+        _isPurchaseButtonPressed = false;
+        _isManualRestore = false;
+        debugPrint('   🔘 Flags cleared after new purchase');
+      } catch (e) {
+        debugPrint('   ❌ Error saving purchase: $e');
+        // Don't mark as processed on error so we can retry
+        // Also don't complete transaction if save failed
+      } finally {
+        _processingPurchases.remove(uniqueKey);
+      }
+      return;
+    }
+    
+    // Handle restored purchases
+    if (status == PurchaseStatus.restored) {
+      debugPrint('   🔄 RESTORED purchase detected (PurchaseStatus.restored)');
+      debugPrint('   💡 This is an EXISTING purchase from Apple, not a new one');
+      
+      final userId = _auth.currentUser?.uid;
+      
+      if (userId == null) {
+        debugPrint('   ⚠️ No user logged in, skipping restore');
+        _processingPurchases.remove(uniqueKey);
+        return;
+      }
+      
+      // Check if user pressed any button
+      if (!_isManualRestore && !_isPurchaseButtonPressed) {
+        debugPrint('   ⚠️ AUTO-RESTORE detected (user did NOT press any button)');
+        debugPrint('   🧹 This is iOS automatic unfinished transaction cleanup');
+        debugPrint('   💡 Premium will NOT be activated automatically');
+        debugPrint('   💡 User must press "Restore Purchases" to activate');
+        
+        // Complete the transaction to clear iOS queue (but don't activate premium)
+        if (purchaseDetails.pendingCompletePurchase) {
+          debugPrint('   ✓ Completing auto-restored transaction (cleanup): $productId');
+          try {
+            await _inAppPurchase.completePurchase(purchaseDetails);
+            debugPrint('   ✅ Transaction completed (queue cleared)');
+          } catch (e) {
+            debugPrint('   ⚠️ Error completing transaction: $e');
+          }
+        }
+        
+        // Don't add to processed list - user can activate later
+        debugPrint('   💡 NOT adding to processed list - user can activate later');
+        _processingPurchases.remove(uniqueKey);
+        return;
+      }
+      
+      // User pressed a button - check which one
+      if (_isPurchaseButtonPressed) {
+        debugPrint('   🔘 "Buy" button was pressed');
+        debugPrint('   💡 Apple returned existing subscription (user already subscribed)');
+        debugPrint('   🔍 Checking cross-account protection...');
+      } else if (_isManualRestore) {
+        debugPrint('   🔘 "Restore Purchases" button was pressed');
+        debugPrint('   💡 User wants to restore previous purchase');
+        debugPrint('   🔍 Checking cross-account protection...');
+      }
+      
+      // CRITICAL: ALWAYS do cross-account check for RESTORED purchases
+      // Even if user pressed "Buy" - the transaction already exists somewhere
+      
+      // Step 1: Check if purchase already exists for CURRENT user
+      debugPrint('   🔍 Step 1: Checking if purchase belongs to current user...');
+      final currentUserPurchase = await _firestore
+          .collection('users')
+          .doc(userId)
+          .collection('purchases')
+          .where('purchaseId', isEqualTo: purchaseId)
+          .limit(1)
+          .get();
+      
+      if (currentUserPurchase.docs.isNotEmpty) {
+        debugPrint('   ✅ Purchase belongs to current user - reactivating premium');
+        // Reactivate premium for this user
+        await _reactivatePremiumForUser(userId);
+        
+        // Complete transaction after reactivating premium
+        if (purchaseDetails.pendingCompletePurchase) {
+          debugPrint('   ✓ Completing restored transaction: $productId');
+          try {
+            await _inAppPurchase.completePurchase(purchaseDetails);
+            debugPrint('   ✅ Transaction completed successfully');
+          } catch (e) {
+            debugPrint('   ⚠️ Error completing transaction: $e');
+          }
+        }
+        
+        _processedPurchases.add(uniqueKey);
+        _processingTimestamps['timestamp_$uniqueKey'] = DateTime.now();
+        _processingPurchases.remove(uniqueKey);
+        
+        // Clear flags after successful reactivation
+        _isPurchaseButtonPressed = false;
+        _isManualRestore = false;
+        debugPrint('   🔘 Flags cleared after reactivate');
+        return;
+      }
+      
+      // Step 2: Check if purchase belongs to ANOTHER user
+      debugPrint('   🔍 Step 2: Checking if purchase belongs to another user...');
+      final otherUserPurchase = await _firestore
+          .collectionGroup('purchases')
+          .where('purchaseId', isEqualTo: purchaseId)
+          .limit(1)
+          .get();
+      
+      if (otherUserPurchase.docs.isNotEmpty) {
+        final originalUserId = otherUserPurchase.docs.first.reference.parent.parent?.id;
+        debugPrint('   ⚠️ REJECTED: Purchase belongs to another Firebase account!');
+        debugPrint('   📱 Original Firebase user: $originalUserId');
+        debugPrint('   👤 Current Firebase user: $userId');
+        debugPrint('   💡 This Apple ID subscription is already linked to another account');
+        
+        // Complete transaction to clear queue (but don't activate premium)
+        if (purchaseDetails.pendingCompletePurchase) {
+          debugPrint('   ✓ Completing rejected transaction: $productId');
+          try {
+            await _inAppPurchase.completePurchase(purchaseDetails);
+            debugPrint('   ✅ Transaction completed (queue cleared)');
+          } catch (e) {
+            debugPrint('   ⚠️ Error completing transaction: $e');
+          }
+        }
+        
+        // Show error message to user
+        _restoreRejectController.add(
+          'Bu Apple ID aboneliği başka bir hesaba bağlı. '
+          'Premium erişim için o hesapla giriş yapın.'
+        );
+        
+        _processedPurchases.add(uniqueKey);
+        _processingTimestamps['timestamp_$uniqueKey'] = DateTime.now();
+        _processingPurchases.remove(uniqueKey);
+        
+        // Clear flags after rejection
+        _isPurchaseButtonPressed = false;
+        _isManualRestore = false;
+        debugPrint('   🔘 Flags cleared after reject');
+        return;
+      }
+      
+      // Step 3: Purchase doesn't exist anywhere - this is first time seeing it
+      debugPrint('   ✅ Purchase not found in any account - linking to current user');
+      try {
+        await _savePurchaseToFirestore(purchaseDetails);
+        debugPrint('   💾 Purchase saved and premium activated');
+        
+        // Complete transaction after saving
+        if (purchaseDetails.pendingCompletePurchase) {
+          debugPrint('   ✓ Completing restored transaction: $productId');
+          try {
+            await _inAppPurchase.completePurchase(purchaseDetails);
+            debugPrint('   ✅ Transaction completed successfully');
+          } catch (e) {
+            debugPrint('   ⚠️ Error completing transaction: $e');
+          }
+        }
+        
+        _processedPurchases.add(uniqueKey);
+        _processingTimestamps['timestamp_$uniqueKey'] = DateTime.now();
+        
+        // İşlem başarılı - flag'leri temizle
+        _isPurchaseButtonPressed = false;
+        _isManualRestore = false;
+        debugPrint('   🔘 Flags cleared after save');
+      } catch (e) {
+        debugPrint('   ❌ Error saving purchase: $e');
+        // Don't complete transaction if save failed
+      } finally {
+        _processingPurchases.remove(uniqueKey);
+      }
+    }
+    } catch (e) {
+      debugPrint('   ❌ Error processing purchase: $e');
+      _processingPurchases.remove(uniqueKey);
+    }
+  }
+  
+  // Reactivate premium for existing user (during manual restore)
+  Future<void> _reactivatePremiumForUser(String userId) async {
+    try {
+      debugPrint('🔄 Reactivating premium for user: $userId');
+      
+      // Update user premium status
+      await _firestore.collection('users').doc(userId).set({
+        'isPremium': true,
+        'premiumUpdatedAt': FieldValue.serverTimestamp(),
+      }, SetOptions(merge: true));
+      
+      // Update cache
+      _cachedPremiumStatus = true;
+      _cachedUserId = userId;
+      
+      // Notify PremiumService
+      await _notifyPremiumStatusChanged();
+      
+      // Notify UI
+      try {
+        _purchaseSuccessController.add('restore_success');
+      } catch (_) {}
+      
+      debugPrint('✅ Premium reactivated for user: $userId');
+    } catch (e) {
+      debugPrint('❌ Error reactivating premium: $e');
+      rethrow;
     }
   }
   
   // Save purchase to Firestore (user-specific)
   Future<void> _savePurchaseToFirestore(PurchaseDetails purchaseDetails) async {
     final userId = _auth.currentUser?.uid;
+    debugPrint('💾 Saving purchase: ${purchaseDetails.productID}');
+    debugPrint('   User ID: ${userId ?? "null"}');
+    
     if (userId == null) {
-      debugPrint('Cannot save purchase: User not logged in');
+      debugPrint('❌ Cannot save: User not logged in');
       return;
     }
 
     try {
       final purchaseId = purchaseDetails.purchaseID ?? '';
       final verificationData = purchaseDetails.verificationData.serverVerificationData;
+      final productId = purchaseDetails.productID;
       
-      // For promotion codes, purchaseID might be empty, so use a unique identifier
-      // Combine productID with timestamp to ensure uniqueness
-      final uniqueId = purchaseId.isNotEmpty 
+      // Use purchaseID as unique ID, or generate one for sandbox/test purchases
+      final uniqueId = purchaseId.isNotEmpty && purchaseId != '0' 
           ? purchaseId 
-          : '${purchaseDetails.productID}_${DateTime.now().millisecondsSinceEpoch}';
+          : 'sandbox_${DateTime.now().millisecondsSinceEpoch}_${productId.hashCode}';
       
       final purchaseData = {
-        'productId': purchaseDetails.productID,
+        'productId': productId,
         'purchaseId': purchaseId,
-        'uniqueId': uniqueId, // For promotion codes and other purchases without purchaseID
+        'uniqueId': uniqueId,
         'status': purchaseDetails.status.toString(),
         'transactionDate': purchaseDetails.transactionDate ?? DateTime.now().millisecondsSinceEpoch.toString(),
         'purchasedAt': FieldValue.serverTimestamp(),
         'verificationData': verificationData.isNotEmpty ? verificationData : '',
-        'isPromotionCode': purchaseId.isEmpty, // Mark promotion code purchases
+        'platform': Platform.isIOS ? 'ios' : 'android',
+        'isRestored': purchaseDetails.status == PurchaseStatus.restored,
       };
 
-      // Save to user's purchases collection
-      // Use uniqueId as document ID to handle promotion codes properly
-      await _firestore
+      // Atomik işlem: Hem purchase kaydet hem user premium durumunu güncelle
+      final batch = _firestore.batch();
+      
+      // Purchase kaydı
+      final purchaseRef = _firestore
           .collection('users')
           .doc(userId)
           .collection('purchases')
-          .doc(uniqueId)
-          .set(purchaseData, SetOptions(merge: true));
-
-      debugPrint('Purchase saved to Firestore for user: $userId, uniqueId: $uniqueId, isPromotionCode: ${purchaseId.isEmpty}');
-
-      // Update user's premium status
-      // This is critical for promotion codes to work
-      await _updateUserPremiumStatus(userId);
+          .doc(uniqueId);
+      batch.set(purchaseRef, purchaseData, SetOptions(merge: true));
       
-      // Premium durumu güncellendi, PremiumService'i bilgilendir
-      _notifyPremiumStatusChanged();
-      
-      debugPrint('Purchase saved to Firestore for user: $userId');
-    } catch (e) {
-      debugPrint('Error saving purchase to Firestore: $e');
-      // Even if saving fails, try to update premium status
-      // This ensures promotion codes work even if there's a temporary error
-      try {
-        await _updateUserPremiumStatus(userId);
-      } catch (e2) {
-        debugPrint('Error updating premium status after save failure: $e2');
-      }
-    }
-  }
-  
-  // Update user's premium status in Firestore
-  Future<void> _updateUserPremiumStatus(String userId) async {
-    try {
-      // Check if user has any active purchases in Firestore
-      // This is important for promotion codes and restored purchases
-      final purchasesSnapshot = await _firestore
-          .collection('users')
-          .doc(userId)
-          .collection('purchases')
-          .get();
-      
-      // Check if user has any valid purchases
-      bool hasPremium = false;
-      if (purchasesSnapshot.docs.isNotEmpty) {
-        // User has at least one purchase, so they have premium access
-        hasPremium = true;
-        debugPrint('User $userId has ${purchasesSnapshot.docs.length} purchase(s) in Firestore');
-      } else {
-        // Also check local purchases as fallback (for users not logged in)
-        // But for logged-in users, we rely on Firestore
-        final currentUserId = _auth.currentUser?.uid;
-        if (currentUserId == null) {
-          hasPremium = _purchases.any((purchase) => 
-            purchase.status == PurchaseStatus.purchased || 
-            purchase.status == PurchaseStatus.restored
-          );
-        }
-      }
-      
-      await _firestore.collection('users').doc(userId).update({
-        'isPremium': hasPremium,
+      // User premium durumu
+      final userRef = _firestore.collection('users').doc(userId);
+      batch.set(userRef, {
+        'isPremium': true,
         'premiumUpdatedAt': FieldValue.serverTimestamp(),
-      });
+      }, SetOptions(merge: true));
       
-      debugPrint('Premium status updated for user: $userId, isPremium: $hasPremium');
+      // Tümünü birlikte commit et
+      await batch.commit();
       
-      // Premium durumu güncellendi, PremiumService'i bilgilendir
-      _notifyPremiumStatusChanged();
-    } catch (e) {
-      debugPrint('Error updating premium status: $e');
-      // On error, try to set premium to true if we just saved a purchase
-      // This ensures promotion codes work even if there's a temporary error
+      debugPrint('✅ Purchase saved and premium activated for user: $userId');
+      
+      // Cache'i güncelle (atomik şekilde)
+      _cachedPremiumStatus = true;
+      _cachedUserId = userId;
+      
+      // PremiumService'i bilgilendir
+      await _notifyPremiumStatusChanged();
+      
+      // UI'a satın alma tamamlandı sinyali gönder (premium ekranı kapansın)
       try {
-        await _firestore.collection('users').doc(userId).update({
-          'isPremium': true,
-          'premiumUpdatedAt': FieldValue.serverTimestamp(),
-        });
-        debugPrint('Premium status set to true as fallback for user: $userId');
-        
-        // Premium durumu güncellendi, PremiumService'i bilgilendir
-        _notifyPremiumStatusChanged();
-      } catch (e2) {
-        debugPrint('Error setting premium status as fallback: $e2');
-      }
+        _purchaseSuccessController.add(productId);
+      } catch (_) {}
+      
+      debugPrint('✅ Purchase processing completed');
+    } catch (e, stackTrace) {
+      debugPrint('❌ ERROR saving purchase: $e');
+      debugPrint('   Stack trace: $stackTrace');
+      
+      // Fallback: Cache'i güncelle ve service'e bildir
+      _cachedPremiumStatus = true;
+      _cachedUserId = userId;
+      await _notifyPremiumStatusChanged();
+      try {
+        _purchaseSuccessController.add(purchaseDetails.productID);
+      } catch (_) {}
     }
   }
   
   // Premium durumu değiştiğinde PremiumService'i bilgilendir
-  void _notifyPremiumStatusChanged() {
-    // PremiumService singleton instance'ını al ve refresh et
+  Future<void> _notifyPremiumStatusChanged() async {
     try {
-      Future.microtask(() {
-        final premiumService = PremiumService();
-        premiumService.refreshPremiumStatus();
-      });
+      final premiumService = PremiumService();
+      await premiumService.refreshPremiumStatus();
+      debugPrint('✅ PremiumService notified and UI refreshed');
     } catch (e) {
-      debugPrint('Error notifying premium status change: $e');
+      debugPrint('⚠️ Error notifying premium status change: $e');
     }
-  }
-
-  // Verify purchase (implement your verification logic here)
-  Future<bool> _verifyPurchase(PurchaseDetails purchaseDetails) async {
-    // TODO: Implement server-side verification
-    // For now, return true for testing
-    return true;
-  }
-
-  // Check if product is a subscription
-  bool _isSubscription(String productId) {
-    // Check both iOS and Android IDs
-    return productId == monthlySubscriptionId ||
-           productId == sixMonthSubscriptionId ||
-           productId == yearlySubscriptionId ||
-           productId == _iosMonthlySubscriptionId ||
-           productId == _iosSixMonthSubscriptionId ||
-           productId == _iosYearlySubscriptionId ||
-           productId == _androidMonthlySubscriptionId ||
-           productId == _androidSixMonthSubscriptionId ||
-           productId == _androidYearlySubscriptionId;
   }
 
   // Buy a product by ProductDetails
   Future<bool> buyProductDetails(ProductDetails productDetails) async {
-    if (!_isAvailable) {
-      debugPrint('In-app purchase not available');
-      return false;
-    }
-
-    // Check if product is loaded
-    if (!_products.any((p) => p.id == productDetails.id)) {
-      debugPrint('Product not loaded: ${productDetails.id}');
-      // Try to reload products
-      await _loadProducts();
-      // Check again
-      if (!_products.any((p) => p.id == productDetails.id)) {
-        debugPrint('Product still not found after reload: ${productDetails.id}');
-        return false;
-      }
-      // Get the updated product
-      final updatedProduct = getProduct(productDetails.id);
-      if (updatedProduct == null) {
-        debugPrint('Could not get updated product: ${productDetails.id}');
-        return false;
-      }
-      productDetails = updatedProduct;
-    }
-
-    final PurchaseParam purchaseParam = PurchaseParam(productDetails: productDetails);
+    debugPrint('═══════════════════════════════════════════════════════');
+    debugPrint('💳 buyProductDetails CALLED');
+    debugPrint('═══════════════════════════════════════════════════════');
+    
+    // Mark that purchase button was pressed - accept ALL restored transactions from now on!
+    _isPurchaseButtonPressed = true;
+    debugPrint('🔘 Purchase button pressed - will accept ALL restored transactions!');
     
     try {
-      bool success;
+      debugPrint('💳 Initiating purchase for: ${productDetails.id}');
+      debugPrint('   Product title: ${productDetails.title}');
+      debugPrint('   Product price: ${productDetails.price}');
+      debugPrint('   Product description: ${productDetails.description}');
       
-      // Use buySubscription for subscription products, buyNonConsumable for lifetime
-      if (_isSubscription(productDetails.id)) {
-        debugPrint('Buying subscription: ${productDetails.id}');
-        success = await _inAppPurchase.buyNonConsumable(purchaseParam: purchaseParam);
+      final userId = _auth.currentUser?.uid;
+      debugPrint('   Platform: ${Platform.isIOS ? "iOS" : "Android"}');
+      debugPrint('   User ID: ${userId ?? "anonymous"}');
+      
+      // iOS: Firebase user ID'yi Apple'a gönder (restore'da eşleştirme için)
+      // Android: Google Play'de applicationUsername desteklenmiyor
+      debugPrint('   Creating PurchaseParam...');
+      final PurchaseParam purchaseParam = PurchaseParam(
+        productDetails: productDetails,
+        applicationUserName: Platform.isIOS && userId != null ? userId : null,
+      );
+      debugPrint('   ✅ PurchaseParam created');
+      
+      debugPrint('🚀 Calling buyNonConsumable...');
+      debugPrint('   Waiting for native purchase dialog...');
+      
+      // iOS ve Android için doğru satın alma yöntemini kullan
+      // buyNonConsumable: iOS subscriptions ve Android non-consumables için
+      final success = await _inAppPurchase.buyNonConsumable(purchaseParam: purchaseParam);
+      debugPrint('   ✅ buyNonConsumable returned: $success');
+      
+      if (success) {
+        debugPrint('✅ Purchase initiated successfully');
+        debugPrint('   Purchase dialog should appear now');
+        debugPrint('   Waiting for user to complete the purchase...');
       } else {
-        debugPrint('Buying non-consumable: ${productDetails.id}');
-        success = await _inAppPurchase.buyNonConsumable(purchaseParam: purchaseParam);
-      }
-      
-      if (!success) {
-        debugPrint('Purchase failed: buyNonConsumable returned false for ${productDetails.id}');
+        debugPrint('❌ Purchase could not be initiated');
+        debugPrint('   Possible reasons:');
+        debugPrint('   1. Products not loaded properly');
+        debugPrint('   2. Sandbox/test account not configured (iOS)');
+        debugPrint('   3. App Store Connect/Play Console products not active');
+        debugPrint('   4. StoreKit/Billing error');
+        debugPrint('   5. Previous purchase still pending completion');
       }
       
       return success;
-    } catch (e) {
-      debugPrint('Purchase failed: $e');
+    } catch (e, stackTrace) {
+      debugPrint('❌ Purchase error: $e');
+      debugPrint('❌ Stack trace: $stackTrace');
       return false;
     }
   }
 
   // Buy product by ID (convenience method)
   Future<bool> buyProductById(String productId) async {
-    // Check if service is initialized
-    if (!_isAvailable) {
-      debugPrint('In-app purchase not available. Initializing...');
-      await initialize();
-      if (!_isAvailable) {
-        debugPrint('In-app purchase still not available after initialization');
-        return false;
+    debugPrint('🛒 Starting purchase for: $productId');
+    
+    try {
+      // Ensure service is initialized (with timeout)
+      if (!_isInitialized || !_isAvailable) {
+        debugPrint('⚠️ Service not ready, initializing...');
+        await initialize().timeout(
+          const Duration(seconds: 15),
+          onTimeout: () {
+            debugPrint('⏰ Initialization timeout');
+            throw 'Ürün yükleme zaman aşımına uğradı. Lütfen internet bağlantınızı kontrol edin.';
+          },
+        );
+        if (!_isAvailable) {
+          debugPrint('❌ Purchase service unavailable');
+          throw 'Satın alma servisi kullanılamıyor. Lütfen daha sonra tekrar deneyin.';
+        }
       }
-    }
 
-    // Check if products are loaded
-    if (_products.isEmpty) {
-      debugPrint('Products not loaded. Loading products...');
-      await _loadProducts();
-      if (_products.isEmpty) {
-        debugPrint('No products found after loading');
-        return false;
+      // Get the product
+      final product = getProduct(productId);
+      if (product == null) {
+        debugPrint('❌ Product not found: $productId');
+        debugPrint('Available products: ${_products.map((p) => p.id).toList()}');
+        debugPrint('Total products loaded: ${_products.length}');
+        
+        // Ürünler yüklenmemişse, bir kez daha yüklemeyi dene
+        if (_products.isEmpty) {
+          debugPrint('⚠️ No products loaded, attempting reload...');
+          await _loadProducts();
+          final retryProduct = getProduct(productId);
+          if (retryProduct == null) {
+            throw 'Ürün bulunamadı. Lütfen internet bağlantınızı kontrol edip tekrar deneyin.';
+          }
+          // Retry successful, continue with retryProduct
+          debugPrint('✅ Product found after retry: ${retryProduct.title} - ${retryProduct.price}');
+          debugPrint('🚀 Initiating purchase...');
+          return await buyProductDetails(retryProduct);
+        }
+        
+        throw 'Ürün bulunamadı: $productId';
       }
+      
+      debugPrint('✅ Product found: ${product.title} - ${product.price}');
+      debugPrint('🚀 Initiating purchase...');
+      
+      return await buyProductDetails(product);
+      
+    } catch (e) {
+      debugPrint('❌ buyProductById error: $e');
+      rethrow; // Re-throw to be caught by the calling function
     }
-
-    final product = getProduct(productId);
-    if (product == null) {
-      debugPrint('Product not found: $productId');
-      debugPrint('Available products: ${_products.map((p) => p.id).toList()}');
-      // Try to reload products one more time
-      await _loadProducts();
-      final retryProduct = getProduct(productId);
-      if (retryProduct == null) {
-        debugPrint('Product still not found after reload: $productId');
-        return false;
-      }
-      return await buyProductDetails(retryProduct);
-    }
-    return await buyProductDetails(product);
   }
 
   // Alias for buyProductById for compatibility
@@ -517,10 +1004,14 @@ class InAppPurchaseService {
     final userId = _auth.currentUser?.uid;
     if (userId == null) {
       // No user logged in, check local purchases
-      return _purchases.any((purchase) => 
+      final hasLocalPremium = _purchases.any((purchase) => 
         purchase.status == PurchaseStatus.purchased || 
         purchase.status == PurchaseStatus.restored
       );
+      // Cache'i güncelle
+      _cachedPremiumStatus = hasLocalPremium;
+      _cachedUserId = null;
+      return hasLocalPremium;
     }
 
     try {
@@ -530,38 +1021,53 @@ class InAppPurchaseService {
       if (userDoc.exists) {
         final data = userDoc.data();
         final isPremium = data?['isPremium'] as bool? ?? false;
+        
+        // Cache'i güncelle
+        _cachedPremiumStatus = isPremium;
+        _cachedUserId = userId;
+        
         return isPremium;
       }
 
       // User document doesn't exist, user is not premium
+      _cachedPremiumStatus = false;
+      _cachedUserId = userId;
       return false;
     } catch (e) {
       debugPrint('Error checking premium access: $e');
-      // If there's an error checking Firestore, return false for logged-in users
-      // to prevent false positives from local purchases
+      // If there's an error checking Firestore, return cached value or false
+      if (_cachedUserId == userId && _cachedPremiumStatus != null) {
+        return _cachedPremiumStatus!;
+      }
       return false;
     }
   }
   
   // Synchronous version for backward compatibility
-  // Note: This checks local purchases only. For accurate user-specific check, use hasPremiumAccess() async version
-  // IMPORTANT: For logged-in users, this should NOT be used as it may return false positives
-  // from purchases made with a different Google Play account
+  // Note: This uses cached value from last async check. Call hasPremiumAccess() first to ensure cache is fresh.
   bool hasPremiumAccessSync() {
     final userId = _auth.currentUser?.uid;
-    if (userId != null) {
-      // User is logged in - we should NOT check local purchases
-      // as they might be from a different Google Play account
-      // Return false to force async check via hasPremiumAccess()
-      // This prevents false positives
-      return false;
+    
+    // Kullanıcı değişmişse cache geçersiz
+    if (_cachedUserId != userId) {
+      _cachedPremiumStatus = null;
     }
     
-    // No user logged in, check local purchases
-    return _purchases.any((purchase) => 
-      purchase.status == PurchaseStatus.purchased || 
-      purchase.status == PurchaseStatus.restored
-    );
+    // Cache varsa döndür
+    if (_cachedPremiumStatus != null) {
+      return _cachedPremiumStatus!;
+    }
+    
+    // Cache yoksa, local purchases'i kontrol et (fallback)
+    if (userId == null) {
+      return _purchases.any((purchase) => 
+        purchase.status == PurchaseStatus.purchased || 
+        purchase.status == PurchaseStatus.restored
+      );
+    }
+    
+    // User logged in ama cache yok - false döndür, async check yapılması gerekiyor
+    return false;
   }
 
   // Check if user has specific subscription
@@ -585,5 +1091,7 @@ class InAppPurchaseService {
   // Dispose
   void dispose() {
     _subscription.cancel();
+    _restoreRejectController.close();
+    _purchaseSuccessController.close();
   }
 }

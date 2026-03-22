@@ -1,4 +1,4 @@
-const functions = require('firebase-functions');
+const functions = require('firebase-functions/v1');
 const admin = require('firebase-admin');
 
 admin.initializeApp();
@@ -115,3 +115,60 @@ exports.deleteUserAccount = functions.https.onRequest(async (req, res) => {
         });
     }
 });
+
+exports.handleManualNotification = functions.firestore
+    .document('notifications/{notificationId}')
+    .onCreate(async (snapshot, context) => {
+        const data = snapshot.data();
+        
+        if (!data) return null;
+
+        const { title, body } = data;
+
+        const message = {
+            notification: {
+                title: title,
+                body: body,
+            },
+            topic: 'all_users', // Bütün kullanıcılara gönder
+            android: {
+                notification: {
+                    color: '#2196F3',
+                    icon: 'launcher_icon',
+                    clickAction: 'FLUTTER_NOTIFICATION_CLICK',
+                },
+            },
+            apns: {
+                payload: {
+                    aps: {
+                        sound: 'default',
+                        badge: 1,
+                    },
+                },
+            },
+            data: {
+                click_action: 'FLUTTER_NOTIFICATION_CLICK',
+                id: context.params.notificationId,
+                status: 'done',
+            },
+        };
+
+        try {
+            const response = await admin.messaging().send(message);
+            console.log('Successfully sent message:', response);
+            
+            // Bildirim durumunu güncelle
+            return snapshot.ref.update({
+                status: 'sent',
+                sentAt: admin.firestore.FieldValue.serverTimestamp(),
+                messageId: response
+            });
+        } catch (error) {
+            console.error('Error sending message:', error);
+            return snapshot.ref.update({
+                status: 'failed',
+                error: error.message
+            });
+        }
+    });
+

@@ -38,8 +38,10 @@ android {
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = 23
         targetSdk = 35
-        versionCode = 8
-        versionName = "1.0.6"
+        // Must be strictly higher than any previous versionCode used (closed testing: 9 (1.0.7))
+        // Flutter pubspec: 1.1.0+26
+        versionCode = 26
+        versionName = "1.1.0"
         
         // NDK optimizasyonları
         ndk {
@@ -83,6 +85,10 @@ flutter {
 
 dependencies {
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.4")
+    
+    // AndroidX Core for Edge-to-Edge support
+    implementation("androidx.core:core-ktx:1.13.1")
+    implementation("androidx.activity:activity-ktx:1.9.0")
     
     // Google Play Billing
     implementation("com.android.billingclient:billing:6.1.0")

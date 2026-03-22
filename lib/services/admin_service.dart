@@ -1,9 +1,64 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 
 class AdminService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  // Uygulama genel ayarları: Ücretsiz soru limitleri
+  Future<Map<String, dynamic>> getFreeQuestionConfig() async {
+    try {
+      final doc = await _firestore
+          .collection('systemSettings')
+          .doc('freeQuestionConfig')
+          .get();
+
+      final data = doc.data() ?? <String, dynamic>{};
+
+      final firstTopicsCount = (data['firstTopicsCount'] as int?) ?? 10;
+      final firstTopicsFreeQuestions =
+          (data['firstTopicsFreeQuestions'] as int?) ?? 20;
+      final otherTopicsFreeQuestions =
+          (data['otherTopicsFreeQuestions'] as int?) ?? 2;
+
+      return {
+        'firstTopicsCount': firstTopicsCount,
+        'firstTopicsFreeQuestions': firstTopicsFreeQuestions,
+        'otherTopicsFreeQuestions': otherTopicsFreeQuestions,
+      };
+    } catch (e) {
+      // Varsayılan değerler
+      return {
+        'firstTopicsCount': 10,
+        'firstTopicsFreeQuestions': 20,
+        'otherTopicsFreeQuestions': 2,
+      };
+    }
+  }
+
+  Future<bool> updateFreeQuestionConfig({
+    required int firstTopicsCount,
+    required int firstTopicsFreeQuestions,
+    required int otherTopicsFreeQuestions,
+  }) async {
+    try {
+      await _firestore
+          .collection('systemSettings')
+          .doc('freeQuestionConfig')
+          .set({
+        'firstTopicsCount': firstTopicsCount,
+        'firstTopicsFreeQuestions': firstTopicsFreeQuestions,
+        'otherTopicsFreeQuestions': otherTopicsFreeQuestions,
+        'updatedAt': FieldValue.serverTimestamp(),
+        'updatedBy': _auth.currentUser?.uid,
+      }, SetOptions(merge: true));
+
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
 
   // Kullanıcı istatistikleri
   Future<Map<String, dynamic>> getUserStatistics() async {
@@ -268,6 +323,116 @@ class AdminService {
         'questionsByCategory': <String, int>{},
         'organizedCategories': 0,
       };
+    }
+  }
+
+  // Tüm kullanıcıların satın almalarını getir (admin görünümü için)
+  Future<List<Map<String, dynamic>>> getAllPurchases({int limit = 200}) async {
+    try {
+      final snapshot = await _firestore
+          .collectionGroup('purchases')
+          .limit(limit)
+          .get();
+
+      final List<Map<String, dynamic>> allRecords = [];
+
+      for (final doc in snapshot.docs) {
+        final data = doc.data();
+        final userRef = doc.reference.parent.parent;
+        final userId = userRef?.id ?? '';
+
+        allRecords.add({
+          'id': doc.id,
+          'userId': userId,
+          'productId': data['productId'] ?? '',
+          'status': data['status'] ?? '',
+          'platform': data['platform'] ?? '',
+          'transactionDate': data['transactionDate'],
+          'purchasedAt': data['purchasedAt'],
+          'isRestored': data['isRestored'] ?? false,
+        });
+      }
+
+      // Mükerrer kayıtları temizle ama AKILLICA:
+      // Eğer bir işlem hem "Purchased" hem "Restore" olarak varsa, "Purchased" olanı tutalım ki kazanç görünsün.
+      final Map<String, Map<String, dynamic>> filteredMap = {};
+      for (var r in allRecords) {
+        final key = '${r['userId']}_${r['productId']}';
+        final isNewRestored = r['isRestored'] == true;
+        
+        if (!filteredMap.containsKey(key)) {
+          filteredMap[key] = r;
+        } else {
+          final existing = filteredMap[key]!;
+          final isExistingRestored = existing['isRestored'] == true;
+          
+          // Öncelik 1: Mevcut kayıt Restore ise ve yeni kayıt Purchased ise, yeni kaydı tut.
+          if (isExistingRestored && !isNewRestored) {
+            filteredMap[key] = r;
+          } 
+          // Öncelik 2: Her iki kayıt da aynı türdeyse, daha yeni olanı tut.
+          else if (isExistingRestored == isNewRestored) {
+            final existingTime = (existing['purchasedAt'] as Timestamp?)?.millisecondsSinceEpoch ?? 
+                               int.tryParse(existing['transactionDate']?.toString() ?? '0') ?? 0;
+            final currentTime = (r['purchasedAt'] as Timestamp?)?.millisecondsSinceEpoch ?? 
+                              int.tryParse(r['transactionDate']?.toString() ?? '0') ?? 0;
+            
+            if (currentTime > existingTime) {
+              filteredMap[key] = r;
+            }
+          }
+        }
+      }
+
+      final purchases = filteredMap.values.toList();
+
+      // Fetch user names for filtered list
+      final uniqueUserIds = purchases.map((p) => p['userId'] as String).where((uid) => uid.isNotEmpty).toSet();
+      final userNames = <String, String>{};
+      
+      for (final uid in uniqueUserIds) {
+        try {
+          final userDoc = await _firestore.collection('users').doc(uid).get();
+          if (userDoc.exists) {
+            userNames[uid] = userDoc.data()?['displayName'] ?? 'İsimsiz Kullanıcı';
+          } else {
+            userNames[uid] = 'Silinmiş Kullanıcı';
+          }
+        } catch (e) {
+          userNames[uid] = 'Hata: $uid';
+        }
+      }
+
+      // Add user names to purchases list
+      for (var p in purchases) {
+        p['displayName'] = userNames[p['userId']] ?? 'Bilinmeyen';
+      }
+
+      // Sort in-memory: handle potential nulls or different field types
+      purchases.sort((a, b) {
+        final aTime = a['purchasedAt'] ?? a['transactionDate'];
+        final bTime = b['purchasedAt'] ?? b['transactionDate'];
+        
+        if (aTime == null && bTime == null) return 0;
+        if (aTime == null) return 1;
+        if (bTime == null) return -1;
+
+        // Try to compare as Timestamps or Strings
+        try {
+          if (aTime is Timestamp && bTime is Timestamp) {
+            return bTime.compareTo(aTime);
+          }
+          // Fallback to string comparison if they are dates/transaction IDs
+          return bTime.toString().compareTo(aTime.toString());
+        } catch (e) {
+          return 0;
+        }
+      });
+
+      return purchases;
+    } catch (e) {
+      debugPrint('Error in getAllPurchases: $e');
+      return [];
     }
   }
 

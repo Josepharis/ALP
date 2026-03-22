@@ -34,6 +34,22 @@ class _AdminScreenState extends State<AdminScreen>
   List<Map<String, dynamic>> _questions = [];
   bool _isLoading = true;
   String _selectedLanguage = 'turkish'; // Questions yönetimi için dil seçimi
+  List<Map<String, dynamic>> _purchases = [];
+
+  final TextEditingController _firstTopicsCountController =
+      TextEditingController();
+  final TextEditingController _firstTopicsFreeQuestionsController =
+      TextEditingController();
+  final TextEditingController _otherTopicsFreeQuestionsController =
+      TextEditingController();
+  final TextEditingController _notificationTitleController =
+      TextEditingController();
+  final TextEditingController _notificationBodyController =
+      TextEditingController();
+  bool _isSendingNotification = false;
+  String _purchaseDateFilter = 'all'; // all, today, week, month, custom
+  DateTime? _customStartDate;
+  DateTime? _customEndDate;
 
   @override
   void initState() {
@@ -47,6 +63,11 @@ class _AdminScreenState extends State<AdminScreen>
   void dispose() {
     // NOT: Cihaz kaldırma listener'ı main.dart'ta global olarak yönetiliyor
     _tabController.dispose();
+    _firstTopicsCountController.dispose();
+    _firstTopicsFreeQuestionsController.dispose();
+    _otherTopicsFreeQuestionsController.dispose();
+    _notificationTitleController.dispose();
+    _notificationBodyController.dispose();
     super.dispose();
   }
 
@@ -58,6 +79,8 @@ class _AdminScreenState extends State<AdminScreen>
       _loadQuizStatistics(),
       _loadLanguageStatistics(),
       _loadCategories(),
+      _loadFreeQuestionConfig(),
+      _loadPurchases(),
     ]);
 
     setState(() => _isLoading = false);
@@ -71,6 +94,25 @@ class _AdminScreenState extends State<AdminScreen>
   Future<void> _loadLanguageStatistics() async {
     final stats = await _adminService.getLanguageBasedQuizStatistics();
     setState(() => _languageStats = stats);
+  }
+
+  Future<void> _loadFreeQuestionConfig() async {
+    final config = await _adminService.getFreeQuestionConfig();
+    setState(() {
+      _firstTopicsCountController.text =
+          (config['firstTopicsCount'] ?? 10).toString();
+      _firstTopicsFreeQuestionsController.text =
+          (config['firstTopicsFreeQuestions'] ?? 20).toString();
+      _otherTopicsFreeQuestionsController.text =
+          (config['otherTopicsFreeQuestions'] ?? 2).toString();
+    });
+  }
+
+  Future<void> _loadPurchases() async {
+    final purchases = await _adminService.getAllPurchases();
+    setState(() {
+      _purchases = purchases;
+    });
   }
 
   Future<void> _loadQuizStatistics() async {
@@ -93,75 +135,56 @@ class _AdminScreenState extends State<AdminScreen>
 
   Future<void> _loadCategories() async {
     try {
-      // Seçilen dile göre kategorileri yükle
-      // Language parameter mapping: 'turkish' -> 'turkish', 'english' -> 'english'
       final languageParam = _selectedLanguage == 'turkish' ? 'turkish' : 'english';
-      final organizedCategories =
-          await _organizedDataService.getOrganizedCategoriesByLanguage(languageParam);
+      final organizedCategories = await _organizedDataService.getOrganizedCategoriesByLanguage(languageParam);
 
-      // Eğer organize kategoriler varsa onları kullan
       if (organizedCategories.isNotEmpty) {
         setState(() {
           _organizedCategories = organizedCategories;
-          _categories =
-              organizedCategories
-                  .map((cat) => cat['displayName'] as String)
-                  .toList();
-          // Her zaman ilk kategoriyi seç ve soruları yükle
+          _categories = organizedCategories.map((cat) => cat['displayName'] as String).toList();
           if (_categories.isNotEmpty) {
             _selectedCategory = _categories.first;
-            _selectedCollectionName =
-                organizedCategories.first['collectionName'] as String;
+            _selectedCollectionName = organizedCategories.first['collectionName'] as String;
           }
         });
-        // Kategoriler yüklendikten sonra soruları yükle
         if (_categories.isNotEmpty) {
-            _loadQuestions();
+          _loadQuestions();
         }
       } else {
-        // Try alternative method to get all categories from Firestore
         final allCategories = await _getAllCategoriesFromFirestore();
-        
         if (allCategories.isNotEmpty) {
-          // Filter by language
           final filteredCategories = allCategories.where((cat) {
             final language = cat['language'] as String? ?? 'turkish';
             return language == languageParam;
           }).toList();
-          
+
           setState(() {
             _organizedCategories = filteredCategories;
             _categories = filteredCategories.map((cat) => cat['displayName'] as String).toList();
-            // Her zaman ilk kategoriyi seç
             if (_categories.isNotEmpty) {
               _selectedCategory = _categories.first;
               _selectedCollectionName = filteredCategories.first['collectionName'] as String;
             }
           });
-          
-          // Kategoriler yüklendikten sonra soruları yükle
+
           if (_categories.isNotEmpty) {
             _loadQuestions();
           }
-      } else {
-          // Final fallback: eski yöntem
-        final categories = await _adminService.getCategories();
-          
-        setState(() {
-          _categories = categories;
-            // Her zaman ilk kategoriyi seç
+        } else {
+          final categories = await _adminService.getCategories();
+          setState(() {
+            _categories = categories;
             if (categories.isNotEmpty) {
-            _selectedCategory = categories.first;
-          }
-        });
-          // Kategoriler yüklendikten sonra soruları yükle
+              _selectedCategory = categories.first;
+            }
+          });
           if (categories.isNotEmpty) {
             _loadQuestions();
           }
         }
       }
     } catch (e) {
-      // Error handling
+      debugPrint('Error loading categories: $e');
     }
   }
 
@@ -361,7 +384,18 @@ class _AdminScreenState extends State<AdminScreen>
         final navItems = [
           {'icon': Icons.dashboard_outlined, 'label': 'Dashboard'},
           {'icon': Icons.quiz_outlined, 'label': 'Questions'},
-          {'icon': Icons.analytics_outlined, 'label': AppLocalizations.of(context)!.analytics},
+          {
+            'icon': Icons.shopping_cart_outlined,
+            'label': 'Satın Alma',
+          },
+          {
+            'icon': Icons.analytics_outlined,
+            'label': AppLocalizations.of(context)!.analytics,
+          },
+          {
+            'icon': Icons.notifications_active_outlined,
+            'label': 'Bildirimler',
+          },
         ];
 
         return Container(
@@ -441,7 +475,11 @@ class _AdminScreenState extends State<AdminScreen>
               case 1:
                 return _buildQuestionsManagement();
               case 2:
+                return _buildPurchasesView();
+              case 3:
                 return _buildAnalytics();
+              case 4:
+                return _buildNotificationSender();
               default:
                 return _buildDashboard();
             }
@@ -533,6 +571,8 @@ class _AdminScreenState extends State<AdminScreen>
           const SizedBox(height: 20),
           _buildStatsGrid(),
           const SizedBox(height: 30),
+          _buildFreeQuestionConfigCard(),
+          const SizedBox(height: 30),
           _buildLanguageStatsGrid(),
           const SizedBox(height: 30),
           _buildQuizCategoriesGrid(),
@@ -541,6 +581,171 @@ class _AdminScreenState extends State<AdminScreen>
         ],
       ),
     );
+  }
+
+  Widget _buildFreeQuestionConfigCard() {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.white.withOpacity(0.1),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: Colors.white.withOpacity(0.2)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            'Ücretsiz Soru Ayarları',
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            'İlk N konu için ücretsiz soru sayısını ve diğer konular için limiti buradan yönetebilirsiniz.',
+            style: TextStyle(
+              color: Colors.white.withOpacity(0.7),
+              fontSize: 13,
+            ),
+          ),
+          const SizedBox(height: 16),
+          Row(
+            children: [
+              Expanded(
+                child: _buildNumberField(
+                  label: 'İlk kaç konu?',
+                  controller: _firstTopicsCountController,
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: _buildNumberField(
+                  label: 'İlk konularda ücretsiz soru',
+                  controller: _firstTopicsFreeQuestionsController,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          Row(
+            children: [
+              Expanded(
+                child: _buildNumberField(
+                  label: 'Diğer konularda ücretsiz soru',
+                  controller: _otherTopicsFreeQuestionsController,
+                ),
+              ),
+              const SizedBox(width: 12),
+              ElevatedButton.icon(
+                onPressed: _saveFreeQuestionConfig,
+                icon: const Icon(Icons.save, size: 18),
+                label: const Text(
+                  'Kaydet',
+                  style: TextStyle(fontSize: 13),
+                ),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.green.shade600,
+                  foregroundColor: Colors.white,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildNumberField({
+    required String label,
+    required TextEditingController controller,
+  }) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          label,
+          style: const TextStyle(
+            color: Colors.white70,
+            fontSize: 12,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+        const SizedBox(height: 6),
+        TextField(
+          controller: controller,
+          keyboardType: TextInputType.number,
+          style: const TextStyle(color: Colors.white, fontSize: 13),
+          decoration: InputDecoration(
+            isDense: true,
+            filled: true,
+            fillColor: Colors.black.withOpacity(0.2),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(
+                color: Colors.white.withOpacity(0.3),
+              ),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(
+                color: Colors.white.withOpacity(0.3),
+              ),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: const BorderSide(
+                color: Colors.greenAccent,
+                width: 1.5,
+              ),
+            ),
+            contentPadding:
+                const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Future<void> _saveFreeQuestionConfig() async {
+    final firstTopicsCount =
+        int.tryParse(_firstTopicsCountController.text.trim()) ?? 10;
+    final firstTopicsFreeQuestions =
+        int.tryParse(_firstTopicsFreeQuestionsController.text.trim()) ?? 20;
+    final otherTopicsFreeQuestions =
+        int.tryParse(_otherTopicsFreeQuestionsController.text.trim()) ?? 2;
+
+    final success = await _adminService.updateFreeQuestionConfig(
+      firstTopicsCount: firstTopicsCount,
+      firstTopicsFreeQuestions: firstTopicsFreeQuestions,
+      otherTopicsFreeQuestions: otherTopicsFreeQuestions,
+    );
+
+    if (!mounted) return;
+
+    if (success) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Ücretsiz soru ayarları güncellendi'),
+          backgroundColor: Colors.green,
+        ),
+      );
+      await _loadFreeQuestionConfig();
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Ayarlar güncellenirken bir hata oluştu'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
   }
 
   Widget _buildStatsGrid() {
@@ -1264,6 +1469,446 @@ class _AdminScreenState extends State<AdminScreen>
     );
   }
 
+  Widget _buildPurchasesView() {
+    // 1. Filtreleme Mantığı
+    final filteredPurchases = _purchases.where((p) {
+      // Tarih filtresi
+      final purchasedAt = p['purchasedAt'];
+      DateTime? date;
+      if (purchasedAt is Timestamp) {
+        date = purchasedAt.toDate();
+      } else if (p['transactionDate'] != null) {
+        try {
+          date = DateTime.fromMillisecondsSinceEpoch(
+              int.parse(p['transactionDate'].toString()));
+        } catch (_) {}
+      }
+
+      if (date == null) return _purchaseDateFilter == 'all';
+
+      final now = DateTime.now();
+      if (_purchaseDateFilter == 'today') {
+        return date.year == now.year && date.month == now.month && date.day == now.day;
+      } else if (_purchaseDateFilter == 'week') {
+        final lastWeek = now.subtract(const Duration(days: 7));
+        return date.isAfter(lastWeek);
+      } else if (_purchaseDateFilter == 'month') {
+        final lastMonth = now.subtract(const Duration(days: 30));
+        return date.isAfter(lastMonth);
+      } else if (_purchaseDateFilter == 'custom') {
+        if (_customStartDate == null || _customEndDate == null) return true;
+        return date.isAfter(_customStartDate!) && date.isBefore(_customEndDate!.add(const Duration(days: 1)));
+      }
+      return true;
+    }).toList();
+
+    return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _buildPurchaseSummaryCard(filteredPurchases),
+          const SizedBox(height: 24),
+          _buildPurchaseFilters(),
+          const SizedBox(height: 24),
+              Row(
+                children: [
+                  const Icon(Icons.monetization_on_rounded, color: Colors.blueAccent, size: 20),
+                  const SizedBox(width: 8),
+                  const Text(
+                    'İşlem Geçmişi',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
+              ),
+          const SizedBox(height: 12),
+          if (filteredPurchases.isEmpty)
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.05),
+                borderRadius: BorderRadius.circular(24),
+                border: Border.all(color: Colors.white.withOpacity(0.1)),
+              ),
+              child: Column(
+                children: [
+                  Icon(Icons.history_rounded, color: Colors.white.withOpacity(0.2), size: 48),
+                  const SizedBox(height: 16),
+                  Text(
+                    'Seçili filtreye göre işlem bulunamadı.',
+                    style: TextStyle(color: Colors.white.withOpacity(0.5), fontSize: 14),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
+            )
+          else
+            ListView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: filteredPurchases.length,
+              itemBuilder: (context, index) {
+                final purchase = filteredPurchases[index];
+                final displayName = purchase['displayName'] as String? ?? 'İsimsiz Kullanıcı';
+                final productId = purchase['productId'] as String? ?? '';
+                final status = purchase['status'] as String? ?? '';
+                final platform = purchase['platform'] as String? ?? '';
+                final isRestored = purchase['isRestored'] as bool? ?? false;
+                final purchasedAt = purchase['purchasedAt'];
+
+                String packageLabel = productId;
+                if (productId.contains('monthly')) packageLabel = 'Aylık Abonelik';
+                else if (productId.contains('sixmonth') || productId.contains('6months')) packageLabel = '6 Aylık Abonelik';
+                else if (productId.contains('yearly')) packageLabel = 'Yıllık Abonelik';
+                else if (productId.contains('lifetime')) packageLabel = 'Ömür Boyu Premium';
+
+                String statusLabel = status;
+                if (status.contains('purchased')) statusLabel = 'Onaylandı';
+                else if (status.contains('restored')) statusLabel = 'Geri Yüklendi';
+                else if (status.contains('pending')) statusLabel = 'Bekliyor';
+                else if (status.contains('error')) statusLabel = 'Hata';
+
+                String purchasedAtText = '';
+                if (purchasedAt is Timestamp) {
+                  final date = purchasedAt.toDate();
+                  purchasedAtText =
+                      '${date.day.toString().padLeft(2, '0')}.${date.month.toString().padLeft(2, '0')}.${date.year} '
+                      '${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')}';
+                } else if (purchase['transactionDate'] != null) {
+                  try {
+                    final date = DateTime.fromMillisecondsSinceEpoch(
+                        int.parse(purchase['transactionDate'].toString()));
+                    purchasedAtText =
+                        '${date.day.toString().padLeft(2, '0')}.${date.month.toString().padLeft(2, '0')}.${date.year} '
+                        '${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')}';
+                  } catch (e) {
+                    purchasedAtText = purchase['transactionDate'].toString();
+                  }
+                }
+
+                return Container(
+                  margin: const EdgeInsets.only(bottom: 12),
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.08),
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(color: Colors.white.withOpacity(0.1)),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                            decoration: BoxDecoration(
+                              color: (isRestored ? Colors.orange : Colors.green).withOpacity(0.2),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Text(
+                              isRestored ? 'Restore' : 'Yeni Satın Alma',
+                              style: TextStyle(
+                                color: isRestored ? Colors.orangeAccent : Colors.greenAccent,
+                                fontSize: 11,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                          const Spacer(),
+                          Text(
+                            platform.toUpperCase(),
+                            style: const TextStyle(color: Colors.white38, fontSize: 11),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 12),
+                      Text(
+                        packageLabel,
+                        style: const TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        'Kullanıcı: $displayName',
+                        style: TextStyle(color: Colors.white.withOpacity(0.6), fontSize: 13),
+                      ),
+                      const SizedBox(height: 12),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.verified_user_rounded,
+                                color: status.contains('purchased') || status.contains('restored') ? Colors.blueAccent : Colors.white24,
+                                size: 14,
+                              ),
+                              const SizedBox(width: 4),
+                              Text(
+                                statusLabel,
+                                style: const TextStyle(color: Colors.white38, fontSize: 12),
+                              ),
+                            ],
+                          ),
+                          Text(
+                            purchasedAtText,
+                            style: const TextStyle(color: Colors.white24, fontSize: 11),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildPurchaseSummaryCard(List<Map<String, dynamic>> filteredList) {
+    int monthlyCount = 0;
+    int sixMonthCount = 0;
+    int yearlyCount = 0;
+    int lifetimeCount = 0;
+    int totalCount = filteredList.length;
+
+    for (var p in filteredList) {
+      final pid = p['productId'] as String;
+      if (pid.contains('monthly')) monthlyCount++;
+      else if (pid.contains('sixmonth') || pid.contains('6months')) sixMonthCount++;
+      else if (pid.contains('yearly')) yearlyCount++;
+      else if (pid.contains('lifetime')) lifetimeCount++;
+    }
+
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(24),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [Colors.indigo.shade900, Colors.blue.shade900],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(28),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.3),
+            blurRadius: 15,
+            offset: const Offset(0, 8),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Row(
+                children: [
+                  Icon(Icons.analytics_rounded, color: Colors.white, size: 20),
+                  SizedBox(width: 8),
+                  Text(
+                    'Satış Özeti',
+                    style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.2),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Text(
+                  _purchaseDateFilter == 'today' ? 'Bugün' :
+                  _purchaseDateFilter == 'week' ? 'Haftalık' :
+                  _purchaseDateFilter == 'month' ? 'Aylık' :
+                  _purchaseDateFilter == 'custom' ? 'Özel' : 'Tüm Zamanlar',
+                  style: const TextStyle(color: Colors.white, fontSize: 11),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 24),
+          Row(
+            children: [
+              _buildSummaryItem('Toplam', totalCount.toString(), Icons.shopping_bag_rounded),
+              const Spacer(),
+              _buildSummaryItem('Aylık', monthlyCount.toString(), Icons.calendar_today_rounded),
+              const Spacer(),
+              _buildSummaryItem('6 Aylık', sixMonthCount.toString(), Icons.date_range_rounded),
+              const Spacer(),
+              _buildSummaryItem('Yıllık', yearlyCount.toString(), Icons.event_available_rounded),
+            ],
+          ),
+          if (lifetimeCount > 0) ...[
+            const SizedBox(height: 16),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Row(
+                children: [
+                  const Icon(Icons.star_rounded, color: Colors.amberAccent, size: 16),
+                  const SizedBox(width: 8),
+                  const Text('Ömür Boyu:', style: TextStyle(color: Colors.white70, fontSize: 13)),
+                  const Spacer(),
+                  Text('$lifetimeCount Adet', style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                ],
+              ),
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSummaryItem(String label, String count, IconData icon) {
+    return Column(
+      children: [
+        Icon(icon, color: Colors.white70, size: 16),
+        const SizedBox(height: 4),
+        Text(
+          count,
+          style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+        ),
+        const SizedBox(height: 2),
+        Text(
+          label,
+          style: TextStyle(color: Colors.white.withOpacity(0.6), fontSize: 11),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildPurchaseFilters() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          'Tarih Filtresi',
+          style: TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.w600),
+        ),
+        const SizedBox(height: 12),
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: [
+              _buildFilterChip('all', 'Hepsi'),
+              _buildFilterChip('today', 'Bugün'),
+              _buildFilterChip('week', 'Haftalık'),
+              _buildFilterChip('month', 'Aylık'),
+              _buildFilterChip('custom', 'Özel Tarih'),
+            ],
+          ),
+        ),
+        if (_purchaseDateFilter == 'custom') ...[
+          const SizedBox(height: 16),
+          Row(
+            children: [
+              Expanded(
+                child: _buildDateButton(
+                  _customStartDate == null 
+                      ? 'Başlangıç' 
+                      : '${_customStartDate!.day}.${_customStartDate!.month}.${_customStartDate!.year}',
+                  true,
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: _buildDateButton(
+                  _customEndDate == null 
+                      ? 'Bitiş' 
+                      : '${_customEndDate!.day}.${_customEndDate!.month}.${_customEndDate!.year}',
+                  false,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ],
+    );
+  }
+
+  Widget _buildFilterChip(String filter, String label) {
+    bool isSelected = _purchaseDateFilter == filter;
+    return GestureDetector(
+      onTap: () => setState(() => _purchaseDateFilter = filter),
+      child: Container(
+        margin: const EdgeInsets.only(right: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+        decoration: BoxDecoration(
+          color: isSelected ? Colors.blueAccent : Colors.white.withOpacity(0.1),
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(color: isSelected ? Colors.blueAccent : Colors.white.withOpacity(0.15)),
+        ),
+        child: Text(
+          label,
+          style: TextStyle(
+            color: isSelected ? Colors.white : Colors.white70,
+            fontSize: 13,
+            fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildDateButton(String label, bool isStart) {
+    return InkWell(
+      onTap: () async {
+        final date = await showDatePicker(
+          context: context,
+          initialDate: DateTime.now(),
+          firstDate: DateTime(2023),
+          lastDate: DateTime.now(),
+          builder: (context, child) {
+            return Theme(
+              data: ThemeData.dark().copyWith(
+                colorScheme: const ColorScheme.dark(
+                  primary: Colors.blueAccent,
+                  onPrimary: Colors.white,
+                  surface: Color(0xFF1A1A1A),
+                  onSurface: Colors.white,
+                ),
+              ),
+              child: child!,
+            );
+          },
+        );
+        if (date != null) {
+          setState(() {
+            if (isStart) _customStartDate = date;
+            else _customEndDate = date;
+          });
+        }
+      },
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: Colors.white.withOpacity(0.05),
+          borderRadius: BorderRadius.circular(15),
+          border: Border.all(color: Colors.white.withOpacity(0.1)),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(label, style: const TextStyle(color: Colors.white70, fontSize: 13)),
+            const Icon(Icons.calendar_month, color: Colors.white38, size: 18),
+          ],
+        ),
+      ),
+    );
+  }
+
   Widget _buildLanguageSelector() {
     return LayoutBuilder(
       builder: (context, constraints) {
@@ -1973,11 +2618,512 @@ class _AdminScreenState extends State<AdminScreen>
         false;
   }
 
+  Widget _buildNotificationSender() {
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            'Manuel Bildirim Gönder',
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            'Bütün kullanıcılara anlık push bildirimi gönderin.',
+            style: TextStyle(
+              color: Colors.white.withOpacity(0.7),
+              fontSize: 14,
+            ),
+          ),
+          const SizedBox(height: 30),
+          _buildReadyMadeNotifications(),
+          const SizedBox(height: 30),
+          Container(
+            padding: const EdgeInsets.all(24),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  Colors.white.withOpacity(0.12),
+                  Colors.white.withOpacity(0.05),
+                ],
+              ),
+              borderRadius: BorderRadius.circular(28),
+              border: Border.all(color: Colors.white.withOpacity(0.2), width: 1.5),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.2),
+                  blurRadius: 20,
+                  offset: const Offset(0, 10),
+                ),
+              ],
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildNotificationField(
+                  label: 'Bildirim Başlığı',
+                  hint: 'Örn: Yeni Sorular Eklendi! 📚',
+                  controller: _notificationTitleController,
+                ),
+                const SizedBox(height: 20),
+                _buildNotificationField(
+                  label: 'Bildirim Mesajı',
+                  hint: 'Örn: Bugünkü quizleri çözmeyi unutmayın...',
+                  controller: _notificationBodyController,
+                  maxLines: 4,
+                ),
+                const SizedBox(height: 30),
+                SizedBox(
+                  width: double.infinity,
+                  height: 55,
+                  child: ElevatedButton(
+                    onPressed: _isSendingNotification ? null : _sendManualNotification,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blue.shade600,
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      elevation: 8,
+                      shadowColor: Colors.blue.withOpacity(0.5),
+                    ),
+                    child: _isSendingNotification
+                        ? const SizedBox(
+                            height: 24,
+                            width: 24,
+                            child: CircularProgressIndicator(
+                              color: Colors.white,
+                              strokeWidth: 2,
+                            ),
+                          )
+                        : const Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(Icons.send_rounded),
+                              SizedBox(width: 12),
+                              Text(
+                                'BİLDİRİMİ GÖNDER',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  letterSpacing: 1.2,
+                                ),
+                              ),
+                            ],
+                          ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 40),
+          _buildNotificationHistory(),
+        ],
+      ),
+    );
+  }
 
+  Widget _buildNotificationField({
+    required String label,
+    required String hint,
+    required TextEditingController controller,
+    int maxLines = 1,
+  }) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          label,
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        const SizedBox(height: 8),
+        TextField(
+          controller: controller,
+          maxLines: maxLines,
+          style: const TextStyle(color: Colors.white),
+          decoration: InputDecoration(
+            hintText: hint,
+            hintStyle: TextStyle(color: Colors.white.withOpacity(0.3)),
+            filled: true,
+            fillColor: Colors.black.withOpacity(0.3),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(16),
+              borderSide: BorderSide(color: Colors.white.withOpacity(0.1)),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(16),
+              borderSide: BorderSide(color: Colors.white.withOpacity(0.1)),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(16),
+              borderSide: const BorderSide(color: Colors.blueAccent, width: 2),
+            ),
+            contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+          ),
+        ),
+      ],
+    );
+  }
 
+  Widget _buildNotificationHistory() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          'Son Gönderilenler',
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+        ),
+        const SizedBox(height: 16),
+        StreamBuilder<QuerySnapshot>(
+          stream: FirebaseFirestore.instance
+              .collection('notifications')
+              .orderBy('createdAt', descending: true)
+              .limit(5)
+              .snapshots(),
+          builder: (context, snapshot) {
+            if (!snapshot.hasData) return const SizedBox();
+            
+            final docs = snapshot.data!.docs;
+            if (docs.isEmpty) {
+              return Text(
+                'Henüz bildirim gönderilmemiş.',
+                style: TextStyle(color: Colors.white.withOpacity(0.5)),
+              );
+            }
 
+            return ListView.separated(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: docs.length,
+              separatorBuilder: (context, index) => const SizedBox(height: 12),
+              itemBuilder: (context, index) {
+                final data = docs[index].data() as Map<String, dynamic>;
+                final status = data['status'] ?? 'pending';
+                
+                return Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.05),
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: Row(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: _getStatusColor(status).withOpacity(0.2),
+                          shape: BoxShape.circle,
+                        ),
+                        child: Icon(
+                          _getStatusIcon(status),
+                          color: _getStatusColor(status),
+                          size: 20,
+                        ),
+                      ),
+                      const SizedBox(width: 16),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              data['title'] ?? '',
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              data['body'] ?? '',
+                              style: TextStyle(
+                                color: Colors.white.withOpacity(0.6),
+                                fontSize: 12,
+                              ),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ],
+                        ),
+                      ),
+                      Text(
+                        status.toUpperCase(),
+                        style: TextStyle(
+                          color: _getStatusColor(status),
+                          fontSize: 10,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              },
+            );
+          },
+        ),
+      ],
+    );
+  }
 
+  Color _getStatusColor(String status) {
+    switch (status) {
+      case 'sent': return Colors.greenAccent;
+      case 'failed': return Colors.redAccent;
+      default: return Colors.orangeAccent;
+    }
+  }
 
+  IconData _getStatusIcon(String status) {
+    switch (status) {
+      case 'sent': return Icons.check_circle_outline;
+      case 'failed': return Icons.error_outline;
+      default: return Icons.schedule;
+    }
+  }
 
+  Future<void> _sendManualNotification() async {
+    final title = _notificationTitleController.text.trim();
+    final body = _notificationBodyController.text.trim();
 
+    if (title.isEmpty || body.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Lütfen başlık ve mesaj alanlarını doldurun.'),
+          backgroundColor: Colors.orange,
+        ),
+      );
+      return;
+    }
+
+    setState(() => _isSendingNotification = true);
+
+    try {
+      await FirebaseFirestore.instance.collection('notifications').add({
+        'title': title,
+        'body': body,
+        'createdAt': FieldValue.serverTimestamp(),
+        'status': 'pending',
+      });
+
+      if (mounted) {
+        _notificationTitleController.clear();
+        _notificationBodyController.clear();
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Bildirim sıraya alındı! Gönderiliyor...'),
+            backgroundColor: Colors.green,
+          ),
+        );
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Hata: $e'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    } finally {
+      if (mounted) {
+        setState(() => _isSendingNotification = false);
+      }
+    }
+  }
+
+  Widget _buildReadyMadeNotifications() {
+    final templates = [
+      {
+        'title': 'Yeni Sorular Eklendi! 📚',
+        'body': 'Uygulamaya yeni anestezi soruları yüklendi. Hemen çözmeye başla!',
+        'icon': Icons.library_add_rounded,
+        'color': Colors.blueAccent,
+      },
+      {
+        'title': 'Premium Fırsatı! 💎',
+        'body': 'Premium ile bütün sorulara ve spot notlara sınırsız erişim sağlayın.',
+        'icon': Icons.workspace_premium_rounded,
+        'color': Colors.amber,
+      },
+      {
+        'title': 'Günün Sorusu Hazır! 💡',
+        'body': 'Bugünkü günün sorusu yayında! Bakalım doğru cevabı bulabilecek misin?',
+        'icon': Icons.lightbulb_rounded,
+        'color': Colors.orangeAccent,
+      },
+      {
+        'title': 'Hatalarını Gözden Geçir! ❌',
+        'body': 'Yanlış yaptığın soruları tekrar çözerek eksiklerini tamamlamaya ne dersin?',
+        'icon': Icons.assignment_late_rounded,
+        'color': Colors.redAccent,
+      },
+      {
+        'title': 'Spot Notlarla Tekrar Yap! 📝',
+        'body': 'Kısa ve öz spot notlar hafızanı tazelemek için seni bekliyor. Hemen göz at!',
+        'icon': Icons.note_alt_rounded,
+        'color': Colors.cyanAccent,
+      },
+      {
+        'title': 'Liderlik Tablosunda Yüksel! 🏆',
+        'body': 'Bugünkü quizleri çözerek sıralamada zirveye yerleşmeye hazır mısın?',
+        'icon': Icons.leaderboard_rounded,
+        'color': Colors.purpleAccent,
+      },
+      {
+        'title': 'Haftalık Soru Maratonu! 🏃',
+        'body': 'Bu hafta en çok soru çözenler arasına girmeye hazır mısın? Maraton başladı!',
+        'icon': Icons.directions_run_rounded,
+        'color': Colors.lightGreenAccent,
+      },
+      {
+        'title': 'Başarıya Odaklan! 🚀',
+        'body': 'Düzenli çalışma başarı getirir. Bugün 10 yeni soru çözerek hedefine yaklaş!',
+        'icon': Icons.rocket_launch_rounded,
+        'color': Colors.indigoAccent,
+      },
+      {
+        'title': 'Performans Raporun Hazır! 📊',
+        'body': 'İstatistiklerini kontrol et ve hangi konularda daha başarılı olduğunu gör.',
+        'icon': Icons.bar_chart_rounded,
+        'color': Colors.greenAccent,
+      },
+      {
+        'title': 'Bilgilerini Tazele! ✨',
+        'body': 'Kısa bir ara verip 5 soru çözmeye ne dersin? Bilgilerin her zaman taze kalsın.',
+        'icon': Icons.auto_awesome_rounded,
+        'color': Colors.tealAccent,
+      },
+      {
+        'title': 'Anestezi Uzmanı Ol! 🩺',
+        'body': 'En zorlayıcı sorularla kendini dene ve seviyeni gör. Başarılar dileriz!',
+        'icon': Icons.medical_services_rounded,
+        'color': Colors.deepOrangeAccent,
+      },
+      {
+        'title': 'Sürpriz Güncelleme! 🎉',
+        'body': 'Uygulamamıza eklenen yeni kategorileri ve soruları hemen incelemeye başla!',
+        'icon': Icons.celebration_rounded,
+        'color': Colors.pinkAccent,
+      },
+    ];
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'Hazır Bildirim Şablonları',
+              style: TextStyle(
+                color: Colors.white.withOpacity(0.9),
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Text(
+              '${templates.length} Hazır Mesaj',
+              style: TextStyle(
+                color: Colors.white.withOpacity(0.5),
+                fontSize: 12,
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 16),
+        SizedBox(
+          height: 120,
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: templates.length,
+            itemBuilder: (context, index) {
+              final template = templates[index];
+              final Color color = template['color'] as Color;
+
+              return InkWell(
+                onTap: () {
+                  setState(() {
+                    _notificationTitleController.text =
+                        template['title'] as String;
+                    _notificationBodyController.text =
+                        template['body'] as String;
+                  });
+                },
+                borderRadius: BorderRadius.circular(24),
+                child: Container(
+                  width: 170,
+                  margin: const EdgeInsets.only(right: 16),
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [
+                        color.withOpacity(0.15),
+                        color.withOpacity(0.05),
+                      ],
+                    ),
+                    borderRadius: BorderRadius.circular(24),
+                    border: Border.all(
+                      color: color.withOpacity(0.3),
+                      width: 1.5,
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: color.withOpacity(0.1),
+                        blurRadius: 8,
+                        offset: const Offset(0, 4),
+                      ),
+                    ],
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: color.withOpacity(0.2),
+                          shape: BoxShape.circle,
+                        ),
+                        child: Icon(
+                          template['icon'] as IconData,
+                          color: color,
+                          size: 26,
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      Text(
+                        template['title'] as String,
+                        style: TextStyle(
+                          color: Colors.white.withOpacity(0.9),
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                        ),
+                        textAlign: TextAlign.center,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+      ],
+    );
+  }
 }
+

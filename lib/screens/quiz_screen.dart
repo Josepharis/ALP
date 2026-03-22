@@ -2,8 +2,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import '../l10n/app_localizations.dart';
 import 'package:flutter/services.dart';
-import 'dart:math';
 import 'package:provider/provider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../models/question.dart';
 import 'question_detail_screen.dart';
@@ -13,9 +13,12 @@ import '../services/premium_access_service.dart';
 import '../services/premium_service.dart';
 import '../services/language_service.dart';
 import '../widgets/premium_lock_widget.dart';
+import '../services/multilingual_question_service.dart';
 
 import '../utils/event_bus.dart';
 import '../utils/snackbar_utils.dart';
+import '../services/auth_service.dart';
+import 'register_screen.dart';
 
 class QuizScreen extends StatefulWidget {
   final String categoryName;
@@ -46,6 +49,7 @@ class _QuizScreenState extends State<QuizScreen>
   late AnimationController _animationController;
   late Animation<double> _animation;
   final QuizService _quizService = QuizService();
+  final AuthService _authService = AuthService();
   bool _isCompletingQuiz = false; // Quiz tamamlanma durumunu takip et
 
   @override
@@ -305,28 +309,40 @@ class _QuizScreenState extends State<QuizScreen>
       builder: (context, languageService, child) {
         return Consumer<PremiumService>(
           builder: (context, premiumService, child) {
-            // Premium kontrolü - Async kontrol kullan (InformationScreen gibi)
-            // Bu önemli çünkü giriş yapılmış kullanıcılar için sync kontrol false döndürüyor
-            return FutureBuilder<bool>(
-              future: premiumService.hasPremiumAccess(),
+            return FutureBuilder<_AccessState>(
+              future: _loadAccessState(
+                premiumService,
+                languageService.currentLocale.languageCode,
+              ),
               builder: (context, snapshot) {
-                // Loading durumunda sync kontrolü kullan
-                final isPremium = snapshot.hasData 
-                    ? snapshot.data! 
-                    : premiumService.isPremium;
-                
+                final accessState = snapshot.data;
+
+                // Premium durumu - yüklenmediyse cache'teki sync değerini kullan
+                final isPremium =
+                    accessState?.isPremium ?? premiumService.isPremium;
+
+                // Ücretsiz soru limiti - yüklenmediyse varsayılanı kullan
+                final maxFreeQuestions =
+                    accessState?.maxFreeQuestions ??
+                    PremiumAccessService.maxFreeQuestions;
+
                 // Test modu kontrolü
                 if (premiumService.isTestMode) {
-                  // Test modu aktifse premium kontrolünü atla
-                  return _buildQuizContent(true);
+                  // Test modu aktifse premium ve limit kontrolünü atla
+                  return _buildQuizContent(true, maxFreeQuestions);
                 }
-        
-        // Premium kontrolü - 2. sorudan sonra premium gerekli
-        if (PremiumAccessService.shouldShowPremiumScreenWithTestMode(currentQuestionIndex, isPremium, premiumService.isTestMode)) {
-          return _buildPremiumLockScreen();
-        }
-        
-                return _buildQuizContent(isPremium);
+
+                // Premium kontrolü - ücretsiz limitten sonra premium gerekli
+                if (PremiumAccessService.shouldShowPremiumScreenWithTestMode(
+                  currentQuestionIndex,
+                  isPremium,
+                  premiumService.isTestMode,
+                  maxFreeQuestionsOverride: maxFreeQuestions,
+                )) {
+                  return _buildPremiumLockScreen();
+                }
+
+                return _buildQuizContent(isPremium, maxFreeQuestions);
               },
             );
           },
@@ -336,7 +352,7 @@ class _QuizScreenState extends State<QuizScreen>
   }
   
   // Quiz içeriğini oluştur
-  Widget _buildQuizContent(bool isPremium) {
+  Widget _buildQuizContent(bool isPremium, int maxFreeQuestions) {
         return PopScope(
           canPop: false,
           onPopInvokedWithResult: (didPop, result) async {
@@ -362,7 +378,7 @@ class _QuizScreenState extends State<QuizScreen>
                   children: [
                     _buildHeader(),
                     _buildProgressBar(),
-                    _buildPremiumStatusBanner(isPremium),
+                    _buildPremiumStatusBanner(isPremium, maxFreeQuestions),
                     Expanded(
                       child: SingleChildScrollView(
                         child: Column(
@@ -649,9 +665,9 @@ class _QuizScreenState extends State<QuizScreen>
                             size: 16,
                           ),
                           const SizedBox(width: 4),
-                          const Text(
-                            'Detail',
-                            style: TextStyle(
+                          Text(
+                            AppLocalizations.of(context)!.details,
+                            style: const TextStyle(
                               color: Colors.white70,
                               fontSize: 12,
                               fontWeight: FontWeight.w500,
@@ -937,6 +953,8 @@ class _QuizScreenState extends State<QuizScreen>
 
   // Premium lock screen
   Widget _buildPremiumLockScreen() {
+    final isGuest = _authService.isGuestUser;
+    
     return Scaffold(
       extendBody: true,
       body: Container(
@@ -955,10 +973,12 @@ class _QuizScreenState extends State<QuizScreen>
                 child: Center(
                   child: Padding(
                     padding: const EdgeInsets.all(24.0),
-                    child: PremiumLockWidget(
-                      message: AppLocalizations.of(context)!.premiumRequiredMessage,
-                      subtitle: AppLocalizations.of(context)!.premiumIncentiveMessage,
-                    ),
+                    child: isGuest
+                        ? _buildGuestRegisterWidget()
+                        : PremiumLockWidget(
+                            message: AppLocalizations.of(context)!.premiumRequiredMessage,
+                            subtitle: AppLocalizations.of(context)!.premiumIncentiveMessage,
+                          ),
                   ),
                 ),
               ),
@@ -969,8 +989,151 @@ class _QuizScreenState extends State<QuizScreen>
     );
   }
 
+  // Misafir kullanıcı için kayıt widget'ı
+  Widget _buildGuestRegisterWidget() {
+    return Container(
+      padding: const EdgeInsets.all(24),
+      decoration: BoxDecoration(
+        gradient: const LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            Color(0xFF1A2E1A), // Yeşil ton
+            Color(0xFF162E16),
+            Color(0xFF0F2E0F),
+          ],
+        ),
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(
+          color: Colors.green.withOpacity(0.3),
+          width: 2,
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.green.withOpacity(0.2),
+            blurRadius: 20,
+            spreadRadius: 2,
+          ),
+        ],
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          // User Icon
+          Container(
+            width: 80,
+            height: 80,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              gradient: const LinearGradient(
+                colors: [Colors.green, Colors.lightGreen],
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.green.withOpacity(0.4),
+                  blurRadius: 20,
+                  spreadRadius: 5,
+                ),
+              ],
+            ),
+            child: const Icon(
+              Icons.person_add,
+              size: 40,
+              color: Colors.white,
+            ),
+          ),
+          
+          const SizedBox(height: 24),
+          
+          // Title
+          Text(
+            AppLocalizations.of(context)!.guestRegisterTitle,
+            style: const TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          
+          const SizedBox(height: 12),
+          
+          // Message
+          Text(
+            AppLocalizations.of(context)!.guestRegisterMessage,
+            style: const TextStyle(
+              fontSize: 16,
+              color: Colors.white70,
+              height: 1.5,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          
+          const SizedBox(height: 8),
+          
+          Text(
+            AppLocalizations.of(context)!.guestRegisterSubtitle,
+            style: const TextStyle(
+              fontSize: 14,
+              color: Colors.green,
+              height: 1.4,
+              fontWeight: FontWeight.bold,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          
+          const SizedBox(height: 32),
+          
+          // Register Button
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton(
+              onPressed: () async {
+                final result = await Navigator.of(context, rootNavigator: true).push(
+                  MaterialPageRoute(
+                    builder: (context) => const RegisterScreen(isGuestUpgrade: true),
+                  ),
+                );
+                
+                // Kayıt başarılıysa sayfayı yenile (premium kontrolü tekrar yapılacak)
+                if (result == true && mounted) {
+                  setState(() {
+                    // State'i yenile, premium kontrolü tekrar yapılacak
+                  });
+                }
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.green,
+                foregroundColor: Colors.white,
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                elevation: 0,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Icon(Icons.person_add, size: 20),
+                  const SizedBox(width: 8),
+                  Text(
+                    AppLocalizations.of(context)!.signUp,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   // Premium status banner
-  Widget _buildPremiumStatusBanner(bool isPremium) {
+  Widget _buildPremiumStatusBanner(bool isPremium, int maxFreeQuestions) {
     return Consumer<PremiumService>(
       builder: (context, premiumService, child) {
         // Test modu aktifse banner gösterme
@@ -978,9 +1141,11 @@ class _QuizScreenState extends State<QuizScreen>
         
         if (isPremium) return const SizedBox.shrink();
         
-        final remainingQuestions = PremiumAccessService.getRemainingFreeQuestions(
+        final remainingQuestions =
+            PremiumAccessService.getRemainingFreeQuestions(
           currentQuestionIndex, 
-          isPremium
+          isPremium,
+          maxFreeQuestionsOverride: maxFreeQuestions,
         );
         
         if (remainingQuestions <= 0) return const SizedBox.shrink();
@@ -1025,4 +1190,68 @@ class _QuizScreenState extends State<QuizScreen>
       },
     );
   }
+  
+  Future<_AccessState> _loadAccessState(
+    PremiumService premiumService,
+    String languageCode,
+  ) async {
+    final isPremium = await premiumService.hasPremiumAccess();
+    final maxFreeQuestions =
+        await _getFreeQuestionLimitForCurrentCategory(languageCode);
+    return _AccessState(
+      isPremium: isPremium,
+      maxFreeQuestions: maxFreeQuestions,
+    );
+  }
+
+  Future<int> _getFreeQuestionLimitForCurrentCategory(
+    String languageCode,
+  ) async {
+    try {
+      // Firestore'dan ücretsiz soru ayarlarını çek
+      final doc = await FirebaseFirestore.instance
+          .collection('systemSettings')
+          .doc('freeQuestionConfig')
+          .get();
+
+      final data = doc.data() ?? <String, dynamic>{};
+
+      final firstTopicsCount = (data['firstTopicsCount'] as int?) ?? 10;
+      final firstTopicsFreeQuestions =
+          (data['firstTopicsFreeQuestions'] as int?) ?? 20;
+      final otherTopicsFreeQuestions =
+          (data['otherTopicsFreeQuestions'] as int?) ?? 2;
+
+      // Mevcut dil için kategori listesini al
+      final localeKey =
+          languageCode == 'en' ? 'en' : 'turkish';
+      final categories =
+          MultilingualQuestionService.getQuizCategories(localeKey);
+
+      final index = categories.indexWhere(
+        (cat) => (cat['title'] as String?) == widget.categoryName,
+      );
+
+      final topicIndex = index >= 0 ? index : 9999;
+
+      if (topicIndex < firstTopicsCount) {
+        return firstTopicsFreeQuestions;
+      }
+
+      return otherTopicsFreeQuestions;
+    } catch (_) {
+      // Herhangi bir hata durumunda varsayılan değere dön
+      return PremiumAccessService.maxFreeQuestions;
+    }
+  }
+}
+
+class _AccessState {
+  final bool isPremium;
+  final int maxFreeQuestions;
+
+  _AccessState({
+    required this.isPremium,
+    required this.maxFreeQuestions,
+  });
 }

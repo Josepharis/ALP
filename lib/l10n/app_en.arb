@@ -1761,6 +1761,16 @@
   "purchaseStarted": "Purchase process started",
   "purchaseFailed": "Purchase process could not be started",
   "termsContent": "This in-app purchase service is subject to Apple App Store and Google Play Store terms. Purchases are non-refundable. Premium features are available as long as they are active.",
+  "termsLegalIntro": "Subscription is subject to the applicable store terms and the documents below. By tapping Subscribe or Purchase you agree to these terms.",
+  "termsPrivacyPolicy": "Privacy Policy",
+  "termsEula": "Terms of Use (EULA)",
+  "termsBulletStore": "Transactions are processed through Apple App Store / Google Play Store and are subject to store policies.",
+  "termsBulletRefund": "Refunds after payment may only be requested in accordance with the applicable store's refund policy.",
+  "termsBulletDisclaimer": "The app and premium content are provided \"as is\"; no warranty is given to the maximum extent permitted by law.",
+  "subscriptionInfoTitle": "About your subscription",
+  "subscriptionAutoRenew": "Subscription automatically renews at the end of each period unless cancelled.",
+  "subscriptionCancelAnytime": "You can cancel anytime from your device Settings.",
+  "subscriptionChargedToAccount": "Payment will be charged to your Apple ID or Google Play account.",
   "ok": "OK",
   "accessAllQuestions": "Access All Questions",
   "unlimitedQuiz": "Unlimited Quiz",
@@ -1861,5 +1871,109 @@
   "deleteAccountMessage": "Are you sure you want to delete your account?\n\nThis action cannot be undone and all your data will be permanently deleted.",
   "@deleteAccountMessage": {
     "description": "Delete account confirmation message"
+  },
+  "detailedInformation": "Detailed Information",
+  "@detailedInformation": {
+    "description": "Detailed information title"
+  },
+  "references": "References",
+  "@references": {
+    "description": "References section title"
+  },
+  "noExplanationAvailable": "No detailed explanation available for this question.",
+  "@noExplanationAvailable": {
+    "description": "No explanation available message"
+  },
+  "guestLogin": "Guest Login",
+  "@guestLogin": {
+    "description": "Guest login button text"
+  },
+  "guestLoginDescription": "Try the app without registration",
+  "@guestLoginDescription": {
+    "description": "Guest login description"
+  },
+  "subscriptionStatus": "Subscription Status",
+  "@subscriptionStatus": {
+    "description": "Subscription status title"
+  },
+  "youAreSubscribed": "You are a Premium Member",
+  "@youAreSubscribed": {
+    "description": "You are subscribed message"
+  },
+  "youAreNotSubscribed": "You are not a Premium Member",
+  "@youAreNotSubscribed": {
+    "description": "You are not subscribed message"
+  },
+  "subscriptionType": "Subscription Type",
+  "@subscriptionType": {
+    "description": "Subscription type label"
+  },
+  "expiresOn": "Expires On",
+  "@expiresOn": {
+    "description": "Expires on label"
+  },
+  "cancelSubscription": "Cancel Subscription",
+  "@cancelSubscription": {
+    "description": "Cancel subscription button"
+  },
+  "goToPremium": "Go Premium",
+  "@goToPremium": {
+    "description": "Go to premium button"
+  },
+  "subscriptionInfo": "Subscription Information",
+  "@subscriptionInfo": {
+    "description": "Subscription info title"
+  },
+  "monthlySubscription": "Monthly Subscription",
+  "@monthlySubscription": {
+    "description": "Monthly subscription type"
+  },
+  "yearlySubscription": "Yearly Subscription",
+  "@yearlySubscription": {
+    "description": "Yearly subscription type"
+  },
+  "sixMonthSubscription": "6 Month Subscription",
+  "@sixMonthSubscription": {
+    "description": "Six month subscription type"
+  },
+  "lifetimePurchase": "Lifetime Premium",
+  "@lifetimePurchase": {
+    "description": "Lifetime purchase type"
+  },
+  "cancelSubscriptionMessage": "To cancel your subscription, you need to go to your device settings.",
+  "@cancelSubscriptionMessage": {
+    "description": "Cancel subscription message"
+  },
+  "openSettings": "Open Settings",
+  "@openSettings": {
+    "description": "Open settings button"
+  },
+  "subscriptionExpired": "Subscription Expired",
+  "@subscriptionExpired": {
+    "description": "Subscription expired message"
+  },
+  "active": "Active",
+  "@active": {
+    "description": "Active status"
+  },
+  "guestRegisterTitle": "Create Your Account",
+  "@guestRegisterTitle": {
+    "description": "Guest register title"
+  },
+  "guestRegisterMessage": "Create your account to continue. Your current progress will be saved!",
+  "@guestRegisterMessage": {
+    "description": "Guest register message"
+  },
+  "guestRegisterSubtitle": "After registration, you can purchase premium",
+  "@guestRegisterSubtitle": {
+    "description": "Guest register subtitle"
+  },
+  "upgradeGuestAccount": "Create Your Account",
+  "@upgradeGuestAccount": {
+    "description": "Upgrade guest account title"
+  },
+  "upgradeGuestAccountMessage": "Convert your guest account to a registered account. All your data will be preserved!",
+  "@upgradeGuestAccountMessage": {
+    "description": "Upgrade guest account message"
   }
 }
