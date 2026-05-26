@@ -25,22 +25,34 @@ class RespiratoryDiseaseAnesthesiaCategory {
 }
 
 class RespiratoryDiseaseAnesthesiaData {
-  static List<RespiratoryDiseaseAnesthesiaCategory> getRespiratoryDiseaseAnesthesiaData(BuildContext context) {
+  static List<RespiratoryDiseaseAnesthesiaCategory>
+  getRespiratoryDiseaseAnesthesiaData(BuildContext context) {
     return [
       RespiratoryDiseaseAnesthesiaCategory(
         categoryName: 'Pulmoner Risk Faktörleri',
         items: [
           RespiratoryDiseaseAnesthesiaItem(
-            title: 'Riskli Hasta Faktörleri',
-            description: 'Sigara 🚬, ileri yaş, obezite.',
+            title: "HASTA KAYNAKLI RİSK FAKTÖRLERİ",
+            description:
+                "Sigara kullanımı, ileri yaş ve obezite, perioperatif solunumsal komplikasyonların en güçlü belirleyicileridir.",
+            additionalInfo:
+                "Özellikle sigara kullanımı silier aktiviteyi bozar ve sekresyon artışına neden olur. İleri yaş ise akciğer elastikiyetini azaltarak kapanma kapasitesini artırır.",
           ),
           RespiratoryDiseaseAnesthesiaItem(
-            title: 'Riskli Cerrahiler',
-            description: 'Torasik + üst abdomen (FRK ↓ belirgin).',
+            title: "CERRAHİ PROSEDÜR VE RİSK DÜZEYİ",
+            description:
+                "Operasyon bölgesinin diyaframa yakınlığı, akciğer hacimlerindeki azalma oranını doğrudan etkiler.",
+            subtitle:
+                "Torasik ve üst abdominal cerrahilerde Fonksiyonel Rezidüel Kapasite (FRK) en çok düşen hacimdir",
+            additionalInfo:
+                "Cerrahi travmaya bağlı gelişen diyafram disfonksiyonu ve ağrı nedeniyle oluşan 'splinting', atelektazi riskini zirveye taşır.",
           ),
           RespiratoryDiseaseAnesthesiaItem(
-            title: 'Üst Abdomen Cerrahisi',
-            description: 'FRK ↓ en çok post-op 1. gün – etki 7-10 gün sürer.',
+            title: "ÜST ABDOMEN CERRAHİSİ VE FRK DEĞİŞİMİ",
+            description:
+                "Üst batın operasyonlarında FRK kaybı en belirgin düzeyine postoperatif birinci günde ulaşır.",
+            additionalInfo:
+                "Bu olumsuz etki genellikle 7-10 gün boyunca devam eder ve hastanın etkili öksürme ve derin nefes alma yeteneğini ciddi şekilde kısıtlar.",
           ),
         ],
       ),
@@ -48,10 +60,13 @@ class RespiratoryDiseaseAnesthesiaData {
         categoryName: 'Obstrüktif Akciğer Hastalıkları',
         items: [
           RespiratoryDiseaseAnesthesiaItem(
-            title: 'Genel Özellikler',
-            description: 'FEF%25-75 <70: Erken anomali (kadın >1.6 L/sn, erkek >2 L/sn normal).',
-            subtitle: 'İleri dönemde: FEV1 ↓ + FEV1/FVC <%70.',
-            additionalInfo: 'Hava hapsi → RV ↑ + TLC ↑.',
+            title: "OBSTRÜKTİF PATOLOJİ VE TEST KRİTERLERİ (FEV1/FVC)",
+            description:
+                "Küçük hava yollarındaki erken dönem anomaliler, FEF%25-75 değerinin %70'in altına düşmesiyle saptanır.",
+            subtitle:
+                "İleri obstrüksiyonda FEV1 azalırken FEV1/FVC oranı %70'in altında izlenir",
+            additionalInfo:
+                "Hava hapsine (air trapping) bağlı olarak rezidüel hacim (RV) ve toplam akciğer kapasitesi (TLC) artış gösterir. Normal FEF%25-75 değerleri kadınlarda >1.6 L/sn, erkeklerde >2 L/sn'dir.",
           ),
         ],
       ),
@@ -59,76 +74,116 @@ class RespiratoryDiseaseAnesthesiaData {
         categoryName: 'Astım',
         items: [
           RespiratoryDiseaseAnesthesiaItem(
-            title: 'Patofizyoloji',
-            description: 'Parasempatik ↑, IgE-mast hücre aktivasyonu → histamin, bradikinin, LT-C/D/E, PGD2, PAF → bronkokonstriksiyon.',
-            subtitle: 'Sabah saatleri: Bronşiyal tonus ↑ (diyurnal ritim).',
-            additionalInfo: 'Takipne → hipokapni tipik, PaCO2 normal/↑ = solunum yetmezliği gelişiyor ⚠️.',
+            title: "ASTIM PATOFİZYOLOJİSİ VE ARACILAR (IgE VE HİSTAMİN)",
+            description:
+                "Artmış parasempatik tonus ve IgE aracılı mast hücre aktivasyonu sonucu salınan mediatörler yaygın bronkokonstriksiyona yol açar.",
+            subtitle:
+                "Diyurnal ritim nedeniyle bronşiyal tonus sabah erken saatlerde en yüksek seviyededir",
+            additionalInfo:
+                "Takipneye bağlı hipokapni tipik bir bulgudur; astımlı bir hastada PaCO2'nin normale dönmesi veya yükselmesi solunum yetmezliği geliştiğine dair ciddi bir uyarıdır.",
           ),
           RespiratoryDiseaseAnesthesiaItem(
-            title: 'Tedavi',
-            description: 'β2 agonist: En etkili bronkodilatör.',
-            subtitle: 'Metilksantin: PDE inhibisyonu → cAMP ↑, diafram stimülasyonu.',
-            additionalInfo: 'Glukokortikoid: Antiinflamatuvar (inhaler: beklometazon, budesonid, flutikazon).',
+            title: "ASTIMDA FARMAKOLOJİK TEDAVİ VE BETA-2 AGONİSTLER",
+            description:
+                "Beta-2 agonistler, solunum yollarında en etkili ve hızlı bronkodilatasyonu sağlayan temel ilaç grubudur.",
+            subtitle:
+                "Metilksantinler PDE inhibisyonu yaparak cAMP düzeyini artırır ve diyafram stimülasyonu sağlarlar",
+            additionalInfo:
+                "Glukokortikoidler (Beklometazon, Budesonid, Flutikazon) antiinflamatuvar etkileriyle kronik yönetimde ve hava yolu duyarlılığını azaltmada kilit rol üstlenirler.",
           ),
           RespiratoryDiseaseAnesthesiaItem(
-            title: 'Antikolinerjik',
-            description: 'Refleks bronkospazmı çözer.',
+            title: "ANTİKOLİNERJİK AJANLARIN BRONKOSPAZMDAKİ ROLÜ",
+            description:
+                "İpratropium gibi antikolinerjik ilaçlar, özellikle refleks yolla gelişen bronkospazmın çözülmesinde etkilidirler.",
+            additionalInfo:
+                "Vagus aracılı bronş daralmasını engelleyerek astım ve KOAH alevlenmelerinde destekleyici tedavi sunarlar.",
           ),
           RespiratoryDiseaseAnesthesiaItem(
-            title: 'Anestezik Yaklaşım',
-            description: 'Kritik nokta: Havayolu enstrümantasyonu 🚨.',
-            subtitle: 'Maske ventilasyonu / rejyonal tercih edilir.',
-            additionalInfo: 'İndüksiyon: Sevofluran iyi seçenek.',
+            title: "ASTIMLI HASTADA ANESTEZİK YAKLAŞIM VE SEÇİMLER",
+            description:
+                "Astımlı hastalarda anestezi yönetiminin en kritik noktası, hava yolu enstrümantasyonunun tetikleyebileceği bronkospazmdır.",
+            subtitle:
+                "Mümkünse rejyonal anestezi veya maske ile ventilasyon (entübasyondan kaçınarak) tercih edilmelidir",
+            additionalInfo:
+                "Genel anestezi gerekiyorsa, Sevofluran güçlü bronkodilatör etkisi nedeniyle indüksiyonda mükemmel bir seçenektir.",
           ),
           RespiratoryDiseaseAnesthesiaItem(
-            title: 'Lidokain Kullanımı',
-            description: 'Lidokain düşük doz → anti-iritan; yetersiz doz → bronkospazm yapabilir.',
+            title: "LİDOKAİN KULLANIMI VE BRONŞİYAL İRRİTASYON",
+            description:
+                "İntravenöz lidokain düşük dozlarda anti-iritan etki göstererek hava yolu reflekslerini baskılar.",
+            additionalInfo:
+                "Ancak yetersiz dozda uygulanan lidokainin kendisi bronşiyal irritasyon yaparak bronkospazmı tetikleyebilir; dozaj dikkatli ayarlanmalıdır.",
           ),
           RespiratoryDiseaseAnesthesiaItem(
-            title: 'Ventilasyon Stratejisi',
-            description: 'Ekspirasyon süresi uzatılmalı → hava hapsi ↓.',
-            subtitle: 'İnhaler + volatil ↑ konsantrasyon = intraop BC tedavisi.',
+            title: "İNTRAOPERATİF VENTİLASYON STRATEJİLERİ",
+            description:
+                "Astımlı hastalarda ventilatör ayarları hava hapsini (auto-PEEP) önleyecek şekilde optimize edilmelidir.",
+            subtitle:
+                "Ekspirasyon süresi (I:E oranı) uzatılarak havanın tamamen dışarı çıkması sağlanmalıdır",
+            additionalInfo:
+                "Ameliyat sırasında gelişen bronkospazm tedavisinde inhaler ajanlar ve volatil anesteziklerin konsantrasyonu artırılmalıdır.",
           ),
         ],
       ),
       RespiratoryDiseaseAnesthesiaCategory(
-        categoryName: 'KOAH',
+        categoryName: 'Kronik Obstrüktif Akciğer Hastalığı (KOAH)',
         items: [
           RespiratoryDiseaseAnesthesiaItem(
-            title: 'Kronik Bronşit',
-            description: '≥2 yıl, her yıl ≥3 ay prodüktif öksürük.',
-            subtitle: 'Blue bloater: Hiperkapni + hipoksemi.',
+            title: "KRONİK BRONŞİT VE 'BLUE BLOATER' FENOTİPİ",
+            description:
+                "En az iki yıl üst üste, yılda en az üç ay süren prodüktif (balgamlı) öksürük ile karakterize tablodur.",
+            subtitle:
+                "Bu hastalarda yaygın olarak hiperkapni ve derin hipoksemi (Blue Bloater) görülür",
+            additionalInfo:
+                "Hava yollarındaki kronik inflamasyon ve mukus artışı, küçük hava yollarında obstrüksiyona ve V/Q dengesizliğine yol açar.",
           ),
           RespiratoryDiseaseAnesthesiaItem(
-            title: 'Amfizem',
-            description: 'Distal havayolu/alveol yıkımı (sigara: sentrilobüler; α1AT eksikliği: panlobüler).',
-            subtitle: 'V/Q bozukluğu + difüzyon ↓.',
-            additionalInfo: 'Pulmoner HT: Hafif, nadiren >40 mmHg. Pink puffer fenotipi.',
+            title: "AMFİZEM VE ALVEOLER YIKIM SÜRECİ",
+            description:
+                "Alveol duvarlarının kalıcı hasarı sonucu hava boşluklarının anormal genişlemesi ve geri dönüşsüz difüzyon kaybıdır.",
+            subtitle:
+                "Sigara 'sentrilobüler', alfa-1 antitripsin eksikliği ise 'panlobüler' amfizeme neden olur",
+            additionalInfo:
+                "Pink Puffer fenotipi ile karakterizedir; pulmoner hipertansiyon genellikle hafif seyreder (<40 mmHg). Efektif gaz değişim yüzeyi belirgin şekilde azalmıştır.",
           ),
           RespiratoryDiseaseAnesthesiaItem(
-            title: 'Tedavi',
-            description: 'Sigara bırakmak = hastalığın hızını ↓.',
-            subtitle: 'Bronkodilatörler semptomatik.',
-            additionalInfo: 'Hipoksemi (<55 mmHg): O2 (1-2 L/dk). Kor pulmonale: Diüretik.',
+            title: "KOAH TEDAVİSİ VE OKSİJEN DESTEĞİ",
+            description:
+                "Sigaranın bırakılması, hastalığın ilerleme hızını yavaşlattığı kanıtlanmış tek müdahaledir.",
+            subtitle:
+                "Kronik hipoksemisi (<55 mmHg) olan hastalarda günde 1-2 L/dk oksijen desteği sağkalımı artırır",
+            additionalInfo:
+                "Bronkodilatörler semptomatik rahatlama sağlar; eşlik eden kor pulmonale durumunda diüretik tedavisi eklenmelidir.",
           ),
           RespiratoryDiseaseAnesthesiaItem(
-            title: 'Anestezik Yaklaşım',
-            description: 'FEV1 <%50 → efor dispnesi; <%25 → minimal aktivitede dispne.',
-            subtitle: 'İndüksiyon öncesi preoksijenizasyon şart.',
+            title: "KOAH'LI HASTADA ANESTEZİ VE EFOR KAPASİTESİ",
+            description:
+                "Preoperatif dönemde FEV1 değerinin %50'nin altında olması efor dispnesinin, %25'in altı ise istirahat dispnesinin göstergesidir.",
+            additionalInfo:
+                "İndüksiyon öncesi denitrojenasyon ve preoksijenizasyon bu hastalar için hayati zaman kazandırır.",
           ),
           RespiratoryDiseaseAnesthesiaItem(
-            title: 'Hava Hapsini Azaltanlar',
-            description: 'Ekspirasyon süresi ↑',
-            subtitle: 'Permisif hiperkapni (PaCO2 ~70 mmHg tolere edilebilir)',
-            additionalInfo: 'Düşük eksternal PEEP',
+            title: "HAVA HAPSİNİ AZALTAN VENTİLASYON YÖNTEMLERİ",
+            description:
+                "KOAH'lı hastalarda ventilatörde ekspirasyon süresi artırılarak dinamik hiperenflasyonun önüne geçilir.",
+            subtitle:
+                "Permisif hiperkapni (PaCO2 ~70 mmHg'ye kadar) serebral pH korunduğu sürece tolere edilebilir",
+            additionalInfo:
+                "Düşük eksternal PEEP uygulanarak hastanın kendi iç PEEP'i (intrinsic PEEP) ile dengelenmesi hedeflenir.",
           ),
           RespiratoryDiseaseAnesthesiaItem(
-            title: 'N₂O Kontrendikasyonu',
-            description: 'N2O\'dan kaçınılmalı (büller, PHT).',
+            title: "AZOT PROTOKSİT (N2O) KONTRENDİKASYONU VE BÜLLER",
+            description:
+                "Amfizemli hastalardaki hava dolu büllerin içine N2O hızla dolarak bül rüptürüne veya tansiyon pnömotoraksa yol açabilir.",
+            additionalInfo:
+                "Ayrıca pulmoner hipertansiyonu olan hastalarda pulmoner vasküler direnci artırabileceği için N2O kullanımından kaçınılmalıdır.",
           ),
           RespiratoryDiseaseAnesthesiaItem(
-            title: 'Post-op Mekanik Ventilasyon Riski',
-            description: 'FEV1 <%50 + üst batın/torasik cerrahi.',
+            title: "POSTOPERATİF MEKANİK VENTİLASYON RİSK TAHMİNİ",
+            description:
+                "FEV1 değeri < %50 olan ve üst batın/toraks cerrahisi geçiren hastalarda ameliyat sonrası uzun süreli solunum desteği ihtiyacı yüksektir.",
+            additionalInfo:
+                "Erken mobilizasyon ve agresif ağrı kontrolü (epidural vb.) bu riski azaltan en önemli faktörlerdir.",
           ),
         ],
       ),
@@ -136,10 +191,13 @@ class RespiratoryDiseaseAnesthesiaData {
         categoryName: 'Restriktif Akciğer Hastalıkları',
         items: [
           RespiratoryDiseaseAnesthesiaItem(
-            title: 'Genel Özellikler',
-            description: 'FEV1 & FVC ↓, FEV1/FVC normal/↑.',
-            subtitle: 'Kompliyans ↓ → hızlı yüzeyel solunum.',
-            additionalInfo: 'Gaz değişimi genellikle geç döneme kadar normal.',
+            title: "RESTRİKTİF PATERN VE SOLUNUM MEKANİĞİ",
+            description:
+                "Akciğer kompliyansının azalması nedeniyle FEV1 ve FVC değerlerinin düştüğü, ancak FEV1/FVC oranının normal kaldığı tablodur.",
+            subtitle:
+                "Hacim kaybını kompanse etmek için hastalar tipik olarak hızlı ve yüzeyel bir solunum paterni sergilerler",
+            additionalInfo:
+                "Gaz değişimi genellikle hastalığın çok ileri evrelerine kadar korunur. Ana problem akciğeri şişirebilmek için gereken yüksek basınç ihtiyacıdır.",
           ),
         ],
       ),
@@ -147,29 +205,43 @@ class RespiratoryDiseaseAnesthesiaData {
         categoryName: 'Akut İntrensek Akciğer Hastalıkları',
         items: [
           RespiratoryDiseaseAnesthesiaItem(
-            title: 'ARDS Ventilasyon',
-            description: 'TV: 4–6 mL/kg',
-            subtitle: 'f: 14–18/dk',
-            additionalInfo: 'Pplat: ≤30 cmH2O',
+            title: "ARDS VENTİLASYON STRATEJİSİ VE KORUYUCU AYARLAR",
+            description:
+                "ARDS'li hastalarda akciğeri volütravmadan korumak için düşük tidal hacimli (4–6 mL/kg) ventilasyon altın standarttır.",
+            subtitle:
+                "Plato basıncı (Pplat) 30 cmH2O değerinin altında tutulmaya çalışılmalıdır",
+            additionalInfo:
+                "Solunum frekansı dakikada 14–18 olacak şekilde ayarlanarak yeterli dakika ventilasyonu sağlanmalıdır.",
           ),
           RespiratoryDiseaseAnesthesiaItem(
-            title: 'Post-op Destek',
-            description: 'Post-op yoğun bakım desteği planlanmalı.',
+            title: "POSTOPERATİF YOĞUN BAKIM VE DESTEK PLANI",
+            description:
+                "Akut akciğer hasarı olan hastaların operasyon sonrası mutlaka yoğun bakım ünitesinde izlenmesi ve ventilatör desteğinin devamı planlanmalıdır.",
+            additionalInfo:
+                "Sıvı yönetimi 'kuru' tutma prensibiyle (akciğer ödemini azaltmak için) titizlikle yürütülmelidir.",
           ),
         ],
       ),
       RespiratoryDiseaseAnesthesiaCategory(
-        categoryName: 'Kronik İntrensek (İnterstisyel)',
+        categoryName: 'Kronik İntrensek (İnterstisyel) Akciğer Hastalıkları',
         items: [
           RespiratoryDiseaseAnesthesiaItem(
-            title: 'Ciddi Disfonksiyon',
-            description: 'VC <15 mL/kg (normal ~70 mL/kg) → ciddi disfonksiyon.',
-            subtitle: 'İndüksiyon → hipoksemi riski yüksek (FRK ↓).',
+            title: "CİDDİ SOLUNUMSAL DİSFONKSİYON KRİTERLERİ",
+            description:
+                "Vital kapasitenin (VC) 15 mL/kg'ın altına düşmesi, hastanın cerrahi stresi tolere edemeyeceğinin güçlü bir göstergesidir.",
+            subtitle:
+                "Normal VC değeri yaklaşık 70 mL/kg'dır; ciddi azalmış FRK nedeniyle indüksiyonda hipoksemi riski çok yüksektir",
+            additionalInfo:
+                "İnterstisyel fibrozis nedeniyle akciğerler sertleşmiştir ve küçük tidal hacimler gerektirir.",
           ),
           RespiratoryDiseaseAnesthesiaItem(
-            title: 'Bleomisin Öyküsü',
-            description: 'FiO2 olabildiğince düşük (SpO2 %88–92 aralığında tut).',
-            subtitle: 'Gerekirse İ:E=1:1 veya ters oranlı ventilasyon.',
+            title: "BLEOMİSİN ÖYKÜSÜ VE OKSİJEN TOKSİSİTESİNDEN KORUNMA",
+            description:
+                "Daha önce Bleomisin tedavisi almış hastalarda, yüksek oksijen konsantrasyonları ölümcül akciğer fibrozisini tetikleyebilir.",
+            subtitle:
+                "İntraoperatif FiO2 olabildiğince düşük tutulmalı ve SpO2 %88–92 aralığında hedeflenmelidir",
+            additionalInfo:
+                "Gerekirse doku oksijenasyonunu korumak için 1:1 veya ters oranlı (inverse) ventilasyon teknikleri uygulanabilir.",
           ),
         ],
       ),
@@ -177,52 +249,85 @@ class RespiratoryDiseaseAnesthesiaData {
         categoryName: 'Pulmoner Emboli',
         items: [
           RespiratoryDiseaseAnesthesiaItem(
-            title: 'Patofizyoloji',
-            description: 'PaCO2 genelde ↑, fakat klinikte hipoksemi ön planda.',
-            subtitle: 'V/Q bozukluğu → refleks vazokonstriksiyon + BC.',
-            additionalInfo: '24–48 sa → sürfaktan kaybı, atelektazi.',
+            title: "PULMONER EMBOLİ PATOFİZYOLOJİSİ VE V/Q BOZUKLUĞU",
+            description:
+                "Emboli sonrası tıkanan damarların beslediği alveoller havalanmaya devam ederken kanlanamaz (ölü boşluk).",
+            subtitle:
+                "Refleks vazokonstriksiyon ve bronkospazm (BC) tablonun daha da ağırlaşmasına neden olur",
+            additionalInfo:
+                "Vakadan 24–48 saat sonra sürfaktan kaybına bağlı atelektaziler gelişir; PaCO2 genellikle yükselse de klinikte derin hipoksemi hakimdir.",
           ),
           RespiratoryDiseaseAnesthesiaItem(
-            title: 'Dolaşım Tıkanıklığı',
-            description: 'Sağlıklı → %50 dolaşım tıkanıklığı → PHT; hasta bireylerde daha azıyla olur.',
+            title: "DOLAŞIM TIKANIKLIĞI VE PULMONER HİPERTANSİYON",
+            description:
+                "Sağlıklı bireylerde pulmoner dolaşımın %50'si kapandığında pulmoner HT ve sağ kalp yüklenmesi başlar.",
+            additionalInfo:
+                "Önceden kalp-akciğer hastalığı olan bireylerde, bu kritik tablo çok daha az orandaki bir tıkanıklıkla ortaya çıkabilir.",
           ),
           RespiratoryDiseaseAnesthesiaItem(
-            title: 'Semptomlar',
-            description: 'Ani dispne, takipne, göğüs ağrısı, hemoptizi.',
+            title: "EMBOLİ SEMPTOMLARI VE KLİNİK BULGULAR",
+            description:
+                "Aniden gelişen dispne (nefes darlığı), takipne (hızlı solunum) ve göğüs ağrısı embolinin klasik triadıdır.",
+            additionalInfo:
+                "Bazı vakalarda bu tabloya hemoptizi (kanlı balgam) ve senkop (bayılma) eşlik edebilir.",
           ),
           RespiratoryDiseaseAnesthesiaItem(
-            title: 'ABG Bulguları',
-            description: 'Respiratuvar alkaloz + hipoksemi.',
+            title: "ARTER KAN GAZI (ABG) VE TANI KOYUCU BULGULAR",
+            description:
+                "Pulmoner embolide tipik kan gazı bulgusu, respiratuvar alkaloz ile birlikte görülen hipoksemidir.",
+            additionalInfo:
+                "Alveoler-arteriyel (A-a) oksijen gradiyentindeki artış, tanıyı destekleyen güçlü bir veridir.",
           ),
           RespiratoryDiseaseAnesthesiaItem(
-            title: 'EKG Bulguları',
-            description: 'Sağ aks deviasyonu, RBBB, sivri T.',
+            title: "EKG BULGULARI VE SAĞ KALP YÜKLENMESİ",
+            description:
+                "Akut sağ kalp zorlanmasına bağlı olarak EKG'de sağ aks deviasyonu, sağ dal bloğu (RBBB) ve sivri T dalgaları görülebilir.",
+            additionalInfo:
+                "En meşhur EKG bulgusu S1Q3T3 paternidir ancak bu her vakada görülmeyebilir.",
           ),
           RespiratoryDiseaseAnesthesiaItem(
-            title: 'Tanı',
-            description: 'BT anjio pratik (Altın standart: Pulmoner anjio).',
+            title: "TANI YÖNTEMLERİ VE ALTIN STANDART (ANJİOGRAFİ)",
+            description:
+                "BT Anjiyografi pratiklik ve hız nedeniyle ilk tercihtir; ancak tanı koyulamayan zor vakalarda altın standart pulmoner anjiyografidir.",
+            additionalInfo:
+                "D-dimer testi düşük riskli hastalarda dışlayıcı bir faktör olarak kullanılabilir.",
           ),
           RespiratoryDiseaseAnesthesiaItem(
-            title: 'DVT Önleme',
-            description: 'Elastik bant, pnömotik kompresyon, mobilizasyon.',
+            title: "DERİN VEN TROMBOZU (DVT) ÖNLEME YÖNTEMLERİ",
+            description:
+                "Perioperatif dönemde DVT riskini azaltmak için elastik bantlar, pnömotik kompresyon cihazları ve erken mobilizasyon şarttır.",
+            additionalInfo:
+                "Cerrahi hastasında tromboemboli profilaksisi hayati bir güvenlik standardıdır.",
           ),
           RespiratoryDiseaseAnesthesiaItem(
-            title: 'Heparin Tedavisi',
-            description: 'Heparin → aPTT 1.5–2.5 kat normal.',
-            subtitle: 'LMWH başlanmalı (pre-op 12 sa, post-op 12–24 sa).',
+            title: "HEPARİN TEDAVİSİ VE LABORATUVAR TAKİBİ (APTT)",
+            description:
+                "Akut emboli tedavisinde heparin, aPTT değerini normalin 1.5–2.5 katı düzeyinde tutacak şekilde infüze edilir.",
+            subtitle:
+                "Düşük molekül ağırlıklı heparinler (LMWH) operasyonun 12 saat öncesinde kesilmeli ve cerrahi sonrası 12-24. saatte başlanmalıdır",
+            additionalInfo:
+                "Antikoagülan dozajı, kanama riski ile tromboz riski arasındaki hassas dengede yönetilmelidir.",
           ),
           RespiratoryDiseaseAnesthesiaItem(
-            title: 'Köprü Tedavisi',
-            description: 'Heparin + warfarin → INR terapötik düzey.',
+            title: "KÖPRÜ TEDAVİSİ (HEPARİN VE WARFARİN)",
+            description:
+                "Warfarin etkisi başlayana kadar heparin desteği sürdürülür (köprüleme); INR terapötik düzeye gelince heparin kesilir.",
+            additionalInfo:
+                "Warfarin kullanımı perioperatif dönemde kanama riski nedeniyle genellikle kesilip yerine heparin başlanarak yönetilir.",
           ),
           RespiratoryDiseaseAnesthesiaItem(
-            title: 'Anestezi',
-            description: 'Akut ataktan 1 yıl sonra cerrahi riski düşük.',
+            title: "EMBOLİ ÖYKÜSÜ VE CERRAHİ ZAMANLAMA",
+            description:
+                "Akut bir emboli atağından yaklaşık bir yıl sonra yapılacak cerrahi girişimlerin emboli tekrarlama riski oldukça düşüktür.",
+            additionalInfo:
+                "Erken dönemdeki zorunlu ameliyatlarda ise vena cava filtreleri veya sıkı antikoagülasyon protokolleri düşünülmelidir.",
           ),
           RespiratoryDiseaseAnesthesiaItem(
-            title: 'İntraop Emboli Belirtisi',
-            description: 'Ani hipotansiyon + hipoksemi + bronkospazm',
-            subtitle: 'EtCO2 düşmesi 🚨',
+            title: "İNTRAOPERATİF EMBOLİ BELİRTİLERİ VE ETCO2 TAKİBİ",
+            description:
+                "Ameliyat sırasında aniden gelişen hipotansiyon, hipoksemi ve bronkospazm tablosuna EtCO2 değerindeki ani düşüş eşlik ediyorsa pulmoner emboliden şüphelenilmelidir.",
+            additionalInfo:
+                "EtCO2 düşmesi, ölü boşluk artışının bir sonucu olarak intraoperatif dönemdeki en spesifik emboli işaretidir.",
           ),
         ],
       ),

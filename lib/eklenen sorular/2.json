@@ -1,0 +1,686 @@
+{
+  "meta": {
+    "title": "Ameliyathane Ortamı ve Anestezi Cihazları Soru Bankası",
+    "language": "tr",
+    "questionCount": 45,
+    "randomized": true,
+    "containsSourceFields": false
+  },
+  "questions": [
+    {
+      "id": 1,
+      "question": "Medikal gaz silindirlerinin karakteristik özellikleri ile ilgili verilen bilgilerden hangisi yanlıştır?",
+      "options": [
+        "O2, hava ve N2 E-silindirleri 625-700 L; N2O E-silindiri ortalama 1590 L içerir",
+        "O2, hava ve N2 silindirlerinin 20°C’deki basınçları 1800-2200 psig, N2O’nun basıncı 745 psig’dir",
+        "Uluslararası silindir renkleri; O2 için beyaz, hava için beyaz-siyah, N2O için mavi ve N2 için siyahtır",
+        "O2, hava, N2 ve N2O silindirlerinin formları gazdır",
+        "Medikal havanın kritik sıcaklığı yaklaşık -140.6°C’dir"
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 2,
+      "explanation": "N2O silindirleri oda sıcaklığında sıvı-gaz dengesi halinde bulunur; bu nedenle tüm bu silindirlerin sadece gaz formunda olduğu ifadesi yanlıştır.",
+      "category": "Ameliyathane Ortamı ve Anestezi Cihazları"
+    },
+    {
+      "id": 2,
+      "question": "Yangın üçlüsü veya yangın üçgeni olarak adlandırılan kimyasal kombinasyonda hangileri yer alır? I. Yakıt II. Oksitleyici III. Ateşleme kaynağı (ısı) IV. Koter plağı",
+      "options": [
+        "Yalnız I",
+        "I-III",
+        "II-IV",
+        "I-II-III",
+        "Hepsi"
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 2,
+      "explanation": "Yangın üçgeni yakıt, oksitleyici ve ateşleme kaynağından oluşur. Koter plağı yangın üçgeninin temel bileşeni değildir.",
+      "category": "Ameliyathane Ortamı ve Anestezi Cihazları"
+    },
+    {
+      "id": 3,
+      "question": "Cerrahi yangın için en yaygın risk faktörü hangisidir?",
+      "options": [
+        "O2’nin açıktan verilmesi",
+        "Elektrik hatlarındaki kaçaklar",
+        "Personel dikkatsizliği",
+        "Odadaki silindirlerin yanlış konumlandırılması",
+        "Koter plağının yanlış yerleştirilmesi"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 2,
+      "explanation": "Cerrahi yangınlarda en yaygın risk faktörlerinden biri oksijenin açık sistemden verilmesi ve cerrahi alanda oksijen zenginleşmesi oluşturmasıdır.",
+      "category": "Ameliyathane Ortamı ve Anestezi Cihazları"
+    },
+    {
+      "id": 4,
+      "question": "Bir E-silindirinin yaklaşık olarak yarısının dolu olduğunu ve yaklaşık 330 L oksijen içerdiğini gösteren basınç değeri kaç psig’dir?",
+      "options": [
+        "1000",
+        "100",
+        "10",
+        "1",
+        "745"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 2,
+      "explanation": "Oksijen E-silindiri tam doluyken yaklaşık 2000 psig ve 660 L oksijen içerir. Yarı dolu olduğunda basınç yaklaşık 1000 psig ve hacim yaklaşık 330 L’dir.",
+      "category": "Ameliyathane Ortamı ve Anestezi Cihazları"
+    },
+    {
+      "id": 5,
+      "question": "Aşağıdakilerden hangisi ameliyathane yangınları ve patlamalarına potansiyel olarak katkıda bulunmaz?",
+      "options": [
+        "Endotrakeal tüpler",
+        "Kanüller",
+        "Bağırsak gazları",
+        "Saç",
+        "Vakum sistemi"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 2,
+      "explanation": "Vakum sistemi yanıcı veya oksitleyici bir materyal değildir; bu nedenle yangın üçgenine doğrudan katkıda bulunmaz.",
+      "category": "Ameliyathane Ortamı ve Anestezi Cihazları"
+    },
+    {
+      "id": 6,
+      "question": "\"Adiabatik kompresyon\" prensibine göre, bir oksijen silindirinin vana anahtarı çok hızlı açıldığında regülatör içindeki gazın sıcaklığının aniden yükselerek yangına yol açma riski hangi fiziksel olayla açıklanır?",
+      "options": [
+        "Joule-Thomson etkisi",
+        "Charles yasası",
+        "Boyle-Mariotte yasası",
+        "Gay-Lussac yasası",
+        "Bernoulli prensibi"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Gazların hızla genleşmesi veya sıkışması sırasında ısı alışverişi olmadan gerçekleşen sıcaklık değişimi bu riskin temelini oluşturur.",
+      "category": "Ameliyathane Ortamı ve Anestezi Cihazları"
+    },
+    {
+      "id": 7,
+      "question": "Bir anestezi cihazında duvar hattı (pipeline) basıncı 50 psig, yedek oksijen silindiri (E-tüpü) basıncı ise 1900 psig’dir. Her iki kaynak da açıkken cihazın öncelikle duvar gazını kullanmasını sağlayan mekanizma hangisidir?",
+      "options": [
+        "Silindir regülatörünün basıncı 45 psig’e düşürmesi",
+        "Check-valf sisteminin yüksek basıncı engellemesi",
+        "Oksijen flush valfinin önceliği",
+        "PISS (Pin Index) sistemi",
+        "İkinci kademe regülatörün bypass edilmesi"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Cihazdaki silindir regülatörü tüp basıncını duvar basıncının hemen altına, yaklaşık 45 psig’e düşürür. Böylece duvar gazı kesilmedikçe silindirden gaz çekilmez.",
+      "category": "Ameliyathane Ortamı ve Anestezi Cihazları"
+    },
+    {
+      "id": 8,
+      "question": "Ameliyathane havalandırmasında HEPA filtreler hava akımının neresinde konumlandırılır?",
+      "options": [
+        "Egzost çıkışında",
+        "Taze hava giriş menfezlerinde, genellikle tavanda",
+        "Sadece koridorlarda",
+        "Sterilizatörlerin içinde",
+        "Cihazların üzerinde"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Steril alana giren havanın son aşamada temizlenmesi için HEPA filtreler genellikle tavandaki taze hava giriş noktalarında konumlandırılır.",
+      "category": "Ameliyathane Ortamı ve Anestezi Cihazları"
+    },
+    {
+      "id": 9,
+      "question": "Ameliyathanelerde kullanılan scavenging sisteminin temel görevi nedir?",
+      "options": [
+        "Hastanın CO2’sini filtrelemek",
+        "Ortama yayılan atık anestezik gazları toplayıp dışarı atmak",
+        "Oksijen basıncını artırmak",
+        "Nemlendirme sağlamak",
+        "Odayı soğutmak"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Scavenging sistemleri personel sağlığı açısından ortama yayılan atık anestezik gazları toplamak ve dışarı uzaklaştırmak için kullanılır.",
+      "category": "Ameliyathane Ortamı ve Anestezi Cihazları"
+    },
+    {
+      "id": 10,
+      "question": "Ekipman veya sistem arızasının hastalarda ya da bakım verenlerde ciddi yaralanma veya ölüme neden olma olasılığının yüksek olduğu tesis sistemleri, NFPA 99 Sağlık Hizmetleri Tesisleri Kodunda hangi risk kategorisinde yer alır?",
+      "options": [
+        "Kategori 1",
+        "Kategori 2",
+        "Kategori 3",
+        "Kategori 4",
+        "Kategori 5"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 2,
+      "explanation": "Arızalanması halinde ciddi yaralanma veya ölüm olasılığı yüksek olan sistemler NFPA 99 kapsamında Kategori 1 tesis sistemleri olarak değerlendirilir.",
+      "category": "Ameliyathane Ortamı ve Anestezi Cihazları"
+    },
+    {
+      "id": 11,
+      "question": "Aşağıdakilerden hangisi veya hangileri tıbbi lazerlerin güvenli çalışması için önemli hususlardandır? I. Lazerin tipi II. Lazerin gücü III. Dalga boyu IV. Odak uzaklığı",
+      "options": [
+        "Yalnız I",
+        "II-IV",
+        "I-III-IV",
+        "I-IV",
+        "Yalnız III"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 2,
+      "explanation": "Tıbbi lazerlerin güvenli kullanımında lazerin tipi, dalga boyu ve odak uzaklığı temel güvenlik parametreleridir.",
+      "category": "Ameliyathane Ortamı ve Anestezi Cihazları"
+    },
+    {
+      "id": 12,
+      "question": "Yoğun bakım ünitesinden santral venöz kateter üzerinden geçici pacemaker takılı bir hasta acil operasyon için ameliyathaneye alınıyor. Operasyon sırasında hat izolasyon monitörü (LIM) alarm veriyor ancak cihazlar çalışmaya devam ediyor. Bu hastada elektrik güvenliği açısından en kritik risk ve yaklaşım hangisidir?",
+      "options": [
+        "LIM alarmı sistemde mikroşok gerçekleştiğini kanıtlar; hasta derhal topraklanmalıdır",
+        "Kalbe direkt iletim yolu olduğu için 10 µA kadar düşük kaçak akımlar bile ventriküler fibrilasyona, yani mikroşoka yol açabilir",
+        "LIM alarm verdiği anda ameliyathanedeki tüm elektrik akımı otomatik olarak kesileceğinden yedek jeneratör beklenmelidir",
+        "LIM alarmı genellikle 100 mA eşiğinde çalar; bu değer makroşok için güvenlidir",
+        "En son takılan cihazın fişi derhal çekilmelidir; çünkü LIM alarmı sistemdeki ikinci bir hatanın oluştuğunu gösterir"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 4,
+      "explanation": "Kalbe doğrudan iletim yolu bulunan hastalarda çok düşük kaçak akımlar bile mikroşok ile ventriküler fibrilasyona neden olabilir. LIM alarmı genellikle ilk izolasyon hatasını gösterir; cihazlar çalışmaya devam eder, ancak ikinci bir hata ciddi risk oluşturabilir.",
+      "category": "Ameliyathane Ortamı ve Anestezi Cihazları"
+    },
+    {
+      "id": 13,
+      "question": "Aşağıdakilerden hangisi ameliyathane yangınları ve patlamalarına potansiyel olarak katkıda bulunmaz?",
+      "options": [
+        "Alkol",
+        "Klorheksidin",
+        "Cerrahi örtüler",
+        "Cerrahi önlükler",
+        "Hava"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 2,
+      "explanation": "Normal hava yaklaşık %21 oksijen içerir ve tek başına yangın riskini belirgin biçimde artıran bir faktör olarak kabul edilmez.",
+      "category": "Ameliyathane Ortamı ve Anestezi Cihazları"
+    },
+    {
+      "id": 14,
+      "question": "Sıvı oksijen için kritik sıcaklık kaç derecedir?",
+      "options": [
+        "-25°C",
+        "-18°C",
+        "+25°C",
+        "-25°C",
+        "-119°C"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 2,
+      "explanation": "Oksijenin kritik sıcaklığı yaklaşık -119°C’dir. Gazlar ancak kritik sıcaklıklarının altında basınçla sıvılaştırılabilir.",
+      "category": "Ameliyathane Ortamı ve Anestezi Cihazları"
+    },
+    {
+      "id": 15,
+      "question": "Ameliyathanede koter (elektrokoter) dumanının solunması hangi riski taşımaz?",
+      "options": [
+        "Viral partiküllerin, örneğin HPV’nin taşınması",
+        "Mutajenik kimyasallara maruziyet",
+        "İritasyon ve bronkospazm",
+        "Malign hipertermi tetiklenmesi",
+        "Görüş alanının kısıtlanması"
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "Koter dumanı viral partikül ve kimyasal maruziyet gibi riskler taşıyabilir; ancak malign hipertermi tetikleyicisi değildir.",
+      "category": "Ameliyathane Ortamı ve Anestezi Cihazları"
+    },
+    {
+      "id": 16,
+      "question": "Aşağıdakilerden hangisi diyatermi yanıklarını önlemek amacıyla alınacak önlemler arasında yer almaz?",
+      "options": [
+        "Uygun dönüş elektrodu yerleşimi",
+        "Protezlerden kaçınma",
+        "Kemik çıkıntılarından kaçınma",
+        "Hasta-toprak temasının ortadan kaldırılması",
+        "Dönüş elektrodunun kalbe yakın yerleştirilmesi"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 2,
+      "explanation": "Diyatermi yanıklarını önlemek için uygun dönüş elektrodu yerleşimi, protez ve kemik çıkıntılarından kaçınma, hasta-toprak temasının ortadan kaldırılması önemlidir. Dönüş elektrodunu kalbe yakın yerleştirmek uygun bir önlem değildir.",
+      "category": "Ameliyathane Ortamı ve Anestezi Cihazları"
+    },
+    {
+      "id": 17,
+      "question": "Aşağıdakilerden hangisi ekip kaynak yönetimi (CRM) ilkelerinden biri değildir?",
+      "options": [
+        "Uyarlanabilirlik/esneklik",
+        "Atılganlık/iletişim",
+        "Karar verme/liderlik",
+        "Analiz/farkındalık",
+        "Güvenlik/uyarı"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 2,
+      "explanation": "CRM’in temel ilkeleri uyarlanabilirlik/esneklik, atılganlık, iletişim, karar verme, liderlik, analiz ve durumsal farkındalıktır. Güvenlik/uyarı bu listede bağımsız bir CRM ilkesi olarak yer almaz.",
+      "category": "Ameliyathane Ortamı ve Anestezi Cihazları"
+    },
+    {
+      "id": 18,
+      "question": "Yüz bölgesinde, ksifoid üzeri bir kitle eksizyonu sırasında hastaya açık sistemden %60 oksijen verilirken monopolar elektrokoter kullanımıyla parlama meydana geliyor. Yangın üçgenine göre doğru eşleştirme hangisidir?",
+      "options": [
+        "Oksitleyici: hava (%21 O2) / Yakıt: cerrahi aletler / Ateşleme kaynağı: lazer",
+        "Oksitleyici: azot protoksit / Yakıt: vakum sistemi / Ateşleme kaynağı: statik elektrik",
+        "Oksitleyici: açık sistem O2 (%60) / Yakıt: cerrahi örtüler veya hastanın kılları / Ateşleme kaynağı: elektrokoter",
+        "Oksitleyici: karbondioksit / Yakıt: alkol bazlı dezenfektan / Ateşleme kaynağı: LED ışık kaynağı",
+        "Oksitleyici: HEPA filtre edilmiş hava / Yakıt: endotrakeal tüp / Ateşleme kaynağı: bimetalik şerit"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 4,
+      "explanation": "Cerrahi yangın üçgeni oksitleyici, yakıt ve ateşleme kaynağından oluşur. Açık sistemle verilen yüksek konsantrasyonlu oksijen oksitleyicidir; örtüler, kıllar veya alkol bazlı solüsyonlar yakıt olabilir; elektrokoter ise ateşleme kaynağıdır.",
+      "category": "Ameliyathane Ortamı ve Anestezi Cihazları"
+    },
+    {
+      "id": 19,
+      "question": "Bir anestezi makinesinde hypoxic guard sistemi ne zaman devreye girer?",
+      "options": [
+        "Oksijen tüpü bittiğinde",
+        "Azot protoksit (N2O) akımı oksijene göre %75’in, yani 3:1 oranının üzerine çıkarılmaya çalışıldığında",
+        "Hava akımı kesildiğinde",
+        "Elektrikler kesildiğinde",
+        "Karbondioksit yükseldiğinde"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Hypoxic guard sistemi hipoksik karışım verilmesini önlemek için N2O ve O2 akışmetrelerini mekanik veya elektronik olarak birbirine bağlar.",
+      "category": "Ameliyathane Ortamı ve Anestezi Cihazları"
+    },
+    {
+      "id": 20,
+      "question": "Ameliyathane ekipmanlarında izin verilen maksimum kaçak akım kaç µA’dir?",
+      "options": [
+        "1",
+        "10",
+        "100",
+        "1000",
+        "10000"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 2,
+      "explanation": "Ameliyathane ekipmanlarında izin verilen maksimum kaçak akım genellikle 10 µA düzeyindedir.",
+      "category": "Ameliyathane Ortamı ve Anestezi Cihazları"
+    },
+    {
+      "id": 21,
+      "question": "Sıvı nitröz oksit tükendiğinde ve tank basıncı düşmeye başladığında silindirde yaklaşık ne kadar nitröz oksit kalır?",
+      "options": [
+        "745 L",
+        "1800 L",
+        "330 L",
+        "450 L",
+        "400 L"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 2,
+      "explanation": "Sıvı faz tükendikten sonra basınç düşmeye başlar; bu aşamada silindirde yaklaşık 400 L nitröz oksit kalmış kabul edilir.",
+      "category": "Ameliyathane Ortamı ve Anestezi Cihazları"
+    },
+    {
+      "id": 22,
+      "question": "Medikal gazların merkezi kaynaklarından ameliyathaneye boru ağı ile iletilmesinde sistem basıncı için kriter değer ne olmalıdır?",
+      "options": [
+        ">5 psig",
+        "<5 psig",
+        "<3 psig",
+        ">3 psig",
+        "<745 psig"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 2,
+      "explanation": "Merkezi medikal gaz sistemlerinde gazın ameliyathaneye güvenli iletimi için sistem basıncının 5 psig’in üzerinde olması beklenir.",
+      "category": "Ameliyathane Ortamı ve Anestezi Cihazları"
+    },
+    {
+      "id": 23,
+      "question": "Bir E-silindirinin üzerindeki PISS (Pin Index Safety System) delikleri oksijen için hangi numaralı pozisyonlardadır?",
+      "options": [
+        "1 ve 5",
+        "2 ve 5",
+        "3 ve 5",
+        "1 ve 6",
+        "2 ve 4"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Oksijen silindirleri için Pin Index Safety System pozisyonları 2 ve 5’tir.",
+      "category": "Ameliyathane Ortamı ve Anestezi Cihazları"
+    },
+    {
+      "id": 24,
+      "question": "Bir anestezi makinesinde \"Hava\" (Air) akışmetresi tamamen açıldığında, hastaya ulaşan karışımın içindeki nitrojen (N2) oranı yaklaşık olarak yüzde kaçtır?",
+      "options": [
+        "%21",
+        "%50",
+        "%78",
+        "%100",
+        "%0"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Medikal hava yaklaşık %21 oksijen ve %78-79 nitrojen içerir. Sadece hava açıldığında nitrojen oranı atmosferik düzeye yakın kalır.",
+      "category": "Ameliyathane Ortamı ve Anestezi Cihazları"
+    },
+    {
+      "id": 25,
+      "question": "Desfluran vaporizatörleri neden elektronik ısıtma sistemine sahiptir?",
+      "options": [
+        "Desfluranın kaynama noktası oda sıcaklığına (23.5°C) çok yakın olduğu için kontrolsüz buharlaşmayı önlemek amacıyla",
+        "Desfluranın çok ucuz bir ajan olması nedeniyle tasarruf sağlamak için",
+        "Desfluranın kokusunu azaltmak için",
+        "Kas gevşetici etkisini artırmak için",
+        "Soda-lime ile reaksiyona girmesini önlemek için"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Desfluranın kaynama noktası düşük ve oda sıcaklığına çok yakındır. Bu nedenle klasik vaporizatörlerde güvenli biçimde dozlanamaz; sabit ısı ve basınç altında tutulması gerekir.",
+      "category": "Ameliyathane Ortamı ve Anestezi Cihazları"
+    },
+    {
+      "id": 26,
+      "question": "Bir güvenlik özelliği olarak, hangi gazın E-silindirlerinde Wood’s metalinden yapılmış bir fiş bulunur?",
+      "options": [
+        "CO2",
+        "N2O",
+        "O2",
+        "N2",
+        "Hava"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 2,
+      "explanation": "Oksijen E-silindirlerinde güvenlik amacıyla Wood’s metalinden yapılmış bir eriyebilir fiş bulunabilir.",
+      "category": "Ameliyathane Ortamı ve Anestezi Cihazları"
+    },
+    {
+      "id": 27,
+      "question": "Ortopedik protez cerrahisi yapılan bir odada HEPA filtreler ve tavandan yere dikey hava akımı bulunmaktadır. Operasyon sırasında kapının sık sık açık bırakıldığı gözlemleniyor. Ameliyathane ortam standartları açısından hangisi yanlıştır?",
+      "options": [
+        "Kapının açık tutulması pozitif basınçlı ortamı bozarak koridordan partikül girişine neden olur",
+        "HEPA filtreleri mühendislik standartları gereği her ameliyathanede zorunlu değildir ancak sıklıkla tercih edilir",
+        "Ameliyathanede saatte yaklaşık 20 hava hacmi değişimi sağlanarak durgunluk ve bakteri üremesi azaltılır",
+        "Hava kalitesini korumak için partikülleri %90 oranında süzen filtreler yeterli kabul edilebilir",
+        "Kapının açık kalması laminer akımı bozsa da odadaki nem oranının %60’ın üzerine çıkmasını engelleyerek steriliteyi artırır"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 4,
+      "explanation": "Kapının açık kalması steriliteyi artırmaz; pozitif basıncı ve laminer akımı bozar. Ameliyathane nemi genellikle %20-60 arasında tutulmalıdır; kapı disiplini kontaminasyonu azaltmak için önemlidir.",
+      "category": "Ameliyathane Ortamı ve Anestezi Cihazları"
+    },
+    {
+      "id": 28,
+      "question": "Aşağıdakilerden hangisi veya hangileri ameliyathane yangınları ve patlamalarına potansiyel olarak katkıda bulunur? I. Oksijen II. Lazerler III. Nitröz oksit IV. Harici defibrilatörler V. Fiberoptik ışık kaynakları (distal uç)",
+      "options": [
+        "II-IV",
+        "III-V",
+        "I-II-V",
+        "I-IV",
+        "Hepsi"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 2,
+      "explanation": "Oksijen ve nitröz oksit oksitleyici; lazerler, harici defibrilatörler ve fiberoptik ışık kaynakları ateşleme kaynağı olabilir. Bu nedenle tümü katkıda bulunabilir.",
+      "category": "Ameliyathane Ortamı ve Anestezi Cihazları"
+    },
+    {
+      "id": 29,
+      "question": "Bir hastada N2O kullanımı sırasında difüzyon hipoksisi (Fink etkisi) gelişmesini önlemek için anestezi sonlandırıldığında yapılması gereken en doğru uygulama nedir?",
+      "options": [
+        "%100 oksijen ile 5-10 dakika solutmak",
+        "Pozitif basınçlı ventilasyona geçmek",
+        "Hastayı Trendelenburg pozisyonuna almak",
+        "Dakika ventilasyonunu %50 artırmak",
+        "Karbondioksit absorbanını değiştirmek"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "N2O kanda az çözündüğü için hızla alveollere geri döner ve alveoler oksijeni dilüe edebilir. Bunu önlemek için anestezi sonunda %100 oksijen verilmelidir.",
+      "category": "Ameliyathane Ortamı ve Anestezi Cihazları"
+    },
+    {
+      "id": 30,
+      "question": "Ameliyathanede izole güç sistemi (IPS) ve hat izolasyon monitörü (LIM) kullanımı ile ilgili hangisi doğrudur?",
+      "options": [
+        "LIM alarm verdiğinde ameliyathanedeki elektrik otomatik olarak kesilir",
+        "LIM sadece mikroşok riskini tamamen ortadan kaldırır",
+        "LIM alarmı, genellikle 5 mA eşiğinde, sistemde bir ilk hata (ground fault) olduğunu gösterir ancak cihazlar çalışmaya devam eder",
+        "LIM koter yanıklarını önlemek için tasarlanmıştır",
+        "LIM alarmı çaldığında tüm cihazlar fişten çekilmelidir"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "LIM alarmı sistemin artık tam izole olmadığını ve ikinci bir hata durumunda şok riski oluşabileceğini bildirir. Ancak operasyonun güvenle tamamlanması için elektrik otomatik olarak kesilmez.",
+      "category": "Ameliyathane Ortamı ve Anestezi Cihazları"
+    },
+    {
+      "id": 31,
+      "question": "Nitröz oksidin kritik sıcaklığı ile ilgili en doğru ifade hangisidir?",
+      "options": [
+        "25°C’den küçüktür",
+        "25°C’den büyüktür",
+        "36.5°C’den küçüktür",
+        "36.5°C’den büyüktür",
+        "25°C’dir"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 2,
+      "explanation": "Nitröz oksidin kritik sıcaklığı yaklaşık 36.5°C’dir. Bu değer oda sıcaklığının üzerinde olduğu için özel bir soğutma sistemi olmadan sıvı halde bulunabilir.",
+      "category": "Ameliyathane Ortamı ve Anestezi Cihazları"
+    },
+    {
+      "id": 32,
+      "question": "Cerrahi yangınların en sık görüldüğü cerrahi bölge hangisidir?",
+      "options": [
+        "Ksifoidin üzeri",
+        "Abdominal bölge",
+        "Pelvis",
+        "Alt ekstremiteler",
+        "Kol ve ön kol"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 2,
+      "explanation": "Cerrahi yangınların en sık bildirildiği senaryo, ilave oksijen verilen ve cerrahi alanın ksifoidin üzerinde olduğu vakalardır.",
+      "category": "Ameliyathane Ortamı ve Anestezi Cihazları"
+    },
+    {
+      "id": 33,
+      "question": "Aşağıdakilerden hangisi hipoterminin etkilerinden biri değildir?",
+      "options": [
+        "Yara yeri enfeksiyonu",
+        "Koagülopati",
+        "Kan kaybında artış",
+        "Uzamış hastane yatışı",
+        "Kan kaybında azalma"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 2,
+      "explanation": "Hipotermi yara yeri enfeksiyonu, koagülopati, intraoperatif kan kaybında artış ve hastanede kalış süresinde uzama ile ilişkilidir. Kan kaybında azalma beklenen bir etki değildir.",
+      "category": "Ameliyathane Ortamı ve Anestezi Cihazları"
+    },
+    {
+      "id": 34,
+      "question": "Robotik cerrahi sırasında merkezi gaz sisteminde arıza gelişmiş ve anestezi cihazı yedek E-silindirlerine geçmiştir. Oksijen silindirinin basıncı 1000 psig, N2O silindirinin basıncı 745 psig’dir. Ameliyatın bitmesine yaklaşık 2 saat vardır ve hasta dakikada 3 L taze gaz akımı, sadece oksijen, ile ventile edilmektedir. Bu senaryoya göre hangisi doğrudur?",
+      "options": [
+        "Oksijen silindiri yaklaşık 660 L gaz içerir ve ameliyat sonuna kadar fazlasıyla yeterlidir",
+        "N2O silindiri yarı yarıya doludur; basınç düşmeye başladığında içinde yaklaşık 1000 L gaz kalmış demektir",
+        "Oksijen silindiri yaklaşık 330 L gaz içerir; 3 L/dk akımla yaklaşık 110 dakika sonra tükenecektir ve ameliyatın sonuna yetmeyebilir",
+        "N2O silindirindeki 745 psig basınç, silindirin tamamen dolu olduğunu ve içinde 1590 L gaz olduğunu garanti eder",
+        "Basınç göstergesi 1000 psig olan oksijen silindiri, 20°C’de kritik sıcaklığının üzerinde olduğu için sıvı fazdadır"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 4,
+      "explanation": "Tam dolu E-silindiri yaklaşık 2000 psig basınçta 660 L oksijen içerir. 1000 psig yaklaşık yarı doluluğu, yani 330 L oksijeni gösterir. 330 L / 3 L/dk = 110 dakika eder; bu nedenle 120 dakikalık ameliyat süresi için yetmeyebilir. N2O sıvı fazda olduğu için basınç miktarı güvenilir biçimde göstermez.",
+      "category": "Ameliyathane Ortamı ve Anestezi Cihazları"
+    },
+    {
+      "id": 35,
+      "question": "Oksijen dakikada 3 L hızla tüketilirse, yarısı dolu bir E-silindiri yaklaşık kaç dakikada boşalır?",
+      "options": [
+        "60",
+        "180",
+        "100",
+        "110",
+        "119"
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 2,
+      "explanation": "Yarı dolu oksijen E-silindiri yaklaşık 330 L oksijen içerir. 330 L / 3 L/dk = yaklaşık 110 dakikadır.",
+      "category": "Ameliyathane Ortamı ve Anestezi Cihazları"
+    },
+    {
+      "id": 36,
+      "question": "Heliox karışımı (helyum/oksijen), üst havayolu darlıklarında solunum işini hangi fiziksel özelliği sayesinde azaltır?",
+      "options": [
+        "Gazın viskozitesinin çok düşük olması",
+        "Gazın yoğunluğunun düşük olması sonucu türbülan akımı laminer akıma yaklaştırması",
+        "Helyumun bronkodilatatör etkisi",
+        "Karbondioksit difüzyonunu hızlandırması",
+        "Oksijen parsiyel basıncını artırması"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Helyumun düşük yoğunluğu daralmış havayollarında türbülansı azaltır, akımı laminer akıma yaklaştırır ve solunum direncini düşürür.",
+      "category": "Ameliyathane Ortamı ve Anestezi Cihazları"
+    },
+    {
+      "id": 37,
+      "question": "Lazer cerrahisinde kullanılan ve \"lazer tüpü\" olarak bilinen endotrakeal tüplerin temel yapısal farkı nedir?",
+      "options": [
+        "Daha uzun olmaları",
+        "Kafsız olmaları",
+        "Dış yüzeylerinin metalik folyo ile kaplı veya lazer ışınına dirençli sentetik materyalden yapılmış olması",
+        "Balonlarının hava yerine azotla şişirilmesi",
+        "Sadece çocuk hastalarda kullanılması"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Lazer cerrahisinde yanma riskini azaltmak için lazer ışınını yansıtan veya absorbe etmeyen özel kaplamalı endotrakeal tüpler kullanılır.",
+      "category": "Ameliyathane Ortamı ve Anestezi Cihazları"
+    },
+    {
+      "id": 38,
+      "question": "Aşağıdakilerden hangisi veya hangileri Toyota Production System (TPS) içinde 5S olarak adlandırılan işlemler arasında yer alır? I. Sınıflandırın (Sort) II. Sıralı talimatlandırın (Set in Order) III. Pırıl pırıl yapın (Shine) IV. Standardize edin (Standardize) V. Sürdürün (Sustain)",
+      "options": [
+        "I-V",
+        "III-IV",
+        "I-II-V",
+        "I-II-III-IV-V",
+        "I-III-V"
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 2,
+      "explanation": "5S yaklaşımı Sort, Set in Order, Shine, Standardize ve Sustain basamaklarından oluşur; verilen tüm önermeler doğrudur.",
+      "category": "Ameliyathane Ortamı ve Anestezi Cihazları"
+    },
+    {
+      "id": 39,
+      "question": "Oksijen analizörü, anestezi cihazının hangi kısmında bulunmalıdır?",
+      "options": [
+        "Duvar girişinde",
+        "Silindir çıkışında",
+        "Solunum devresinin inspiratuar kolunda",
+        "Ekspiratuar valf çıkışında",
+        "Vaporizatör içinde"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Hastaya giden gaz karışımının FiO2 değerini en doğru şekilde ölçmek için oksijen analizörü solunum devresinin inspiratuar kolunda yer almalıdır.",
+      "category": "Ameliyathane Ortamı ve Anestezi Cihazları"
+    },
+    {
+      "id": 40,
+      "question": "Ameliyathane ortamı ile ilgili verilen bilgilerden hangisi yanlıştır?",
+      "options": [
+        "Ameliyathane ortam nemi %20 ile %60 arasında tutulmalıdır",
+        "Ameliyathane gürültüsü 70-80 dB arasında ölçülebilir ve tepe değerler 80 dB’i aşabilir",
+        "Durgunluk ve bakteri üremesi riskini azaltmak için saatte yaklaşık 20 hava hacmi değişimi önerilir",
+        "Hava kalitesi, partiküllerin %90’ını filtreleyen bir filtre kullanılarak korunabilir",
+        "HEPA filtreleri mühendislik veya enfeksiyon kontrol standartları tarafından zorunludur"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 2,
+      "explanation": "HEPA filtreleri sık kullanılsa da her ameliyathane için mühendislik veya enfeksiyon kontrol standartları tarafından zorunlu değildir.",
+      "category": "Ameliyathane Ortamı ve Anestezi Cihazları"
+    },
+    {
+      "id": 41,
+      "question": "KTP lazer ile laringeal papillom eksizyonu sırasında endotrakeal tüpün pilot balonunun söndüğü fark ediliyor. Lazer güvenliği protokolüne göre yapılması gereken en doğru hamle hangisidir?",
+      "options": [
+        "Pilot balon söndüğü için ETT derhal geri çekilmeli; çünkü metal ETT’ler lazer ışınını yansıtır",
+        "Hava yolu yangını şüphesiyle tüm gaz akışı, O2 ve N2O, derhal kesilmeli; ETT çıkarılmalı ve sahaya su veya salin dökülmelidir",
+        "Lazer dumanı aspiratörü kapatılmalıdır; çünkü duman yangını söndürücü etki yapar",
+        "İşleme devam edilmeli, yalnızca O2 konsantrasyonu %100’e çıkarılmalıdır",
+        "Yanıcı PVC tüp yerine standart kırmızı lastik tüp kullanılmalı ve balon sadece hava ile şişirilmelidir"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 4,
+      "explanation": "Hava yolu yangını şüphesinde ilk yaklaşım oksitleyiciyi kesmek, yanıcı materyali uzaklaştırmak ve sahayı su veya salinle soğutmaktır. Lazer cerrahisinde özel lazer dirençli tüpler ve metilen mavili salinle şişirilmiş kaflar tercih edilir.",
+      "category": "Ameliyathane Ortamı ve Anestezi Cihazları"
+    },
+    {
+      "id": 42,
+      "question": "Variable bypass tipi bir vaporizatörde, çevre sıcaklığı arttığında çıkış konsantrasyonunun sabit kalmasını sağlayan mekanizma hangisidir?",
+      "options": [
+        "Bimetalik şerit (termokompenzatör)",
+        "Elektronik sensör",
+        "Manuel ayar düğmesi",
+        "Oksijen flush valfi",
+        "Basınç düşürücü valf"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Sıcaklık arttığında bimetalik şerit bükülerek bypass kanalını genişletir ve buharlaşma odasına giden gaz miktarını azaltır. Böylece çıkış konsantrasyonu daha sabit kalır.",
+      "category": "Ameliyathane Ortamı ve Anestezi Cihazları"
+    },
+    {
+      "id": 43,
+      "question": "Pamuklu tekstil örtülerin kağıt örtülere göre yangın riski açısından farkı nedir?",
+      "options": [
+        "Pamuklu örtüler daha zor yanar",
+        "Pamuklu örtüler oksijenle zenginleşmiş ortamda oksijeni hapsederek çok daha kolay alev alır",
+        "Hiçbir farkı yoktur",
+        "Pamuklu örtüler sadece lazerle yanar",
+        "Kağıt örtüler antistatiktir"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Gözenekli yapısı nedeniyle pamuklu tekstil örtüler oksijeni hapsedebilir ve oksijenle zenginleşmiş ortamda küçük bir kıvılcımla parlayabilir.",
+      "category": "Ameliyathane Ortamı ve Anestezi Cihazları"
+    },
+    {
+      "id": 44,
+      "question": "Bourdon gauge (basınç göstergesi) bir silindirde neyi ölçer?",
+      "options": [
+        "Gazın hacmini",
+        "Gazın akış hızını",
+        "Silindir içindeki basıncı, atmosferik basınca göre farkı",
+        "Gazın saflığını",
+        "Silindirin ağırlığını"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Bourdon gauge, silindir içindeki gaz basıncını atmosferik basınca göre gösteren klasik manometre düzeneğidir.",
+      "category": "Ameliyathane Ortamı ve Anestezi Cihazları"
+    },
+    {
+      "id": 45,
+      "question": "Bir hastada laringoskop ampulü patlar ve duman çıkarsa, yangın üçgenindeki ateşleme kaynağı hangisidir?",
+      "options": [
+        "Oksijen",
+        "Ampulün ısınan filamenti",
+        "Endotrakeal tüp",
+        "Alkol bazlı dezenfektan",
+        "Hastanın saçı"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Yangın üçgeninde ısı veya kıvılcım sağlayan unsur ateşleme kaynağıdır. Bu olayda ampulün ısınan filamenti ateşleme kaynağıdır.",
+      "category": "Ameliyathane Ortamı ve Anestezi Cihazları"
+    }
+  ]
+}

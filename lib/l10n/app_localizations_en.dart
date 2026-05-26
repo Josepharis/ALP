@@ -214,6 +214,25 @@ class AppLocalizationsEn extends AppLocalizations {
   String get informationSubtitle => 'Useful information and resources';
 
   @override
+  String get informationSearchHint => 'Search in information...';
+
+  @override
+  String get informationNoResults => 'No results found';
+
+  @override
+  String informationNoResultsForQuery(String query) {
+    return 'No results found for \'$query\'';
+  }
+
+  @override
+  String get informationTryDifferentKeywords => 'Try different keywords';
+
+  @override
+  String informationSubtopicsCount(int count) {
+    return '$count Sub-topics';
+  }
+
+  @override
   String get comingSoon => 'Coming Soon';
 
   @override
@@ -1246,7 +1265,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get purchaseStarted => 'Purchase process started';
 
   @override
-  String get purchaseFailed => 'Purchase process could not be started';
+  String get purchaseFailed => 'Purchase could not be started';
 
   @override
   String get termsContent =>
@@ -1648,4 +1667,84 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get upgradeGuestAccountMessage =>
       'Convert your guest account to a registered account. All your data will be preserved!';
+
+  @override
+  String get noQuestionsInCategory => 'No questions in this category yet.';
+
+  @override
+  String retakeAttempt(int count) {
+    return 'Attempt #$count';
+  }
+
+  @override
+  String get retakeQuiz => 'Retake Quiz';
+
+  @override
+  String get retakeError => 'An error occurred while retaking the quiz';
+
+  @override
+  String get quizComparison => 'Quiz Comparison';
+
+  @override
+  String get previousScore => 'Previous';
+
+  @override
+  String get newScore => 'New';
+
+  @override
+  String improvementMessage(String percent) {
+    return 'Great! $percent% better performance! 🎉';
+  }
+
+  @override
+  String get similarityMessage => 'Results are similar. You can try again! 💪';
+
+  @override
+  String get settingsErrorApple =>
+      'Settings could not be opened. Please go to App Store > Account > Subscriptions manually.';
+
+  @override
+  String get settingsErrorGoogle =>
+      'Settings could not be opened. Please go to Google Play Store > Subscriptions manually.';
+
+  @override
+  String errorOccurred(String error) {
+    return 'An error occurred: $error';
+  }
+
+  @override
+  String get deviceRemoved => 'Device successfully removed';
+
+  @override
+  String get deviceRemoveError => 'An error occurred while removing device';
+
+  @override
+  String accountDeletionPage(String url) {
+    return 'Account deletion page: $url';
+  }
+
+  @override
+  String get subscriptionBelongsToAnotherAccount =>
+      'Subscription Belongs to Another Account';
+
+  @override
+  String get processTimeoutPremium =>
+      'The process took too long. If Premium is activated, please restart the page or try \'Restore Purchases\'.';
+
+  @override
+  String productLoadingWait(String productId) {
+    return 'Loading product, please wait a few seconds...\nProduct ID: $productId';
+  }
+
+  @override
+  String quizQuestionsNotFound(String quizName) {
+    return 'Quiz questions not found: $quizName';
+  }
+
+  @override
+  String get searchQuizzes => 'Search quizzes...';
+
+  @override
+  String get defaultDailyQuestion =>
+      'In anesthesia, through which receptor does propofol act?';
 }

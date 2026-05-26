@@ -215,6 +215,26 @@ class AppLocalizationsTr extends AppLocalizations {
   String get informationSubtitle => 'Faydalı bilgiler ve kaynaklar';
 
   @override
+  String get informationSearchHint => 'Bilgilerde ara...';
+
+  @override
+  String get informationNoResults => 'Sonuç bulunamadı';
+
+  @override
+  String informationNoResultsForQuery(String query) {
+    return '\'$query\' için sonuç bulunamadı';
+  }
+
+  @override
+  String get informationTryDifferentKeywords =>
+      'Farklı anahtar kelimeler deneyin';
+
+  @override
+  String informationSubtopicsCount(int count) {
+    return '$count Konu Alt Başlığı';
+  }
+
+  @override
   String get comingSoon => 'Yakında';
 
   @override
@@ -1245,7 +1265,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get purchaseStarted => 'Satın alma işlemi başlatıldı';
 
   @override
-  String get purchaseFailed => 'Satın alma işlemi başlatılamadı';
+  String get purchaseFailed => 'Satın alma başlatılamadı';
 
   @override
   String get termsContent =>
@@ -1649,4 +1669,84 @@ class AppLocalizationsTr extends AppLocalizations {
   @override
   String get upgradeGuestAccountMessage =>
       'Mevcut misafir hesabınızı kayıtlı hesaba dönüştürün. Tüm verileriniz korunacak!';
+
+  @override
+  String get noQuestionsInCategory => 'Bu kategoride henüz soru bulunmuyor.';
+
+  @override
+  String retakeAttempt(int count) {
+    return '$count. Defa Çözülüyor';
+  }
+
+  @override
+  String get retakeQuiz => 'Tekrar Çöz';
+
+  @override
+  String get retakeError => 'Quiz tekrar çözülürken bir hata oluştu';
+
+  @override
+  String get quizComparison => 'Quiz Karşılaştırması';
+
+  @override
+  String get previousScore => 'Önceki';
+
+  @override
+  String get newScore => 'Yeni';
+
+  @override
+  String improvementMessage(String percent) {
+    return 'Harika! %$percent daha iyi performans! 🎉';
+  }
+
+  @override
+  String get similarityMessage =>
+      'Sonuçlar benzer. Tekrar deneyebilirsiniz! 💪';
+
+  @override
+  String get settingsErrorApple =>
+      'Ayarlar açılamadı. Lütfen manuel olarak App Store > Hesabım > Abonelikler bölümüne gidin.';
+
+  @override
+  String get settingsErrorGoogle =>
+      'Ayarlar açılamadı. Lütfen manuel olarak Google Play Store > Abonelikler bölümüne gidin.';
+
+  @override
+  String errorOccurred(String error) {
+    return 'Bir hata oluştu: $error';
+  }
+
+  @override
+  String get deviceRemoved => 'Cihaz başarıyla kaldırıldı';
+
+  @override
+  String get deviceRemoveError => 'Cihaz kaldırılırken bir hata oluştu';
+
+  @override
+  String accountDeletionPage(String url) {
+    return 'Hesap silme sayfası: $url';
+  }
+
+  @override
+  String get subscriptionBelongsToAnotherAccount => 'Abonelik Başka Hesaba Ait';
+
+  @override
+  String get processTimeoutPremium =>
+      'İşlem uzadı. Premium açıldıysa sayfayı kapatıp tekrar açın veya \"Satın Alımları Geri Yükle\" deneyin.';
+
+  @override
+  String productLoadingWait(String productId) {
+    return 'Ürün yükleniyor, lütfen birkaç saniye bekleyin...\nProduct ID: $productId';
+  }
+
+  @override
+  String quizQuestionsNotFound(String quizName) {
+    return 'Quiz soruları bulunamadı: $quizName';
+  }
+
+  @override
+  String get searchQuizzes => 'Quizlerde ara...';
+
+  @override
+  String get defaultDailyQuestion =>
+      'Anestezide propofol hangi reseptör üzerinden etki eder?';
 }

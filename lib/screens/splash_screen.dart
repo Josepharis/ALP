@@ -3,7 +3,9 @@ import 'dart:async';
 import 'dart:math';
 import '../services/auth_service.dart';
 import '../services/tutorial_service.dart';
+import '../services/version_service.dart';
 import '../l10n/app_localizations.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -48,6 +50,7 @@ class _SplashScreenState extends State<SplashScreen>
 
   final AuthService _authService = AuthService();
   final TutorialService _tutorialService = TutorialService();
+  final VersionService _versionService = VersionService();
 
   @override
   void initState() {
@@ -213,6 +216,14 @@ class _SplashScreenState extends State<SplashScreen>
 
       if (!mounted) return;
 
+      // --- VERSİYON KONTROLÜ BAŞLANGIÇ ---
+      final versionStatus = await _versionService.checkVersionStatus();
+      if (!versionStatus.canContinue && mounted) {
+        _showUpdateDialog(versionStatus);
+        return; // İşlemi burada durdur, uygulamaya sokma
+      }
+      // --- VERSİYON KONTROLÜ BİTİŞ ---
+
       // Tamamlandı animasyonunu başlat
       await _completionController.forward();
 
@@ -261,6 +272,61 @@ class _SplashScreenState extends State<SplashScreen>
         Navigator.of(context).pushReplacementNamed('/login');
       }
     }
+  }
+
+  // Güncelleme diyaloğunu göster
+  void _showUpdateDialog(AppVersionStatus status) {
+    showDialog(
+      context: context,
+      barrierDismissible: false, // Kapatılamaz yap
+      builder: (context) => WillPopScope(
+        onWillPop: () async => false, // Geri tuşunu engelle
+        child: AlertDialog(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          backgroundColor: const Color(0xFF1A237E),
+          title: const Row(
+            children: [
+              Icon(Icons.system_update, color: Colors.cyanAccent),
+              SizedBox(width: 10),
+              Text('Güncelleme Gerekli', style: TextStyle(color: Colors.white)),
+            ],
+          ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'Uygulamamızın yeni bir sürümü mevcut. Devam edebilmek için lütfen güncelleyin.',
+                style: TextStyle(color: Colors.white70),
+              ),
+              const SizedBox(height: 15),
+              Text(
+                'Mevcut Versiyon: ${status.currentVersion}',
+                style: const TextStyle(color: Colors.white54, fontSize: 12),
+              ),
+              Text(
+                'Gerekli Versiyon: ${status.minVersion}',
+                style: const TextStyle(color: Colors.white54, fontSize: 12),
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () async {
+                final url = Uri.parse(status.storeUrl);
+                if (await canLaunchUrl(url)) {
+                  await launchUrl(url, mode: LaunchMode.externalApplication);
+                }
+              },
+              child: const Text(
+                'HEMEN GÜNCELLE',
+                style: TextStyle(color: Colors.cyanAccent, fontWeight: FontWeight.bold),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   // Firebase Auth'un hazır olmasını bekle

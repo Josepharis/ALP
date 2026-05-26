@@ -1,0 +1,894 @@
+{
+  "meta": {
+    "title": "Kardiyovasküler Monitörizasyon Soru Bankası",
+    "language": "tr",
+    "totalQuestions": 59
+  },
+  "questions": [
+    {
+      "id": 1,
+      "question": "Pulmoner arter kateteri ile ölçülen \"mikst venöz oksijen satürasyonu\" (SvO2) için örnek kan nereden alınmalıdır?",
+      "options": [
+        "Sağ atriyum",
+        "Vena cava superior",
+        "Vena cava inferior",
+        "Pulmoner arter ucu",
+        "Sağ ventrikül çıkış yolu"
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "Gerçek mikst venöz kan, SVC, IVC ve koroner sinüsten gelen kanın tam karıştığı yer olan pulmoner arterden alınır.",
+      "category": "Kardiyovasküler Monitörizasyon"
+    },
+    {
+      "id": 2,
+      "question": "Fick prensibine göre, bir hastanın VO2 (oksijen tüketimi) sabitken, CaO2 -CvO2 farkı artıyorsa kardiyak output (CO) hakkında ne söylenebilir?",
+      "options": [
+        "CO artmıştır.",
+        "CO azalmıştır.",
+        "CO değişmemiştir.",
+        "CO ölçülemez.",
+        "Hemoglobin konsantrasyonu artmıştır."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "CO= VO2/(CaO2 -CvO2) . Payda büyürse (fark artarsa), sonuç (CO) azalır. Yani dokular düşük akım nedeniyle kandan daha fazla oksijen çekmek zorunda kalmıştır.",
+      "category": "Kardiyovasküler Monitörizasyon"
+    },
+    {
+      "id": 3,
+      "question": "Santral venöz dalga formu için verilen bilgilerden hangisi yanlıştır?",
+      "options": [
+        "Atriyal kasılmadan gelen a dalgaları atriyal fibrilasyonda yoktur ve junctional ritimlerde abartılıdır (cannon a dalgaları).",
+        "c dalgaları erken ventriküler kasılma sırasında triküspit kapağın yükselmesinden kaynaklanır.",
+        "v dalgaları kapalı triküspit kapağa karşı venöz dönüşü yansıtır.",
+        "x inişi muhtemelen diyastol sırasında triküspit kapağın aşağı doğru yer değiştirmesinden kaynaklanır.",
+        "y inişi diyastol sırasında triküspit kapağın açılmasından kaynaklanır."
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "x inişi diyastolde değil, sistol sırasında triküspit kapağın aşağı doğru yer değiştirmesiyle ilişkilidir.",
+      "category": "Kardiyovasküler Monitörizasyon"
+    },
+    {
+      "id": 4,
+      "question": "Karaciğer nakli sırasında PiCCO monitörü ile izlenen hastada şu veriler alınıyor: Kardiyak İndeks: 4.5 L/dk/m2 (Yüksek) Global End-Diyastolik Volüm İndeksi (GEDVI): 550 mL/m2 (Düşük - Normal: 680-800) Sistemik Vasküler Direnç İndeksi (SVRI): 1200 dynes- sn/cm5 (Düşük) Ekstravasküler Akciğer Suyu İndeksi (EVLWI): 15 mL/kg (Yüksek - Normal: <10) Bu hemodinamik tabloya göre hastadaki patoloji ve en uygun tedavi yaklaşımı nedir?",
+      "options": [
+        "Kardiyojenik Şok; Dobutamin başlanmalı.",
+        "Hiperdinamik/Distributif Şok ve Akciğer Ödemi; Sıvı kısıtlanmalı, vazopressör ve gerekirse diüretik düşünülmelidir.",
+        "Saf Hipovolemi; Agresif sıvı resüsitasyonu yapılmalı.",
+        "Pulmoner Emboli; Trombolitik tedavi başlanmalı.",
+        "Obstrüktif Şok (Tamponad); Acil perikardiyosentez."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Hastanın kalbi hızlı çalışıyor (yüksek CI) ancak dolum hacimleri düşük (düşük GEDVI) ve akciğerlerinde su birikmiş (yüksek EVLWI). Bu tablo tipik bir kapiller kaçak (SIRS/Sepsis benzeri) veya karaciğer yetmezliğinin hiperdinamik tablosudur. Akciğer suyu yüksek olduğu için daha fazla sıvı vermek ödemi artırır; vazopressörle direnç artırılmalı ve sıvı dengelenmelidir.",
+      "category": "Kardiyovasküler Monitörizasyon"
+    },
+    {
+      "id": 5,
+      "question": "Atriyal Septal Defekt (ASD) tanısı olan ve pulmoner hipertansiyon gelişen bir hastada kardiyak output (CO) Pulmoner Arter Kateteri (PAC) ile \"bolus termodilüsyon\" yöntemiyle ölçülüyor. Soldan sağa şantı olan bu hastada ölçülen CO değeri gerçek değere göre nasıldır ve nedeni nedir?",
+      "options": [
+        "Yanlış düşük çıkar; çünkü indikatör (soğuk serum) şant nedeniyle akciğerlere uğramadan sistemik dolaşıma karışır.",
+        "Yanlış yüksek çıkar; çünkü indikatör sağ kalpte kanla aşırı seyreltilir ve eğri altındaki alan küçülür.",
+        "Değişmez; termodilüsyon şantlardan etkilenmez.",
+        "Ölçüm yapılamaz; cihaz hata verir.",
+        "Yanlış düşük çıkar; çünkü pulmoner arterde ısı değişimi saptanamaz."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Soldan sağa şantlarda, indikatör sağ kalpte aşırı dilüe olur (seyrelir). Termodilüsyon prensibine göre seyreltme ne kadar fazlaysa CO o kadar yüksek hesaplanır",
+      "category": "Kardiyovasküler Monitörizasyon"
+    },
+    {
+      "id": 6,
+      "question": "TEE'de sol ventrikül \"end-diyastolik alan\" (LVEDA) ölçümü aşağıdakilerden hangisini en iyi yansıtır?",
+      "options": [
+        "Afterload",
+        "Kontraktilite",
+        "Preload",
+        "Ejeksiyon fraksiyonu",
+        "Miyokardiyal kompliyans"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Ekokardiyografik olarak ölçülen ventrikül sonu diyastolik hacim veya alan, ventrikülün gerilmesini yani preload'u (ön yükü) basınç ölçümlerinden (CVP, PCWP) çok daha güvenilir bir şekilde yansıtır.",
+      "category": "Kardiyovasküler Monitörizasyon"
+    },
+    {
+      "id": 7,
+      "question": "İnvaziv arteriyel monitörizasyonda, \"overdamping\" (aşırı sönümlenme) dalga formuna sahip bir sistemde aşağıdakilerden hangisi gözlenir?",
+      "options": [
+        "Sistolik basınç gerçekte olduğundan yüksek ölçülür.",
+        "Diyastolik basınç gerçekte olduğundan düşük ölçülür.",
+        "Ortalama arter basıncı (MAP) belirgin şekilde değişir.",
+        "Dikrotik çentik (dicrotic notch) kaybolur.",
+        "Nabız basıncı (pulse pressure) artar."
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "Overdamping durumunda (hava kabarcığı, pıhtı, yumuşak tüp), dalga formu yuvarlaklaşır, dikrotik çentik seçilemez hale gelir. Sistolik düşük, diyastolik yüksek ölçülür ancak MAP değişmez.",
+      "category": "Kardiyovasküler Monitörizasyon"
+    },
+    {
+      "id": 8,
+      "question": "Aşağıdakilerden hangisi nabız basıncı varyasyonu (PPV) ölçümünün \"yalancı pozitif\" (hastanın sıvıya yanıtı olmadığı halde yüksek varyasyon) çıkmasına neden olur?",
+      "options": [
+        "Atriyal fibrilasyon",
+        "Düşük tidal volüm (<6 mL/kg)",
+        "Sağ ventrikül yetmezliği",
+        "Açık toraks cerrahisi",
+        "Spontan solunum eforu"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Sağ ventrikül yetmezliğinde, inspirasyonda artan intratorasik basınç RV afterload'unu artırarak atım hacminde büyük değişimlere yol açar. Bu durum hastanın sıvı ihtiyacı olduğu anlamına gelmez, RV disfonksiyonunu yansıtır.",
+      "category": "Kardiyovasküler Monitörizasyon"
+    },
+    {
+      "id": 9,
+      "question": "PiCCO hangi yöntemle kalp debisini ölçer?",
+      "options": [
+        "Boya dilüsyon",
+        "Nabız kontür",
+        "Biyoempedans",
+        "Fick prensibi",
+        "Termodilüsyon"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "PiCCO kalp debisini transpulmoner termodilüsyonla kalibre eder ve sürekli izlem için arteriyel nabız kontur analizinden yararlanır.",
+      "category": "Kardiyovasküler Monitörizasyon"
+    },
+    {
+      "id": 10,
+      "question": "Kardiyak cerrahi sonrası göğüs tüplerinden drenajı aniden duran ve hipotansiyonu gelişen hastanın CVP trasesinde \"x\" ve \"y\" inişlerinin derinleştiği, trasesinin \"M\" veya \"W\" harfine benzediği görülüyor. Bu durum öncelikle neyi düşündürür?",
+      "options": [
+        "Kardiyak Tamponad",
+        "Konstriktif Perikardit",
+        "Hipovolemi",
+        "Pulmoner Emboli",
+        "Sağ Ventrikül Yetmezliği"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Konstriktif perikarditte ventrikül dolumu aniden durduğu için belirgin y inişi ve M/W şekli görülür. Tamponadda ise tam tersine y inişi silinir.",
+      "category": "Kardiyovasküler Monitörizasyon"
+    },
+    {
+      "id": 11,
+      "question": "Bir hastada nabız basıncı varyasyonu (PPV) %18 olarak ölçülmüştür. Bu hastaya volüm verilmesi sonrası aşağıdakilerden hangisinin olması beklenir?",
+      "options": [
+        "PPV artar, CO azalır.",
+        "PPV azalır, CO artır.",
+        "PPV değişmez, MAP artar.",
+        "Sistolik basınç düşer.",
+        "Nabız basıncı daralır."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "PPV'nin %12-13'ten büyük olması sıvı yanıtlılığını gösterir. Sıvı verildikçe preload artar, kalp Frank-Starling eğrisinin daha dik olmayan kısmına geçer ve varyasyon (PPV) azalırken atım hacmi ve CO artar.",
+      "category": "Kardiyovasküler Monitörizasyon"
+    },
+    {
+      "id": 12,
+      "question": "Hangi elektrokardiyografi derivasyonunda en yüksek P dalgası voltajları görülür?",
+      "options": [
+        "DI",
+        "DII",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 2,
+      "explanation": "DII derivasyonunun elektrik ekseni atriyal depolarizasyon eksenine paralel olduğu için en yüksek P dalgası voltajları genellikle DII’de görülür.",
+      "category": "Kardiyovasküler Monitörizasyon"
+    },
+    {
+      "id": 13,
+      "question": "İnvaziv arteriyel monitörizasyonu olan bir hastada trasenin \"dik çıkışlı\" (fast upstroke), sistolik tepesinin çok yüksek ve \"dicrotic notch\"un (dikrotik çentik) kaybolduğu, nabız basıncının (sistol-diyastol farkı) çok genişlediği gözleniyor. Bu trase aşağıdaki kapak hastalıklarından hangisi için tipiktir?",
+      "options": [
+        "Aort Darlığı",
+        "Mitral Darlığı",
+        "Aort Yetmezliği",
+        "Mitral Yetmezliği",
+        "Triküspit Darlığı"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Aort yetmezliğinde \"pulsus parvus et tardus\"un tam tersi bir tablo (Water-hammer pulse benzeri trase) görülür; diyastolik kaçış nedeniyle nabız basıncı artar.",
+      "category": "Kardiyovasküler Monitörizasyon"
+    },
+    {
+      "id": 14,
+      "question": "Yoğun bakımda takip edilen bir hastanın Santral Venöz Basınç (CVP) trasesi incelendiğinde; \"a\" dalgasının tamamen kaybolduğu, ancak sistol sırasında \"c\" ve \"v\" dalgalarının birleşerek dev bir \"cv\" (veya s) dalgası oluşturduğu ve \"x\" inişinin silindiği gözleniyor. Bu hastanın fizik muayenesinde aşağıdakilerden hangisinin saptanması en olasıdır?",
+      "options": [
+        "Belirgin sistolik üfürüm ve boyun venlerinde dev pulzasyonlar.",
+        "İnspirasyonda kan basıncında 20 mmHg düşüş (pulsus paradoxus).",
+        "Diyastolik \"opening snap\" sesi.",
+        "Akciğer bazallerinde yaygın raller.",
+        "Zayıf ve ipliksi nabız."
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Tarif edilen trase (a kaybı, dev cv birleşmesi, x silinmesi) Atriyal Fibrilasyon zemininde gelişmiş ağır Triküspit Yetmezliği için tipiktir. Triküspit yetmezliğinde ventrikül kanı atriyuma geri kaçtığı için dev v (veya cv) dalgaları oluşur ve bu boyun venlerinde pulzasyon olarak izlenir.",
+      "category": "Kardiyovasküler Monitörizasyon"
+    },
+    {
+      "id": 15,
+      "question": "Aşağıdakilerden hangisi PiCCO sisteminde \"ekstravasküler akciğer suyu\" (EVLW) artışının en erken ve duyarlı göstergesidir?",
+      "options": [
+        "İntratorasik kan hacmi (ITBV) azalması",
+        "Global end-diyastolik volüm (GEDV) artışı",
+        "Pulmoner termal hacim (PTV) / İntratorasik termal hacim (ITTV) oranı",
+        "Stroke volüm varyasyonu (SVV) artışı",
+        "ITTV ve ITBV arasındaki farkın açılması"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "EVLW=ITTV-ITBV. Bu farkın artması akciğer ödemini (ekstravasküler su) gösterir.",
+      "category": "Kardiyovasküler Monitörizasyon"
+    },
+    {
+      "id": 16,
+      "question": "Kan basıncı ve akımı ile ilgili verilen bilgilerden hangisi/hangileri doğrudur? I. Akım basınç ile doğru, direnç ile ters orantılıdır. II. Basınç yüksek olsa bile direnç de yüksek olduğunda akım düşük olabilir. III. Manşon kesesi ekstremitenin en az yarısına kadar uzanmalı ve manşon genişliği ekstremite çapından %20-50 daha büyük olmalıdır. IV. Arteriyel kan basıncı organ perfüzyonunun doğrudan ölçüsü değil, göstergesi olarak görülmelidir.",
+      "options": [
+        "Hepsi",
+        "Yalnız I",
+        "III-IV",
+        "I-III-IV",
+        "II-IV"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Verilen ifadelerin tamamı kan basıncı, akım ve manşon seçimi açısından doğrudur.",
+      "category": "Kardiyovasküler Monitörizasyon"
+    },
+    {
+      "id": 17,
+      "question": "Septik şoktaki bir hastada \"Stroke Volume Variation\" (SVV) %18 ölçülüyor (Eşik değer: %12). Ancak hastada aynı zamanda Aort Yetmezliği olduğu biliniyor. Bu durumda SVV değeri hakkında ne söylenebilir?",
+      "options": [
+        "SVV güvenilirdir, hasta sıvıya yanıt verir.",
+        "Aort yetmezliği SVV’yi \"yalancı yüksek\" çıkaracağı için sıvı yanıtı konusunda yanıltıcıdır.",
+        "Aort yetmezliği SVV’yi etkilemez.",
+        "SVV sadece spontan soluyan hastalarda bozulur.",
+        "SVV yerine CVP bakılmalıdır."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Aort yetmezliği gibi kapak hastalıkları ve aritmiler, arteriyel dalga analiziyle yapılan dinamik ölçümleri (SVV, PPV) geçersiz kılar; çünkü vuru hacmi değişkenliği preload dışı nedenlere bağlıdır.",
+      "category": "Kardiyovasküler Monitörizasyon"
+    },
+    {
+      "id": 18,
+      "question": "Transözofageal ekokardiyografide (TEE), \"mid-özofageal short axis\" görüntüsünde sol ventrikül duvar hareket kusuru izlenmesi hangi arterin tıkanıklığı hakkında en spesifik bilgiyi verir?",
+      "options": [
+        "Sağ koroner arter (RCA)",
+        "Sol anterior desendan arter (LAD)",
+        "Sirkumfleks arter (Cx)",
+        "Sol ana koroner arter (LMCA)",
+        "Posterior desendan arter (PDA)"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Sol ventrikülün kısa aks görüntüsünde anterior duvar ve septumun büyük kısmı LAD tarafından beslenir.",
+      "category": "Kardiyovasküler Monitörizasyon"
+    },
+    {
+      "id": 19,
+      "question": "Diyastol sonundan ventriküler ejeksiyonun sonuna kadar arteriyel basınç trasesinin sistolik kısmının alanını ölçen algoritmalara dayanan kalp debisi ölçme yöntemi hangisidir?",
+      "options": [
+        "Termodilüsyon",
+        "Biyoempedans",
+        "Nabız kontür",
+        "Fick prensibi",
+        "Boya dilüsyon"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Nabız kontür cihazları, arteriyel basınç trasesinin sistolik alanını analiz eden algoritmalarla stroke volüm ve kardiyak output hesaplar.",
+      "category": "Kardiyovasküler Monitörizasyon"
+    },
+    {
+      "id": 20,
+      "question": "Aşağıdaki klinik durumların hangisinde \"dev (cannon) a dalgaları\" görülmesi en az olasıdır?",
+      "options": [
+        "Junctional ritim",
+        "Tam AV blok",
+        "Ventriküler taşikardi",
+        "Triküspit darlığı",
+        "Atriyal fibrilasyon"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Dev \"a\" dalgaları, atriyumun kapalı bir triküspit kapağa karşı kasılmasıyla oluşur. AF'de atriyal kasılma olmadığı için \"a\" dalgası oluşamaz. Diğerlerinde ise atriyoventriküler disosiasyon nedeniyle kapalı kapağa karşı kasılma olur.",
+      "category": "Kardiyovasküler Monitörizasyon"
+    },
+    {
+      "id": 21,
+      "question": "Hemodinamik parametreler için verilen bilgilerden hangisi/hangileri doğrudur? I. Kardiyak output, stroke volüm ve kalp hızının çarpımına eşittir. II. Kardiyak indeks, kalp debisinin vücut yüzey alanına bölünmesi ile bulunur; normali 2.2-4.2’dir. III. Stroke volüm = kalp debisi x 1000 / kalp hızı; normali 60-90 mL’dir. IV. Stroke indeks = atım hacmi / vücut yüzey alanı; normali 20-65’tir.",
+      "options": [
+        "Yalnız I",
+        "II-III",
+        "I-IV",
+        "I-II-IV",
+        "I-II-III-IV"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Verilen hemodinamik formüller ve normal aralıklar temel monitörizasyon parametreleriyle uyumludur.",
+      "category": "Kardiyovasküler Monitörizasyon"
+    },
+    {
+      "id": 22,
+      "question": "Septik şok nedeniyle Pulmoner Arter Kateteri (PAC) ile izlenen mekanik ventilasyon altındaki bir hastada, PCWP ölçümü yapılmak isleniyor. Kateter ucu \"Zone 2\" bölgesinde şüpheleniliyor. Aşağıdaki bulgulardan hangisi, ölçülen PCWP değerinin \"Sol Atriyal Basınç\"ı (LAP) doğru yansıtmadığını (alveol basıncından etkilendiğini) kesin olarak kanıtlar?",
+      "options": [
+        "PCWP değerinin CVP'den yüksek olması.",
+        "PCWP değerinin Pulmoner Arter Diyastolik (PAD) basıncından yüksek olması.",
+        "PCWP trasesinde \"a\" ve \"v\" dalgalarının seçilmesi.",
+        "PEEP düzeyi artırıldığında PCWP'nin değişmemesi.",
+        "Aspirasyonla gelen kanın $PO_2$ değerinin sistemik arteriyel $PO_2$'den düşük olması."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "PCWP, kan akımının kesintisiz olduğu bir sütun üzerinden LAP'ı ölçer. Fiziksel olarak PCWP, her zaman PA diyastolik basıncından (PAD) düşük veya ona eşit olmalıdır. Eğer PCWP > PAD ise kateter bir damarı değil, yüksek basınçlı bir alveolü ölçüyor demektir (Zone 1 veya 2).",
+      "category": "Kardiyovasküler Monitörizasyon"
+    },
+    {
+      "id": 23,
+      "question": "İdeal elektrokardiyografi derivasyon ikilisi hangisidir?",
+      "options": [
+        "DI-V5",
+        "DII-V5",
+        "DII-V3",
+        "DI-V3",
+        "DII-V6"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 2,
+      "explanation": "DII ve V5 birlikte izlendiğinde ritim, inferior iskemi ve anterolateral iskemi açısından tamamlayıcı bilgi sağlar.",
+      "category": "Kardiyovasküler Monitörizasyon"
+    },
+    {
+      "id": 24,
+      "question": "Non-invaziv kan basıncı ölçen otomatik (osilometrik) cihazlar hakkında hangisi doğrudur?",
+      "options": [
+        "Önce sistolik basıncı ölçer, sonra MAP'ı hesaplar.",
+        "Manşon şişirilirken sesleri dinler (Korotkoff).",
+        "Maksimum osilasyonun olduğu nokta Ortalama Arter Basıncıdır (MAP).",
+        "Hipotansif ve vazokonstrüksiyonu olan hastada en güvenilir yöntemdir.",
+        "Aritmiler ölçüm doğruluğunu etkilemez."
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Osilometrik cihazlar osilasyonun en yüksek olduğu noktayı MAP olarak belirler, sistolik ve diyastoliği algoritmalarla hesaplar.",
+      "category": "Kardiyovasküler Monitörizasyon"
+    },
+    {
+      "id": 25,
+      "question": "Kardiyak tamponadda CVP dalga formundaki en karakteristik değişiklik hangisidir?",
+      "options": [
+        "Derin \"y\" inişi",
+        "Belirgin \"a\" dalgası",
+        "\"y\" inişinin silinmesi veya azalması",
+        "\"c-v\" birleşmesi",
+        "\"x\" inişinin kaybolması"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Tamponadda diyastolde kalbe dolum engellendiği için \"y\" inişi (triküspit kapağın açılıp kanın ventriküle boşalması) silinir. Bu durum konstriktif perikardit (Friedreich belirtisi - derin y) ile ayırıcı tanıda kritiktir.",
+      "category": "Kardiyovasküler Monitörizasyon"
+    },
+    {
+      "id": 26,
+      "question": "İdeal bir arteriyel dalga analizinde, \"rezonans\" (underdamping) sorunu varsa aşağıdakilerden hangisi yapılması en uygundur?",
+      "options": [
+        "Daha uzun ve yumuşak bağlantı hortumları kullanmak.",
+        "Sistemdeki hava kabarcıklarını temizlemek.",
+        "Daha geniş çaplı kateter seçmek.",
+        "Transduseri kalp seviyesinin üzerine çıkarmak.",
+        "Sisteme \"damping\" cihazı (rosebud) eklemek."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Underdamping (aşırı salınım/çınlama) genellikle sistemdeki küçük hava kabarcıklarından kaynaklanır. Hava temizlenirse sistem stabilize olur.",
+      "category": "Kardiyovasküler Monitörizasyon"
+    },
+    {
+      "id": 27,
+      "question": "Fick prensibine göre kardiyak output nasıl hesaplanır?",
+      "options": [
+        "Oksijen tüketimi / arter-ven O2 farkı",
+        "Santral venöz oksijen satürasyonu / arter-ven O2 farkı",
+        "Oksijen tüketimi / santral venöz oksijen satürasyonu",
+        "Arter-ven O2 farkı / SpO2",
+        "SpO2 / santral venöz oksijen satürasyonu"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 2,
+      "explanation": "Fick prensibine göre VO2, kardiyak output ile arteriyel-venöz oksijen içerik farkının çarpımına eşittir; bu nedenle CO = VO2 / (CaO2 - CvO2).",
+      "category": "Kardiyovasküler Monitörizasyon"
+    },
+    {
+      "id": 28,
+      "question": "İnvaziv basınç izleminde transduserin \"phlebostatic axis\" noktasına göre 13.6 cm aşağıya indirilmesi ölçülen basıncı nasıl etkiler?",
+      "options": [
+        "1 mmHg daha düşük gösterir.",
+        "10 mmHg daha düşük gösterir.",
+        "10 mmHg daha yüksek gösterir.",
+        "Ölçümü etkilemez (kapalı sistem).",
+        "Sadece sistolik basıncı etkiler."
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Civa suyun yaklaşık 13.6 katı yoğundur. Bu nedenle 13.6 cm su sütunu farkı, 10 mmHg basınç değişimine (cıva sütunu olarak) karşılık gelir. Transduser aşağıdaysa basınç yüksek okunur.",
+      "category": "Kardiyovasküler Monitörizasyon"
+    },
+    {
+      "id": 29,
+      "question": "Ekokardiyografik dönüştürücüden uzağa yönlendirilen kan akımı hangi renkte görülür?",
+      "options": [
+        "Kırmızı",
+        "Sarı",
+        "Siyah",
+        "Beyaz",
+        "Mavi"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 2,
+      "explanation": "Renkli Doppler ekokardiyografide probdan uzaklaşan akım mavi, proba doğru gelen akım kırmızı gösterilir.",
+      "category": "Kardiyovasküler Monitörizasyon"
+    },
+    {
+      "id": 30,
+      "question": "Aşağıdakilerden hangisi \"nabız kontur analizi\" yönteminin sınırlamalarından biridir?",
+      "options": [
+        "Sürekli ölçüm yapamaz.",
+        "Aort kapak yetmezliğinde hatalı sonuç verir.",
+        "Sadece PAC ile birlikte kullanılabilir.",
+        "Trend takibi için uygun değildir.",
+        "Hipotermiden etkilenmez."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Nabız kontur analizi (LiDCO, PiCCO vb.) aortik ejeksiyonun kapalı bir sistemde olduğu varsayımına dayanır. Aort yetmezliğinde geri kaçış olduğu için vuru hacmi (SV) yanlış hesaplanır.",
+      "category": "Kardiyovasküler Monitörizasyon"
+    },
+    {
+      "id": 31,
+      "question": "Elektrokoter kullanımı sırasında EKG monitörizasyonunda paraziti önlemek için en etkili yöntem hangisidir?",
+      "options": [
+        "Filtre modunu \"Diagnostic\"e almak.",
+        "Bipolar koter yerine monopolar koter kullanmak.",
+        "EKG elektrotlarını operasyon sahasından ve koter plağından uzağa yerleştirmek.",
+        "Sadece V5 derivasyonunu izlemek.",
+        "Transduser kablolarını koter kablosuna sarmak."
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Fiziksel mesafe, elektromanyetik interferansı azaltmanın en temel yoludur. Ayrıca filtre \"Monitor\" modunda olmalıdır.",
+      "category": "Kardiyovasküler Monitörizasyon"
+    },
+    {
+      "id": 32,
+      "question": "Santral venöz kateterizasyon hakkında verilen bilgilerden hangisi/hangileri doğrudur? I. İnspirasyon CVP’yi artırabilir veya azaltabilir, bu nedenle CVP ekspirasyon sonunda ölçülmelidir. II. Sol internal juguler ven kateterizasyonunda plevral efüzyon ve şilotoraks riski artar. III. İğne üzerinden kateter, iğne yoluyla kateter ve kılavuz tel üzerinden kateter (Seldinger) olmak üzere en az üç teknik vardır. IV. Hava embolisi riskini azaltmak ve internal juguler/subklavyen damarı doldurmak için Trendelenburg pozisyonu verilir. V. Karotid arter kanülasyonu hematom, inme, hava yolu bozulması ve ölüme yol açabilir.",
+      "options": [
+        "III-IV-V",
+        "I-II-IV",
+        "II-III-V",
+        "I-III-IV-V",
+        "I-II-III-IV-V"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Verilen ifadelerin tamamı santral venöz kateterizasyon tekniği, pozisyonlama ve komplikasyonları açısından doğrudur.",
+      "category": "Kardiyovasküler Monitörizasyon"
+    },
+    {
+      "id": 33,
+      "question": "Yoğun bakımda yatan bir hastada Pulmoner Arter Diyastolik Basıncı (PAD) 15 mmHg, PCWP ise 22 mmHg ölçülüyor. Fizyolojik olarak PCWP'nin PAD'den yüksek olması beklenmediğine göre, bu hatalı ölçümün en olası nedeni nedir?",
+      "options": [
+        "Kateterin West Zone 3 yerine Zone 1 veya 2'de olması.",
+        "Hastada Mitral Yetmezliği olması (dev v dalgası nedeniyle ortalama PCWP artışı).",
+        "Balonun tam şişirilmemiş olması.",
+        "Transduserin kalp seviyesinin çok altında olması.",
+        "Hepsi doğru olabilir."
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Zone 1-2 konumu alveol basıncını yansıtır , Mitral yetmezliğindeki v dalgası PCWP'yi PAD'den yüksek okutabilir , transduser seviyesi tüm basınçları kaydırabilir. Klinik olarak hepsi bu paradoksal duruma yol açabilir.",
+      "category": "Kardiyovasküler Monitörizasyon"
+    },
+    {
+      "id": 34,
+      "question": "Pre-eklamptik bir gebede invaziv arter izlemi yapılırken dalga formunda \"dikrotik çentik\"in çok aşağıda yer alması neyi düşündürür?",
+      "options": [
+        "Yüksek sistemik vasküler direnç (SVR)",
+        "Düşük sistemik vasküler direnç (SVR)",
+        "Aort darlığı",
+        "Hipovolemi",
+        "Hiperkalsemi"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Dikrotik çentiğin (aort kapağının kapanması) aşağıda yer alması genellikle periferik vazodilatasyonu veya düşük SVR'yi gösterir. Tam tersi, yüksek yerleşimli çentik vazokonstriksiyonu (yüksek SVR) işaret eder.",
+      "category": "Kardiyovasküler Monitörizasyon"
+    },
+    {
+      "id": 35,
+      "question": "Santral venöz dalga formunda belirgin \"v\" dalgaları aşağıdakilerden hangisinin tanısında en yardımcıdır?",
+      "options": [
+        "Aort darlığı",
+        "Triküspit yetmezliği",
+        "Konstriktif perikardit",
+        "Kardiyak tamponad",
+        "Mitral darlık"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Triküspit yetmezliğinde ventrikül sistolü sırasında kan sağ atriyuma geri kaçar ve \"v\" dalgasının normalden çok daha yüksek ve belirgin olmasına neden olur.",
+      "category": "Kardiyovasküler Monitörizasyon"
+    },
+    {
+      "id": 36,
+      "question": "Arter kanülasyonu için aşağıda verilen bilgilerden hangisi yanlıştır?",
+      "options": [
+        "Allen testi radial arter kanülasyonunun güvenliğini değerlendirmek için basit ancak güvenilir olmayan bir yöntemdir.",
+        "Femoral arter aterom oluşumuna ve psödoanevrizmaya eğilimlidir.",
+        "Femur başının aseptik nekrozu çocuklarda femoral arter kanülasyonunun nadir fakat trajik bir komplikasyonudur.",
+        "Dorsalis pedis ve posterior tibial arterler aortadan uzakta oldukları için en bozuk dalga biçimlerine sahiptir.",
+        "Geniş yanıklı hastalarda brakial arter en iyi seçenek olabilir."
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Geniş yanıklı hastalarda brakial arter yerine aksiller arter daha uygun bir seçenek olabilir.",
+      "category": "Kardiyovasküler Monitörizasyon"
+    },
+    {
+      "id": 37,
+      "question": "Pnömoni zemininde ARDS gelişen, Tidal Volümü 5 mL/kg (ideal vücut ağırlığına göre) ayarlanan ve PEEP 15 $cmH_2O$ uygulanan, düzenli sinüs ritmindeki bir hastada Nabız Basıncı Varyasyonu (PPV) %8 olarak ölçülüyor. Hastanın idrar çıkışı saatlik 0.2 mL/kg ve laktatı 4.5 mmol/L. Bu hastanın sıvı yönetimi için aşağıdakilerden hangisi en doğrudur?",
+      "options": [
+        "PPV <%12 olduğu için hasta kesinlikle sıvıya yanıtsızdır, inotrop başlanmalıdır.",
+        "PPV düşük olsa da, düşük tidal volüm kullanımı \"yalancı negatif\" sonuç vermiş olabilir; pasif bacak kaldırma testi yapılmalıdır.",
+        "PEEP çok yüksek olduğu için PPV \"yalancı pozitif\" sonuç vermiştir; sıvı kısıtlanmalıdır.",
+        "PPV değeri bu hastada doğrudan preload'u gösterir, hastaya acil 1000 mL kristaloid verilmelidir.",
+        "CVP ölçümü PPV'den daha güvenilirdir, CVP bakılmadan karar verilmemelidir."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "PPV'nin sıvı yanıtını göstermesi için tidal volümün en az 8 mL/kg olması gerekir. Düşük tidal volümlerde (ARDS protokolü gibi), göğüs içi basınç değişikliği kalbi yeterince zorlamaz ve PPV sıvı ihtiyacı olsa bile düşük (%12-13 altı) çıkabilir (yalancı negatif). Bu durumda pasif bacak kaldırma gibi tidal volümden bağımsız testler tercih edilir.",
+      "category": "Kardiyovasküler Monitörizasyon"
+    },
+    {
+      "id": 38,
+      "question": "Pulmoner kapiller kama basıncı (PCWP) ölçülürken, kateterin \"West Zone 3\" bölgesinde olmadığı nasıl anlaşılır?",
+      "options": [
+        "Solunumla PCWP değişiminin, havayolu basıncı değişiminin yarısından az olması.",
+        "PCWP değerinin, PA diyastolik basıncından büyük ölçülmesi.",
+        "CVP'nin PCWP'den yüksek olması.",
+        "PA dalga formunun düzleşmesi.",
+        "PCWP'nin 12 mmHg üzerinde olması."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "PCWP, her zaman PA diyastolik basıncına eşit veya ondan düşük olmalıdır. Eğer yüksekse, kateter alveol basıncının damar basıncından büyük olduğu Zone 1 veya 2'dedir ve ölçüm hatalıdır.",
+      "category": "Kardiyovasküler Monitörizasyon"
+    },
+    {
+      "id": 39,
+      "question": "Ekstravasküler akciğer su indeksi için hangi değer normal kabul edilir?",
+      "options": [
+        "<10 mL/kg",
+        ">10 mL/kg",
+        "<20 mL/kg",
+        ">20 mL/kg",
+        "<25 mL/kg"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 2,
+      "explanation": "Ekstravasküler akciğer su indeksi için normal değer genellikle 10 mL/kg’dan düşüktür.",
+      "category": "Kardiyovasküler Monitörizasyon"
+    },
+    {
+      "id": 40,
+      "question": "İntratorasik termal hacim (ITTV) hangi volümlerin toplamına eşittir?",
+      "options": [
+        "Pulmoner kan hacmi (PBV), ekstravasküler akciğer suyu (EVLW) ve kalpte bulunan kan",
+        "Pulmoner termal hacim (PTV), EVLW ve intratorasik kan hacmi (ITBV)",
+        "İntratorasik kan hacmi (ITBV), pulmoner kan hacmi (PBV) ve EVLW",
+        "EVLW, kalpte bulunan kan ve ITBV",
+        "PTV, EVLW ve PBV"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "ITTV; pulmoner kan hacmi, ekstravasküler akciğer suyu ve kalpte bulunan kan hacmini içerir.",
+      "category": "Kardiyovasküler Monitörizasyon"
+    },
+    {
+      "id": 41,
+      "question": "Nabız basıncındaki hangi değişkenlik sıvıya yanıtı düşündürür?",
+      "options": [
+        ">%12-13 değişkenlik",
+        ">%20-21 değişkenlik",
+        ">%24-25 değişkenlik",
+        ">%30-31 değişkenlik",
+        "<%10-11 değişkenlik"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 2,
+      "explanation": "PPV’nin %12-13’ten büyük olması mekanik ventilasyondaki uygun hastalarda sıvı yanıtlılığını düşündürür.",
+      "category": "Kardiyovasküler Monitörizasyon"
+    },
+    {
+      "id": 42,
+      "question": "Radial arter kanülasyonunda bilek hangi pozisyona alınmalıdır?",
+      "options": [
+        "Supinasyon-ekstansiyon",
+        "İnversiyon-ekstansiyon",
+        "Abduksiyon-fleksiyon",
+        "Addüksiyon-ekstansiyon",
+        "İnversiyon-fleksiyon"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 2,
+      "explanation": "Bileğin supinasyonu ve ekstansiyonu radial arteri kanülasyon için en uygun pozisyona getirir.",
+      "category": "Kardiyovasküler Monitörizasyon"
+    },
+    {
+      "id": 43,
+      "question": "Aşağıdakilerden hangisi/hangileri kardiyak output’un doğru ölçülmesini etkileyen faktörlerdendir? I. Hızlı ve düzgün enjeksiyon II. Enjekte edilen maddenin sıcaklığı ve hacmi III. PA kateteri tipi için kalibrasyon faktörlerinin CO bilgisayarına doğru girilmesi IV. Elektrokoter sırasında ölçümlerden kaçınılması",
+      "options": [
+        "Yalnız III",
+        "I-III",
+        "II-III-IV",
+        "I-II-III",
+        "I-II-III-IV"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Doğru CO ölçümü; hızlı ve düzgün enjeksiyona, enjekte edilen maddenin sıcaklık ve hacminin bilinmesine, PA kateter kalibrasyon faktörlerinin doğru girilmesine ve elektrokoter sırasında ölçümden kaçınılmasına bağlıdır.",
+      "category": "Kardiyovasküler Monitörizasyon"
+    },
+    {
+      "id": 44,
+      "question": "LiDCO™ hangi yöntemle kalp debisini ölçer?",
+      "options": [
+        "Termodilüsyon",
+        "Boya/indikatör dilüsyon",
+        "Nabız kontür",
+        "Fick prensibi",
+        "Biyoempedans"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "LiDCO sisteminde lityum indikatör dilüsyonu ile kalp debisi kalibre edilir; sistem ayrıca arteriyel basınç dalga formundan atımdan atıma stroke volüm hesaplayabilir.",
+      "category": "Kardiyovasküler Monitörizasyon"
+    },
+    {
+      "id": 45,
+      "question": "Arteriyel kanülasyon sonrası \"damping\" katsayısının ve doğal frekansın ölçüldüğü test aşağıdakilerden hangisidir?",
+      "options": [
+        "Allen testi",
+        "Seldinger manevrası",
+        "Square wave (kare dalga) testi",
+        "Trendelenburg testi",
+        "Doppler testi"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Hızlı yıkama (flush) sonrası dalga formunun eski haline dönüş hızı ve salınım sayısı, sistemin dinamik yanıtını (square wave test) belirler.",
+      "category": "Kardiyovasküler Monitörizasyon"
+    },
+    {
+      "id": 46,
+      "question": "Anterior ve lateral duvar iskemisinin tanınması için en uygun elektrokardiyografi derivasyonu hangisidir?",
+      "options": [
+        "DI",
+        "DII",
+        "V3",
+        "V4",
+        "V5"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 2,
+      "explanation": "V5 derivasyonu anterior ve lateral duvar iskemisini saptamak için uygundur.",
+      "category": "Kardiyovasküler Monitörizasyon"
+    },
+    {
+      "id": 47,
+      "question": "CO ölçüm tekniklerinden termodilüsyon yöntemi için verilen bilgilerden hangisi/hangileri doğrudur? I. Sağ atriyuma vücut sıcaklığının altında 2.5, 5 veya 10 mL sıvı enjekte edilir. II. PA kateteri ucundaki termistör, kan sıcaklığındaki değişimi ölçer; değişim derecesi CO ile ters orantılıdır. III. Transpulmoner termodilüsyon (PiCCO, VolumeView) aynı ilkelere dayanır ancak PA kateteri gerektirmez. IV. Hassas kalp debisi ölçümü Stewart-Hamilton algoritmasına dayanır. V. Kalp ve akciğerlerden geçiş, preload volümleri ve akciğer suyunun belirlenmesini sağlar.",
+      "options": [
+        "I-II",
+        "III-IV-V",
+        "II-IV",
+        "I-II-III",
+        "I-II-III-IV-V"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Termodilüsyon ve transpulmoner termodilüsyonla ilgili verilen tüm ifadeler doğrudur.",
+      "category": "Kardiyovasküler Monitörizasyon"
+    },
+    {
+      "id": 48,
+      "question": "Arteriyel kan basıncı için aşağıda verilen bilgilerden hangisi yanlıştır?",
+      "options": [
+        "Nabız basıncı, sistolik ve diyastolik basınçlar arasındaki farktır.",
+        "Bir nabız vurusu arteriyel ağaç boyunca periferik ilerlerken dalga yansıması basınç dalga biçimini bozarak sistolik ve nabız basınçlarının büyümesine yol açar.",
+        "Radial arter sistolik basıncı genellikle aortik sistolik basınçtan daha yüksektir.",
+        "Radial arter sistolik basınçları, elin vasküler direncindeki değişiklikler nedeniyle hipotermik kardiyopulmoner bypass hemen ardından daha santral basınçlara göre genellikle daha düşük olabilir.",
+        "Doppler tekniği ile hem sistolik hem diyastolik basınçlar güvenilir şekilde belirlenebilir."
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Doppler tekniği ile yalnızca sistolik basınç güvenilir şekilde belirlenebilir; diyastolik basınç için güvenilir değildir.",
+      "category": "Kardiyovasküler Monitörizasyon"
+    },
+    {
+      "id": 49,
+      "question": "Bir hastada mikst venöz oksijen satürasyonu (SvO2 ) %50 ölçülmüştür. Bu durumun nedeni aşağıdakilerden hangisi olamaz?",
+      "options": [
+        "Şiddetli anemi",
+        "Kardiyojenik şok",
+        "Siyanür zehirlenmesi",
+        "Şiddetli hipoksi",
+        "Nöbet geçirme (status epileptikus)"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Siyanür zehirlenmesinde hücreler oksijeni kullanamaz, bu yüzden venöz kana dönen oksijen miktarı artar (SvO2 yükselir). Diğer şıklarda ise oksijen sunumu azaldığı veya tüketim arttığı için SvO2 düşer.",
+      "category": "Kardiyovasküler Monitörizasyon"
+    },
+    {
+      "id": 50,
+      "question": "65 yaşında, aort darlığı nedeniyle opere edilen hastanın radial arter kateterinden alınan basınç trasesinde sistolik basınç 170 mmHg, diyastolik basınç 60 mmHg izleniyor. Ancak eş zamanlı bakılan non-invaziv manşon ölçümü 145/75 mmHg sonuç veriyor. Arteriyel sistem \"square wave\" (kare dalga) testi ile kontrol edildiğinde, flush sonrası dalga formunun taban çizgisine dönmeden önce 4-5 kez salınım (oscillations) yaptığı görülüyor. Bu hastadaki basınç farkının en muhtemel nedeni ve yapılması gereken ilk müdahale nedir?",
+      "options": [
+        "Overdamping; sistemdeki hava kabarcıkları temizlenmelidir.",
+        "Underdamping (Rezonans); sisteme ek bir \"damping\" cihazı eklenmeli veya gereksiz uzatma hatları çıkarılmalıdır.",
+        "Normal fizyolojik fark; aorta-periferik basınç farkı nedeniyle müdahale gerekmez.",
+        "Transduser seviyesi hatası; transduser hastanın kalp seviyesinden yukarı taşınmalıdır.",
+        "Kateter trombozu; radial arter kateteri çekilip karşı koldan tekrar takılmalıdır."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Flush sonrası görülen fazla salınımlar \"underdamping\" (yetersiz sönümlenme/rezonans) göstergesidir. Bu durum sistolik basıncı olduğundan yüksek, diyastoliği ise düşük gösterir; ancak MAP değişmez. Uzun ve sert tüpler rezonansı artırır.",
+      "category": "Kardiyovasküler Monitörizasyon"
+    },
+    {
+      "id": 51,
+      "question": "Aşağıdakilerden hangisi Lityum Dilüsyonu (LiDCO) yöntemiyle kardiyak output ölçümünde yanlış sonuçlara yol açabilir?",
+      "options": [
+        "Hastanın sevofluran alması.",
+        "Hastanın nöromüsküler blokör olarak veküronyum kullanması.",
+        "Hastanın bipolar bozukluk nedeniyle lityum tedavisi alıyor olması.",
+        "Hastada triküspit yetmezliği olması.",
+        "Hastanın hemoglobin değerinin 10 g/dL olması."
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "LiDCO yönteminde kanda lityum konsantrasyonu ölçüldüğü için, halihazırda lityum kullanan hastalarda bazal değerler bozuk çıkacak ve ölçüm yapılamayacaktır.",
+      "category": "Kardiyovasküler Monitörizasyon"
+    },
+    {
+      "id": 52,
+      "question": "Masif hava embolisinde kapnografide görülen ani düşüşün temel fizyopatolojik mekanizması nedir?",
+      "options": [
+        "Alveoler ventilasyon artışı",
+        "Ölü boşluk (dead space) artışı",
+        "Metabolik hızın azalması",
+        "Şant (shunt) artışı",
+        "Havayolu direncinin azalması"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Hava embolisi pulmoner damarları tıkar. Ventilasyon devam ederken o bölgede perfüzyon kesildiği için \"alveoler ölü boşluk\" oluşur ve ETCO2 hızla düşer.",
+      "category": "Kardiyovasküler Monitörizasyon"
+    },
+    {
+      "id": 53,
+      "question": "Aritmi ve alt duvar iskemisinin tanınması için en uygun elektrokardiyografi derivasyonu hangisidir?",
+      "options": [
+        "DI",
+        "DII",
+        "V3",
+        "V4",
+        "V5"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 2,
+      "explanation": "DII derivasyonu aritmi tanısını ve inferior duvar iskemisinin saptanmasını kolaylaştırır.",
+      "category": "Kardiyovasküler Monitörizasyon"
+    },
+    {
+      "id": 54,
+      "question": "Aşağıdakilerden hangisi santral venöz kanülasyonun riskleri arasında yer almaz?",
+      "options": [
+        "Hat veya kan dolaşımı enfeksiyonu",
+        "Hava veya trombüs embolisi",
+        "Aritmi, kardiyak perforasyon, kardiyak tamponad",
+        "Pnömotoraks, hemotoraks, hidrotoraks, şilotoraks",
+        "Alerjik reaksiyon öyküsü"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 2,
+      "explanation": "Santral venöz kanülasyon riskleri arasında enfeksiyon, emboli, aritmi, hematom, pnömotoraks/hemotoraks/hidrotoraks/şilotoraks, kardiyak perforasyon, tamponad, sinir-arter travması ve tromboz bulunur; alerjik reaksiyon öyküsü doğrudan kanülasyon riski değildir.",
+      "category": "Kardiyovasküler Monitörizasyon"
+    },
+    {
+      "id": 55,
+      "question": "Santral venöz basınç (CVP) trasesinde, atriyal fibrilasyonu olan bir hastada hangi dalga formunun kaybı beklenir?",
+      "options": [
+        "a dalgası",
+        "c dalgası",
+        "v dalgası",
+        "x inişi",
+        "y inişi"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "\"a\" dalgası atriyal kontraksiyonu temsil eder. Atriyal fibrilasyonda organize bir kontraksiyon olmadığı için \"a\" dalgası kaybolur.",
+      "category": "Kardiyovasküler Monitörizasyon"
+    },
+    {
+      "id": 56,
+      "question": "Termodilüsyon yöntemi ile kardiyak output ölçümünde, \"enjeksiyonun çok yavaş yapılması\" sonucu nasıl etkiler?",
+      "options": [
+        "Eğri altındaki alan küçülür, CO yalancı yüksek çıkar.",
+        "Eğri altındaki alan büyür, CO yalancı düşük çıkar.",
+        "Ölçüm etkilenmez, Stewart-Hamilton bunu kompanse eder.",
+        "Sadece sistolik hacim yanlış hesaplanır.",
+        "Bazal sıcaklık kayması nedeniyle ölçüm yapılamaz."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Yavaş enjeksiyon, termal değişikliğin daha uzun sürmesine ve eğri altındaki alanın (AUC) büyümesine neden olur. CO, AUC ile ters orantılı olduğu için CO yalancı düşük çıkar.",
+      "category": "Kardiyovasküler Monitörizasyon"
+    },
+    {
+      "id": 57,
+      "question": "Ekstravasküler akciğer suyu (EVLW) aşağıdaki formüllerin hangisi ile bulunabilir?",
+      "options": [
+        "EVLW = ITTV - ITBV",
+        "EVLW = PTV - PBV",
+        "EVLW = ITBV - PBV",
+        "EVLW = ITTV - PTV",
+        "EVLW = PBV - ITBV"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 2,
+      "explanation": "EVLW, intratorasik termal hacimden intratorasik kan hacminin çıkarılmasıyla hesaplanır: EVLW = ITTV - ITBV.",
+      "category": "Kardiyovasküler Monitörizasyon"
+    },
+    {
+      "id": 58,
+      "question": "Aşağıdakilerden hangisi/hangileri santral venöz kateterizasyon endikasyonları arasında yer alır? I. Hipovolemi ve şoku tedavi etmek için sıvı verilmesi II. Kostik ilaçların ve total parenteral beslenmenin infüzyonu III. Hava embolisinin aspirasyonu IV. Transkütanöz pacing elektrotlarının yerleştirilmesi V. Periferik damarları zayıf olan hastalarda venöz erişim sağlanması",
+      "options": [
+        "I-II-V",
+        "III-IV",
+        "I-III",
+        "II-IV-V",
+        "I-II-III-IV-V"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Santral venöz kateterizasyon; CVP izlemi, sıvı tedavisi, kostik ilaç/TPN infüzyonu, hava embolisi aspirasyonu, pacing elektrodu yerleştirilmesi ve zor venöz erişim için endikedir.",
+      "category": "Kardiyovasküler Monitörizasyon"
+    },
+    {
+      "id": 59,
+      "question": "Pulmoner arter kateteri (PAC) yerleştirilirken, kateterin sağ ventrikülden pulmoner artere geçtiği en güvenilir şekilde nasıl anlaşılır?",
+      "options": [
+        "Sistolik basıncın ani yükselmesi",
+        "Ortalama basıncın düşmesi",
+        "Diyastolik basıncın ani yükselmesi",
+        "Nabız basıncının (pulse pressure) artması",
+        "\"v\" dalgasının belirginleşmesi"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Sağ ventrikülde diyastolik basınç sıfıra yakındır (0-8 mmHg). Kateter PA'ya geçtiğinde diyastolik basınç aniden yükselir (8-15 mmHg) çünkü pulmoner kapak kapanmıştır. Sistolik basınç ise hemen hemen aynı kalır.",
+      "category": "Kardiyovasküler Monitörizasyon"
+    }
+  ]
+}

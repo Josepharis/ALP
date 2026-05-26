@@ -25,106 +25,72 @@ class AnesthesiaHistoryCategory {
 class AnesthesiaHistoryData {
   static const List<AnesthesiaHistoryCategory> categories = [
     AnesthesiaHistoryCategory(
-      categoryName: "Anestezi Tarihçesi – Spot Bilgiler",
+      categoryName: "Modern Anestezinin Doğuşu ve Öncüleri",
       items: [
         AnesthesiaHistoryItem(
-          title: "1846, Morton",
-          description: "İlk başarılı eter anestezisi (modern anestezinin başlangıcı)",
+          title: "WILLIAM MORTON",
+          description: "İlk başarılı halka açık eter anestezisini yaparak modern anestezinin başlangıcını sağlamıştır.",
+          additionalInfo: "16 Ekim 1846'da Boston'daki 'Ether Dome' amfisinde, cerrah John Warren'ın ağrısız bir tümör ameliyatı yapmasını sağlamış ve tıp tarihinde yeni bir çağ açmıştır.",
         ),
         AnesthesiaHistoryItem(
-          title: "1844, Horace Wells",
-          description: "İlk kez N₂O ile diş çekimi (başarısız sayıldı)",
+          title: "HORACE WELLS",
+          description: "Diş çekiminde Nitröz Oksit (N₂O) gazını kullanan ilk öncüdür.",
+          additionalInfo: "Kendi dişini ağrısız çektirse de Boston'daki halka açık gösterimi sırasında hastanın inlemesi üzerine başarısız sayılmış, ancak Morton'a ilham kaynağı olmuştur.",
         ),
         AnesthesiaHistoryItem(
-          title: "Oliver Wendell Holmes",
-          description: "\"Anestezi\" terimini ilk kullanan (1846)",
+          title: "JOHN SNOW",
+          description: "Anesteziyi bilimsel temellere oturtan ve Kraliçe Victoria'nın doğumlarında kloroform uygulayan ilk uzman doktordur.",
+          additionalInfo: "Anestezi dozajını ve güvenliğini kanıtlayarak yöntemin toplumda kabul görmesini sağlamış, aynı zamanda modern epidemiyolojinin temellerini atmıştır.",
         ),
         AnesthesiaHistoryItem(
-          title: "Ether",
-          description: "İlk yaygın genel anestezik",
+          title: "OLIVER WENDELL HOLMES",
+          description: "Ağrısız cerrahi durumunu tanımlamak için 'Anestezi' terimini ilk kez kullanmıştır.",
+          additionalInfo: "1846 yılında William Morton'a yazdığı mektupta, Yunancadan türettiği bu kelimeyi (hissizlik/duygusuzluk) önermiştir.",
         ),
         AnesthesiaHistoryItem(
-          title: "James Simpson",
-          description: "Kloroformu doğum analjezisi için kullandı",
-        ),
-        AnesthesiaHistoryItem(
-          title: "John Snow",
-          description: "Eter ve kloroformun güvenli kullanımı",
-          subtitle: "Kraliyet ailesinde anestezi uygulamaları",
-          additionalInfo: "İlk endotrakeal tüp prensipleri",
+          title: "JAMES YOUNG SIMPSON",
+          description: "Kloroformu keşfederek özellikle doğum sancılarını dindirmek için kullanmış ve kadın doğumda analjeziyi başlatmıştır.",
+          additionalInfo: "Eterden daha güçlü ve hızlı etkili olan kloroformu 1847'de kullanmaya başlamış, dönemin bağnaz çevrelerine karşı bilimsel bir mücadele vermiştir.",
         ),
       ],
     ),
     AnesthesiaHistoryCategory(
-      categoryName: "İlaçlar ve İlk Kullanımlar",
+      categoryName: "Lokal ve Bölgesel Anestezinin Gelişimi",
       items: [
         AnesthesiaHistoryItem(
-          title: "Nitröz oksit (N₂O)",
-          description: "1800 → Humphry Davy analjezik etkisini tanımladı",
-          subtitle: "1844 → Wells/Colton diş hekimliğinde kullandı",
+          title: "CARL KOLLER",
+          description: "Kokainin göz üzerindeki etkisini keşfederek lokal anestezinin temelini atmıştır (1884).",
+          additionalInfo: "Bu buluş, sadece göz cerrahisinde değil, tüm bölgesel anestezi tekniklerinde bir devrim yaratmış ve cerrahi pratiği kökten değiştirmiştir.",
         ),
         AnesthesiaHistoryItem(
-          title: "Kokain",
-          description: "1884 → Carl Koller, göz cerrahisinde topikal",
-          subtitle: "1884 → William Halsted, sinir bloğu / infiltrasyon",
+          title: "AUGUST BIER",
+          description: "Dünyadaki ilk başarılı spinal anesteziyi gerçekleştirmiştir (1898).",
+          additionalInfo: "Kokain kullanarak yaptığı bu uygulamayı bizzat kendisi ve asistanı üzerinde denemiş, böylece bölgesel anestezinin sınırlarını belirlemiştir.",
         ),
         AnesthesiaHistoryItem(
-          title: "Chloral hydrate",
-          description: "İlk sedatif, 19. yy sonu",
-        ),
-        AnesthesiaHistoryItem(
-          title: "Barbitüratlar",
-          description: "İlk: Hekzobarbital (1927)",
-        ),
-        AnesthesiaHistoryItem(
-          title: "Saf opioid anestezisi",
-          description: "Lowenstein, 1969",
+          title: "ALEXANDER WOOD",
+          description: "Hipodermik enjektörü icat ederek intravenöz (IV) anestezinin önünü açmıştır (1855).",
+          additionalInfo: "İlaçların doğrudan doku ve kan dolaşımına verilmesini sağlayan bu icat, günümüzdeki çoğu anestezi yönteminin teknik altyapısını oluşturur.",
         ),
       ],
     ),
     AnesthesiaHistoryCategory(
-      categoryName: "Bölgesel Anestezi – Spotlar",
+      categoryName: "Modern Teknikler ve İlaç Gelişmeleri",
       items: [
         AnesthesiaHistoryItem(
-          title: "Spinal anestezi",
-          description: "August Bier, 1898",
+          title: "JOHN LUNDY",
+          description: "Tek bir ilaç yerine farklı amaçlı ilaçların bir arada kullanıldığı 'Dengeli Anestezi' kavramını ortaya atmıştır.",
+          additionalInfo: "1926 yılında geliştirdiği bu prensip ile yan etkiler azaltılmış ve anestezi güvenliği en üst düzeye çıkarılmıştır.",
         ),
         AnesthesiaHistoryItem(
-          title: "RİVA (Bier Bloğu)",
-          description: "1908",
+          title: "ROBERT MACINTOSH",
+          description: "Havayolu yönetimini güvenli hale getiren laringoskop kılıcı ve teknikleri geliştirmiştir.",
+          additionalInfo: "1940'lı yıllarda tasarladığı eğri laringoskop kılıcı (Macintosh blade), günümüzde hala dünyadaki en standart havayolu ekipmanıdır.",
         ),
         AnesthesiaHistoryItem(
-          title: "Kaudal epidural",
-          description: "Cathelin & Sicard",
-        ),
-        AnesthesiaHistoryItem(
-          title: "Lumbal epidural",
-          description: "Fidel Pages (1921), Dogliotti (1931)",
-        ),
-      ],
-    ),
-    AnesthesiaHistoryCategory(
-      categoryName: "Teknolojik / Uygulama Gelişmeleri",
-      items: [
-        AnesthesiaHistoryItem(
-          title: "Alexander Wood (1855)",
-          description: "Hipodermik enjektör → IV anestezinin temeli",
-        ),
-        AnesthesiaHistoryItem(
-          title: "Joseph Clover",
-          description: "Modern havayolu yönetimi & monitörizasyon öncüsü",
-        ),
-        AnesthesiaHistoryItem(
-          title: "Joseph O'Dwyer",
-          description: "Elektif trakeal entübasyon",
-        ),
-        AnesthesiaHistoryItem(
-          title: "Sir Robert Macintosh",
-          description: "Endotrakeal tüp kullanımını yaygınlaştırdı (güvenli havayolu)",
-        ),
-        AnesthesiaHistoryItem(
-          title: "Lundy (1926)",
-          description: "Dengeli anestezi tanımı",
+          title: "GRIFFITH VE JOHNSON",
+          description: "Kürar (Curare) kullanımını anesteziye dahil ederek tam kas gevşemesi sağlamışlardır (1942).",
+          additionalInfo: "Bu sayede karın içi ve göğüs cerrahileri gibi derin kas gevşemesi gerektiren ameliyatlar çok daha güvenli ve kolay yapılabilir hale gelmiştir.",
         ),
       ],
     ),

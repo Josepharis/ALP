@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
+import 'dart:convert';
+import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:file_picker/file_picker.dart';
 import '../l10n/app_localizations.dart';
 import '../services/auth_service.dart';
 import '../services/admin_service.dart';
@@ -8,6 +11,10 @@ import '../services/organized_data_service.dart';
 import '../services/multilingual_question_service.dart';
 import 'add_question_screen.dart';
 import 'edit_question_screen.dart';
+import 'add_spot_info_screen.dart';
+import '../services/spot_migration_service.dart';
+import '../services/spot_service.dart';
+import '../models/spot_info.dart';
 
 class AdminScreen extends StatefulWidget {
   const AdminScreen({super.key});
@@ -22,6 +29,10 @@ class _AdminScreenState extends State<AdminScreen>
   final AuthService _authService = AuthService();
   final AdminService _adminService = AdminService();
   final OrganizedDataService _organizedDataService = OrganizedDataService();
+  final SpotMigrationService _spotMigrationService = SpotMigrationService();
+  final SpotService _spotService = SpotService();
+  bool _isMigrating = false;
+  bool _isImportingJson = false;
 
   int _selectedNavIndex = 0;
   Map<String, dynamic> _userStats = {};
@@ -48,8 +59,28 @@ class _AdminScreenState extends State<AdminScreen>
       TextEditingController();
   bool _isSendingNotification = false;
   String _purchaseDateFilter = 'all'; // all, today, week, month, custom
+  String _notificationLanguage = 'all'; // all, tr, en
   DateTime? _customStartDate;
   DateTime? _customEndDate;
+  String _selectedSpotLanguage = 'tr';
+  String _selectedSpotCategory = 'Hepsi';
+  List<String> _spotCategories = ['Hepsi'];
+  final TextEditingController _spotSearchController = TextEditingController();
+  String _spotSearchQuery = '';
+
+  String _generateSlug(String text) {
+    var slug = text.toLowerCase();
+    slug = slug.replaceAll('ı', 'i');
+    slug = slug.replaceAll('ğ', 'g');
+    slug = slug.replaceAll('ü', 'u');
+    slug = slug.replaceAll('ş', 's');
+    slug = slug.replaceAll('ö', 'o');
+    slug = slug.replaceAll('ç', 'c');
+    slug = slug.replaceAll(RegExp(r'[^a-z0-9\s-]'), '');
+    slug = slug.replaceAll(RegExp(r'\s+'), '-');
+    slug = slug.replaceAll(RegExp(r'-+'), '-');
+    return slug.trim();
+  }
 
   @override
   void initState() {
@@ -68,6 +99,7 @@ class _AdminScreenState extends State<AdminScreen>
     _otherTopicsFreeQuestionsController.dispose();
     _notificationTitleController.dispose();
     _notificationBodyController.dispose();
+    _spotSearchController.dispose();
     super.dispose();
   }
 
@@ -81,6 +113,7 @@ class _AdminScreenState extends State<AdminScreen>
       _loadCategories(),
       _loadFreeQuestionConfig(),
       _loadPurchases(),
+      _loadSpotCategories(),
     ]);
 
     setState(() => _isLoading = false);
@@ -127,7 +160,6 @@ class _AdminScreenState extends State<AdminScreen>
       final combinedStats = {...adminStats, 'organizedStats': organizedStats};
 
       setState(() => _quizStats = combinedStats);
-
     } catch (e) {
       setState(() => _quizStats = {});
     }
@@ -135,53 +167,72 @@ class _AdminScreenState extends State<AdminScreen>
 
   Future<void> _loadCategories() async {
     try {
-      final languageParam = _selectedLanguage == 'turkish' ? 'turkish' : 'english';
-      final organizedCategories = await _organizedDataService.getOrganizedCategoriesByLanguage(languageParam);
+      final languageParam =
+          _selectedLanguage == 'turkish' ? 'turkish' : 'english';
+      
+      // 1. Önce yerel kategorileri yükle
+      final localCategories = MultilingualQuestionService.getQuizCategories(
+        languageParam == 'turkish' ? 'turkish' : 'en',
+      );
+      
+      final List<Map<String, dynamic>> combined = localCategories.map((c) {
+        final title = c['title'] as String;
+        return <String, dynamic>{
+          'id': '',
+          'displayName': title,
+          'collectionName': c['collectionName'] as String? ?? _generateSlug(title),
+          'questionCount': (c['questions'] as List?)?.length ?? 0,
+          'language': languageParam,
+        };
+      }).toList();
 
-      if (organizedCategories.isNotEmpty) {
-        setState(() {
-          _organizedCategories = organizedCategories;
-          _categories = organizedCategories.map((cat) => cat['displayName'] as String).toList();
-          if (_categories.isNotEmpty) {
-            _selectedCategory = _categories.first;
-            _selectedCollectionName = organizedCategories.first['collectionName'] as String;
+      // 2. Firestore'daki organize kategorileri yükle
+      try {
+        final organizedCategories = await _organizedDataService
+            .getOrganizedCategoriesByLanguage(languageParam);
+
+        if (organizedCategories.isNotEmpty) {
+          for (var fireCat in organizedCategories) {
+            final displayName = fireCat['displayName'] as String;
+            final collectionName = fireCat['collectionName'] as String;
+            final index = combined.indexWhere((c) => c['displayName'] == displayName);
+            
+            if (index != -1) {
+              combined[index] = <String, dynamic>{
+                ...combined[index],
+                'id': fireCat['id'],
+                'collectionName': collectionName,
+                'questionCount': fireCat['questionCount'],
+              };
+            } else {
+              combined.add(<String, dynamic>{
+                'id': fireCat['id'],
+                'displayName': displayName,
+                'collectionName': collectionName,
+                'questionCount': fireCat['questionCount'],
+                'language': languageParam,
+              });
+            }
           }
-        });
+        }
+      } catch (_) {}
+
+      setState(() {
+        _organizedCategories = combined;
+        _categories = combined.map((cat) => cat['displayName'] as String).toList();
         if (_categories.isNotEmpty) {
-          _loadQuestions();
-        }
-      } else {
-        final allCategories = await _getAllCategoriesFromFirestore();
-        if (allCategories.isNotEmpty) {
-          final filteredCategories = allCategories.where((cat) {
-            final language = cat['language'] as String? ?? 'turkish';
-            return language == languageParam;
-          }).toList();
-
-          setState(() {
-            _organizedCategories = filteredCategories;
-            _categories = filteredCategories.map((cat) => cat['displayName'] as String).toList();
-            if (_categories.isNotEmpty) {
-              _selectedCategory = _categories.first;
-              _selectedCollectionName = filteredCategories.first['collectionName'] as String;
-            }
-          });
-
-          if (_categories.isNotEmpty) {
-            _loadQuestions();
-          }
-        } else {
-          final categories = await _adminService.getCategories();
-          setState(() {
-            _categories = categories;
-            if (categories.isNotEmpty) {
-              _selectedCategory = categories.first;
-            }
-          });
-          if (categories.isNotEmpty) {
-            _loadQuestions();
+          if (_selectedCategory == null || !_categories.contains(_selectedCategory)) {
+            _selectedCategory = _categories.first;
+            _selectedCollectionName = combined.first['collectionName'] as String;
+          } else {
+            final selectedCat = combined.firstWhere((c) => c['displayName'] == _selectedCategory);
+            _selectedCollectionName = selectedCat['collectionName'] as String;
           }
         }
+      });
+
+      if (_categories.isNotEmpty) {
+        _loadQuestions();
       }
     } catch (e) {
       debugPrint('Error loading categories: $e');
@@ -214,28 +265,29 @@ class _AdminScreenState extends State<AdminScreen>
     }
   }
 
-
   // Alternative method to get categories without isActive filter
   Future<List<Map<String, dynamic>>> _getAllCategoriesFromFirestore() async {
     try {
       // Use the existing method but modify the service to not require isActive
       // For now, let's try to get categories using a different approach
-      final snapshot = await FirebaseFirestore.instance
-          .collection('quizCategories')
-          .orderBy('displayName')
-          .get();
+      final snapshot =
+          await FirebaseFirestore.instance
+              .collection('quizCategories')
+              .orderBy('displayName')
+              .get();
 
-      final categories = snapshot.docs.map((doc) {
-        final data = doc.data();
-        return {
-          'id': doc.id,
-          'displayName': data['displayName'] ?? '',
-          'collectionName': data['collectionName'] ?? '',
-          'questionCount': data['questionCount'] ?? 0,
-          'language': data['language'] ?? 'turkish',
-          'createdAt': data['createdAt'],
-        };
-      }).toList();
+      final categories =
+          snapshot.docs.map((doc) {
+            final data = doc.data();
+            return {
+              'id': doc.id,
+              'displayName': data['displayName'] ?? '',
+              'collectionName': data['collectionName'] ?? '',
+              'questionCount': data['questionCount'] ?? 0,
+              'language': data['language'] ?? 'turkish',
+              'createdAt': data['createdAt'],
+            };
+          }).toList();
 
       return categories;
     } catch (e) {
@@ -280,16 +332,22 @@ class _AdminScreenState extends State<AdminScreen>
         final screenWidth = constraints.maxWidth;
         final isSmallScreen = screenWidth < 600;
         final isVerySmallScreen = screenWidth < 400;
-        
+
         return Container(
-          padding: EdgeInsets.all(isVerySmallScreen ? 12 : (isSmallScreen ? 16 : 20)),
+          padding: EdgeInsets.all(
+            isVerySmallScreen ? 12 : (isSmallScreen ? 16 : 20),
+          ),
           child: Row(
             children: [
               Container(
-                padding: EdgeInsets.all(isVerySmallScreen ? 8 : (isSmallScreen ? 10 : 12)),
+                padding: EdgeInsets.all(
+                  isVerySmallScreen ? 8 : (isSmallScreen ? 10 : 12),
+                ),
                 decoration: BoxDecoration(
                   color: Colors.white.withOpacity(0.15),
-                  borderRadius: BorderRadius.circular(isVerySmallScreen ? 10 : 15),
+                  borderRadius: BorderRadius.circular(
+                    isVerySmallScreen ? 10 : 15,
+                  ),
                 ),
                 child: Icon(
                   Icons.admin_panel_settings,
@@ -297,7 +355,9 @@ class _AdminScreenState extends State<AdminScreen>
                   size: isVerySmallScreen ? 18 : (isSmallScreen ? 20 : 24),
                 ),
               ),
-              SizedBox(width: isVerySmallScreen ? 8 : (isSmallScreen ? 12 : 16)),
+              SizedBox(
+                width: isVerySmallScreen ? 8 : (isSmallScreen ? 12 : 16),
+              ),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -305,7 +365,8 @@ class _AdminScreenState extends State<AdminScreen>
                     Text(
                       'Admin Panel',
                       style: TextStyle(
-                        fontSize: isVerySmallScreen ? 18 : (isSmallScreen ? 20 : 24),
+                        fontSize:
+                            isVerySmallScreen ? 18 : (isSmallScreen ? 20 : 24),
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
                       ),
@@ -313,7 +374,8 @@ class _AdminScreenState extends State<AdminScreen>
                     Text(
                       'Sistem Yönetimi',
                       style: TextStyle(
-                        fontSize: isVerySmallScreen ? 11 : (isSmallScreen ? 12 : 14), 
+                        fontSize:
+                            isVerySmallScreen ? 11 : (isSmallScreen ? 12 : 14),
                         color: Colors.white70,
                       ),
                     ),
@@ -327,7 +389,9 @@ class _AdminScreenState extends State<AdminScreen>
                     context: context,
                     builder:
                         (context) => AlertDialog(
-                          title: Text(AppLocalizations.of(context)!.adminLogout),
+                          title: Text(
+                            AppLocalizations.of(context)!.adminLogout,
+                          ),
                           content: Text(
                             AppLocalizations.of(context)!.adminLogoutConfirm,
                           ),
@@ -354,7 +418,9 @@ class _AdminScreenState extends State<AdminScreen>
                       if (mounted) {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
-                            content: Text('${AppLocalizations.of(context)!.logoutError}: $e'),
+                            content: Text(
+                              '${AppLocalizations.of(context)!.logoutError}: $e',
+                            ),
                             backgroundColor: Colors.red,
                           ),
                         );
@@ -363,16 +429,17 @@ class _AdminScreenState extends State<AdminScreen>
                   }
                 },
                 icon: Icon(
-                  Icons.logout, 
+                  Icons.logout,
                   color: Colors.white,
                   size: isVerySmallScreen ? 18 : (isSmallScreen ? 20 : 24),
                 ),
               ),
             ],
-          ));
-        },
-      );
-    }
+          ),
+        );
+      },
+    );
+  }
 
   Widget _buildNavigation() {
     return LayoutBuilder(
@@ -380,79 +447,96 @@ class _AdminScreenState extends State<AdminScreen>
         final screenWidth = constraints.maxWidth;
         final isSmallScreen = screenWidth < 600;
         final isVerySmallScreen = screenWidth < 400;
-        
+
         final navItems = [
           {'icon': Icons.dashboard_outlined, 'label': 'Dashboard'},
           {'icon': Icons.quiz_outlined, 'label': 'Questions'},
-          {
-            'icon': Icons.shopping_cart_outlined,
-            'label': 'Satın Alma',
-          },
+          {'icon': Icons.shopping_cart_outlined, 'label': 'Satın Alma'},
           {
             'icon': Icons.analytics_outlined,
             'label': AppLocalizations.of(context)!.analytics,
           },
-          {
-            'icon': Icons.notifications_active_outlined,
-            'label': 'Bildirimler',
-          },
+          {'icon': Icons.notifications_active_outlined, 'label': 'Bildirimler'},
+          {'icon': Icons.lightbulb_outline_rounded, 'label': 'Spot Bilgi'},
         ];
 
         return Container(
-          margin: EdgeInsets.symmetric(horizontal: isVerySmallScreen ? 12 : (isSmallScreen ? 16 : 20)),
-          padding: EdgeInsets.all(isVerySmallScreen ? 6 : (isSmallScreen ? 7 : 8)),
+          margin: EdgeInsets.symmetric(
+            horizontal: isVerySmallScreen ? 12 : (isSmallScreen ? 16 : 20),
+          ),
+          padding: EdgeInsets.all(
+            isVerySmallScreen ? 6 : (isSmallScreen ? 7 : 8),
+          ),
           decoration: BoxDecoration(
             color: Colors.white.withOpacity(0.1),
             borderRadius: BorderRadius.circular(isVerySmallScreen ? 15 : 20),
             border: Border.all(color: Colors.white.withOpacity(0.2)),
           ),
           child: Row(
-            children: navItems.asMap().entries.map((entry) {
-              final index = entry.key;
-              final item = entry.value;
-              final isSelected = _selectedNavIndex == index;
+            children:
+                navItems.asMap().entries.map((entry) {
+                  final index = entry.key;
+                  final item = entry.value;
+                  final isSelected = _selectedNavIndex == index;
 
-              return Expanded(
-                child: GestureDetector(
-                  onTap: () => setState(() => _selectedNavIndex = index),
-                  child: Container(
-                    padding: EdgeInsets.symmetric(
-                      vertical: isVerySmallScreen ? 8 : (isSmallScreen ? 10 : 12),
-                    ),
-                    decoration: BoxDecoration(
-                      color: isSelected
-                          ? Colors.white.withOpacity(0.2)
-                          : Colors.transparent,
-                      borderRadius: BorderRadius.circular(isVerySmallScreen ? 10 : 15),
-                    ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(
-                          item['icon'] as IconData,
-                          color: isSelected ? Colors.white : Colors.white60,
-                          size: isVerySmallScreen ? 16 : (isSmallScreen ? 18 : 20),
+                  return Expanded(
+                    child: GestureDetector(
+                      onTap: () {
+                        setState(() => _selectedNavIndex = index);
+                        if (index == 5) {
+                          _loadSpotCategories();
+                        }
+                      },
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                          vertical:
+                              isVerySmallScreen ? 8 : (isSmallScreen ? 10 : 12),
                         ),
-                        SizedBox(height: isVerySmallScreen ? 2 : 4),
-                        Text(
-                          item['label'] as String,
-                          style: TextStyle(
-                            color: isSelected ? Colors.white : Colors.white60,
-                            fontSize: isVerySmallScreen ? 8 : (isSmallScreen ? 9 : 10),
-                            fontWeight: isSelected
-                                ? FontWeight.w600
-                                : FontWeight.normal,
+                        decoration: BoxDecoration(
+                          color:
+                              isSelected
+                                  ? Colors.white.withOpacity(0.2)
+                                  : Colors.transparent,
+                          borderRadius: BorderRadius.circular(
+                            isVerySmallScreen ? 10 : 15,
                           ),
-                          textAlign: TextAlign.center,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
                         ),
-                      ],
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(
+                              item['icon'] as IconData,
+                              color: isSelected ? Colors.white : Colors.white60,
+                              size:
+                                  isVerySmallScreen
+                                      ? 16
+                                      : (isSmallScreen ? 18 : 20),
+                            ),
+                            SizedBox(height: isVerySmallScreen ? 2 : 4),
+                            Text(
+                              item['label'] as String,
+                              style: TextStyle(
+                                color:
+                                    isSelected ? Colors.white : Colors.white60,
+                                fontSize:
+                                    isVerySmallScreen
+                                        ? 8
+                                        : (isSmallScreen ? 9 : 10),
+                                fontWeight:
+                                    isSelected
+                                        ? FontWeight.w600
+                                        : FontWeight.normal,
+                              ),
+                              textAlign: TextAlign.center,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-              );
-            }).toList(),
+                  );
+                }).toList(),
           ),
         );
       },
@@ -465,25 +549,30 @@ class _AdminScreenState extends State<AdminScreen>
         final screenWidth = constraints.maxWidth;
         final isSmallScreen = screenWidth < 600;
         final isVerySmallScreen = screenWidth < 400;
-        
+
         return Padding(
-          padding: EdgeInsets.all(isVerySmallScreen ? 12 : (isSmallScreen ? 16 : 20)),
-          child: (() {
-            switch (_selectedNavIndex) {
-              case 0:
-                return _buildDashboard();
-              case 1:
-                return _buildQuestionsManagement();
-              case 2:
-                return _buildPurchasesView();
-              case 3:
-                return _buildAnalytics();
-              case 4:
-                return _buildNotificationSender();
-              default:
-                return _buildDashboard();
-            }
-          })(),
+          padding: EdgeInsets.all(
+            isVerySmallScreen ? 12 : (isSmallScreen ? 16 : 20),
+          ),
+          child:
+              (() {
+                switch (_selectedNavIndex) {
+                  case 0:
+                    return _buildDashboard();
+                  case 1:
+                    return _buildQuestionsManagement();
+                  case 2:
+                    return _buildPurchasesView();
+                  case 3:
+                    return _buildAnalytics();
+                  case 4:
+                    return _buildNotificationSender();
+                  case 5:
+                    return _buildSpotInfoManagement();
+                  default:
+                    return _buildDashboard();
+                }
+              })(),
         );
       },
     );
@@ -642,15 +731,14 @@ class _AdminScreenState extends State<AdminScreen>
               ElevatedButton.icon(
                 onPressed: _saveFreeQuestionConfig,
                 icon: const Icon(Icons.save, size: 18),
-                label: const Text(
-                  'Kaydet',
-                  style: TextStyle(fontSize: 13),
-                ),
+                label: const Text('Kaydet', style: TextStyle(fontSize: 13)),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.green.shade600,
                   foregroundColor: Colors.white,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 10,
+                  ),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
@@ -689,15 +777,11 @@ class _AdminScreenState extends State<AdminScreen>
             fillColor: Colors.black.withOpacity(0.2),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(
-                color: Colors.white.withOpacity(0.3),
-              ),
+              borderSide: BorderSide(color: Colors.white.withOpacity(0.3)),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(
-                color: Colors.white.withOpacity(0.3),
-              ),
+              borderSide: BorderSide(color: Colors.white.withOpacity(0.3)),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
@@ -706,8 +790,10 @@ class _AdminScreenState extends State<AdminScreen>
                 width: 1.5,
               ),
             ),
-            contentPadding:
-                const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: 12,
+              vertical: 8,
+            ),
           ),
         ),
       ],
@@ -755,7 +841,8 @@ class _AdminScreenState extends State<AdminScreen>
         'value': '${_userStats['totalUsers'] ?? 0}',
         'icon': Icons.people,
         'color': Colors.blue,
-        'subtitle': '${_userStats['newUsersLastWeek'] ?? 0} ${AppLocalizations.of(context)!.newUsers7Days}',
+        'subtitle':
+            '${_userStats['newUsersLastWeek'] ?? 0} ${AppLocalizations.of(context)!.newUsers7Days}',
       },
       {
         'title': AppLocalizations.of(context)!.activeUsers,
@@ -777,7 +864,8 @@ class _AdminScreenState extends State<AdminScreen>
         'value': '${_userStats['totalQuizzes'] ?? 0}',
         'icon': Icons.assessment,
         'color': Colors.purple,
-        'subtitle': '${_userStats['recentQuizzes'] ?? 0} ${AppLocalizations.of(context)!.last7DaysQuizzes}',
+        'subtitle':
+            '${_userStats['recentQuizzes'] ?? 0} ${AppLocalizations.of(context)!.last7DaysQuizzes}',
       },
     ];
 
@@ -802,7 +890,8 @@ class _AdminScreenState extends State<AdminScreen>
         } else {
           // Telefon - 2 sütun (küçük ve büyük telefon)
           crossAxisCount = 2;
-          childAspectRatio = screenWidth > 600 ? 2.2 : 2.0; // Çok daha küçük kartlar
+          childAspectRatio =
+              screenWidth > 600 ? 2.2 : 2.0; // Çok daha küçük kartlar
           spacing = screenWidth > 600 ? 4 : 3; // Çok daha az boşluk
         }
 
@@ -825,7 +914,10 @@ class _AdminScreenState extends State<AdminScreen>
     );
   }
 
-  Widget _buildResponsiveStatCard(Map<String, dynamic> stat, double screenWidth) {
+  Widget _buildResponsiveStatCard(
+    Map<String, dynamic> stat,
+    double screenWidth,
+  ) {
     // Ekran boyutuna göre padding ve font boyutları
     final isSmallScreen = screenWidth < 600;
     final isLargeScreen = screenWidth >= 1200;
@@ -867,7 +959,10 @@ class _AdminScreenState extends State<AdminScreen>
               if (isLargeScreen) ...[
                 // Büyük ekranlarda ek bilgi
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 6,
+                    vertical: 2,
+                  ),
                   decoration: BoxDecoration(
                     color: (stat['color'] as Color).withOpacity(0.1),
                     borderRadius: BorderRadius.circular(8),
@@ -884,7 +979,7 @@ class _AdminScreenState extends State<AdminScreen>
               ],
             ],
           ),
-          
+
           // Değer ve açıklama
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -971,22 +1066,24 @@ class _AdminScreenState extends State<AdminScreen>
               itemBuilder: (context, index) {
                 final isTurkish = index == 0;
                 final language = isTurkish ? 'Türkçe' : 'İngilizce';
-                final questionCount = isTurkish 
-                    ? _languageStats['turkishQuestions'] ?? 0
-                    : _languageStats['englishQuestions'] ?? 0;
-                final categoryCount = isTurkish
-                    ? _languageStats['turkishCategories'] ?? 0
-                    : _languageStats['englishCategories'] ?? 0;
+                final questionCount =
+                    isTurkish
+                        ? _languageStats['turkishQuestions'] ?? 0
+                        : _languageStats['englishQuestions'] ?? 0;
+                final categoryCount =
+                    isTurkish
+                        ? _languageStats['turkishCategories'] ?? 0
+                        : _languageStats['englishCategories'] ?? 0;
                 final color = isTurkish ? Colors.red : Colors.blue;
                 final flag = isTurkish ? '🇹🇷' : '🇺🇸';
 
                 return _buildLanguageStatCard(
-                  language, 
-                  questionCount, 
-                  categoryCount, 
-                  color, 
-                  flag, 
-                  screenWidth
+                  language,
+                  questionCount,
+                  categoryCount,
+                  color,
+                  flag,
+                  screenWidth,
                 );
               },
             );
@@ -997,12 +1094,12 @@ class _AdminScreenState extends State<AdminScreen>
   }
 
   Widget _buildLanguageStatCard(
-    String language, 
-    int questionCount, 
-    int categoryCount, 
-    Color color, 
-    String flag, 
-    double screenWidth
+    String language,
+    int questionCount,
+    int categoryCount,
+    Color color,
+    String flag,
+    double screenWidth,
   ) {
     final isSmallScreen = screenWidth < 600;
     final isLargeScreen = screenWidth >= 1200;
@@ -1041,7 +1138,8 @@ class _AdminScreenState extends State<AdminScreen>
                     Text(
                       flag,
                       style: TextStyle(
-                        fontSize: isSmallScreen ? 16 : (isLargeScreen ? 20 : 18),
+                        fontSize:
+                            isSmallScreen ? 16 : (isLargeScreen ? 20 : 18),
                       ),
                     ),
                     SizedBox(width: isSmallScreen ? 4 : 6),
@@ -1049,7 +1147,8 @@ class _AdminScreenState extends State<AdminScreen>
                       language,
                       style: TextStyle(
                         color: color,
-                        fontSize: isSmallScreen ? 12 : (isLargeScreen ? 14 : 13),
+                        fontSize:
+                            isSmallScreen ? 12 : (isLargeScreen ? 14 : 13),
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -1058,7 +1157,7 @@ class _AdminScreenState extends State<AdminScreen>
               ),
             ],
           ),
-          
+
           // Değer ve açıklama
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -1089,14 +1188,23 @@ class _AdminScreenState extends State<AdminScreen>
   }
 
   Widget _buildQuizCategoriesGrid() {
-    final turkishCategories = _languageStats['turkishQuestionsByCategory'] as Map<String, int>? ?? {};
-    final englishCategories = _languageStats['englishQuestionsByCategory'] as Map<String, int>? ?? {};
-    
+    final turkishCategories =
+        _languageStats['turkishQuestionsByCategory'] as Map<String, int>? ?? {};
+    final englishCategories =
+        _languageStats['englishQuestionsByCategory'] as Map<String, int>? ?? {};
+
     // Multilingual sırasına göre kategorileri sırala
-    final turkishOrderedCategories = _getOrderedTurkishCategories(turkishCategories);
-    final englishOrderedCategories = _getOrderedEnglishCategories(englishCategories);
-    
-    final maxLength = math.max(turkishOrderedCategories.length, englishOrderedCategories.length);
+    final turkishOrderedCategories = _getOrderedTurkishCategories(
+      turkishCategories,
+    );
+    final englishOrderedCategories = _getOrderedEnglishCategories(
+      englishCategories,
+    );
+
+    final maxLength = math.max(
+      turkishOrderedCategories.length,
+      englishOrderedCategories.length,
+    );
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -1115,41 +1223,45 @@ class _AdminScreenState extends State<AdminScreen>
           physics: const NeverScrollableScrollPhysics(),
           itemCount: maxLength,
           itemBuilder: (context, index) {
-            final turkishCategory = index < turkishOrderedCategories.length 
-                ? turkishOrderedCategories[index] 
-                : null;
-            final englishCategory = index < englishOrderedCategories.length 
-                ? englishOrderedCategories[index] 
-                : null;
-            
+            final turkishCategory =
+                index < turkishOrderedCategories.length
+                    ? turkishOrderedCategories[index]
+                    : null;
+            final englishCategory =
+                index < englishOrderedCategories.length
+                    ? englishOrderedCategories[index]
+                    : null;
+
             return Padding(
               padding: const EdgeInsets.only(bottom: 12),
               child: Row(
                 children: [
                   // Sol taraf - Türkçe
                   Expanded(
-                    child: turkishCategory != null
-                        ? _buildCategoryCard(
-                            turkishCategory['name']!,
-                            turkishCategory['count']!,
-                            'TR',
-                            Colors.blue,
-                            number: index + 1,
-                          )
-                        : const SizedBox(height: 80),
+                    child:
+                        turkishCategory != null
+                            ? _buildCategoryCard(
+                              turkishCategory['name']!,
+                              turkishCategory['count']!,
+                              'TR',
+                              Colors.blue,
+                              number: index + 1,
+                            )
+                            : const SizedBox(height: 80),
                   ),
                   const SizedBox(width: 12),
                   // Sağ taraf - İngilizce
                   Expanded(
-                    child: englishCategory != null
-                        ? _buildCategoryCard(
-                            englishCategory['name']!,
-                            englishCategory['count']!,
-                            'EN',
-                            Colors.green,
-                            number: index + 1,
-                          )
-                        : const SizedBox(height: 80),
+                    child:
+                        englishCategory != null
+                            ? _buildCategoryCard(
+                              englishCategory['name']!,
+                              englishCategory['count']!,
+                              'EN',
+                              Colors.green,
+                              number: index + 1,
+                            )
+                            : const SizedBox(height: 80),
                   ),
                 ],
               ),
@@ -1161,45 +1273,50 @@ class _AdminScreenState extends State<AdminScreen>
   }
 
   // Türkçe kategorileri multilingual sırasına göre sırala
-  List<Map<String, dynamic>> _getOrderedTurkishCategories(Map<String, int> categories) {
+  List<Map<String, dynamic>> _getOrderedTurkishCategories(
+    Map<String, int> categories,
+  ) {
     // MultilingualQuestionService'ten Türkçe kategorileri al
-    final turkishCategories = MultilingualQuestionService.getQuizCategories('turkish');
-    
+    final turkishCategories = MultilingualQuestionService.getQuizCategories(
+      'turkish',
+    );
+
     final orderedCategories = <Map<String, dynamic>>[];
     for (final category in turkishCategories) {
       final name = category['title'] as String;
       if (categories.containsKey(name)) {
-        orderedCategories.add({
-          'name': name,
-          'count': categories[name]!,
-        });
+        orderedCategories.add({'name': name, 'count': categories[name]!});
       }
     }
     return orderedCategories;
   }
 
   // İngilizce kategorileri multilingual sırasına göre sırala
-  List<Map<String, dynamic>> _getOrderedEnglishCategories(Map<String, int> categories) {
+  List<Map<String, dynamic>> _getOrderedEnglishCategories(
+    Map<String, int> categories,
+  ) {
     // MultilingualQuestionService'ten İngilizce kategorileri al (63 kategori)
-    final englishCategories = MultilingualQuestionService.getQuizCategories('en');
-    
+    final englishCategories = MultilingualQuestionService.getQuizCategories(
+      'en',
+    );
+
     final orderedCategories = <Map<String, dynamic>>[];
-    
+
     // Sadece MultilingualQuestionService'teki kategorileri kullan (63 kategori)
     for (final category in englishCategories) {
       final name = category['title'] as String;
       String? firebaseKey;
-      
+
       // Firebase'deki tüm olası formatları kontrol et - daha kapsamlı eşleştirme
       final possibleKeys = [
-        '$name (English)',  // En yaygın format
+        '$name (English)', // En yaygın format
         '${name.replaceAll(' & ', ' and ')} (English)',
         '${name.replaceAll(' and ', ' & ')} (English)',
         '${name.replaceAll(' - ', ' & ')} (English)',
         '${name.replaceAll(' & ', ' - ')} (English)',
         '${name.replaceAll(', ', ' & ')} (English)',
         '${name.replaceAll(' & ', ', ')} (English)',
-        name,  // Direkt isim
+        name, // Direkt isim
         name.replaceAll(' & ', ' and '),
         name.replaceAll(' and ', ' & '),
         name.replaceAll(' - ', ' & '),
@@ -1214,33 +1331,35 @@ class _AdminScreenState extends State<AdminScreen>
         '${name.replaceAll(', ', ' & ')}',
         '${name.replaceAll(' & ', ', ')}',
       ];
-      
+
       // Ayrıca kısmi eşleştirme de dene - daha akıllı eşleştirme
       final partialMatches = <String>[];
-      final nameWords = name.toLowerCase().split(' ').where((w) => w.length > 2).toList();
-      
+      final nameWords =
+          name.toLowerCase().split(' ').where((w) => w.length > 2).toList();
+
       for (final key in categories.keys) {
         final keyLower = key.toLowerCase();
-        final keyWords = keyLower.split(' ').where((w) => w.length > 2).toList();
-        
+        final keyWords =
+            keyLower.split(' ').where((w) => w.length > 2).toList();
+
         // En az 2 kelime eşleşiyorsa kısmi eşleştirme olarak kabul et
         int matchCount = 0;
         for (final nameWord in nameWords) {
           for (final keyWord in keyWords) {
-            if (nameWord == keyWord || 
-                nameWord.contains(keyWord) || 
+            if (nameWord == keyWord ||
+                nameWord.contains(keyWord) ||
                 keyWord.contains(nameWord)) {
               matchCount++;
               break;
             }
           }
         }
-        
+
         if (matchCount >= 2) {
           partialMatches.add(key);
         }
       }
-      
+
       // Önce tam eşleştirme dene
       for (final key in possibleKeys) {
         if (categories.containsKey(key)) {
@@ -1248,13 +1367,15 @@ class _AdminScreenState extends State<AdminScreen>
           break;
         }
       }
-      
+
       // Tam eşleştirme yoksa kısmi eşleştirme dene
       if (firebaseKey == null && partialMatches.isNotEmpty) {
         // En uzun eşleşmeyi seç
-        firebaseKey = partialMatches.reduce((a, b) => a.length > b.length ? a : b);
+        firebaseKey = partialMatches.reduce(
+          (a, b) => a.length > b.length ? a : b,
+        );
       }
-      
+
       if (firebaseKey != null) {
         orderedCategories.add({
           'name': name, // Temiz isim
@@ -1262,100 +1383,102 @@ class _AdminScreenState extends State<AdminScreen>
         });
       } else {
         // Eğer Firebase'de eşleşme yoksa, 0 soru ile göster
-        orderedCategories.add({
-          'name': name,
-          'count': 0,
-        });
+        orderedCategories.add({'name': name, 'count': 0});
       }
     }
-    
+
     return orderedCategories;
   }
 
   // Kategori kartı oluştur
-  Widget _buildCategoryCard(String name, int count, String language, Color color, {int? number}) {
+  Widget _buildCategoryCard(
+    String name,
+    int count,
+    String language,
+    Color color, {
+    int? number,
+  }) {
     return Container(
-        height: 120, // Yüksekliği daha da artırdık
-        decoration: BoxDecoration(
-          color: Colors.white.withOpacity(0.1),
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: color.withOpacity(0.3)),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(8),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  // Numara
-                  if (number != null) ...[
-                    Container(
-                      width: 24,
-                      height: 24,
-                      decoration: BoxDecoration(
-                        color: color.withOpacity(0.8),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Center(
-                        child: Text(
-                          '$number',
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 10,
-                            fontWeight: FontWeight.bold,
-                          ),
+      height: 120, // Yüksekliği daha da artırdık
+      decoration: BoxDecoration(
+        color: Colors.white.withOpacity(0.1),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: color.withOpacity(0.3)),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(8),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                // Numara
+                if (number != null) ...[
+                  Container(
+                    width: 24,
+                    height: 24,
+                    decoration: BoxDecoration(
+                      color: color.withOpacity(0.8),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Center(
+                      child: Text(
+                        '$number',
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 10,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
-                    const SizedBox(width: 6),
-                  ],
-                  // Dil etiketi
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                    decoration: BoxDecoration(
-                      color: color,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Text(
-                      language,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 10,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
                   ),
-                  const Spacer(),
-                  Text(
-                    '$count soru',
-                    style: const TextStyle(
-                      color: Colors.white70,
-                      fontSize: 10,
-                    ),
-                  ),
+                  const SizedBox(width: 6),
                 ],
-              ),
-              const SizedBox(height: 4),
-              Expanded(
-                child: Text(
-                  name,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 11,
-                    fontWeight: FontWeight.w500,
-                    height: 1.2,
+                // Dil etiketi
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 6,
+                    vertical: 2,
                   ),
-                  maxLines: 4,
-                  overflow: TextOverflow.ellipsis,
+                  decoration: BoxDecoration(
+                    color: color,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Text(
+                    language,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 10,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
+                const Spacer(),
+                Text(
+                  '$count soru',
+                  style: const TextStyle(color: Colors.white70, fontSize: 10),
+                ),
+              ],
+            ),
+            const SizedBox(height: 4),
+            Expanded(
+              child: Text(
+                name,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 11,
+                  fontWeight: FontWeight.w500,
+                  height: 1.2,
+                ),
+                maxLines: 4,
+                overflow: TextOverflow.ellipsis,
               ),
-            ],
-          ),
+            ),
+          ],
         ),
+      ),
     );
   }
-
 
   Widget _buildRecentActivity() {
     return Container(
@@ -1408,7 +1531,7 @@ class _AdminScreenState extends State<AdminScreen>
         final screenWidth = constraints.maxWidth;
         final isSmallScreen = screenWidth < 600;
         final isVerySmallScreen = screenWidth < 400;
-        
+
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -1420,12 +1543,16 @@ class _AdminScreenState extends State<AdminScreen>
                 color: Colors.white,
               ),
             ),
-            SizedBox(height: isVerySmallScreen ? 12 : (isSmallScreen ? 14 : 16)),
-            
+            SizedBox(
+              height: isVerySmallScreen ? 12 : (isSmallScreen ? 14 : 16),
+            ),
+
             // Dil seçici
             _buildLanguageSelector(),
-            SizedBox(height: isVerySmallScreen ? 12 : (isSmallScreen ? 14 : 16)),
-            
+            SizedBox(
+              height: isVerySmallScreen ? 12 : (isSmallScreen ? 14 : 16),
+            ),
+
             Row(
               children: [
                 Expanded(
@@ -1438,30 +1565,80 @@ class _AdminScreenState extends State<AdminScreen>
                         ),
                       ).then((_) => _loadQuestions());
                     },
-                    icon: Icon(Icons.add, size: isVerySmallScreen ? 16 : (isSmallScreen ? 18 : 20)),
+                    icon: Icon(
+                      Icons.add,
+                      size: isVerySmallScreen ? 16 : (isSmallScreen ? 18 : 20),
+                    ),
                     label: Text(
                       'Yeni Soru Ekle',
                       style: TextStyle(
-                        fontSize: isVerySmallScreen ? 12 : (isSmallScreen ? 13 : 14),
+                        fontSize:
+                            isVerySmallScreen ? 12 : (isSmallScreen ? 13 : 14),
                       ),
                     ),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.blue.shade600,
                       foregroundColor: Colors.white,
                       padding: EdgeInsets.symmetric(
-                        vertical: isVerySmallScreen ? 8 : (isSmallScreen ? 10 : 12),
+                        vertical:
+                            isVerySmallScreen ? 8 : (isSmallScreen ? 10 : 12),
                       ),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(isVerySmallScreen ? 10 : 15),
+                        borderRadius: BorderRadius.circular(
+                          isVerySmallScreen ? 10 : 15,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: ElevatedButton.icon(
+                    onPressed: _isImportingJson ? null : _showJsonImportDialog,
+                    icon: _isImportingJson
+                        ? SizedBox(
+                            width: isVerySmallScreen ? 14 : 16,
+                            height: isVerySmallScreen ? 14 : 16,
+                            child: const CircularProgressIndicator(
+                              strokeWidth: 2,
+                              color: Colors.white,
+                            ),
+                          )
+                        : Icon(
+                            Icons.upload_file_rounded,
+                            size: isVerySmallScreen ? 16 : (isSmallScreen ? 18 : 20),
+                          ),
+                    label: Text(
+                      'JSON İçe Aktar',
+                      style: TextStyle(
+                        fontSize:
+                            isVerySmallScreen ? 12 : (isSmallScreen ? 13 : 14),
+                      ),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.green.shade700,
+                      foregroundColor: Colors.white,
+                      padding: EdgeInsets.symmetric(
+                        vertical:
+                            isVerySmallScreen ? 8 : (isSmallScreen ? 10 : 12),
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(
+                          isVerySmallScreen ? 10 : 15,
+                        ),
                       ),
                     ),
                   ),
                 ),
               ],
             ),
-            SizedBox(height: isVerySmallScreen ? 12 : (isSmallScreen ? 14 : 16)),
+            SizedBox(
+              height: isVerySmallScreen ? 12 : (isSmallScreen ? 14 : 16),
+            ),
             _buildCategorySelector(),
-            SizedBox(height: isVerySmallScreen ? 12 : (isSmallScreen ? 14 : 16)),
+            SizedBox(
+              height: isVerySmallScreen ? 12 : (isSmallScreen ? 14 : 16),
+            ),
             Expanded(child: _buildQuestionsList()),
           ],
         );
@@ -1469,38 +1646,409 @@ class _AdminScreenState extends State<AdminScreen>
     );
   }
 
+  // ─────────────────────── JSON İÇE AKTARMA ───────────────────────
+
+  Future<void> _showJsonImportDialog() async {
+    // Dialog içi state
+    List<Map<String, dynamic>>? parsedQuestions;
+    String? fileName;
+    String? selectedCollectionName;
+    String? selectedDisplayName;
+    String? parseError;
+
+    if (_organizedCategories.isEmpty) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Önce kategori listesi yüklenmelidir.'),
+            backgroundColor: Colors.orange,
+          ),
+        );
+      }
+      return;
+    }
+
+    await showDialog(
+      context: context,
+      barrierDismissible: !_isImportingJson,
+      builder: (ctx) => StatefulBuilder(
+        builder: (ctx, setDialogState) {
+          Future<void> pickFile() async {
+            try {
+              final result = await FilePicker.platform.pickFiles(
+                type: FileType.custom,
+                allowedExtensions: ['json'],
+                allowMultiple: false,
+              );
+              if (result == null || result.files.isEmpty) return;
+
+              final file = result.files.first;
+
+              // bytes → web'de dolu, masaüstünde null olabilir
+              // path → mobil/masaüstünde dolu, web'de null olabilir
+              String jsonString;
+              if (file.bytes != null) {
+                jsonString = utf8.decode(file.bytes!);
+              } else if (file.path != null) {
+                jsonString = await File(file.path!).readAsString();
+              } else {
+                setDialogState(() => parseError = 'Dosya okunamadı.');
+                return;
+              }
+              final decoded = jsonDecode(jsonString) as Map<String, dynamic>;
+              final questions = (decoded['questions'] as List?)
+                  ?.map((e) => Map<String, dynamic>.from(e as Map))
+                  .toList();
+
+              if (questions == null || questions.isEmpty) {
+                setDialogState(() {
+                  parseError = 'Dosyada "questions" alanı bulunamadı veya boş.';
+                  parsedQuestions = null;
+                  fileName = null;
+                });
+                return;
+              }
+
+              setDialogState(() {
+                parsedQuestions = questions;
+                fileName = file.name;
+                parseError = null;
+              });
+            } catch (e) {
+              setDialogState(() {
+                parseError = 'JSON parse hatası: $e';
+                parsedQuestions = null;
+                fileName = null;
+              });
+            }
+          }
+
+          return AlertDialog(
+            backgroundColor: Colors.indigo.shade900,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            title: const Row(
+              children: [
+                Icon(Icons.upload_file_rounded,
+                    color: Colors.greenAccent, size: 24),
+                SizedBox(width: 10),
+                Text('JSON\'dan Soru İçe Aktar',
+                    style: TextStyle(color: Colors.white, fontSize: 17)),
+              ],
+            ),
+            content: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Adım 1: Dosya Seç
+                  Container(
+                    padding: const EdgeInsets.all(14),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(0.07),
+                      borderRadius: BorderRadius.circular(12),
+                      border:
+                          Border.all(color: Colors.white.withOpacity(0.15)),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text('1. JSON Dosyası Seç',
+                            style: TextStyle(
+                                color: Colors.white70,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 13)),
+                        const SizedBox(height: 10),
+                        SizedBox(
+                          width: double.infinity,
+                          child: ElevatedButton.icon(
+                            onPressed: pickFile,
+                            icon: const Icon(Icons.folder_open_rounded,
+                                size: 18),
+                            label: Text(
+                              fileName ?? 'Dosya Seç (.json)',
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.blueGrey.shade700,
+                              foregroundColor: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10)),
+                            ),
+                          ),
+                        ),
+                        if (parseError != null)
+                          Padding(
+                            padding: const EdgeInsets.only(top: 8),
+                            child: Text(parseError!,
+                                style: const TextStyle(
+                                    color: Colors.redAccent, fontSize: 12)),
+                          ),
+                        if (parsedQuestions != null)
+                          Padding(
+                            padding: const EdgeInsets.only(top: 8),
+                            child: Row(
+                              children: [
+                                const Icon(Icons.check_circle,
+                                    color: Colors.greenAccent, size: 16),
+                                const SizedBox(width: 6),
+                                Text(
+                                  '${parsedQuestions!.length} soru okundu',
+                                  style: const TextStyle(
+                                      color: Colors.greenAccent,
+                                      fontSize: 13),
+                                ),
+                              ],
+                            ),
+                          ),
+                      ],
+                    ),
+                  ),
+
+                  const SizedBox(height: 14),
+
+                  // Adım 2: Kategori Seç
+                  Container(
+                    padding: const EdgeInsets.all(14),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(0.07),
+                      borderRadius: BorderRadius.circular(12),
+                      border:
+                          Border.all(color: Colors.white.withOpacity(0.15)),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text('2. Hedef Kategori Seç',
+                            style: TextStyle(
+                                color: Colors.white70,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 13)),
+                        const SizedBox(height: 10),
+                        DropdownButtonFormField<String>(
+                          value: selectedCollectionName,
+                          isExpanded: true,
+                          dropdownColor: Colors.indigo.shade900,
+                          style: const TextStyle(
+                              color: Colors.white, fontSize: 13),
+                          decoration: InputDecoration(
+                            isDense: true,
+                            filled: true,
+                            fillColor: Colors.black.withOpacity(0.3),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide(
+                                  color: Colors.white.withOpacity(0.3)),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide(
+                                  color: Colors.white.withOpacity(0.3)),
+                            ),
+                            contentPadding: const EdgeInsets.symmetric(
+                                horizontal: 12, vertical: 10),
+                            hintText: 'Kategori seçin...',
+                            hintStyle:
+                                const TextStyle(color: Colors.white38),
+                          ),
+                          items: _organizedCategories
+                              .where((c) =>
+                                  (c['language'] as String? ?? 'turkish') ==
+                                  'turkish')
+                              .map((cat) {
+                            return DropdownMenuItem<String>(
+                              value: cat['collectionName'] as String,
+                              child: Text(
+                                cat['displayName'] as String,
+                                overflow: TextOverflow.ellipsis,
+                                style: const TextStyle(fontSize: 13),
+                              ),
+                            );
+                          }).toList(),
+                          onChanged: (val) {
+                            setDialogState(() {
+                              selectedCollectionName = val;
+                              selectedDisplayName = _organizedCategories
+                                  .firstWhere(
+                                    (c) => c['collectionName'] == val,
+                                    orElse: () => <String, dynamic>{'displayName': val ?? ''},
+                                  )['displayName'] as String?;
+                            });
+                          },
+                        ),
+                        if (selectedCollectionName != null)
+                          Padding(
+                            padding: const EdgeInsets.only(top: 8),
+                            child: Text(
+                              'Firestore ID: $selectedCollectionName',
+                              style: const TextStyle(
+                                  color: Colors.white38, fontSize: 11),
+                            ),
+                          ),
+                      ],
+                    ),
+                  ),
+
+                  // Uyarı notu
+                  const SizedBox(height: 12),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: Colors.amber.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(
+                          color: Colors.amber.withOpacity(0.3)),
+                    ),
+                    child: const Row(
+                      children: [
+                        Icon(Icons.info_outline,
+                            color: Colors.amber, size: 16),
+                        SizedBox(width: 8),
+                        Expanded(
+                          child: Text(
+                            'Zaten var olan sorular (metin eşleşmesine göre) otomatik atlanır. JSON\'daki id alanları yok sayılır.',
+                            style: TextStyle(
+                                color: Colors.amber, fontSize: 11),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(ctx).pop(),
+                child: const Text('İptal',
+                    style: TextStyle(color: Colors.white54)),
+              ),
+              ElevatedButton.icon(
+                onPressed: (parsedQuestions == null ||
+                        selectedCollectionName == null)
+                    ? null
+                    : () async {
+                        Navigator.of(ctx).pop();
+                        await _importJsonQuestions(
+                          collectionName: selectedCollectionName!,
+                          displayName: selectedDisplayName ??
+                              selectedCollectionName!,
+                          questions: parsedQuestions!,
+                        );
+                      },
+                icon: const Icon(Icons.cloud_upload_rounded, size: 18),
+                label: const Text('Firestore\'a Yükle'),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.green.shade700,
+                  foregroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10)),
+                ),
+              ),
+            ],
+          );
+        },
+      ),
+    );
+  }
+
+  Future<void> _importJsonQuestions({
+    required String collectionName,
+    required String displayName,
+    required List<Map<String, dynamic>> questions,
+  }) async {
+    setState(() => _isImportingJson = true);
+
+    try {
+      final result = await _organizedDataService.importQuestionsFromJson(
+        collectionName,
+        displayName,
+        questions,
+      );
+
+      if (!mounted) return;
+
+      final imported = result['imported'] as int? ?? 0;
+      final skipped = result['skipped'] as int? ?? 0;
+      final errors = result['errors'] as int? ?? 0;
+      final success = result['success'] as bool? ?? false;
+
+      if (success) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              '✅ $imported soru yüklendi'
+              '${skipped > 0 ? ', $skipped zaten vardı' : ''}'
+              '${errors > 0 ? ', $errors hata' : ''}',
+            ),
+            backgroundColor: Colors.green.shade700,
+            duration: const Duration(seconds: 4),
+          ),
+        );
+        // Soru listesini yenile
+        _loadQuestions();
+        _loadQuizStatistics();
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('❌ Hata: ${result['error'] ?? 'Bilinmeyen hata'}'),
+            backgroundColor: Colors.red.shade700,
+            duration: const Duration(seconds: 5),
+          ),
+        );
+      }
+    } catch (e) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('❌ Yükleme başarısız: $e'),
+          backgroundColor: Colors.red.shade700,
+        ),
+      );
+    } finally {
+      if (mounted) setState(() => _isImportingJson = false);
+    }
+  }
+
+  // ─────────────────────────────────────────────────────────────────
+
   Widget _buildPurchasesView() {
     // 1. Filtreleme Mantığı
-    final filteredPurchases = _purchases.where((p) {
-      // Tarih filtresi
-      final purchasedAt = p['purchasedAt'];
-      DateTime? date;
-      if (purchasedAt is Timestamp) {
-        date = purchasedAt.toDate();
-      } else if (p['transactionDate'] != null) {
-        try {
-          date = DateTime.fromMillisecondsSinceEpoch(
-              int.parse(p['transactionDate'].toString()));
-        } catch (_) {}
-      }
+    final filteredPurchases =
+        _purchases.where((p) {
+          // Tarih filtresi
+          final purchasedAt = p['purchasedAt'];
+          DateTime? date;
+          if (purchasedAt is Timestamp) {
+            date = purchasedAt.toDate();
+          } else if (p['transactionDate'] != null) {
+            try {
+              date = DateTime.fromMillisecondsSinceEpoch(
+                int.parse(p['transactionDate'].toString()),
+              );
+            } catch (_) {}
+          }
 
-      if (date == null) return _purchaseDateFilter == 'all';
+          if (date == null) return _purchaseDateFilter == 'all';
 
-      final now = DateTime.now();
-      if (_purchaseDateFilter == 'today') {
-        return date.year == now.year && date.month == now.month && date.day == now.day;
-      } else if (_purchaseDateFilter == 'week') {
-        final lastWeek = now.subtract(const Duration(days: 7));
-        return date.isAfter(lastWeek);
-      } else if (_purchaseDateFilter == 'month') {
-        final lastMonth = now.subtract(const Duration(days: 30));
-        return date.isAfter(lastMonth);
-      } else if (_purchaseDateFilter == 'custom') {
-        if (_customStartDate == null || _customEndDate == null) return true;
-        return date.isAfter(_customStartDate!) && date.isBefore(_customEndDate!.add(const Duration(days: 1)));
-      }
-      return true;
-    }).toList();
+          final now = DateTime.now();
+          if (_purchaseDateFilter == 'today') {
+            return date.year == now.year &&
+                date.month == now.month &&
+                date.day == now.day;
+          } else if (_purchaseDateFilter == 'week') {
+            final lastWeek = now.subtract(const Duration(days: 7));
+            return date.isAfter(lastWeek);
+          } else if (_purchaseDateFilter == 'month') {
+            final lastMonth = now.subtract(const Duration(days: 30));
+            return date.isAfter(lastMonth);
+          } else if (_purchaseDateFilter == 'custom') {
+            if (_customStartDate == null || _customEndDate == null) return true;
+            return date.isAfter(_customStartDate!) &&
+                date.isBefore(_customEndDate!.add(const Duration(days: 1)));
+          }
+          return true;
+        }).toList();
 
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
@@ -1511,20 +2059,24 @@ class _AdminScreenState extends State<AdminScreen>
           const SizedBox(height: 24),
           _buildPurchaseFilters(),
           const SizedBox(height: 24),
-              Row(
-                children: [
-                  const Icon(Icons.monetization_on_rounded, color: Colors.blueAccent, size: 20),
-                  const SizedBox(width: 8),
-                  const Text(
-                    'İşlem Geçmişi',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                  ),
-                ],
+          Row(
+            children: [
+              const Icon(
+                Icons.monetization_on_rounded,
+                color: Colors.blueAccent,
+                size: 20,
               ),
+              const SizedBox(width: 8),
+              const Text(
+                'İşlem Geçmişi',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+            ],
+          ),
           const SizedBox(height: 12),
           if (filteredPurchases.isEmpty)
             Container(
@@ -1537,11 +2089,18 @@ class _AdminScreenState extends State<AdminScreen>
               ),
               child: Column(
                 children: [
-                  Icon(Icons.history_rounded, color: Colors.white.withOpacity(0.2), size: 48),
+                  Icon(
+                    Icons.history_rounded,
+                    color: Colors.white.withOpacity(0.2),
+                    size: 48,
+                  ),
                   const SizedBox(height: 16),
                   Text(
                     'Seçili filtreye göre işlem bulunamadı.',
-                    style: TextStyle(color: Colors.white.withOpacity(0.5), fontSize: 14),
+                    style: TextStyle(
+                      color: Colors.white.withOpacity(0.5),
+                      fontSize: 14,
+                    ),
                     textAlign: TextAlign.center,
                   ),
                 ],
@@ -1554,7 +2113,8 @@ class _AdminScreenState extends State<AdminScreen>
               itemCount: filteredPurchases.length,
               itemBuilder: (context, index) {
                 final purchase = filteredPurchases[index];
-                final displayName = purchase['displayName'] as String? ?? 'İsimsiz Kullanıcı';
+                final displayName =
+                    purchase['displayName'] as String? ?? 'İsimsiz Kullanıcı';
                 final productId = purchase['productId'] as String? ?? '';
                 final status = purchase['status'] as String? ?? '';
                 final platform = purchase['platform'] as String? ?? '';
@@ -1562,16 +2122,25 @@ class _AdminScreenState extends State<AdminScreen>
                 final purchasedAt = purchase['purchasedAt'];
 
                 String packageLabel = productId;
-                if (productId.contains('monthly')) packageLabel = 'Aylık Abonelik';
-                else if (productId.contains('sixmonth') || productId.contains('6months')) packageLabel = '6 Aylık Abonelik';
-                else if (productId.contains('yearly')) packageLabel = 'Yıllık Abonelik';
-                else if (productId.contains('lifetime')) packageLabel = 'Ömür Boyu Premium';
+                if (productId.contains('monthly'))
+                  packageLabel = 'Aylık Abonelik';
+                else if (productId.contains('sixmonth') ||
+                    productId.contains('6months'))
+                  packageLabel = '6 Aylık Abonelik';
+                else if (productId.contains('yearly'))
+                  packageLabel = 'Yıllık Abonelik';
+                else if (productId.contains('lifetime'))
+                  packageLabel = 'Ömür Boyu Premium';
 
                 String statusLabel = status;
-                if (status.contains('purchased')) statusLabel = 'Onaylandı';
-                else if (status.contains('restored')) statusLabel = 'Geri Yüklendi';
-                else if (status.contains('pending')) statusLabel = 'Bekliyor';
-                else if (status.contains('error')) statusLabel = 'Hata';
+                if (status.contains('purchased'))
+                  statusLabel = 'Onaylandı';
+                else if (status.contains('restored'))
+                  statusLabel = 'Geri Yüklendi';
+                else if (status.contains('pending'))
+                  statusLabel = 'Bekliyor';
+                else if (status.contains('error'))
+                  statusLabel = 'Hata';
 
                 String purchasedAtText = '';
                 if (purchasedAt is Timestamp) {
@@ -1582,7 +2151,8 @@ class _AdminScreenState extends State<AdminScreen>
                 } else if (purchase['transactionDate'] != null) {
                   try {
                     final date = DateTime.fromMillisecondsSinceEpoch(
-                        int.parse(purchase['transactionDate'].toString()));
+                      int.parse(purchase['transactionDate'].toString()),
+                    );
                     purchasedAtText =
                         '${date.day.toString().padLeft(2, '0')}.${date.month.toString().padLeft(2, '0')}.${date.year} '
                         '${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')}';
@@ -1605,15 +2175,22 @@ class _AdminScreenState extends State<AdminScreen>
                       Row(
                         children: [
                           Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 10,
+                              vertical: 4,
+                            ),
                             decoration: BoxDecoration(
-                              color: (isRestored ? Colors.orange : Colors.green).withOpacity(0.2),
+                              color: (isRestored ? Colors.orange : Colors.green)
+                                  .withOpacity(0.2),
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: Text(
                               isRestored ? 'Restore' : 'Yeni Satın Alma',
                               style: TextStyle(
-                                color: isRestored ? Colors.orangeAccent : Colors.greenAccent,
+                                color:
+                                    isRestored
+                                        ? Colors.orangeAccent
+                                        : Colors.greenAccent,
                                 fontSize: 11,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -1622,19 +2199,29 @@ class _AdminScreenState extends State<AdminScreen>
                           const Spacer(),
                           Text(
                             platform.toUpperCase(),
-                            style: const TextStyle(color: Colors.white38, fontSize: 11),
+                            style: const TextStyle(
+                              color: Colors.white38,
+                              fontSize: 11,
+                            ),
                           ),
                         ],
                       ),
                       const SizedBox(height: 12),
                       Text(
                         packageLabel,
-                        style: const TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                       const SizedBox(height: 4),
                       Text(
                         'Kullanıcı: $displayName',
-                        style: TextStyle(color: Colors.white.withOpacity(0.6), fontSize: 13),
+                        style: TextStyle(
+                          color: Colors.white.withOpacity(0.6),
+                          fontSize: 13,
+                        ),
                       ),
                       const SizedBox(height: 12),
                       Row(
@@ -1644,19 +2231,29 @@ class _AdminScreenState extends State<AdminScreen>
                             children: [
                               Icon(
                                 Icons.verified_user_rounded,
-                                color: status.contains('purchased') || status.contains('restored') ? Colors.blueAccent : Colors.white24,
+                                color:
+                                    status.contains('purchased') ||
+                                            status.contains('restored')
+                                        ? Colors.blueAccent
+                                        : Colors.white24,
                                 size: 14,
                               ),
                               const SizedBox(width: 4),
                               Text(
                                 statusLabel,
-                                style: const TextStyle(color: Colors.white38, fontSize: 12),
+                                style: const TextStyle(
+                                  color: Colors.white38,
+                                  fontSize: 12,
+                                ),
                               ),
                             ],
                           ),
                           Text(
                             purchasedAtText,
-                            style: const TextStyle(color: Colors.white24, fontSize: 11),
+                            style: const TextStyle(
+                              color: Colors.white24,
+                              fontSize: 11,
+                            ),
                           ),
                         ],
                       ),
@@ -1679,10 +2276,14 @@ class _AdminScreenState extends State<AdminScreen>
 
     for (var p in filteredList) {
       final pid = p['productId'] as String;
-      if (pid.contains('monthly')) monthlyCount++;
-      else if (pid.contains('sixmonth') || pid.contains('6months')) sixMonthCount++;
-      else if (pid.contains('yearly')) yearlyCount++;
-      else if (pid.contains('lifetime')) lifetimeCount++;
+      if (pid.contains('monthly'))
+        monthlyCount++;
+      else if (pid.contains('sixmonth') || pid.contains('6months'))
+        sixMonthCount++;
+      else if (pid.contains('yearly'))
+        yearlyCount++;
+      else if (pid.contains('lifetime'))
+        lifetimeCount++;
     }
 
     return Container(
@@ -1715,21 +2316,33 @@ class _AdminScreenState extends State<AdminScreen>
                   SizedBox(width: 8),
                   Text(
                     'Satış Özeti',
-                    style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ],
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 4,
+                ),
                 decoration: BoxDecoration(
                   color: Colors.white.withOpacity(0.2),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Text(
-                  _purchaseDateFilter == 'today' ? 'Bugün' :
-                  _purchaseDateFilter == 'week' ? 'Haftalık' :
-                  _purchaseDateFilter == 'month' ? 'Aylık' :
-                  _purchaseDateFilter == 'custom' ? 'Özel' : 'Tüm Zamanlar',
+                  _purchaseDateFilter == 'today'
+                      ? 'Bugün'
+                      : _purchaseDateFilter == 'week'
+                      ? 'Haftalık'
+                      : _purchaseDateFilter == 'month'
+                      ? 'Aylık'
+                      : _purchaseDateFilter == 'custom'
+                      ? 'Özel'
+                      : 'Tüm Zamanlar',
                   style: const TextStyle(color: Colors.white, fontSize: 11),
                 ),
               ),
@@ -1738,13 +2351,29 @@ class _AdminScreenState extends State<AdminScreen>
           const SizedBox(height: 24),
           Row(
             children: [
-              _buildSummaryItem('Toplam', totalCount.toString(), Icons.shopping_bag_rounded),
+              _buildSummaryItem(
+                'Toplam',
+                totalCount.toString(),
+                Icons.shopping_bag_rounded,
+              ),
               const Spacer(),
-              _buildSummaryItem('Aylık', monthlyCount.toString(), Icons.calendar_today_rounded),
+              _buildSummaryItem(
+                'Aylık',
+                monthlyCount.toString(),
+                Icons.calendar_today_rounded,
+              ),
               const Spacer(),
-              _buildSummaryItem('6 Aylık', sixMonthCount.toString(), Icons.date_range_rounded),
+              _buildSummaryItem(
+                '6 Aylık',
+                sixMonthCount.toString(),
+                Icons.date_range_rounded,
+              ),
               const Spacer(),
-              _buildSummaryItem('Yıllık', yearlyCount.toString(), Icons.event_available_rounded),
+              _buildSummaryItem(
+                'Yıllık',
+                yearlyCount.toString(),
+                Icons.event_available_rounded,
+              ),
             ],
           ),
           if (lifetimeCount > 0) ...[
@@ -1757,11 +2386,24 @@ class _AdminScreenState extends State<AdminScreen>
               ),
               child: Row(
                 children: [
-                  const Icon(Icons.star_rounded, color: Colors.amberAccent, size: 16),
+                  const Icon(
+                    Icons.star_rounded,
+                    color: Colors.amberAccent,
+                    size: 16,
+                  ),
                   const SizedBox(width: 8),
-                  const Text('Ömür Boyu:', style: TextStyle(color: Colors.white70, fontSize: 13)),
+                  const Text(
+                    'Ömür Boyu:',
+                    style: TextStyle(color: Colors.white70, fontSize: 13),
+                  ),
                   const Spacer(),
-                  Text('$lifetimeCount Adet', style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                  Text(
+                    '$lifetimeCount Adet',
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -1778,7 +2420,11 @@ class _AdminScreenState extends State<AdminScreen>
         const SizedBox(height: 4),
         Text(
           count,
-          style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         const SizedBox(height: 2),
         Text(
@@ -1795,7 +2441,11 @@ class _AdminScreenState extends State<AdminScreen>
       children: [
         const Text(
           'Tarih Filtresi',
-          style: TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.w600),
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 15,
+            fontWeight: FontWeight.w600,
+          ),
         ),
         const SizedBox(height: 12),
         SingleChildScrollView(
@@ -1816,8 +2466,8 @@ class _AdminScreenState extends State<AdminScreen>
             children: [
               Expanded(
                 child: _buildDateButton(
-                  _customStartDate == null 
-                      ? 'Başlangıç' 
+                  _customStartDate == null
+                      ? 'Başlangıç'
                       : '${_customStartDate!.day}.${_customStartDate!.month}.${_customStartDate!.year}',
                   true,
                 ),
@@ -1825,8 +2475,8 @@ class _AdminScreenState extends State<AdminScreen>
               const SizedBox(width: 12),
               Expanded(
                 child: _buildDateButton(
-                  _customEndDate == null 
-                      ? 'Bitiş' 
+                  _customEndDate == null
+                      ? 'Bitiş'
                       : '${_customEndDate!.day}.${_customEndDate!.month}.${_customEndDate!.year}',
                   false,
                 ),
@@ -1848,7 +2498,10 @@ class _AdminScreenState extends State<AdminScreen>
         decoration: BoxDecoration(
           color: isSelected ? Colors.blueAccent : Colors.white.withOpacity(0.1),
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: isSelected ? Colors.blueAccent : Colors.white.withOpacity(0.15)),
+          border: Border.all(
+            color:
+                isSelected ? Colors.blueAccent : Colors.white.withOpacity(0.15),
+          ),
         ),
         child: Text(
           label,
@@ -1886,8 +2539,10 @@ class _AdminScreenState extends State<AdminScreen>
         );
         if (date != null) {
           setState(() {
-            if (isStart) _customStartDate = date;
-            else _customEndDate = date;
+            if (isStart)
+              _customStartDate = date;
+            else
+              _customEndDate = date;
           });
         }
       },
@@ -1901,7 +2556,10 @@ class _AdminScreenState extends State<AdminScreen>
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(label, style: const TextStyle(color: Colors.white70, fontSize: 13)),
+            Text(
+              label,
+              style: const TextStyle(color: Colors.white70, fontSize: 13),
+            ),
             const Icon(Icons.calendar_month, color: Colors.white38, size: 18),
           ],
         ),
@@ -1915,9 +2573,11 @@ class _AdminScreenState extends State<AdminScreen>
         final screenWidth = constraints.maxWidth;
         final isSmallScreen = screenWidth < 600;
         final isVerySmallScreen = screenWidth < 400;
-        
+
         return Container(
-          padding: EdgeInsets.all(isVerySmallScreen ? 12 : (isSmallScreen ? 14 : 16)),
+          padding: EdgeInsets.all(
+            isVerySmallScreen ? 12 : (isSmallScreen ? 14 : 16),
+          ),
           decoration: BoxDecoration(
             color: Colors.white.withOpacity(0.1),
             borderRadius: BorderRadius.circular(isVerySmallScreen ? 10 : 15),
@@ -1926,11 +2586,13 @@ class _AdminScreenState extends State<AdminScreen>
           child: Row(
             children: [
               Icon(
-                Icons.language, 
-                color: Colors.white, 
+                Icons.language,
+                color: Colors.white,
                 size: isVerySmallScreen ? 16 : (isSmallScreen ? 18 : 20),
               ),
-              SizedBox(width: isVerySmallScreen ? 8 : (isSmallScreen ? 10 : 12)),
+              SizedBox(
+                width: isVerySmallScreen ? 8 : (isSmallScreen ? 10 : 12),
+              ),
               Expanded(
                 child: DropdownButton<String>(
                   value: _selectedLanguage,
@@ -1938,14 +2600,16 @@ class _AdminScreenState extends State<AdminScreen>
                     'Dil Seçin',
                     style: TextStyle(
                       color: Colors.white60,
-                      fontSize: isVerySmallScreen ? 12 : (isSmallScreen ? 13 : 14),
+                      fontSize:
+                          isVerySmallScreen ? 12 : (isSmallScreen ? 13 : 14),
                     ),
                   ),
                   isExpanded: true,
                   dropdownColor: Colors.indigo.shade800,
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: isVerySmallScreen ? 12 : (isSmallScreen ? 13 : 14),
+                    fontSize:
+                        isVerySmallScreen ? 12 : (isSmallScreen ? 13 : 14),
                   ),
                   underline: Container(),
                   icon: Icon(
@@ -1958,12 +2622,20 @@ class _AdminScreenState extends State<AdminScreen>
                       value: 'turkish',
                       child: Row(
                         children: [
-                          Text('🇹🇷', style: TextStyle(fontSize: isVerySmallScreen ? 14 : 16)),
+                          Text(
+                            '🇹🇷',
+                            style: TextStyle(
+                              fontSize: isVerySmallScreen ? 14 : 16,
+                            ),
+                          ),
                           SizedBox(width: isVerySmallScreen ? 6 : 8),
                           Text(
                             'Türkçe',
                             style: TextStyle(
-                              fontSize: isVerySmallScreen ? 12 : (isSmallScreen ? 13 : 14),
+                              fontSize:
+                                  isVerySmallScreen
+                                      ? 12
+                                      : (isSmallScreen ? 13 : 14),
                             ),
                           ),
                         ],
@@ -1973,12 +2645,20 @@ class _AdminScreenState extends State<AdminScreen>
                       value: 'english',
                       child: Row(
                         children: [
-                          Text('🇺🇸', style: TextStyle(fontSize: isVerySmallScreen ? 14 : 16)),
+                          Text(
+                            '🇺🇸',
+                            style: TextStyle(
+                              fontSize: isVerySmallScreen ? 14 : 16,
+                            ),
+                          ),
                           SizedBox(width: isVerySmallScreen ? 6 : 8),
                           Text(
                             'English',
                             style: TextStyle(
-                              fontSize: isVerySmallScreen ? 12 : (isSmallScreen ? 13 : 14),
+                              fontSize:
+                                  isVerySmallScreen
+                                      ? 12
+                                      : (isSmallScreen ? 13 : 14),
                             ),
                           ),
                         ],
@@ -2050,16 +2730,19 @@ class _AdminScreenState extends State<AdminScreen>
                               value: category,
                               child: Container(
                                 width: double.infinity, // Tam genişlik
-                                padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 4),
-                              child: Text(
-                                category,
-                                style: const TextStyle(
-                                  color: Colors.white,
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 8,
+                                  horizontal: 4,
+                                ),
+                                child: Text(
+                                  category,
+                                  style: const TextStyle(
+                                    color: Colors.white,
                                     fontSize: 13, // Biraz daha küçük font
                                     fontWeight: FontWeight.w500,
-                                ),
+                                  ),
                                   maxLines: 2, // İki satıra kadar göster
-                                overflow: TextOverflow.ellipsis,
+                                  overflow: TextOverflow.ellipsis,
                                 ),
                               ),
                             );
@@ -2072,7 +2755,7 @@ class _AdminScreenState extends State<AdminScreen>
                             final selectedOrganizedCategory =
                                 _organizedCategories.firstWhere(
                                   (cat) => cat['displayName'] == value,
-                                  orElse: () => {},
+                                  orElse: () => <String, dynamic>{},
                                 );
                             _selectedCollectionName =
                                 selectedOrganizedCategory['collectionName'] ??
@@ -2654,7 +3337,10 @@ class _AdminScreenState extends State<AdminScreen>
                 ],
               ),
               borderRadius: BorderRadius.circular(28),
-              border: Border.all(color: Colors.white.withOpacity(0.2), width: 1.5),
+              border: Border.all(
+                color: Colors.white.withOpacity(0.2),
+                width: 1.5,
+              ),
               boxShadow: [
                 BoxShadow(
                   color: Colors.black.withOpacity(0.2),
@@ -2678,12 +3364,15 @@ class _AdminScreenState extends State<AdminScreen>
                   controller: _notificationBodyController,
                   maxLines: 4,
                 ),
+                const SizedBox(height: 20),
+                _buildNotificationLanguageSelector(),
                 const SizedBox(height: 30),
                 SizedBox(
                   width: double.infinity,
                   height: 55,
                   child: ElevatedButton(
-                    onPressed: _isSendingNotification ? null : _sendManualNotification,
+                    onPressed:
+                        _isSendingNotification ? null : _sendManualNotification,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.blue.shade600,
                       foregroundColor: Colors.white,
@@ -2693,30 +3382,31 @@ class _AdminScreenState extends State<AdminScreen>
                       elevation: 8,
                       shadowColor: Colors.blue.withOpacity(0.5),
                     ),
-                    child: _isSendingNotification
-                        ? const SizedBox(
-                            height: 24,
-                            width: 24,
-                            child: CircularProgressIndicator(
-                              color: Colors.white,
-                              strokeWidth: 2,
-                            ),
-                          )
-                        : const Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(Icons.send_rounded),
-                              SizedBox(width: 12),
-                              Text(
-                                'BİLDİRİMİ GÖNDER',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                  letterSpacing: 1.2,
-                                ),
+                    child:
+                        _isSendingNotification
+                            ? const SizedBox(
+                              height: 24,
+                              width: 24,
+                              child: CircularProgressIndicator(
+                                color: Colors.white,
+                                strokeWidth: 2,
                               ),
-                            ],
-                          ),
+                            )
+                            : const Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(Icons.send_rounded),
+                                SizedBox(width: 12),
+                                Text(
+                                  'BİLDİRİMİ GÖNDER',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 1.2,
+                                  ),
+                                ),
+                              ],
+                            ),
                   ),
                 ),
               ],
@@ -2768,10 +3458,79 @@ class _AdminScreenState extends State<AdminScreen>
               borderRadius: BorderRadius.circular(16),
               borderSide: const BorderSide(color: Colors.blueAccent, width: 2),
             ),
-            contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: 20,
+              vertical: 16,
+            ),
           ),
         ),
       ],
+    );
+  }
+
+  Widget _buildNotificationLanguageSelector() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          'Hedef Dil',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        const SizedBox(height: 12),
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: [
+              _buildLanguageChip('all', 'Hepsi (Global)', Icons.public),
+              const SizedBox(width: 8),
+              _buildLanguageChip('tr', 'Türkçe', Icons.language),
+              const SizedBox(width: 8),
+              _buildLanguageChip('en', 'English', Icons.language),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildLanguageChip(String lang, String label, IconData icon) {
+    bool isSelected = _notificationLanguage == lang;
+    return GestureDetector(
+      onTap: () => setState(() => _notificationLanguage = lang),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+        decoration: BoxDecoration(
+          color: isSelected ? Colors.blueAccent : Colors.white.withOpacity(0.1),
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(
+            color:
+                isSelected ? Colors.blueAccent : Colors.white.withOpacity(0.15),
+            width: 1.5,
+          ),
+        ),
+        child: Row(
+          children: [
+            Icon(
+              icon,
+              size: 16,
+              color: isSelected ? Colors.white : Colors.white60,
+            ),
+            const SizedBox(width: 8),
+            Text(
+              label,
+              style: TextStyle(
+                color: isSelected ? Colors.white : Colors.white60,
+                fontSize: 13,
+                fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 
@@ -2789,14 +3548,15 @@ class _AdminScreenState extends State<AdminScreen>
         ),
         const SizedBox(height: 16),
         StreamBuilder<QuerySnapshot>(
-          stream: FirebaseFirestore.instance
-              .collection('notifications')
-              .orderBy('createdAt', descending: true)
-              .limit(5)
-              .snapshots(),
+          stream:
+              FirebaseFirestore.instance
+                  .collection('notifications')
+                  .orderBy('createdAt', descending: true)
+                  .limit(5)
+                  .snapshots(),
           builder: (context, snapshot) {
             if (!snapshot.hasData) return const SizedBox();
-            
+
             final docs = snapshot.data!.docs;
             if (docs.isEmpty) {
               return Text(
@@ -2813,7 +3573,7 @@ class _AdminScreenState extends State<AdminScreen>
               itemBuilder: (context, index) {
                 final data = docs[index].data() as Map<String, dynamic>;
                 final status = data['status'] ?? 'pending';
-                
+
                 return Container(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
@@ -2839,12 +3599,36 @@ class _AdminScreenState extends State<AdminScreen>
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              data['title'] ?? '',
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                              ),
+                            Row(
+                              children: [
+                                Text(
+                                  data['title'] ?? '',
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                const SizedBox(width: 8),
+                                Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 6,
+                                    vertical: 2,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white.withOpacity(0.1),
+                                    borderRadius: BorderRadius.circular(4),
+                                  ),
+                                  child: Text(
+                                    (data['language'] ?? 'all')
+                                        .toString()
+                                        .toUpperCase(),
+                                    style: const TextStyle(
+                                      color: Colors.white54,
+                                      fontSize: 8,
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                             Text(
                               data['body'] ?? '',
@@ -2879,17 +3663,23 @@ class _AdminScreenState extends State<AdminScreen>
 
   Color _getStatusColor(String status) {
     switch (status) {
-      case 'sent': return Colors.greenAccent;
-      case 'failed': return Colors.redAccent;
-      default: return Colors.orangeAccent;
+      case 'sent':
+        return Colors.greenAccent;
+      case 'failed':
+        return Colors.redAccent;
+      default:
+        return Colors.orangeAccent;
     }
   }
 
   IconData _getStatusIcon(String status) {
     switch (status) {
-      case 'sent': return Icons.check_circle_outline;
-      case 'failed': return Icons.error_outline;
-      default: return Icons.schedule;
+      case 'sent':
+        return Icons.check_circle_outline;
+      case 'failed':
+        return Icons.error_outline;
+      default:
+        return Icons.schedule;
     }
   }
 
@@ -2913,6 +3703,7 @@ class _AdminScreenState extends State<AdminScreen>
       await FirebaseFirestore.instance.collection('notifications').add({
         'title': title,
         'body': body,
+        'language': _notificationLanguage,
         'createdAt': FieldValue.serverTimestamp(),
         'status': 'pending',
       });
@@ -2930,10 +3721,7 @@ class _AdminScreenState extends State<AdminScreen>
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Hata: $e'),
-            backgroundColor: Colors.red,
-          ),
+          SnackBar(content: Text('Hata: $e'), backgroundColor: Colors.red),
         );
       }
     } finally {
@@ -2944,80 +3732,181 @@ class _AdminScreenState extends State<AdminScreen>
   }
 
   Widget _buildReadyMadeNotifications() {
-    final templates = [
-      {
-        'title': 'Yeni Sorular Eklendi! 📚',
-        'body': 'Uygulamaya yeni anestezi soruları yüklendi. Hemen çözmeye başla!',
-        'icon': Icons.library_add_rounded,
-        'color': Colors.blueAccent,
-      },
-      {
-        'title': 'Premium Fırsatı! 💎',
-        'body': 'Premium ile bütün sorulara ve spot notlara sınırsız erişim sağlayın.',
-        'icon': Icons.workspace_premium_rounded,
-        'color': Colors.amber,
-      },
-      {
-        'title': 'Günün Sorusu Hazır! 💡',
-        'body': 'Bugünkü günün sorusu yayında! Bakalım doğru cevabı bulabilecek misin?',
-        'icon': Icons.lightbulb_rounded,
-        'color': Colors.orangeAccent,
-      },
-      {
-        'title': 'Hatalarını Gözden Geçir! ❌',
-        'body': 'Yanlış yaptığın soruları tekrar çözerek eksiklerini tamamlamaya ne dersin?',
-        'icon': Icons.assignment_late_rounded,
-        'color': Colors.redAccent,
-      },
-      {
-        'title': 'Spot Notlarla Tekrar Yap! 📝',
-        'body': 'Kısa ve öz spot notlar hafızanı tazelemek için seni bekliyor. Hemen göz at!',
-        'icon': Icons.note_alt_rounded,
-        'color': Colors.cyanAccent,
-      },
-      {
-        'title': 'Liderlik Tablosunda Yüksel! 🏆',
-        'body': 'Bugünkü quizleri çözerek sıralamada zirveye yerleşmeye hazır mısın?',
-        'icon': Icons.leaderboard_rounded,
-        'color': Colors.purpleAccent,
-      },
-      {
-        'title': 'Haftalık Soru Maratonu! 🏃',
-        'body': 'Bu hafta en çok soru çözenler arasına girmeye hazır mısın? Maraton başladı!',
-        'icon': Icons.directions_run_rounded,
-        'color': Colors.lightGreenAccent,
-      },
-      {
-        'title': 'Başarıya Odaklan! 🚀',
-        'body': 'Düzenli çalışma başarı getirir. Bugün 10 yeni soru çözerek hedefine yaklaş!',
-        'icon': Icons.rocket_launch_rounded,
-        'color': Colors.indigoAccent,
-      },
-      {
-        'title': 'Performans Raporun Hazır! 📊',
-        'body': 'İstatistiklerini kontrol et ve hangi konularda daha başarılı olduğunu gör.',
-        'icon': Icons.bar_chart_rounded,
-        'color': Colors.greenAccent,
-      },
-      {
-        'title': 'Bilgilerini Tazele! ✨',
-        'body': 'Kısa bir ara verip 5 soru çözmeye ne dersin? Bilgilerin her zaman taze kalsın.',
-        'icon': Icons.auto_awesome_rounded,
-        'color': Colors.tealAccent,
-      },
-      {
-        'title': 'Anestezi Uzmanı Ol! 🩺',
-        'body': 'En zorlayıcı sorularla kendini dene ve seviyeni gör. Başarılar dileriz!',
-        'icon': Icons.medical_services_rounded,
-        'color': Colors.deepOrangeAccent,
-      },
-      {
-        'title': 'Sürpriz Güncelleme! 🎉',
-        'body': 'Uygulamamıza eklenen yeni kategorileri ve soruları hemen incelemeye başla!',
-        'icon': Icons.celebration_rounded,
-        'color': Colors.pinkAccent,
-      },
-    ];
+    final Map<String, List<Map<String, dynamic>>> templates = {
+      'tr': [
+        {
+          'title': 'Yeni Sorular Eklendi! 📚',
+          'body':
+              'Uygulamaya yeni anestezi soruları yüklendi. Hemen çözmeye başla!',
+          'icon': Icons.library_add_rounded,
+          'color': Colors.blueAccent,
+        },
+        {
+          'title': 'Spot Bilgileri Keşfet! 💡',
+          'body':
+              'Önemli klinik notlar ve kısa hatırlatıcılar Spot Bilgi bölümünde seni bekliyor.',
+          'icon': Icons.lightbulb_rounded,
+          'color': Colors.orangeAccent,
+        },
+        {
+          'title': 'Hatalarını Gözden Geçir! ❌',
+          'body':
+              'Yanlış yaptığın soruları tekrar çözerek eksiklerini tamamlamaya ne dersin?',
+          'icon': Icons.assignment_late_rounded,
+          'color': Colors.redAccent,
+        },
+        {
+          'title': 'Günün Hedefi: 1 Quiz! 🎯',
+          'body':
+              'Bugün kendine bir konu seç ve sadece bir quiz çözerek bilgilerini kontrol et.',
+          'icon': Icons.track_changes_rounded,
+          'color': Colors.greenAccent,
+        },
+        {
+          'title': 'Premium ile Tam Erişim! 💎',
+          'body':
+              'Bütün soru setlerine ve özel spot notlara sınırsız erişim için Premium\'u incele.',
+          'icon': Icons.workspace_premium_rounded,
+          'color': Colors.amber,
+        },
+        {
+          'title': 'Sıralamada Yüksel! 🏆',
+          'body':
+              'Daha fazla soru çözerek liderlik tablosu sıralamasında üstlere yerleş!',
+          'icon': Icons.emoji_events_rounded,
+          'color': Colors.yellowAccent,
+        },
+        {
+          'title': 'Bilginle Fark Yarat! 🧠',
+          'body':
+              'Farklı kategorilerdeki yüzlerce özel anestezi sorusuyla kendini geliştir.',
+          'icon': Icons.psychology_rounded,
+          'color': Colors.tealAccent,
+        },
+        {
+          'title': 'Yeni Bir Konu Öğren! 📁',
+          'body':
+              'Daha önce bakmadığın bir kategori seç ve anestezi bilginin sınırlarını genişlet!',
+          'icon': Icons.folder_special_rounded,
+          'color': Colors.pinkAccent,
+        },
+        {
+          'title': 'Kısa Bir Mola, Bir Quiz! ⏱️',
+          'body':
+              'Yoğun çalışma programında kısa bir mola verip bilgilerini test etmeye ne dersin?',
+          'icon': Icons.timer_rounded,
+          'color': Colors.cyanAccent,
+        },
+        {
+          'title': 'Liderlik Tablosu Güncellendi! 🔥',
+          'body':
+              'Sıralamadaki yerini kontrol et ve zirveye giden yolda bir adım daha at!',
+          'icon': Icons.local_fire_department_rounded,
+          'color': Colors.deepOrangeAccent,
+        },
+        {
+          'title': 'Günün Sorusu Geldi! 🧐',
+          'body':
+              'Bakalım bugün hazırlanan özel soruyu doğru cevaplayabilecek misin?',
+          'icon': Icons.psychology_alt_rounded,
+          'color': Colors.purpleAccent,
+        },
+        {
+          'title': 'Gelişimine Katkıda Bulun! 💬',
+          'body':
+              'Uygulamayı senin için iyileştirmemize yardımcı olmak üzere bize önerilerini yaz!',
+          'icon': Icons.forum_rounded,
+          'color': Colors.white,
+        },
+      ],
+      'en': [
+        {
+          'title': 'New Questions are Live! 📚',
+          'body':
+              'New anesthesia questions have been uploaded. Start solving now!',
+          'icon': Icons.library_add_rounded,
+          'color': Colors.blueAccent,
+        },
+        {
+          'title': 'Discover Spot Info! 💡',
+          'body':
+              'Critical clinical notes and reminders await you in the Spot Info section.',
+          'icon': Icons.lightbulb_rounded,
+          'color': Colors.orangeAccent,
+        },
+        {
+          'title': 'Review Your Mistakes! ❌',
+          'body':
+              'Re-solve the questions you got wrong to brush up on your knowledge.',
+          'icon': Icons.assignment_late_rounded,
+          'color': Colors.redAccent,
+        },
+        {
+          'title': 'Daily Goal: 1 Quiz! 🎯',
+          'body':
+              'Pick a topic today and check your knowledge by solving just one quiz.',
+          'icon': Icons.track_changes_rounded,
+          'color': Colors.greenAccent,
+        },
+        {
+          'title': 'Full Access with Premium! 💎',
+          'body':
+              'Check out Premium for unlimited access to all question sets and spot notes.',
+          'icon': Icons.workspace_premium_rounded,
+          'color': Colors.amber,
+        },
+        {
+          'title': 'Rise in the Rankings! 🏆',
+          'body':
+              'Solve more questions to secure your place on the leaderboard!',
+          'icon': Icons.emoji_events_rounded,
+          'color': Colors.yellowAccent,
+        },
+        {
+          'title': 'Difference With Knowledge! 🧠',
+          'body':
+              'Improve yourself with hundreds of specialized anesthesia questions!',
+          'icon': Icons.psychology_rounded,
+          'color': Colors.tealAccent,
+        },
+        {
+          'title': 'Learn a New Topic! 📁',
+          'body':
+              'Select a category you haven\'t checked before and expand your knowledge!',
+          'icon': Icons.folder_special_rounded,
+          'color': Colors.pinkAccent,
+        },
+        {
+          'title': 'Short Break, One Quiz! ⏱️',
+          'body': 'How about a quick quiz break during your busy schedule?',
+          'icon': Icons.timer_rounded,
+          'color': Colors.cyanAccent,
+        },
+        {
+          'title': 'Leaderboard Updated! 🔥',
+          'body':
+              'Check your spot in the rankings and take another step toward the top!',
+          'icon': Icons.local_fire_department_rounded,
+          'color': Colors.deepOrangeAccent,
+        },
+        {
+          'title': 'Question of the Day! 🧐',
+          'body': 'Today\'s question is here! Can you find the correct answer?',
+          'icon': Icons.psychology_alt_rounded,
+          'color': Colors.purpleAccent,
+        },
+        {
+          'title': 'Contribute to Growth! 💬',
+          'body': 'Help us improve the app by sending us your suggestions!',
+          'icon': Icons.forum_rounded,
+          'color': Colors.white,
+        },
+      ],
+    };
+
+    // Seçili bildirim diline göre şablon listesini belirle (all durumunda Türkçe göster)
+    final displayLanguage = _notificationLanguage == 'en' ? 'en' : 'tr';
+    final currentTemplates = templates[displayLanguage]!;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -3026,7 +3915,7 @@ class _AdminScreenState extends State<AdminScreen>
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'Hazır Bildirim Şablonları',
+              'Hazır Bildirim Şablonları (${displayLanguage.toUpperCase()})',
               style: TextStyle(
                 color: Colors.white.withOpacity(0.9),
                 fontSize: 16,
@@ -3034,7 +3923,7 @@ class _AdminScreenState extends State<AdminScreen>
               ),
             ),
             Text(
-              '${templates.length} Hazır Mesaj',
+              '${currentTemplates.length} Hazır Mesaj',
               style: TextStyle(
                 color: Colors.white.withOpacity(0.5),
                 fontSize: 12,
@@ -3047,9 +3936,9 @@ class _AdminScreenState extends State<AdminScreen>
           height: 120,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            itemCount: templates.length,
+            itemCount: currentTemplates.length,
             itemBuilder: (context, index) {
-              final template = templates[index];
+              final template = currentTemplates[index];
               final Color color = template['color'] as Color;
 
               return InkWell(
@@ -3124,6 +4013,489 @@ class _AdminScreenState extends State<AdminScreen>
         ),
       ],
     );
+  }
+
+  Widget _buildSpotInfoManagement() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const Text(
+              'Spot Bilgi Yönetimi',
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+            IconButton(
+              icon: const Icon(Icons.refresh, color: Colors.white),
+              onPressed: () {
+                _loadSpotCategories();
+              },
+            ),
+          ],
+        ),
+        const SizedBox(height: 16),
+        Row(
+          children: [
+            Expanded(
+              child: ElevatedButton.icon(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const AddSpotInfoScreen(),
+                    ),
+                  ).then((val) {
+                    if (val == true) _loadSpotCategories();
+                  });
+                },
+                icon: const Icon(Icons.add),
+                label: const Text('Yeni Ekle', style: TextStyle(fontSize: 12)),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.blue.shade600,
+                  foregroundColor: Colors.white,
+                  padding: const EdgeInsets.symmetric(vertical: 12),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(width: 8),
+            Expanded(
+              child: ElevatedButton.icon(
+                onPressed: _isMigrating ? null : _runSpotMigration,
+                icon: _isMigrating
+                    ? const SizedBox(
+                      width: 16,
+                      height: 16,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2,
+                        color: Colors.black,
+                      ),
+                    )
+                    : const Icon(Icons.cloud_upload_outlined),
+                label: Text(
+                  _isMigrating ? 'AKTARIYOR...' : 'VERİLERİ AKTAR',
+                  style: const TextStyle(fontSize: 12),
+                ),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.amber,
+                  foregroundColor: Colors.black,
+                  padding: const EdgeInsets.symmetric(vertical: 12),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 20),
+        _buildSpotSearchField(),
+        const SizedBox(height: 16),
+        _buildSpotFilters(),
+        const SizedBox(height: 16),
+        Expanded(child: _buildSpotInfoList()),
+      ],
+    );
+  }
+
+  Widget _buildSpotSearchField() {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      decoration: BoxDecoration(
+        color: Colors.white.withOpacity(0.1),
+        borderRadius: BorderRadius.circular(15),
+        border: Border.all(color: Colors.white.withOpacity(0.2)),
+      ),
+      child: TextField(
+        controller: _spotSearchController,
+        style: const TextStyle(color: Colors.white),
+        onChanged: (val) {
+          setState(() => _spotSearchQuery = val);
+        },
+        decoration: InputDecoration(
+          hintText: 'Spot bilgilerde ara...',
+          hintStyle: TextStyle(color: Colors.white.withOpacity(0.5)),
+          border: InputBorder.none,
+          icon: const Icon(Icons.search, color: Colors.white70),
+          suffixIcon: _spotSearchQuery.isNotEmpty
+              ? IconButton(
+                  icon: const Icon(Icons.clear, color: Colors.white70),
+                  onPressed: () {
+                    _spotSearchController.clear();
+                    setState(() => _spotSearchQuery = '');
+                  },
+                )
+              : null,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSpotFilters() {
+    return Row(
+      children: [
+        // Dil Seçimi
+        Expanded(
+          flex: 1,
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 12),
+            decoration: BoxDecoration(
+              color: Colors.white.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: DropdownButton<String>(
+              value: _selectedSpotLanguage,
+              dropdownColor: Colors.grey.shade900,
+              isExpanded: true,
+              underline: const SizedBox(),
+              items: const [
+                DropdownMenuItem(
+                  value: 'tr',
+                  child: Text('TR', style: TextStyle(color: Colors.white)),
+                ),
+                DropdownMenuItem(
+                  value: 'en',
+                  child: Text('EN', style: TextStyle(color: Colors.white)),
+                ),
+              ],
+              onChanged: (val) {
+                setState(() {
+                  _selectedSpotLanguage = val!;
+                  _loadSpotCategories();
+                });
+              },
+            ),
+          ),
+        ),
+        const SizedBox(width: 12),
+        // Kategori Seçimi
+        Expanded(
+          flex: 2,
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 12),
+            decoration: BoxDecoration(
+              color: Colors.white.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: DropdownButton<String>(
+              value: _selectedSpotCategory,
+              dropdownColor: Colors.grey.shade900,
+              isExpanded: true,
+              underline: const SizedBox(),
+              items: _spotCategories.map((cat) {
+                return DropdownMenuItem(
+                  value: cat,
+                  child: Text(
+                    cat,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 13,
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                );
+              }).toList(),
+              onChanged: (val) {
+                setState(() => _selectedSpotCategory = val!);
+              },
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Future<void> _loadSpotCategories() async {
+    final cats = await _spotService.getAllCategoryNames(_selectedSpotLanguage);
+    if (mounted) {
+      setState(() {
+        _spotCategories = ['Hepsi', ...cats];
+        if (!_spotCategories.contains(_selectedSpotCategory)) {
+          _selectedSpotCategory = 'Hepsi';
+        }
+      });
+    }
+  }
+
+  Stream<List<SpotItem>> _getSpotStream() {
+    if (_selectedSpotCategory == 'Hepsi') {
+      return _spotService.getSpotItemsByLanguage(_selectedSpotLanguage);
+    } else {
+      return _spotService.getSpotItemsByCategory(
+        _selectedSpotCategory,
+        _selectedSpotLanguage,
+      );
+    }
+  }
+
+  Widget _buildSpotInfoList() {
+    return Column(
+      children: [
+        Expanded(
+          child: StreamBuilder<List<SpotItem>>(
+            stream: _getSpotStream(),
+            builder: (context, snapshot) {
+              if (snapshot.hasError) {
+                return Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Icon(Icons.error_outline, color: Colors.red, size: 48),
+                      const SizedBox(height: 16),
+                      Text(
+                        'Veri yüklenirken hata oluştu:\n${snapshot.error}',
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(color: Colors.white70),
+                      ),
+                    ],
+                  ),
+                );
+              }
+
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(child: CircularProgressIndicator());
+              }
+
+              var items = snapshot.data ?? [];
+              
+              if (_spotSearchQuery.isNotEmpty) {
+                final query = _spotSearchQuery.toLowerCase();
+                items = items.where((item) {
+                  return item.title.toLowerCase().contains(query) ||
+                      item.description.toLowerCase().contains(query) ||
+                      (item.unitName?.toLowerCase().contains(query) ?? false) ||
+                      (item.subtitle?.toLowerCase().contains(query) ?? false) ||
+                      (item.additionalInfo?.toLowerCase().contains(query) ?? false);
+                }).toList();
+              }
+
+              if (items.isEmpty) {
+                return Center(
+                  child: Text(
+                    _spotSearchQuery.isEmpty
+                        ? 'Henüz bu dilde/kategoride spot bilgi yok.'
+                        : 'Arama sonucu bulunamadı.',
+                    style: TextStyle(color: Colors.white.withOpacity(0.5)),
+                  ),
+                );
+              }
+
+              return ListView.separated(
+                itemCount: items.length,
+                separatorBuilder: (context, index) => const SizedBox(height: 10),
+                itemBuilder: (context, index) {
+                  final item = items[index];
+                  return Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(0.05),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 8,
+                                vertical: 2,
+                              ),
+                              decoration: BoxDecoration(
+                                color: Colors.blueAccent.withOpacity(0.2),
+                                borderRadius: BorderRadius.circular(4),
+                              ),
+                              child: Text(
+                                item.categoryName,
+                                style: const TextStyle(
+                                  color: Colors.blueAccent,
+                                  fontSize: 10,
+                                ),
+                              ),
+                            ),
+                            if (item.unitName != null) ...[
+                              const SizedBox(width: 8),
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 8,
+                                  vertical: 2,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: Colors.purpleAccent.withOpacity(0.15),
+                                  borderRadius: BorderRadius.circular(4),
+                                ),
+                                child: Text(
+                                  item.unitName!,
+                                  style: const TextStyle(
+                                    color: Colors.purpleAccent,
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ],
+                            const Spacer(),
+                            IconButton(
+                              icon: const Icon(
+                                Icons.edit,
+                                size: 18,
+                                color: Colors.white60,
+                              ),
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => AddSpotInfoScreen(editingItem: item),
+                                  ),
+                                ).then((val) {
+                                  if (val == true) _loadSpotCategories();
+                                });
+                              },
+                            ),
+                            IconButton(
+                              icon: const Icon(
+                                Icons.delete,
+                                size: 18,
+                                color: Colors.redAccent,
+                              ),
+                              onPressed: () => _confirmDeleteSpot(item.id),
+                            ),
+                          ],
+                        ),
+                        Text(
+                          item.title,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14,
+                          ),
+                        ),
+                        const SizedBox(height: 4),
+                        if (item.subtitle != null) ...[
+                          Text(
+                            item.subtitle!,
+                            style: const TextStyle(
+                              color: Colors.blueAccent,
+                              fontSize: 11,
+                              fontStyle: FontStyle.italic,
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+                        ],
+                        Text(
+                          item.description,
+                          style: TextStyle(
+                            color: Colors.white.withOpacity(0.7),
+                            fontSize: 12,
+                          ),
+                          maxLines: 3,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        if (item.additionalInfo != null) ...[
+                          const SizedBox(height: 8),
+                          Container(
+                            padding: const EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              color: Colors.white.withOpacity(0.03),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Text(
+                              '💡 ${item.additionalInfo!}',
+                              style: TextStyle(
+                                color: Colors.orangeAccent.withOpacity(0.7),
+                                fontSize: 11,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ],
+                    ),
+                  );
+                },
+              );
+            },
+          ),
+        ),
+      ],
+    );
+  }
+
+
+  Future<void> _runSpotMigration() async {
+    setState(() => _isMigrating = true);
+    try {
+      final result = await _spotMigrationService.migrateAllSpotInfo(context);
+      if (result['success'] == true) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                '✅ ${result['totalMigrated']} adet spot bilgi başarıyla aktarıldı!',
+              ),
+              backgroundColor: Colors.green,
+            ),
+          );
+          _loadInitialData(); // Refresh everything
+        }
+      } else {
+        throw result['error'] ?? 'Bilinmeyen hata';
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('❌ Aktarım sırasında hata oluştu: $e'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    } finally {
+      if (mounted) setState(() => _isMigrating = false);
+    }
+  }
+
+  Future<void> _confirmDeleteSpot(String id) async {
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: Colors.grey.shade900,
+        title: const Text(
+          'Spot Bilgiyi Sil',
+          style: TextStyle(color: Colors.white),
+        ),
+        content: const Text(
+          'Bu bilgiyi kalıcı olarak silmek istediğinize emin misiniz?',
+          style: TextStyle(color: Colors.white70),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: const Text('İptal'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(context, true),
+            child: const Text('SİL', style: TextStyle(color: Colors.red)),
+          ),
+        ],
+      ),
+    );
+
+    if (confirmed == true) {
+      await _spotService.deleteSpotItem(id);
+      if (mounted) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(const SnackBar(content: Text('✅ Bilgi silindi')));
+        _loadSpotCategories();
+      }
+    }
   }
 }
 

@@ -25,52 +25,41 @@ class PharmacologicalPrinciplesCategory {
 }
 
 class PharmacologicalPrinciplesData {
-  static List<PharmacologicalPrinciplesCategory> getPharmacologicalPrinciplesData(BuildContext context) {
+  static List<PharmacologicalPrinciplesCategory>
+  getPharmacologicalPrinciplesData(BuildContext context) {
     return [
       PharmacologicalPrinciplesCategory(
         categoryName: 'Farmakokinetik (Vücut İlaca Ne Yapar)',
         items: [
           PharmacologicalPrinciplesItem(
-            title: 'Emilim (Absorbsiyon)',
-            description: 'İlaç özellikleri, doz ve absorbsiyon bölgesi etkiler.',
-            subtitle: 'Oral: İlk geçiş hepatik metabolizma önemli.',
-            additionalInfo: 'Noniyonize > iyonize ilaç emilir.\n\nAğız, özafagus, rektum → karaciğeri atlayabilir.\n\nCilt: Stratum korneum lipofilik küçük moleküllere bariyer.',
+            title: "EMİLİM VE ABSORBSİYON PRENSİPLERİ",
+            description: "İlacın uygulama bölgesinden kan dolaşımına geçiş sürecidir; ilaç özellikleri, doz ve bölge kan akımı tarafından belirlenir.",
+            subtitle: "Oral yolda ilk geçiş hepatik metabolizması kritik rol oynar",
+            additionalInfo: "Temel prensipler:\n• İyonizasyon: Noniyonize (yüksüz) formdaki ilaçlar, iyonize formdakilere göre çok daha hızlı emilir.\n• İlk Geçiş Etkisi: Ağız, özafagus ve rektumun alt kısımlarından yapılan uygulamalar karaciğeri atlayarak doğrudan sistemik dolaşıma katılabilir.\n• Cilt Bariyeri: Stratum korneum tabakası, lipofilik küçük moleküller dışındaki maddeler için güçlü bir bariyer oluşturur.",
           ),
           PharmacologicalPrinciplesItem(
-            title: 'Dağılım (Distrübisyon)',
-            description: 'İlaç kanlanan organlara öncelikli gider.',
-            subtitle: 'Yağ/deri → lipofilik ilaçlar için depo.',
-            additionalInfo: 'Albumin: asidik ilaçları bağlar (barbitürat).\nα1-asit glikoprotein: bazik ilaçlar (lokal anestetik).\n\nIV bolus sonrası: hızlı dağılım → plazmada hızlı düşüş.\n\nKonteks duyarlı yarı ömür: infüzyon sonrası plazmada %50 düşüş zamanı.',
+            title: "DAĞILIM VE PLAZMA PROTEİNLERİ",
+            description: "İlacın plazmadan dokulara yayılma sürecidir; kanlanan organlara (kalp, akciğer, beyin) öncelikli olarak ulaşır.",
+            subtitle: "Yağ ve deri dokusu lipofilik ilaçlar için depo görevi görür",
+            additionalInfo: "Plazma protein bağlanması ilacın serbest (aktif) miktarını belirler:\n• Albümin: Barbitüratlar gibi asidik ilaçları bağlar.\n• α1-asit Glikoprotein: Lokal anestetikler gibi bazik ilaçları bağlar.\n• Dağılım Hızı: IV bolus sonrası ilaç önce zengin damarlı dokulara dağılır (plazmada hızlı düşüş), ardından daha yavaş kanlanan dokulara geçer.\n• Konteks Duyarlı Yarı Ömür: Sürekli infüzyon sonrası plazma konsantrasyonunun %50 düşmesi için gereken süreyi ifade eder.",
           ),
           PharmacologicalPrinciplesItem(
-            title: 'Kompartmanlar',
-            description: 'V1: santral (kan, akciğer)\nV2: hızlı dağılım periferik\nV3: yavaş dağılım periferik',
-            subtitle: 'Vdss = V1 + V2 + V3 → küçük = hidrofilik, büyük = lipofilik',
+            title: "VÜCUT KOMPARTMAN MODELLERİ",
+            description: "İlacın vücuttaki hareketini matematiksel olarak açıklayan sanal hacim bölmeleridir.",
+            subtitle: "Vdss (Dağılım Hacmi) = V1 + V2 + V3",
+            additionalInfo: "Genellikle üç kompartmanlı model kullanılır:\n• V1 (Santral): Kan hacmi ve akciğerler gibi en hızlı ulaşılan alan.\n• V2 (Hızlı Dağılım): Kas ve organlar gibi damardan zengin dokular.\n• V3 (Yavaş Dağılım): Yağ ve deri gibi geç dengeye ulaşan dokular.\nKüçük Vd değeri hidrofilik (suda çözünen), büyük Vd değeri ise lipofilik (yağda çözünen) ilaçlara işaret eder.",
           ),
           PharmacologicalPrinciplesItem(
-            title: 'Biyotransformasyon',
-            description: 'Faz I: oksidasyon, redüksiyon, hidroliz → polar metabolit\nFaz II: glukuronidasyon → hidrofilik hale getirir',
-            subtitle: 'Karaciğer kan akımı düşük etkili ilaçlarda az rol oynar; metabolik kapasite belirleyicidir',
+            title: "BİYOTRANSFORMASYON (METABOLİZMA)",
+            description: "İlacın vücutta kimyasal olarak aktif veya inaktif metabolitlere dönüştürülme sürecidir; temel amaç ilacı suda çözünür hale getirip atmaktır.",
+            subtitle: "Karaciğer kapasitesi ve kan akımı hızı belirleyicidir",
+            additionalInfo: "İki ana fazda gerçekleşir:\n• Faz I: Oksidasyon, redüksiyon veya hidroliz reaksiyonları ile moleküle polar gruplar eklenir.\n• Faz II: Glukuronidasyon gibi konjugasyon işlemleri ile ilaç tamamen hidrofilik hale getirilerek böbreklerden atıma hazırlanır.\nKaraciğer kan akımı düşük olan ilaçlarda metabolik kapasite (enzim gücü) sınırlayıcı faktördür.",
           ),
           PharmacologicalPrinciplesItem(
-            title: 'Atılım (Ekskresyon)',
-            description: 'Renal klirens: böbrekler ile uzaklaştırılan miktar\nSafra → enterohepatik siklus',
-            subtitle: 'Örnek: Lorazepam → Lorazepam Glukuronit → tekrar geri',
-          ),
-        ],
-      ),
-      PharmacologicalPrinciplesCategory(
-        categoryName: 'Kompartman Modelleri',
-        items: [
-          PharmacologicalPrinciplesItem(
-            title: 'Kompartman Tanımları',
-            description: 'Santral: kan ve akciğerler\nHızlı dengelenen: damardan zengin (kas, organ)\nYavaş dengelenen: yağ, deri',
-            subtitle: '3 kompartmanlı model: hızlı arteriyel örnekleme varsa',
-          ),
-          PharmacologicalPrinciplesItem(
-            title: 'Bolus Sonrası Dağılım',
-            description: 'Periferik kompartmanlara hızlı geçiş → plazma düşüşü',
-            subtitle: 'Terminal yarı ömür: ilacın tamamen vücuttan atılmasını gösterir',
+            title: "ATILIM VE EKSKRESYON YOLLARI",
+            description: "İlaç ve metabolitlerinin vücuttan tamamen uzaklaştırılması sürecidir; birincil yol böbrekler, ikincil yol ise safradır.",
+            subtitle: "Enterohepatik siklus ilacın vücutta kalış süresini uzatabilir",
+            additionalInfo: "Renal klirens, böbreklerin birim zamanda temizlediği plazma hacmini ifade eder. Safra yoluyla atılan bazı ilaçlar (örneğin Lorazepam Glukuronit) bağırsaklardan tekrar emilerek karaciğere dönebilir (Enterohepatik Siklus); bu durum ilacın etki süresini beklenmedik şekilde uzatabilir.",
           ),
         ],
       ),
@@ -78,18 +67,20 @@ class PharmacologicalPrinciplesData {
         categoryName: 'Farmakodinamik (İlaç Vücuda Ne Yapar)',
         items: [
           PharmacologicalPrinciplesItem(
-            title: 'Etki (Potens, Etkinlik, Terapötik Pencere)',
-            description: 'Doz-yanıt ve konsantrasyon-yanıt ilişkisi',
-            subtitle: 'Eşik değer: etki başlaması için gerekli konsantrasyon',
-            additionalInfo: 'Sigmoid ilişki: konsantrasyon artışıyla maksimum etki sabitlenir\n\nTerapötik pencere: etkili konsantrasyon ile toksik konsantrasyon aralığı',
+            title: "POTENS VE TERAPÖTİK PENCERE",
+            description: "İlacın dozu ile oluşturduğu yanıt arasındaki ilişkiyi ve güvenli kullanım aralığını tanımlar.",
+            subtitle: "Eşik değer: Etkinin başlaması için gerekli minimum konsantrasyon",
+            additionalInfo: "• Sigmoid İlişki: Konsantrasyon artışıyla etki bir noktaya kadar artar, ardından maksimum kapasiteye (Emax) ulaşılır ve sabitlenir.\n• Potens: Belirli bir etkiyi oluşturmak için gereken ilaç miktarıdır.\n• Terapötik Pencere: İlacın etkili olduğu minimum konsantrasyon ile toksik etkilerin başladığı konsantrasyon arasındaki güvenli koridordur; bu koridorun dar olması (örneğin Digoksin) risklidir.",
           ),
           PharmacologicalPrinciplesItem(
-            title: 'İlaç Reseptörleri',
-            description: 'Agonist: yanıt oluşturur\nAntagonist: agonist etkisini geri çevirir, tek başına etkisiz',
+            title: "AGONİST VE ANTAGONİST İLİŞKİLERİ",
+            description: "İlacın reseptöre bağlanarak bir yanıt oluşturup oluşturmadığını ifade eden temel etkileşim türleridir.",
+            additionalInfo: "• Agonist: Reseptöre bağlanır ve biyolojik bir yanıt tetikler (örneğin opioidler).\n• Antagonist: Reseptöre bağlandığı halde tek başına bir yanıt oluşturmaz; ancak o bölgeyi işgal ederek agonistin etkisini engeller veya geri çevirir (örneğin Nalokson).",
           ),
           PharmacologicalPrinciplesItem(
-            title: 'Antagonizma',
-            description: 'Kompetitif: agonist ile yarışır\nNonkompetitif: agonist etkisini geri çevirir, bağlanma yeri farklı',
+            title: "ANTAGONİZMA TÜRLERİ (KOMPETİTİF / NONKOMPETİTİF)",
+            description: "İlaçların birbirlerinin etkilerini hangi mekanizma ile ortadan kaldırdığını gösterir.",
+            additionalInfo: "• Kompetitif (Yarışmalı): Agonist ve antagonist aynı bağlanma bölgesi için yarışır. Doz artırılarak bu engel aşılabilir.\n• Nonkompetitif: Antagonist, agonistten farklı bir bölgeye bağlanarak veya reseptörü kalıcı olarak değiştirerek etkiyi engeller; agonist dozu artırılsa bile engel genellikle aşılamaz.",
           ),
         ],
       ),

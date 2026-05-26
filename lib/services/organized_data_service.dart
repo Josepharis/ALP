@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import '../models/question.dart';
 
 // ============================================================================
@@ -803,6 +804,120 @@ class OrganizedDataService {
     }
   }
 
+  // JSON dosyasından Firestore'a soru aktarma (Admin paneli için)
+  Future<Map<String, dynamic>> importQuestionsFromJson(
+    String collectionName,
+    String displayName,
+    List<Map<String, dynamic>> rawQuestions,
+  ) async {
+    int imported = 0;
+    int skipped = 0;
+    int errors = 0;
+
+    try {
+      // Mevcut soru sayısını al (yeni questionNumber için)
+      int existingCount = 0;
+      try {
+        final countSnap = await _firestore
+            .collection('questions')
+            .doc(collectionName)
+            .collection('items')
+            .count()
+            .get();
+        existingCount = countSnap.count ?? 0;
+      } catch (_) {}
+
+      for (int i = 0; i < rawQuestions.length; i++) {
+        try {
+          final q = rawQuestions[i];
+          final questionText = (q['question'] as String? ?? '').trim();
+
+          if (questionText.isEmpty) {
+            skipped++;
+            continue;
+          }
+
+          // Aynı soru metni Firestore'da var mı kontrol et (duplicate önleme)
+          final existingQuery = await _firestore
+              .collection('questions')
+              .doc(collectionName)
+              .collection('items')
+              .where('question', isEqualTo: questionText)
+              .limit(1)
+              .get();
+
+          if (existingQuery.docs.isNotEmpty) {
+            skipped++;
+            continue;
+          }
+
+          // sourceUid yoksa benzersiz bir tane üret
+          final sourceUid = (q['sourceUid'] as String?)?.isNotEmpty == true
+              ? q['sourceUid'] as String
+              : 'json_import_${collectionName}_${DateTime.now().millisecondsSinceEpoch}_$i';
+
+          final questionData = {
+            'questionNumber': existingCount + imported + 1,
+            'question': questionText,
+            'options': List<String>.from(
+                (q['options'] as List?)?.map((e) => e.toString()) ?? []),
+            'correctAnswer':
+                q['correctAnswerIndex'] ?? q['correctAnswer'] ?? 0,
+            'explanation': q['explanation'] ?? '',
+            'difficulty':
+                _getDifficultyString(q['difficulty']),
+            'category': displayName,
+            'collectionName': collectionName,
+            'sourceUid': sourceUid,
+            'createdAt': FieldValue.serverTimestamp(),
+            'createdBy': _auth.currentUser?.uid ?? 'system',
+            'migrated': false,
+            'source': 'json_import',
+          };
+
+          await _firestore
+              .collection('questions')
+              .doc(collectionName)
+              .collection('items')
+              .add(questionData);
+
+          imported++;
+        } catch (e) {
+          errors++;
+        }
+      }
+
+      // Kategori dokümanının questionCount'unu güncelle
+      if (imported > 0) {
+        await _firestore
+            .collection('quizCategories')
+            .doc(collectionName)
+            .set({
+          'displayName': displayName,
+          'collectionName': collectionName,
+          'questionCount': FieldValue.increment(imported),
+          'updatedAt': FieldValue.serverTimestamp(),
+          'isActive': true,
+        }, SetOptions(merge: true));
+      }
+
+      return {
+        'success': true,
+        'imported': imported,
+        'skipped': skipped,
+        'errors': errors,
+      };
+    } catch (e) {
+      return {
+        'success': false,
+        'error': e.toString(),
+        'imported': imported,
+        'skipped': skipped,
+        'errors': errors,
+      };
+    }
+  }
+
   Map<String, dynamic> _convertQuestionToMap(dynamic question) {
     if (question is Map<String, dynamic>) {
       return question;
@@ -910,6 +1025,7 @@ class OrganizedDataService {
           'questionCount': data['questionCount'] ?? 0,
           'language': language,
           'createdAt': data['createdAt'],
+          'updatedAt': data['updatedAt'],
         };
       }).toList();
     } catch (e) {
@@ -928,7 +1044,8 @@ class OrganizedDataService {
               .doc(collectionName)
               .collection('items')
               .orderBy('questionNumber')
-              .get();
+              .get()
+              .timeout(const Duration(seconds: 4));
 
       return snapshot.docs.map((doc) {
         final data = doc.data();
@@ -937,7 +1054,7 @@ class OrganizedDataService {
           'questionNumber': data['questionNumber'] ?? 0,
           'question': data['question'] ?? '',
           'options': List<String>.from(data['options'] ?? []),
-          'correctAnswer': data['correctAnswer'] ?? 0,
+          'correctAnswerIndex': data['correctAnswer'] ?? data['correctAnswerIndex'] ?? 0,
           'explanation': data['explanation'] ?? '',
           'difficulty': data['difficulty'] ?? 'medium',
           'category': data['category'] ?? '',
@@ -946,6 +1063,7 @@ class OrganizedDataService {
         };
       }).toList();
     } catch (e) {
+      debugPrint('Error getting questions by category $collectionName: $e');
       return [];
     }
   }

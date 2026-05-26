@@ -273,6 +273,36 @@
   "@informationSubtitle": {
     "description": "Information screen subtitle"
   },
+  "informationSearchHint": "Search in information...",
+  "@informationSearchHint": {
+    "description": "Hint text for the information search bar"
+  },
+  "informationNoResults": "No results found",
+  "@informationNoResults": {
+    "description": "Text shown when no search results are found"
+  },
+  "informationNoResultsForQuery": "No results found for '{query}'",
+  "@informationNoResultsForQuery": {
+    "description": "Text shown when no search results are found for a specific query",
+    "placeholders": {
+      "query": {
+        "type": "String"
+      }
+    }
+  },
+  "informationTryDifferentKeywords": "Try different keywords",
+  "@informationTryDifferentKeywords": {
+    "description": "Helper text shown when no results are found"
+  },
+  "informationSubtopicsCount": "{count} Sub-topics",
+  "@informationSubtopicsCount": {
+    "description": "Count of subtopics in a section",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "comingSoon": "Coming Soon",
   "@comingSoon": {
     "description": "Coming soon message"
@@ -1975,5 +2005,123 @@
   "upgradeGuestAccountMessage": "Convert your guest account to a registered account. All your data will be preserved!",
   "@upgradeGuestAccountMessage": {
     "description": "Upgrade guest account message"
+  },
+  "noQuestionsInCategory": "No questions in this category yet.",
+  "@noQuestionsInCategory": {
+    "description": "Message shown when a category has no questions"
+  },
+  "retakeAttempt": "Attempt #{count}",
+  "@retakeAttempt": {
+    "description": "Text shown when retaking a quiz",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "retakeQuiz": "Retake Quiz",
+  "@retakeQuiz": {
+    "description": "Button text to retake a quiz"
+  },
+  "retakeError": "An error occurred while retaking the quiz",
+  "@retakeError": {
+    "description": "Error message when retaking a quiz fails"
+  },
+  "quizComparison": "Quiz Comparison",
+  "@quizComparison": {
+    "description": "Title for the score comparison dialog"
+  },
+  "previousScore": "Previous",
+  "@previousScore": {
+    "description": "Label for the previous score"
+  },
+  "newScore": "New",
+  "@newScore": {
+    "description": "Label for the new score"
+  },
+  "improvementMessage": "Great! {percent}% better performance! 🎉",
+  "@improvementMessage": {
+    "description": "Message shown when performance improved",
+    "placeholders": {
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "similarityMessage": "Results are similar. You can try again! 💪",
+  "@similarityMessage": {
+    "description": "Message shown when performance is similar"
+  },
+  "settingsErrorApple": "Settings could not be opened. Please go to App Store > Account > Subscriptions manually.",
+  "@settingsErrorApple": {
+    "description": "Error message for iOS settings failure"
+  },
+  "settingsErrorGoogle": "Settings could not be opened. Please go to Google Play Store > Subscriptions manually.",
+  "@settingsErrorGoogle": {
+    "description": "Error message for Android settings failure"
+  },
+  "errorOccurred": "An error occurred: {error}",
+  "@errorOccurred": {
+    "description": "General error message with details",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "deviceRemoved": "Device successfully removed",
+  "@deviceRemoved": {
+    "description": "Success message when device removed"
+  },
+  "deviceRemoveError": "An error occurred while removing device",
+  "@deviceRemoveError": {
+    "description": "Error message when device removal fails"
+  },
+  "accountDeletionPage": "Account deletion page: {url}",
+  "@accountDeletionPage": {
+    "description": "Account deletion page URL message",
+    "placeholders": {
+      "url": {
+        "type": "String"
+      }
+    }
+  },
+  "subscriptionBelongsToAnotherAccount": "Subscription Belongs to Another Account",
+  "@subscriptionBelongsToAnotherAccount": {
+    "description": "Error message when subscription belongs to another account"
+  },
+  "processTimeoutPremium": "The process took too long. If Premium is activated, please restart the page or try 'Restore Purchases'.",
+  "@processTimeoutPremium": {
+    "description": "Timeout message for premium purchase"
+  },
+  "productLoadingWait": "Loading product, please wait a few seconds...\nProduct ID: {productId}",
+  "@productLoadingWait": {
+    "description": "Loading message with product ID",
+    "placeholders": {
+      "productId": {
+        "type": "String"
+      }
+    }
+  },
+  "purchaseFailed": "Purchase could not be started",
+  "@purchaseFailed": {
+    "description": "General purchase failure message"
+  },
+  "quizQuestionsNotFound": "Quiz questions not found: {quizName}",
+  "@quizQuestionsNotFound": {
+    "description": "Error message when quiz questions are missing",
+    "placeholders": {
+      "quizName": {
+        "type": "String"
+      }
+    }
+  },
+  "searchQuizzes": "Search quizzes...",
+  "@searchQuizzes": {
+    "description": "Hint text for the quiz search bar"
+  },
+  "defaultDailyQuestion": "In anesthesia, through which receptor does propofol act?",
+  "@defaultDailyQuestion": {
+    "description": "Default daily question text"
   }
 }

@@ -123,14 +123,23 @@ exports.handleManualNotification = functions.firestore
         
         if (!data) return null;
 
-        const { title, body } = data;
+        const { title, body, language } = data;
+        
+        // Dil bazlı topic belirle
+        // language: 'all', 'tr', 'en'
+        let targetTopic = 'all_users';
+        if (language === 'tr') {
+            targetTopic = 'all_users_tr';
+        } else if (language === 'en') {
+            targetTopic = 'all_users_en';
+        }
 
         const message = {
             notification: {
                 title: title,
                 body: body,
             },
-            topic: 'all_users', // Bütün kullanıcılara gönder
+            topic: targetTopic,
             android: {
                 notification: {
                     color: '#2196F3',
@@ -155,13 +164,14 @@ exports.handleManualNotification = functions.firestore
 
         try {
             const response = await admin.messaging().send(message);
-            console.log('Successfully sent message:', response);
+            console.log('Successfully sent message to topic:', targetTopic, response);
             
             // Bildirim durumunu güncelle
             return snapshot.ref.update({
                 status: 'sent',
                 sentAt: admin.firestore.FieldValue.serverTimestamp(),
-                messageId: response
+                messageId: response,
+                targetTopic: targetTopic
             });
         } catch (error) {
             console.error('Error sending message:', error);
@@ -171,4 +181,103 @@ exports.handleManualNotification = functions.firestore
             });
         }
     });
+
+/**
+ * Her gün saat 19:00'da (Türkiye saati) dile göre otomatik bildirim gönderir.
+ * Firestore işlem kilidi (transaction lock) kullanarak günde sadece 1 kez çalışmasını garanti eder.
+ */
+exports.scheduledDailyNotification = functions.pubsub
+    .schedule('0 19 * * *') 
+    .timeZone('Europe/Istanbul')
+    .onRun(async (context) => {
+        // Türkiye saatine göre tarihi YYYY-MM-DD formatında al
+        const formatter = new Intl.DateTimeFormat('en-CA', {
+            timeZone: 'Europe/Istanbul',
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit'
+        });
+        const dateStr = formatter.format(new Date());
+
+        const logRef = admin.firestore().collection('daily_notification_logs').doc(dateStr);
+        let alreadySent = false;
+
+        try {
+            // Güvenli kilit: Aynı gün içinde ikinci bir tetiklemeyi engellemek için Firestore işlemi kullan
+            await admin.firestore().runTransaction(async (transaction) => {
+                const doc = await transaction.get(logRef);
+                if (doc.exists) {
+                    alreadySent = true;
+                    return;
+                }
+                // Kilidi yerleştir (durumu pending olarak kaydet)
+                transaction.set(logRef, {
+                    status: 'pending',
+                    createdAt: admin.firestore.FieldValue.serverTimestamp()
+                });
+            });
+        } catch (txError) {
+            console.error('Firestore transaction error for daily lock check:', txError);
+            // Firestore hatası durumunda bildirim gönderimini pas geçip spam'i önle
+            return null;
+        }
+
+        if (alreadySent) {
+            console.log(`[Daily Notification] Already sent today (${dateStr}). Skipping execution to prevent duplicate notifications.`);
+            return null;
+        }
+
+        // Türkçe Mesaj Varyasyonları (3 tane)
+        const trMessages = [
+            { title: 'Günlük Quiz Zamanı! 📚', body: 'Bugünkü anestezi sorularını çözerek bilgilerini tazelemeye ne dersin?' },
+            { title: 'Bugün Kendini Test Ettin mi? 💡', body: 'Yeni eklenen spot bilgileri ve güncel notları kaçırma!' },
+            { title: 'Hedefine Bir Adım Daha! 🏆', body: 'Liderlik tablosunda yükselmek için bugünkü sorularını çözmeyi unutma.' }
+        ];
+
+        // İngilizce Mesaj Varyasyonları (3 tane)
+        const enMessages = [
+            { title: 'Daily Quiz Time! 📚', body: 'How about refreshing your knowledge by solving today\'s anesthesia questions?' },
+            { title: 'Have You Tested Yourself Today? 💡', body: 'Don\'t miss the newly added spot information and current notes!' },
+            { title: 'One Step Closer to Your Goal! 🏆', body: 'Don\'t forget to solve today\'s questions to climb the leaderboard.' }
+        ];
+
+        // Rastgele seçim
+        const index = Math.floor(Math.random() * trMessages.length);
+        const tr = trMessages[index];
+        const en = enMessages[index];
+
+        // Yayınla
+        try {
+            await Promise.all([
+                admin.messaging().send({ 
+                    notification: { title: tr.title, body: tr.body }, 
+                    topic: 'all_users_tr',
+                    android: { notification: { clickAction: 'FLUTTER_NOTIFICATION_CLICK' } },
+                    data: { click_action: 'FLUTTER_NOTIFICATION_CLICK' }
+                }),
+                admin.messaging().send({ 
+                    notification: { title: en.title, body: en.body }, 
+                    topic: 'all_users_en',
+                    android: { notification: { clickAction: 'FLUTTER_NOTIFICATION_CLICK' } },
+                    data: { click_action: 'FLUTTER_NOTIFICATION_CLICK' }
+                })
+            ]);
+            console.log(`Daily notifications sent successfully for ${dateStr}.`);
+            await logRef.update({ 
+                status: 'success',
+                sentAt: admin.firestore.FieldValue.serverTimestamp(),
+                messageTr: tr,
+                messageEn: en
+            });
+        } catch (error) {
+            console.error('Notification sending failed:', error);
+            await logRef.update({ 
+                status: 'failed', 
+                error: error.message,
+                failedAt: admin.firestore.FieldValue.serverTimestamp()
+            });
+        }
+        return null;
+    });
+
 

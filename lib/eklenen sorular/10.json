@@ -1,0 +1,1104 @@
+{
+  "meta": {
+    "title": "Analjezik Ajanlar Soru Bankası",
+    "language": "tr",
+    "totalQuestions": 73
+  },
+  "questions": [
+    {
+      "id": 1,
+      "question": "Aşağıdakilerden hangisi en yüksek lipofilisiteye sahiptir?",
+      "options": [
+        "Metilnaltrekson",
+        "Alvimopan",
+        "Nalokson",
+        "Naltrekson",
+        "Hiçbiri"
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "Santral etkili olanlar daha lipofilik.",
+      "category": "Analjezik Ajanlar"
+    },
+    {
+      "id": 2,
+      "question": "\"Nalokson testi\" hangi durumlarda tanısal veya tedavi edici amaçla kullanılır?",
+      "options": [
+        "Karaciğer yetmezliği tanısında",
+        "Opioid bağımlılığı olan birinde yoksunluk krizini tetikleyerek bağımlılığı doğrulamada",
+        "Postoperatif bulantıyı önlemede",
+        "Lokal anestezik toksisitesini geri döndürmede",
+        "Malign hipertermi tanısında"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Nalokson, fiziksel bağımlılığı olan birinde verildiğinde hızla yoksunluk sendromu başlatır. Bu klinik bir doğrulama testi olarak kullanılabilir.",
+      "category": "Analjezik Ajanlar"
+    },
+    {
+      "id": 3,
+      "question": "Opioid yapı-aktivitesi için aşağıdakilerden hangisi yanlıştır?",
+      "options": [
+        "Tüm opioid reseptörleri G proteinlerine bağlanır.",
+        "Adenilat siklaz aktivasyonu yaparak hücre içi siklik adenozin monofosfat konsantrasyonları artar.",
+        "Fosfolipaz C aktive olur.",
+        "Voltaj bağımlı Ca kanalları inhibe olur.",
+        "İçeri doğrultucu K kanalları aktive olur."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Opioid reseptörleri Gi/Go proteinleri üzerinden adenilat siklazı inhibe eder; hücre içi cAMP artmaz, azalır.",
+      "category": "Analjezik Ajanlar"
+    },
+    {
+      "id": 4,
+      "question": "Opioidlerin etki ettiği nörotransmitterler hangileridir?",
+      "options": [
+        "Asetilkolin + Kalsiyum",
+        "Asetilkolin + Potasyum",
+        "Asetilkolin + Substans P",
+        "Kalsiyum + Potasyum",
+        "Substans P + Kalsiyum"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Opioidler presinaptik nörotransmitter salınımını azaltır; ağrı iletiminde özellikle substans P ve asetilkolin salınımının azalması önemlidir.",
+      "category": "Analjezik Ajanlar"
+    },
+    {
+      "id": 5,
+      "question": "Aşağıdakilerden hangisi tam agonist bir opioid ajandır?",
+      "options": [
+        "Fentanil",
+        "Nalorfin",
+        "Nalbufin",
+        "Butorfanol",
+        "Buprenorfin"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Fentanil güçlü bir tam μ-opioid reseptör agonistidir. Nalbufin/butorfanol karma agonist-antagonist, buprenorfin parsiyel agonisttir.",
+      "category": "Analjezik Ajanlar"
+    },
+    {
+      "id": 6,
+      "question": "Aşağıdakilerden hangisi temel opioid reseptörlerinden biri değildir?",
+      "options": [
+        "μ1",
+        "μ2",
+        "σ",
+        "δ",
+        "κ"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Sigma (σ), klasik temel opioid reseptör ailesi içinde kabul edilmez; temel opioid reseptörleri μ, κ ve δ gruplarıdır.",
+      "category": "Analjezik Ajanlar"
+    },
+    {
+      "id": 7,
+      "question": "PCA’da kullanımı önerilmeyen opioid hangisidir?",
+      "options": [
+        "Morfin",
+        "Meperidin",
+        "Fentanil",
+        "Remifentanil",
+        "Sufentanil"
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "Remifentanil çok kısa etkili ve hızlı solunum depresyonu riski olan bir ajandır; klasik hasta kontrollü analjezi için uygun değildir.",
+      "category": "Analjezik Ajanlar"
+    },
+    {
+      "id": 8,
+      "question": "Aşağıdakilerden hangisi multimodal analjezi yaklaşımının temel amacıdır?",
+      "options": [
+        "Tek ilacın dozunu artırarak maksimum analjezi sağlamak.",
+        "Sadece opioid kullanarak yan etkileri izlemek.",
+        "Farklı mekanizmalı ilaçları düşük dozlarda birleştirerek yan etkileri azaltıp analjeziyi artırmak.",
+        "Sadece santral etkili ilaçları kullanmak.",
+        "İlaçlar arasındaki etkileşimi minimuma indirmek."
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Multimodal analjezinin amacı, farklı reseptörlere etki eden ilaçları (NSAİİ, opioid, ketamin, lokal anestezik) kombine ederek opioid dozunu ve yan etkilerini azaltmaktır.",
+      "category": "Analjezik Ajanlar"
+    },
+    {
+      "id": 9,
+      "question": "Opioid antagonisti verilince akut yoksunluk gelişen hasta. En olası verilen ilaç:",
+      "options": [
+        "Metilnaltrekson",
+        "Alvimopan",
+        "Nalokson",
+        "Nalokson",
+        "Morfin"
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "Nalokson Güçlü ve hızlı etkili opioid antagonisti Kan-beyin bariyerini geçer → santral reseptörleri bloke eder 👉 Opioid bağımlısı hastada: Reseptörler sürekli aktive durumda Nalokson verilince → ani blokaj ➡ Sonuç: akut yoksunluk (withdrawal) Ajitasyon Taşikardi Hipertansiyon Terleme Kusma",
+      "category": "Analjezik Ajanlar"
+    },
+    {
+      "id": 10,
+      "question": "Opioidlerin gastrointestinal sistem üzerine etkileri ile ilgili verilen bilgilerden hangisi yanlıştır?",
+      "options": [
+        "Barsaktaki opioid reseptörlerine bağlanarak gastrointestinal motiliteyi yavaşlatır ve peristaltizmi azaltır.",
+        "Oddi sfinkterinin gevşemesine neden olurlar.",
+        "Kabızlığa nadiren tolerans gelişir.",
+        "Periferik opioid antagonistleri metilnaltrekson, alvimopan, naloksegol ve naldemidindir.",
+        "Klinik olarak safra taşını taklit edebilirler."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Opioidler Oddi sfinkter tonusunu artırabilir; biliyer kolik benzeri ağrı oluşturabilirler.",
+      "category": "Analjezik Ajanlar"
+    },
+    {
+      "id": 11,
+      "question": "Alkol bağımlısı hastada craving azaltmak için ilaç başlanıyor. Etki mekanizması nedir?",
+      "options": [
+        "GABA aktivasyonu",
+        "Dopamin artışı",
+        "μ-opioid reseptör blokajı",
+        "NMDA aktivasyonu",
+        "Serotonin blokajı"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Alkol → endojen opioid (endorfin) salınımını artırır Bu → dopamin salınımını artırarak ödül/zevk hissi oluşturur Naltrekson: μ-opioid reseptörlerini bloke eder Endorfin etkisini engeller Dopamin artışını azaltır Sonuç: Craving (içme isteği) azalır Relaps riski düşer",
+      "category": "Analjezik Ajanlar"
+    },
+    {
+      "id": 12,
+      "question": "Opioidlerin bağırsak motilitesini azaltma mekanizması:",
+      "options": [
+        "Dopamin ↑",
+        "Asetilkolin ↓",
+        "Serotonin ↑",
+        "GABA ↓",
+        "Histamin ↑"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Opioidler (örn. Morfin), enterik sinir sistemi üzerindeki μ-opioid reseptörlerini aktive eder. 👉 Bu aktivasyon sonucu: Presinaptik nöronlarda asetilkolin (ACh) salınımı azalır ACh normalde bağırsak peristaltizmini artırır ➡ ACh azalınca: Peristaltizm ↓ Bağırsak hareketi ↓ Kabızlık gelişir",
+      "category": "Analjezik Ajanlar"
+    },
+    {
+      "id": 13,
+      "question": "Aşağıdaki opioid antagonistlerinden hangisi kan-beyin bariyerini geçemez ve sadece periferal opioid reseptörlerini (özellikle GİS) bloke etmek amacıyla kullanılır?",
+      "options": [
+        "Nalokson",
+        "Naltrekson",
+        "Nalmefen",
+        "Metilnaltrekson",
+        "Alvimopan"
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "Metilnaltrekson, kuvaterner amonyum yapısı nedeniyle kan-beyin bariyerini geçemez. Santral analjezik etkiyi bozmadan sadece periferal yan etkileri (özellikle konstipasyonu) tedavi etmek için kullanılır.",
+      "category": "Analjezik Ajanlar"
+    },
+    {
+      "id": 14,
+      "question": "En uzun etkili opioid antagonist:",
+      "options": [
+        "Nalokson",
+        "Naltrekson",
+        "Nalmefen",
+        "Metilnaltrekson",
+        "Alvimopan"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Naltrekson Uzun etkili opioid antagonisttir Etki süresi: 24–72 saat Aktif metaboliti (6-β-naltrekson) vardır → etki süresi uzar Klinik kullanım: Opioid bağımlılığı Alkol bağımlılığı",
+      "category": "Analjezik Ajanlar"
+    },
+    {
+      "id": 15,
+      "question": "Parasetamol (Asetaminofen) zehirlenmesinde hepatotoksisiteden sorumlu olan reaktif ara metabolit aşağıdakilerden hangisidir?",
+      "options": [
+        "N-asetilsistein",
+        "NAPQI (N-acetyl-p-benzoquinone imine)",
+        "Glukuronid konjugatı",
+        "Sülfat konjugatı",
+        "Glutatyon"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Parasetamol normal dozlarda glukuronidasyon ile atılır; ancak yüksek dozda CYP2E1 yoluyla toksik NAPQI oluşur. Glutatyon depoları bittiğinde NAPQI karaciğer hücrelerine hasar verir.",
+      "category": "Analjezik Ajanlar"
+    },
+    {
+      "id": 16,
+      "question": "72 yaşında hasta morfin kullanımı sonrası konstipasyon geliştiriyor. Doktor, analjeziyi bozmadan GİS motilitesini artıran bir ilaç başlıyor. İlacın hangi özelliği bu seçimi açıklar?",
+      "options": [
+        "Lipofilik olması",
+        "Kan-beyin bariyerini geçmesi",
+        "Pozitif yüklü olması",
+        "CYP450 ile metabolize olması",
+        "Yüksek protein bağlanması"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Metilnaltrekson kuaterner amonyum içerir → sürekli pozitif yüklü → ➡ lipofilik değil → kan-beyin bariyerini geçemez 👉 Bu yüzden: Santral analjezi korunur Sadece GİS reseptörleri bloke olur",
+      "category": "Analjezik Ajanlar"
+    },
+    {
+      "id": 17,
+      "question": "Karaciğerde CYP2D6 enzimi ile morfine dönüşerek etkisini gösteren, bu enzimi eksik olanlarda (poor metabolizers) analjezi sağlamayan ilaç hangisidir?",
+      "options": [
+        "Oksikodon",
+        "Kodein",
+        "Metadon",
+        "Meperidin",
+        "Sufentanil"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Kodein bir prodrugdır. Analjezik etkisi olması için karaciğerde CYP2D6 ile morfine metabolize olması şarttır.",
+      "category": "Analjezik Ajanlar"
+    },
+    {
+      "id": 18,
+      "question": "Aşağıdaki opioid reseptör-etki eşleşmelerinden hangisi yanlıştır?",
+      "options": [
+        "Mü : Supraspinal analjezi, öfori",
+        "Kappa : Spinal analjezi, disfori, halüsinasyon",
+        "Delta : Spinal analjezi, duygulanım",
+        "Mü : Miosis, konstipasyon",
+        "Kappa : Öfori, solunum depresyonu"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Kappa reseptör uyarımı öfori değil, aksine disfori yapar. Solunum depresyonu ise esas olarak Mü reseptörleri aracılığıyladır.",
+      "category": "Analjezik Ajanlar"
+    },
+    {
+      "id": 19,
+      "question": "Aşağıdaki durumlardan hangisi opioid ihtiyacını (MAC değerini düşürür gibi) azaltan faktörlerden biri değildir?",
+      "options": [
+        "Hipotermi",
+        "Yaşlılık",
+        "Gebelik",
+        "Hipernatremi",
+        "Alkol intoksikasyonu"
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "Hipernatremi anestetik ve analjezik ihtiyacını artırır. Diğerleri (hipotermi, yaş, gebelik, akut alkol) analjezik gereksinimini azaltır.",
+      "category": "Analjezik Ajanlar"
+    },
+    {
+      "id": 20,
+      "question": "Yenidoğanda dikkatli kullanılması gereken opioid hangisidir?",
+      "options": [
+        "Fentanil",
+        "Sufentanil",
+        "Morfin",
+        "Meperidin",
+        "Alfentanil"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Morfin yenidoğanda immatür glukuronidasyon ve değişmiş dağılım nedeniyle daha dikkatli dozlanmalıdır.",
+      "category": "Analjezik Ajanlar"
+    },
+    {
+      "id": 21,
+      "question": "Opioidlerin GİS motilitesini azaltmasının nedeni:",
+      "options": [
+        "Dopamin artışı",
+        "Asetilkolin salınımının inhibisyonu",
+        "Serotonin azalması",
+        "GABA artışı",
+        "Histamin artışı"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Opioidler: Enterik sinir sisteminde Asetilkolin salınımını azaltır 👉 Sonuç: Peristaltizm ↓ Kabızlık ↑",
+      "category": "Analjezik Ajanlar"
+    },
+    {
+      "id": 22,
+      "question": "Opioid overdose ile gelen hastaya acilde verilen kısa etkili antagonist:",
+      "options": [
+        "Nalokson",
+        "Naltrekson",
+        "Nalmefen",
+        "Metilnaltrekson",
+        "Alvimopan"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Nalokson hızlı etki → acil durum ilacı.",
+      "category": "Analjezik Ajanlar"
+    },
+    {
+      "id": 23,
+      "question": "Bir hastada opioid rotasyonu yapılırken \"eksik çapraz tolerans\" (incomplete cross-tolerance) kavramı dikkate alınarak yeni başlanacak ilacın dozu nasıl ayarlanmalıdır?",
+      "options": [
+        "Eşdeğer dozun %25-50 üzerinde başlanmalıdır.",
+        "Eşdeğer dozun aynısı verilmelidir.",
+        "Hesaplanmış eşdeğer dozun %25-50 oranında azaltılması önerilir.",
+        "Sadece intravenöz form tercih edilmelidir.",
+        "Yan etkiler gelişene kadar doz artırılmalıdır."
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Opioidler arasında çapraz tolerans tam değildir. Bir opioidden diğerine geçerken, hastanın yeni ilaca aşırı duyarlı olma riskine karşı hesaplanan equianalgesic dozun genellikle %25-50 oranında azaltılması önerilir.",
+      "category": "Analjezik Ajanlar"
+    },
+    {
+      "id": 24,
+      "question": "Opioid bağımlısı hastaya antagonist verilince şiddetli ajitasyon gelişiyor. Bunun mekanizması:",
+      "options": [
+        "Dopamin artışı",
+        "GABA inhibisyonu",
+        "Reseptörlerin ani blokajı → withdrawal",
+        "Serotonin sendromu",
+        "Histamin salınımı"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Opioid bağımlısı hastada: Reseptörler sürekli aktive Antagonist → ani blokaj 👉 Bu → akut yoksunluk (withdrawal) Ajitasyon Terleme Taşikardi",
+      "category": "Analjezik Ajanlar"
+    },
+    {
+      "id": 25,
+      "question": "Alkol bağımlılığı tedavisinde kullanılan ilacın mekanizması:",
+      "options": [
+        "GABA agonisti",
+        "NMDA antagonisti",
+        "μ-opioid reseptör antagonizması",
+        "Dopamin geri alım inhibisyonu",
+        "Serotonin salınımı"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Naltrekson: Alkol → endorfin salınımı → dopamin ↑ Naltrekson → μ reseptör blokajı → ödül azalır 👉 Bağımlılık döngüsünü kırar",
+      "category": "Analjezik Ajanlar"
+    },
+    {
+      "id": 26,
+      "question": "Opioidlerin hücresel etki mekanizması düşünüldüğünde, aşağıdakilerden hangisi mü (μ) reseptör aktivasyonu sonrası izlenen post-sinaptik olaylardan biridir?",
+      "options": [
+        "Adenilat siklaz aktivitesinin artması",
+        "Hücre içi cAMP düzeyinin yükselmesi",
+        "Voltaj bağımlı kalsiyum kanallarının açılması",
+        "Potasyum (K+) kanallarının açılarak hücrenin hiperpolarize olması",
+        "Fosfolipaz C aktivasyonu üzerinden IP3 artışı"
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "Opioid reseptörleri G-protein kenetlidir (Gi/Go). Aktivasyonları sonucu adenilat siklaz inhibe edilir ve cAMP azalır. Pre-sinaptik olarak kalsiyum kanalları kapanırken (transmitter salınımı azalır), post-sinaptik olarak potasyum kanalları açılır ve hücre hiperpolarize edilerek uyarılabilirlik azaltılır.",
+      "category": "Analjezik Ajanlar"
+    },
+    {
+      "id": 27,
+      "question": "Periferik μ-opioid reseptörlerini bloke eden:",
+      "options": [
+        "Nalokson",
+        "Naltrekson",
+        "Nalmefen",
+        "Alvimopan",
+        "Morfin"
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "Alvimopan Periferik μ-opioid reseptör antagonistidir Kan-beyin bariyerini geçmez → sadece GİS’te etkilidir Özellikle postoperatif ileus tedavisinde kullanılır 👉 Etkisi: Bağırsak motilitesini artırır Opioidlerin GİS üzerindeki inhibisyonunu kaldırır Analjeziyi bozmaz (çünkü santrale geçmez)",
+      "category": "Analjezik Ajanlar"
+    },
+    {
+      "id": 28,
+      "question": "Naloksonun IV verilmesi sonrası hangi etki en hızlı düzelir?",
+      "options": [
+        "Kabızlık",
+        "Sedasyon",
+        "Solunum depresyonu",
+        "Bağımlılık",
+        "Tolerans"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Opioidler: Solunum merkezini baskılar (medulla) Nalokson: en hızlı düzelen şey = solunum",
+      "category": "Analjezik Ajanlar"
+    },
+    {
+      "id": 29,
+      "question": "Epidural ve spinal opioidlerin yan etkileri nelerdir?\nI. Sedasyon\nII. Solunum depresyonu\nIII. İdrar retansiyonu\nIV. Kaşıntı\nV. Bulantı-kusma",
+      "options": [
+        "I-II-III",
+        "I-III",
+        "I-II-IV-V",
+        "II-IV-V",
+        "I-II-III-IV-V"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Nöroaksiyel opioidler sedasyon, solunum depresyonu, idrar retansiyonu, pruritus ve bulantı-kusma yapabilir.",
+      "category": "Analjezik Ajanlar"
+    },
+    {
+      "id": 30,
+      "question": "Yağda çözünürlük özellikleri en yüksek olan opioidler hangileridir?",
+      "options": [
+        "Morfin + alfentanil",
+        "Meperidin + remifentanil",
+        "Alfentanil + sufentanil",
+        "Fentanil + sufentanil",
+        "Morfin + fentanil"
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "Fentanil ve sufentanil yüksek lipofilisiteye sahip opioidlerdir; hızlı santral sinir sistemi penetrasyonu gösterirler.",
+      "category": "Analjezik Ajanlar"
+    },
+    {
+      "id": 31,
+      "question": "\"Triple Whammy\" (Üçlü Darbe) olarak bilinen ve akut böbrek yetmezliği riskini ciddi şekilde artıran ilaç kombinasyonu aşağıdakilerden hangisidir?",
+      "options": [
+        "Opioid + Benzodiazepin + NSAİİ",
+        "ACE İnhibitörü + Diüretik + NSAİİ",
+        "Parasetamol + NSAİİ + Steroid",
+        "Antikolinerjik + Opioid + Antihistaminik",
+        "Beta Bloker + Kalsiyum Kanal Blokeri + NSAİİ"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "ACE inhibitörleri efferent arteriolü dilate eder, diüretikler plazma volümünü azaltır, NSAİİ'ler ise afferent arteriolü daraltır. Üçü birleştiğinde glomerüler filtrasyon basıncı çöker ve AKH gelişir.",
+      "category": "Analjezik Ajanlar"
+    },
+    {
+      "id": 32,
+      "question": "Kronik ağrı nedeniyle yüksek doz opioid kullanan bir hastada \"opioid kaynaklı hiperaljezi\" (OIH) şüphesi varsa, bu durumun fizyopatolojisinde rol oynayan temel reseptör ve tedavi seçeneği aşağıdakilerden hangisinde doğru eşleşmiştir?",
+      "options": [
+        "Kappa reseptörü – Nalokson",
+        "NMDA reseptörü – Ketamin",
+        "Delta reseptörü – Metilnaltrekson",
+        "Sigma reseptörü – Buprenorfin",
+        "GABA reseptörü – Diazepam"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Opioid kaynaklı hiperaljezi, doz artışına rağmen ağrının kötüleşmesi durumudur. Bu mekanizmada glutamaterjik sistem ve NMDA reseptör aktivasyonu temel rol oynar. NMDA antagonisti olan ketamin, bu tablonun yönetiminde kullanılır.",
+      "category": "Analjezik Ajanlar"
+    },
+    {
+      "id": 33,
+      "question": "Metilnaltrekson verilince aşağıdaki etkilerden hangisi görülmez?",
+      "options": [
+        "Bağırsak hareketinde artış",
+        "Kabızlıkta düzelme",
+        "Analjezinin kaybı",
+        "GİS motilite artışı",
+        "Periferik reseptör blokajı"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Metilnaltrekson: Santrale geçmez Ağrı kontrolü bozulmaz Ama: GİS motilite ↑ Kabızlık ↓",
+      "category": "Analjezik Ajanlar"
+    },
+    {
+      "id": 34,
+      "question": "Proteine bağlanma afinitesi yüksek olan opioidler hangileridir?",
+      "options": [
+        "Fentanil + morfin",
+        "Morfin + meperidin",
+        "Sufentanil + alfentanil",
+        "Fentanil + remifentanil",
+        "Meperidin + fentanil"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Sufentanil ve alfentanil plazma proteinlerine yüksek oranda bağlanan opioidler arasındadır.",
+      "category": "Analjezik Ajanlar"
+    },
+    {
+      "id": 35,
+      "question": "Aşağıdaki opioid reseptörlerinden hangisi uyarıldığında \"disfori, kabus görme ve psikotomimetik etkiler\" ortaya çıkar?",
+      "options": [
+        "Mü-1",
+        "Mü-2",
+        "Delta",
+        "Kappa",
+        "Sigma"
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "Kappa reseptör uyarımı analjezi sağlasa da, hastada disfori (mutsuzluk hali), halüsinasyon ve kabuslar gibi istenmeyen psikolojik etkilere yol açar.",
+      "category": "Analjezik Ajanlar"
+    },
+    {
+      "id": 36,
+      "question": "Opioidlerin solunum sistemi üzerine etkileri ile ilgili verilen bilgilerden hangileri doğrudur?\nI. Solunum hızını baskılar.\nII. PaCO2’yi artırır ve CO2 artışına yanıtı köreltir.\nIII. CO2 yanıt eğrisinin yukarı ve sola kaymasına neden olurlar.\nIV. Etkiler beyin sapındaki solunum merkezindeki nöronlara opioid bağlanmasından kaynaklanır.\nV. Apneik eşik yükselir ve hipoksik dürtü azalır.",
+      "options": [
+        "I-II",
+        "I-II-III",
+        "II-IV",
+        "III-V",
+        "I-II-IV-V"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Opioidler solunum merkezinin CO2’ye duyarlılığını azaltır; solunum hızı düşer, PaCO2 artar, apneik eşik yükselir ve hipoksik drive azalır.",
+      "category": "Analjezik Ajanlar"
+    },
+    {
+      "id": 37,
+      "question": "Opioid reseptör aktivasyonu normalde:",
+      "options": [
+        "cAMP artırır",
+        "K+ çıkışı artırır → hiperpolarizasyon",
+        "Na girişini artırır",
+        "Ca girişini artırır",
+        "Depolarizasyon yapar"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Opioid etkisi: K+ kanalları açılır ➡ hücre hiperpolarize olur ➡ nöron ateşlemesi azalır",
+      "category": "Analjezik Ajanlar"
+    },
+    {
+      "id": 38,
+      "question": "Kronik NSAİİ kullanımına bağlı gastropatiyi önlemek için kullanılan, sentetik bir Prostaglandin E1 analoğu olan ilaç hangisidir?",
+      "options": [
+        "Omeprazol",
+        "Misoprostol",
+        "Sukralfat",
+        "Famotidin",
+        "Bizmut"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Misoprostol, prostaglandin E1 analoğudur; mukus salgısını artırarak NSAİİ ilişkili ülser riskini azaltır (ancak ishal yan etkisi ve abortif etkisi vardır).",
+      "category": "Analjezik Ajanlar"
+    },
+    {
+      "id": 39,
+      "question": "Buprenorfin ile ilgili aşağıdaki ifadelerden hangisi yanlıştır?",
+      "options": [
+        "Mü reseptörü için parsiyel agonisttir.",
+        "Disfajisi olanlarda sublingual kullanılabilir.",
+        "Reseptör afinitesi çok yüksektir, nalokson ile geri döndürülmesi zordur.",
+        "Bir \"tavan etkisi\" (ceiling effect) vardır, doz artışı bir yerden sonra solunumu daha fazla baskılamaz.",
+        "Saf bir opioid antagonistidir."
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Buprenorfin bir antagonist değil, parsiyel agonisttir. Karmaşık bir profili vardır (mü-agonist, kappa-antagonist).",
+      "category": "Analjezik Ajanlar"
+    },
+    {
+      "id": 40,
+      "question": "Gabapentin ve pregabalin hangi yollarla etki eder?",
+      "options": [
+        "GABA-NMDA",
+        "NMDA-Ca kanalı",
+        "Ca kanalı-GABA",
+        "GABA-Substans P",
+        "Substans P-Ca kanalı"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Gabapentin ve pregabalin yapısal olarak GABA analoglarıdır; klinik etkilerini voltaj bağımlı kalsiyum kanallarının α2δ alt birimine bağlanarak gösterirler.",
+      "category": "Analjezik Ajanlar"
+    },
+    {
+      "id": 41,
+      "question": "Aşağıdaki ilaçlardan hangisi hem mü-opioid reseptör agonisti hem de güçlü bir Norepinefrin Geri Alım İnhibitörü (NRI) olup serotonin sendromu riski tramadole göre daha düşüktür?",
+      "options": [
+        "Kodein",
+        "Tapentadol",
+        "Metadon",
+        "Oksikodon",
+        "Nalbuphin"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Tapentadol, dual mekanizmalı bir ilaçtır (MOR-NRI). Tramadolden farkı, serotonerjik etkisinin minimal olmasıdır; bu da serotonin sendromu riskini azaltır.",
+      "category": "Analjezik Ajanlar"
+    },
+    {
+      "id": 42,
+      "question": "Opioid antagonisti verilen hastada hangi elektrofizyolojik değişim olur?",
+      "options": [
+        "Na kanalı kapanır",
+        "Ca kanalı açılır",
+        "cAMP düzeyi artar",
+        "K kanalı kapanır",
+        "Cl kanalı açılır"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Opioidler cAMP ↓ yapar → antagonistle ↑ olur.",
+      "category": "Analjezik Ajanlar"
+    },
+    {
+      "id": 43,
+      "question": "Opioidlerin indüklediği kas rijiditesini (chest wall rigidity) hızlıca geri döndürmek için en uygun ajan aşağıdakilerden hangisidir?",
+      "options": [
+        "Flumazenil",
+        "Nalokson",
+        "Neostigmin",
+        "Atropin",
+        "Magnezyum"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Göğüs duvarı rijiditesi bir opioid yan etkisidir (özellikle fentanil grubu). Opioid antagonisti olan nalokson bu durumu hızla geri döndürür.",
+      "category": "Analjezik Ajanlar"
+    },
+    {
+      "id": 44,
+      "question": "Naltreksonun uzun etkili olmasının sebebi:",
+      "options": [
+        "Hızlı metabolizma",
+        "Aktif metabolitleri olması",
+        "Renal atılım",
+        "Protein bağlanmaması",
+        "Düşük lipofilisite"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Naltrekson: Aktif metaboliti: 6-β-naltrekson Bu → etki süresini uzatır",
+      "category": "Analjezik Ajanlar"
+    },
+    {
+      "id": 45,
+      "question": "Aşağıdaki opioidlerden hangisinin QT aralığını uzatma ve Torsades de Pointes riskini artırma potansiyeli en yüksektir?",
+      "options": [
+        "Morfin",
+        "Metadon",
+        "Fentanil",
+        "Remifentanil",
+        "Alfentanil"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Metadon, hERG potasyum kanallarını bloke ederek QT uzamasına neden olabilir. Bu nedenle kullanımında EKG takibi önemlidir.",
+      "category": "Analjezik Ajanlar"
+    },
+    {
+      "id": 46,
+      "question": "Bir hasta opioid overdose ile geliyor. Nalokson verilmeden önce hangi fizyolojik değişiklik beklenir?",
+      "options": [
+        "Bradipne",
+        "Hiperkapni",
+        "Respiratuvar asidoz",
+        "Miozis",
+        "Hepsi"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Opioid overdose klasik triad: Miozis (pinpoint pupil) Solunum depresyonu Bilinç kaybı Fizyolojik: CO₂ ↑ → hiperkapni pH ↓ → respiratuvar asidoz",
+      "category": "Analjezik Ajanlar"
+    },
+    {
+      "id": 47,
+      "question": "Aşağıdaki opioidlerden hangisi, yapısal olarak atropine benzerliği nedeniyle toksik dozlarda miosis (iğne ucu göz bebeği) yerine midriyazis yapabilir?",
+      "options": [
+        "Morfin",
+        "Fentanil",
+        "Meperidin",
+        "Hidromorfon",
+        "Sufentanil"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Meperidin (Pethidine), yapısal olarak atropine benzer. Bu nedenle diğer opioidlerin aksine belirgin bir antikolinerjik etki gösterebilir ve toksisitesinde miosis yerine midriyazis görülebilir.",
+      "category": "Analjezik Ajanlar"
+    },
+    {
+      "id": 48,
+      "question": "Hangi ilaç sadece gastrointestinal sistemde etkilidir?",
+      "options": [
+        "Nalokson",
+        "Naltrekson",
+        "Nalmefen",
+        "Metilnaltrekson",
+        "Hepsi"
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "Metilnaltrekson Kuaterner amonyum yapısındadır → sürekli pozitif yüklü Bu nedenle kan-beyin bariyerini geçemez Sadece periferik opioid reseptörlerini, özellikle gastrointestinal sistemdeki μ-reseptörleri bloke eder 👉 Klinik sonuç: Kabızlık düzelir Santral analjezi korunur",
+      "category": "Analjezik Ajanlar"
+    },
+    {
+      "id": 49,
+      "question": "68 yaşında hasta, kolon cerrahisi sonrası 3. gününde abdominal distansiyon ve gaz çıkaramama ile başvuruyor. Opioid analjezisi devam ediyor. Hangi ilaç başlanmalıdır?",
+      "options": [
+        "Nalokson",
+        "Naltrekson",
+        "Metilnaltrekson",
+        "Alvimopan",
+        "Loperamid"
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "Post-op ileus → Alvimopan spesifik.",
+      "category": "Analjezik Ajanlar"
+    },
+    {
+      "id": 50,
+      "question": "Epidural aralığa verilen morfinin, fentanile göre daha geç (6-12 saat sonra) solunum depresyonu yapmasının temel nedeni nedir?",
+      "options": [
+        "Daha lipofilik olması",
+        "Daha düşük molekül ağırlığına sahip olması",
+        "Daha hidrofilik olması ve BOS içinde rostral (başa doğru) yavaş yayılımı",
+        "Karaciğerde daha hızlı yıkılması",
+        "Protein bağlama kapasitesinin düşük olması"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Morfin hidrofiliktir, bu yüzden BOS içinde çözünmüş halde başa doğru yavaşça yükselerek medulladaki solunum merkezine geç ulaşır (geç solunum depresyonu).",
+      "category": "Analjezik Ajanlar"
+    },
+    {
+      "id": 51,
+      "question": "MAO inhibitörü kullanım öyküsü olan hastada hangi opioid iyi bir seçenek olmaz?",
+      "options": [
+        "Fentanil",
+        "Morfin",
+        "Meperidin",
+        "Alfentanil",
+        "Sufentanil"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Meperidin MAO inhibitörleriyle ciddi eksitasyon, hipertermi, serotonin sendromu benzeri reaksiyonlar ve nöbet riski nedeniyle kaçınılması gereken opioiddir.",
+      "category": "Analjezik Ajanlar"
+    },
+    {
+      "id": 52,
+      "question": "65 yaşında erkek hasta, kronik opioid kullanımı sonrası şiddetli kabızlıkla başvuruyor. Santral analjezi korunmak isteniyor. Hangi ilaç tercih edilir?",
+      "options": [
+        "Nalokson",
+        "Naltrekson",
+        "Metilnaltrekson",
+        "Morfin",
+        "Fentanil"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Metilnaltrekson KBB’yi geçmez → sadece GİS etkisi.",
+      "category": "Analjezik Ajanlar"
+    },
+    {
+      "id": 53,
+      "question": "Opioid reseptörleri için verilen bilgilerden hangisi yanlıştır?",
+      "options": [
+        "μ reseptörleri supraspinal analjezi, solunum depresyonu, fiziksel bağımlılık ve kas rijiditesinden sorumludur.",
+        "Morfin sedasyon ve spinal analjezi etkisini κ reseptörü üzerinden gösterir.",
+        "Endojen opioidler analjezik ve epileptojenik etkilerini δ reseptörleri üzerinden gösterirler.",
+        "κ reseptörleri disfori ve halüsinasyondan sorumludur.",
+        "Ketamin δ reseptör agonistidir."
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Ketamin opioid δ reseptör agonisti değildir; temel etkisi NMDA antagonizmasıdır ve bazı kaynaklarda sigma reseptör etkileşimi tartışılır.",
+      "category": "Analjezik Ajanlar"
+    },
+    {
+      "id": 54,
+      "question": "Opioidlerin MSS üzerine etkileri ile ilgili verilen bilgilerden hangisi yanlıştır?",
+      "options": [
+        "Normokarbi korunursa opioidler beyin oksijen tüketimini, beyin kan akımını, beyin kan hacmini ve intrakraniyal basıncı azaltır.",
+        "Opioidlerin genellikle EEG’de hemen hemen hiçbir etkisi yoktur.",
+        "Büyük dozlarda yavaş delta dalga aktivitesi izlenir.",
+        "Medüller kemoreseptör tetikleyici bölgenin uyarılması opioide bağlı bulantı ve kusmadan sorumludur.",
+        "Büyük dozlarda güvenilir amnezi oluştururlar."
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Opioidler analjezi ve sedasyon sağlar; ancak benzodiyazepinler gibi güvenilir amnezi oluşturmazlar.",
+      "category": "Analjezik Ajanlar"
+    },
+    {
+      "id": 55,
+      "question": "Bir ilaç postoperatif ileusu önlemek için kullanılıyor. Sadece GİS’te etkilidir ve opioid analjezisini bozmaz. Hangi reseptörü hedefler?",
+      "options": [
+        "Merkezi κ reseptör",
+        "Merkezi δ reseptör",
+        "Periferik μ reseptör",
+        "GABA-A",
+        "NMDA"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Alvimopan: Sadece GİS μ reseptörlerini bloke eder Santral sinir sistemine girmez 👉 Postop ileus → bağırsak hareketi geri gelir",
+      "category": "Analjezik Ajanlar"
+    },
+    {
+      "id": 56,
+      "question": "Aşağıdaki ilaçlardan hangisi NMDA antagonisti analjezik olup, solunumu deprese etmek yerine koruyucu havayolu reflekslerini idame ettirir?",
+      "options": [
+        "Propofol",
+        "Ketamin",
+        "Midazolam",
+        "Etomidat",
+        "Tiopental"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Ketamin dissosiyatif bir anesteziktir; NMDA antagonizması ile güçlü analjezi sağlar ve solunum depresyonu yapmaz, havayolu reflekslerini korur.",
+      "category": "Analjezik Ajanlar"
+    },
+    {
+      "id": 57,
+      "question": "Bir hasta yüksek doz opioid kullanıyor. Nalokson verilince hipertansiyon ve taşikardi gelişiyor. Sebep:",
+      "options": [
+        "Histamin salınımı",
+        "Sempatik aktivitenin rebound artışı",
+        "Parasempatik aktivasyon",
+        "Dopamin blokajı",
+        "Serotonin artışı"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Opioidler: Sempatik sistemi baskılar Nalokson: ani kaldırma → rebound sempatik aktivite 👉 Bulgular: Taşikardi Hipertansiyon Ajitasyon Tamam—seviyeyi board/USMLE Step 1–2 arası zor vaka düzeyine getiriyorum. Her soru klinik akıl yürütme gerektirir. 🧠 10 ZOR VAKA SORUSU (AÇIKLAMALI)",
+      "category": "Analjezik Ajanlar"
+    },
+    {
+      "id": 58,
+      "question": "Opioid ile ilgili verilen bilgilerden hangisi yanlıştır?",
+      "options": [
+        "Alfentanil, fentanile göre lipidde daha az çözünür olmasına rağmen bolus sonrası daha hızlı etki başlangıcına ve daha kısa etki süresine sahiptir.",
+        "Alfentanilin fizyolojik pH’daki yüksek non-iyonize fraksiyonu ve küçük dağılım hacmi beyinde bağlanmak için mevcut ilaç miktarını artırır.",
+        "Yağda çözünen opioidlerin önemli bir kısmı akciğerler tarafından alınabilir.",
+        "Akciğerlerden alınım; daha önceden alınan ilaçların birikmesi, tütün kullanımı ve eş zamanlı inhalasyon anesteziği uygulamasıyla azalır.",
+        "Tüm opioidlerin öncelikle karaciğer tarafından biyotransforme edilmesi gerekir."
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Remifentanil karaciğerden bağımsız olarak plazma ve doku esterazlarıyla yıkılır; bu nedenle “tüm opioidler karaciğerde biyotransforme edilir” ifadesi yanlıştır.",
+      "category": "Analjezik Ajanlar"
+    },
+    {
+      "id": 59,
+      "question": "Aşağıdaki opioidlerden hangisinin non-iyonize hali en fazladır?",
+      "options": [
+        "Alfentanil",
+        "Fentanil",
+        "Remifentanil",
+        "Morfin",
+        "Sufentanil"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Alfentanilin pKa değeri fizyolojik pH’a yakındır; bu nedenle non-iyonize fraksiyonu yüksektir ve etki başlangıcı hızlıdır.",
+      "category": "Analjezik Ajanlar"
+    },
+    {
+      "id": 60,
+      "question": "Opioid biyotransformasyonu ile ilgili yanlış olan hangisidir?",
+      "options": [
+        "Opioidlerin karaciğerden atılım oranları yüksek olduğundan temizlenmeleri karaciğer kan akımına bağlıdır.",
+        "Meperidin yüksek dozlardan sonra N-demetilasyon ile nöbete neden olabilen normeperidine dönüşür.",
+        "Fentanil, sufentanil ve alfentanilin son ürünleri aktif değildir.",
+        "Kodein CYP2D6 enzimi tarafından morfine dönüştürülerek aktifleşen bir ön ilaçtır.",
+        "Norfentanil akut fentanil alımının tanısında tek başına güvenilir akut belirteçtir."
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Norfentanil fentanil metabolitidir; ancak tek başına akut alımı kesinleştiren özgül bir akut belirteç gibi yorumlanmamalıdır.",
+      "category": "Analjezik Ajanlar"
+    },
+    {
+      "id": 61,
+      "question": "Nalokson verilince pupil dilatasyonu gelişir. Bu değişim hangi sistemin etkisinin kalkmasıyla olur?",
+      "options": [
+        "Sempatik",
+        "Parasempatik baskının kalkması",
+        "Dopaminerjik",
+        "Serotonerjik",
+        "Kolinerjik"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Opioidler: Edinger-Westphal çekirdeğini aktive eder → miozis Nalokson: Bu etkiyi kaldırır pupil dilate olur",
+      "category": "Analjezik Ajanlar"
+    },
+    {
+      "id": 62,
+      "question": "Morfinin periferik etkilerinden olmayan hangisidir?",
+      "options": [
+        "Konstipasyon",
+        "Biliyer spazm",
+        "Kaşıntı",
+        "İdrar retansiyonu",
+        "Bulantı-kusma"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Bulantı-kusma daha çok santral kemoreseptör tetikleyici bölge etkisiyle ilişkilidir; diğerleri periferik opioid etkileridir.",
+      "category": "Analjezik Ajanlar"
+    },
+    {
+      "id": 63,
+      "question": "Fentanilin intravenöz bolus uygulaması sonrası etkisinin çok hızlı başlaması ve çok kısa sürmesinin (initial terminasyon) nedeni nedir?",
+      "options": [
+        "Karaciğerde anında metabolize olması",
+        "Plazma esterazları ile yıkılması",
+        "Beyinden dokulara (kas ve yağ) hızlı redistribüsyonu",
+        "Böbreklerden değişmeden atılması",
+        "Proteinlere çok zayıf bağlanması"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Fentanil lipofiliktir; beyne hızla girer (etki başlar) ancak daha sonra daha az kanlanan dokulara (kas, yağ) doğru redistribüze olur (etki biter).",
+      "category": "Analjezik Ajanlar"
+    },
+    {
+      "id": 64,
+      "question": "Opioid overdose sonrası verilen Nalokson sonrası hasta düzeliyor ancak 30 dk sonra tekrar solunum depresyonu gelişiyor. En olası sebep?",
+      "options": [
+        "İlacın renal atılımı",
+        "Tolerans gelişimi",
+        "Naloksonun kısa yarı ömrü",
+        "Morfin antagonize edilemez",
+        "Rebound hipoksi"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Nalokson: Etki süresi: 30–90 dk Morfin gibi opioidler: daha uzun etkili Sonuç: Nalokson etkisi bitince opioid tekrar etkili olur → re-narkotizasyon",
+      "category": "Analjezik Ajanlar"
+    },
+    {
+      "id": 65,
+      "question": "Opioidlerin kardiyovasküler sistem üzerine etkileri ile ilgili verilen bilgilerden hangileri doğrudur?\nI. Meperidin kalp hızını artırır.\nII. Morfin, fentanil, sufentanil, remifentanil ve alfentanilin yüksek dozları vagal bradikardi ile ilişkilidir.\nIII. Opioidle indüklenen bradikardi, venodilatasyon ve sempatik reflekslerin azalması nedeniyle arteriyel basınç sıklıkla düşer.\nIV. Meperidin, hidromorfon ve morfin bolus dozları histamin salınımıyla SVR ve arteriyel basınçta düşüşe neden olabilir.",
+      "options": [
+        "Yalnız I",
+        "I-II",
+        "I-III",
+        "II-IV",
+        "Hepsi"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Meperidin kalp hızını artırabilir; birçok opioid yüksek dozda vagal bradikardiye yol açabilir. Venodilatasyon, sempatik refleks azalması ve histamin salınımı kan basıncını düşürebilir.",
+      "category": "Analjezik Ajanlar"
+    },
+    {
+      "id": 66,
+      "question": "NSAİİ ile ilgili yanlış olan bilgi hangisidir?",
+      "options": [
+        "Aspirin COX-1’i irreversibl inhibe eder ve etkisi trombosit ömrü boyunca sürebilir.",
+        "NSAİİ’ler prostaglandin sentezinde anahtar basamak olan siklooksijenaz inhibisyonuyla etki eder.",
+        "COX’u seçici olmayan şekilde inhibe eden ajanlar ateş, inflamasyon ve ağrıyı azaltır.",
+        "COX-1 inhibisyonu trombozu azaltırken selektif COX-2 inhibisyonu MI, tromboz ve inme riskini artırabilir.",
+        "Tüm NSAİİ’ler inme veya miyokard infarktüsü riskini artırır."
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Aspirin düşük dozda antitrombotik etki gösterir; “tüm NSAİİ’ler” ifadesi genelleyici ve hatalıdır.",
+      "category": "Analjezik Ajanlar"
+    },
+    {
+      "id": 67,
+      "question": "28 yaşında erkek hasta, bilinç bulanıklığı ve solunum depresyonu ile acile getiriliyor. Pupilleri pinpoint. Nalokson verilince hızla düzeliyor. 45 dakika sonra tekrar solunumu yavaşlıyor. En uygun yaklaşım nedir?",
+      "options": [
+        "Taburcu etmek",
+        "Naltrekson başlamak",
+        "Nalokson infüzyonu başlamak",
+        "Metilnaltrekson vermek",
+        "Antibiyotik başlamak"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Nalokson kısa etkili → opioid daha uzun → tekrar depresyon → infüzyon gerekir",
+      "category": "Analjezik Ajanlar"
+    },
+    {
+      "id": 68,
+      "question": "Opioidlere bağlı çekilme semptomları nelerdir?\nI. Anksiyete\nII. Salivasyon\nIII. Esneme\nIV. Dilate pupiller\nV. Titreme\nVI. Diyare",
+      "options": [
+        "Hepsi",
+        "I-II-IV-V",
+        "I-II-III",
+        "I-III-V",
+        "II-IV"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Opioid yoksunluğunda anksiyete, salivasyon, esneme, midriyazis, tremor ve diyare görülebilir.",
+      "category": "Analjezik Ajanlar"
+    },
+    {
+      "id": 69,
+      "question": "Seçici COX-2 inhibitörlerinin (Celecoxib gibi) en önemli kardiyovasküler riski aşağıdakilerden hangisidir?",
+      "options": [
+        "Trombosit agregasyonunu artırarak tromboz riskini (Mİ, inme) yükseltmesi",
+        "Ciddi bradikardi yapması",
+        "Hipotansiyon tetiklemesi",
+        "Hiperkalemi üzerinden aritmi yapması",
+        "Periferik ödem yapmaması"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "COX-2 inhibitörleri, damar duvarındaki vazodilatör ve anti-agregan olan PGI2 (Prostasiklin) sentezini baskılarken, trombositlerdeki COX-1 kaynaklı Tromboksan A2'yi etkilemez. Bu denge tromboz lehine bozulur.",
+      "category": "Analjezik Ajanlar"
+    },
+    {
+      "id": 70,
+      "question": "Nalokson uygulanan hastada hangi yan etki beklenmez?",
+      "options": [
+        "Taşikardi",
+        "Kardiyak arrest",
+        "Pulmoner ödem",
+        "Çekilme sendromu",
+        "Hipotansiyon"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Nalokson sonrası sempatik rebound ile taşikardi, hipertansiyon, pulmoner ödem ve yoksunluk görülebilir; hipotansiyon beklenen tipik yan etki değildir.",
+      "category": "Analjezik Ajanlar"
+    },
+    {
+      "id": 71,
+      "question": "Aşağıdaki NSAİİ'lerden hangisi \"irreversibl\" COX inhibisyonu yaparak anti-agregan etkisini trombosit ömrü boyunca (7-10 gün) sürdürür?",
+      "options": [
+        "İbuprofen",
+        "Naproksen",
+        "Asetilsalisilik asit (Aspirin)",
+        "Diklofenak",
+        "İndometasin"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Aspirin, COX enzimini asetilleyerek irreversibl (geri dönüşümsüz) inhibe eden tek yaygın NSAİİ'dir. Diğerleri reversibl bağlanır.",
+      "category": "Analjezik Ajanlar"
+    },
+    {
+      "id": 72,
+      "question": "Nöropatik ağrısı olan bir hastada voltaj bağımlı kalsiyum kanallarının alfa-2-delta alt birimine bağlanarak glutamat salınımını azaltan ilaç aşağıdakilerden hangisidir?",
+      "options": [
+        "Amitriptilin",
+        "Karbamazepin",
+        "Pregabalin",
+        "Lidokain",
+        "Duloksetin"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Gabapentin ve Pregabalin, kalsiyum kanallarının alpha_2\\delta alt birimine bağlanarak kalsiyum girişini ve dolayısıyla ağrılı nörotransmitter salınımını baskılar.",
+      "category": "Analjezik Ajanlar"
+    },
+    {
+      "id": 73,
+      "question": "Karaciğer yetmezliği olan bir hastada farmakokinetik profili en güvenli olan ve metabolizması organ fonksiyonlarından bağımsız gerçekleşen opioid aşağıdakilerden hangisidir?",
+      "options": [
+        "Alfentanil",
+        "Sufentanil",
+        "Remifentanil",
+        "Fentanil",
+        "Meperidin"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Remifentanil, plazma ve doku non-spesifik esterazları tarafından hidroliz edilir. Bu nedenle karaciğer veya böbrek yetmezliği olan hastalarda eliminasyonu değişmez, organ bağımsız bir profile sahiptir.",
+      "category": "Analjezik Ajanlar"
+    }
+  ]
+}

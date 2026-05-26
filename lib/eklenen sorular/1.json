@@ -1,0 +1,897 @@
+{
+  "meta": {
+    "title": "Anestezi Soru Bankası - Birleştirilmiş ve Karıştırılmış",
+    "language": "tr",
+    "totalQuestions": 44,
+    "shuffleSeed": 20260524,
+    "schemaVersion": "1.0",
+    "note": "Bu dosya yalnızca yüklenen DOCX dosyalarındaki sorulardan oluşturulmuştur. Kullanıcı mesajındaki asit-baz örnek sorusu format örneği kabul edilerek çıkarılmıştır. Soru sırası random karıştırılmıştır; seçenek sıraları ve doğru cevap indeksleri korunmuştur.",
+    "sourceFiles": [
+      "1.docx",
+      "1.ANESTEZİ UYGULAMASI.docx",
+      "user_message_acid_base_example"
+    ]
+  },
+  "questions": [
+    {
+      "id": 1,
+      "sourceUid": "1docx_31",
+      "question": "1920’lerde \"Anesthesia & Analgesia\" dergisini kurarak anesteziyi müstakil bir bilim dalı haline getiren ve \"International Anesthesia Research Society\"nin (IARS) kurucusu olan isim kimdir?",
+      "options": [
+        "Francis McMechan",
+        "John Lundy",
+        "Ralph Waters",
+        "Arthur Guedel",
+        "William Morton"
+      ],
+      "correctAnswerIndex": 0,
+      "correctAnswerLetter": "A",
+      "difficulty": 3,
+      "explanation": "McMechan, anestezinin profesyonelleşmesindeki en büyük organizatördür.",
+      "category": "Anestezi Tarihi ve Uygulama Prensipleri",
+      "source": "1.docx",
+      "originalQuestionNumber": "8",
+      "correctAnswerText": "Francis McMechan"
+    },
+    {
+      "id": 2,
+      "sourceUid": "anestezi_uygulamasi_01",
+      "question": "Anestezi tarihi ile ilgili verilen bilgilerden hangileri doğrudur?\nI. 1846'da Oliver Wendell Holmes anestezi terimini ilk kullanan kişidir.\nII. 1846'da William T.G. Morton cerrahi operasyon için genel anestezinin halka açık ilk tanıtımını eter kullanarak gerçekleştirmiştir.\nIII. Carl Koller (oftalmoloji) 1884'te ilk lokal anestezi uygulamasını topikal anestezi ile gerçekleştirmiştir.\nIV. Anestezi uzmanlığının babası olarak John Snow kabul edilir.\nV. Eteri ve genel anestezinin fizyolojisini bilimsel olarak araştıran ilk kişi John Snow’dur.",
+      "options": [
+        "Yalnız I",
+        "I-II-III",
+        "II-IV",
+        "I-II-V",
+        "I-II-III-IV-V"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Doğru cevap E seçeneğidir. Verilen önermelerin tamamı modern anestezi tarihinin temel taşlarını oluşturan akademik ve tarihsel gerçeklerdir.",
+      "category": "Anestezi Tarihi ve Uygulama Prensipleri",
+      "source": "1.ANESTEZİ UYGULAMASI.docx",
+      "originalQuestionNumber": "1",
+      "correctAnswerLetter": "E",
+      "correctAnswerText": "I-II-III-IV-V"
+    },
+    {
+      "id": 3,
+      "sourceUid": "1docx_26",
+      "question": "1950’lerde anestezi güvenliğini artırmak için geliştirilen ve ekspirasyon havasındaki CO2’i absorbe eden \"Soda-Lime\" düzeneğini modern kapalı devre anestezi cihazlarına entegre eden isim kimdir?",
+      "options": [
+        "Ralph Waters",
+        "John Snow",
+        "Edmund Andrews",
+        "Arthur Guedel",
+        "Joseph Clover"
+      ],
+      "correctAnswerIndex": 0,
+      "correctAnswerLetter": "A",
+      "difficulty": 3,
+      "explanation": "Ralph Waters, \"To-and-fro\" (git-gel) emilim sistemini ve soda-lime kullanımını standardize etmiştir.",
+      "category": "Anestezi Tarihi ve Uygulama Prensipleri",
+      "source": "1.docx",
+      "originalQuestionNumber": "2",
+      "correctAnswerText": "Ralph Waters"
+    },
+    {
+      "id": 4,
+      "sourceUid": "1docx_24",
+      "question": "Nöromüsküler iletimin izlenmesinde (TOF - Train of Four), dört ardışık uyarı sonrası oluşan yanıtların birbirine oranının (TOF Ratio) klinik değerlendirmeye girmesi hangi araştırmacıya atfedilir?",
+      "options": [
+        "Ali ve arkadaşları (1971)",
+        "Griffith ve arkadaşları (1942)",
+        "Bovet ve arkadaşları (1949)",
+        "Miller ve arkadaşları (1980)",
+        "Churchill-Davidson (1955)"
+      ],
+      "correctAnswerIndex": 0,
+      "correctAnswerLetter": "A",
+      "difficulty": 3,
+      "explanation": "TOF monitörizasyonu, 1971 yılında Ali ve ark. tarafından tanımlanmış ve anestezi pratiğinde standart hale gelmiştir.",
+      "category": "Anestezi Tarihi ve Uygulama Prensipleri",
+      "source": "1.docx",
+      "originalQuestionNumber": "25",
+      "correctAnswerText": "Ali ve arkadaşları (1971)"
+    },
+    {
+      "id": 5,
+      "sourceUid": "anestezi_uygulamasi_03",
+      "question": "Anestezi tarihi ile ilgili verilen bilgilerden hangileri doğrudur?\nI. Gardner Colton ve Horace Wells, nitröz oksidi ilk kez 1844’te insanlarda diş çekimi için anestezik olarak kullanmış olmakla tanınırlar.\nII. Eterin güvenliğine ve popülaritesine rakip olan tek inhalasyon ajanı siklopropandı (1934’te tanıtıldı).\nIII. Halotan 1951’de geliştirildi ve 1956’da piyasaya sürüldü.\nIV. Kokain, 1855 yılında Gaedicke tarafından koka yapraklarından izole edildi ve 1860 yılında Albert Niemann tarafından saflaştırıldı.\nV. Anestezi için orijinal kokain uygulaması, 1884’te gözün topikal anestezisini gösteren Carl Koller’a atfedilir.",
+      "options": [
+        "Yalnız III",
+        "III-V",
+        "I-II-IV",
+        "IV-V",
+        "I-II-III-IV-V"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Doğru cevap E seçeneğidir. Verilen önermelerin tamamı modern anestezi tarihinin temel taşlarını oluşturan akademik ve tarihsel gerçeklerdir.",
+      "category": "Anestezi Tarihi ve Uygulama Prensipleri",
+      "source": "1.ANESTEZİ UYGULAMASI.docx",
+      "originalQuestionNumber": "3",
+      "correctAnswerLetter": "E",
+      "correctAnswerText": "I-II-III-IV-V"
+    },
+    {
+      "id": 6,
+      "sourceUid": "1docx_02",
+      "question": "19. yüzyılda kloroformun doğum analjezisinde kullanılması tıp ve din çevrelerinde büyük tartışmalara yol açmıştır. Kloroformu 1853 yılında Kraliçe Victoria’nın doğumunda bizzat uygulayarak bu ajanın tıbbi meşruiyet kazanmasını sağlayan \"ilk anestezi uzmanı\" kimdir?",
+      "options": [
+        "James Simpson",
+        "John Snow",
+        "Joseph Clover",
+        "Ivan Magill",
+        "Robert Macintosh"
+      ],
+      "correctAnswerIndex": 1,
+      "correctAnswerLetter": "B",
+      "difficulty": 3,
+      "explanation": "John Snow, Kraliçe Victoria'nın doğumlarında kloroform uygulayarak uzmanlaşmış ilk hekim ve anestezinin babası olarak kabul edilir.",
+      "category": "Anestezi Tarihi ve Uygulama Prensipleri",
+      "source": "1.docx",
+      "originalQuestionNumber": "2",
+      "correctAnswerText": "John Snow"
+    },
+    {
+      "id": 7,
+      "sourceUid": "1docx_03",
+      "question": "İnhalasyon anesteziklerinin derinliğini belirlemek için kullanılan \"Guedel Klasifikasyonu\", aşağıdaki ajanlardan hangisinin klinik gözlemlerine dayanarak oluşturulmuştur?",
+      "options": [
+        "Halotan",
+        "Kloroform",
+        "Sevofluran",
+        "Dietil eter",
+        "Nitröz oksit"
+      ],
+      "correctAnswerIndex": 3,
+      "correctAnswerLetter": "D",
+      "difficulty": 3,
+      "explanation": "Arthur Guedel, 1937'de anestezi derinliği evrelerini (Guedel Evreleri) dietil eter kullanan, spontan soluyan hastalar üzerindeki gözlemleriyle tanımlamıştır.",
+      "category": "Anestezi Tarihi ve Uygulama Prensipleri",
+      "source": "1.docx",
+      "originalQuestionNumber": "3",
+      "correctAnswerText": "Dietil eter"
+    },
+    {
+      "id": 8,
+      "sourceUid": "1docx_18",
+      "question": "Anestezi sırasında hastanın monitorizasyonunda devrim yaratan \"Puls Oksimetre\" cihazı, 1970'lerin başında kim tarafından icat edilmiştir?",
+      "options": [
+        "Takuo Aoyagi",
+        "John Severinghaus",
+        "Leland Clark",
+        "William Morton",
+        "John Snow"
+      ],
+      "correctAnswerIndex": 0,
+      "correctAnswerLetter": "A",
+      "difficulty": 3,
+      "explanation": "Japon mühendis Takuo Aoyagi, puls oksimetrenin mucidi olarak kabul edilir.",
+      "category": "Anestezi Tarihi ve Uygulama Prensipleri",
+      "source": "1.docx",
+      "originalQuestionNumber": "19",
+      "correctAnswerText": "Takuo Aoyagi"
+    },
+    {
+      "id": 9,
+      "sourceUid": "1docx_15",
+      "question": "Rejyonal anestezide kullanılan ilk ester yapılı sentetik lokal anestezik olan \"Prokain\" (Novocain), 1904 yılında kim tarafından sentezlenmiştir?",
+      "options": [
+        "Albert Niemann",
+        "Alfred Einhorn",
+        "Carl Koller",
+        "William Halsted",
+        "August Bier"
+      ],
+      "correctAnswerIndex": 1,
+      "correctAnswerLetter": "B",
+      "difficulty": 3,
+      "explanation": "Alfred Einhorn, kokainin toksisitesine karşı ilk güvenli sentetik alternatif olan prokaini sentezlemiştir.",
+      "category": "Anestezi Tarihi ve Uygulama Prensipleri",
+      "source": "1.docx",
+      "originalQuestionNumber": "16",
+      "correctAnswerText": "Alfred Einhorn"
+    },
+    {
+      "id": 10,
+      "sourceUid": "1docx_36",
+      "question": "1953 yılında Virginia Apgar tarafından geliştirilen APGAR skoru, başlangıçta hangi amaçla tasarlanmıştır?",
+      "options": [
+        "Yenidoğanın resüsitasyon ihtiyacını hızlıca belirlemek.",
+        "Anestezinin derinliğini ölçmek.",
+        "Ameliyat sonrası ağrıyı puanlamak.",
+        "Kas gevşemesini takip etmek.",
+        "Hipotermiyi önlemek."
+      ],
+      "correctAnswerIndex": 0,
+      "correctAnswerLetter": "A",
+      "difficulty": 3,
+      "explanation": "Bir anestezist olan Virginia Apgar, bu skoru yenidoğan sağlığını standartlaştırmak için kurmuştur.",
+      "category": "Anestezi Tarihi ve Uygulama Prensipleri",
+      "source": "1.docx",
+      "originalQuestionNumber": "18",
+      "correctAnswerText": "Yenidoğanın resüsitasyon ihtiyacını hızlıca belirlemek."
+    },
+    {
+      "id": 11,
+      "sourceUid": "anestezi_uygulamasi_06",
+      "question": "Anestezi tarihi ile ilgili verilen bilgilerden hangileri doğrudur?\nI. Ketamin, 1962’de Stevens tarafından sentezlendi ve ilk olarak 1965’te Corssen ve Domino tarafından klinik olarak kullanıldı.\nII. Etomidat 1964’te sentezlendi.\nIII. Propofol 1986’da, Amerika Birleşik Devletleri’nde ise 1989’da piyasaya sürüldü.\nIV. Kürar 1942’de Harold Griffith ve Enid Johnson tarafından tanıtıldı.\nV. Süksinilkolin, 1949’da Bovet tarafından sentezlendi ve 1951’de piyasaya sürüldü.",
+      "options": [
+        "Hepsi",
+        "II-IV",
+        "I-III-V",
+        "I-IV",
+        "III-IV"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Doğru cevap A seçeneğidir. Verilen önermelerin tamamı modern anestezi tarihinin temel taşlarını oluşturan akademik ve tarihsel gerçeklerdir.",
+      "category": "Anestezi Tarihi ve Uygulama Prensipleri",
+      "source": "1.ANESTEZİ UYGULAMASI.docx",
+      "originalQuestionNumber": "6",
+      "correctAnswerLetter": "A",
+      "correctAnswerText": "Hepsi"
+    },
+    {
+      "id": 12,
+      "sourceUid": "1docx_20",
+      "question": "Tarihsel gelişimde, spinal anestezi sonrası gelişen \"post-dural ponksiyon baş ağrısını\" (PDPH) azaltmak için 1951'de atravmatik \"kurşun kalem uçlu\" (pencil-point) iğneyi geliştiren araştırmacı kimdir?",
+      "options": [
+        "Hart ve Whitacre",
+        "Quincke",
+        "Tuohy",
+        "August Bier",
+        "Fidel Pages"
+      ],
+      "correctAnswerIndex": 0,
+      "correctAnswerLetter": "A",
+      "difficulty": 3,
+      "explanation": "Whitacre (ve daha sonra Sprotte), dural lifleri kesmek yerine ayıran atravmatik iğnelerin öncüsüdür.",
+      "category": "Anestezi Tarihi ve Uygulama Prensipleri",
+      "source": "1.docx",
+      "originalQuestionNumber": "21",
+      "correctAnswerText": "Hart ve Whitacre"
+    },
+    {
+      "id": 13,
+      "sourceUid": "anestezi_uygulamasi_02",
+      "question": "Anestezi tarihi ile ilgili verilen bilgilerden hangileri doğrudur?\nI. Sülfürik eter ilk olarak 1540 yılında Valerius Cordus tarafından hazırlandı.\nII. 1846’da Boston’da William T.G. Morton, eter kullanarak cerrahi operasyon için genel anestezinin halka açık ilk tanıtımını gerçekleştirdi.\nIII. Kloroform ilk olarak 1847’de Holmes Coote tarafından kullanıldı.\nIV. Kloroform klinik pratiğe İskoç Sir James Simpson tarafından getirildi ve doğum ağrısını hafifletmek için kullanıldı.\nV. Joseph Priestley 1772’de nitröz oksit üretti.",
+      "options": [
+        "I-II-III",
+        "I-II-IV",
+        "III-IV-V",
+        "I-III-V",
+        "Hepsi"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Doğru cevap E seçeneğidir. Verilen önermelerin tamamı modern anestezi tarihinin temel taşlarını oluşturan akademik ve tarihsel gerçeklerdir.",
+      "category": "Anestezi Tarihi ve Uygulama Prensipleri",
+      "source": "1.ANESTEZİ UYGULAMASI.docx",
+      "originalQuestionNumber": "2",
+      "correctAnswerLetter": "E",
+      "correctAnswerText": "Hepsi"
+    },
+    {
+      "id": 14,
+      "sourceUid": "1docx_27",
+      "question": "\"Minimum Alveoler Konsantrasyon\" (MAK) kavramını 1963 yılında tanımlayarak inhalasyon anesteziklerinin potansini ölçmek için evrensel bir standart getiren araştırmacı kimdir?",
+      "options": [
+        "Edmond Eger",
+        "Charles Suckling",
+        "Michael Johnstone",
+        "John Lundy",
+        "Lucien Morris"
+      ],
+      "correctAnswerIndex": 0,
+      "correctAnswerLetter": "A",
+      "difficulty": 3,
+      "explanation": "MAK (MAC) kavramı Edmond I. Eger II tarafından literatüre kazandırılmıştır.",
+      "category": "Anestezi Tarihi ve Uygulama Prensipleri",
+      "source": "1.docx",
+      "originalQuestionNumber": "3",
+      "correctAnswerText": "Edmond Eger"
+    },
+    {
+      "id": 15,
+      "sourceUid": "1docx_12",
+      "question": "\"ASA Fiziksel Durum Sınıflaması\" (ASA PS), günümüzde her hastanın preoperatif değerlendirmesinde standarttır. Bu sınıflama sistemi ilk olarak hangi yıl Amerikan Anesteziyologlar Cemiyeti tarafından kabul edilmiştir?",
+      "options": [
+        "1846",
+        "1920",
+        "1941",
+        "1963",
+        "1985"
+      ],
+      "correctAnswerIndex": 2,
+      "correctAnswerLetter": "C",
+      "difficulty": 3,
+      "explanation": "ASA sınıflaması ilk kez 1941'de (Saklad ve arkadaşları tarafından önerilmiş) kabul edilmiştir.",
+      "category": "Anestezi Tarihi ve Uygulama Prensipleri",
+      "source": "1.docx",
+      "originalQuestionNumber": "13",
+      "correctAnswerText": "1941"
+    },
+    {
+      "id": 16,
+      "sourceUid": "1docx_37",
+      "question": "Tarihte \"İlk Anestezi Hemşiresi\" olarak kabul edilen ve 1877'de bu görevi profesyonelce yürüten isim kimdir?",
+      "options": [
+        "Alice Magaw",
+        "Florence Nightingale",
+        "Virginia Apgar",
+        "Mary Walker",
+        "Enid Johnson"
+      ],
+      "correctAnswerIndex": 0,
+      "correctAnswerLetter": "A",
+      "difficulty": 3,
+      "explanation": "Dr. William Mayo tarafından \"Anestezinin Anası\" olarak adlandırılmıştır.",
+      "category": "Anestezi Tarihi ve Uygulama Prensipleri",
+      "source": "1.docx",
+      "originalQuestionNumber": "19",
+      "correctAnswerText": "Alice Magaw"
+    },
+    {
+      "id": 17,
+      "sourceUid": "anestezi_uygulamasi_07",
+      "question": "Anestezi tarihi ile ilgili verilen bilgilerden hangileri yanlıştır?",
+      "options": [
+        "İlk olarak 1803-1805 yılları arasında Sertürner tarafından afyondan izole edilen morfin, damardan anestezik olarak da denendi.",
+        "Balans anestezi kavramı, 1926’da Lundy ve diğerleri tarafından tanıtıldı (tiyopental + N2O + opioid + kürar).",
+        "Eteri ve genel anestezi fizyolojisini bilimsel olarak araştıran ilk kişi Joseph O’Dwyer’dır.",
+        "1847’de Snow, genel anestezi üzerine ilk kitabı olan “Eter İnhalasyonu Üzerine”yi yayımladı.",
+        "Çene itme manevrasını ilk kullanan, resüsitasyon ekipmanının anestezi sırasında her zaman hazır olması konusunda ilk ısrar eden ve krikotiroid kanülü ilk kullanan kişi Dr. Joseph T. Clover’dır."
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Yanlış ifade C seçeneğidir. Eter ve genel anestezi fizyolojisini bilimsel olarak araştıran ilk kişi Joseph O’Dwyer değil, John Snow’dur.",
+      "category": "Anestezi Tarihi ve Uygulama Prensipleri",
+      "source": "1.ANESTEZİ UYGULAMASI.docx",
+      "originalQuestionNumber": "7",
+      "correctAnswerLetter": "C",
+      "correctAnswerText": "Eteri ve genel anestezi fizyolojisini bilimsel olarak araştıran ilk kişi Joseph O’Dwyer’dır."
+    },
+    {
+      "id": 18,
+      "sourceUid": "1docx_21",
+      "question": "\"TCI\" (Target Controlled Infusion - Hedef Kontrollü İnfüzyon) teknolojisi, aşağıdaki intravenöz ajanlardan hangisinin farmakokinetik modelleriyle (Marsh veya Schnider modelleri) özdeşleşmiştir?",
+      "options": [
+        "Tiyopental",
+        "Propofol",
+        "Remifentanil",
+        "Etomidat",
+        "Ketamin"
+      ],
+      "correctAnswerIndex": 1,
+      "correctAnswerLetter": "B",
+      "difficulty": 3,
+      "explanation": "Propofol, TCI sistemlerinin en yaygın kullanıldığı ve farmakokinetik modellerinin en iyi tanımlandığı ajandır.",
+      "category": "Anestezi Tarihi ve Uygulama Prensipleri",
+      "source": "1.docx",
+      "originalQuestionNumber": "22",
+      "correctAnswerText": "Propofol"
+    },
+    {
+      "id": 19,
+      "sourceUid": "1docx_13",
+      "question": "1950'li yıllara kadar kullanılan yanıcı ve patlayıcı anestezi ajanlarının yerini alan, \"ilk non-inflamatuar halojenize sıvı\" olan Halotan'ı sentezleyen araştırmacı kimdir?",
+      "options": [
+        "Michael Johnstone",
+        "Charles Suckling",
+        "James Simpson",
+        "William Morton",
+        "Carl Koller"
+      ],
+      "correctAnswerIndex": 1,
+      "correctAnswerLetter": "B",
+      "difficulty": 3,
+      "explanation": "Halotan, 1951 yılında Charles Suckling tarafından sentezlenmiş ve 1956'da klinik kullanıma sunulmuştur.",
+      "category": "Anestezi Tarihi ve Uygulama Prensipleri",
+      "source": "1.docx",
+      "originalQuestionNumber": "14",
+      "correctAnswerText": "Charles Suckling"
+    },
+    {
+      "id": 20,
+      "sourceUid": "1docx_25",
+      "question": "Guedel’in klasik anestezi derinliği evrelemesi, modern inhalasyon anestezikleri (sevofluran, desfluran) ile uygulandığında hangi temel fark nedeniyle tam olarak takip edilemez?",
+      "options": [
+        "Modern ajanların çözünürlüğünün düşük olması sonucu evreler arası geçişin çok hızlı olması.",
+        "Modern ajanların analjezik etkisinin etere göre daha güçlü olması.",
+        "Yeni ajanların kas gevşetici etkisinin bulunmaması.",
+        "Maske indüksiyonunun artık tercih edilmemesi.",
+        "Modern ajanların solunum depresyonu yapmaması."
+      ],
+      "correctAnswerIndex": 0,
+      "correctAnswerLetter": "A",
+      "difficulty": 3,
+      "explanation": "Dietil eter kanda çok çözündüğü için evreler yavaş geçerdi; modern ajanlarda ise indüksiyon ve uyanma hızı nedeniyle bu evreleri klinik olarak tek tek izlemek zordur.",
+      "category": "Anestezi Tarihi ve Uygulama Prensipleri",
+      "source": "1.docx",
+      "originalQuestionNumber": "1",
+      "correctAnswerText": "Modern ajanların çözünürlüğünün düşük olması sonucu evreler arası geçişin çok hızlı olması."
+    },
+    {
+      "id": 21,
+      "sourceUid": "1docx_32",
+      "question": "Spinal anestezi sonrası baş ağrısını önlemek için tasarlanan \"Sprotte\" ve \"Whitacre\" iğnelerinin ortak özelliği nedir?",
+      "options": [
+        "Uçlarının keskin değil, künt (pencil-point) olması.",
+        "İğne çaplarının çok kalın olması.",
+        "Yan deliklerinin bulunmaması.",
+        "Sadece epidural alanda kullanılabilmeleri.",
+        "Tek kullanımlık olmamaları."
+      ],
+      "correctAnswerIndex": 0,
+      "correctAnswerLetter": "A",
+      "difficulty": 3,
+      "explanation": "Bu iğneler dural lifleri kesmez, aralayarak geçer (atravmatik).",
+      "category": "Anestezi Tarihi ve Uygulama Prensipleri",
+      "source": "1.docx",
+      "originalQuestionNumber": "9",
+      "correctAnswerText": "Uçlarının keskin değil, künt (pencil-point) olması."
+    },
+    {
+      "id": 22,
+      "sourceUid": "1docx_33",
+      "question": "Anestezide kullanılan ilk non-depolarizan kas gevşetici olan d-tübokürarin’in (Kürar) antidotu olarak \"Neostigmin\"in kullanımını ilk kez öneren kimdir?",
+      "options": [
+        "Mary Walker",
+        "Harold Griffith",
+        "Enid Johnson",
+        "John Lundy",
+        "Robert Macintosh"
+      ],
+      "correctAnswerIndex": 0,
+      "correctAnswerLetter": "A",
+      "difficulty": 3,
+      "explanation": "Mary Walker, kürar zehirlenmesi ve Myastenia Gravis tedavisinde neostigminin etkisini ilk gösterenlerdendir.",
+      "category": "Anestezi Tarihi ve Uygulama Prensipleri",
+      "source": "1.docx",
+      "originalQuestionNumber": "11",
+      "correctAnswerText": "Mary Walker"
+    },
+    {
+      "id": 23,
+      "sourceUid": "1docx_09",
+      "question": "İntravenöz anestezinin temel taşlarından biri olan Tiyopental, 1934 yılında klinik kullanıma girmiştir. Bu ajanı klinik pratiğe ilk kez sokan araştırmacılar aşağıdakilerden hangisidir?",
+      "options": [
+        "Stevens ve Domino",
+        "Lundy ve Waters",
+        "Fischer ve Mering",
+        "Griffith ve Johnson",
+        "Wood ve Niemann"
+      ],
+      "correctAnswerIndex": 1,
+      "correctAnswerLetter": "B",
+      "difficulty": 3,
+      "explanation": "Tiyopental, 1934 yılında John Lundy ve Ralph Waters tarafından klinik uygulamaya dahil edilmiştir.",
+      "category": "Anestezi Tarihi ve Uygulama Prensipleri",
+      "source": "1.docx",
+      "originalQuestionNumber": "9",
+      "correctAnswerText": "Lundy ve Waters"
+    },
+    {
+      "id": 24,
+      "sourceUid": "1docx_01",
+      "question": "Modern anestezi pratiğinde \"Balans Anestezi\" kavramı, yan etkileri minimize etmek için farklı ajanların kombinasyonunu ifade eder. Bu kavramın tarihsel süreçte temelini oluşturan, 1926 yılında bu terimi ilk kez ortaya atan kişi kimdir?",
+      "options": [
+        "John Snow",
+        "Ralph Waters",
+        "John Lundy",
+        "Arthur Guedel",
+        "Francis McMechan"
+      ],
+      "correctAnswerIndex": 2,
+      "correctAnswerLetter": "C",
+      "difficulty": 3,
+      "explanation": "Balans anestezi (tiyopental, azot protoksit, opioid ve kürar kombinasyonu) kavramı 1926'da John Lundy tarafından tanıtılmıştır.",
+      "category": "Anestezi Tarihi ve Uygulama Prensipleri",
+      "source": "1.docx",
+      "originalQuestionNumber": "1",
+      "correctAnswerText": "John Lundy"
+    },
+    {
+      "id": 25,
+      "sourceUid": "1docx_07",
+      "question": "Modern havayolu yönetiminde en sık kullanılan \"curved\" (eğri) laringoskop bleydini 1943 yılında dizayn eden araştırmacı aşağıdakilerden hangisidir?",
+      "options": [
+        "Robert Macintosh",
+        "Ivan Magill",
+        "Richard Miller",
+        "James Simpson",
+        "Henry Bennett"
+      ],
+      "correctAnswerIndex": 0,
+      "correctAnswerLetter": "A",
+      "difficulty": 3,
+      "explanation": "Sir Robert Macintosh, vallekulaya yerleştirilen eğri bleyti dizayn ederek entübasyon pratiğini modernize etmiştir.",
+      "category": "Anestezi Tarihi ve Uygulama Prensipleri",
+      "source": "1.docx",
+      "originalQuestionNumber": "7",
+      "correctAnswerText": "Robert Macintosh"
+    },
+    {
+      "id": 26,
+      "sourceUid": "1docx_29",
+      "question": "1947 yılında \"direkt invaziv arteriyel basınç monitörizasyonu\" tekniğini klinik bir çalışmada ilk kez bildiren ve modern invaziv takibin temelini atan isimler kimlerdir?",
+      "options": [
+        "Lambert ve Wood",
+        "John Lundy ve Ralph Waters",
+        "Griffith ve Johnson",
+        "Cushing ve Snow",
+        "Macintosh ve Magill"
+      ],
+      "correctAnswerIndex": 0,
+      "correctAnswerLetter": "A",
+      "difficulty": 3,
+      "explanation": "İnvaziv arter takibinin klinik raporlanması Lambert ve Wood'a aittir.",
+      "category": "Anestezi Tarihi ve Uygulama Prensipleri",
+      "source": "1.docx",
+      "originalQuestionNumber": "5",
+      "correctAnswerText": "Lambert ve Wood"
+    },
+    {
+      "id": 27,
+      "sourceUid": "1docx_23",
+      "question": "Anestezi kayıtlarında \"ilk sistematik grafik veri tutma\" yöntemini öneren ve anestezi uzmanlarının sadece ilaç veren değil, fizyolojiyi yöneten hekimler olması gerektiğini savunan kişi kimdir?",
+      "options": [
+        "Harvey Cushing",
+        "John Snow",
+        "William Morton",
+        "Alexander Wood",
+        "John Lundy"
+      ],
+      "correctAnswerIndex": 0,
+      "correctAnswerLetter": "A",
+      "difficulty": 3,
+      "explanation": "Beyin cerrahı Harvey Cushing, anestezi sırasında kan basıncı ve nabzın grafiksel olarak kaydedilmesi gerektiğini savunarak monitörizasyon standartlarını yükseltmiştir.",
+      "category": "Anestezi Tarihi ve Uygulama Prensipleri",
+      "source": "1.docx",
+      "originalQuestionNumber": "24",
+      "correctAnswerText": "Harvey Cushing"
+    },
+    {
+      "id": 28,
+      "sourceUid": "anestezi_uygulamasi_04",
+      "question": "Anestezi tarihi ile ilgili verilen bilgilerden hangileri doğrudur?\nI. 1884’te William Halsted, intradermal infiltrasyon ve sinir blokları için kokain kullandı.\nII. August Bier, 1898’de ilk spinal anesteziyi uyguladı.\nIII. August Bier 1908’de intravenöz bölgesel anesteziyi (Bier bloğu) tanımlayan ilk kişiydi.\nIV. Prokain 1904 yılında Alfred Einhorn tarafından sentezlendi.\nV. Heinrich Braun lokal anesteziklerin süresini uzatmak için epinefrin ekleyen ilk kişidir.",
+      "options": [
+        "I-IV-V",
+        "III-IV",
+        "II-V",
+        "I-III-V",
+        "Hepsi"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Doğru cevap E seçeneğidir. Verilen önermelerin tamamı modern anestezi tarihinin temel taşlarını oluşturan akademik ve tarihsel gerçeklerdir.",
+      "category": "Anestezi Tarihi ve Uygulama Prensipleri",
+      "source": "1.ANESTEZİ UYGULAMASI.docx",
+      "originalQuestionNumber": "4",
+      "correctAnswerLetter": "E",
+      "correctAnswerText": "Hepsi"
+    },
+    {
+      "id": 29,
+      "sourceUid": "1docx_05",
+      "question": "1942 yılında klinik pratiğe giren ve anestezi tarihinde \"kas gevşetici devrimi\" olarak adlandırılan d-tübokürarin (kürar), hangi iki araştırmacı tarafından ilk kez bir cerrahi vakada kullanılmıştır?",
+      "options": [
+        "Bovet ve Long",
+        "Lundy ve Waters",
+        "Griffith ve Johnson",
+        "Einhorn ve Braun",
+        "Fischer ve von Mering"
+      ],
+      "correctAnswerIndex": 2,
+      "correctAnswerLetter": "C",
+      "difficulty": 3,
+      "explanation": "Harold Griffith ve Enid Johnson, 1942'de kürarı anestezi pratiğine sokarak büyük cerrahilerin daha düşük anestezi derinliğinde yapılmasını sağlamışlardır.",
+      "category": "Anestezi Tarihi ve Uygulama Prensipleri",
+      "source": "1.docx",
+      "originalQuestionNumber": "5",
+      "correctAnswerText": "Griffith ve Johnson"
+    },
+    {
+      "id": 30,
+      "sourceUid": "1docx_04",
+      "question": "Tarihsel süreçte endotrakeal entübasyonun gelişiminde, I. Dünya Savaşı sırasında yüz ve çene yaralanmaları olan askerlerde \"kör nazotrakeal entübasyon\" tekniğini geliştiren öncü isim aşağıdakilerden hangisidir?",
+      "options": [
+        "Robert Macintosh",
+        "Ivan Magill",
+        "Joseph O'Dwyer",
+        "Chevalier Jackson",
+        "Ralph Waters"
+      ],
+      "correctAnswerIndex": 1,
+      "correctAnswerLetter": "B",
+      "difficulty": 3,
+      "explanation": "Sir Ivan Magill, anestezi güvenliğini artıran nazotrakeal entübasyon tekniklerini ve Magill forsepsini geliştiren en önemli öncülerdendir.",
+      "category": "Anestezi Tarihi ve Uygulama Prensipleri",
+      "source": "1.docx",
+      "originalQuestionNumber": "4",
+      "correctAnswerText": "Ivan Magill"
+    },
+    {
+      "id": 31,
+      "sourceUid": "1docx_30",
+      "question": "İlk sentetik opioid olan ve 1939 yılında sentezlenerek anestezi pratiğinde opioidlerin kullanımını yaygınlaştıran ajan hangisidir?",
+      "options": [
+        "Meperidin (Pektidin)",
+        "Fentanil",
+        "Morfin",
+        "Remifentanil",
+        "Sufentanil"
+      ],
+      "correctAnswerIndex": 0,
+      "correctAnswerLetter": "A",
+      "difficulty": 3,
+      "explanation": "Meperidin, morfinden sonra sentezlenen ilk sentetik opioiddir.",
+      "category": "Anestezi Tarihi ve Uygulama Prensipleri",
+      "source": "1.docx",
+      "originalQuestionNumber": "6",
+      "correctAnswerText": "Meperidin (Pektidin)"
+    },
+    {
+      "id": 32,
+      "sourceUid": "anestezi_uygulamasi_05",
+      "question": "Anestezi tarihi ile ilgili verilen bilgilerden hangileri doğrudur?\nI. Ferdinand Cathelin ve Jean Sicard 1901’de kaudal epidural anesteziyi tanıttılar.\nII. Lomber epidural anestezi ilk olarak 1921’de Fidel Pages tarafından tanıtıldı.\nIII. Barbitüratlar ilk olarak 1903’te Fischer ve von Mering tarafından sentezlendi.\nIV. Anestezi indüksiyonu için kullanılan ilk barbitürat dietilbarbitürik asittir (barbital).\nV. Tiyopental, klinik olarak ilk kez 1934’te John Lundy ve Ralph Waters tarafından kullanıldı.",
+      "options": [
+        "Yalnız IV",
+        "I-IV",
+        "II-V",
+        "I-III-V",
+        "I-II-III-IV-V"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Doğru cevap E seçeneğidir. Verilen önermelerin tamamı modern anestezi tarihinin temel taşlarını oluşturan akademik ve tarihsel gerçeklerdir.",
+      "category": "Anestezi Tarihi ve Uygulama Prensipleri",
+      "source": "1.ANESTEZİ UYGULAMASI.docx",
+      "originalQuestionNumber": "5",
+      "correctAnswerLetter": "E",
+      "correctAnswerText": "I-II-III-IV-V"
+    },
+    {
+      "id": 33,
+      "sourceUid": "1docx_34",
+      "question": "1964 yılında sentezlenen ve özellikle kardiyovasküler stabilite sağlaması nedeniyle riskli hastalarda tercih edilen intravenöz ajan hangisidir?",
+      "options": [
+        "Etomidat",
+        "Propofol",
+        "Tiyopental",
+        "Ketamin",
+        "Midazolam"
+      ],
+      "correctAnswerIndex": 0,
+      "correctAnswerLetter": "A",
+      "difficulty": 3,
+      "explanation": "Etomidat, sempatik aktiviteyi en az etkileyen ajandır.",
+      "category": "Anestezi Tarihi ve Uygulama Prensipleri",
+      "source": "1.docx",
+      "originalQuestionNumber": "12",
+      "correctAnswerText": "Etomidat"
+    },
+    {
+      "id": 34,
+      "sourceUid": "1docx_19",
+      "question": "19. yüzyılda \"Nitröz Oksit\"in (Gülen Gaz) diş çekiminde kullanımı başarısızlıkla sonuçlanan ve bu başarısızlık nedeniyle intihar eden anestezi öncüsü kimdir?",
+      "options": [
+        "William Morton",
+        "Horace Wells",
+        "James Simpson",
+        "Gardner Colton",
+        "Carl Koller"
+      ],
+      "correctAnswerIndex": 1,
+      "correctAnswerLetter": "B",
+      "difficulty": 3,
+      "explanation": "Horace Wells, 1845'teki halka açık gösterisinin başarısız olması üzerine mesleki saygınlığını yitirmiş ve trajik bir son yaşamıştır.",
+      "category": "Anestezi Tarihi ve Uygulama Prensipleri",
+      "source": "1.docx",
+      "originalQuestionNumber": "20",
+      "correctAnswerText": "Horace Wells"
+    },
+    {
+      "id": 35,
+      "sourceUid": "1docx_28",
+      "question": "Tarihte bilinen ilk endotrakeal tüp kafını (cuff) aspirasyonu önlemek amacıyla dizayn eden kişi kimdir?",
+      "options": [
+        "Arthur Guedel",
+        "Ivan Magill",
+        "Robert Macintosh",
+        "Ralph Waters",
+        "Chevalier Jackson"
+      ],
+      "correctAnswerIndex": 0,
+      "correctAnswerLetter": "A",
+      "difficulty": 3,
+      "explanation": "Arthur Guedel, 1928'de havayolunu sızdırmaz hale getiren ilk kafı tanıtmıştır.",
+      "category": "Anestezi Tarihi ve Uygulama Prensipleri",
+      "source": "1.docx",
+      "originalQuestionNumber": "4",
+      "correctAnswerText": "Arthur Guedel"
+    },
+    {
+      "id": 36,
+      "sourceUid": "1docx_06",
+      "question": "Lokal anesteziklerin etkisini uzatmak ve sistemik toksisiteyi azaltmak amacıyla karışıma \"epinefrin\" eklenmesini ilk kez öneren hekim kimdir?",
+      "options": [
+        "Carl Koller",
+        "August Bier",
+        "Heinrich Braun",
+        "Alfred Einhorn",
+        "Fidel Pages"
+      ],
+      "correctAnswerIndex": 2,
+      "correctAnswerLetter": "C",
+      "difficulty": 3,
+      "explanation": "Heinrich Braun, 1903 yılında lokal anesteziklere adrenalin (epinefrin) ekleyerek \"kimyasal turnike\" kavramını geliştirmiştir.",
+      "category": "Anestezi Tarihi ve Uygulama Prensipleri",
+      "source": "1.docx",
+      "originalQuestionNumber": "6",
+      "correctAnswerText": "Heinrich Braun"
+    },
+    {
+      "id": 37,
+      "sourceUid": "1docx_08",
+      "question": "Rejyonal anestezinin gelişiminde, 1921 yılında ilk kez \"Lomber Epidural Anestezi\" tekniğini tanımlayan ancak çalışması uzun süre fark edilmeyen İspanyol askeri cerrah kimdir?",
+      "options": [
+        "Jean Sicard",
+        "Ferdinand Cathelin",
+        "Fidel Pages",
+        "Achille Dogliotti",
+        "August Bier"
+      ],
+      "correctAnswerIndex": 2,
+      "correctAnswerLetter": "C",
+      "difficulty": 3,
+      "explanation": "Fidel Pages, 1921'de lomber epidural tekniği tanımlamıştır. Daha sonra 1931'de Dogliotti bu tekniği tekrar popüler hale getirmiştir.",
+      "category": "Anestezi Tarihi ve Uygulama Prensipleri",
+      "source": "1.docx",
+      "originalQuestionNumber": "8",
+      "correctAnswerText": "Fidel Pages"
+    },
+    {
+      "id": 38,
+      "sourceUid": "1docx_11",
+      "question": "İlk kez 1855'te hipodermik iğne ve şırıngayı icat ederek ilaçların doku içine verilmesini sağlayan, böylece enjeksiyonel anestezinin önünü açan araştırmacı kimdir?",
+      "options": [
+        "Alexander Wood",
+        "Albert Niemann",
+        "Carl Koller",
+        "William Halsted",
+        "August Bier"
+      ],
+      "correctAnswerIndex": 0,
+      "correctAnswerLetter": "A",
+      "difficulty": 3,
+      "explanation": "Alexander Wood, modern şırınga ve iğnenin mucidi olarak kabul edilir.",
+      "category": "Anestezi Tarihi ve Uygulama Prensipleri",
+      "source": "1.docx",
+      "originalQuestionNumber": "12",
+      "correctAnswerText": "Alexander Wood"
+    },
+    {
+      "id": 39,
+      "sourceUid": "1docx_35",
+      "question": "1884'te kokainin sinir blokajı (brakial pleksus) için ilk kez kullanılmasını sağlayan \"cerrahinin babası\" kabul edilen isim kimdir?",
+      "options": [
+        "William Halsted",
+        "Carl Koller",
+        "August Bier",
+        "Alfred Einhorn",
+        "James Simpson"
+      ],
+      "correctAnswerIndex": 0,
+      "correctAnswerLetter": "A",
+      "difficulty": 3,
+      "explanation": "Halsted, kokaini sinir blokajlarında kullanarak rejyonal anestezinin cerrahi gelişimini başlatmıştır.",
+      "category": "Anestezi Tarihi ve Uygulama Prensipleri",
+      "source": "1.docx",
+      "originalQuestionNumber": "15",
+      "correctAnswerText": "William Halsted"
+    },
+    {
+      "id": 40,
+      "sourceUid": "1docx_22",
+      "question": "Modern anestezi makinelerinde kullanılan ve inhalasyon ajanının buharlaşmasını sıcaklıktan bağımsız olarak sabit tutan \"Variable Bypass Vaporizer\" düzeneğinin öncüsü olan \"Copper Kettle\", 1952'de kim tarafından icat edilmiştir?",
+      "options": [
+        "Lucien Morris",
+        "John Snow",
+        "Ralph Waters",
+        "Arthur Guedel",
+        "Joseph Clover"
+      ],
+      "correctAnswerIndex": 0,
+      "correctAnswerLetter": "A",
+      "difficulty": 3,
+      "explanation": "Lucien Morris tarafından geliştirilen Copper Kettle, modern vaporizatörlerin atasıdır.",
+      "category": "Anestezi Tarihi ve Uygulama Prensipleri",
+      "source": "1.docx",
+      "originalQuestionNumber": "23",
+      "correctAnswerText": "Lucien Morris"
+    },
+    {
+      "id": 41,
+      "sourceUid": "1docx_10",
+      "question": "Disosiyatif anestezi kavramını literatüre kazandıran, 1962'de sentezlenen Ketamin'in ilk klinik çalışmalarını yürüten araştırmacılar kimdir?",
+      "options": [
+        "Corssen ve Domino",
+        "Bovet ve Long",
+        "Einhorn ve Braun",
+        "Halsted ve Wood",
+        "Koller ve Niemann"
+      ],
+      "correctAnswerIndex": 0,
+      "correctAnswerLetter": "A",
+      "difficulty": 3,
+      "explanation": "Ketamin 1962'de Stevens tarafından sentezlenmiş, 1965'te Corssen ve Domino tarafından klinik kullanıma sunulmuştur.",
+      "category": "Anestezi Tarihi ve Uygulama Prensipleri",
+      "source": "1.docx",
+      "originalQuestionNumber": "10",
+      "correctAnswerText": "Corssen ve Domino"
+    },
+    {
+      "id": 42,
+      "sourceUid": "1docx_16",
+      "question": "\"Bier Bloğu\" olarak bilinen İntravenöz Rejyonal Anestezi (IVRA) tekniğinde, lokal anesteziğin vasküler yatağa hapsedilmesi için kullanılan çiftli turnike sistemini geliştiren August Bier, bu çalışmasını hangi yıl yayınlamıştır?",
+      "options": [
+        "1884",
+        "1898",
+        "1908",
+        "1921",
+        "1942"
+      ],
+      "correctAnswerIndex": 2,
+      "correctAnswerLetter": "C",
+      "difficulty": 3,
+      "explanation": "August Bier, IVRA tekniğini 1908 yılında tanımlamıştır.",
+      "category": "Anestezi Tarihi ve Uygulama Prensipleri",
+      "source": "1.docx",
+      "originalQuestionNumber": "17",
+      "correctAnswerText": "1908"
+    },
+    {
+      "id": 43,
+      "sourceUid": "1docx_17",
+      "question": "Aşağıdaki ajanlardan hangisi, klinik kullanıma giren ilk \"selektif gevşetici bağlayıcı ajan\" (selective relaxant binding agent) olarak anestezi tarihinde bir dönüm noktasıdır?",
+      "options": [
+        "Neostigmin",
+        "Sugammadeks",
+        "Edrofonyum",
+        "Piridostigmin",
+        "Atropin"
+      ],
+      "correctAnswerIndex": 1,
+      "correctAnswerLetter": "B",
+      "difficulty": 3,
+      "explanation": "Sugammadeks (2008), roküronyum ve veküronyum bloğunu hızla geri çeviren ilk selektif bağlayıcı ajandır.",
+      "category": "Anestezi Tarihi ve Uygulama Prensipleri",
+      "source": "1.docx",
+      "originalQuestionNumber": "18",
+      "correctAnswerText": "Sugammadeks"
+    },
+    {
+      "id": 44,
+      "sourceUid": "1docx_14",
+      "question": "Tarihteki ilk \"anestezi polikliniği\" veya preoperatif değerlendirme kliniği kavramını başlatan kişi kim kabul edilir?",
+      "options": [
+        "John Snow",
+        "Francis McMechan",
+        "John Lundy",
+        "Ralph Waters",
+        "Arthur Guedel"
+      ],
+      "correctAnswerIndex": 3,
+      "correctAnswerLetter": "D",
+      "difficulty": 3,
+      "explanation": "Ralph Waters, hastaların ameliyat öncesi değerlendirilmesi ve kayıt tutulması konusunda modern standartları belirleyen kişidir.",
+      "category": "Anestezi Tarihi ve Uygulama Prensipleri",
+      "source": "1.docx",
+      "originalQuestionNumber": "15",
+      "correctAnswerText": "Ralph Waters"
+    }
+  ]
+}

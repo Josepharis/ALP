@@ -31,16 +31,19 @@ class IntensiveCareProblemsData {
         categoryName: 'General Principles',
         items: [
           IntensiveCareProblemsItem(
-            title: 'ICU Patient Risk',
-            description: 'ICU patients carry a high risk of multisystem dysfunction',
+            title: 'MULTISYSTEM RISK IN THE CRITICAL PATIENT',
+            description: 'Intensive care patients typically present with high risks of multi-organ dysfunction rather than isolated single-system disease.',
+            additionalInfo: 'Vigilant and proactive care is required to prevent progressive organ failure.',
+          ),
+          PostanestheticCareItem(
+             title: "ANESTHESIOLOGIST'S ROLE IN CRITICAL CARE",
+             description: "Key responsibilities include mechanical ventilation, circulatory support, fluid balance, and the management of severe sepsis.",
+             additionalInfo: "The transition from the operating room to the ICU is a critical period managed by the anesthesia team.",
           ),
           IntensiveCareProblemsItem(
-            title: 'Anesthesiologist\'s Role',
-            description: 'Mechanical ventilation, circulatory support, fluid–electrolyte balance, nutrition, infection and complication management',
-          ),
-          IntensiveCareProblemsItem(
-            title: 'Essential Requirements',
-            description: 'Continuous monitoring and a multidisciplinary approach are essential',
+            title: 'REQUIREMENTS FOR SUCCESSFUL INTENSIVE CARE',
+            description: 'Success depends on continuous physiological monitoring and a collaborative, multidisciplinary clinical approach.',
+             additionalInfo: "Timely intervention based on monitoring trends is essential.",
           ),
         ],
       ),
@@ -48,19 +51,21 @@ class IntensiveCareProblemsData {
         categoryName: 'Respiratory System Problems',
         items: [
           IntensiveCareProblemsItem(
-            title: 'Hypoxemia',
-            description: 'Most common issue → atelectasis, ARDS, pneumonia, pulmonary embolism',
-            subtitle: 'Dx: ↓ SpO₂, PaO₂ <60 mmHg',
-            additionalInfo: 'Tx: ↑ FiO₂, PEEP, recruitment maneuvers',
+            title: 'HYPOXEMIA ETIOLOGY IN THE INTENSIVE CARE UNIT',
+            description: 'Commonly results from atelectasis, ARDS, pneumonia, or pulmonary embolism.',
+            subtitle: 'Diagnostic benchmarks: ↓ SpO₂ and PaO₂ <60 mmHg',
+            additionalInfo: 'Management includes incremental FiO₂ adjustments, PEEP optimization, and recruitment maneuvers.',
           ),
           IntensiveCareProblemsItem(
-            title: 'Hypercapnia',
-            description: 'Hypoventilation, obstruction, sedative/opioid effect',
+            title: 'HYPERCAPNIA AND HYPOVENTILATION MECHANISMS',
+            description: 'Often caused by residual sedative effects, opioid-induced respiratory depression, or upper airway obstruction.',
+            additionalInfo: 'Increasing minute ventilation is the primary treatment for CO2 retention.',
           ),
           IntensiveCareProblemsItem(
-            title: 'ARDS',
-            description: 'Dx: acute onset, bilateral infiltrates, PaO₂/FiO₂ ≤300, cardiac cause excluded',
-            subtitle: 'Tx: low tidal volume (6 mL/kg), plateau pressure <30 cmH₂O, optimal PEEP, prone if needed',
+            title: 'ACUTE RESPIRATORY DISTRESS SYNDROME (ARDS) CRITERIA',
+            description: 'Characterized by acute onset, bilateral infiltrates on imaging, and a PaO₂/FiO₂ ratio ≤300.',
+            subtitle: 'Lung-protective strategy: low tidal volume (6 mL/kg) and plateau pressure <30 cmH₂O',
+            additionalInfo: 'Prone positioning may be considered in cases of refractory hypoxemia.',
           ),
         ],
       ),
@@ -68,18 +73,21 @@ class IntensiveCareProblemsData {
         categoryName: 'Cardiovascular Problems',
         items: [
           IntensiveCareProblemsItem(
-            title: 'Hypotension',
-            description: 'Hypovolemia, sepsis, cardiogenic shock, drug effect',
-            subtitle: 'Tx: fluid resuscitation, vasopressor (norepinephrine first-line)',
+            title: 'HYPOTENSION AND SEPTIC SHOCK MANAGEMENT',
+            description: 'Typically driven by hypovolemia, severe sepsis, or cardiogenic failure, threatening organ perfusion.',
+            subtitle: 'Treatment: aggressive fluid resuscitation and norepinephrine as the first-line vasopressor',
+            additionalInfo: 'Mean arterial pressure (MAP) targets should generally be ≥65 mmHg.',
           ),
           IntensiveCareProblemsItem(
-            title: 'Hypertension',
-            description: 'Pain, anxiety, ↑ ICP',
+            title: 'ICU HYPERTENSION AND SYMPATHETIC OVERACTIVITY',
+            description: 'Often a secondary response to uncontrolled pain, severe anxiety, or increased intracranial pressure (ICP).',
+            additionalInfo: 'Treating the underlying cause is prioritized over non-specific antihypertensive use.',
           ),
           IntensiveCareProblemsItem(
-            title: 'Arrhythmias',
-            description: 'Electrolyte disorders, hypoxia, catecholamine therapy',
-            subtitle: 'Tx: correct cause, antiarrhythmics, cardioversion',
+            title: 'PERIOPERATIVE ARRHYTHMIAS IN CRITICAL CARE',
+            description: 'Linked to electrolyte disturbances, underlying hypoxia, or therapeutic catecholamine infusions.',
+            subtitle: 'Immediate management includes correcting the underlying metabolic or respiratory trigger',
+            additionalInfo: 'Magnesium and potassium levels should be kept in the high-normal range.',
           ),
         ],
       ),
@@ -87,16 +95,19 @@ class IntensiveCareProblemsData {
         categoryName: 'Neurological Problems',
         items: [
           IntensiveCareProblemsItem(
-            title: 'Delirium & Agitation',
-            description: 'Hypoxia, sepsis, withdrawal, electrolyte disorders',
+            title: 'DELIRIUM AND AGITATION IN THE INTENSIVE CARE UNIT',
+            description: 'Triggered by hypoxia, sepsis, drug withdrawal, or significant electrolyte abnormalities.',
+            additionalInfo: 'Delirium is associated with prolonged ICU stays and higher overall mortality.',
           ),
           IntensiveCareProblemsItem(
-            title: 'Coma/Delayed Awakening',
-            description: 'Residual anesthetics, metabolic encephalopathy, stroke, hypoglycemia',
+            title: 'FAILURE TO AWAKEN AND METABOLIC ENCEPHALOPATHY',
+            description: 'Causes include residual anesthetic effects, severe hypoglycemia, perioperative stroke, or uremia.',
+            additionalInfo: 'Clinical exclusion of pharmacological sedation is the first step in assessment.',
           ),
           IntensiveCareProblemsItem(
-            title: 'Monitoring',
-            description: 'GCS, pupillary reflexes, EEG, imaging',
+            title: 'NEUROLOGICAL MONITORING AND PUPILLARY REFLEXES',
+            description: 'Serial Glasgow Coma Scale (GCS) assessments, pupillary checks, and EEG are vital for detecting neurological decline.',
+            additionalInfo: 'New-onset focal deficits require immediate neuroimaging.',
           ),
         ],
       ),
@@ -104,14 +115,15 @@ class IntensiveCareProblemsData {
         categoryName: 'Renal Problems',
         items: [
           IntensiveCareProblemsItem(
-            title: 'AKI',
-            description: 'Hypoperfusion, sepsis, nephrotoxic drugs',
-            subtitle: 'Oliguria <0.5 mL/kg/h',
-            additionalInfo: 'Tx: fluid balance, avoid nephrotoxins, RRT (CRRT, HD) if needed',
+            title: 'ACUTE KIDNEY INJURY (AKI) AND OLIGURIA CRITERIA',
+            description: 'Often resulting from hypoperfusion, sepsis, or nephrotoxic drugs; diagnosed via creatinine rise or decreased urine output.',
+            subtitle: 'Oliguria is defined as urine output <0.5 mL/kg/h',
+            additionalInfo: 'Management targets include maintaining renal perfusion and starting RRT (e.g., CRRT) if needed.',
           ),
           IntensiveCareProblemsItem(
-            title: 'Electrolyte Disorders',
-            description: 'Hyperkalemia (most urgent), hyponatremia, hypocalcemia → arrhythmia risk',
+            title: 'LIFE-THREATENING ELECTROLYTE DISORDERS',
+            description: 'Hyperkalemia is the most urgent metabolic emergency; hyponatremia and hypocalcemia also impact cardiovascular stability.',
+            additionalInfo: 'Rapid shift of potassium (insulin/glucose) is a temporary life-saving measure.',
           ),
         ],
       ),
@@ -119,17 +131,20 @@ class IntensiveCareProblemsData {
         categoryName: 'Gastrointestinal & Nutrition',
         items: [
           IntensiveCareProblemsItem(
-            title: 'Stress Ulcer',
-            description: 'Prophylaxis with PPI or H₂ blocker',
+            title: 'STRESS ULCER PROPHYLAXIS IN THE ICU',
+            description: 'Standard practice involves proton pump inhibitors (PPIs) or H₂ blockers for high-risk patients.',
+            additionalInfo: 'Mechanical ventilation and coagulopathy are the two strongest risk factors for stress bleeding.',
           ),
           IntensiveCareProblemsItem(
-            title: 'Ileus',
-            description: 'Opioids, electrolyte imbalance, sepsis',
+            title: 'POSTOPERATIVE ILEUS AND MOTILITY DISORDERS',
+            description: 'Associated with excessive opioid use, electrolyte imbalances, and severe intra-abdominal sepsis.',
+            additionalInfo: 'Reducing opioid burden and early mobilization can accelerate bowel recovery.',
           ),
           IntensiveCareProblemsItem(
-            title: 'Feeding Strategy',
-            description: 'Preferred feeding: enteral (preserves gut integrity)',
-            subtitle: 'TPN: risk of sepsis, hyperglycemia',
+            title: 'ENTERAL NUTRITION AND MUCOSAL INTEGRITY',
+            description: 'The preferred route of nutritional delivery as it preserves intestinal architecture and reduces bacterial translocation.',
+            subtitle: 'TPN (Total Parenteral Nutrition) carries significantly higher risks of sepsis and hyperglycemia',
+            additionalInfo: 'Enteral feeding should be initiated within 24-48 hours if possible.',
           ),
         ],
       ),
@@ -137,17 +152,25 @@ class IntensiveCareProblemsData {
         categoryName: 'Infection & Sepsis',
         items: [
           IntensiveCareProblemsItem(
-            title: 'Leading Cause of Mortality',
-            description: 'Sepsis & septic shock',
+            title: 'LEADING CAUSE OF ICU MORTALITY: SEPSIS',
+            description: 'Sepsis and its progression to septic shock remain the most frequent causes of death in critical care settings.',
+            additionalInfo: 'Requires rapid identification via qSOFA or SOFA scoring systems.',
           ),
           IntensiveCareProblemsItem(
-            title: 'Diagnosis',
-            description: 'Fever/hypothermia, leukocytosis/leukopenia, tachycardia, hypotension, organ dysfunction',
+            title: 'DIAGNOSTIC CRITERIA FOR SEVERE SEPSIS',
+            description: 'Includes systemic temperature abnormalities, tachycardia, leukocytosis/leukopenia, and evidence of organ dysfunction.',
+            additionalInfo: 'Elevated serum lactate is a key biomarker for tissue hypoperfusion.',
           ),
           IntensiveCareProblemsItem(
-            title: 'Treatment',
-            description: 'Early broad-spectrum antibiotics, fluid resuscitation, norepinephrine, source control',
-            subtitle: 'Risk factors: catheters, intubation, surgical wounds',
+            title: 'EARLY MANAGEMENT OF SEPTIC SHOCK',
+            description: 'Focuses on early broad-spectrum antibiotics (within 1 hour), fluid resuscitation, and norepinephrine for MAP maintenance.',
+            subtitle: 'Surgical or radiological source control is mandatory for abscesses or necrotic tissue',
+            additionalInfo: 'Initial fluid bolus of 30 mL/kg crystalloid is recommended.',
+          ),
+          IntensiveCareProblemsItem(
+            title: 'ICU RISK FACTORS FOR SECONDARY INFECTION',
+            description: 'Linked to invasive central lines, indwelling catheters, endotracheal intubation, and surgical site contamination.',
+            additionalInfo: 'Infection bundles should be strictly followed to reduce VAP and CLABSI.',
           ),
         ],
       ),
@@ -155,13 +178,15 @@ class IntensiveCareProblemsData {
         categoryName: 'Hematological Problems',
         items: [
           IntensiveCareProblemsItem(
-            title: 'Thrombocytopenia',
-            description: 'Sepsis, drugs, DIC, HIT',
+            title: 'THROMBOCYTOPENIA IN CRITICAL ILLNESS',
+            description: 'Common causes include severe sepsis, drug side effects, and heparin-induced thrombocytopenia (HIT).',
+            additionalInfo: 'Profound drops in platelet counts increase the risk of spontaneous intracranial bleeding.',
           ),
           IntensiveCareProblemsItem(
-            title: 'DIC',
-            description: 'Sepsis, trauma, obstetric complications → consumption of coagulation factors & platelets',
-            subtitle: 'Tx: treat underlying cause, support with FFP/platelets',
+            title: 'DIC (DISSEMINATED INTRAVASCULAR COAGULATION)',
+            description: 'A systemic activation of coagulation leading to factor consumption and simultaneous bleeding and thrombosis.',
+            subtitle: 'Management focus: treating the underlying cause (sepsis/trauma) and supporting with FFP/Platelets',
+            additionalInfo: 'Schistocytes on a blood smear may support the diagnosis.',
           ),
         ],
       ),
@@ -169,17 +194,19 @@ class IntensiveCareProblemsData {
         categoryName: 'Metabolic & Endocrine Problems',
         items: [
           IntensiveCareProblemsItem(
-            title: 'Hyperglycemia',
-            description: 'Stress response, TPN, steroids → ↑ mortality',
-            subtitle: 'Tx: insulin infusion, target 140–180 mg/dL',
+            title: 'STRESS HYPERGLYCEAMIA AND INSULIN TARGETS',
+            description: 'Critical illness induces insulin resistance; maintaining blood glucose between 140–180 mg/dL is standard.',
+            additionalInfo: 'Tight glycemic control (<110 mg/dL) is no longer recommended due to high hypoglycemia risks.',
           ),
           IntensiveCareProblemsItem(
-            title: 'Hypoglycemia',
-            description: 'Insulin therapy, sepsis',
+            title: 'HYPOGLYCEMIA RISKS IN THE ICU',
+            description: 'Often caused by intensive insulin therapy or liver failure; sepsis can also paradoxically cause low sugars.',
+            additionalInfo: 'Requires immediate titration of glucose infusion.',
           ),
           IntensiveCareProblemsItem(
-            title: 'Endocrine Emergencies',
-            description: 'Thyroid storm, adrenal insufficiency may occur in critical illness → stress-dose steroids may be required',
+            title: 'CRITICAL ILLNESS ENDOCRINE EMERGENCIES',
+            description: 'Includes relative adrenal insufficiency and thyroid storm; stress-dose hydrocortisone may be used for shock.',
+            additionalInfo: 'Diagnosis of adrenal insufficiency in the ICU is often clinical based on vasopressor requirements.',
           ),
         ],
       ),
@@ -187,13 +214,15 @@ class IntensiveCareProblemsData {
         categoryName: 'Neuromuscular Problems',
         items: [
           IntensiveCareProblemsItem(
-            title: 'Prolonged Neuromuscular Block',
-            description: 'Residual drug, hypermagnesemia, acidosis',
+            title: 'PROLONGED NEUROMUSCULAR BLOCKADE',
+            description: 'Result of drug accumulation (especially in renal failure), hypermagnesemia, or severe acidosis.',
+            additionalInfo: 'Always assess with TOF monitoring if patients fail to initiate spontaneous breaths.',
           ),
           IntensiveCareProblemsItem(
-            title: 'Critical Illness Polyneuropathy/Myopathy',
-            description: 'Prolonged ICU stay, steroids, sepsis',
-            subtitle: 'Clinical: weakness, weaning difficulty',
+            title: 'CRITICAL ILLNESS POLYNEUROPATHY AND MYOPATHY',
+            description: 'Associated with prolonged ICU stay, high-dose steroids, and sepsis; presents as generalized weakness.',
+            subtitle: 'Major cause of ventilation weaning difficulty',
+            additionalInfo: 'Early rehabilitation and mobilization are the only effective preventive measures.',
           ),
         ],
       ),
@@ -201,20 +230,24 @@ class IntensiveCareProblemsData {
         categoryName: 'Special ICU Situations',
         items: [
           IntensiveCareProblemsItem(
-            title: 'Sepsis',
-            description: 'Early antibiotics, 30 mL/kg crystalloids, vasopressors',
+            title: 'SEPSIS BUNDLED CARE AND CRYSTALLOIDS',
+            description: 'Standardized approach involving lactate measurement, blood cultures, 30 mL/kg fluids, and early antibiotics.',
+            additionalInfo: 'Crystalloids are preferred over colloids for initial resuscitation.',
           ),
           IntensiveCareProblemsItem(
-            title: 'Acute Coronary Syndrome',
-            description: 'Aspirin, heparin, β-blockers, PCI if needed',
+            title: 'ACUTE CORONARY SYNDROME (ACS) IN THE ICU',
+            description: 'Requires aspirin, heparin, beta-blockers, and early cardiology consultation for potential PCI.',
+            additionalInfo: 'Troponin levels should be checked in all patients with unexplained tachycardia or chest pain.',
           ),
           IntensiveCareProblemsItem(
-            title: 'Pulmonary Embolism',
-            description: 'Anticoagulation, thrombolysis',
+            title: 'PULMONARY EMBOLISM (PE) AND THROMBOLYSIS',
+            description: 'A high-risk complication requiring anticoagulation; systemic thrombolysis is reserved for massive/unstable PE.',
+            additionalInfo: 'Suspect PE in cases of sudden, unexplained hypoxemia or right heart strain.',
           ),
           IntensiveCareProblemsItem(
-            title: 'Status Epilepticus',
-            description: 'Benzodiazepine, propofol, antiepileptic drugs',
+            title: 'MANAGEMENT OF STATUS EPILEPTICUS',
+            description: 'Initial control with benzodiazepines followed by propofol or thiopental for refractory cases.',
+            additionalInfo: 'Continuous EEG is required to rule out non-convulsive status.',
           ),
         ],
       ),
@@ -223,12 +256,21 @@ class IntensiveCareProblemsData {
         items: [
           IntensiveCareProblemsItem(
             title: 'SUMMARY SPOT QUESTIONS',
-            description: 'Leading ICU cause of death: sepsis/MOF',
-            subtitle: 'ARDS goal: tidal volume 6 mL/kg, plateau <30 cmH₂O',
-            additionalInfo: 'Septic shock first-line vasopressor: norepinephrine\nOliguria unresponsive to fluids in AKI → dialysis\nMost common complication of prolonged intubation: pneumonia',
+            description: 'Leading death cause: Sepsis/MOF. ARDS Target: 6 mL/kg tidal, <30 plateau. Shock drug: Norepinephrine.',
+            additionalInfo: 'AKI: dialysis if oliguria persists despite fluids. Long intubation #1 risk: Pneumonia (VAP).',
           ),
         ],
       ),
     ];
   }
+}
+
+// Added this helper class because it was missing in the current scope for one specific item
+class PostanestheticCareItem extends IntensiveCareProblemsItem {
+  PostanestheticCareItem({
+    required String title,
+    required String description,
+    String? subtitle,
+    String? additionalInfo,
+  }) : super(title: title, description: description, subtitle: subtitle, additionalInfo: additionalInfo);
 }

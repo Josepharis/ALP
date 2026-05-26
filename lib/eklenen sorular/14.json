@@ -1,0 +1,1599 @@
+{
+  "meta": {
+    "title": "Adrenerjik Agonist ve Antagonistler Soru Bankası",
+    "language": "tr",
+    "questionCount": 106
+  },
+  "questions": [
+    {
+      "question": "Norepinefrin (Noradrenalin) infüzyonu yapılan bir hastada sistemik vasküler direnç (SVR) artarken, kalp hızında bir miktar azalma (refleks bradikardi) gözleniyor. Bu tablonun farmakodinamik nedeni hangisidir?",
+      "options": [
+        "Norepinefrinin doğrudan M2 reseptörlerini uyarması",
+        "Beta-2 reseptörlerinin baskın gelerek vazodilatasyon yapması",
+        "Alfa-1 aracılı vazokonstriksiyona yanıt olarak baroreseptör deşarjının vagal aktiviteyi artırması",
+        "İlacın presinaptik dopamin reseptörlerini bloke etmesi",
+        "Norepinefrinin sadece beta-1 reseptörlerini etkilemesi"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 4,
+      "explanation": "Norepinefrin güçlü bir alfa-1 agonistidir. Kan basıncını hızla yükseltir; bu yükseliş aort yayı ve karotis sinüsündeki baroreseptörleri uyararak parasempatik (vagal) deşarja ve dolayısıyla refleks bradikardiye neden olur.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 1
+    },
+    {
+      "question": "İnsülin sekresyonunu AZALTAN adrenerjik reseptör aşağıdakilerden hangisidir?",
+      "options": [
+        "Alfa-2",
+        "Beta-2",
+        "Alfa-1",
+        "Beta-1",
+        "D1"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "alfa-2 uyarımı insülin salınımını azaltırken, beta-2 uyarımı insülin salınımını artırır.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 2
+    },
+    {
+      "question": "Kardiyojenik şokta tercih edilen Dobutamin'in, Dopamin'den temel farkı nedir?",
+      "options": [
+        "Dopamin'den daha güçlü vazokonstriksiyon yapması",
+        "D1 reseptörlerini daha çok uyarması",
+        "Baskın olarak Beta-1 uyarımı yaparak inotropiyi artırması ve SVR'yi düşürebilmesi",
+        "Sadece böbrekleri etkilemesi",
+        "Kan-beyin bariyerini geçmesi"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 4,
+      "explanation": "Dobutamin bir inodilatördür; kalbi güçlendirirken periferik direnci (Beta-2 etkisiyle) bir miktar düşürebilir, bu da kalbin iş yükünü azaltır.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 3
+    },
+    {
+      "question": "β1 reseptörleri için verilen bilgilerden hangisi yanlıştır?",
+      "options": [
+        "Norepinefrin ve epinefrin, β1 reseptörleri üzerinde eş potense sahiptir.",
+        "Epinefrin, β2 reseptörleri üzerinde norepinefrin den önemli ölçüde daha potenttir.",
+        "β2-reseptörleri, kalpteki postsinaptik membranlarda bulunur.",
+        "Bu reseptörlerin uyarılması, adenozin trifosfatı siklik adenozin monofosfata dönüştüren ve bir kinaz fosforilasyon kaskadını başlatan adenilil siklazı aktive eder.",
+        "+ inotrop, - kronotrop ve + dromotrop etkileri vardır."
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: + inotrop, - kronotrop ve + dromotrop etkileri vardır..",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 4
+    },
+    {
+      "question": "45 yaşında kadın hasta, dirençli hipertansiyon nedeniyle yeni bir ilaç kullanımına başlıyor. İlacın ilk dozundan kısa bir süre sonra hasta ayağa kalktığında şiddetli baş dönmesi hissediyor ve bayılma (senkop) yaşıyor. Bu hastanın yaşadığı \"ilk doz fenomeni\" aşağıdaki reseptörlerden hangisinin blokajına bağlıdır?",
+      "options": [
+        "Alfa-2",
+        "Beta-1",
+        "Alfa-1",
+        "Beta-2",
+        "Dopamin-1"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 4,
+      "explanation": "Prazosin, terazosin ve doksazosin gibi selektif Alfa-1 blokerleri, vasküler düz kaslarda vazodilatasyona neden olur. Bu ilaçların ilk dozu, baroreseptör refleksinin kompanse edemeyeceği kadar ani bir ortostatik hipotansiyona (ilk doz fenomeni) yol açabilir.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 5
+    },
+    {
+      "question": "Erektil disfonksiyon tedavisinde geçmişte kullanılan, santral ve periferik Alfa-2 antagonisti olan madde hangisidir?",
+      "options": [
+        "Klonidin",
+        "Yohimbin",
+        "Tamsulosin",
+        "Prazosin",
+        "Metoprolol"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Yohimbin, alfa-2 blokajı ile sempatik çıkışı ve kan akımını artırır (ancak günümüzde yerini PDE-5 inhibitörlerine bırakmıştır).",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 6
+    },
+    {
+      "question": "α2 reseptörleri için verilen bilgilerden hangisi yanlıştır?",
+      "options": [
+        "α2-reseptörleri esas olarak presinaptik sinir terminallerinde bulunur.",
+        "Bu adrenoseptörlerin aktivasyonu, adenilil siklaz aktivitesini inhibe eder.",
+        "α2-reseptörleri, nörondan daha fazla norepinefrin salmımını engelleyen bir negatif geri besleme (feed back) döngüsü oluşturur.",
+        "Vasküler düz kas, vazodilatasyona yol açan postsinaptik a2-reseptörleri içerir.",
+        "Merkezi sinir sisteminde postsinaptik a2-reseptörlerinin uyarılması sedasyon sağlar ve sempatik çıkışı azaltarak periferik vazodilatasyona ve düşük kan basıncına neden olur."
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: Vasküler düz kas, vazodilatasyona yol açan postsinaptik a2-reseptörleri içerir..",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 7
+    },
+    {
+      "question": "Feokromositoma şüphesi olan bir hastada tanıyı desteklemek için kullanılan ve hem alfa-1 hem alfa-2 reseptörlerini irreversibl (geri dönüşsüz) olarak bloke eden ajan hangisidir?",
+      "options": [
+        "Fentolamin",
+        "Fenoksibenzamin",
+        "Prazosin",
+        "Yohimbin",
+        "Karvedilol"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 4,
+      "explanation": "Fenoksibenzamin, alfa reseptörlerine kovalent bağlarla bağlanır. Bu özellik, feokromositoma ameliyatı sırasında tümörden salınan devasa miktardaki katekolaminlerin (yarışmalı olmadıkları için) blokajı yenmesini engeller.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 8
+    },
+    {
+      "question": "Erken doğum riskinde (tokoliz) uterus düz kaslarını gevşetmek için kullanılan Beta-2 agonist hangisidir?",
+      "options": [
+        "Atenolol",
+        "Karvedilol",
+        "Ritodrin",
+        "Propranolol",
+        "Bisoprolol"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Ritodrin ve Terbutalin, uterus düz kasındaki beta-2'leri uyararak doğumu geciktirmek amacıyla kullanılır.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 9
+    },
+    {
+      "question": "Adrenerjik reseptörler hakkında verilen bilgilerden hangisi yanlıştır?\nEkrin ter bezleri ve bazı kan damarları dışındaki uç organ dokularında bulunan",
+      "options": [
+        "postgangliyonik sempatik liflerden norepinefrin salınır.",
+        "Preganglionik sempatik lifler ve tüm parasempatik liflerden asetilkolin salınır.",
+        "Norepinefrin non-nöronal hücrelerde katekol-O-metiltransferaz, nöronlarda monoamin oksidaz tarafından metabolize edilebilir",
+        "Bu reseptörler G proteinlerine bağlıdır.",
+        "Farklı adrenoseptörlerin kendine özgü bir efektörü vardır ancak her biri kofaktör olarak adenozin trifosfat (ATP) kullanan spesifik G proteinlerine bağlıdır."
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: Farklı adrenoseptörlerin kendine özgü bir efektörü vardır ancak her biri kofaktör olarak adenozin trifosfat (ATP) kullanan spesifik G proteinlerine bağlıdır..",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 10
+    },
+    {
+      "question": "Gebelikte hipertansiyon tedavisinde \"altın standart\" kabul edilen ve merkezi etkili Alfa-2 agonist olan ilaç hangisidir?",
+      "options": [
+        "Hidralazin",
+        "Propranolol",
+        "Alfa-metildopa",
+        "Prazosin",
+        "Fentolamin"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 4,
+      "explanation": "Alfa-metildopa, teratojenik olmadığı uzun yıllardır kanıtlanmış, gebelerde en güvenli antihipertansiflerden biridir.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 11
+    },
+    {
+      "question": "Genellikle farmakolojik stres testinde kullanılan adrenerjik agonist aşağıdakilerden hangisidir?",
+      "options": [
+        "Dopamin",
+        "Dobutamin",
+        "Fenoldopam",
+        "Fenilefrin",
+        "Efedrin"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: Dobutamin.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 12
+    },
+    {
+      "question": "Epinefrinin arritmik yan etkisini arttırabilen volatil anestezik ajan aşağıdakilerden hangisidir?",
+      "options": [
+        "Sevofluran",
+        "Desfluran",
+        "İzofluran",
+        "Nitröz oksit",
+        "Halotan"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: Halotan.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 13
+    },
+    {
+      "question": "Fenoksibenzamin'in feokromositoma cerrahisinde vazgeçilmez olmasını sağlayan kimyasal özelliği nedir?",
+      "options": [
+        "Sadece 5 dakika etkili olması",
+        "Reseptöre kovalent bağlarla geri dönüşümsüz bağlanması",
+        "Sadece damardan verilmesi",
+        "Beta reseptörlerini uyarması",
+        "Böbrekleri koruması"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 4,
+      "explanation": "Fenoksibenzamin kovalent bağ kurar. Bu sayede tümörden ani katekolamin deşarjı olsa bile alfa reseptörleri blokajı \"yenilemez\" (surmountable değildir).",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 14
+    },
+    {
+      "question": "Feokromositoma tanısı konulmuş ve cerrahiye hazırlanan bir hastada, preoperatif dönemde alfa-blokaj (Fenoksibenzamin) sağlandıktan sonra taşikardi gelişiyor. Bu aşamada beta-bloker eklenmesi planlanıyor. Eğer alfa-blokaj tam sağlanmadan beta-bloker verilirse hangi komplikasyonun gelişmesi en olasıdır?",
+      "options": [
+        "Şiddetli hipotansiyon ve şok",
+        "Paradoksal bradikardi ve asistoli",
+        "Oppozisyonel vazokonstriksiyon nedeniyle kontrolsüz hipertansif kriz",
+        "Bronkospazm ve akut solunum yetmezliği",
+        "İnsülin salınımının aşırı artmasına bağlı hipoglisemi"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 4,
+      "explanation": "Feokromositomalı hastada beta-blokaj, alfa-blokajdan önce veya alfa-blokaj yetersizken yapılırsa; iskelet kaslarındaki damarları genişleten beta-2 reseptörler devre dışı kalır. Geriye kalan engellenmemiş alfa-1 stimülasyonu (vazokonstriksiyon), kan basıncını kontrol edilemez seviyelere çıkarabilir.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 15
+    },
+    {
+      "question": "Tükrük bezinde sekresyon artışına neden olan adrenerjik reseptör aşağıdakilerden hangisidir?",
+      "options": [
+        "α1+β2",
+        "β1+β2",
+        "α1+α2",
+        "α2+β2",
+        "β1+α2"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: α1+β2.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 16
+    },
+    {
+      "question": "Propranololün yan etkileri arasında olmayan hangisidir?",
+      "options": [
+        "Akut konjestif kalp yetmezliği",
+        "Bronkospazm",
+        "Bradikardi",
+        "Atriyoventriküler kalp bloğu",
+        "Akut böbrek yetmezliği"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: Akut böbrek yetmezliği.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 17
+    },
+    {
+      "question": "Metabolik etkiler düşünüldüğünde, diyabetik bir hastada non-selektif beta-bloker (örneğin Propranolol) kullanımı neden riskli kabul edilir?",
+      "options": [
+        "İnsülin direncini tamamen ortadan kaldırdığı için",
+        "Hipoglisemi semptomlarını (taşikardi, titreme) maskelediği ve glikojenolizi engellediği için",
+        "Kan şekerini kontrolsüz şekilde yükselttiği için",
+        "Ketozis riskini azalttığı için",
+        "Pankreastan glukagon salınımını aşırı artırdığı için"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 4,
+      "explanation": "Beta-2 reseptör blokajı karaciğerde glikojenolizi (şeker üretimini) baskılar. Ayrıca hipogliseminin en önemli uyarıcı bulgusu olan taşikardiyi (beta-1 blokajı ile) gizleyerek hastanın komaya girmesine neden olabilir.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 18
+    },
+    {
+      "question": "Aşağıdaki beta-blokerlerden hangisi topikal olarak uygulandığında gözde aköz hümör üretimini azaltarak glokom tedavisinde kullanılır?",
+      "options": [
+        "Nadolol",
+        "Timolol",
+        "Karvedilol",
+        "Pindolol",
+        "Sotalol"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Timolol, siliyer cisimdeki beta reseptörlerini bloke ederek göz içi sıvısının üretimini azaltır.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 19
+    },
+    {
+      "question": "Aşağıdaki β blokerlerin hangisi/hangileri karaciğerde metabolize edilir?\nAtenolol\nEsmolol\nLabetalol\nMetoprolol\nPropranolol",
+      "options": [
+        "Yalnız I",
+        "I-II",
+        "III-V",
+        "III-IV-V",
+        "Hepsi"
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: III-IV-V.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 20
+    },
+    {
+      "question": "α1 reseptörleri için verilen bilgilerden hangisi yanlıştır?",
+      "options": [
+        "Bu reseptörlerin aktivasyonu, düz kasların kasılmasına yol açan hücre içi kalsiyum iyonu konsantrasyonunu artırır.",
+        "α1-agonistleri, midriyazis (radyal göz kaslarının kasılmasına bağlı olarak gözbebeği genişlemesi), bronkokonstriksiyon, vazokonstriksiyon, uterus kasılması ve gastrointestinal ve genitoüriner sistemdeki sfinkterlerin daralması ile ilişkilidir.",
+        "α1-reseptörlerinin uyarılması ayrıca insülin sekresyonunu ve lipolizi de inhibe eder.",
+        "α1 stimülasyonunun en önemli kardiyovasküler etkisi, periferik vasküler direnci, sol ventrikül art yükünü ve arteriyel kan basıncını artıran vazokonstriksiyondur.",
+        "Miyokardiyal iskemi sırasında, agonistlerle azalan α1-reseptör eşleşmesi gözlenir."
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: Miyokardiyal iskemi sırasında, agonistlerle azalan α1-reseptör eşleşmesi gözlenir..",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 21
+    },
+    {
+      "question": "Adrenerjik reseptörler hakkında verilen bilgilerden hangisi yanlıştır?",
+      "options": [
+        "α1 fosfolipazları aktive eden Gq’ye bağlıdır.",
+        "α2 adenilat siklazı (adenil veya adenilil siklaz olarak da adlandırılır) inhibe eden Gi’ye bağlıdır.",
+        "β, adenilat siklazı aktive eden Gs’ye bağlıdır.",
+        "α1 fosfolipazı inhibe eden Gq’ye bağlıdır.",
+        "α1-Reseptörleri, vücuttaki düz kaslarda (göz, akciğer, kan damarları, uterus, bağırsak ve genitoüriner sistemde) bulunan postsinaptik adrenoseptörlerdir."
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: α1 fosfolipazı inhibe eden Gq’ye bağlıdır..",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 22
+    },
+    {
+      "question": "Mirabegron, \"aşırı aktif mesane\" tedavisinde hangi mekanizma ile detrusor kasını gevşetir?",
+      "options": [
+        "Beta-1 agonizmi",
+        "Alfa-1 antagonizmi",
+        "Beta-3 agonizmi",
+        "Muskarinik blokaj",
+        "Dopamin inhibisyonu"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Beta-3 reseptörleri mesane detrusor kasında bulunur; uyarılmaları mesanenin gevşemesini ve idrar tutma kapasitesinin artmasını sağlar.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 23
+    },
+    {
+      "question": "Benign Prostat Hiperplazisi (BPH) olan ve normotansif (tansiyonu normal) bir hastada, sistemik kan basıncını düşürmeden idrar akışını rahatlatmak için hangi \"üroselektif\" ajan tercih edilmelidir?",
+      "options": [
+        "Terazosin",
+        "Doksazosin",
+        "Tamsulosin",
+        "Fentolamin",
+        "Propranolol"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 4,
+      "explanation": "Tamsulosin, prostat ve mesane boynunda bulunan Alfa-1A reseptörlerine spesifiktir. Damar yatağındaki Alfa-1B reseptörlerini minimal etkilediği için hipotansiyon yapma riski çok düşüktür.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 24
+    },
+    {
+      "question": "Uzun süreli Propranolol kullanan bir hastada cerrahi sırasında ani kan kaybı gelişiyor. Hastanın bu duruma vermesi gereken fizyolojik taşikardi yanıtının baskılanması hangi mekanizmayla açıklanır?",
+      "options": [
+        "Negatif inotropik etkinin renal perfüzyonu bozması",
+        "Beta-1 reseptör antagonizması nedeniyle kronotropik yanıtın engellenmesi",
+        "Alfa-2 reseptörlerinin norepinefrin salınımını artırması",
+        "Beta-2 reseptörlerinin periferik direnci düşürmesi",
+        "Baroreseptör refleksinin tamamen felç olması"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 4,
+      "explanation": "Beta-blokerler (Propranolol gibi non-selektifler dahil), kalpteki beta-1 reseptörlerini bloke ederek sempatik deşarja (hipovolemi, ağrı vb.) karşı oluşacak taşikardi yanıtını küntleştirirler.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 25
+    },
+    {
+      "question": "Preeklampsi (gebelik hipertansiyonu) olan bir hastada, acil tansiyon kontrolü sağlamak için kullanılan ve hem alfa hem beta blokaj yapan ajan hangisidir?",
+      "options": [
+        "Labetalol",
+        "Esmolol",
+        "Fenoksibenzamin",
+        "Klonidin",
+        "Rezerpin"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 4,
+      "explanation": "Labetalol, gebelikte güvenle kullanılan, alfa-1 ve beta blokajı yaparak hızlı ve dengeli tansiyon düşüşü sağlayan bir ajandır.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 26
+    },
+    {
+      "question": "Selektif bir Alfa-2 agonisti olan Deksmedetomidin için aşağıdakilerden hangisi doğrudur?",
+      "options": [
+        "Sadece periferik damarlarda vazokonstriksiyon yapar.",
+        "Locus Coeruleus bölgesinde norepinefrin salınımını azaltarak sedasyon sağlar.",
+        "Solunum merkezini şiddetli şekilde deprese eder.",
+        "Beta-1 reseptörlerini uyararak taşikardi yapar.",
+        "Sadece epilepsi nöbetlerini durdurmak için kullanılır."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Deksmedetomidin, beyin sapındaki Locus Coeruleus'ta presinaptik alfa-2 reseptörlerine bağlanır, norepinefrin salınımını durdurur. Bu durum \"doğal uykuya benzer\" bir sedasyon sağlar ve solunumu diğer İV anestezikler kadar deprese etmez.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 27
+    },
+    {
+      "question": "Sempatik sinir sisteminin adrenerjik aktivitesinin çoğundan sorumlu olan birincil nörotransmitter aşağıdakilerden hangisidir?",
+      "options": [
+        "Epinefrin",
+        "Noradrenalin",
+        "Efedrin",
+        "Dopamin",
+        "Fenilefrin"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: Noradrenalin.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 28
+    },
+    {
+      "question": "Monoamin Oksidaz (MAO) inhibitörü kullanan bir hastada \"peynir reaksiyonu\" (hipertansif kriz) gelişimine neden olan madde hangisidir?",
+      "options": [
+        "Triptofun",
+        "Tiramin",
+        "Histamin",
+        "Dopamin",
+        "Serotonin"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 4,
+      "explanation": "MAO enzimi bloke olduğunda, gıdalarla alınan tiramin yıkılamaz. Tiramin, sinir uçlarından norepinefrin salgılatarak tansiyonu fırlatır.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 29
+    },
+    {
+      "question": "Aşağıdaki özellikleri taşıyan adrenerjik antagonist hangisidir?\nHem α1- hem de α2-reseptörlerinin kompetitif (geri dönüşümlü) blokajına neden olur.\nα1 Antagonizma ve doğrudan düz kas gevşemesi, periferik vazodilatasyondan ve arteriyel kan basıncındaki düşüşten sorumludur.\nRefleks taşikardiye neden olur.\nRefleks taşikardi ve postural hipotansiyon nedeniyle, aşırı α stimülasyonuna (örn., feokromositoma, klonidin çekilmesi vb.) bağlı hipertansiyon tedavisinde kullanımı sınırlıdır.\nNorepinefrin içeren intravenöz sıvının ekstravazasyonuna takiben gelişen doku nekrozunu önlemek veya en aza indirmek için uygulanır.",
+      "options": [
+        "Fentolamin",
+        "Prazosin",
+        "Fenoksibenzamin",
+        "Labetalol",
+        "Propranolol"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: Fentolamin.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 30
+    },
+    {
+      "question": "Norepinefrin için verilen bilgilerden hangileri doğrudur?\nKısıtlı β2 aktivitesiyle (klinik olarak kullanılan dozlarda) birlikte doğrudan a, stimülasyonu, arteriyel ve venöz damarların yoğun vazokonstriksiyonuna neden olur.\nβ1 etkilerinden kaynaklanan artan miyokardiyal kontraktilite, periferik vazokonstriksiyon ile birlikte, arteriyel kan basıncı artışına katkıda bulunur.\nNorepinefrinin intravenöz uygulama bölgesine ekstravazasyonu doku nekrozuna neden olabilir.\nRenal ve splanknik kan akımının azalması ve miyokardiyal oksijen gereksinimlerinin artması endişe vericidir, ancak norepinefrin refrakter (özellikle septik) şokun yönetiminde tercih edilen ajandır.\nHem sistolik hem de diyastolik basınçlar genellikle yükselir, ancak artan ard yük (afterload) ve refleks bradikardi, kalp debisindeki herhangi bir artışı önleyebilir.",
+      "options": [
+        "I-III-V",
+        "II-IV",
+        "II-IV-V",
+        "I-II-III-IV",
+        "I-II-III-IV-V"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: I-II-III-IV-V.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 31
+    },
+    {
+      "question": "55 yaşında tip 2 diyabet ve hipertansiyonu olan bir hastaya non-selektif bir beta-bloker olan Propranolol reçete ediliyor. Bu hastada ilaç kullanımı sırasında ortaya çıkabilecek en tehlikeli durum aşağıdakilerden hangisidir?",
+      "options": [
+        "İnsülin direncinin azalması",
+        "Hipoglisemiye yanıt olarak gelişen taşikardinin maskelenmesi",
+        "Hiperglisemiye bağlı ketoasidoz",
+        "Aşırı terleme (diyaforez)",
+        "Ürik asit artışına bağlı gut krizi"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 4,
+      "explanation": "Beta-blokerler, hipoglisemi sırasında ortaya çıkan ve hastayı uyaran \"çarpıntı/taşikardi\" bulgusunu baskılar. Ayrıca karaciğerde glikojenolizi (Beta-2 aracılı) engelleyerek hipogliseminin derinleşmesine neden olurlar.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 32
+    },
+    {
+      "question": "Adrenoreseptör fizyolojisi için verilen bilgilerden hangisi yanlıştır?",
+      "options": [
+        "β3-reseptörleri safra kesesi ve beyin yağ dokusunda bulunur.",
+        "D1 reseptörlerinin aktivasyonu, böbrek, bağırsak ve kalpte vazodilatasyona aracılık eder.",
+        "D2 reseptörlerinin Droperidol, Haloperidol ve benzer ajanların antiemetik etkisinde rol oynadığına inanılmaktadır.",
+        "β3-reseptörleri kahverengi yağda termojenez ve mesane gevşemesinde rol oynadıkları düşünülmektedir.",
+        "Dobutamin dopaminerjik reseptörler üzerinden etki eder."
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: Dobutamin dopaminerjik reseptörler üzerinden etki eder..",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 33
+    },
+    {
+      "question": "Fenilefrin infüzyonu sırasında görülen en karakteristik kardiyovasküler yanıt kombinasyonu hangisidir?",
+      "options": [
+        "Hipotansiyon + Taşikardi",
+        "Hipertansiyon + Refleks bradikardi",
+        "Hipertansiyon + Taşikardi",
+        "Normotansiyon + Aritmi",
+        "Vazodilatasyon + Bradikardi"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 4,
+      "explanation": "Fenilefrin saf bir Alfa-1 agonistidir. SVR'yi artırarak tansiyonu yükseltir; baroreseptörler bu yükselişi fark edince vagal tonusu artırarak kalbi yavaşlatır (refleks bradikardi).",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 34
+    },
+    {
+      "question": "Propranolol kullanımı sonrası \"kabus görme\" ve \"depresyon\" gibi yan etkilerin görülme sebebi ilacın hangi özelliğine bağlıdır?",
+      "options": [
+        "Yüksek hidrofillik",
+        "Yüksek lipid çözünürlüğü (lipofilisite)",
+        "Sadece böbrekten atılması",
+        "Alfa reseptörlerini de etkilemesi",
+        "Çok kısa yarı ömürlü olması"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Propranolol en lipofilik beta blokerlerden biridir; MSS'ye kolay geçer ve santral yan etkileri belirgindir. Atenolol gibi hidrofilik olanlar beyne daha az geçer.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 35
+    },
+    {
+      "question": "Radial kas kasılmasıda (midriyazis) görev alan adrenerjik reseptör aşağıdakilerden hangisidir?",
+      "options": [
+        "α1",
+        "α2",
+        "β1",
+        "β2",
+        "δ"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: α1.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 36
+    },
+    {
+      "question": "\"Nebivolol\"ü diğer klasik beta-blokerlerden ayıran benzersiz özellik nedir?",
+      "options": [
+        "Sadece alfa reseptörleri bloke etmesi",
+        "Nitrik oksit (NO) salınımı yoluyla doğrudan vazodilatasyon yapması",
+        "En uzun etkili beta-bloker olması",
+        "Hiçbir şekilde böbrekten atılmaması",
+        "Sadece çocuklarda kullanılması"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Nebivolol, yüksek derecede beta-1 selektif bir blokerdir ancak endotelyal NO sentazı uyararak damarlarda genişleme yapma özelliğiyle diğerlerinden ayrılır.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 37
+    },
+    {
+      "question": "Fenilefrin için verilen bilgilerden hangisi yanlıştır?",
+      "options": [
+        "Fenilefrin, seçici α1-agonist aktivitesine sahip bir katekolamindir.",
+        "Fenilefrinin birincil etkisi, sistemik vasküler direnç ve arteriyel kan basıncında eşzamanlı bir artış ile birlikte periferik vazokonstriksiyondur.",
+        "Vagus sinirinin aracılık ettiği refleks bradikardi kardiyak çıktıyı azaltabilir.",
+        "Dekonjestan ve midriatik ajan olarak kullanılır.",
+        "Bronkodilatasyon yapar."
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: Bronkodilatasyon yapar..",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 38
+    },
+    {
+      "question": "Efedrin için verilen bilgilerden hangisi yanlıştır?",
+      "options": [
+        "Katekolamin olmayan bir sempatomimetik olan efedrinin kardiyovasküler etkileri epinefrininkine benzer: kan basıncında, kalp atım hızında, kontraktilitede ve kalp debisinde artış.",
+        "Bir bronkodilatatördür.",
+        "Efedri hem dolaylı hem de doğrudan etkilere sahiptir ve merkezi sinir sistemini uyarır (minimum alveolar konsantrasyonu yükseltir).",
+        "Hipotansiyonun nedeni belirlenirken ve düzeltilirken geçici bir önlem olarak görülmelidir.",
+        "Uterus kan akımını azaltır."
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: Uterus kan akımını azaltır..",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 39
+    },
+    {
+      "question": "28 yaşında gebe bir hasta, rutin kontrolünde 160/100 mmHg kan basıncı ile preeklampsi tanısı alıyor. Hastaya santral etkili bir alfa-2 agonisti başlanıyor. Bu ilacın uzun süreli kullanımında yan etki olarak \"pozitif direkt Coombs testi\" görülme riski vardır. Bu ilaç hangisidir?",
+      "options": [
+        "Labetalol",
+        "Hidralazin",
+        "Alfa-metildopa",
+        "Magnezyum sülfat",
+        "Klonidin"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 4,
+      "explanation": "Alfa-metildopa, gebelikte güvenli bir alfa-2 agonistidir. Ancak hastaların %10-20'sinde direkt Coombs testinde pozitifliğe ve nadiren hemolitik anemiye neden olabilir.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 40
+    },
+    {
+      "question": "Uzun süreli Klonidin tedavisi alan bir hastanın ilacı aniden bırakması sonucu görülen \"rebound hipertansiyon\" mekanizması nedir?",
+      "options": [
+        "Beta reseptör sayısının azalması",
+        "Presinaptik Alfa-2 reseptörlerinin duyarsızlaşması ve aşırı norepinefrin deşarjı",
+        "Böbreklerden aşırı su tutulumu",
+        "İlacın karaciğerde birikmesi",
+        "Alfa-1 reseptörlerinin tamamen yok olması"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 4,
+      "explanation": "Klonidin kesildiğinde, baskılanmış olan sempatik sistem hızla deşarj olur ve Alfa-1/Beta-1 reseptörlerini uyararak hipertansif krize yol açar.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 41
+    },
+    {
+      "question": "Alfa-1 reseptör aktivasyonu sonrası hücre içinde artan ve kalsiyum salınımını sağlayan ikincil haberci hangisidir?",
+      "options": [
+        "cAMP",
+        "cGMP",
+        "İnositol Trifosfat",
+        "Tirozin Kinaz",
+        "Nitrik Oksit"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Alfa-1 reseptörleri Gq proteini üzerinden PLC'yi aktive eder; bu da IP3 ve DAG oluşumuna yol açar.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 42
+    },
+    {
+      "question": "Endotelyal nitrikoksit sentaz üzerindeki uyarıcı etkisi yoluyla doğrudan vazodilatasyona neden olma kabiliyeti bakımından benzersiz olan β bloker ajan aşağıdakilerden hangisidir?",
+      "options": [
+        "Nebivolol",
+        "Karvedilol",
+        "Propranolol",
+        "Metoprolol",
+        "Esmolol"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: Nebivolol.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 43
+    },
+    {
+      "question": "β blokerler için verilen bilgilerden hangisi yanlıştır?",
+      "options": [
+        "Metoprolol hepatik metabolizma ile elimine edilir.",
+        "Atenolol böbrekler tarafından değişmeden atılır.",
+        "Esmolol kanda hidrolize olur.",
+        "β-blokerlerin çoğu, tam agonistler (epinefrin gibi) kadar etkili olmasa da, bir miktar agonist aktiviteye sahiptir.",
+        "Esmolol nöbet süresini önemli ölçüde uzatabilir."
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: Esmolol nöbet süresini önemli ölçüde uzatabilir..",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 44
+    },
+    {
+      "question": "Bir ilaç hem Alfa-1 hem de Alfa-2 reseptörlerini bloke ediyorsa (örn. Fentolamin), neden sadece Alfa-1 blokerlere (örn. Prazosin) göre daha şiddetli taşikardi yapar?",
+      "options": [
+        "Kalbe doğrudan zarar verdiği için",
+        "Alfa-2 blokajı nedeniyle norepinefrin üzerindeki \"fren\" etkisinin kalkması ve aşırı salınan NE'nin Beta-1'i uyarması",
+        "Böbreklerden adrenalin salgılattığı için",
+        "Tansiyonu hiç düşürmediği için",
+        "Histamin deşarjı yaptığı için"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Presinaptik Alfa-2 reseptörleri \"negatif feedback\" yapar. Bunlar bloke edilince sinaps aralığı norepinefrin ile dolar ve bu NE gidip kalpteki Beta-1 reseptörlerini kamçılar.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 45
+    },
+    {
+      "question": "Aşağıdakilerden hangisi beta-adrenerjik reseptör sinyal iletim yolunda yer alan proteindir?",
+      "options": [
+        "Gi",
+        "Gq",
+        "Gs",
+        "Gt",
+        "G 12/13"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Tüm beta reseptör tipleri (1, 2, 3) Gs (stimülatör) proteini ile kenetlidir; adenilat siklazı artırırlar.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 46
+    },
+    {
+      "question": "Aşağıdaki ajanlardan hangisi/hangileri renal kan akımını arttırabilir?\nDopamin\nDobutamin\nFenoldopam\nEfedrin\nFenilefrin",
+      "options": [
+        "Yalnız I",
+        "I-II",
+        "I-II-III",
+        "I-II-III-IV",
+        "I-II-III-IV-V"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: I-II-III.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 47
+    },
+    {
+      "question": "DA’nın (dopaminerjik reseptör) birçok faydasına sahip olan ancak α- veya β-adrenoseptör veya DA2-reseptör agonist aktivitesi çok az olan veya hiç olmayan seçici bir DA1-reseptör agonisti olan ajan aşağıdakilerden hangisidir?",
+      "options": [
+        "Fenoldopam",
+        "Dopamin",
+        "Dobutamin",
+        "Fenilefrin",
+        "Norepinefrin"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: Fenoldopam.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 48
+    },
+    {
+      "question": "İnsülin sekresyonunda artışa ve azalışa neden olan adrenerjik reseptörler aşağıdakilerden hangisinde sırasıyla verilmiştir?",
+      "options": [
+        "β1+β2",
+        "α1+α2",
+        "α2+β2",
+        "β1+α2",
+        "β2+α1"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: β2+α1.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 49
+    },
+    {
+      "question": "Epinefrin için verilen bilgilerden hangisi/hangileri doğrudur?\nEpinefrin, adrenal medullada sentezlenen endojen bir katekolamindir.\nMiyokardın β1-reseptörlerinin epinefrin tarafından uyarılması, kontraktiliteyi ve kalp atım hızını artırarak kan basıncını, kalp debisini ve miyokardiyal oksijen talebini yükseltir (faz IV depolarizasyon hızının artışı).\nα1 stimülasyon, splanik ve renal kan akımını azaltır ancak aortik diyastolik basıncı artırarak koroner perfüzyon basıncını artırır.\nSistolik kan basıncı genellikle yükselmesine karşın iskelet kasındaki β2 aracılı vazodilatasyon düşük doz epinefrin infüzyonları ile diyastolik basıncı düşürebilir.\nβ2 Stimülasyon ayrıca bronşiyal düz kasları gevşetir.",
+      "options": [
+        "I-IV-V",
+        "II-III-V",
+        "I-III-IV",
+        "I-II-IV-V",
+        "I-II-III-IV-V"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: I-II-III-IV-V.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 50
+    },
+    {
+      "question": "Aşağıdaki ajanlardan hangisi/hangileri sadece β reseptörleri üzerinden etki eder?\nDobutamin\nTerbutalin\nDopamin\nFenilefrin\nFenoldopam",
+      "options": [
+        "Yalnız I",
+        "I-III",
+        "I-II",
+        "I-IV",
+        "I-III-V"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: I-II.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 51
+    },
+    {
+      "question": "Aşağıdaki ajanlardan hangisi/hangileri sadece dopaminerjik reseptörleri üzerinden etki eder?",
+      "options": [
+        "Fenoldopam",
+        "Dopamin",
+        "Dobutamin",
+        "Epinefrin",
+        "Terbutalin"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: Fenoldopam.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 52
+    },
+    {
+      "question": "Kokain kullanımı sonrası acil servise göğüs ağrısı ve hipertansiyonla getirilen bir hastada, sadece saf beta-bloker (örneğin Propranolol) verilmesinin kontrendike olmasının temel sebebi nedir?",
+      "options": [
+        "Şiddetli bradikardi riski",
+        "Kokainin metabolizmasını yavaşlatması",
+        "Karşılanmamış alfa uyarımı nedeniyle vazospazmın şiddetlenmesi",
+        "İlacın merkezi sinir sistemine geçememesi",
+        "Hipoglisemi riskini artırması"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 4,
+      "explanation": "Beta reseptörler bloke edilirse, kokainin artırdığı tüm katekolaminler serbest kalan Alfa-1 reseptörlerine saldırır; bu da koroner arterlerin tamamen büzülmesine (infarktüs) yol açabilir.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 53
+    },
+    {
+      "question": "35 yaşında femur fraktürü nedeniyle acil cerrahi planlanan bayan hasta preoperatif olarak değerlendirildiğinde, ara ara olan tansiyon yüksekliği, çarpıntı ve baş ağrısı şikayetlerinin olduğunu söylüyor. Feokromositoma ön tanısı düşünülen hastaya genel anestezi planı yapılıyor. Bu hasta için preoperatif olarak hazırda bulundurulması gereken adrenerjik antagonist aşağıdakilerden hangisidir?",
+      "options": [
+        "Fenoksibenzamin",
+        "Prazosin",
+        "Fentolamin",
+        "Esmolol",
+        "Metoprolol"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: Fenoksibenzamin.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 54
+    },
+    {
+      "question": "Esmololün anestezi pratiğinde (örneğin entübasyon sırasında gelişen taşikardi yönetiminde) tercih edilmesinin en önemli farmakokinetik nedeni nedir?",
+      "options": [
+        "Çok uzun etki süresine sahip olması",
+        "Sadece ağız yoluyla kullanılabilmesi",
+        "Eritrosit esterazları tarafından hızla hidroliz edilmesi (çok kısa yarı ömür)",
+        "Karaciğerde CYP450 sistemiyle metabolize olması",
+        "Kan-beyin bariyerini çok hızlı geçmesi"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Esmolol, eritrosit sitozolündeki esterazlar tarafından saniyeler içinde parçalanır. Bu ultra kısa etki süresi, ilacın etkisinin istenildiği zaman hızla sonlandırılabilmesini sağlar.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 55
+    },
+    {
+      "question": "72 yaşında erkek hasta, idrar yapmakta zorlanma (BPH) şikayeti ile başvuruyor. Hastaya başlanan ilacın \"vasküler etkisinin çok az olduğu\" ve sadece prostatik düz kasları gevşettiği biliniyor. Bu ilacın hedef aldığı spesifik reseptör alt tipi hangisidir?",
+      "options": [
+        "Alfa-1A",
+        "Alfa-1B",
+        "Alfa-2A",
+        "Beta-3",
+        "Beta-1"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 4,
+      "explanation": "Tamsulosin, prostat düz kaslarında yoğunlaşan Alfa-1A reseptörlerine spesifiktir. Damarlarda bulunan Alfa-1B reseptörlerini etkilemediği için sistemik tansiyonu düşürmez.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 56
+    },
+    {
+      "question": "Klonidin ile ilgili verilen bilgilerden hangisi yanlıştır?",
+      "options": [
+        "Katekolamin düzeylerini yükseltir.",
+        "Postoperatif titremede azalma sağlar.",
+        "Opioid kaynaklı kas rijiditesinin inhibisyonu için kullanılabilir.",
+        "Postoperatif akut ağrı ve bazı kronik ağrı sendromlarının tedavisi yer alır.",
+        "Yan etkiler arasında bradikardi, hipotansiyon, sedasyon, solunum depresyonu ve ağız kuruluğu bulunur."
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: Katekolamin düzeylerini yükseltir..",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 57
+    },
+    {
+      "question": "Aşağıda özellikleri verilen β bloker ajan hangisidir?\nKalp atım hızını ve daha az ölçüde kan basıncını azaltan, ultra kısa etkili seçici bir β1 antagonistidir.\nEntübasyon, cerrahi stimülasyon ve uyanma gibi perioperatif uyaranlara yanıt olarak taşikardi ve hipertansiyonu önlemek veya en aza indirmek için kullanılır.\nAtriyal fibrilasyonu veya flatteri olan hastalarda ventriküler hızı kontrol etmede yararlıdır.\nKardiyoselektif olarak kabul edilse de, yüksek dozlarda bronşiyal ve vasküler düz kaslardaki β2-reseptörlerini inhibe eder.\nKısa etki süresi, hızlı yeniden dağılımına (dağılım yarı ömrü 2 dk.dır) ve kırmızı kan hücresi esterazının hidrolizine (eliminasyon yarı ömrü 9 dk.) bağlıdır.",
+      "options": [
+        "Esmolol",
+        "Labetalol",
+        "Metoprolol",
+        "Propranolol",
+        "Nebivolol"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: Esmolol.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 58
+    },
+    {
+      "question": "Epinefrin (Adrenalin) çok düşük dozlarda verildiğinde neden kan basıncında hafif bir düşüş görülebilir?",
+      "options": [
+        "Alfa-1 reseptörlerinin baskılanması nedeniyle",
+        "Beta-2 reseptörlerinin (vazodilatasyon) düşük konsantrasyonlarda Alfa-1'den daha duyarlı olması nedeniyle",
+        "Kalbin yavaşlaması nedeniyle",
+        "Böbreklerden sodyum atılımı nedeniyle",
+        "Histamin salınımı nedeniyle"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Beta-2 reseptörlerinin epinefrine afinitesi Alfa-1'den yüksektir. Düşük dozda sadece damarları genişleten beta-2'ler uyarılır.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 59
+    },
+    {
+      "question": "Aşağıdaki Adrenerjik agonistlerden hangilerinin bronkodilatasyon yapması beklenmez?\nFenilefrin\nFenoldopam\nNorepinefrin\nDopamin\nDobutamin",
+      "options": [
+        "Yalnız III",
+        "I-II-III",
+        "IV-V",
+        "I-III-V",
+        "I-II-III-IV-V"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: I-II-III-IV-V.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 60
+    },
+    {
+      "question": "Septik şok nedeniyle Norepinefrin (Noradrenalin) infüzyonu alan bir hastada, ilacın periferik vasküler direnci (SVR) artırdığı ancak kalp hızını beklenenin aksine bir miktar düşürdüğü (refleks bradikardi) saptanıyor. Bu refleks bradikardiden sorumlu olan kraniyal sinir hangisidir?",
+      "options": [
+        "N. Trigeminus (V)",
+        "N. Facialis (VII)",
+        "N. Vagus (X)",
+        "N. Hypoglossus (XII)",
+        "N. Opticus (II)"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 4,
+      "explanation": "Norepinefrin alfa-1 etkisiyle tansiyonu artırır. Aort yayı ve karotis sinüsündeki baroreseptörler bu artışı algılayınca, N. Vagus üzerinden parasempatik deşarj göndererek kalp hızını yavaşlatır.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 61
+    },
+    {
+      "question": "Veziküler monoamin taşıyıcısını (VMAT) bloke ederek dopamin ve norepinefrinin veziküllere girmesini engelleyen ve depoları boşaltan ilaç hangisidir?",
+      "options": [
+        "Klonidin",
+        "Rezerpin",
+        "Alfa-metildopa",
+        "Guanetidin",
+        "Efedrin"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Rezerpin depoları kalıcı olarak boşaltır; etkisi yeni veziküller sentezlenene kadar (günlerce) sürer.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 62
+    },
+    {
+      "question": "Anafilaktik şokta Epinefrin (Adrenalin) uygulamasının temel gerekçelerinden biri olan 'bronkodilatasyon' hangi reseptör üzerinden gerçekleşir?",
+      "options": [
+        "Alfa-1",
+        "Alfa-2",
+        "Beta-1",
+        "Beta-2",
+        "D2"
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 4,
+      "explanation": "Beta-2 reseptör uyarımı, bronş düz kaslarında gevşemeye (bronkodilatasyon) ve mast hücrelerinden mediyatör salınımının azalmasına yol açar.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 63
+    },
+    {
+      "question": "Aşağıdaki ajanlardan hangisi/hangileri β1 reseptör özgüllüğüne sahiptir?\nAtenolol\nEsmolol\nLabetalol\nMetoprolol\nPropranolol",
+      "options": [
+        "Yalnız I",
+        "I-II",
+        "III-IV-V",
+        "I-II-IV",
+        "Hepsi"
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: I-II-IV.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 64
+    },
+    {
+      "question": "Dopaminerjik (D1) reseptör uyarımı ile sadece renal kan akımını artıran doz miktarı yaklaşık ne kadardır?",
+      "options": [
+        "1-2 mcg/kg/dk",
+        "5-10 mcg/kg/dk",
+        "15-20 mcg/kg/dk",
+        "50 mcg/kg/dk",
+        "100 mcg/kg/dk"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Düşük doz dopamin (\"renal doz\") sadece D1 reseptörlerini etkiler. Doz arttıkça beta ve alfa etkileri başlar.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 65
+    },
+    {
+      "question": "α, β ve dopaminerjik reseptörler üzerinden etki gösteren ajan aşağıdakilerden hangisidir?",
+      "options": [
+        "Dobutamin",
+        "Terbutalin",
+        "Fenoldopam",
+        "Norepinefrin",
+        "Dopamin"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: Dopamin.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 66
+    },
+    {
+      "question": "Alfa-1 bloker tedavisine (örn. Prazosin) yeni başlayan bir hastada \"ilk doz fenomeni\"ni önlemek için ne önerilir?",
+      "options": [
+        "İlacın sabah aç karnına içilmesi",
+        "İlacın çok yüksek dozda başlanması",
+        "İlk dozun gece yatmadan önce (bedtime) alınması",
+        "İlacın yanında bol kafein tüketilmesi",
+        "İlacın İV olarak uygulanması"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 4,
+      "explanation": "İlk doz fenomeni (şiddetli ortostatik hipotansiyon ve bayılma) riskine karşı hasta uykudayken bu etkinin geçmesi hedeflenir.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 67
+    },
+    {
+      "question": "Kalp hızını azaltabilen adrenerjik agonistler aşağıdakilerden hangileridir?",
+      "options": [
+        "Norepinefrin-fenilefrin",
+        "Dopamin-dobutamin",
+        "Fenilefrin-efedrin",
+        "Dopamin-fenoldopam",
+        "Fenoldopam-dobutamin"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: Norepinefrin-fenilefrin.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 68
+    },
+    {
+      "question": "Fenoldopam için verilen bilgilerden hangisi yanlıştır?",
+      "options": [
+        "Fenoldopam, renal kan akımı, diürez ve natriürez artışı ile birlikte periferik vasküler direncin azalması ile karakterize hipotansif etki yapar.",
+        "Fenoldopam, hipertansif acil durumlarda tavsiye edilen kullanımının yanı sıra kontrast madde kaynaklı nefropatinin önlenmesinde de endikedir.",
+        "Fenoldopam hızlı bir etki başlangıcına sahiptir ve kısa eliminasyon yarı ömrü nedeniyle kolayca titre edilebilir.",
+        "Düşük dozlar, daha az refleks taşikardi ile ilişkilendirilmiştir.",
+        "Fenoldopamın perioperatif olarak böbreği “koruma” yeteneği çalışmalarla kanıtlanmıştır."
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: Fenoldopamın perioperatif olarak böbreği “koruma” yeteneği çalışmalarla kanıtlanmıştır..",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 69
+    },
+    {
+      "question": "Koroner arter hastalığı olan hastalarda faydalı olan α ve β etkilerinin kombinasyonu nedeniyle refleks taşikardi olmaksızın kan basıncını düşüren ajan aşağıdakilerden hangisidir?",
+      "options": [
+        "Fentolamin",
+        "Prazosin",
+        "Fenoksibenzamin",
+        "Labetalol",
+        "Esmolol"
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: Labetalol.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 70
+    },
+    {
+      "question": "Beta-bloker zehirlenmesinde, intrasellüler cAMP seviyelerini beta reseptörlerinden bağımsız olarak artırarak kalp hızını ve kontraktilitesini düzelten antidot hangisidir?",
+      "options": [
+        "Kalsiyum glukonat",
+        "Atropin",
+        "Glukagon",
+        "İnsülin",
+        "Sodyum bikarbonat"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Glukagon, kalpte kendine has reseptörleri üzerinden adenilat siklazı aktive eder ve beta reseptör blokajını \"bypass\" ederek kalbi uyarır.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 71
+    },
+    {
+      "question": "β blokerler için verilen bilgilerden hangisi yanlıştır?",
+      "options": [
+        "Daha β1 seçici olanların bronkopulmoner ve vasküler β2 reseptörleri üzerinde daha az etkisi vardır.",
+        "Selektif bir β1 bloker, β2 reseptörleri üzerinde daha az inhibitör etkiye sahip olacaktır ve bu nedenle kronik obstrüktif akciğer hastalığı veya periferik vasküler hastalığı olan hastalarda tercih edilebilir.",
+        "Periferik vasküler hastalığı olan hastalarda, arteriyolleri genişleten β2-reseptörleri bloke edilirse potansiyel olarak kan akımında bir azalma olabilir.",
+        "β-reseptör bloke edici ajanlar ayrıca glokomlu hastalarda göz içi basıncını düşürür.",
+        "Metoprolol metabolize edilmeden (değişime uğramadan) böbreklerle atılır."
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: Metoprolol metabolize edilmeden (değişime uğramadan) böbreklerle atılır..",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 72
+    },
+    {
+      "question": "Şok tablosundaki bir hastada düşük doz (1-2 mcg/kg/dk) Dopamin infüzyonu başlanıyor. Bu doz aralığında baskın olarak hangi reseptör aktivasyonu ve klinik sonuç beklenir?",
+      "options": [
+        "Alfa-1 reseptör uyarımı – Sistemik vazokonstriksiyon",
+        "Beta-1 reseptör uyarımı – Belirgin taşikardi",
+        "D1 reseptör uyarımı – Renal ve mezenterik vazodilatasyon",
+        "Beta-2 reseptör uyarımı – Bronkodilatasyon",
+        "Muskarinik uyarım – Gastrointestinal motilite artışı"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 4,
+      "explanation": "Dopamin doz bağımlı etki gösterir. Düşük dozlarda (renal doz) dopaminerjik (D1) reseptörleri uyararak renal kan akımını ve idrar çıkışını artırır. Orta dozlarda beta-1, yüksek dozlarda alfa-1 etkisi baskınlaşır.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 73
+    },
+    {
+      "question": "Kardiyomiyopatiye sekonder kronik kalp yetmezliği, akut miyokard enfarktüsü sonrası sol ventrikül disfonksiyonu ve hipertansiyon tedavisinde kullanılan karışık bir Ş- ve a-blokerdir.",
+      "options": [
+        "Nebivolol",
+        "Karvedilol",
+        "Propranolol",
+        "Metoprolol",
+        "Esmolol"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: Karvedilol.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 74
+    },
+    {
+      "question": "Selektif beta-1 blokerlerin (kardiyoselektif), astımı olan hastalarda Propranolol'e göre tercih edilme sebebi aşağıdakilerden hangisidir?",
+      "options": [
+        "Daha güçlü taşikardi yapmaları",
+        "Bronşlardaki beta-2 reseptörlerini minimal düzeyde etkilemeleri",
+        "Kan basıncını daha fazla düşürmeleri",
+        "Karaciğerden daha hızlı atılmaları",
+        "Sadece böbrekler üzerinden atılmaları"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 4,
+      "explanation": "Selektif blokerler (Metoprolol, Atenolol vb.) kalpteki beta-1'e yöneliktir. Propranolol gibi non-selektifler ise bronşlardaki beta-2'yi bloke ederek ölümcül bronkospazma yol açabilir.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 75
+    },
+    {
+      "question": "Klonidin ile ilgili verilen bilgilerden hangisi yanlıştır?",
+      "options": [
+        "α2 agonisttir.",
+        "Antihipertnasif ve negatif kronotropik etkileri vardır.",
+        "Oral, intramüsküler, intravenöz, transdermal, intratekal ve epidural kullanımı vardır.",
+        "Klonidin anestezik ve analjezik gereksinimlerini azaltır (minimum alveolar konsantrasyonu azaltır), sedasyon ve anksiyoliz sağlar.",
+        "Bölgesel anestezi sırasında, klonidin bloğun daha hızlı başlamasını sağlar."
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: Bölgesel anestezi sırasında, klonidin bloğun daha hızlı başlamasını sağlar..",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 76
+    },
+    {
+      "question": "Norepinefrin infüzyonu yapılan bir hastada damar dışına sızma (ekstravazasyon) sonucu iskemi ve doku nekrozu riski oluşmuştur. Bu durumu engellemek için bölgeye uygulanması gereken spesifik alfa-antagonist hangisidir?",
+      "options": [
+        "Prazosin",
+        "Fenoksibenzamin",
+        "Fentolamin",
+        "Tamsulosin",
+        "Yohimbin"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 4,
+      "explanation": "Fentolamin, kısa etkili ve kompetitif bir non-selektif alfa blokerdir. Lokal olarak uygulandığında norepinefrinin yaptığı şiddetli vazokonstriksiyonu geri çevirerek doku nekrozunu önler.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 77
+    },
+    {
+      "question": "Dopamin için verilen bilgilerden hangisi yanlıştır?",
+      "options": [
+        "Endojen, seçici olmayan, doğrudan ve dolaylı adrenerjik ve dopaminerjik agonisttir.",
+        "Klinik etkileri, doza göre belirgin şekil de değişir.",
+        "Düşük dozlarda DA1 aktive olur, renal damarları genişletir ve diürez ve natriürezi teşvik eder.",
+        "Orta dozlarda β1 aktive olur, miyokardiyal kontraktiliteyi, kalp atım hızını, sistolik kan basıncını ve kalp debisini artırır.",
+        "Yüksek dozlarda α2 aktive olur, periferik vasküler dirençte artışa ve renal kan akımında düşüşe neden olur."
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: Yüksek dozlarda α2 aktive olur, periferik vasküler dirençte artışa ve renal kan akımında düşüşe neden olur..",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 78
+    },
+    {
+      "question": "Propranolol için verilen bilgilerden hangisi yanlıştır?",
+      "options": [
+        "β1 ve β2-reseptörlerini seçici olmayan bir şekilde bloke eder.",
+        "Miyokardiyal kontraktilite de azalma, kalp hızında ve renin salınımında azalma dahil olmak üzere çeşitli mekanizmalar ile arteriyel kan basıncı düşürülür.",
+        "Propranololün yan etkileri arasında bronkospazm (β2 antagonizmi), akut konjestif kalp yetmezliği, bradikardi ve atriyoventriküler kalp bloğu (β1 antagonizmi) bulunur.",
+        "Kalsiyum kanal blokerleri kullanan hastalarda dikkatli kullanılmalıdır.",
+        "Astım hastalarında güvenle kullanılabilir"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: Astım hastalarında güvenle kullanılabilir.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 79
+    },
+    {
+      "question": "Ortalama arteriyel basıncın düşmesine neden olabilen adrenerjik agonistler aşağıdakilerden hangisi/hangileridir?\nDopamin\nDobutamin\nFenoldopam\nİzoproterenol\nEfedrin",
+      "options": [
+        "Yalnız IV",
+        "I-II",
+        "I-II-III",
+        "III-IV",
+        "Hepsi"
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: III-IV.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 80
+    },
+    {
+      "question": "Dobutamin için verilen bilgilerden hangisi yanlıştır?",
+      "options": [
+        "Dobutamin, hem β1- hem de β2-reseptörleri için afıniteye sahip, β1-reseptörleri için nispeten daha yüksek seçiciliğe sahiptir.",
+        "Birincil kardiyovasküler etkisi, artan miyokard kontraktilitesinin bir sonucu olarak kalp debisindeki artıştır.",
+        "β2 aktivasyonunun neden olduğu periferik vasküler dirençteki düşüş, genellikle arteriyel kan basıncındaki artışın çoğunu önler.",
+        "Sol ventrikül dolum basıncı azalırken koroner kan akımı artar.",
+        "Kardiyopulmoner baypastan ayrılmayı kolaylaştırmak için güvenle kullanılabilir."
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: Kardiyopulmoner baypastan ayrılmayı kolaylaştırmak için güvenle kullanılabilir..",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 81
+    },
+    {
+      "question": "Uzun etkili bir beta-2 agonisti (LABA) olan Salmeterol için hangisi doğrudur?",
+      "options": [
+        "Akut astım atağında hayat kurtarıcıdır.",
+        "Etki süresi çok kısadır (2-4 saat).",
+        "Akut semptomlarda değil, sadece kontrol edici (idame) tedavide kullanılır.",
+        "Sadece ağız yoluyla alınır.",
+        "Beta-1 reseptörlerine daha selektiftir."
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "LABA'lar (Salmeterol, Formoterol) yavaş başlar ancak uzun sürer. Akut atakta etkisizdirler ve tek başlarına kullanıldığında astıma bağlı ölüm riskini artırabilirler; mutlaka kortikosteroid ile kombine edilmelidirler.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 82
+    },
+    {
+      "question": "Bir araştırma laboratuvarında denek hayvanına önce \"İzoproterenol\" veriliyor ve kan basıncının düştüğü gözleniyor. Daha sonra bir \"X İlacı\" veriliyor ve İzoproterenol tekrarlandığında kan basıncının düşmediği, aksine değişmediği saptanıyor. \"X İlacı\" aşağıdakilerden hangisi olabilir?",
+      "options": [
+        "Atropin",
+        "Propranolol",
+        "Prazosin",
+        "Neostigmin",
+        "Fenilefrin"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 4,
+      "explanation": "İzoproterenol, Beta-2 etkisiyle vazodilatasyon yapar ve tansiyonu düşürür. Eğer ortama bir Beta-bloker (Propranolol) eklenirse, izoproterenolün bu etkisi ortadan kalkar.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 83
+    },
+    {
+      "question": "Glikojenolizis ve glukoneogenez’te görev alan adrenerjik reseptörler hangileridir?",
+      "options": [
+        "α1+α2",
+        "β1+β2",
+        "α1+β2",
+        "β1+α2",
+        "α2+β2"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: α1+β2.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 84
+    },
+    {
+      "question": "Kalp hızını azaltıp, ortalama arteriyel basıncı arttıran ve kardiyak output’u düşüren adrenerjik agonist aşağıdakilerden hangisidir?",
+      "options": [
+        "Fenilefrin",
+        "Efedrin",
+        "Fenoldopam",
+        "Dopamin",
+        "Dobutamin"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: Fenilefrin.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 85
+    },
+    {
+      "question": "β2 reseptörler için verilen bilgilerden hangisi yanlıştır?",
+      "options": [
+        "β2-reseptörler, esas olarak düz kas ve bez hücrelerinde bulunan postsinaptik adrenoseptörlerdir, ancak ventriküler miyositlerde de bulunurlar.",
+        "Bu reseptörlerin intravenöz katekolaminlere verdiği yanıttaki rölatif katkısı kronik kalp yetmezliği olan hastalarında artar.",
+        "Adenilat siklazı aktive eder, bu da düz kasları gevşeterek bronkodilatasyon, vazodilatasyon ve uterusun (tokoliz), mesane ve bağırsakların gevşemesi ile sonuçlanır.",
+        "Glikojenoliz, lipoliz, glukoneogenez ve insülin salınımı [3,-reseptör aktivasyonu ile uyarılır.",
+        "Fenilefrin bu reseptör üzerinden etki eder."
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: Fenilefrin bu reseptör üzerinden etki eder..",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 86
+    },
+    {
+      "question": "Efedrin hangi reseptörler üzerinden etki gösterir?",
+      "options": [
+        "α1+β1+β2",
+        "α2+β1+β2",
+        "α1+β2+DA1",
+        "α1+β1+DA1+DA2",
+        "α1+β1+DA1"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: α1+β1+β2.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 87
+    },
+    {
+      "question": "Epinefrin hangi reseptörler üzerinden etki gösterir?",
+      "options": [
+        "α1+β1+DA1",
+        "α1+α2+β1+β2",
+        "α2+β1+β2",
+        "α1+β1+DA1+DA2",
+        "α1+β2+DA1"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: α1+α2+β1+β2.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 88
+    },
+    {
+      "question": "Acil servise \"status asthmaticus\" tablosunda getirilen hastaya yoğun şekilde inhale beta-2 agonist (albuterol/salbutamol) tedavisi veriliyor. Hastanın izleminde aşağıdaki elektrolit bozukluklarından hangisinin gelişmesi en olasıdır?",
+      "options": [
+        "Hiperkalemi",
+        "Hipokalemi",
+        "Hiponatremi",
+        "Hiperkalsemi",
+        "Hipomagnezemi"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 4,
+      "explanation": "Beta-2 reseptör stimülasyonu, -ATPase pompasını aktive ederek potasyumun hücre içine kaymasına (shift) neden olur. Bu durum geçici bir hipokalemiye yol açar.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 89
+    },
+    {
+      "question": "Sempatik sinir uçlarında norepinefrin sentezinin son aşaması (Norepinefrin oluşumu) hücrenin neresinde gerçekleşir?",
+      "options": [
+        "Mitokondri içinde",
+        "Sitoplazmada serbest halde",
+        "Depolama vezikülleri içinde",
+        "Hücre zarı üzerinde",
+        "Çekirdekte"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Dopamin vezikül içine girdikten sonra orada bulunan \"Dopamin beta-hidroksilaz\" enzimi ile norepinefrine dönüşür.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 90
+    },
+    {
+      "question": "İzoproterenol için verilen bilgilerden hangisi yanlıştır?",
+      "options": [
+        "Saf bir β-agonistidir.",
+        "β1 etkileri kalp atım hızını, kontraktiliteyi ve kalp debisini artırır.",
+        "β2 stimülasyonu periferik vasküler direnci ve diyastolik kan basıncını azaltır.",
+        "Oksijen arzı düşerken miyokardiyal oksijen talebi artar.",
+        "Çoğu durumda güçlü bir inotropik seçim alternatifidir."
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: Çoğu durumda güçlü bir inotropik seçim alternatifidir..",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 91
+    },
+    {
+      "question": "Nadolol'ün diğer non-selektif beta-blokerlerden (örn. Propranolol) en belirgin farkı nedir?",
+      "options": [
+        "Çok kısa etkili olması",
+        "Çok uzun yarı ömre sahip olması (günde tek doz)",
+        "Sadece karaciğerde yıkılması",
+        "Alfa reseptörlerini uyarması",
+        "Göz içine damlatılması"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Nadolol, uzun yarı ömrü sayesinde kronik tedavide hasta uyumunu artırır.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 92
+    },
+    {
+      "question": "Feokromositoma tanısı olan hastada hangi anestezik ajanlardan kaçınılmalıdır?\nKetamin\nHalotan\nSevofluran\nAntikolinerjikler\nPankuronyum\nAtrakuryum",
+      "options": [
+        "I-II-II",
+        "IV-V-VI",
+        "I-V-IV",
+        "II-III-IV",
+        "Hepsi"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: Hepsi.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 93
+    },
+    {
+      "question": "Aşağıdaki ajanlardan hangisi/hangileri sadece α reseptörleri üzerinden etki eder?\nFenilefrin\nEfedrin\nKlonidin\nDeksmedetomidin\nEfedrin",
+      "options": [
+        "Yalnız I",
+        "I-II",
+        "I-III-IV",
+        "II-V",
+        "I-II-V"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: I-III-IV.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 94
+    },
+    {
+      "question": "Norepinefrin hangi reseptörler üzerinden etki gösterir?",
+      "options": [
+        "α1+α2+β1",
+        "α1+α2+β2",
+        "α1+β1+β2",
+        "α2+β1+β2",
+        "α1+β1+DA1"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: α1+α2+β1.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 95
+    },
+    {
+      "question": "\"Nebivolol\" isimli üçüncü kuşak beta-blokerin, diğer beta-blokerlere (örneğin Atenolol) üstünlüğü olan ek mekanizması aşağıdakilerden hangisidir?",
+      "options": [
+        "Alfa-1 blokajı yapması",
+        "Kalsiyum kanal blokajı yapması",
+        "Nitrik Oksit (NO) salınımını uyararak vazodilatasyon sağlaması",
+        "ACE inhibisyonu yapması",
+        "İnsülin duyarlılığını azaltması"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Nebivolol, yüksek derecede beta-1 selektif olmasının yanında, vasküler endotelden NO salınımını tetikleyerek doğrudan vazodilatör etki gösteren benzersiz bir beta-blokerdir.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 96
+    },
+    {
+      "question": "Aşağıdakilerden hangisi/hangileri doğal katekolaminler arasında yer alır?\nDopamin\nEpinefrin\nNorepinefrin\nDobutamin\nİzoproterenol",
+      "options": [
+        "Yalnız I",
+        "I-II",
+        "I-II-III",
+        "I-II-III-IV",
+        "I-II-III-IV-V"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: I-II-III.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 97
+    },
+    {
+      "question": "Hem alfa-1 hem de non-selektif beta blokaj yaparak, özellikle kalp yetmezliği tedavisinde mortaliteyi azalttığı kanıtlanmış \"karışık etkili\" bloker hangisidir?",
+      "options": [
+        "Atenolol",
+        "Karvedilol",
+        "Esmolol",
+        "Prazosin",
+        "Metoprolol"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Karvedilol; alfa-1, beta-1 ve beta-2 blokajı yapar. Kalp yetmezliğinde hem art yükü azaltır hem de kalbi sempatik aşırı aktiviteden korur.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 98
+    },
+    {
+      "question": "Aşağıdaki ajanlardan hangisi/hangileri α blokerler grubunda yer alır?\nFentolamin\nPrazosin\nFenoksibenzamin\nEsmolol\nMetoprolol",
+      "options": [
+        "Yalnız I",
+        "I-II",
+        "I-II-III",
+        "I-II-III-IV",
+        "I-II-III-IV-V"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: I-II-III.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 99
+    },
+    {
+      "question": "Aşağıdaki ajanlardan hangileri katekolaminler üzerinde etkilidir?\nTrisiklik antidepresanlar\nKokain\nAmfetamin\nMonoamin oksiddaz inhibitörleri\nAminoglikozidler",
+      "options": [
+        "I-III",
+        "II-IV",
+        "I-II-III-IV",
+        "Yalnız I",
+        "I-II-III-IV-V"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: I-II-III-IV.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 100
+    },
+    {
+      "question": "Sempatik sinir uçlarında tirozin'den DOPA sentezini gerçekleştiren ve hız kısıtlayıcı (rate-limiting) basamak olan enzim hangisidir?",
+      "options": [
+        "DOPA dekarboksilaz",
+        "Dopamin beta-hidroksilaz",
+        "Tirozin hidroksilaz",
+        "Feniletanolamin N-metiltransferaz",
+        "MAO"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Tirozin hidroksilaz, katekolamin sentezinin en kritik ve kontrol noktası olan adımıdır.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 101
+    },
+    {
+      "question": "60 yaşında kronik kalp yetmezliği olan bir erkek hastaya \"inodilatör\" etkisi nedeniyle Dobutamin infüzyonu başlanıyor. Dobutamin'in moleküler düzeyde hücre içi döngüdeki ana etkisi aşağıdakilerden hangisidir?",
+      "options": [
+        "İnositol trifosfat artışı",
+        "Guanilat siklaz aktivasyonu",
+        "Adenilat siklaz aktivasyonu ve cAMP artışı",
+        "Fosfodiesteraz-3 inhibisyonu",
+        "Voltaj bağımlı sodyum kanallarının blokajı"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 4,
+      "explanation": "Dobutamin bir Beta-1 agonistidir. Beta reseptörler proteini üzerinden adenilat siklazı aktive ederek hücre içi cAMP düzeylerini artırır, bu da protein kinaz A aracılığıyla kalsiyum girişini ve kontraktiliteyi artırır.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 102
+    },
+    {
+      "question": "Deksmedetomidin için verilen bilgilerden hangisi yanlıştır.",
+      "options": [
+        "α2/α1 reseptör özgüllük oranı klonidinin 8 katıdır (afinitesi daha yüksek).",
+        "Deksmedetomidinin yarı ömrü (2-3 sa.) klonidinden (12-24 sa.) daha kısadır.",
+        "Perioperatif dönemde görülen kardiyovasküler yanıtların çoğunu baskılayan sedatif, analjezik ve sempatolitik etkilere sahiptir.",
+        "Sedatif ve analjezik etkilere beyin (locus ceruleus) ve spinal korddaki α2-adrenerjik reseptörler aracılık eder.",
+        "Uzun süreli kullanımına tolerans gelişmez."
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: Uzun süreli kullanımına tolerans gelişmez..",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 103
+    },
+    {
+      "question": "Anafilaksi için ve ventriküler fibrilasyon sırasında koroner perfüzyon basıncını artırmak için başlıca ilaç tedavisi aşağıdakilerden hangisidir?",
+      "options": [
+        "Efedrin",
+        "Epinefrin",
+        "Noradrenalin",
+        "Dopamin",
+        "İzoproterenol"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: Epinefrin.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 104
+    },
+    {
+      "question": "İzoproterenol (İzoprenalin) uygulaması sonrası kalp hızı ve sistemik vasküler direnç değişimi nasıl olur?",
+      "options": [
+        "Hız Artar / Direnç Artar",
+        "Hız Artar / Direnç Azalır",
+        "Hız Azalır / Direnç Artar",
+        "Hız Azalır / Direnç Azalır",
+        "Değişmez"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "İzoproterenol saf beta agonisttir. Beta-1 ile kalbi hızlandırır, Beta-2 ile damarları genişletir (vazodilatasyon).",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 105
+    },
+    {
+      "question": "Aşağıdaki adrenerjik agonist ajanlardan hangisi/hangileri periferik vasküler direnci düşürebilir?\nEpinefrin\nFenoldopam\nİzoproterenol\nDobutamin\nFenilefrin",
+      "options": [
+        "I-II",
+        "I-III",
+        "II-V",
+        "I-II-III-IV",
+        "I-II-III-IV-V"
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: I-II-III-IV.",
+      "category": "Adrenerjik Agonist ve Antagonistler",
+      "id": 106
+    }
+  ]
+}

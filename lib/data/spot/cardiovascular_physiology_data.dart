@@ -25,35 +25,43 @@ class CardiovascularPhysiologyCategory {
 }
 
 class CardiovascularPhysiologyData {
-  static List<CardiovascularPhysiologyCategory> getCardiovascularPhysiologyData(BuildContext context) {
+  static List<CardiovascularPhysiologyCategory> getCardiovascularPhysiologyData(
+    BuildContext context,
+  ) {
     return [
       CardiovascularPhysiologyCategory(
         categoryName: 'Kardiyak Aksiyon Potansiyeli',
         items: [
           CardiovascularPhysiologyItem(
-            title: 'İstirahat Potansiyeli',
-            description: '-80/-90 mV',
+            title: "İSTİRAHAT POTANSİYELİ (-80/-90 MV)",
+            description: "Kardiyak hücrelerinde istirahat halindeki membran potansiyeli -80 ile -90 mV arasındadır.",
+            additionalInfo: "Bu potansiyel farkı Na-K ATPaz pompası tarafından aktif olarak korunur; hücre içindeki negatif yükün korunması uyarılabilirlik için temeldir.",
           ),
           CardiovascularPhysiologyItem(
-            title: 'Faz 0',
-            description: 'Na⁺ girişi (hızlı depolarizasyon)',
+            title: "FAZ 0 (HIZLI DEPOLARİZASYON)",
+            description: "Hızlı sodyum (Na⁺) kanallarının açılmasıyla gerçekleşen ani bir elektriksel deşarj aşamasıdır.",
+            additionalInfo: "Na⁺ iyonlarının hücre içine hızla girmesiyle membran potansiyeli negatiften pozitif değerlere doğru hızla yükselir.",
           ),
           CardiovascularPhysiologyItem(
-            title: 'Faz 1',
-            description: 'Na⁺ inaktivasyonu',
+            title: "FAZ 1 (SODYUM İNAKTİVASYONU)",
+            description: "Hızlı sodyum kanallarının kapanması ve potasyumun geçici dışa çıkışı ile başlayan kısa bir repolarizasyon fazıdır.",
+            additionalInfo: "Bu evrede aksiyon potansiyeli tepe noktasına ulaşır ve inaktivasyon kapıları kapanarak sodyum akımı durdurulur.",
           ),
           CardiovascularPhysiologyItem(
-            title: 'Faz 2',
-            description: 'Ca²⁺ girişi (plato)',
+            title: "FAZ 2 (KALSİYUM GİRİŞİ VE PLATO DÖNEMİ)",
+            description: "Kalsiyum (Ca²⁺) iyonlarının hücre içine girişiyle oluşan ve kasılmanın tetiklendiği plato aşamasıdır.",
+            additionalInfo: "Yavaş kalsiyum kanalları üzerinden gerçekleşen bu giriş, potasyum çıkışı ile dengelenerek aksiyon potansiyelinin süresini uzatır ve kalbin tetanik kasılmasını engeller.",
           ),
           CardiovascularPhysiologyItem(
-            title: 'Faz 3',
-            description: 'K⁺ çıkışı (repolarizasyon)',
+            title: "FAZ 3 (POTASYUM ÇIKIŞI VE REPOLARİZASYON)",
+            description: "Hızlı potasyum (K⁺) çıkışı ile hücrenin tekrar negatif istirahat potansiyeline dönmesini sağlayan aşamadır.",
+            additionalInfo: "Repolarizasyonun tamamlanmasıyla hücre tekrar uyarılabilir hale gelmek üzere hazırlanır; bu aşamada iyon dengesi yeniden düzenlenir.",
           ),
           CardiovascularPhysiologyItem(
-            title: 'Faz 4',
-            description: 'İstirahat potansiyeline dönüş',
-            subtitle: 'Refrakter dönem: Faz IV\'e kadar',
+            title: "FAZ 4 (İSTİRAHAT POTANSİYELİNE DÖNÜŞ)",
+            description: "Hücrenin tekrar uyarılmayı beklediği kararlı istirahat potansiyeli aşamasıdır.",
+            subtitle: "Hücrenin tekrar uyarılmaya dirençli olduğu mutlak refrakter dönem Faz IV'e kadar sürer",
+            additionalInfo: "Na-K ATPaz pompası bu fazda iyonları (Na out, K in) yerli yerine koyarak bir sonraki aksiyon potansiyeli için hazır hale gelir.",
           ),
         ],
       ),
@@ -61,22 +69,25 @@ class CardiovascularPhysiologyData {
         categoryName: 'Kardiyak İletim Sistemi',
         items: [
           CardiovascularPhysiologyItem(
-            title: 'SA Nod',
-            description: 'Primer pacemaker, intrinsik hız 90–100/dk',
+            title: "SA NOD (PRİMER PACEMAKER)",
+            description: "Kalbin ana ritim odağı olup, intrinsik olarak dakikada 90-100 uyarı üretme kapasitesine sahiptir.",
+            additionalInfo: "Sağ atriyumda yer alan bu yapı, normal fizyolojide baskın pacemaker olarak kalbin hızını belirleyen ana merkezdir.",
           ),
           CardiovascularPhysiologyItem(
-            title: 'AV Nod',
-            description: 'İleti gecikmesi (0.11 s), hız 40–60/dk',
+            title: "AV NOD (İLETİ GECİKMESİ)",
+            description: "İletiyi yaklaşık 0.11 saniye geciktirerek atriyumların boşalmasına ve ventriküllerin dolmasına zaman kazandırır.",
+            additionalInfo: "İntrinsik uyarı hızı dakikada 40-60 arasındadır. Bu gecikme mekanizması kalp siklusunun mekanik verimliliği için hayati önemdedir.",
           ),
           CardiovascularPhysiologyItem(
-            title: 'His-Purkinje',
-            description: 'En hızlı ileti → ventriküller eş zamanlı uyarılır (0.03 s)',
+            title: "HİS-PURKİNJE SİSTEMİ (EN HIZLI İLETİ)",
+            description: "İletinin en hızlı yayıldığı bölge olup, ventriküllerin 0.03 saniye içinde eş zamanlı kasılmasını sağlar.",
+            additionalInfo: "Bu hızlı yayılım, kalbin kanı fırlatırken senkronize bir şekilde çalışmasına (kontraksiyon senkronizasyonuna) imkan tanır.",
           ),
           CardiovascularPhysiologyItem(
-            title: 'Anesteziklerin Etkileri',
-            description: 'Potent inhalasyon ajanları: SA nod baskılar, AV nod orta derece, Purkinje lifleri karmaşık',
-            subtitle: 'Opioidler: AP süresini uzatır',
-            additionalInfo: 'LA\'ler: yüksek dozda Na⁺ kanallarını bloke eder',
+            title: "ANESTEZİKLERİN İLETİ SİSTEMİ ÜZERİNE ETKİLERİ",
+            description: "Potent inhalasyon ajanları SA nodu baskılarken, AV nodu orta derece, Purkinje liflerini ise karmaşık etkilerler.",
+            subtitle: "Opioidler aksiyon potansiyeli (AP) süresini uzatır",
+            additionalInfo: "Lokal anestezikler (LA) ise yüksek dozlarda Na⁺ kanallarını bloke ederek ileti hızını ciddi oranda yavaşlatabilirler.",
           ),
         ],
       ),
@@ -84,16 +95,19 @@ class CardiovascularPhysiologyData {
         categoryName: 'Kalbin İnnervasyonu',
         items: [
           CardiovascularPhysiologyItem(
-            title: 'Parasempatik (M2)',
-            description: 'Negatif kronotropi, dromotropi, inotropi',
+            title: "PARASEMPATİK SİSTEM (M2 RESEPTÖRLER)",
+            description: "Muskarinik tip 2 reseptörler üzerinden negatif kronotropi, dromotropi ve inotropi etkisi yaparlar.",
+            additionalInfo: "Vagus siniri üzerinden gerçekleştirilen bu kontrol, kalp hızını ve kasılma gücünü baskılayarak kalbin iş yükünü azaltır.",
           ),
           CardiovascularPhysiologyItem(
-            title: 'Sempatik (β1)',
-            description: 'Pozitif kronotropi, dromotropi, inotropi',
+            title: "SEMPATİK SİSTEM (BETA-1 RESEPTÖRLER)",
+            description: "Beta-1 reseptörleri üzerinden pozitif kronotropi, dromotropi ve inotropi etkileri gösterirler.",
+            additionalInfo: "Sempatik üst zincir üzerinden gelen uyarılar kalp hızını ve kasılma gücünü artırarak kardiyak debiyi yükseltirler.",
           ),
           CardiovascularPhysiologyItem(
-            title: 'İnnervasyon Dağılımı',
-            description: 'Sağ vagus/sempatik → SA nod; Sol vagus/sempatik → AV nod',
+            title: "İNNERVASYON DAĞILIMI VE NOD KONTROLÜ",
+            description: "Sağ otonomik sinirler temel olarak SA nodu, sol taraf ise AV nodu kontrol etme eğilimindedir.",
+            additionalInfo: "Sağ vagus/sempatik sistemi SA nod üzerindeki baskın hızı, sol vagus/sempatik sistemi ise AH (AV geçiş) gecikmesini belirler.",
           ),
         ],
       ),
@@ -101,14 +115,15 @@ class CardiovascularPhysiologyData {
         categoryName: 'Kalp Siklusu',
         items: [
           CardiovascularPhysiologyItem(
-            title: 'Atriyum Kontraksiyonu',
-            description: 'Ventrikül dolumuna %20–30 katkı',
+            title: "ATRİYUM KONTRAKSİYONU (ATRİYAL KİCK)",
+            description: "Atriyumların sistolü, toplam ventrikül dolumuna yaklaşık %20-30 oranında katkı sağlar.",
+            additionalInfo: "Atriyal fibrilasyon gibi durumlarda bu katkının kaybolması, kardiyak debide belirgin bir düşüşle sonuçlanabilir.",
           ),
           CardiovascularPhysiologyItem(
-            title: 'CVP Dalgaları',
-            description: 'a dalgası: atriyum sistolü',
-            subtitle: 'c dalgası: ventrikül sistolü',
-            additionalInfo: 'v dalgası: atriyum dolumu',
+            title: "CVP DALGALARI (A, C, V DALGASI)",
+            description: "Santral venöz basınçtaki 'a' dalgası atriyum sistolünü, 'c' dalgası ise ventrikül sistolünü yansıtır.",
+            subtitle: "v dalgası ise atriyumun dolum aşamasını temsil eder",
+            additionalInfo: "CVP trasesindeki bu mekanik işaretler, kalbin sağ tarafındaki hemodinamik olaylar hakkında doğrudan bilgi sağlar.",
           ),
         ],
       ),
@@ -116,42 +131,51 @@ class CardiovascularPhysiologyData {
         categoryName: 'Ventrikül Performansı',
         items: [
           CardiovascularPhysiologyItem(
-            title: 'Temel Formüller',
-            description: 'CO = SV × HR',
-            subtitle: 'CI = CO / VYA (2.5–4.2 L/dk/m²)',
-            additionalInfo: 'EF = (EDV-ESV)/EDV → normal %67±8\nMiks venöz sat.: doku perfüzyonu göstergesi',
+            title: "TEMEL HEMODİNAMİK FORMÜLLER (CO VE CI)",
+            description: "Kardiyak debi (CO), atım hacmi ile kalp hızının çarpımıdır; CO = SV × HR.",
+            subtitle: "CI (Kardiyak İndeks), CO'nun vücut yüzey alanına oranıdır ve normalde 2.5–4.2 L/dk/m²'dir",
+            additionalInfo: "Bu formüller dokulara yeterli kan sunulup sunulmadığını belirleyen en temel klinik parametrelerdir.",
+          ),
+          CardiovascularPhysiologyItem(
+            title: "EJEKSİYON FRAKSİYONU (EF) VE MİKS VENÖZ",
+            description: "EF, diyastol sonu hacmin ne kadarının atıldığını gösterir; EF = (EDV-ESV)/EDV (Normal %67±8).",
+            additionalInfo: "Miks venöz satürasyon (SvO2) ise dokuların oksijen tüketimi ile sunumu arasındaki dengeyi yansıtan en hassas perfüzyon göstergesidir.",
           ),
         ],
       ),
       CardiovascularPhysiologyCategory(
-        categoryName: 'Önyük',
+        categoryName: 'Önyük (Preload)',
         items: [
           CardiovascularPhysiologyItem(
-            title: 'Önyük Göstergeleri',
-            description: 'EDV = önyük göstergesi',
+            title: "ÖNYÜK GÖSTERGELERİ (EDV)",
+            description: "Ventrikül diyastol sonu hacmi (EDV), kalbin önyükü için en temel göstergedir.",
+            additionalInfo: "Klinik olarak EDV arttıkça Frank-Starling kanununa göre kasılma gücü ve atım hacmi de artar.",
           ),
           CardiovascularPhysiologyItem(
-            title: 'Frank-Starling Yasası',
-            description: 'Hacim ↑ → CO ↑',
-            subtitle: 'Aşırı hacim → CO değişmez/azalır',
+            title: "FRANK-STARLING YASASI VE HACİM İLİŞKİSİ",
+            description: "Kalbe gelen kan hacmi arttıkça liflerin gerilmesine bağlı olarak kardiyak debi (CO) artar.",
+            subtitle: "Aşırı hacim yüklenmesi durumunda kalp bu artışı kompanse edemez, debi sabit kalır veya azalır",
+            additionalInfo: "Bu mekanizma kalbin anlık venöz dönüş değişikliklerine uyum sağlamasını sağlayan içsel bir özelliktir.",
           ),
           CardiovascularPhysiologyItem(
-            title: 'Kalp Hızı Etkisi',
-            description: '>120/dk hız dolumu azaltır',
+            title: "KALP HIZININ DOLUM ÜZERİNDEKİ ETKİSİ",
+            description: "Kalp hızının dakikada 120 atımı aşması, diyastol süresini kısalttığı için ventrikül dolumunu azaltır.",
+            additionalInfo: "Kısalan dolum süresi, özellikle mitral darlığı veya koroner yetmezliği gibi durumlarda debiyi ciddi oranda düşürebilir.",
           ),
         ],
       ),
       CardiovascularPhysiologyCategory(
-        categoryName: 'Ardyük',
+        categoryName: 'Ardyük (Afterload)',
         items: [
           CardiovascularPhysiologyItem(
-            title: 'Duvar Gerilimi',
-            description: 'Duvar gerilimi = (P×R)/(2×H) (Laplace)',
+            title: "DUVAR GERİLİMİ VE LAPLACE KANUNU",
+            description: "Duvar gerilimi (P×R)/(2×H) formülü ile hesaplanan, ventrikülün kanı fırlatmak için yendiği basınçtır.",
+            additionalInfo: "Ventrikül yarıçapı arttıkça veya duvar inceldikçe gereken kasılma gücü ve oksijen tüketimi de artar.",
           ),
           CardiovascularPhysiologyItem(
-            title: 'Direnç Değerleri',
-            description: 'SVR: 900–1500 dyn·s·cm⁻⁵',
-            subtitle: 'PVR: 50–150 dyn·s·cm⁻⁵',
+            title: "VASKÜLER DİRENÇ DEĞERLERİ (SVR VE PVR)",
+            description: "Sistemik direnç (SVR) 900–1500, pulmoner direnç (PVR) ise 50–150 dyn·s·cm⁻⁵ arasındadır.",
+            additionalInfo: "Bu direnç değerleri, kalbin her bir atımında kanı ileriye itmek için karşılaştığı empedansı belirler.",
           ),
         ],
       ),
@@ -159,12 +183,14 @@ class CardiovascularPhysiologyData {
         categoryName: 'Kontraktilite',
         items: [
           CardiovascularPhysiologyItem(
-            title: 'Pozitif Etkiler',
-            description: 'En güçlü pozitif etki: sempatik sistem',
+            title: "POZİTİF İNOTROPİK ETKİLER",
+            description: "Kasılmayı artıran en güçlü pozitif faktör sempatik sistem uyarımıdır.",
+            additionalInfo: "Eksojen katekolaminler, kalsiyum ve digitalis türevleri de kasılma gücünü artıran unsurlar arasındadır.",
           ),
           CardiovascularPhysiologyItem(
-            title: 'Negatif Etkiler',
-            description: 'Anoksi, asidoz, iskemi, katekolamin tükenmesi',
+            title: "NEGATİF İNOTROPİK ETKİLER",
+            description: "Anoksi, asidoz, iskemi ve karbondioksit birikimi kalbin kasılma gücünü saniyeler içinde düşürür.",
+            additionalInfo: "Ayrıca kronik durumlardaki katekolamin tükenmesi de kontraktilite üzerinde negatif etki oluşturur.",
           ),
         ],
       ),
@@ -172,13 +198,15 @@ class CardiovascularPhysiologyData {
         categoryName: 'Sistemik Dolaşım',
         items: [
           CardiovascularPhysiologyItem(
-            title: 'Basınç Hesaplamaları',
-            description: 'OAB = DB + 1/3 NB',
-            subtitle: 'Nabız basıncı: SV ile doğru, arteriyel kompliyans ile ters',
+            title: "BASINÇ HESAPLAMALARI (OAB VE NB)",
+            description: "Ortalama arter basıncı (OAB) = Diyastolik Basınç + 1/3 Nabız Basıncı formülüyle bulunur.",
+            subtitle: "Nabız basıncı atım hacmi ile doğru, arteriyel esneklik (kompliyans) ile ters orantılıdır",
+            additionalInfo: "OAB, doku perfüzyonunu sağlayan temel sürücü güçtür ve anestezi altında dikkatle izlenmelidir.",
           ),
           CardiovascularPhysiologyItem(
-            title: 'Arteriyoller',
-            description: 'En büyük basınç düşüşü (SVR belirleyici)',
+            title: "ARTERİYOLLERİN DİRENÇ ÜZERİNDEKİ ROLÜ",
+            description: "Dolaşım sisteminde en büyük kan basıncı düşüşünün yaşandığı bölge arteriyollerdir.",
+            additionalInfo: "Bu küçük damarlar, vasküler direncin (SVR) ana belirleyicisi olarak kan akımının kontrolünde başrol oynarlar.",
           ),
         ],
       ),
@@ -186,16 +214,20 @@ class CardiovascularPhysiologyData {
         categoryName: 'Basınç Kontrol Mekanizmaları',
         items: [
           CardiovascularPhysiologyItem(
-            title: 'Erken Dönem',
-            description: 'Barorefleks (karotis > aort)',
+            title: "ERKEN DÖNEM (BAROREFLEKS)",
+            description: "Saniyeler içinde devreye giren en hızlı basınç kontrol mekanizmasıdır.",
+            subtitle: "Karotis sinüsü baroreseptörleri, aortik alana göre daha baskındır",
+            additionalInfo: "Basınç değişikliklerini algılayarak otonom sinir sistemi üzerinden kalp hızı ve direnç ayarı yapar.",
           ),
           CardiovascularPhysiologyItem(
-            title: 'Orta Dönem',
-            description: 'RAA, AVP',
+            title: "ORTA DÖNEM (RAA VE AVP)",
+            description: "Dakikalar ila saatler içinde devreye giren Renin-Anjiyotensin ve Vazopressin sistemidir.",
+            additionalInfo: "Damar daralması ve sıvı tutulumu üzerinden kan basıncını dengelemeye çalışır.",
           ),
           CardiovascularPhysiologyItem(
-            title: 'Uzun Dönem',
-            description: 'Renal Na-su dengesi',
+            title: "UZUN DÖNEM (RENAL MEKANİZMALAR)",
+            description: "Günler ve haftalar boyunca böbrekler üzerinden sodyum ve su dengesini düzenleyen mekanizmadır.",
+            additionalInfo: "Basınç natriürezi ve diürezi yoluyla kan hacmini ayarlayarak tansiyonu stabil tutar.",
           ),
         ],
       ),
@@ -203,15 +235,15 @@ class CardiovascularPhysiologyData {
         categoryName: 'Koroner Dolaşım',
         items: [
           CardiovascularPhysiologyItem(
-            title: 'Koroner Arterler',
-            description: 'RCA → RA, RV, LV inferior',
-            subtitle: 'LCA → LA, septum, LV anterior-lateral',
+            title: "KORONER ARTERLERİN BESLEME BÖLGELERİ",
+            description: "RCA sağ kalp ve LV inferiorunu besler; LCA ise sol kalp, septum ve anterior bölgeleri besler.",
+            additionalInfo: "RCA = Sağ atriyum, Sağ ventrikül, LV inferiyor wall; LCA = Sol atriyum, İnterventriküler septum, LV anterior–lateral wall.",
           ),
           CardiovascularPhysiologyItem(
-            title: 'Koroner Perfüzyon',
-            description: 'Koroner perfüzyon basıncı = DBP – LVEDP',
-            subtitle: 'Koroner kan akımı ≈ 250 mL/dk',
-            additionalInfo: 'Sinüs sat. ≈ %30\nO₂ tüketimi: basınç işi %64',
+            title: "KORONER PERFÜZYON BASINCI VE AKIM",
+            description: "Koroner perfüzyon basıncı DBP – LVEDP farkıdır; normal kan akımı dakikada 250 mL'dir.",
+            subtitle: "Kalbin oksijen tüketiminin %64'ü basınç işine harcanır",
+            additionalInfo: "Sinüs venöz satürasyonu yaklaşık %30'dur; bu da miyokardın oksijeni en verimli (maksimum) kullanan organ olduğunu gösterir.",
           ),
         ],
       ),
@@ -219,12 +251,14 @@ class CardiovascularPhysiologyData {
         categoryName: 'Anesteziklerin Kardiyovasküler Etkileri',
         items: [
           CardiovascularPhysiologyItem(
-            title: 'Volatil Ajanlar',
-            description: 'Koroner VD, MVO₂ azalması, reperfüzyon koruması (ATP-duyarlı K⁺ kanalı)',
+            title: "VOLATİL AJANLARIN KORUYUCU ETKİLERİ",
+            description: "ATP-duyarlı potasyum kanallarını açarak rejenerasyon ve reperfüzyon koruması sağlarlar.",
+            additionalInfo: "Koroner vazodilatasyon ve miyokard oksijen (MVO2) ihtiyacını azaltarak kalbi riskli dönemlerde korurlar.",
           ),
           CardiovascularPhysiologyItem(
-            title: 'Sevofluran',
-            description: 'Koroner steal yapmaz',
+            title: "SEVOFLURAN VE KORONER ÇALMA",
+            description: "Sevofluran'ın koroner çalma fenomenine yol açmadığı klinik olarak kanıtlanmıştır.",
+            additionalInfo: "Bu özelliği ile iskemik kalp hastalarında inhalasyon anestezisi için güvenilir bir seçenek sunar.",
           ),
         ],
       ),
@@ -232,16 +266,19 @@ class CardiovascularPhysiologyData {
         categoryName: 'Kalp Yetmezliği',
         items: [
           CardiovascularPhysiologyItem(
-            title: 'En Sık Sebep',
-            description: 'KAH',
+            title: "EN SIK SEBEP (KORONER ARTER HASTALIĞI)",
+            description: "Kalp yetmezliği vakalarının birincil ve en yaygın etiyolojik nedeni koroner arter hastalığıdır.",
+            additionalInfo: "Miyokard perfüzyonunun bozulması, zamanla kasılma ve dolum kusurlarına yol açarak yetmezlik tablosunu oluşturur.",
           ),
           CardiovascularPhysiologyItem(
-            title: 'Diyastolik Disfonksiyon',
-            description: 'HT, KAH, HCM',
+            title: "DİYASTOLİK DİSFONKSİYON NEDENLERİ",
+            description: "Sıklıkla Hipertansiyon (HT), Koroner Arter Hastalığı (KAH) ve Hipertrofik Kardiyomiyopati sonrası gelişir.",
+            additionalInfo: "Kalp kasının sertleşmesi veya dolumun zorlaşması ile karakterize bu durum, yetmezlik semptomlarının önemli bir kısmından sorumludur.",
           ),
           CardiovascularPhysiologyItem(
-            title: 'Kompansatuar Mekanizmalar',
-            description: 'Önyük ↑, sempatik tonus ↑, ventriküler hipertrofi',
+            title: "KOMPANSATUAR MEKANİZMALAR VE VENTRİKÜL",
+            description: "Kalp debisi düştüğünde vücut önyükü artırır, sempatik tonusu yükseltir ve ventriküler hipertrofi geliştirir.",
+            additionalInfo: "Kısa vadede debiyi koruyan bu yanıtlar, uzun vadede kalbin şekil değiştirmesine (remodeling) ve yetmezliğin ağırlaşmasına yol açabilir.",
           ),
         ],
       ),

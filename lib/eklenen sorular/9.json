@@ -1,0 +1,1149 @@
+{
+  "meta": {
+    "title": "İntravenöz Anestezikler Soru Bankası",
+    "language": "tr",
+    "questionCount": 76
+  },
+  "questions": [
+    {
+      "id": 1,
+      "question": "Aşağıdaki İV anestezik ajanlardan hangisi akut intermitan porfiri veya variegate porfiriyi tetikleyebilir?",
+      "options": [
+        "Tiyopental",
+        "Propofol",
+        "Midazolam",
+        "Ketamin",
+        "Etomidat"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Barbitüratlar, karaciğerde ALA sentetaz (aminolevulinik asit sentetaz) enzimini indüklerler (uyarırlar). Bu enzimin uyarılması, vücutta porfirin öncüllerinin aşırı birikmesine neden olur. Bu durum; şiddetli karın ağrısı, nörolojik bozukluklar ve kardiyovasküler instabilite ile seyreden ölümcül bir akut porfiri krizinitetikleyebilir.",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 2,
+      "question": "Midazolamın suda çözünürlüğünü sağlayan ve intravenöz uygulamada (Diyazepamın aksine) ağrı yapmamasını sağlayan yapısal özellik nedir?",
+      "options": [
+        "Propilen glikol içermesi",
+        "pH'a duyarlı imidazol halkası",
+        "Yüksek albümin bağlama kapasitesi",
+        "Benzen halkasına klor eklenmesi",
+        "Safra yoluyla atılması"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Midazolamın imidazol halkası, ampul içindeki düşük pH'da açık kalarak ilacı suda çözünür yapar; kanın fizyolojik pH'ında (7.4) halka kapanır ve ilaç yağda çözünür hale gelerek beyne geçer.",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 3,
+      "question": "Aşağıdakilerden hangisi benzodiyazepinlerin tek başlarına uygulandıklarında kardiyovasküler sistemde beklenen bir etki değildir?",
+      "options": [
+        "Arteryel kan basıncında hafif düşüşe neden olabilirler.",
+        "Kardiyak debide hafif düşüşe neden olabilirler.",
+        "Periferik vasküler rezistansta hafif düşüşe neden olabilirler.",
+        "Minimal sol ventrikül depresan etkiye sahiptirler.",
+        "Kalp hızında hafif düşüşe neden olabilirler."
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Benzodiazepinler, arteryel kan basıncını hafifçe düşürdüklerinde (vazodilatasyon ve sempatik tonus azalması nedeniyle), vücut buna genellikle refleks olarak kalp hızında hafif bir artışla yanıt verir. Kalp hızı ya değişmez ya da bu baroreseptör refleksi nedeniyle bir miktar artar. Kalp hızını düşürmeleri beklenen bir etki değildir.",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 4,
+      "question": "Aşağıdakilerin hangisi Barbitüratların santral sinir sistemi üzerindeki etkilerinden biri değildir?",
+      "options": [
+        "Serebral vazokonstriksiyon yaparak serebral kan akımını, serebral kan hacmini ve intrakraniyal basıncı azaltırlar.",
+        "Serebral perfüzyon basıncı [cerebral perfusion pressure (CPP)] genellikle yükselir.",
+        "Barbitüratlar serebral oksijen tüketimini (normalin %50’sine kadar) serebral kan akımına kıyasla daha fazla azaltırlar.",
+        "EEG’de düşük dozlarda düşük voltajlı hızlı aktiviteyle; yüksek dozlardaysa yüksek voltajlı düşük aktivite, burst supresyon ve izoelektrik aktivite ile kendini gösterir.",
+        "Santral sinir sistemi depresyonu uygulanan dozdan bağımsız olarak, hafif sedasyondan bilinç kaybına kadar uzanan bir skalada olabilir."
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Barbitüratların etkisi doza bağımlıdır. Küçük dozlar sakinlik (sedasyon) yaparken, doz artırıldığında anestezi ve tam bilinç kaybı gelişir.",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 5,
+      "question": "Propofolün indüksiyon sonrası uyanma hızının ve TİVA (Total İntravenöz Anestezi) için uygunluğunun temel nedeni aşağıdakilerden hangisidir?",
+      "options": [
+        "Sadece böbrekler yoluyla değişmeden atılması",
+        "Çok düşük plazma protein bağlama oranı",
+        "Çok hızlı hepatik metabolizma ve yüksek klirens hızı",
+        "Aktif metabolitlerinin beyin üzerinde uzun süre kalması",
+        "Yağ dokusundan kana geçişinin (redistribüsyon) olmaması"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Propofol, karaciğerde son derece hızlı metabolize edilir (konjugasyon). Bu yüksek klirens, ilacın vücutta birikmesini önleyerek hızlı uyanma sağlar.",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 6,
+      "question": "Potent bir bronkodilatatör olması sebebiyle astım hastalarında tercih edilen ketamin türevi hangisidir?",
+      "options": [
+        "Rasemik ketamin",
+        "Steroizomer ketamin",
+        "Enantiomer ketamin",
+        "Norketamin",
+        "Hepsi"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Astımlı bir hastada veya aktif wheezing (hırıltılı solunum) olan bir hastada anestezi indüksiyonu yapılacaksa, Ketamin(rasemik form) havayolu direncini azalttığı için ilk tercih edilen ajanlardan biridir.",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 7,
+      "question": "Aşağıdaki İV anestezik ajanlardan hangisi Adrenokortikal supresyona neden olur?",
+      "options": [
+        "Propofol",
+        "Pentotal",
+        "Midazolam",
+        "Ketamin",
+        "Etomidat"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Etomidat → adrenokortikal supresyon yapar (11β-hidroksilaz inhibisyonu).",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 8,
+      "question": "Barbitürat halkası üzerinde yapılan atomik değişiklikler ilacın klinik özelliklerini belirler. Aşağıdaki eşleşmelerden hangisi yanlıştır?",
+      "options": [
+        "C2'ye Kükürt eklenmesi: Yağda çözünürlüğü ve etki hızını artırır.",
+        "C5'teki yan zincir değişimi: Hipnotik gücü (potens) belirler.",
+        "N1'e Metil grubu eklenmesi: Etki süresini uzatır ve antikonvülzan etkiyi artırır.",
+        "Fenobarbitaldeki fenil grubu: Antikonvülzan etki sağlar.",
+        "Tiyopentalin yüksek yağ çözünürlüğü: Hızlı beyin penetrasyonundan sorumludur."
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "N1'e metil grubu eklenmesi (Metoheksital örneğinde olduğu gibi) etki süresini kısaltır ve antikonvülzan etki sağlamak yerine prokonvülzan (nöbet tetikleyici) özellik kazandırır.",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 9,
+      "question": "Ketaminin oluşturduğu dissosiyatif anestezi tablosu için aşağıdakilerden hangisi doğrudur?",
+      "options": [
+        "Duyusal impulsların limbik korteksten ayrılması (dissosiasyon) sonucu oluşur.",
+        "Tüm beyin bölgelerinde tam bir baskılanma (izoelektrik EEG) yapar.",
+        "Sadece sub-anestezik dozlarda analjezi sağlar.",
+        "Parasempatik sistemi uyararak tükürük salgısını azaltır.",
+        "NMDA reseptörlerini agonize ederek etkisini gösterir."
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Ketamin, talamoneokortikal sistemi baskılarken limbik sistemi aktive eder; bu \"ayrışma\" hastanın çevreden kopuk ama gözleri açık bir durumda kalmasına neden olur.",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 10,
+      "question": "Acil sezaryen operasyonunda Tiyopental ile hızlı ardışık indüksiyon yapılmıştır. Bebek doğduğunda hafif sedatize görünmektedir ancak 5 dakika içinde toparlamıştır. Tiyopentalin fetüs üzerindeki etkisinin bu kadar kısa sürmesinin nedeni nedir?",
+      "options": [
+        "Fetal karaciğerin ilacı hızla yıkması",
+        "İlacın plasentadan geçmemesi",
+        "İlacın fetal dolaşımda karaciğerde dilüe olması ve hızla dokulara dağılması",
+        "Amniyotik sıvının ilacı absorbe etmesi",
+        "Bebeğin kan-beyin bariyerinin çok kalın olması"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Tiyopental plasentayı geçer. Ancak bebekte göbek veninden gelen kan önce karaciğerde dilüe olur ve ardından fetal dokulara hızla dağılır (redistribüsyon). Bu koruyucu mekanizma sayesinde bebekteki santral sinir sistemi depresyonu kısa sürer.",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 11,
+      "question": "Aşağıdakilerden hangisi benzodiyazepinlerin santral sinir sistemi üzerindeki etkisini geri çevirmek için kullanılan bir imidazobenzodiyazepindir?",
+      "options": [
+        "Flumazenil",
+        "Naloksan",
+        "Diyazepam",
+        "Flumex",
+        "Flumasin"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Flumazenil, benzodiazepinlerin reseptörü üzerindeki spesifik bağlanma noktalarına bağlanarak bu ilaçların etkilerini yarışmalı (kompetitif) olarak bloke eden bir imidazobenzodiazepin türevidir.",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 12,
+      "question": "Tiyopental sonrası gelişen tansiyon düşüklüğüne vücudun verdiği normal yanıt nedir?",
+      "options": [
+        "Bradikardi",
+        "Kompansatuar taşikardi (baroreseptör refleks)",
+        "Solunum durması",
+        "Terleme",
+        "İdrar miktarında artış"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Barbitüratlar vazodilatasyon yapınca, sağlam baroreseptörlere sahip hastada kalp hızı refleks olarak artar.",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 13,
+      "question": "Öyküsünde yumurtaya karşı anafilaksi olan bir hastada Propofol kullanımından kaçınılmıştır. Propofol formülasyonunda bulunan ve bu alerji riskinden sorumlu olan madde hangisidir?",
+      "options": [
+        "Propilen glikol",
+        "Soya fasulyesi yağı",
+        "Yumurta lesitini",
+        "Gliserol",
+        "Sülfitler"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Propofol, suda çözünmediği için %10 soya yağı, %2.25 gliserol ve %1.2 saflaştırılmış yumurta lesitini içeren bir emülsiyon içinde sunulur. Yumurta anafilaksisi olanlarda bu içerik risk oluşturabilir.",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 14,
+      "question": "Deksmedetomidin sedasyonu altında olan bir hastanın Propofol sedasyonuna göre en büyük farkı nedir?",
+      "options": [
+        "Hasta asla uyandırılamaz.",
+        "Hasta sözlü komutla kolayca uyandırılabilir ve koopere olabilir (kooperatif sedasyon).",
+        "Hasta sürekli halüsinasyon görür.",
+        "Solunum hızı dakikada 4'ün altına iner.",
+        "Göz bebekleri (miyozis) çok büyür."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Deksmedetomidin \"doğal uykuya benzer\" bir sedasyon yapar; hasta uyandırıldığında hızla kendine gelir ve koopere olur.",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 15,
+      "question": "Kafa travması sonrası kafa içi basıncı (KİB) kontrol edilemeyen bir hastada \"Barbitürat Koması\" kararı alınmıştır. Tiyopentalin KİB'i düşürme ve beyni koruma mekanizması hakkında hangisi yanlıştır?",
+      "options": [
+        "Serebral metabolik hızı (CMRO2) düşürür",
+        "Serebral vazokonstriksiyon yapar",
+        "Serebral kan akımını azaltır",
+        "Serebral perfüzyon basıncını (CPP) genellikle düşürür",
+        "Serebral damarları genişleterek kan hacmini artırır"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Barbitüratlar serebral vazodilatasyon yapmaz; tam tersine serebral vazokonstriksiyon yaparak serebral kan hacmini ve kafa içi basıncını (KİB) düşürürler. Bu özellikleri sayesinde beyin cerrahisinde \"beyin koruyucu\" olarak kullanılırlar.",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 16,
+      "question": "Atılımı dışkı ile olan barbitürat aşağıdakilerden hangisidir?",
+      "options": [
+        "Metoheksital",
+        "Fenobarbital",
+        "Tiyopental",
+        "Pentobarbital",
+        "Tiamilal"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Barbitüratlar içinde yüksek karaciğer metabolizasyonu ve dışkı (safra) yoluyla atılım özelliği ile öne çıkan ajan Metoheksital'dir.",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 17,
+      "question": "Nöroanestezide Tiyopentalin \"beyin koruyucu\" (neuroprotective) olarak kabul edilmesinin temel şartı nedir?",
+      "options": [
+        "Serebral kan akımını artırması",
+        "Beyin metabolik hızını (CMRO2) ve kafa içi basıncını (KİB) belirgin düşürmesi",
+        "Nöbet eşiğini düşürmesi",
+        "Serebral vazodilatasyon yapması",
+        "Kan-beyin bariyerini geçmemesi"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Barbitüratlar beyin oksijen tüketimini %50-60 oranında azaltarak iskemik hasara karşı koruma sağlar.",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 18,
+      "question": "Diyazepam ve lorazepam gibi ilaçların hazırlanmasında kullanılan ve intravenöz ya da intramusküler enjeksiyon sırasında ağrıya neden madde aşağıdakilerden hangisidir?",
+      "options": [
+        "Propilen glikol",
+        "Benzen",
+        "Tiamil",
+        "Simetidin",
+        "Etanol"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Diazepam (Diyazepam) ve Lorazepam suda çözünmeyen ilaçlardır. Bu ilaçların damar yoluyla (IV) veya kas içine (IM) verilebilecek sıvı bir form haline getirilmesi için propilen glikol adı verilen organik bir çözücü kullanılır.",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 19,
+      "question": "Premedikasyon amacıyla 5 mg Midazolam yapılan yaşlı hasta, işlem bittikten 1 saat sonra hala aşırı sedatize ve hipoventile durumdadır. Anestezi uzmanı sedasyonu sonlandırmak istemektedir. Hangi ilacı, hangi riskten dolayı dikkatle uygulamalıdır?",
+      "options": [
+        "Neostigmin - Bradikardi",
+        "Naloksan - Hipertansiyon",
+        "Flumazenil - Kısa etkili olduğu için tekrar sedasyon (resedasyon) riski",
+        "Sugammadex - Anafilaksi",
+        "Atropin - Aritmi"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Flumazenilin yarı ömrü (~1 saat), Midazolamın yarı ömründen çok daha kısadır. Flumazenil vücuttan temizlendiğinde, ortamda hala bulunan Midazolam tekrar reseptörlere bağlanarak hastayı tekrar uyutabilir (resedasyon).",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 20,
+      "question": "Aşağıdakilerden hangisi barbitürat kullanım endikasyonları arasında yer almaz?",
+      "options": [
+        "Genel anestezi indüksiyonu",
+        "Anksiyoliz",
+        "Status",
+        "Sedasyon",
+        "Analjezi"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Barbitüratların (örneğin Tiyopental) en belirgin özelliklerinden biri analjezik (ağrı kesici) etkilerinin olmamasıdır.Hatta düşük dozlarda, ağrı eşiğini düşürerek anti-analjezik etki gösterebilirler.",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 21,
+      "question": "Derlenme deliryumunu, alkol çekilmesi semptomlarını ve kokain intoksikasyonunun yan etkilerini azaltmak için kullanılabilen İV anestezik ajan aşağıdakilerden hangisidir?",
+      "options": [
+        "Propofol",
+        "Fospropofol",
+        "Benzodiyazepin",
+        "Barbitüratlar",
+        "Deksmedetomidin"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Deksmedetomidin, beyin sapındaki Locus Coeruleus bölgesinde bulunan adrenerjik reseptörlere bağlanarak norepinefrin (adrenalin benzeri madde) salınımını durdurur. Bu da vücutta bir \"sakinleşme\" ve \"sempatik deşarjın kesilmesi\" etkisini yaratır.",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 22,
+      "question": "Vücut yüzeyinin %30'u yanmış 4 yaşındaki bir çocuğun pansuman ve debridmanı için tekrarlayan seanslarda Ketamin kullanılmıştır. Son seanslarda aynı etkiyi almak için dozun artırılması gerekmiştir. Ketamin kullanımında görülen bu durumun temel nedeni nedir?",
+      "options": [
+        "İlacın yağ dokusunda birikmesi",
+        "Enzim indüksiyonu ve reseptör değişikliğine bağlı tolerans gelişimi",
+        "Psödokolin esteraz aktivitesinde artış",
+        "İlacın eliminasyon yarı ömrünün kısalması",
+        "Böbrek klirensinin artması"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Ketamin, özellikle yanık pansumanı gibi tekrarlayan işlemlerde kullanıldığında karaciğerdeki CYP450 enzimlerini indükler. Bu durum ilacın daha hızlı yıkılmasına ve reseptör düzeyinde duyarsızlaşmaya (taşiflaksi/tolerans) yol açar.",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 23,
+      "question": "Barbitüratların yağdaki çözünürlüğü hangi atom üzerinden ayarlanır?",
+      "options": [
+        "C1",
+        "C2",
+        "C3",
+        "C4",
+        "C5"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "C2'de Sülfür = Yüksek yağ çözünürlüğü + Çok hızlı etki. C2'de Oksijen = Daha düşük yağ çözünürlüğü + Daha yavaş etki.",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 24,
+      "question": "Deksmedetomidin için verilen bilgilerden hangisi yanlıştır?",
+      "options": [
+        "Sadece intravenöz kullanım için onay almıştır.",
+        "Karaciğerde CYP450 sistemi ve glukuronidasyon ile metabolize edilir.",
+        "Deksmedetomidinin neredeyse tüm metabolitleri idrarla atılır.",
+        "Deksmedetomidin solunum depresyonu yapmaz ve bu sebeple mekanik ventilasyondan ayrılacak hastaları sedatize etmek için ideal bir ajandır.",
+        "Deksmedetomidin, beta bloker kullanan hastalarda refleks yanıt olarak taşikardi yapabilir."
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Deksmedetomidin, bir adrenerjik agonistidir ve sempatik sinir sistemi aktivitesini (norepinefrin salınımını) baskılar. Bu durumun en tipik kardiyovasküler sonuçları bradikardi (nabız yavaşlaması) ve hipotansiyondur (tansiyon düşmesi).",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 25,
+      "question": "Uzun süreli (>48 saat) ve yüksek doz (>4 mg/kg/saat) propofol infüzyonu alan bir yoğun bakım hastasında aşağıdakilerden hangisinin görülmesi beklenmez?",
+      "options": [
+        "Metabolik asidoz",
+        "Rabdomiyoliz (kas yıkımı)",
+        "Hiperlipidemi (trigliserid artışı)",
+        "Hiperglisemi ve taşikardi",
+        "Bradikardi ve kalp yetmezliği"
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "PRIS klinik tablosunda metabolik asidoz, rabdomiyoliz, hiperpotasemi ve dirençli bradiaritmiler görülür. Hiperglisemi tipik bir bulgu değildir.",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 26,
+      "question": "Ketamin hakkında aşağıda verilen bilgilerin hangisi yanlıştır?",
+      "options": [
+        "Ketamin oral, nazal, rektal, subkütan ve epidural şekilde uygulanabilmesine rağmen, klinik pratikte intravenöz ve intramusküler şekilde uygulanır.",
+        "Ketamin yüksek lipid çözünürlüğüne sahiptir ve hem serebral kan akımını hem de kardiyak debi artışını uyarması sayesinde beyne ve dokulara yeniden dağılım hızlı gerçekleşir.",
+        "Ketamin uygulanmasından sonra uyanma, beyinden periferik kompartmanlara yeniden dağılım ile gerçekleşir.",
+        "Ketamin karaciğer tarafından birçok metabolite dönüştürülür ve bu metabolitlerden biri (norketamin) anestezik aktivitesini korur.",
+        "Tekrarlayan dozda ketamin alan hastalarda tolerans gelişmez."
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "özellikle kronik ağrı tedavisi veya tekrarlayan sedasyon uygulamaları gibi durumlarda kullanıldığında tolerans gelişimigözlenen bir ajandır. Bu durum, karaciğer enzimlerinin (sitokrom P450) indüklenmesi ve reseptör düzeyindeki değişikliklerle ilişkilidir.",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 27,
+      "question": "Diyazepam ve midazolam metabolizmasını değiştirebilen ilaçlar sırasıyla aşağıdakilerden hangisidir?",
+      "options": [
+        "Simetidin-Eritromisin",
+        "Eritromisin-Simetidin",
+        "Simetidin-Propilen glikol",
+        "Propilen glikol-Simetidin",
+        "Eritromisin-Propilen glikol"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Karaciğer enzimlerini baskılayan Simetidin diyazepamın, Eritromisin ise midazolamın etkisini uzatır.",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 28,
+      "question": "Fospropofolün Propofole göre temel farkı nedir?",
+      "options": [
+        "Yağda çözünmesi",
+        "Suda çözünmesi ve vücutta propofole dönüşerek daha yavaş etki göstermesi",
+        "Daha hızlı uyanma sağlaması",
+        "Enjeksiyon ağrısını artırması",
+        "Karaciğerde hiç metabolize olmaması"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Fospropofol bir ön ilaçtır (pro-drug); suda çözünür ve vücutta alkali fosfataz enzimiyle yavaşça propofole dönüşür.",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 29,
+      "question": "Benzodiyazepin için verilen bilgilerden hangisi/hangileri yanlıştır? I. Benzodiyazepinler serebral oksijen tüketimini, serebral kan akımını ve intrakraniyal basıncı barbitüratlar kadar olmasa da azaltırlar. Grand mal nöbetleri kontrol altına almakta başarılıdırlar. II. Anterograd amnezi yapar. III. Hafif düzeyde kas gevşemesi yapma etkisi spinal kord düzeyinde gerçekleşir. IV. Benzodiyazepinlerin direkt analjezik özellikleri yoktur.",
+      "options": [
+        "Yalnız I",
+        "I-IV",
+        "II-III",
+        "I-II-III-IV",
+        "Hiçbiri"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Benzodiyazepinler sedasyon, anksiyoliz, antikonvülzan etki, anterograd amnezi ve hafif santral kas gevşemesi sağlar; direkt analjezik değildir. Verilen ifadeler yanlıştır kabul edilmez.",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 30,
+      "question": "Öyküsünde akut intermitan porfiri atağı olan bir hastada genel anestezi indüksiyonu için en güvenli seçenek aşağıdakilerden hangisidir?",
+      "options": [
+        "Tiyopental",
+        "Metoheksital",
+        "Propofol",
+        "Tiamilal",
+        "Alkol bazlı Diazepam"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Barbitüratlar (Tiyopental, Metoheksital) ve Etomidat porfiri krizini tetikleyebilir. Propofol, porfirin metabolizması üzerinde olumsuz etkisi olmayan güvenli bir ajandır.",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 31,
+      "question": "Hastanın kullandığı Simetidin (H2 reseptör blokörü), Diazepamın etkisini nasıl değiştirir?",
+      "options": [
+        "Etki süresini kısaltır.",
+        "Metabolizmasını (CYP450) inhibe ederek etkisini ve süresini artırır.",
+        "Suda çözünürlüğünü artırır.",
+        "Antagonize eder.",
+        "Böbreklerden atılımını hızlandırır."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Simetidin karaciğer enzimlerini baskılayarak Diazepamın yıkımını geciktirir.",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 32,
+      "question": "Aşağıda verilen İV anestezik ajanların hangisinin indüksiyonu sırasında myoklonus görülebilir?",
+      "options": [
+        "Propofol",
+        "Etomidat",
+        "Benzodiyazepin",
+        "Barbitürat",
+        "Deksmedetomidin"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Anestezi sınavlarında ve klinik pratikte \"myoklonus\" denildiğinde akla ilk gelmesi gereken IV ajan Etomidat'tır. Bunun dışında Etomidat'ın en karakteristik diğer yan etkisi ise adrenokortikal baskılanma (kortizol sentezini durdurması) durumudur.",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 33,
+      "question": "Aşağıdakilerden hangisi cerrahi öncesi yapılan premedikasyonun hedeflerinden biri değildir?",
+      "options": [
+        "Kaygıyı (anksiyete) azaltmak",
+        "Gastrik aspirasyon riskini (mide asidini düşürerek) azaltmak",
+        "Postoperatif bulantı-kusmayı önlemek",
+        "Tüm kasları tamamen felç ederek entübasyona hazırlamak",
+        "Perioperatif amnezi sağlamak"
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "Kas gevşetilmesi premedikasyonun değil, genel anestezi indüksiyonunun bir parçasıdır. Premedikasyon hastayı konforlu ve güvenli bir şekilde ameliyata hazırlamayı hedefler.",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 34,
+      "question": "Aşağıdakilerden hangisi barbitüratların kardiyovasküler sistem üzerine etkilerini etkileyen faktörlerden değildir?",
+      "options": [
+        "Uygulama hızı",
+        "Uygulama dozu",
+        "Bazal otonomik tonus",
+        "Kardiyovasküler hastalık öyküsü",
+        "Cinsiyet"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Barbitürat uygulaması sırasında hastanın mevcut hastalıkları, sıvı durumu (volemi), ilacın miktarı ve veriliş hızı hayati önem taşırken; hastanın cinsiyeti bu hemodinamik yanıtı değiştiren bir faktör değildir.",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 35,
+      "question": "Deksmedetomidin (α2 agonist) kullanımı ile ilgili aşağıdaki ifadelerden hangisi yanlıştır?",
+      "options": [
+        "Locus Coeruleus bölgesini etkileyerek doğal uykuya benzer sedasyon sağlar.",
+        "Belirgin bir solunum depresyonu yapmaz.",
+        "Rejyonal anestezide lokal anesteziklerin etki süresini kısaltmak için kullanılır.",
+        "Sempatik deşarjı baskılayarak bradikardi ve hipotansiyona yol açabilir.",
+        "Alkol çekilmesi ve deliryum tedavisinde kullanılabilir."
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Deksmedetomidin rejyonal anestezide etki süresini hızlandırmak için değil, uzatmak ve blok kalitesini artırmak için eklenir.",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 36,
+      "question": "Barbitüratların solunum istemi üzerine etkisi olmayan hangisidir?",
+      "options": [
+        "Hiperkapni ve hipoksiye verilen solunum yanıtını azaltırlar.",
+        "Barbitüratlar laringoskopi ve entübasyona karşı oluşan havayolu refleks yanıtlarını propofole kıyasla tam olarak baskılayamazlar.",
+        "Havayolu enstrümentasyonu bronkospazma ya da yüzeyel anestezi durumlarında laringospazma sebep olabilir.",
+        "Sıklıkla apne oluşturmazlar.",
+        "Uyanma aşamasında, tidal volüm ve solunum sayısı azalır."
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "Barbitüratlar indüksiyon dozlarında solunum merkezini deprese eder ve sıklıkla geçici apne oluşturabilir.",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 37,
+      "question": "Etomidat indüksiyonu sırasında görülen myoklonik hareketlerin (istemsiz kas seğirmeleri) nedeni aşağıdakilerden hangisidir?",
+      "options": [
+        "Epileptik nöbet tetiklenmesi",
+        "NMDA reseptörlerinin uyarılması",
+        "GABAerjik inhibisyonun beyin sapı düzeyinde dengesiz/asimetrik gerçekleşmesi (disinhibisyon)",
+        "Kortizol seviyesinin aniden düşmesi",
+        "Lokal irritasyon"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Etomidat, beyindeki inhibitör yolları dengesiz baskıladığı için ekstrapiramidal sistemde geçici boşalmalara (myoklonus) neden olur.",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 38,
+      "question": "Propofol hakkında verilen bilgilerden hangisi yanlıştır?",
+      "options": [
+        "Propofol GABA’mn GABAa reseptörlerine bağlanmasını allosterik olarak artırır.",
+        "Propofol iki izopropil grubunun eklenmiş olduğu bir fenol halkasından oluşur.",
+        "Soya fasülyesi yağı, gliserol ve yumurta lesitini içerir.",
+        "Nadiren, ön yükteki ani düşüş vagal yolla refleks bradikardi yanıtına (Bezold-Jarisch refleksi) sebep olabilir.",
+        "Karaciğerde konjugasyon sonrası oluşan inaktif metabolitler safra tarafından atılır."
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Propofol karaciğerde son derece hızlı bir şekilde konjugasyon (glukuronid ve sülfat konjugatları) yoluyla metabolize edilir. Bu oluşan suda çözünür inaktif metabolitlerin yaklaşık %90'ı böbrekler yoluyla (idrarla) atılır. Safra ile atılım miktarı çok düşüktür.",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 39,
+      "question": "Aşağıdaki İV anestezik ajanlardan hangisi kullanılırsa kandaki kortizol ve aldosteron seviyeleri etkilenebilir?",
+      "options": [
+        "Etomidat",
+        "Ketamin",
+        "Propofol",
+        "Midazolam",
+        "Pentotal"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Kortizol ve aldosteron düzeylerini düşürür.",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 40,
+      "question": "Ketamin hakkında aşağıda verilen bilgilerin hangisi/hangileri doğrudur? I. N-metil-D-aspartat (NMDA) kanallarını inhibe ettiği iyi bilinir. II. Ketamin fonksiyonel olarak duyusal impulsları limbik korteksten dissosiye eder. III. Ketamin ve esketamin dirençli depresyonda kullanılmaktadır. IV. Ketaminin düşük dozlarda infüzyonu postoperatif analjezi ve refrakter ağrıda kullanılabilir. V. Ketaminin endojen analjezik yolaklar üzerinde ek etkileri olabilir.",
+      "options": [
+        "II-IV-V",
+        "I-III",
+        "I-II-IV",
+        "I-II-IV-V",
+        "I-II-III-IV-V"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Ketamin NMDA antagonisti, dissosiyatif anestezik, analjezik ve dirençli depresyonda kullanılan bir ajandır; verilen ifadelerin tümü doğrudur.",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 41,
+      "question": "Midazolamın cerrahi öncesi en çok istenen etkisi hangisidir?",
+      "options": [
+        "Retrograd amnezi (geçmişi unutma)",
+        "Anterograd amnezi (ilaç verildikten sonrasını hatırlamama)",
+        "Tam analjezi",
+        "Kas paralizisi",
+        "Öksürük refleksinin artması"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Benzodiyazepinler güçlü anterograd amnezi yapar; bu sayede hasta ameliyathanedeki nahoş olayları hatırlamaz.",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 42,
+      "question": "Ciddi mitral darlığı olan bir hastada indüksiyon sırasında hızlı Propofol bolusu sonrası ani hipotansiyon ve ardından Bezold-Jarisch refleksi gelişmiştir. Bu hastada Bezold-Jarisch refleksi sonucu ne görülmesi beklenir?",
+      "options": [
+        "Şiddetli taşikardi",
+        "Hipertansiyon",
+        "Refleks bradikardi",
+        "Bronkospazm",
+        "Midriyazis"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Propofol, ön yükü (preload) aniden düşürdüğünde, kalbin sol ventrikülündeki mekanoreseptörler uyarılabilir. Bu durum, normalde beklenen taşikardi yerine paradoksal bir vagal yanıt oluşturarak şiddetli bradikardiye (Bezold-Jarisch) neden olur",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 43,
+      "question": "Aşağıdakilerden hangisi Propofol’ün özelliklerinden biri değildir?",
+      "options": [
+        "Antipüritik",
+        "Antiemetik",
+        "Antikonvülzan",
+        "Antimikrobik",
+        "Sedasyon"
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "Propofol, bu seçenekler arasında antimikrobik özelliği olmayan, aksine mikroorganizmaların üremesi için çok uygun bir ortam hazırlayan bir ilaçtır.",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 44,
+      "question": "Barbitüratların birbirinden ayrılmasını sağlayan atomlar aşağıdakilerden hangisi/hangileridir?",
+      "options": [
+        "C1-C2-N3",
+        "C2-C4-N1",
+        "C2-C5-N1",
+        "C3-C5-N2",
+        "C1-C5-N1"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "C2 (Kükürt eklenmesi): Yağda çözünürlüğü ve etki hızını aşırı artırır (Örn: Tiyopental). C5 (Yan zincir değişimi): İlacın hipnotik gücünü (uyutma kapasitesini) belirler. N1 (Metil grubu eklenmesi): Etki süresini kısaltır ve nöbet uyarıcı (konvülsif) etki ekleyebilir (Örn: Metohekzital).",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 45,
+      "question": "3 saat süren bir batın operasyonunda Propofol infüzyonu (TİVA) uygulanmıştır. İnfüzyon kapatıldıktan 10 dakika sonra hasta oryante bir şekilde uyanmıştır. Propofolün bu hızlı uyanma özelliğini açıklayan kavram hangisidir?",
+      "options": [
+        "Yüksek redistribüsyon ve hızlı metabolik klirens",
+        "Aktif metabolitlerin idrarla atılması",
+        "Kan-gaz çözünürlüğünün düşük olması",
+        "İlacın akciğerlerden atılması",
+        "Plazma esterazları ile parçalanması"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Propofolün uyanma hızı sadece dokulara dağılımına (redistribüsyon) bağlı değildir; aynı zamanda karaciğer dışı (akciğer vb.) eliminasyonu da içeren çok yüksek bir metabolik hıza sahiptir. Bu sayede uzun infüzyonlardan sonra bile birikme yapmaz.",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 46,
+      "question": "Ekstrapiramidal motor aktiviteyi kontrol eden sinir sistemi üzerinde disinhibisyon yapabilien İV anestezik ajan aşağıdakilerden hangisidir?",
+      "options": [
+        "Etomidat",
+        "Propofol",
+        "Benzodiyazepin",
+        "Barbitürat",
+        "Deksmedetomidin"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Etomidat, beyindeki \"frenleri\" (inhibisyonu) erken kaldırdığı için ekstrapiramidal sistemin kontrolsüzce deşarj olmasına ve kas seğirmelerine neden olur.",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 47,
+      "question": "Septik şok nedeniyle yoğun bakımda takip edilen ve entübe edilecek olan hastada Etomidat kullanılmıştır. İşlemden 6 saat sonra hastanın vazopressör ihtiyacının arttığı ve tansiyonun düzelmediği görülmüştür. Bu durumun nedeni aşağıdakilerden hangisi olabilir?",
+      "options": [
+        "Etomidatın akut böbrek yetmezliği yapması",
+        "Etomidatın 11β-hidroksilazı inhibe ederek sürrenal yetmezlik yapması",
+        "İlacın anaflaktik şok yapması",
+        "Myoklonusların metabolik yükü artırması",
+        "İlacın miyokardı doğrudan deprese etmesi"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Sepsisli hastalar hayatta kalmak için yüksek kortizol seviyelerine ihtiyaç duyar. Etomidat, kortizol sentezindeki son basamak olan 11β-hidroksilaz enzimini tek dozda bile 24 saate kadar bloke eder. Bu da hastanın vazopressörlere yanıtını bozar.",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 48,
+      "question": "Etomidat ve Lipid Emülsiyonu Etomidat'ın propilen glikol içinde hazırlanmasının klinik dezavantajı nedir?",
+      "options": [
+        "İlacın etkisini geciktirmesi",
+        "Venöz irritasyon ve enjeksiyon yerinde ağrı yapması",
+        "Böbrek yetmezliğini tetiklemesi",
+        "Görme bozukluğu yapması",
+        "Kan şekerini yükseltmesi"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Propilen glikol bazlı ilaçlar (Eski Etomidat formları ve Diazepam) damar cidarını irrite ederek ağrıya yol açar.",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 49,
+      "question": "Araç dışı trafik kazası sonrası getirilen, kan basıncı 70/40 mmHg, kalp hızı 130/dk olan ve aktif iç kanaması şüphelenilen hastanın acil operasyonu için anestezi indüksiyonu planlanmaktadır. Bu hastada hemodinamik stabiliteyi en iyi koruyan ve sürrenal rezervi kısıtlı olmayan hastalarda ilk tercih edilmesi gereken İV ajan hangisidir?",
+      "options": [
+        "Propofol",
+        "Tiyopental",
+        "Etomidat",
+        "Midazolam",
+        "Yüksek doz fentanil"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Propofol ve Tiyopental, sempatik tonusu baskılayarak ve venöz göllenmeye yol açarak tansiyonu daha da düşürür. Ketamin sempatomimetik olsa da, Etomidat miyokardiyal kontraktiliteyi ve vasküler direnci en az etkileyen ajandır.",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 50,
+      "question": "Ketaminin eliminasyon yarı ömrünü uzatan İV anestezik ajan aşağıdakilerden hangisidir?",
+      "options": [
+        "Midazolam",
+        "Diyazepam",
+        "Etomidat",
+        "Propofol",
+        "Deksmedetomidin"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Diyazepam, ketaminin karaciğerdeki yıkımını yavaşlatarak vücutta daha uzun süre kalmasına neden olan spesifik ajandır.",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 51,
+      "question": "İV anestezik ajanlar hakkında verilen bilgilerden hangisi yanlıştır?",
+      "options": [
+        "Fospropofol suda çözünür.",
+        "Fospropofol vücutta propofol, fosfat ve formaldehide metabolize olur.",
+        "Fospropofol propofole kıyasla daha yavaş etki başlangıcı ve derlenme sağlar.",
+        "Deksmedetomidin a2 adrenerjik agonistidir ve klonidine benzer şekilde anksiyoliz, sedasyon ve analjezi sağlamak için kullanılabilir.",
+        "Rejyonal blokların etki süresini hızlandırmak için de kullanılır."
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Bu ifade yanlıştır. Deksmedetomidin rejyonal (bölgesel) anestezi uygulamalarında (örneğin spinal anestezi veya periferik sinir blokları) lokal anesteziklere eklendiğinde etki süresini hızlandırmak için değil, etki süresini uzatmak ve blok kalitesini artırmak için kullanılır.",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 52,
+      "question": "Volatil olmayan ajanlar arasında, analjezi, amnezi ve bilinçsizlik sağlayabilmesi yönünden “ideal anestezik” olmaya en yakın ajan aşağıdakilerden hangisidir?",
+      "options": [
+        "Etomidat",
+        "Ketamin",
+        "Propofol",
+        "Benzodiyazepinler",
+        "Barbitüratlar"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Anestezinin temel bileşenleri analjezi (ağrısızlık), amnezi (bellek kaybı) ve bilinçsizlik (hipnoz) olarak tanımlanır. Volatil (gaz) olmayan intravenöz ajanlar arasında bu üçünü tek başına ve en güçlü şekilde sağlayabilen ajan Ketamin’dir.",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 53,
+      "question": "Barbitüratların Analjezik Özelliği Barbitüratların (Tiyopental) ağrı üzerindeki etkisi için hangisi doğrudur?",
+      "options": [
+        "Çok güçlü analjeziktirler.",
+        "Analjezik etkileri yoktur, düşük dozda ağrı duyarlılığını (anti-analjezi) artırabilirler.",
+        "Opioidlerle aynı reseptöre bağlanırlar.",
+        "Sadece spinal düzeyde analjezi yaparlar.",
+        "Nöropatik ağrıda ilk tercihtirler."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Barbitüratlar ağrı kesmez; hatta düşük dozlarda ağrı eşiğini düşürerek hastanın ağrıyı daha şiddetli hissetmesine neden olabilirler.",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 54,
+      "question": "Aşağıdakilerden hangisi barbitüratların kardiyovasküler sistem üzerine etkilerinden biri değildir?",
+      "options": [
+        "Kan basıncını azaltırlar",
+        "Kalp hızını azaltırlar",
+        "Medüller vazomotor merkezin depresyonu, vazodilatasyona ve kanın periferik göllenmesine sebep olarak, kan hacminin azalmasını taklit eder.",
+        "Kardiyak debi sıklıkla korunmuştur.",
+        "Baroreseptör yanıtın köreldiği yada olmadığı durumlarda (örn. hipovolemi, konjestif kalp yetmezliği, [3-adrenerjik blokaj), kardiyak debi ve arteriyel kan basıncı, kanın kompanse edilememiş periferik göllenmesi ve direkt miyokardiyal depresyon sebebiyle dramatik bir biçimde düşebilir."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Barbitüratlar damarları genişletip (vazodilatasyon) tansiyonu düşürdüğünde, vücut bu düşüşü dengelemek için baroreseptör refleksi devreye sokar. Bu refleks sayesinde kalp, düşen tansiyonu telafi etmek için daha hızlı atmaya başlar (Kompansatuar taşikardi).",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 55,
+      "question": "Hemorajik şok tablosunda olan ve acil cerrahiye alınan bir hastada indüksiyon ajanı olarak Etomidat tercih edilmiştir. Bu hastada tek doz uygulamadan sonra bile görülebilecek en karakteristik yan etki ve sorumlusu olan mekanizma hangisidir?",
+      "options": [
+        "Metabolik asidoz - Laktat birikimi",
+        "Adrenokortikal supresyon - 11β-hidroksilaz inhibisyonu",
+        "Myoklonus - NMDA reseptör aktivasyonu",
+        "Hipertansiyon - Sempatik deşarj",
+        "Bradikardi - Vagal stimülasyon"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Etomidat, 11β-hidroksilaz enzimini inhibe ederek kortizol ve aldosteron sentezini durdurur. Bu durum kritik hastalarda (sepsis, şok) adrenal yetmezliği derinleştirebilir.",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 56,
+      "question": "Propofolün bulantı ve kusmayı önlemedeki (anti-emetik) mekanizması nedir?",
+      "options": [
+        "Dopamin reseptörlerini agonize etmesi",
+        "Serotonin (5-HT3) reseptörlerini inhibe etmesi",
+        "Mide boşalmasını hızlandırması",
+        "Kafa içi basıncını artırması",
+        "Histamin salınımını engellemesi"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Propofol, kemoreseptör trigger zon ve 5-HT3 reseptörleri üzerindeki etkileriyle güçlü bir anti-emetik ajandır.",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 57,
+      "question": "Ketaminin kardiyovasküler sistem üzerindeki etkileri ile ilgili verilen bilgilerin hangisi yanlıştır?",
+      "options": [
+        "Özellikle hızlı bolus enjeksiyonu takiben; arteriyel kan basıncı, kalp atım hızı ve kardiyak debiyi artırır.",
+        "Kardiyovasküler sistem üzerine olan dolaylı etki, sempatik sinir sisteminin santral düzeyde uyarılmasıyla ve sinir uçlarından norepinefrinin geri alınımını inhibe edilmesi ile gerçekleşir.",
+        "Pulmoner arter basıncı ve miyokardiyal iş yükünde artış meydana gelebilir.",
+        "Koroner arter hastalığı olanlarda, kontrolsüz hipertansiyonda, konjestif kalp yetmezliğinde ve arteriyel anevrizmalarda dikkatle kullanılmalıdır.",
+        "Kalp hızı ve kan basıncı üzerine etkileri nedeni ile spinal kord kesisi ve son dönem şok durumlarında güvenle kullanılabilir."
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Ketamin \"katekolamin depoları tükenmiş\" ağır şoktaki hastalarda sanıldığı kadar güvenli değildir; doğrudan miyokardiyal depresan etkisiyle kalbi durdurabilir.",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 58,
+      "question": "Tiyopentalin hangi özellikleri santral sinir sistemine dağılımın hızlı olmasından sorumludur? I.Yüksek lipid çözünürlüğü II. Yüksek non-iyonize ilaç fraksiyonu III. Yüksek iyonize ilaç fraksiyonu IV. C5 atomonundaki yer değişimleri",
+      "options": [
+        "Yalnız I",
+        "I-II",
+        "I-III-IV",
+        "I-II-IV",
+        "I-III"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Tiyopentalin beyne çok hızlı geçmesinden ve anesteziyi saniyeler içinde başlatmasından şu iki faktör sorumludur: Yüksek Lipid Çözünürlüğü: Yağlı bir zar olan kan-beyin bariyerini kolayca delip geçmesini sağlar. Yüksek Non-İyonize (Yüksüz) Form: Sadece elektriksel yükü olmayan ilaç molekülleri zarlardan geçebilir; Tiyopentalin büyük kısmı bu formdadır.",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 59,
+      "question": "Propofol hakkında verilen bilgilerden hangisi yanlıştır?",
+      "options": [
+        "Propofolün uzun süreli infüzyonları toleransa sebep olmaz.",
+        "Midazolam gereken propofol dozunu %10’dan fazla azaltabilir.",
+        "Bazen kas seğirmesi, opustotonus yada hıçkırık gibi eksitatör fenomenlere sebep olabilir.",
+        "Bağımlılık riski yüksektir.",
+        "Son dönem böbrek yetmezliğinde propofolün klirensi etkilenmez."
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "propofol, opioidler (morfin, fentanil) veya benzodiazepinler gibi klasik anlamda fiziksel bağımlılık ve yüksek suiistimal potansiyeli olan ilaçlar listesinde (kontrole tabi ilaçlar) yer almaz.",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 60,
+      "question": "Midazolam etkisini geri çevirmek için kullanılan Flumazenil ile ilgili hangisi doğrudur?",
+      "options": [
+        "NMDA reseptörlerini bloke eder.",
+        "Etki süresi midazolamdan daha uzundur, tekrar doza gerek yoktur.",
+        "GABA-A reseptöründe benzodiyazepin bağlanma noktasında yarışmalı (kompetitif) antagonisttir.",
+        "Opioid doz aşımında da etkilidir.",
+        "Sadece oral yolla uygulanır."
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Flumazenil spesifik bir benzodiyazepin antagonistidir. Etki süresi kısa olduğu için \"resedasyon\" riski açısından hasta takip edilmelidir.",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 61,
+      "question": "Akut intermitan porfiri tanısı olan bir hastada Tiyopental kullanımının kesin kontrendike olmasının nedeni nedir?",
+      "options": [
+        "Böbrek yetmezliği yapması",
+        "ALA sentetaz enzimini indükleyerek porfirin öncüllerini biriktirmesi",
+        "Histamin salınımı ile anaflaksi yapması",
+        "Serebral kan akımını artırarak KİBAS yapması",
+        "Psödokolin esterazı inhibe etmesi"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Barbitüratlar karaciğerde ALA sentetaz enzimini uyararak porfiri krizini (karın ağrısı, nörolojik kriz) tetikleyebilir.",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 62,
+      "question": "Ketamin hakkında aşağıda verilen bilgilerin hangisi/hangileri doğrudur? I. Fensiklidin analoğudur. II. Sempatik stimülasyonun faydalı olacağı hipovolemi ve travma gibi durumlarda intravenöz indüksiyonda kullanılabilir. III. İntramusküler yolla genel anestezi indüksiyonu sağlayabilir. IV. Bilinçli sedasyon oluşturmak için kullanılabilir. V. Ketamin sadece anestezik dozları ile halüsinasyonlara sebep olabilir.",
+      "options": [
+        "Yalnız I",
+        "I-II",
+        "II-III-IV",
+        "I-II-III-IV",
+        "I-II-III-IV-V"
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "Ketamin fensiklidin analoğudur; IV/IM kullanılabilir ve bilinçli sedasyon sağlayabilir. Halüsinasyonlar yalnızca anestezik dozlarla sınırlı değildir.",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 63,
+      "question": "Tiyopentalin Etkisinin Sonlanması İndüksiyon dozunda verilen bir bolus Tiyopentalin etkisinin saniyeler içinde başlayıp 5-10 dakika içinde sona ermesinin temel mekanizması nedir?",
+      "options": [
+        "Hızlı böbrek eliminasyonu",
+        "Plazma esterazları ile yıkım",
+        "İlacın beyinden kas ve yağ dokusuna yeniden dağılımı (redistribüsyon)",
+        "Akciğerlerden ekshale edilmesi",
+        "Karaciğerde aktif metabolitlerine dönüşmesi"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Tiyopental ultra kısa etkilidir çünkü beyindeki yüksek konsantrasyon, ilacın hızla daha az kanlanan dokulara (kas ve yağ) dağılmasıyla düşer.",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 64,
+      "question": "Aşağıdaki İV anesteziklerden hangisi/hangilerinin bronşlar üzerine belirgin bronkodilatasyon/bronkokonstriksiyon etkisi yoktur? I. Barbitüratlar II. Benzodiyazepinler III. Etomidat IV. Ketamin V. Propofol",
+      "options": [
+        "Yalnız V",
+        "II-III",
+        "III-V",
+        "I-V",
+        "II-V"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Benzodiyazepinlerin ve etomidatın bronş düz kasları üzerinde belirgin bir etkisi yoktur.",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 65,
+      "question": "Ketamin anestezisinden uyanan 25 yaşındaki hastada şiddetli halüsinasyonlar, \"beden dışı deneyim\" hissi ve ajitasyon görülmektedir. Bu \"emergence delirium\" tablosunu önlemek için indüksiyonda hangi grup ilaç eklenmeliydi?[",
+      "options": [
+        "Barbitüratlar",
+        "Benzodiyazepinler (örn: Midazolam)",
+        "Opioidler",
+        "Antikolinerjikler",
+        "Lokal anestezikler"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Ketaminin uyanma döneminde yaptığı halüsinasyon ve ajitasyon reaksiyonlarını en iyi baskılayan ilaç grubu Benzodiyazepinlerdir. İndüksiyonda eklenen Midazolam bu riski belirgin azaltır.",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 66,
+      "question": "Benzodiyazepin için verilen bilgilerden hangisi/hangileri yanlıştır?",
+      "options": [
+        "Benzodiyazepinlerin GABAA reseptörüne bağlanması klor ilişkili iyon kanallarının açılma sıklığını artırır.",
+        "Bir benzen halkası ve yedi üyeli bir diyazepin halkasından oluşur.",
+        "Midazolamda bulunan imidazol halkası düşük pH’da suda çözünürlüğe katkıda bulunur.",
+        "Diyazepam ve lorazepam suda çözünemezler.",
+        "Başlıca safra ile atılırlar."
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "benzodiyazepinler karaciğerde metabolize edildikten sonra oluşan metabolitleri (genellikle glukuronid konjugatları şeklinde) esas olarak böbrekler yoluyla (idrarla) vücuttan atılırlar. Safra ile atılım miktarı oldukça düşüktür.",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 67,
+      "question": "Ketaminin koroner arter hastalığı olanlarda tercih edilmemesinin nedeni hangisidir?",
+      "options": [
+        "Miyokardiyal kontraktiliteyi doğrudan baskılaması",
+        "Periferik vazodilatasyon yaparak koroner çalma yapması",
+        "Sempatik aktivasyonu artırarak kalp hızını ve miyokardın oksijen tüketimini artırması",
+        "Şiddetli bradikardi yapması",
+        "Kan şekerini düşürmesi"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Ketamin sempatomimetik etkili olduğu için kalp hızı ve tansiyonu artırır; bu da iskemik kalbin yükünü artırarak risk oluşturur.",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 68,
+      "question": "Astımlı bir hastanın acil operasyonunda Ketamin tercih edilmesinin iki temel avantajı nedir?",
+      "options": [
+        "Apne yapması ve sekresyonları kurutması",
+        "Spontan solunumu koruması ve güçlü bronkodilatasyon yapması",
+        "Laringospazmı tamamen engellemesi ve tidal volümü artırması",
+        "Üst havayolu reflekslerini tamamen felç etmesi",
+        "Histamin salınımını baskılaması"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Ketamin bronşları genişletir (bronkodilatasyon) ve indüksiyon dozunda bile genellikle solunum durmasına (apne) yol açmaz.",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 69,
+      "question": "Aşağıdakilerden hangisi premedikasyon amaçları arasında yer alır? I. Kaygıyı azaltmak II. Preoperatif ağrıyı azaltmak III. Peroperatif amneziyi artırmak IV. Bulantı kusmayı önlemek V. Aspirasyon riskini azaltmak VI. Hemodinamik stabilitenin sağlanması",
+      "options": [
+        "I-III-V",
+        "II-IV-VI",
+        "I-II-III",
+        "I-II-IV-VI",
+        "I-II-III-IV-V-VI"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Verilen maddelerin tamamı premedikasyonun klinik hedefleri arasında yer alır.",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 70,
+      "question": "Ketamin ve Kafa İçi Basınç (KİB) Aşağıdaki hastaların hangisinde Ketamin kullanımı görece kontrendikedir?",
+      "options": [
+        "Hipovolemik şoktaki travma hastası",
+        "Aktif bronkospazmı olan çocuk hasta",
+        "Kafa içi kitlesi ve yüksek kafa içi basıncı olan hasta",
+        "Analjezi gereken yanık hastası",
+        "Dirençli depresyonu olan hasta"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Ketamin serebral kan akımını artırarak kafa içi basıncını (ICP) yükseltebilir.",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 71,
+      "question": "Etomidat ile verilen bilgilerden hangisi yanlıştır?",
+      "options": [
+        "Etomidat sadece intravenöz yolla uygulanır.",
+        "Etomidat karboksile bir imidazol halkası içerir ve yapı olarak diğer anestezik ajanlardan farklıdır.",
+        "İmidazol halkası asidik solüsyonlarda suda, fizyolojik pH değerlerinde yağda çözünürlük sağlar; bu sebeple etomidat preparatları propilen glikol içerisinde çözünmüş şekilde bulunur.",
+        "Plazma proteinlerine yüksek oranda bağlanmasına rağmen, etomidatın etki başlangıcı yüksek lipid çözünürlüğü ve fizyolojik pH’da noniyonize fraksiyonunun fazla olması nedeniyle hızlıdır.",
+        "Etomidat hidrolizinin son ürünleri esas olarak safra ile atılır."
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Etomidat karaciğerde ve plazmada bulunan esteraz enzimleri tarafından hızla hidroliz edilerek inaktif bir metabolite (karboksilik asit türevi) dönüştürülür. Bu metabolitlerin yaklaşık %85'i böbrekler yoluyla (idrarla), geri kalan küçük bir kısmı ise safra ile atılır.",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 72,
+      "question": "Barbitüratlar ile ilgili verilen bilgilerden hangisi yanlıştır?",
+      "options": [
+        "y-aminobütirik asit tip A (GABAA) reseptörlerine bağlanır.",
+        "Bağlanma noktası benzodiyazepinlerin bağlandığı GABAA noktasından farklıdır.",
+        "Klor spesifik iyon kanallarının açık kalma süresini arttırır.",
+        "Karbon C5’teki yer değişimleri hipnotik potensi ve antikonvülzan aktiviteyi belirler.",
+        "Fenobarbitaldeki fenil grubu ve metoheksitaldeki metil grubu antikonvülzan etki gösterir."
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Fenobarbitaldeki fenil grubu: Evet, bu grup antikonvülzan (nöbet önleyici) etkiyi artırır. Metoheksitaldeki metil grubu: Hayır, azot () üzerindeki metil grubu antikonvülzan etki sağlamaz; aksine prokonvülzan (nöbeti tetikleyici/uyarıcı) özellik kazandırır. Bu yüzden Metoheksital, elektrokonvülsif tedavi (EKT) sırasında nöbet süresini uzatmak için tercih edilir.",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 73,
+      "question": "Propofol ampulü açıldıktan sonra neden 6-12 saat içinde tüketilmelidir?",
+      "options": [
+        "İlacın etkisi uçucu olduğu için azalır.",
+        "İçindeki lipid emülsiyonu (soya yağı, yumurta lesitini) mikroorganizmalar için ideal üreme ortamıdır.",
+        "Işıkla temas ettiğinde toksik maddeye dönüşür.",
+        "Çökelme yaparak damarı tıkar.",
+        "pH değeri hızla yükselir."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Propofolün lipid yapısı bakteri üremesine çok müsaittir, bu yüzden aseptik kurallara sıkı uyulmalıdır.",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 74,
+      "question": "Ameliyathaneye alınan astımlı bir hastada indüksiyon sırasında şiddetli bronkospazm ve wheezing gelişmiştir. Hangi ajanın hem anesteziyi derinleştirmesi hem de direkt bronkodilatör etkisi nedeniyle bu durumda kullanılması en avantajlıdır?",
+      "options": [
+        "Tiyopental",
+        "Etomidat",
+        "Ketamin",
+        "Midazolam",
+        "Deksmedetomidin"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Ketamin ise katekolamin geri alımını bloke ederek endojen epinefrin etkisini artırır ve güçlü bir bronkodilatör etki yaratır.",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 75,
+      "question": "85 yaşındaki bir hastada Propofol ile indüksiyon yapılırken standart dozun çok altında bile derin apne ve hipotansiyon gelişmiştir. Yaşlılarda bu hassasiyetin artmasının temel farmakokinetik nedeni nedir?",
+      "options": [
+        "Karaciğer kütlesinin artması",
+        "Santral kompartman hacminin azalması ve azalmış protein bağlama",
+        "Böbrek klirensinin çok hızlanması",
+        "Yağ dokusunun tamamen yok olması",
+        "Reseptör sayısının artması"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Yaşlılarda toplam vücut suyu azalır, yağ oranı artar ve santral kompartman hacmi küçülür. İlaç verildiğinde küçük bir hacimde çok yüksek konsantrasyona ulaşır. Ayrıca azalan plazma proteinleri nedeniyle serbest (aktif) ilaç miktarı artarak derin etkilere yol açar.",
+      "category": "İntravenöz Anestezikler"
+    },
+    {
+      "id": 76,
+      "question": "Psikiyatri servisinde yatan bir hastaya dirençli depresyon nedeniyle Elektrokonvülsif Terapi (EKT) planlanmıştır. Anestezi uzmanı, nöbet süresini kısaltmayan, aksine prokonvülzan özellikleri olan bir ajan seçmek istemektedir. Bu amaçla kullanılması en uygun olan Barbitürat türevi aşağıdakilerden hangisidir?",
+      "options": [
+        "Tiyopental",
+        "Fenobarbital",
+        "Metoheksital",
+        "Pentobarbital",
+        "Secobarbital"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Barbitüratların çoğu antikonvülzandır; ancak Metoheksital, N1 atomundaki metil grubu sayesinde \"prokonvülzan\" özellik gösterir. EKT'de amaç kontrollü bir nöbet oluşturmak olduğu için, nöbet süresini kısaltmayan Metoheksital altın standarttır.",
+      "category": "İntravenöz Anestezikler"
+    }
+  ]
+}

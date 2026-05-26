@@ -500,6 +500,36 @@ abstract class AppLocalizations {
   /// **'Useful information and resources'**
   String get informationSubtitle;
 
+  /// Hint text for the information search bar
+  ///
+  /// In en, this message translates to:
+  /// **'Search in information...'**
+  String get informationSearchHint;
+
+  /// Text shown when no search results are found
+  ///
+  /// In en, this message translates to:
+  /// **'No results found'**
+  String get informationNoResults;
+
+  /// Text shown when no search results are found for a specific query
+  ///
+  /// In en, this message translates to:
+  /// **'No results found for \'{query}\''**
+  String informationNoResultsForQuery(String query);
+
+  /// Helper text shown when no results are found
+  ///
+  /// In en, this message translates to:
+  /// **'Try different keywords'**
+  String get informationTryDifferentKeywords;
+
+  /// Count of subtopics in a section
+  ///
+  /// In en, this message translates to:
+  /// **'{count} Sub-topics'**
+  String informationSubtopicsCount(int count);
+
   /// Coming soon message
   ///
   /// In en, this message translates to:
@@ -2468,10 +2498,10 @@ abstract class AppLocalizations {
   /// **'Purchase process started'**
   String get purchaseStarted;
 
-  /// No description provided for @purchaseFailed.
+  /// General purchase failure message
   ///
   /// In en, this message translates to:
-  /// **'Purchase process could not be started'**
+  /// **'Purchase could not be started'**
   String get purchaseFailed;
 
   /// No description provided for @termsContent.
@@ -3193,6 +3223,132 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Convert your guest account to a registered account. All your data will be preserved!'**
   String get upgradeGuestAccountMessage;
+
+  /// Message shown when a category has no questions
+  ///
+  /// In en, this message translates to:
+  /// **'No questions in this category yet.'**
+  String get noQuestionsInCategory;
+
+  /// Text shown when retaking a quiz
+  ///
+  /// In en, this message translates to:
+  /// **'Attempt #{count}'**
+  String retakeAttempt(int count);
+
+  /// Button text to retake a quiz
+  ///
+  /// In en, this message translates to:
+  /// **'Retake Quiz'**
+  String get retakeQuiz;
+
+  /// Error message when retaking a quiz fails
+  ///
+  /// In en, this message translates to:
+  /// **'An error occurred while retaking the quiz'**
+  String get retakeError;
+
+  /// Title for the score comparison dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Quiz Comparison'**
+  String get quizComparison;
+
+  /// Label for the previous score
+  ///
+  /// In en, this message translates to:
+  /// **'Previous'**
+  String get previousScore;
+
+  /// Label for the new score
+  ///
+  /// In en, this message translates to:
+  /// **'New'**
+  String get newScore;
+
+  /// Message shown when performance improved
+  ///
+  /// In en, this message translates to:
+  /// **'Great! {percent}% better performance! 🎉'**
+  String improvementMessage(String percent);
+
+  /// Message shown when performance is similar
+  ///
+  /// In en, this message translates to:
+  /// **'Results are similar. You can try again! 💪'**
+  String get similarityMessage;
+
+  /// Error message for iOS settings failure
+  ///
+  /// In en, this message translates to:
+  /// **'Settings could not be opened. Please go to App Store > Account > Subscriptions manually.'**
+  String get settingsErrorApple;
+
+  /// Error message for Android settings failure
+  ///
+  /// In en, this message translates to:
+  /// **'Settings could not be opened. Please go to Google Play Store > Subscriptions manually.'**
+  String get settingsErrorGoogle;
+
+  /// General error message with details
+  ///
+  /// In en, this message translates to:
+  /// **'An error occurred: {error}'**
+  String errorOccurred(String error);
+
+  /// Success message when device removed
+  ///
+  /// In en, this message translates to:
+  /// **'Device successfully removed'**
+  String get deviceRemoved;
+
+  /// Error message when device removal fails
+  ///
+  /// In en, this message translates to:
+  /// **'An error occurred while removing device'**
+  String get deviceRemoveError;
+
+  /// Account deletion page URL message
+  ///
+  /// In en, this message translates to:
+  /// **'Account deletion page: {url}'**
+  String accountDeletionPage(String url);
+
+  /// Error message when subscription belongs to another account
+  ///
+  /// In en, this message translates to:
+  /// **'Subscription Belongs to Another Account'**
+  String get subscriptionBelongsToAnotherAccount;
+
+  /// Timeout message for premium purchase
+  ///
+  /// In en, this message translates to:
+  /// **'The process took too long. If Premium is activated, please restart the page or try \'Restore Purchases\'.'**
+  String get processTimeoutPremium;
+
+  /// Loading message with product ID
+  ///
+  /// In en, this message translates to:
+  /// **'Loading product, please wait a few seconds...\nProduct ID: {productId}'**
+  String productLoadingWait(String productId);
+
+  /// Error message when quiz questions are missing
+  ///
+  /// In en, this message translates to:
+  /// **'Quiz questions not found: {quizName}'**
+  String quizQuestionsNotFound(String quizName);
+
+  /// Hint text for the quiz search bar
+  ///
+  /// In en, this message translates to:
+  /// **'Search quizzes...'**
+  String get searchQuizzes;
+
+  /// Default daily question text
+  ///
+  /// In en, this message translates to:
+  /// **'In anesthesia, through which receptor does propofol act?'**
+  String get defaultDailyQuestion;
 }
 
 class _AppLocalizationsDelegate

@@ -67,6 +67,11 @@
   "leaderboard": "Sıralama",
   "information": "Bilgiler",
   "informationSubtitle": "Faydalı bilgiler ve kaynaklar",
+  "informationSearchHint": "Bilgilerde ara...",
+  "informationNoResults": "Sonuç bulunamadı",
+  "informationNoResultsForQuery": "'{query}' için sonuç bulunamadı",
+  "informationTryDifferentKeywords": "Farklı anahtar kelimeler deneyin",
+  "informationSubtopicsCount": "{count} Konu Alt Başlığı",
   "comingSoon": "Yakında",
   "informationDescription": "Bu bölüm çalışmalarınızda size yardımcı olacak faydalı bilgiler, rehberler ve kaynaklar içerecektir.",
   "anesthesiaHistory": "Anestezi Tarihçesi",
@@ -446,6 +451,23 @@
   "tutorialAppTitle": "Anestezi Uygulaması",
   "tutorialSkip": "Geç",
   "tutorialExploreNow": "Hemen Keşfet",
+  "quizQuestionsNotFound": "Quiz questions not found: {quizName}",
+  "@quizQuestionsNotFound": {
+    "description": "Error message when quiz questions are missing",
+    "placeholders": {
+      "quizName": {
+        "type": "String"
+      }
+    }
+  },
+  "searchQuizzes": "Search quizzes...",
+  "@searchQuizzes": {
+    "description": "Hint text for the quiz search bar"
+  },
+  "defaultDailyQuestion": "In anesthesia, through which receptor does propofol act?",
+  "@defaultDailyQuestion": {
+    "description": "Default daily question text"
+  },
   "remainingFreeQuestions": "Kalan ücretsiz soru hakkınız: {count}",
   "@remainingFreeQuestions": {
     "description": "Kalan ücretsiz soru hakkı gösterimi",
@@ -675,6 +697,28 @@
     "description": "Upgrade guest account title"
   },
   "upgradeGuestAccountMessage": "Mevcut misafir hesabınızı kayıtlı hesaba dönüştürün. Tüm verileriniz korunacak!",
+  "noQuestionsInCategory": "Bu kategoride henüz soru bulunmuyor.",
+  "retakeAttempt": "{count}. Defa Çözülüyor",
+  "retakeQuiz": "Tekrar Çöz",
+  "retakeError": "Quiz tekrar çözülürken bir hata oluştu",
+  "quizComparison": "Quiz Karşılaştırması",
+  "previousScore": "Önceki",
+  "newScore": "Yeni",
+  "improvementMessage": "Harika! %{percent} daha iyi performans! 🎉",
+  "similarityMessage": "Sonuçlar benzer. Tekrar deneyebilirsiniz! 💪",
+  "settingsErrorApple": "Ayarlar açılamadı. Lütfen manuel olarak App Store > Hesabım > Abonelikler bölümüne gidin.",
+  "settingsErrorGoogle": "Ayarlar açılamadı. Lütfen manuel olarak Google Play Store > Abonelikler bölümüne gidin.",
+  "errorOccurred": "Bir hata oluştu: {error}",
+  "deviceRemoved": "Cihaz başarıyla kaldırıldı",
+  "deviceRemoveError": "Cihaz kaldırılırken bir hata oluştu",
+  "accountDeletionPage": "Hesap silme sayfası: {url}",
+  "subscriptionBelongsToAnotherAccount": "Abonelik Başka Hesaba Ait",
+  "processTimeoutPremium": "İşlem uzadı. Premium açıldıysa sayfayı kapatıp tekrar açın veya \"Satın Alımları Geri Yükle\" deneyin.",
+  "productLoadingWait": "Ürün yükleniyor, lütfen birkaç saniye bekleyin...\nProduct ID: {productId}",
+  "purchaseFailed": "Satın alma başlatılamadı",
+  "quizQuestionsNotFound": "Quiz soruları bulunamadı: {quizName}",
+  "searchQuizzes": "Quizlerde ara...",
+  "defaultDailyQuestion": "Anestezide propofol hangi reseptör üzerinden etki eder?",
   "@upgradeGuestAccountMessage": {
     "description": "Upgrade guest account message"
   }

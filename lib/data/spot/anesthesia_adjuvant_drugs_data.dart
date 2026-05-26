@@ -25,30 +25,39 @@ class AnesthesiaAdjuvantDrugsCategory {
 }
 
 class AnesthesiaAdjuvantDrugsData {
-  static List<AnesthesiaAdjuvantDrugsCategory> getAnesthesiaAdjuvantDrugsData(BuildContext context) {
+  static List<AnesthesiaAdjuvantDrugsCategory> getAnesthesiaAdjuvantDrugsData(
+    BuildContext context,
+  ) {
     return [
       AnesthesiaAdjuvantDrugsCategory(
         categoryName: 'Aspirasyon & Profilaksi',
         items: [
           AnesthesiaAdjuvantDrugsItem(
-            title: 'Aspirasyon Pnömonisi Riski',
-            description: 'pH <2.5 ve hacim >25 mL',
+            title: "ASPİRASYON PNÖMONİSİ RİSK FAKTÖRLERİ",
+            description: "Aspirasyon pnömonisi (Mendelson Sendromu) gelişmesi için kritik eşik değerler mide içeriğinin pH değerinin 2.5'ten düşük ve hacminin 25 mL'den fazla olmasıdır.",
+            additionalInfo: "Cerrahi öncesi açlık sürelerine uyulması bu riski azaltmak için temel yaklaşımdır. Ancak travma, obezite, gebelik ve diyabet gibi mide boşalmasının yavaşladığı durumlarda profilaktik ilaç kullanımı hayati önem taşır.",
           ),
           AnesthesiaAdjuvantDrugsItem(
-            title: 'Antiasitler',
-            description: 'pH\'ı hızla yükseltir ama intragastrik hacmi artırır → aspirasyon daha zararlı olabilir.',
+            title: "ANTİASİTLERİN ASPİRASYON ÜZERİNDEKİ ROLÜ",
+            description: "Mevcut mide asidini nötralize ederek pH'ı hızla yükseltirler ancak mide sıvısı hacmini artırma riski taşırlar.",
+            subtitle: "Hacim artışı nedeniyle olası bir aspirasyon akciğerler için daha zararlı hale gelebilir",
+            additionalInfo: "Genellikle sodyum sitrat gibi partikülsüz antiasitler tercih edilir; partiküllü (kalsiyum veya magnezyum bazlı) olanlar aspire edilirse ciddi akciğer hasarına (pnömoni) yol açabilir.",
           ),
           AnesthesiaAdjuvantDrugsItem(
-            title: 'H2 Blokerleri',
-            description: 'Gastrik asit salgısını azaltır, pH\'yı yükseltir, sadece uygulandıktan sonraki mide sıvısında etki.',
+            title: "H2 BLOKERLERİ VE MİDE ASİT YÖNETİMİ",
+            description: "Mide pariyetal hücrelerinden asit salgılanmasını azaltarak hem pH'ı yükseltir hem de mide içeriğinin asiditesini düşürürler.",
+            subtitle: "Sadece uygulamadan sonra salgılanan yeni mide sıvısı üzerinde etkilidirler",
+            additionalInfo: "Halihazırda midede bulunan asidi nötralize etmezler, bu nedenle etkilerinin başlaması için cerrahi indüksiyondan en az 60-90 dakika önce uygulanmaları gerekir.",
           ),
           AnesthesiaAdjuvantDrugsItem(
-            title: 'Metoklopramid',
-            description: 'Mide boşalmasını hızlandırır, alt özofagus sfinkter tonusunu ↑ (pH değişmez).',
+            title: "METOKLOPRAMİD VE MİDE BOŞALMASI",
+            description: "Mide boşalmasını hızlandıran prokinetik bir ajandır ve alt özofagus sfinkter tonusunu artırarak asit reflüsünü engeller.",
+            additionalInfo: "Mide pH'ı üzerinde doğrudan bir etkisi yoktur; ancak mide içeriğini onikiparmak bağırsağına (duodenum) yönlendirerek aspirasyon riskini mekanik olarak azaltır.",
           ),
           AnesthesiaAdjuvantDrugsItem(
-            title: 'PPI\'lar',
-            description: 'Proton pompasını inhibe eder, asit sekresyonunu en güçlü baskılayan grup.',
+            title: "PROTON POMPA İNHİBİTÖRLERİ (PPI)",
+            description: "H+/K+ ATPaz pompasını irreversibl olarak inhibe ederek asit üretimini en güçlü şekilde baskılayan ilaç grubudur.",
+            additionalInfo: "Aspirasyon profilaksisinde genellikle cerrahi sabahı uygulandıklarında en yüksek verimi sağlarlar. Uzun süreli kullanımlarında mide flora değişikliğine yol açabilirler.",
           ),
         ],
       ),
@@ -56,138 +65,141 @@ class AnesthesiaAdjuvantDrugsData {
         categoryName: 'Histamin Fizyolojisi & Reseptörler',
         items: [
           AnesthesiaAdjuvantDrugsItem(
-            title: 'H1 Reseptörü',
-            description: 'Fosfolipaz C aktivasyonu → bronkokonstriksiyon, kapiller geçirgenlik ↑, lökotaksis ↑',
+            title: "H1 RESEPTÖRÜ VE BRONKOKONSTRİKSİYON",
+            description: "Fosfolipaz C aktivasyonu yoluyla bronkon daralmasına, kapiller geçirgenliğin artmasına ve doku ödemine yol açan reseptördür.",
+            additionalInfo: "Saman nezlesi, ürtiker ve hafif alerjik reaksiyonların klinik tablosundan sorumludur. H1 aktivasyonu ayrıca bağırsak düz kaslarını kasar ve mukus salgısını artırır.",
           ),
           AnesthesiaAdjuvantDrugsItem(
-            title: 'H2 Reseptörü',
-            description: 'cAMP ↑ → mide asit salgısı ↑, kalp hızı & kontraktilite ↑',
+            title: "H2 RESEPTÖRÜ VE MİDE ASİT SALGISI",
+            description: "cAMP artışı üzerinden mide asit salgılanmasını uyarır; ayrıca kalp hızı ve kasılma gücü üzerinde hafif artırıcı etkisi vardır.",
+            additionalInfo: "Sadece midede değil, damar düz kaslarında da bulunur ve vazodilatasyona (damar genişlemesine) katkıda bulunabilir. Anafilaksi tedavisinde her iki reseptörün (H1 ve H2) de bloke edilmesi daha etkili bir sonuç sağlar.",
           ),
           AnesthesiaAdjuvantDrugsItem(
-            title: 'H3 Reseptörü',
-            description: 'Presinaptik, negatif feedback (histamin salınımını azaltır).',
-          ),
-          AnesthesiaAdjuvantDrugsItem(
-            title: 'H4 Reseptörü',
-            description: 'İmmün sistemde rol (notlarında yok ama sınavda gelebilir).',
-          ),
-        ],
-      ),
-      AnesthesiaAdjuvantDrugsCategory(
-        categoryName: 'H1 Blokerleri',
-        items: [
-          AnesthesiaAdjuvantDrugsItem(
-            title: '1. Kuşak H1 Blokerleri',
-            description: 'Difenhidramin, prometazin, hidroksizin → sedatif, antiemetik, antikolinerjik.',
-          ),
-          AnesthesiaAdjuvantDrugsItem(
-            title: '2. Kuşak H1 Blokerleri',
-            description: 'Loratadin, setirizin, feksofenadin → KBB\'ni geçmez, alerjik rinit/ürtiker.',
-            subtitle: 'Astımda etkisiz!',
-            additionalInfo: 'Sedatif etkileri SSS depresanları ile artar.',
+            title: "H3 VE H4 RESEPTÖR FONKSİYONLARI",
+            description: "H3 reseptörleri presinaptik uçta negatif feedback ile histamin salınımını azaltırken, H4 reseptörleri immün yanıt kontrolünde rol oynar.",
+            additionalInfo: "H3 reseptörleri esasen merkezi sinir sisteminde yer alır ve uyku-uyanıklık döngüsünü düzenler. H4 reseptörleri ise lokositlerin kemotaksisinde (akışında) etkilidir ve yeni ilaç geliştirme çalışmalarının hedefidir.",
           ),
         ],
       ),
       AnesthesiaAdjuvantDrugsCategory(
-        categoryName: 'H2 Blokerleri',
+        categoryName: 'H1 Blokerleri (Antihistaminikler)',
         items: [
           AnesthesiaAdjuvantDrugsItem(
-            title: 'Simetidin',
-            description: 'P-450 inhibisyonu (warfarin, fenitoin, diazepam, propranolol etkileşim!).',
-            subtitle: 'Yan etki: jinekomasti, impotans, hepatotoksisite.',
+            title: "1. KUŞAK H1 BLOKERLERİ (SEDATİF ETKİLİ)",
+            description: "Kan-beyin bariyerini (KBB) aşarak belirgin uyku hali (sedasyon), antiemetik etki ve güçlü antikolinerjik yan etkiler oluştururlar.",
+            subtitle: "Difenhidramin, prometazin ve hidroksizin bu gruptadır",
+            additionalInfo: "Ağız kuruluğu ve görme bulanıklığı gibi yan etkiler sık görülür. Diğer merkezi sinir sistemi depresanları ve alkol ile birlikte kullanıldıklarında sedatif etkileri tehlikeli şekilde artabilir.",
           ),
           AnesthesiaAdjuvantDrugsItem(
-            title: 'Ranitidin',
-            description: 'P-450\'yi hafif etkiler.',
-          ),
-          AnesthesiaAdjuvantDrugsItem(
-            title: 'Famotidin/Nizatidin',
-            description: 'P-450 etkisi yok.',
-            subtitle: 'Hızlı IV uygulama → hipotansiyon + bradikardi.',
+            title: "2. KUŞAK H1 BLOKERLERİ (NON-SEDATİF ETKİLİ)",
+            description: "Kan-beyin bariyerini geçemedikleri için uyku hali yapmazlar; temel olarak alerjik rinit ve ürtiker vakalarında tercih edilirler.",
+            subtitle: "Loratadin, setirizin ve feksofenadin astım tedavisinde etkisizdir!",
+            additionalInfo: "Bu ajanlar periferik H1 reseptörlerine çok daha selektif bağlanırlar. Antikolinerjik yan etkileri yok denecek kadar azdır; bu nedenle gün boyu zindelik gerektiren hastalarda ilk tercihtir.",
           ),
         ],
       ),
       AnesthesiaAdjuvantDrugsCategory(
-        categoryName: 'Metoklopramid',
+        categoryName: 'H2 Blokerleri ve İlaç Etkileşimleri',
         items: [
           AnesthesiaAdjuvantDrugsItem(
-            title: 'Mekanizma',
-            description: 'Periferde kolinomimetik, santralde dopamin antagonist.',
+            title: "SİMETİDİN VE P-450 ENZİM İNHİBİSYONU",
+            description: "Karaciğerdeki sitokrom P-450 enzim sistemini güçlü şekilde inhibe ederek diğer ilaçların vücuttan atılımını yavaşlatır.",
+            subtitle: "Varfarin, fenitoin, diazepam ve propranolol ile ciddi etkileşime girebilir",
+            additionalInfo: "Yan etkileri arasında jinekomasti (erkeklerde meme büyümesi), impotans ve nadiren hepatotoksisite yer alır. Modern anestezide yan etkileri nedeniyle yerini daha spesifik ajanlara bırakmıştır.",
           ),
           AnesthesiaAdjuvantDrugsItem(
-            title: 'Etkiler',
-            description: 'Mide boşalması ↑, sıvı hacmi ↓, antiemetik etki (KTZ dopamin R blokajı).',
-          ),
-          AnesthesiaAdjuvantDrugsItem(
-            title: 'Yan Etkiler',
-            description: 'Ekstrapiramidal bulgular, Parkinsonda kontrendike, feokromasitomada HT krizi.',
+            title: "RANİTİDİN, FAMOTİDİN VE NİZATİDİN ÖZELLİKLERİ",
+            description: "P-450 enzimi üzerine etkileri yok denecek kadar az olan, daha güvenli profil sergileyen H2 bloker ajanlardır.",
+            subtitle: "Famotidin ve Nizatidin'in hızlı intravenöz uygulaması hipotansiyon ve bradikardiye (asistoliye kadar) yol açabilir",
+            additionalInfo: "Ranitidin, simetidine göre daha potenttir ancak famotidin en güçlü ve uzun etkili olanıdır. İntravenöz uygulamaları yavaş yapılmalıdır (genellikle 15-20 dakikaya yayılmalıdır).",
           ),
         ],
       ),
       AnesthesiaAdjuvantDrugsCategory(
-        categoryName: 'Proton Pompa İnhibitörleri',
+        categoryName: 'Metoklopramid ve Prokinetik Etki',
         items: [
           AnesthesiaAdjuvantDrugsItem(
-            title: 'İlaçlar',
-            description: 'Omeprazol, lansoprazol, pantoprazol.',
-            subtitle: 'Etki: Asit sekresyonunu en güçlü baskılar.',
+            title: "METOKLOPRAMİD ETİ MEKANİZMASI",
+            description: "Periferde kolinomimetik (asetilkolin etkisini artıran), merkezde ise dopamin antagonisti olarak fonksiyon görür.",
+            additionalInfo: "Mide duvarının kasılma gücünü artırır, pilor sfinkterini gevşetir ve mide içeriğinin ince bağırsağa geçişini kolaylaştırır. Santral dopamin blokajı ile hafif bir antiemetik (bulantı önleyici) etki de sağlar.",
           ),
           AnesthesiaAdjuvantDrugsItem(
-            title: 'Yan Etkiler',
-            description: 'Uzun süre kullanım → enterokromafin hücre hiperplazisi, bakteriyel kolonizasyon ↑.',
+            title: "KLİNİK ETKİLER VE ÖZOFAGUS TONUSU",
+            description: "Mide boşalmasını hızlandırıp sıvı hacmini azaltırken, alt özofagus sfinkter tonusunu artırarak mide asidinin yemek borusuna kaçmasını önler.",
+            additionalInfo: "KTZ (Kemoreseptör Tetikleme Bölgesi) üzerindeki dopamin reseptörlerini bloke ederek mide bulantısını engellemede (opioid veya cerrahi sonrası) yardımcı olur.",
           ),
           AnesthesiaAdjuvantDrugsItem(
-            title: 'İlaç Etkileşimleri',
-            description: 'Diazepam, varfarin, fenitoin klirensini azaltır; klopidogrel etkinliğini azaltır.',
+            title: "YAN ETKİLER VE EKSTRAPİRAMİDAL BULGULAR",
+            description: "Dopamin reseptörlerini bloke ettiği için hareket bozukluklarına (distoni, akatizi) ve Parkinson hastalarında semptomların kötüleşmesine neden olabilir.",
+            subtitle: "Feokromasitoma hastalarında katekolamin salınımını tetikleyerek hipertansif krize yol açabilir",
+            additionalInfo: "Parkinson hastalığı, barsak tıkanıklığı (obstrüksiyon) ve feokromasitoma olan vakalarda kullanımı kesinlikle kontrendikedir (yasaktır).",
           ),
         ],
       ),
       AnesthesiaAdjuvantDrugsCategory(
-        categoryName: 'POBK (Postoperatif Bulantı Kusma)',
+        categoryName: 'Proton Pompa İnhibitörleri (PPI)',
         items: [
           AnesthesiaAdjuvantDrugsItem(
-            title: 'Risk Faktörleri',
-            description: 'Kadın, sigara içmeme, taşıt tutması öyküsü.',
+            title: "PPI GRUBU İLAÇLAR VE GÜÇLÜ ASİT BASKILAMA",
+            description: "Omeprazol, lansoprazol ve pantoprazol gibi ajanlar mide asidini en radikal şekilde azaltan grup olup, 'son vuruş' etkisine sahiptir.",
+            additionalInfo: "Hücredeki asit pompasını kalıcı olarak kapattıkları için etkileri enzimler yeniden sentezlenene kadar (yaklaşık 24-48 saat) devam eder.",
           ),
           AnesthesiaAdjuvantDrugsItem(
-            title: 'Anestezi Faktörleri',
-            description: 'Volatil anestezik, N₂O, opioidler.',
+            title: "UZUN SÜRELİ KULLANIMDA ORTAYA ÇIKAN YAN ETKİLER",
+            description: "Yıllarca süren kullanımda mide hücrelerinde (enterokromafin benzeri hücreler) hiperplazi ve bakteriyel kolonizasyon (enfeksiyon) riski artar.",
+            additionalInfo: "Mide asidinin yokluğu (aklorhidri), kalsiyum ve B12 vitamini emilimini bozarak osteoporoz ve anemi riskini de artırabilir.",
           ),
           AnesthesiaAdjuvantDrugsItem(
-            title: 'Cerrahi Faktörleri',
-            description: 'Süre uzaması (her 30 dk → %60 artış).',
+            title: "PPI VE KLOPİDÖGREL ETKİLEŞİMİ",
+            description: "Omeprazol gibi PPI'lar, kan sulandırıcı bir ilaç olan Klopidogrelin (Plavix) vücutta aktifleşmesini engelleyerek etkinliğini azaltabilir.",
+            additionalInfo: "Karaciğerdeki CYP2C19 enzim yarışı nedeniyle gerçekleşen bu durum, kalp hastalarında stent tıkanması (tromboz) riskini artırdığı için dikkatli yönetilmelidir. Pantoprazol bu etkileşim açısından daha güvenli kabul edilir.",
           ),
         ],
       ),
       AnesthesiaAdjuvantDrugsCategory(
-        categoryName: 'Antiemetikler',
+        categoryName: 'Postoperatif Bulantı Kusma (POBK)',
         items: [
           AnesthesiaAdjuvantDrugsItem(
-            title: '5-HT3 Antagonistleri',
-            description: 'Ondansetron → QT uzaması, baş ağrısı, KC yetmezliğinde doz azalt.',
+            title: "POBK İÇİN HASTA VE ANESTEZİ RİSK FAKTÖRLERİ",
+            description: "Kadın cinsiyet, sigara içmeme öyküsü ve taşıt tutması (motion sickness) geçmişi en güçlü bağımsız risk faktörleridir.",
+            additionalInfo: "Anestezi sırasında kullanılan volatil (solunumsal) ajanlar, nitröz oksit (N2O) ve postoperatif dönemdeki opioid (morfin vb.) kullanımı bu riski tetikler. TİVA (total intravenöz anestezi) kullanımı riski belirgin şekilde azaltır.",
           ),
           AnesthesiaAdjuvantDrugsItem(
-            title: 'Butirofenonlar',
-            description: 'Droperidol → QT uzaması, torsades riski.',
-          ),
-          AnesthesiaAdjuvantDrugsItem(
-            title: 'Deksametazon',
-            description: '4 mg, cerrahi başında verilir.',
-          ),
-          AnesthesiaAdjuvantDrugsItem(
-            title: 'NK-1 Antagonistleri',
-            description: 'Aprepitant → ondansetronla aditif etki.',
+            title: "CERRAHİ TÜRÜ VE SÜRESİNİN POBK ÜZERİNDEKİ ETKİSİ",
+            description: "Cerrahi sürenin her 30 dakikalık uzaması, bulantı kusma riskini yaklaşık %60 oranında artırmaktadır.",
+            additionalInfo: "Özellikle jinekolojik ameliyatlar, şaşılık ameliyatları, laparoskopik girişimler ve kulak operasyonları POBK açısından en yüksek riskli cerrahi gruplardır.",
           ),
         ],
       ),
       AnesthesiaAdjuvantDrugsCategory(
-        categoryName: 'Spot Sorular',
+        categoryName: 'Antiemetik Ajanlar ve Modern Tedavi',
         items: [
           AnesthesiaAdjuvantDrugsItem(
-            title: 'ÖZET SPOT SORULAR',
-            description: 'Aspirasyon pnömonisi için kritik değer? → pH <2.5, hacim >25 mL',
-            subtitle: 'Astımda etkisiz antihistaminik? → H1 blokerler',
-            additionalInfo: 'Jinekomasti yapan ilaç? → Simetidin\nQT uzaması yapan antiemetik? → Ondansetron & Droperidol\nMide boşalmasını hızlandıran ilaç? → Metoklopramid\nKlopidogrel etkinliğini azaltan ilaç? → Omeprazol (PPI)\nSedatif etkili antihistaminikler? → 1. kuşak H1 blokerleri',
+            title: "5-HT3 ANTAGONİSTLERİ (ONDANSETRON)",
+            description: "Serotonin reseptörlerini bloke ederek kusma merkezini baskılayan, anestezinin en popüler antiemetik ilaç grubudur.",
+            subtitle: "Yan etki olarak QT mesafesinde uzama ve baş ağrısı yapabilir",
+            additionalInfo: "Karaciğer yetmezliği olan hastalarda doz azaltımı gerekebilir. Steroidlerle (Deksametazon) kombine edildiklerinde etkileri sinerjik olarak artar.",
+          ),
+          AnesthesiaAdjuvantDrugsItem(
+            title: "BUTİROFENONLAR VE DROPERİDOL",
+            description: "Dopamin reseptörlerini bloke ederek çok düşük dozlarda bile etkili antiemetik kontrol sağlarlar.",
+            subtitle: "Ciddi QT uzaması ve ani ölüm riski (Black Box Warning) nedeniyle EKG monitorizasyonu ile uygulanmalıdır",
+            additionalInfo: "Ekstrapiramidal yan etkiler (kas kasılmaları) yapabilirler. Torsades de Pointes aritmisine yol açma riski nedeniyle klinik kullanımı sınırlandırılmıştır.",
+          ),
+          AnesthesiaAdjuvantDrugsItem(
+            title: "DEKSAMETAZON VE NK-1 ANTAGONİSTLERİ",
+            description: "Deksametazon (4 mg) cerrahi başında uygulandığında bulantıyı önlemede etkilidir; aprepitant (NK-1 antagonisti) ise kitle kusmalarında (örneğin kemoterapi sonrası) tercih edilir.",
+            additionalInfo: "Aprepitant ve ondansetron kombinasyonu, şiddetli POBK riski olan hastalarda aditif (eklemeli) bir koruma kalkanı oluşturur.",
+          ),
+        ],
+      ),
+      AnesthesiaAdjuvantDrugsCategory(
+        categoryName: 'Klinik Altın Spotlar',
+        items: [
+          AnesthesiaAdjuvantDrugsItem(
+            title: "ÖZET VE KRİTİK HATIRLATMALAR",
+            description: "Anestezide yardımcı ilaçlar hakkında sınavda çıkması en muhtemel spot bilgiler.",
+            additionalInfo: "• Aspirasyon riski: pH <2.5 ve hacim >25 mL.\n• Jinekomasti yapan: Simetidin.\n• QT uzaması yapanlar: Ondansetron ve Droperidol.\n• Klopidogrel etkisini azaltan: Omeprazol.\n• Prokinetik ve sfinkter tonusu artıran: Metoklopramid.\n• Astımda antihistaminik verilmesi: Pratik bir faydası yoktur, asıl tedavi bronkodilatörlerdir.",
           ),
         ],
       ),

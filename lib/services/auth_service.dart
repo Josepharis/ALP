@@ -200,12 +200,12 @@ class AuthService {
           debugPrint('⚠️ Premium yükleme hatası (devam ediliyor): $e');
         }
         
-        // Bildirim ayarla - kritik değil
+        // Bildirim aboneliklerini ayarla - kritik değil
         try {
           final notificationService = NotificationService();
-          await notificationService.scheduleDailyNotification();
+          await notificationService.updateSubscriptionsByLanguage();
         } catch (e) {
-          debugPrint('⚠️ Bildirim hatası (devam ediliyor): $e');
+          debugPrint('⚠️ Bildirim abonelik hatası (devam ediliyor): $e');
         }
       }
 
@@ -278,12 +278,12 @@ class AuthService {
         debugPrint('⚠️ Premium yükleme hatası (devam ediliyor): $e');
       }
 
-      // Bildirim ayarla - kritik değil
+      // Bildirim aboneliklerini ayarla - kritik değil
       try {
         final notificationService = NotificationService();
-        await notificationService.scheduleDailyNotification();
+        await notificationService.updateSubscriptionsByLanguage();
       } catch (e) {
-        debugPrint('⚠️ Bildirim hatası (devam ediliyor): $e');
+        debugPrint('⚠️ Bildirim abonelik hatası (devam ediliyor): $e');
       }
 
       return user;

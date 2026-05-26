@@ -1,0 +1,580 @@
+{
+  "meta": {
+    "title": "Farmakolojik Prensipler Soru Bankası",
+    "language": "tr",
+    "totalQuestions": 38,
+    "category": "Farmakolojik Prensipler"
+  },
+  "questions": [
+    {
+      "id": 1,
+      "question": "Bir antagonist, doz-yanıt eğrisinde maksimum etkiyi (Emax) değiştirmiyor ancak eğriyi sağa kaydırarak EC50 değerini artırıyor. Bu hangi tip antagonizmadır?",
+      "options": [
+        "Kompetitif antagonist.",
+        "Non-kompetitif antagonist.",
+        "İrreversibl antagonist.",
+        "Fizyolojik antagonist.",
+        "Kimyasal antagonist."
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Kompetitif antagonist reseptör bölgesinde agonistle yarışır. Agonist konsantrasyonu artırıldığında etki aşılabilir; Emax korunur, EC50 artar.",
+      "category": "Farmakolojik Prensipler"
+    },
+    {
+      "id": 2,
+      "question": "Bir deneyde agonistin yanına X maddesi eklendiğinde maksimum etki (Emax) değişmiyor, ancak aynı etki için gereken agonist miktarı (EC50) artıyor. X maddesi ne tür bir antagonisttir?",
+      "options": [
+        "Non-kompetitif antagonist.",
+        "İrreversibl antagonist.",
+        "Kompetitif antagonist.",
+        "Fizyolojik antagonist.",
+        "Kimyasal antagonist."
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Kompetitif antagonist agonistle aynı reseptör bölgesine geri dönüşümlü bağlanır. Agonist artırıldığında antagonizma aşılabilir; Emax değişmez, EC50 artar.",
+      "category": "Farmakolojik Prensipler"
+    },
+    {
+      "id": 3,
+      "question": "Emilim için verilen bilgilerden hangisi yanlıştır?",
+      "options": [
+        "Asidik ilaçların bazik ortamda, bazik ilaçların asidik ortamda emilimi kolaydır.",
+        "Oral ilaç karaciğerden ilk geçiş metabolizmasına maruz kalabilir.",
+        "Noniyonize ilaçlar iyonize ilaçlara göre daha kolay emilirler.",
+        "Mide ve ince bağırsağın venöz drenajı karaciğere olduğu için yüksek oranda metabolize olan ilaçların biyoyararlanımı azalabilir.",
+        "Ağız ve özofagusun venöz drenajı portal sisteme değil superior vena kavaya olduğu için sublingual veya bukkal absorbsiyon ilk geçiş etkisinden korunur."
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "İlaçlar noniyonize oldukları ortamda daha iyi emilir. Asidik ilaçlar asidik ortamda, bazik ilaçlar bazik ortamda daha fazla noniyonize kalır ve daha kolay emilir.",
+      "category": "Farmakolojik Prensipler"
+    },
+    {
+      "id": 4,
+      "question": "İlaç emilimini etkileyen faktörlerden olmayan hangisidir?",
+      "options": [
+        "Çözünürlük",
+        "Formül yapısı",
+        "Doz",
+        "Emilim bölgesi",
+        "Cinsiyet"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 2,
+      "explanation": "İlaç emilimi çözünürlük, formülasyon, doz ve emilim bölgesi gibi faktörlerden etkilenir. Cinsiyet doğrudan temel bir emilim faktörü değildir.",
+      "category": "Farmakolojik Prensipler"
+    },
+    {
+      "id": 5,
+      "question": "Bir antagonistin varlığında, agonist ilacın doz-yanıt eğrisi sağa kayıyor ancak maksimum etkisi (Emax) değişmiyor. Bu hangi tip antagonizmadır?",
+      "options": [
+        "Non-kompetitif antagonist.",
+        "Kompetitif antagonist.",
+        "İrreversibl antagonist.",
+        "Fizyolojik antagonist.",
+        "Kimyasal antagonist."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Kompetitif antagonizmada antagonist agonistle aynı reseptör bölgesi için yarışır. Agonist dozu artırılarak etki aşılabilir; bu yüzden Emax değişmez, ancak EC50 artar ve eğri sağa kayar.",
+      "category": "Farmakolojik Prensipler"
+    },
+    {
+      "id": 6,
+      "question": "Hipovolemik şok tablosunda olan bir hastada, intravenöz yolla verilen bir ilacın başlangıç dozu (loading dose) neden normalden düşük tutulmalıdır?",
+      "options": [
+        "Metabolizma hızı arttığı için.",
+        "Santral kompartman hacmi azaldığı için ilaç hayati organlara daha yüksek konsantrasyonda gider.",
+        "Böbrek fonksiyonları durduğu için.",
+        "Protein bağlanma oranı arttığı için.",
+        "İlaç dokulara daha hızlı dağıldığı için."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 4,
+      "explanation": "Hipovolemide santral kompartman hacmi azalır. Aynı doz daha küçük hacme dağıldığından özellikle beyin ve kalp gibi organlarda daha yüksek konsantrasyon oluşturabilir.",
+      "category": "Farmakolojik Prensipler"
+    },
+    {
+      "id": 7,
+      "question": "Yenidoğanlarda aşağıdaki Faz II reaksiyonlarından hangisinin yetersiz olması Gri Bebek Sendromu riskine yol açar?",
+      "options": [
+        "Sülfasyon.",
+        "Glukuronidasyon.",
+        "Asetilasyon.",
+        "Hidroliz.",
+        "Oksidasyon."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Yenidoğanlarda UDP-glukuronoziltransferaz sistemi olgunlaşmamıştır. Kloramfenikol gibi ilaçların glukuronidasyonla atılamaması Gri Bebek Sendromu riskini artırır.",
+      "category": "Farmakolojik Prensipler"
+    },
+    {
+      "id": 8,
+      "question": "Transdermal ilaç uygulamasında epidermisin hangi tabakası etkin bir bariyer görevi görür?",
+      "options": [
+        "Stratum korneum",
+        "Stratum lucidum",
+        "Stratum granülosum",
+        "Stratum spinosum",
+        "Stratum basale"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 2,
+      "explanation": "Stratum corneum, epidermisin en dış tabakasıdır ve transdermal ilaç geçişine karşı en güçlü bariyeri oluşturur.",
+      "category": "Farmakolojik Prensipler"
+    },
+    {
+      "id": 9,
+      "question": "Simvastatin ve nifedipin kullanan bir hasta her sabah büyük bir bardak taze greyfurt suyu içmeye başlıyor. Bir süre sonra rabdomiyoliz bulguları ve belirgin hipotansiyon gelişiyor. Greyfurt suyunun bu tabloya yol açmasının temel nedeni hangisidir?",
+      "options": [
+        "Böbrek filtrasyon hızını yavaşlatması.",
+        "Bağırsaktaki CYP3A4 enzimini inhibe ederek ilaçların ilk geçiş etkisini azaltması.",
+        "Plazma albümin düzeylerini düşürerek serbest ilaç miktarını artırması.",
+        "Mide asidini nötralize ederek ilaç emilimini durdurması.",
+        "İlaçların idrarla atılımını engellemesi."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 4,
+      "explanation": "Greyfurt suyu intestinal CYP3A4'ü inhibe eder. Statinler ve kalsiyum kanal blokerleri gibi substratların ilk geçiş metabolizması azalır ve plazma düzeyleri toksik seviyelere çıkabilir.",
+      "category": "Farmakolojik Prensipler"
+    },
+    {
+      "id": 10,
+      "question": "Biyotransformasyon için verilen bilgilerden hangisi yanlıştır?",
+      "options": [
+        "Biyotransformasyon, ilaç molekülünün vücutta değişime uğradığı kimyasal süreçtir.",
+        "Karaciğer çoğu ilacın metabolizması için primer organdır; kan veya dokuda hidrolize uğrayan esterler bunun istisnasıdır.",
+        "Hepatik klirens, birim zamanda ilaçtan temizlenen kan veya plazma hacmidir.",
+        "Propofol, propranolol, lidokain, morfin ve nitrogliserin gibi ilaçlar akıma bağımlı klirense sahiptir.",
+        "Faz II reaksiyonu ile ana molekül oksidasyon, redüksiyon veya hidroliz ile daha polar metabolitlere dönüştürülür."
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Oksidasyon, redüksiyon ve hidroliz Faz I reaksiyonlarıdır. Faz II reaksiyonları genellikle konjugasyon reaksiyonlarıdır.",
+      "category": "Farmakolojik Prensipler"
+    },
+    {
+      "id": 11,
+      "question": "Bir ilacın pKa değeri 7.4 ise ve vücut pH'ı da 7.4 ise, bu ilacın iyonizasyon durumu nasıldır?",
+      "options": [
+        "%100 iyonize olmuştur.",
+        "%100 non-iyonize olmuştur.",
+        "%50 iyonize, %50 non-iyonize formdadır.",
+        "Tamamı proteinlere bağlanmıştır.",
+        "Hiçbiri."
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 2,
+      "explanation": "Henderson-Hasselbalch prensibine göre ortam pH'ı ilacın pKa değerine eşitse, ilaç yaklaşık olarak %50 iyonize ve %50 non-iyonize formdadır.",
+      "category": "Farmakolojik Prensipler"
+    },
+    {
+      "id": 12,
+      "question": "Bir hasta yüksek dozda bir ilaç alarak intihar girişiminde bulunmuştur. Yapılan incelemede ilacın dağılım hacminin (Vd) 15 L/kg olduğu saptanmıştır. Bu hastanın tedavisiyle ilgili aşağıdaki ifadelerden hangisi doğrudur?",
+      "options": [
+        "İlaç büyük oranda plazma içinde hapsolmuştur.",
+        "Hemodiyaliz, ilacı vücuttan uzaklaştırmak için çok etkili bir yöntemdir.",
+        "İlaç dokularda (yağ veya kas gibi) yaygın olarak birikmiştir.",
+        "İlacın plazma proteinlerine bağlanma oranı %99'dur.",
+        "İlaç yüksek oranda hidrofilik karakterdedir."
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 4,
+      "explanation": "Vd'nin toplam vücut suyunun çok üzerinde olması ilacın plazma dışında dokularda depolandığını gösterir. Böyle ilaçlar yalnızca kandaki ilacı temizleyen hemodiyalizle iyi uzaklaştırılamaz.",
+      "category": "Farmakolojik Prensipler"
+    },
+    {
+      "id": 13,
+      "question": "Kalp debisi ciddi oranda düşük olan bir hastada, intravenöz indüksiyon ajanlarının (örn. propofol) dozu neden azaltılmalıdır?",
+      "options": [
+        "Hepatik enzimler daha yavaş çalıştığı için.",
+        "Plazma proteinlerine bağlanma oranı arttığı için.",
+        "Santral kompartman hacmi azaldığı için ilaç beyne daha yüksek konsantrasyonda gider.",
+        "İlacın böbreklerden atılımı hızlandığı için.",
+        "Kan-beyin bariyeri daha geçirgen hale geldiği için."
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 4,
+      "explanation": "Düşük kalp debisinde kan akımı beyin ve kalp gibi hayati organlara yönlenir ve santral kompartman hacmi daralır. Standart intravenöz doz daha küçük bir hacme dağıldığından beyin konsantrasyonu beklenenden yüksek olabilir; bu nedenle indüksiyon dozu azaltılmalıdır.",
+      "category": "Farmakolojik Prensipler"
+    },
+    {
+      "id": 14,
+      "question": "Bir ilacın terapötik indeksi (LD50 / ED50) 1.1 olarak ölçülmüştür. Bu durum aşağıdakilerden hangisini gösterir?",
+      "options": [
+        "İlacın çok geniş bir güvenli kullanım aralığına sahip olduğunu.",
+        "İlacın çok güçlü bir agonist olduğunu.",
+        "Toksik doz ile tedavi edici dozun birbirine çok yakın olduğunu.",
+        "İlacın biyoyararlanımının %100 olduğunu.",
+        "İlacın sadece böbrek yoluyla atıldığını."
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Terapötik indeksin 1'e çok yakın olması, etkili doz ile toksik veya öldürücü doz arasındaki farkın çok dar olduğunu gösterir. Küçük doz artışları ciddi toksisiteye yol açabilir.",
+      "category": "Farmakolojik Prensipler"
+    },
+    {
+      "id": 15,
+      "question": "Trafik kazası sonrası ağır kanaması olan ve hipovolemik şoka giren bir hastada intravenöz bir ilacın başlangıç dozunun düşük tutulması gerektiği düşünülüyor. Bu kararın temel farmakokinetik gerekçesi nedir?",
+      "options": [
+        "Karaciğer kan akımının artması.",
+        "Santral kompartman hacminin azalması sonucu ilacın hayati organlara yüksek konsantrasyonda gitmesi.",
+        "Plazma proteinlerinin aşırı artması.",
+        "İlacın dokulara dağılımının hızlanması.",
+        "Böbreklerden ilaç atılımının hızlanması."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 4,
+      "explanation": "Şokta periferik vazokonstriksiyon ve santral kan akımı ön plandadır. Santral kompartman daraldığı için standart dozlar beyin ve kalp gibi hayati organlarda yüksek konsantrasyona ve toksisiteye yol açabilir.",
+      "category": "Farmakolojik Prensipler"
+    },
+    {
+      "id": 16,
+      "question": "Sürekli fenitoin tedavisi alan bir hastada, ilacın dozu küçük bir miktar artırıldığında plazma düzeyinin beklenmedik şekilde çok hızlı yükseldiği görülüyor. Bu durum hangi eliminasyon prensibi ile açıklanır?",
+      "options": [
+        "Birinci derece kinetik.",
+        "Karaciğer kan akımının artması.",
+        "Enzimlerin doygunluğa ulaşması (sıfırıncı derece kinetik).",
+        "Dağılım hacminin azalması.",
+        "Renal klirensin artması."
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 4,
+      "explanation": "Fenitoin terapötik aralıkta metabolik enzimleri doyurma eğilimindedir. Enzimler doygunluğa ulaştığında küçük doz artışları plazma düzeyinde orantısız ve toksik yükselmelere neden olabilir.",
+      "category": "Farmakolojik Prensipler"
+    },
+    {
+      "id": 17,
+      "question": "Epilepsi hastası 300 mg/gün fenitoin kullanırken nöbetleri devam ettiği için doz 330 mg/gün'e çıkarılıyor. Bu küçük artış sonrası ataksi, nistagmus ve plazma düzeyinde belirgin artış gelişiyor. Bu orantısız artış hangi farmakokinetik prensip ile açıklanır?",
+      "options": [
+        "Birinci derece kinetik.",
+        "İlaç emiliminin doygunluğa ulaşması.",
+        "Kapasite sınırlı (Michaelis-Menten) eliminasyonun doygunluğa ulaşması.",
+        "Dağılım hacminin dozla birlikte küçülmesi.",
+        "Renal klirensin indüklenmesi."
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 4,
+      "explanation": "Fenitoin terapötik dozlarda metabolik enzimleri doyurma noktasına yaklaşır. Kapasite sınırlı eliminasyonda küçük doz artışları plazma düzeyinde büyük artışlara neden olabilir.",
+      "category": "Farmakolojik Prensipler"
+    },
+    {
+      "id": 18,
+      "question": "Fenitoin gibi sıfırıncı derece kinetik gösteren ilaçlar için hangisi doğrudur?",
+      "options": [
+        "Sabit bir oranda (yüzde olarak) atılırlar.",
+        "Yarı ömürleri doza bağlı olarak değişmez.",
+        "Enzimler doygunluğa ulaştığı için birim zamanda sabit bir miktar atılırlar.",
+        "Plazma konsantrasyonu arttıkça atılım hızı da artar.",
+        "Sadece akciğer yoluyla atılırlar."
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Sıfırıncı derece kinetikte eliminasyon enzimleri doygunluğa ulaşır. İlaç sabit bir yüzdeyle değil, birim zamanda sabit bir miktar olarak atılır; doz arttıkça yarı ömür uzayabilir.",
+      "category": "Farmakolojik Prensipler"
+    },
+    {
+      "id": 19,
+      "question": "Yüksek oranda karaciğer kan akımına bağımlı bir ilaç olan lidokain infüzyonu alan bir hastada ciddi kalp yetmezliği gelişiyor. Bu durumun ilacın farmakokinetiği üzerindeki en olası etkisi nedir?",
+      "options": [
+        "Dağılım hacmi artar.",
+        "Hepatik klirens azalır ve toksisite riski artar.",
+        "First-pass etkisi artar.",
+        "Plazma protein bağlanması artar.",
+        "İlacın yarı ömrü kısalır."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 4,
+      "explanation": "Lidokain yüksek hepatik ekstraksiyonlu ve akıma bağımlı klirense sahip bir ilaçtır. Kalp yetmezliği karaciğer kan akımını azaltır, hepatik klirensi düşürür ve toksisite riskini artırır.",
+      "category": "Farmakolojik Prensipler"
+    },
+    {
+      "id": 20,
+      "question": "Anjina pektoris krizi geçiren bir hastaya nitrogliserin dil altı formda veriliyor. Bu uygulama yolunun oral yola göre temel avantajı hangisidir?",
+      "options": [
+        "Mide asidinden etkilenmemesi.",
+        "İlacın doğrudan superior vena kava yoluyla kalbe ulaşarak karaciğerdeki ilk geçiş etkisini bypass etmesi.",
+        "İlacın bağırsak florası tarafından parçalanmasının önlenmesi.",
+        "İlacın plazma proteinlerine daha az bağlanması.",
+        "İlacın sadece koroner damarlara spesifik dağılması."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Sublingual emilim doğrudan sistemik venöz dolaşıma olur ve portal dolaşımı atlar. Bu nedenle nitrogliserin karaciğerdeki ilk geçiş metabolizmasından korunur.",
+      "category": "Farmakolojik Prensipler"
+    },
+    {
+      "id": 21,
+      "question": "Yaşlı hastalarda lipofilik ilaçların (örn. diazepam) etkisinin daha uzun sürmesinin temel nedeni nedir?",
+      "options": [
+        "Karaciğer enzimlerinin daha aktif olması.",
+        "Vücut yağ oranının artması ve ilacın bu dokularda depolanması.",
+        "Toplam vücut suyunun artması.",
+        "Plazma proteinlerinin artması.",
+        "Böbrek filtrasyonunun hızlanması."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Yaşlılarda yağ dokusu oranı artar ve toplam vücut suyu azalır. Diazepam gibi lipofilik ilaçlar yağ dokusunda daha fazla depolanır; bu da dağılım hacmini ve etki süresini artırır.",
+      "category": "Farmakolojik Prensipler"
+    },
+    {
+      "id": 22,
+      "question": "Propofolün tek doz uygulamasından sonra hastanın hızla uyanmasını sağlayan temel mekanizma nedir?",
+      "options": [
+        "Hızlı karaciğer metabolizması.",
+        "Akciğerler yoluyla atılım.",
+        "İlacın beyinden diğer dokulara (kas ve yağ) redistribüsyonu.",
+        "Plazma esterazları tarafından parçalanma.",
+        "Böbreklerden hızlı filtrasyon."
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Propofol gibi lipofilik intravenöz anesteziklerde tek bolus sonrası etkinin hızla sonlanması esas olarak redistribüsyona bağlıdır. İlaç beyinden kas ve yağ dokusuna geçer, beyin konsantrasyonu düşer ve hasta uyanır.",
+      "category": "Farmakolojik Prensipler"
+    },
+    {
+      "id": 23,
+      "question": "Dağılım için verilen bilgilerden hangisi yanlıştır?",
+      "options": [
+        "İlaç molekülleri kütle etkisi kanununa uyar.",
+        "Moleküller kanda serbest formda ya da plazma proteinleri veya yağlar gibi kan elemanlarına bağlı olarak bulunur.",
+        "Plazma proteinlerine bağlanma transfer hızını doğrudan etkilemez, ancak ilacın kan ve dokudaki nispi çözünürlüğünü etkiler.",
+        "Albüminin birçok asidik ve nötral ilaca afinitesi olan bağlanma bölgeleri vardır.",
+        "α2-Asit glikoprotein (AAG) bazik ilaçları bağlar."
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Bazik ilaçları bağlayan protein α1-asit glikoproteindir. α2-asit glikoprotein ifadesi bu bağlamda yanlıştır.",
+      "category": "Farmakolojik Prensipler"
+    },
+    {
+      "id": 24,
+      "question": "Anestezi sırasında kullanılan inhalasyon ajanlarının etki hızı öncelikle neye bağlıdır?",
+      "options": [
+        "İlacın lipofilikliğine.",
+        "Kan/gaz dağılım katsayısına.",
+        "Karaciğer metabolizmasına.",
+        "Böbrek filtrasyonuna.",
+        "Kalp hızına."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "İnhalasyon ajanlarında etki hızı kan/gaz dağılım katsayısına bağlıdır. Kan çözünürlüğü düşük olan ajanların alveol ve beyin parsiyel basıncı daha hızlı yükselir, indüksiyon daha hızlı olur.",
+      "category": "Farmakolojik Prensipler"
+    },
+    {
+      "id": 25,
+      "question": "Atrakuryumun organ bağımsız bir şekilde pH ve sıcaklığa bağlı olarak parçalanmasına ne ad verilir?",
+      "options": [
+        "Oksidatif redüksiyon.",
+        "Hofmann eliminasyonu.",
+        "Glukuronidasyon.",
+        "Dealkilasyon.",
+        "İlk geçiş etkisi."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Atrakuryum ve sisatrakuryum, karaciğer veya böbrek fonksiyonuna bağımlı olmadan Hofmann eliminasyonu ile yıkılır. Bu süreç pH ve sıcaklığa bağlıdır.",
+      "category": "Farmakolojik Prensipler"
+    },
+    {
+      "id": 26,
+      "question": "Kronik böbrek yetmezliği olan bir hastada hangi nöromüsküler blokör ajan Hofmann eliminasyonu sayesinde daha güvenle kullanılır?",
+      "options": [
+        "Atrakuryum.",
+        "Vekuronyum.",
+        "Rokuronyum.",
+        "Pankuronyum.",
+        "Süksinilkolin."
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Atrakuryum ve sisatrakuryum Hofmann eliminasyonu ile organ fonksiyonundan bağımsız yıkılır. Bu nedenle böbrek yetmezliğinde birikme riski daha düşüktür.",
+      "category": "Farmakolojik Prensipler"
+    },
+    {
+      "id": 27,
+      "question": "Karaciğer yetmezliği nedeniyle plazma albümin düzeyi çok düşük olan bir hastada proteinlere %98 oranında bağlanan bir ilaç uygulanıyor. Bu hastada ne beklenebilir?",
+      "options": [
+        "İlacın etkisi azalır çünkü bağlanacak protein bulamaz.",
+        "Serbest (aktif) ilaç miktarı artar ve toksisite riski yükselir.",
+        "İlacın dağılım hacmi küçülür.",
+        "İlacın böbreklerden atılımı durur.",
+        "İlaç hiçbir dokuya geçemez."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 4,
+      "explanation": "Albümin düzeyi düşükse yüksek protein bağlı ilacın serbest fraksiyonu artar. Serbest ilaç aktif olduğu için etki ve toksisite riski yükselir.",
+      "category": "Farmakolojik Prensipler"
+    },
+    {
+      "id": 28,
+      "question": "Transdermal ilaç geçişinde en önemli bariyer tabaka hangisidir?",
+      "options": [
+        "Dermis.",
+        "Stratum basale.",
+        "Stratum corneum.",
+        "Stratum spinosum.",
+        "Hipodermis."
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 2,
+      "explanation": "Stratum corneum, epidermisin en dış tabakasıdır ve transdermal ilaç geçişini sınırlayan en önemli bariyerdir.",
+      "category": "Farmakolojik Prensipler"
+    },
+    {
+      "id": 29,
+      "question": "Plazma albümin düzeyi çok düşük olan bir hastada, proteinlere yüksek oranda bağlanan bir ilaç uygulandığında ne beklenir?",
+      "options": [
+        "İlacın etkisi azalır.",
+        "Serbest ilaç miktarı artar ve toksisite riski yükselir.",
+        "İlacın yarı ömrü kısalır.",
+        "İlaç dokulara hiç dağılmaz.",
+        "Eliminasyon hızı artar."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Sadece serbest ilaç farmakolojik etki gösterir. Albümin azaldığında yüksek protein bağlı ilaçların serbest fraksiyonu artar ve toksisite riski yükselir.",
+      "category": "Farmakolojik Prensipler"
+    },
+    {
+      "id": 30,
+      "question": "Greyfurt suyunun birçok ilacın plazma düzeyini tehlikeli oranda artırmasının nedeni hangisidir?",
+      "options": [
+        "Böbrek atılımını engellemesi.",
+        "CYP3A4 enzimini inhibe ederek ilaç metabolizmasını yavaşlatması.",
+        "İlacın emilimini hızlandırması.",
+        "Plazma proteinlerini parçalaması.",
+        "Mide asidini nötralize etmesi."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Greyfurt suyu, özellikle bağırsak duvarındaki CYP3A4 enzimini inhibe eder. Bu enzimle metabolize edilen ilaçların ilk geçiş metabolizması azalır ve plazma düzeyleri artabilir.",
+      "category": "Farmakolojik Prensipler"
+    },
+    {
+      "id": 31,
+      "question": "Kronik böbrek yetmezliği ve karaciğer sirozu olan 55 yaşında bir hasta acil cerrahi girişime alınacaktır. Entübasyon için nöromüsküler blokör bir ajan seçilmesi gerekmektedir. Aşağıdaki ajanlardan hangisi, eliminasyonu organ fonksiyonlarından bağımsız olan Hofmann eliminasyonu sayesinde bu hasta için en güvenli seçenektir?",
+      "options": [
+        "Vekuronyum",
+        "Rokuronyum",
+        "Atrakuryum",
+        "Pankuronyum",
+        "Süksinilkolin"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 4,
+      "explanation": "Atrakuryum ve sisatrakuryum karaciğer metabolizmasına veya böbrek atılımına ihtiyaç duymaz. Plazma pH'ı ve sıcaklıkta gerçekleşen Hofmann eliminasyonu ile parçalanırlar.",
+      "category": "Farmakolojik Prensipler"
+    },
+    {
+      "id": 32,
+      "question": "Bir ilacın dağılım hacmi (Vd) 500 litre olarak bulunmuştur. Bu veri ilaç hakkında neyi kanıtlar?",
+      "options": [
+        "İlacın plazmada çok yüksek miktarda bulunduğunu.",
+        "İlacın suda çok iyi çözündüğünü.",
+        "İlacın lipofilik olduğunu ve dokularda yaygın olarak biriktiğini.",
+        "İlacın proteinlere çok sıkı bağlandığını.",
+        "İlacın idrarla çok hızlı atıldığını."
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Toplam vücut suyunun çok üzerinde bir Vd değeri, ilacın plazmada kalmadığını ve yağ, kas veya diğer dokularda yaygın şekilde dağılıp biriktiğini gösterir.",
+      "category": "Farmakolojik Prensipler"
+    },
+    {
+      "id": 33,
+      "question": "İzoniazid veya hidralazin kullanan bir hastada ilaçla tetiklenen lupus tablosu gelişiyor. Bu yan etkinin hastanın hangi genetik özelliği ile ilişkili olması en olasıdır?",
+      "options": [
+        "Hızlı asetilleyici olması.",
+        "Yavaş asetilleyici olması (NAT2 enzim aktivitesi düşük).",
+        "CYP2D6 enzim aktivitesinin yüksek olması.",
+        "Plazma kolinesteraz eksikliği.",
+        "Glukoz-6-fosfat dehidrogenaz eksikliği."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 4,
+      "explanation": "Hidralazin ve izoniazid asetilasyonla metabolize edilir. NAT2 aktivitesi düşük olan yavaş asetilleyicilerde ilaç birikimi lupus benzeri reaksiyon riskini artırır.",
+      "category": "Farmakolojik Prensipler"
+    },
+    {
+      "id": 34,
+      "question": "Aşağıdaki yollardan hangisi ile verilen bir ilaç doğrudan superior vena kava yoluyla kalbe ulaşarak ilk geçiş etkisini tamamen bypass eder?",
+      "options": [
+        "Oral.",
+        "Rektal (üst kısım).",
+        "Sublingual.",
+        "İntratekal.",
+        "Nazogastrik tüp."
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Sublingual yoldan emilen ilaçlar vena lingualis ve internal juguler ven aracılığıyla superior vena kavaya dökülür; portal sisteme uğramadıkları için ilk geçiş metabolizmasını bypass ederler.",
+      "category": "Farmakolojik Prensipler"
+    },
+    {
+      "id": 35,
+      "question": "Bir ilacın bağlam-duyarlı yarı ömrü (context-sensitive half-time) neyi ifade eder?",
+      "options": [
+        "Tek bir dozun vücuttan atılma süresini.",
+        "İnfüzyon süresine bağlı olarak, plazma konsantrasyonunun %50 azalması için gereken süreyi.",
+        "İlacın reseptöre bağlanma hızını.",
+        "İlacın karaciğerde metabolize olma kapasitesini.",
+        "İlacın yağ dokusunda ne kadar çözündüğünü."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Bağlam-duyarlı yarı ömür, sürekli intravenöz infüzyon durdurulduktan sonra plazma konsantrasyonunun %50 azalması için gereken süredir. Buradaki bağlam infüzyon süresidir.",
+      "category": "Farmakolojik Prensipler"
+    },
+    {
+      "id": 36,
+      "question": "Lidokain gibi yüksek hepatik ekstraksiyon oranına sahip ilaçların eliminasyon hızı öncelikle neye bağlıdır?",
+      "options": [
+        "Karaciğerin enzim kapasitesine.",
+        "Karaciğer kan akımına.",
+        "İlacın plazma proteinine bağlanma oranına.",
+        "İlacın molekül ağırlığına.",
+        "İdrar pH'ına."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Yüksek hepatik ekstraksiyon oranına sahip ilaçlarda eliminasyon hızı metabolik kapasiteden çok karaciğer kan akımına bağlıdır. Bu durum akıma bağımlı klirens olarak tanımlanır.",
+      "category": "Farmakolojik Prensipler"
+    },
+    {
+      "id": 37,
+      "question": "İlacın eliminasyon yarı ömrü 4 saattir. İnfüzyon durdurulduktan 12 saat sonra vücutta ilacın yüzde kaçı kalır?",
+      "options": [
+        "%50.",
+        "%25.",
+        "%12.5.",
+        "%6.25.",
+        "%0."
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 2,
+      "explanation": "12 saat, 4 saatlik yarı ömrün 3 katıdır. Üç yarı ömür sonunda kalan miktar %100 → %50 → %25 → %12.5 olur.",
+      "category": "Farmakolojik Prensipler"
+    },
+    {
+      "id": 38,
+      "question": "30 haftalık gebe bir hastada şiddetli hipertansiyon saptanıyor. Yenidoğanda renal disgenezi ve kafatası kemikleşme kusurlarına yol açtığı için gebelikte kontrendike olan ilaç grubu hangisidir?",
+      "options": [
+        "Beta-blokörler.",
+        "ACE inhibitörleri.",
+        "Kalsiyum kanal blokörleri.",
+        "Santral etkili alfa-2 agonistleri (metildopa).",
+        "Hidralazin."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 4,
+      "explanation": "ACE inhibitörleri fetal anjiyotensin II düzeyini düşürerek fetal böbrek perfüzyonu ve gelişimini bozar. Özellikle 2. ve 3. trimesterde renal disgenezi, oligohidramniyos ve kafatası defektleri oluşturabilir.",
+      "category": "Farmakolojik Prensipler"
+    }
+  ]
+}

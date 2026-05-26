@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
+import 'dart:ui';
+import 'dart:io';
+import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'pdf_viewer_screen.dart';
 import '../l10n/app_localizations.dart';
 import '../services/language_service.dart';
 import '../services/premium_service.dart';
@@ -76,6 +82,7 @@ import '../data/spot/eng/intensive_care_problems_data.dart' as eng;
 import '../data/spot/eng/postoperative_care_inhalation_data.dart' as eng;
 import '../data/spot/eng/sepsis_ards_data.dart' as eng;
 import '../data/spot/eng/erc2021_data.dart' as eng;
+import '../services/spot_service.dart';
 import '../data/spot/anticholinergic_drugs_data.dart';
 import '../data/spot/adrenergic_agonists_antagonists_data.dart';
 import '../data/spot/hypotensive_agents_data.dart';
@@ -138,6 +145,8 @@ class _InformationScreenState extends State<InformationScreen> {
   bool _isSearching = false;
   List<dynamic> _allSections = [];
   List<dynamic> _filteredSections = [];
+  final SpotService _spotService = SpotService();
+  int? _pressedSectionIndex;
 
   @override
   void initState() {
@@ -147,7 +156,8 @@ class _InformationScreenState extends State<InformationScreen> {
     });
   }
 
-  void _loadAllData() {
+  void _loadAllData() async {
+    if (!mounted) return;
     final languageService = Provider.of<LanguageService>(context, listen: false);
     final isEnglish = languageService.currentLocale.languageCode == 'en';
     
@@ -687,16 +697,118 @@ class _InformationScreenState extends State<InformationScreen> {
         },
     ];
     
-    _filteredSections = _allSections;
+    // Add index to sections for PDF mapping
+    for (int i = 0; i < _allSections.length; i++) {
+      _allSections[i]['index'] = i + 1;
+    }
     
-    setState(() {});
+    // Firestore'dan dinamik spot bilgilerini al
+    try {
+      final langCode = languageService.currentLocale.languageCode;
+      final dynamicItems = await _spotService.getAllSpotItems(langCode);
+      
+      if (dynamicItems.isNotEmpty) {
+        // Dinamik öğeleri mevcut kategorilere göre grupla veya yeni kategori oluştur
+        for (var item in dynamicItems) {
+          bool found = false;
+
+          // 1. ADIM: unitName varsa önce o üniteyi bulmaya çalış (Daha spesifik eşleşme)
+          if (item.unitName != null && item.unitName!.isNotEmpty) {
+            for (var section in _allSections) {
+              if (section['title'].toString().toLowerCase() == item.unitName!.toLowerCase()) {
+                final categories = section['categories'] as List;
+                bool catFoundInUnit = false;
+                for (var category in categories) {
+                  if (category.categoryName == item.categoryName) {
+                    try {
+                      category.items.add(item);
+                    } catch (e) {
+                      // Immutable list handle if needed
+                    }
+                    catFoundInUnit = true;
+                    break;
+                  }
+                }
+                
+                // Ünite bulundu ama kategori bulunamadıysa ünite içine yeni kategori ekle
+                if (!catFoundInUnit) {
+                  categories.add(_DynamicCategory(
+                    categoryName: item.categoryName,
+                    items: [item],
+                  ));
+                }
+                found = true;
+                break;
+              }
+            }
+          }
+
+          // 2. ADIM: unitName ile bulunamadıysa (veya yoksa) eski usul kategori bazlı ara
+          if (!found) {
+            for (var section in _allSections) {
+              final categories = section['categories'] as List;
+              for (var category in categories) {
+                if (category.categoryName == item.categoryName) {
+                  try {
+                    category.items.add(item);
+                  } catch (e) {}
+                  found = true;
+                  break;
+                }
+              }
+              if (found) break;
+            }
+          }
+          
+          // 3. ADIM: Hiçbir yerde bulunamadıysa "Ek Bilgiler" kısmına ekle
+          if (!found) {
+            var otherSection = _allSections.firstWhere(
+              (s) => s['title'] == (isEnglish ? 'Additional Information' : 'Ek Bilgiler') || 
+                     s['title'] == (isEnglish ? 'General Information' : 'Genel Bilgiler'),
+              orElse: () {
+                var newSection = {
+                  'title': isEnglish ? 'Additional Information' : 'Ek Bilgiler',
+                  'icon': Icons.add_to_photos_rounded,
+                  'color': [const Color(0xFF45B649), const Color(0xFFDCE35B)],
+                  'categories': [],
+                };
+                _allSections.add(newSection);
+                return newSection;
+              }
+            );
+            
+            var categoriesList = otherSection['categories'] as List;
+            var targetCategorySet = categoriesList.where((c) => c.categoryName == item.categoryName);
+            if (targetCategorySet.isNotEmpty) {
+              targetCategorySet.first.items.add(item);
+            } else {
+              categoriesList.add(_DynamicCategory(
+                categoryName: item.categoryName,
+                items: [item],
+              ));
+            }
+          }
+        }
+      }
+    } catch (e) {
+      debugPrint('Error loading dynamic spot info: $e');
+    }
+    
+    if (mounted) {
+      setState(() {
+        _filteredSections = _allSections;
+      });
+    }
   }
 
   void _navigateToDetailScreen(dynamic section) {
-    Navigator.push(
-      context,
+    Navigator.of(context, rootNavigator: true).push(
       MaterialPageRoute(
-        builder: (context) => InformationDetailScreen(section: section),
+        builder: (context) => PdfViewerScreen(
+          pdfUrl: '',
+          subjectTitle: section['title']?.toString() ?? 'Konu Anlatımı',
+          subjectIndex: section['index'] as int?,
+        ),
       ),
     );
   }
@@ -766,7 +878,7 @@ class _InformationScreenState extends State<InformationScreen> {
               // Compact Header
               Padding(
                 padding: EdgeInsets.symmetric(
-                  horizontal: isSmallScreen ? 16 : 20,
+                  horizontal: isSmallScreen ? 10 : 14,
                   vertical: isSmallScreen ? 8 : 12,
                 ),
                 child: Row(
@@ -826,11 +938,22 @@ class _InformationScreenState extends State<InformationScreen> {
               if (_isSearching) ...[
                 const SizedBox(height: 12),
                 Container(
-                  margin: EdgeInsets.symmetric(horizontal: isSmallScreen ? 16 : 20),
-                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  margin: EdgeInsets.symmetric(horizontal: isSmallScreen ? 10 : 14),
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.2),
-                    borderRadius: BorderRadius.circular(20),
+                    color: Colors.white.withOpacity(0.08),
+                    borderRadius: BorderRadius.circular(25),
+                    border: Border.all(
+                      color: Colors.white.withOpacity(0.15),
+                      width: 1,
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.1),
+                        blurRadius: 10,
+                        offset: const Offset(0, 4),
+                      ),
+                    ],
                   ),
                   child: TextField(
                     controller: _searchController,
@@ -841,13 +964,17 @@ class _InformationScreenState extends State<InformationScreen> {
                       });
                       _performSearch(value);
                     },
-                    style: const TextStyle(color: Colors.white),
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 15,
+                      fontWeight: FontWeight.w500,
+                    ),
                     decoration: InputDecoration(
-                      hintText: 'Bilgilerde ara...',
-                      hintStyle: const TextStyle(color: Colors.white70),
+                      hintText: AppLocalizations.of(context)!.informationSearchHint,
+                      hintStyle: TextStyle(color: Colors.white.withOpacity(0.5)),
                       border: InputBorder.none,
-                      icon: const Icon(Icons.search, color: Colors.white70, size: 18),
-                      contentPadding: const EdgeInsets.symmetric(vertical: 8),
+                      icon: Icon(Icons.search_rounded, color: Colors.white.withOpacity(0.7), size: 18),
+                      contentPadding: const EdgeInsets.symmetric(vertical: 12),
                     ),
                   ),
                 ),
@@ -858,16 +985,39 @@ class _InformationScreenState extends State<InformationScreen> {
               Expanded(
                 child: Builder(
                   builder: (context) {
-                    return _filteredSections.isEmpty
-                        ? _buildEmptyState()
-                        : ListView.builder(
-                            padding: EdgeInsets.symmetric(horizontal: isSmallScreen ? 16 : 20),
-                            itemCount: _filteredSections.length,
-                            itemBuilder: (context, sectionIndex) {
-                              final section = _filteredSections[sectionIndex];
-                              return _buildSectionCard(section, sectionIndex);
-                            },
-                          );
+                    if (_filteredSections.isEmpty) {
+                      return _buildEmptyState();
+                    }
+                    
+                    final horizontalPadding = isSmallScreen ? 4.0 : 8.0;
+                    
+                    if (screenWidth >= 600) {
+                      // Modern responsive GridView for tablets and wider screens
+                      return GridView.builder(
+                        padding: EdgeInsets.symmetric(horizontal: horizontalPadding, vertical: 8),
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: screenWidth >= 900 ? 3 : 2,
+                          crossAxisSpacing: 14,
+                          mainAxisSpacing: 14,
+                          childAspectRatio: screenWidth >= 900 ? 2.5 : 2.2,
+                        ),
+                        itemCount: _filteredSections.length,
+                        itemBuilder: (context, sectionIndex) {
+                          final section = _filteredSections[sectionIndex];
+                          return _buildSectionCard(section, sectionIndex);
+                        },
+                      );
+                    } else {
+                      // Stretched ListView for mobiles with minimal margins
+                      return ListView.builder(
+                        padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+                        itemCount: _filteredSections.length,
+                        itemBuilder: (context, sectionIndex) {
+                          final section = _filteredSections[sectionIndex];
+                          return _buildSectionCard(section, sectionIndex);
+                        },
+                      );
+                    }
                   },
                 ),
               ),
@@ -905,16 +1055,19 @@ class _InformationScreenState extends State<InformationScreen> {
           ),
           SizedBox(height: 20),
           Text(
-            "Sonuç bulunamadı",
-            style: TextStyle(
+            _searchQuery.isEmpty 
+                ? AppLocalizations.of(context)!.informationNoResults 
+                : AppLocalizations.of(context)!.informationNoResultsForQuery(_searchQuery),
+            style: const TextStyle(
               color: Colors.white,
               fontSize: 20,
               fontWeight: FontWeight.w400,
             ),
+            textAlign: TextAlign.center,
           ),
           SizedBox(height: 8),
           Text(
-            "Farklı anahtar kelimeler deneyin",
+            AppLocalizations.of(context)!.informationTryDifferentKeywords,
             style: TextStyle(
               color: Colors.white,
               fontSize: 14,
@@ -931,69 +1084,159 @@ class _InformationScreenState extends State<InformationScreen> {
     final isSmallScreen = screenWidth < 400;
     
     final sectionTitle = section['title'];
-    final sectionIcon = section['icon'];
     final sectionColors = section['color'];
     final categories = section['categories'];
     
-    return Container(
-      width: double.infinity,
-      margin: EdgeInsets.only(bottom: isSmallScreen ? 12 : 16),
+    final isPressed = _pressedSectionIndex == sectionIndex;
+    final imagePath = _getSectionImagePath(sectionTitle);
+    
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
       child: GestureDetector(
-        onTap: () => _navigateToDetailScreen(section),
-        child: Container(
-          width: double.infinity,
-          padding: EdgeInsets.symmetric(
-            horizontal: isSmallScreen ? 12 : 16,
-            vertical: isSmallScreen ? 8 : 12,
-          ),
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: sectionColors,
+        onTapDown: (_) {
+          setState(() {
+            _pressedSectionIndex = sectionIndex;
+          });
+        },
+        onTapUp: (_) {
+          setState(() {
+            _pressedSectionIndex = null;
+          });
+          _navigateToDetailScreen(section);
+        },
+        onTapCancel: () {
+          setState(() {
+            _pressedSectionIndex = null;
+          });
+        },
+        child: AnimatedScale(
+          scale: isPressed ? 0.98 : 1.0,
+          duration: const Duration(milliseconds: 150),
+          curve: Curves.easeOutCubic,
+          child: Container(
+            margin: EdgeInsets.only(bottom: screenWidth >= 600 ? 0 : 8.0),
+            decoration: BoxDecoration(
+              color: Colors.white.withOpacity(0.04), // Clean glassmorphic appearance
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(
+                color: Colors.white.withOpacity(0.08),
+                width: 1,
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.2),
+                  blurRadius: 10,
+                  offset: const Offset(0, 4),
+                ),
+              ],
             ),
-            borderRadius: BorderRadius.circular(isSmallScreen ? 12 : 16),
-            boxShadow: [
-              BoxShadow(
-                color: sectionColors[0].withOpacity(0.3),
-                blurRadius: isSmallScreen ? 8 : 12,
-                spreadRadius: 0,
-                offset: Offset(0, isSmallScreen ? 2 : 4),
-              ),
-            ],
-          ),
-          child: Row(
-            children: [
-              Container(
-                padding: EdgeInsets.all(isSmallScreen ? 6 : 8),
-                decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.15),
-                  borderRadius: BorderRadius.circular(isSmallScreen ? 8 : 10),
-                ),
-                child: Icon(
-                  sectionIcon,
-                  color: Colors.white,
-                  size: isSmallScreen ? 16 : 18,
-                ),
-              ),
-              SizedBox(width: isSmallScreen ? 8 : 12),
-              Expanded(
-                child: Text(
-                  sectionTitle,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: isSmallScreen ? 14 : 16,
-                    fontWeight: FontWeight.w500,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(19),
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
+                child: IntrinsicHeight(
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      // Realistic 3D Medical Illustration - Fully Embedded
+                      Hero(
+                        tag: 'sec_img_${section['index']}',
+                        child: SizedBox(
+                          width: isSmallScreen ? 64.0 : 80.0,
+                          child: Image.asset(
+                            imagePath,
+                            fit: BoxFit.cover,
+                            errorBuilder: (context, error, stackTrace) {
+                              return Container(
+                                color: sectionColors[0].withOpacity(0.2),
+                                child: Center(
+                                  child: Icon(
+                                    section['icon'] ?? Icons.medical_services_rounded,
+                                    color: Colors.white,
+                                    size: isSmallScreen ? 20 : 24,
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 10.0,
+                            vertical: 10.0,
+                          ),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      sectionTitle,
+                                      style: TextStyle(
+                                        fontSize: isSmallScreen ? 13 : 14,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                        height: 1.25,
+                                        letterSpacing: 0.1,
+                                      ),
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                    const SizedBox(height: 6),
+                                    // Subtopics Tag Badge
+                                    Container(
+                                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                                      decoration: BoxDecoration(
+                                        color: sectionColors[0].withOpacity(0.1),
+                                        borderRadius: BorderRadius.circular(20),
+                                        border: Border.all(
+                                          color: sectionColors[0].withOpacity(0.2),
+                                          width: 1,
+                                        ),
+                                      ),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Icon(
+                                            Icons.layers_outlined,
+                                            size: 10,
+                                            color: sectionColors[0].withOpacity(0.9),
+                                          ),
+                                          const SizedBox(width: 4),
+                                          Text(
+                                            AppLocalizations.of(context)!.informationSubtopicsCount(categories.length),
+                                            style: TextStyle(
+                                              fontSize: isSmallScreen ? 9 : 10,
+                                              color: sectionColors[0].withOpacity(0.9),
+                                              fontWeight: FontWeight.w700,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(width: 8),
+                              // Minimal Chevron Icon
+                              Icon(
+                                Icons.arrow_forward_ios_rounded,
+                                color: Colors.white.withOpacity(0.3),
+                                size: isSmallScreen ? 12 : 14,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
-              SizedBox(width: isSmallScreen ? 6 : 8),
-              Icon(
-                Icons.arrow_forward_ios_rounded,
-                color: Colors.white.withOpacity(0.8),
-                size: isSmallScreen ? 12 : 14,
-              ),
-            ],
+            ),
           ),
         ),
       ),
@@ -1018,6 +1261,170 @@ class InformationDetailScreen extends StatefulWidget {
 }
 
 class _InformationDetailScreenState extends State<InformationDetailScreen> {
+  bool _isLoadingPdf = false;
+
+  Future<String> _getDownloadUrlForSubject(int index) async {
+    final possiblePaths = [
+      'konu anlatımı/$index',
+      'konu nalatımı/$index', // Typo fallback
+      'konu_anlatimi/$index',
+      'konu anlatimi/$index',
+      'Konu Anlatımları/$index',
+      'Konu Anlatımı/$index',
+      'konu anlatimlari/$index',
+    ];
+
+    for (final path in possiblePaths) {
+      try {
+        final folderRef = FirebaseStorage.instance.ref().child(path);
+        final listResult = await folderRef.listAll();
+        
+        final pdfFileRefs = listResult.items.where(
+          (ref) => ref.name.toLowerCase().endsWith('.pdf')
+        ).toList();
+        
+        if (pdfFileRefs.isNotEmpty) {
+          return await pdfFileRefs.first.getDownloadURL();
+        }
+      } catch (e) {
+        continue;
+      }
+    }
+
+    final fallbackPaths = [
+      'konu anlatımı/$index/$index.pdf',
+      'konu anlatımı/$index.pdf',
+      'konu nalatımı/$index/$index.pdf',
+      'konu nalatımı/$index.pdf',
+      'konu_anlatimi/$index/$index.pdf',
+      'konu_anlatimi/$index.pdf',
+      'Konu Anlatımları/$index/$index.pdf',
+      'Konu Anlatımı/$index/$index.pdf',
+    ];
+
+    for (final filePath in fallbackPaths) {
+      try {
+        final fileRef = FirebaseStorage.instance.ref().child(filePath);
+        return await fileRef.getDownloadURL();
+      } catch (e) {
+        continue;
+      }
+    }
+
+    throw FirebaseException(
+      plugin: 'firebase_storage',
+      code: 'object-not-found',
+      message: 'PDF klasörü veya dosyası bulunamadı',
+    );
+  }
+
+  Future<void> _openSubjectPdf(int? index) async {
+    if (index == null) return;
+    
+    setState(() {
+      _isLoadingPdf = true;
+    });
+
+    try {
+      final subjectTitle = widget.section['title']?.toString() ?? 'Konu Anlatımı';
+      
+      // 1. Cache kontrolü: Dosya yerelde varsa Firebase Storage'a gitme
+      final directory = await getTemporaryDirectory();
+      final safeTitle = subjectTitle.replaceAll(RegExp(r'[^a-zA-Z0-9]'), '_');
+      final cachedFile = File('${directory.path}/pdf_cache_$safeTitle.pdf');
+
+      if (await cachedFile.exists()) {
+        if (!mounted) return;
+        Navigator.of(context, rootNavigator: true).push(
+          MaterialPageRoute(
+            builder: (context) => PdfViewerScreen(
+              pdfUrl: '',
+              subjectTitle: subjectTitle,
+            ),
+          ),
+        );
+        return; // Firebase sorgusu yapmadan sonlandır
+      }
+
+      // 2. Cache'te yoksa Firebase'den URL'i al
+      final downloadUrl = await _getDownloadUrlForSubject(index);
+      
+      if (!mounted) return;
+      
+      Navigator.of(context, rootNavigator: true).push(
+        MaterialPageRoute(
+          builder: (context) => PdfViewerScreen(
+            pdfUrl: downloadUrl,
+            subjectTitle: subjectTitle,
+          ),
+        ),
+      );
+      
+    } on FirebaseException catch (e) {
+      if (!mounted) return;
+      if (e.code == 'object-not-found') {
+        _showNotification(
+          context,
+          AppLocalizations.of(context)!.localeName == 'tr'
+              ? 'Bu konunun PDF anlatımı henüz eklenmemiştir. Lütfen "konu anlatımı/$index" klasörünü kontrol edin.'
+              : 'The PDF lecture for this subject is not available yet.',
+          isError: false,
+        );
+      } else {
+        _showNotification(
+          context,
+          AppLocalizations.of(context)!.localeName == 'tr'
+              ? 'Bağlantı hatası: ${e.message}'
+              : 'Connection error: ${e.message}',
+          isError: true,
+        );
+      }
+    } catch (e) {
+      if (!mounted) return;
+      _showNotification(
+        context,
+        AppLocalizations.of(context)!.localeName == 'tr'
+            ? 'PDF açılamadı: Hata Detayı: $e'
+            : 'Failed to open PDF: $e',
+        isError: true,
+      );
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isLoadingPdf = false;
+        });
+      }
+    }
+  }
+
+  void _showNotification(BuildContext context, String message, {required bool isError}) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Row(
+          children: [
+            Icon(
+              isError ? Icons.error_outline_rounded : Icons.info_outline_rounded,
+              color: Colors.white,
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Text(
+                message,
+                style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+              ),
+            ),
+          ],
+        ),
+        backgroundColor: isError ? Colors.red.shade800 : Colors.blue.shade800,
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+        margin: const EdgeInsets.all(16),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -1042,7 +1449,7 @@ class _InformationDetailScreenState extends State<InformationDetailScreen> {
               // Header
               Padding(
                 padding: EdgeInsets.symmetric(
-                  horizontal: isSmallScreen ? 16 : 20,
+                  horizontal: isSmallScreen ? 10 : 14,
                   vertical: isSmallScreen ? 8 : 12,
                 ),
                 child: Row(
@@ -1078,6 +1485,57 @@ class _InformationDetailScreenState extends State<InformationDetailScreen> {
                         ),
                       ),
                     ),
+                    const SizedBox(width: 8),
+                    // PDF Button
+                    GestureDetector(
+                      onTap: _isLoadingPdf ? null : () => _openSubjectPdf(widget.section['index']),
+                      child: Container(
+                        padding: EdgeInsets.all(isSmallScreen ? 6 : 8),
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: _isLoadingPdf 
+                                ? [Colors.white.withOpacity(0.1), Colors.white.withOpacity(0.05)]
+                                : [Colors.red.shade400.withOpacity(0.3), Colors.red.shade900.withOpacity(0.3)],
+                          ),
+                          borderRadius: BorderRadius.circular(isSmallScreen ? 10 : 12),
+                          border: Border.all(
+                            color: _isLoadingPdf 
+                                ? Colors.white.withOpacity(0.2)
+                                : Colors.red.shade400.withOpacity(0.5),
+                          ),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            _isLoadingPdf
+                                ? SizedBox(
+                                    width: isSmallScreen ? 16 : 18,
+                                    height: isSmallScreen ? 16 : 18,
+                                    child: const CircularProgressIndicator(
+                                      strokeWidth: 2,
+                                      valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                                    ),
+                                  )
+                                : Icon(
+                                    Icons.picture_as_pdf_rounded,
+                                    color: Colors.white,
+                                    size: isSmallScreen ? 16 : 18,
+                                  ),
+                            if (!isSmallScreen) ...[
+                              const SizedBox(width: 6),
+                              Text(
+                                _isLoadingPdf ? '...' : 'PDF Oku',
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ],
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -1085,10 +1543,93 @@ class _InformationDetailScreenState extends State<InformationDetailScreen> {
               // Content
               Expanded(
                 child: SingleChildScrollView(
-                  padding: EdgeInsets.symmetric(horizontal: isSmallScreen ? 16 : 20),
+                  padding: EdgeInsets.symmetric(horizontal: isSmallScreen ? 10 : 14),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      const SizedBox(height: 12),
+                      // Premium Detail Header Banner
+                      Container(
+                        width: double.infinity,
+                        margin: const EdgeInsets.only(bottom: 24),
+                        padding: const EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            colors: [
+                              widget.section['color'][0].withOpacity(0.15),
+                              widget.section['color'][1].withOpacity(0.03),
+                            ],
+                          ),
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(
+                            color: widget.section['color'][0].withOpacity(0.25),
+                            width: 1,
+                          ),
+                        ),
+                        child: Row(
+                          children: [
+                            Hero(
+                              tag: 'sec_img_${widget.section['index']}',
+                              child: Container(
+                                width: 64,
+                                height: 64,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(16),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: widget.section['color'][0].withOpacity(0.3),
+                                      blurRadius: 12,
+                                    ),
+                                  ],
+                                ),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(16),
+                                  child: Image.asset(
+                                    _getSectionImagePath(sectionTitle),
+                                    fit: BoxFit.cover,
+                                    errorBuilder: (context, error, stackTrace) => Container(
+                                      color: widget.section['color'][0].withOpacity(0.2),
+                                      child: Icon(
+                                        widget.section['icon'] ?? Icons.medical_services_rounded,
+                                        color: Colors.white,
+                                        size: 28,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(width: 16),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    AppLocalizations.of(context)!.localeName == 'tr' ? 'KONU ANLATIMI' : 'SUBJECT LECTURE',
+                                    style: TextStyle(
+                                      color: widget.section['color'][0].withOpacity(0.85),
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.bold,
+                                      letterSpacing: 1.5,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 4),
+                                  Text(
+                                    sectionTitle,
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                       // Kategoriler
                       ...categories.map((category) => _buildCategoryCard(category, categories.indexOf(category))),
                     ],
@@ -1108,82 +1649,113 @@ class _InformationDetailScreenState extends State<InformationDetailScreen> {
     
     // Her kategori için daha yumuşak ve göze hoş gelen renkler
     List<List<Color>> categoryColors = [
-      [Color(0xFF6B73FF), Color(0xFF9B59B6)], // Soft Purple-Blue
-      [Color(0xFFE74C3C), Color(0xFFC0392B)], // Soft Red
-      [Color(0xFF3498DB), Color(0xFF2980B9)], // Soft Blue
-      [Color(0xFF27AE60), Color(0xFF229954)], // Soft Green
-      [Color(0xFF8E44AD), Color(0xFF7D3C98)], // Soft Purple
-      [Color(0xFFE67E22), Color(0xFFD35400)], // Soft Orange
-      [Color(0xFF16A085), Color(0xFF138D75)], // Soft Teal
-      [Color(0xFF95A5A6), Color(0xFF7F8C8D)], // Soft Gray
-      [Color(0xFFE91E63), Color(0xFFC2185B)], // Soft Pink
-      [Color(0xFF9C27B0), Color(0xFF7B1FA2)], // Soft Violet
+      [const Color(0xFF6B73FF), const Color(0xFF9B59B6)], // Soft Purple-Blue
+      [const Color(0xFFE74C3C), const Color(0xFFC0392B)], // Soft Red
+      [const Color(0xFF3498DB), const Color(0xFF2980B9)], // Soft Blue
+      [const Color(0xFF27AE60), const Color(0xFF229954)], // Soft Green
+      [const Color(0xFF8E44AD), const Color(0xFF7D3C98)], // Soft Purple
+      [const Color(0xFFE67E22), const Color(0xFFD35400)], // Soft Orange
+      [const Color(0xFF16A085), const Color(0xFF138D75)], // Soft Teal
+      [const Color(0xFF95A5A6), const Color(0xFF7F8C8D)], // Soft Gray
+      [const Color(0xFFE91E63), const Color(0xFFC2185B)], // Soft Pink
+      [const Color(0xFF9C27B0), const Color(0xFF7B1FA2)], // Soft Violet
     ];
     
     final colors = categoryColors[categoryIndex % categoryColors.length];
     
     return Container(
       width: double.infinity,
-      margin: EdgeInsets.only(bottom: isSmallScreen ? 20 : 24),
+      margin: EdgeInsets.only(bottom: isSmallScreen ? 20 : 26),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Responsive Category Header
-          Container(
-            width: double.infinity,
-            padding: EdgeInsets.symmetric(
-              horizontal: isSmallScreen ? 12 : 16,
-              vertical: isSmallScreen ? 10 : 12,
-            ),
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: colors,
+          // Elegant Category Header
+          Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      colors[0].withOpacity(0.15),
+                      colors[1].withOpacity(0.05),
+                    ],
+                  ),
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(
+                    color: colors[0].withOpacity(0.3),
+                    width: 1,
+                  ),
+                ),
+                child: Text(
+                  (categoryIndex + 1).toString().padLeft(2, '0'),
+                  style: TextStyle(
+                    color: colors[0],
+                    fontSize: isSmallScreen ? 10 : 11,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Courier',
+                  ),
+                ),
               ),
-              borderRadius: BorderRadius.circular(isSmallScreen ? 12 : 16),
-              boxShadow: [
-                BoxShadow(
-                  color: colors[0].withOpacity(0.3),
-                  blurRadius: isSmallScreen ? 8 : 12,
-                  spreadRadius: 0,
-                  offset: Offset(0, isSmallScreen ? 2 : 4),
-                ),
-              ],
-            ),
-            child: Row(
-              children: [
-                Container(
-                  padding: EdgeInsets.all(isSmallScreen ? 6 : 8),
-                  decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.2),
-                    borderRadius: BorderRadius.circular(isSmallScreen ? 8 : 10),
-                  ),
-                  child: Icon(
-                    Icons.category_rounded,
-                    color: Colors.white,
-                    size: isSmallScreen ? 16 : 18,
+              const SizedBox(width: 12),
+              Expanded(
+                child: Text(
+                  category.categoryName.toUpperCase(),
+                  style: TextStyle(
+                    color: Colors.white.withOpacity(0.9),
+                    fontSize: isSmallScreen ? 12 : 13,
+                    fontWeight: FontWeight.w800,
+                    letterSpacing: 1.2,
                   ),
                 ),
-                SizedBox(width: isSmallScreen ? 10 : 12),
-                Expanded(
-                  child: Text(
-                    category.categoryName,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: isSmallScreen ? 16 : 18,
-                      fontWeight: FontWeight.w400,
-                    ),
+              ),
+              const SizedBox(width: 10),
+              // Trailing gradient divider line
+              Container(
+                width: screenWidth * 0.15,
+                height: 1,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      colors[0].withOpacity(0.4),
+                      colors[0].withOpacity(0.0),
+                    ],
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
           
-          SizedBox(height: isSmallScreen ? 12 : 16),
+          const SizedBox(height: 16),
           
-          // Items
-          ...category.items.map((item) => _buildItemCard(item, colors)),
+          // Items laid out responsively to utilize screen width
+          screenWidth >= 900
+              ? Wrap(
+                  spacing: 16,
+                  runSpacing: 16,
+                  children: category.items.map<Widget>((item) {
+                    final itemWidth = (screenWidth - (isSmallScreen ? 20 : 28) - 32) / 3;
+                    return SizedBox(
+                      width: itemWidth,
+                      child: _buildItemCard(item, colors),
+                    );
+                  }).toList(),
+                )
+              : screenWidth >= 600
+                  ? Wrap(
+                      spacing: 16,
+                      runSpacing: 16,
+                      children: category.items.map<Widget>((item) {
+                        final itemWidth = (screenWidth - (isSmallScreen ? 20 : 28) - 16) / 2;
+                        return SizedBox(
+                          width: itemWidth,
+                          child: _buildItemCard(item, colors),
+                        );
+                      }).toList(),
+                    )
+                  : Column(
+                      children: category.items.map<Widget>((item) => _buildItemCard(item, colors)).toList(),
+                    ),
         ],
       ),
     );
@@ -1195,85 +1767,154 @@ class _InformationDetailScreenState extends State<InformationDetailScreen> {
     
     return Container(
       width: double.infinity,
-      margin: EdgeInsets.only(bottom: isSmallScreen ? 10 : 12),
+      margin: const EdgeInsets.only(bottom: 16),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            Colors.white.withOpacity(0.1),
-            Colors.white.withOpacity(0.05),
+            categoryColors[0].withOpacity(0.3),
+            categoryColors[1].withOpacity(0.02),
           ],
         ),
-        borderRadius: BorderRadius.circular(isSmallScreen ? 12 : 16),
-        border: Border.all(
-          color: Colors.white.withOpacity(0.15),
-          width: 1,
-        ),
+        borderRadius: BorderRadius.circular(24),
         boxShadow: [
           BoxShadow(
-            color: categoryColors[0].withOpacity(0.1),
-            blurRadius: isSmallScreen ? 6 : 8,
-            spreadRadius: 0,
-            offset: Offset(0, isSmallScreen ? 1 : 2),
+            color: categoryColors[0].withOpacity(0.06),
+            blurRadius: 12,
+            offset: const Offset(0, 4),
           ),
         ],
       ),
-      child: Padding(
-        padding: EdgeInsets.all(isSmallScreen ? 14 : 18),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Title
-            Text(
-              item.title,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: isSmallScreen ? 15 : 16,
-                fontWeight: FontWeight.w400,
-              ),
+      padding: const EdgeInsets.all(1.2), // Gradient border width
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(23),
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
+          child: Container(
+            decoration: BoxDecoration(
+              color: const Color(0xFF0F172A).withOpacity(0.7), // Deep obsidian background
+              borderRadius: BorderRadius.circular(23),
             ),
-            
-            SizedBox(height: isSmallScreen ? 10 : 12),
-            
-            // Description
-            Text(
-              item.description,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: isSmallScreen ? 13 : 14,
-                height: 1.5,
-                fontWeight: FontWeight.w400,
-              ),
+            padding: EdgeInsets.all(isSmallScreen ? 14 : 18),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Tag label
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                  decoration: BoxDecoration(
+                    color: categoryColors[0].withOpacity(0.08),
+                    borderRadius: BorderRadius.circular(6),
+                    border: Border.all(
+                      color: categoryColors[0].withOpacity(0.15),
+                      width: 1,
+                    ),
+                  ),
+                  child: Text(
+                    item.title.toUpperCase(),
+                    style: TextStyle(
+                      color: categoryColors[0].withOpacity(0.9),
+                      fontSize: isSmallScreen ? 9 : 10,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 0.8,
+                    ),
+                  ),
+                ),
+                
+                const SizedBox(height: 12),
+                
+                // Key Spot Info with vertical quote accent
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      width: 3.5,
+                      height: isSmallScreen ? 34 : 42,
+                      margin: const EdgeInsets.only(top: 2, right: 12),
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [
+                            categoryColors[0],
+                            categoryColors[1].withOpacity(0.2),
+                          ],
+                        ),
+                        borderRadius: BorderRadius.circular(2),
+                      ),
+                    ),
+                    Expanded(
+                      child: Text(
+                        item.description,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: isSmallScreen ? 14 : 16,
+                          fontWeight: FontWeight.bold,
+                          height: 1.35,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                
+                if (item.additionalInfo != null) ...[
+                  const SizedBox(height: 12),
+                  // Detailed explanation
+                  Padding(
+                    padding: const EdgeInsets.only(left: 4.0),
+                    child: Text(
+                      item.additionalInfo!,
+                      style: TextStyle(
+                        color: Colors.white.withOpacity(0.85),
+                        fontSize: isSmallScreen ? 13 : 14,
+                        height: 1.45,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ),
+                ],
+                
+                if (item.subtitle != null) ...[
+                  // Premium Tip / Key Concept Box
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    margin: const EdgeInsets.only(top: 14),
+                    decoration: BoxDecoration(
+                      color: categoryColors[0].withOpacity(0.06),
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(
+                        color: categoryColors[0].withOpacity(0.15),
+                        width: 1,
+                      ),
+                    ),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Icon(
+                          Icons.lightbulb_outline_rounded,
+                          size: isSmallScreen ? 14 : 16,
+                          color: categoryColors[0].withOpacity(0.85),
+                        ),
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child: Text(
+                            item.subtitle!,
+                            style: TextStyle(
+                              color: Colors.white.withOpacity(0.75),
+                              fontSize: isSmallScreen ? 11 : 12,
+                              fontWeight: FontWeight.w500,
+                              height: 1.35,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ],
             ),
-            
-            // Subtitle
-            if (item.subtitle != null) ...[
-              SizedBox(height: isSmallScreen ? 6 : 8),
-              Text(
-                item.subtitle!,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: isSmallScreen ? 12 : 13,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-            ],
-            
-            // Additional info
-            if (item.additionalInfo != null) ...[
-              SizedBox(height: isSmallScreen ? 8 : 10),
-              Text(
-                item.additionalInfo!,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: isSmallScreen ? 12 : 13,
-                  height: 1.4,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-            ],
-          ],
+          ),
         ),
       ),
     );
@@ -1343,4 +1984,191 @@ class _PremiumInformationScreenState extends State<PremiumInformationScreen> {
       },
     );
   }
+}
+
+class _DynamicCategory {
+  final String categoryName;
+  final List<dynamic> items;
+
+  _DynamicCategory({
+    required this.categoryName,
+    required this.items,
+  });
+}
+
+class PremiumIconBadge extends StatelessWidget {
+  final IconData icon;
+  final List<Color> colors;
+  final bool isSmallScreen;
+
+  const PremiumIconBadge({
+    super.key,
+    required this.icon,
+    required this.colors,
+    required this.isSmallScreen,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final size = isSmallScreen ? 38.0 : 46.0;
+    final iconSize = isSmallScreen ? 18.0 : 22.0;
+
+    return Container(
+      width: size,
+      height: size,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        boxShadow: [
+          // Subtle outer glow matching the category's primary color
+          BoxShadow(
+            color: colors[0].withOpacity(0.3),
+            blurRadius: 10,
+            spreadRadius: 1,
+          ),
+          // Deep drop shadow for a floating 3D grounding effect
+          BoxShadow(
+            color: Colors.black.withOpacity(0.35),
+            blurRadius: 5,
+            offset: const Offset(0, 3),
+          ),
+        ],
+      ),
+      child: Stack(
+        children: [
+          // 1. Reflective Metallic Outer Bezel
+          Container(
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  Colors.white.withOpacity(0.55),
+                  colors[0].withOpacity(0.2),
+                  Colors.black.withOpacity(0.65),
+                ],
+                stops: const [0.0, 0.5, 1.0],
+              ),
+            ),
+          ),
+          // 2. Translucent Inner Glass Core with radial lighting
+          Padding(
+            padding: const EdgeInsets.all(1.5),
+            child: Container(
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                gradient: RadialGradient(
+                  center: const Alignment(-0.35, -0.35),
+                  radius: 0.85,
+                  colors: [
+                    colors[0].withOpacity(0.8), // Luminous center
+                    colors[1].withOpacity(0.95), // Darker edge shade
+                  ],
+                  stops: const [0.0, 1.0],
+                ),
+              ),
+            ),
+          ),
+          // 3. Highlight Glint (Glossy Reflection Dome)
+          Positioned(
+            top: 1.5,
+            left: 1.5,
+            right: 1.5,
+            child: Container(
+              height: size * 0.42,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(size),
+                  topRight: Radius.circular(size),
+                  bottomLeft: Radius.circular(size * 0.7),
+                  bottomRight: Radius.circular(size * 0.7),
+                ),
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Colors.white.withOpacity(0.4),
+                    Colors.white.withOpacity(0.0),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          // 4. Floating Crisp Icon glyph with soft drop shadow
+          Center(
+            child: Stack(
+              children: [
+                Positioned(
+                  top: 1.2,
+                  left: 1.2,
+                  child: Icon(
+                    icon,
+                    size: iconSize,
+                    color: Colors.black.withOpacity(0.4),
+                  ),
+                ),
+                Icon(
+                  icon,
+                  size: iconSize,
+                  color: Colors.white,
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+String _getSectionImagePath(String title) {
+  final titleLower = title.toLowerCase();
+  
+  if (titleLower.contains('tarih') || titleLower.contains('history')) {
+    return 'assets/images/img_history.png';
+  }
+  if (titleLower.contains('inhalasyon') || titleLower.contains('inhalation')) {
+    return 'assets/images/img_operating_room.png';
+  }
+  if (titleLower.contains('ameliyathane') || titleLower.contains('makine') || titleLower.contains('room') || titleLower.contains('workstation')) {
+    return 'assets/images/img_operating_room.png';
+  }
+  if (titleLower.contains('solunum') || titleLower.contains('havayolu') || titleLower.contains('respiratory') || titleLower.contains('airway') || titleLower.contains('akciğer') || titleLower.contains('thoracic') || titleLower.contains('toraks')) {
+    return 'assets/images/img_lungs.png';
+  }
+  if (titleLower.contains('kardiyo') || titleLower.contains('kalp') || titleLower.contains('cardio') || titleLower.contains('heart') || titleLower.contains('vascular')) {
+    return 'assets/images/img_heart.png';
+  }
+  if (titleLower.contains('oftalmik') || titleLower.contains('ophthalmic') || titleLower.contains('eye') || titleLower.contains('göz')) {
+    return 'assets/images/img_eye.png';
+  }
+  if (titleLower.contains('ortopedik') || titleLower.contains('orthopedic') || titleLower.contains('bone') || titleLower.contains('kemik') || titleLower.contains('eklem') || titleLower.contains('joint')) {
+    return 'assets/images/img_ortho.png';
+  }
+  if (titleLower.contains('spinal') || titleLower.contains('epidural') || titleLower.contains('kaudal') || titleLower.contains('caudal') || titleLower.contains('blok') || titleLower.contains('block') || titleLower.contains('sinir') || titleLower.contains('nerve') || titleLower.contains('ağrı') || titleLower.contains('pain')) {
+    return 'assets/images/img_spine.png';
+  }
+  if (titleLower.contains('nöro') || titleLower.contains('beyin') || titleLower.contains('neuro') || titleLower.contains('psych') || titleLower.contains('neuromuscular') || titleLower.contains('nöromüsküler')) {
+    return 'assets/images/img_brain.png';
+  }
+  if (titleLower.contains('karaciğer') || titleLower.contains('hepatic') || titleLower.contains('liver')) {
+    return 'assets/images/img_liver.png';
+  }
+  if (titleLower.contains('endokrin') || titleLower.contains('endocrine') || titleLower.contains('hormon') || titleLower.contains('hormone') || titleLower.contains('tiroid') || titleLower.contains('thyroid')) {
+    return 'assets/images/img_endocrine.png';
+  }
+  if (titleLower.contains('pediatri') || titleLower.contains('pediatric') || titleLower.contains('obstetric') || titleLower.contains('obstetrik') || titleLower.contains('maternal') || titleLower.contains('gebe') || titleLower.contains('child') || titleLower.contains('fetal') || titleLower.contains('bebek') || titleLower.contains('çocuk')) {
+    return 'assets/images/img_pediatric.png';
+  }
+  if (titleLower.contains('böbrek') || titleLower.contains('sıvı') || titleLower.contains('renal') || titleLower.contains('kidney') || titleLower.contains('fluid') || titleLower.contains('electrolyte') || titleLower.contains('asit-baz') || titleLower.contains('acid-base') || titleLower.contains('idrar') || titleLower.contains('genitourinary')) {
+    return 'assets/images/img_kidney.png';
+  }
+  if (titleLower.contains('farmakoloji') || titleLower.contains('ilaç') || titleLower.contains('anestezik') || titleLower.contains('ajan') || titleLower.contains('agonist') || titleLower.contains('antagonist') || titleLower.contains('drug') || titleLower.contains('pharmac') || titleLower.contains('agent')) {
+    return 'assets/images/img_pharmacology.png';
+  }
+  if (titleLower.contains('komplikasyon') || titleLower.contains('complication') || titleLower.contains('cpr') || titleLower.contains('resüsitasyon') || titleLower.contains('sepsis') || titleLower.contains('warning') || titleLower.contains('acil') || titleLower.contains('trauma') || titleLower.contains('travma') || titleLower.contains('emergency') || titleLower.contains('erc') || titleLower.contains('guideline') || titleLower.contains('kılavuz')) {
+    return 'assets/images/img_warning.png';
+  }
+  
+  return 'assets/images/img_operating_room.png';
 }

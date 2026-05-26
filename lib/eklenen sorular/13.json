@@ -1,0 +1,774 @@
+{
+  "meta": {
+    "title": "Antikolinerjik İlaçlar Soru Bankası",
+    "language": "tr",
+    "totalQuestions": 51
+  },
+  "questions": [
+    {
+      "id": 1,
+      "question": "Atropin dozuna bağlı etkilerde, en düşük dozda ilk görülen klinik bulgu hangisidir?",
+      "options": [
+        "Taşikardi",
+        "Midriyazis",
+        "Tükürük ve ter salgısında azalma (ağız kuruluğu)",
+        "İdrar retansiyonu",
+        "Halüsinasyon"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Tükürük bezleri antikolinerjiklere en duyarlı yapılardır; en düşük dozlarda bile ilk olarak sekresyonlar azalır.",
+      "category": "Antikolinerjik İlaçlar"
+    },
+    {
+      "id": 2,
+      "question": "Skopolaminin etkilerinden olmayan hangisidir?",
+      "options": [
+        "Uyuşukluk ve amnezi",
+        "Huzursuzluk",
+        "Baş dönmesi",
+        "Deliryum",
+        "Kas gevşemesi"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Skopolamin belirgin santral sedasyon, amnezi, baş dönmesi ve deliryum yapabilir; doğrudan kas gevşetici değildir.",
+      "category": "Antikolinerjik İlaçlar"
+    },
+    {
+      "id": 3,
+      "question": "Skopolamin transdermal yamaların postoperatif bulantı-kusmayı (PONV) önlemedeki hedef bölgesi neresidir?",
+      "options": [
+        "Mide paryetal hücreleri",
+        "Kemoreseptör trigger zon (CTZ) ve vestibüler sistem",
+        "Kolon peristaltizmi",
+        "Tükürük bezleri",
+        "Pankreas salgıları"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Skopolamin kusma merkezini ve vestibüler girişi baskılayarak antiemetik etki gösterir.",
+      "category": "Antikolinerjik İlaçlar"
+    },
+    {
+      "id": 4,
+      "question": "Hangi antikolinerjik ajan, \"denervasyon\" nedeniyle (kalp nakli yapılmış hasta) vagal sinir etkisi olmayan bir kalpte taşikardi oluşturamaz?",
+      "options": [
+        "Atropin",
+        "Glikopirolat",
+        "Skopolamin",
+        "Hepsi",
+        "Hiçbiri"
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 4,
+      "explanation": "Antikolinerjikler (Atropin, Glikopirolat vb.) etkilerini vagal siniri (parasempatik) baskılayarak gösterirler. Vagal uyarısı olmayan (nakilli veya denerve) bir kalpte bu ilaçların kalp hızını artırma etkisi yoktur.",
+      "category": "Antikolinerjik İlaçlar"
+    },
+    {
+      "id": 5,
+      "question": "Antikolinerjik ajanlar için verilen bilgilerden hangisi yanlıştır?",
+      "options": [
+        "Asetilkolin ile bağlanmayı yarışmalı bir şekilde bloke eder ve reseptör aktivasyonunu önler.",
+        "Antikolinerjikler, bronşiyal düz kasları gevşeterek havayolu direncini azaltır ve anatomik ölü boşluğu artırır.",
+        "Atropin özellikle kalp ve bronşiyal düz kas üzerinde güçlü etkilere sahiptir ve bradiaritmi tedavisinde en etkili antikolinerjiktir.",
+        "İpratropiyum, beta-agonist ilaçlarla kronik obstrüktif akciğer hastalığının tedavisinde özellikle etkili olabilir.",
+        "Skopolamin, atropin kadar güçlü olmasa da daha önemli merkezi sinir sistemi etkilerine neden olur."
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Skopolamin antimuskarinik etki açısından atropinden zayıf kabul edilmez; özellikle santral etkileri ve sedatif/amnestik etkileri belirgindir.",
+      "category": "Antikolinerjik İlaçlar"
+    },
+    {
+      "id": 6,
+      "question": "Alt özofagus sfinkter (AÖS) basıncını düşüren antikolinerjikler hangi hasta grubunda risklidir?",
+      "options": [
+        "Diyabetiklerde",
+        "Hiatus hernisi (mide fıtığı) ve reflüsü olanlarda",
+        "Hipertansiyonu olanlarda",
+        "Böbrek taşı olanlarda",
+        "Genç sporcularda"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 4,
+      "explanation": "Sfinkter basıncı düşünce mide içeriğinin yemek borusuna kaçışı ve aspirasyon riski artar.",
+      "category": "Antikolinerjik İlaçlar"
+    },
+    {
+      "id": 7,
+      "question": "Atropin uygulaması sonrası kalp hızında görülen \"paradoksal bradikardi\"nin nedeni nedir?",
+      "options": [
+        "İlacın doğrudan kalbe toksik etkisi",
+        "Düşük dozlarda presinaptik M1 reseptörlerini bloke ederek ACh salınımını artırması",
+        "Sempatik sistemin uyarılması",
+        "Potasyum kanallarının açılması",
+        "Hipoksemi"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Çok düşük doz atropin, otoreseptörleri bloke ederek geçici ve hafif bir bradikardi yapabilir.",
+      "category": "Antikolinerjik İlaçlar"
+    },
+    {
+      "id": 8,
+      "question": "Kuaterner amonyum yapısı nedeniyle kan-beyin bariyerini ve plasentayı geçemeyen ajan hangisidir?",
+      "options": [
+        "Atropin",
+        "Skopolamin",
+        "Glikopirolat",
+        "Hiyosiyamin",
+        "Biperiden"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Glikopirolat yüklü bir kuaterner amindir; bu özelliği onun MSS'ye ve fetusa geçişini engeller.",
+      "category": "Antikolinerjik İlaçlar"
+    },
+    {
+      "id": 9,
+      "question": "Katarakt ameliyatlarında cerrahın görüş alanını genişletmek için hangi antikolinerjik etki kullanılır?",
+      "options": [
+        "Lakrimasyon",
+        "Miyozis",
+        "Midriyazis",
+        "Enoftalmus",
+        "Ptozis"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 4,
+      "explanation": "Pupilin genişletilmesi lensin daha kolay çıkarılmasını sağlar.",
+      "category": "Antikolinerjik İlaçlar"
+    },
+    {
+      "id": 10,
+      "question": "Premedikasyonda skopolamin uygulanan bir hastada, ameliyat sonrasında belirgin bir uyuşukluk ve hastanın o ana dair hiçbir şey hatırlamadığı gözleniyor. Skopolaminin bu \"anterograd amnezi\" yapma gücü atropin ile karşılaştırıldığında yaklaşık ne kadardır?",
+      "options": [
+        "Atropin ile aynıdır.",
+        "Atropinden 2 kat daha zayıftır.",
+        "Atropinden 100 kat daha güçlüdür.",
+        "Atropin amnezi yaparken skopolamin yapmaz.",
+        "Sadece çocuklarda 5 kat daha güçlüdür."
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 4,
+      "explanation": "Skopolaminin merkezi etkileri ve amnezi yapıcı özelliği atropinden yaklaşık 100 kat daha fazladır.",
+      "category": "Antikolinerjik İlaçlar"
+    },
+    {
+      "id": 11,
+      "question": "Katarakt cerrahisi geçiren bir hastada, cerrah ameliyat alanını genişletmek için topikal antikolinerjik damla kullanıyor. Ancak operasyon sırasında hastada ani göz ağrısı, bulantı ve görme kaybı gelişiyor. Bu tablonun nedeni hangisi olabilir?",
+      "options": [
+        "Kornea perforasyonu",
+        "İlacın sistemik emilimine bağlı hipertansiyon",
+        "Akut dar açılı glokom krizi",
+        "Santral antikolinerjik sendrom",
+        "Lokal anestetik toksisitesi"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 4,
+      "explanation": "Antikolinerjiklerin yaptığı midriyazis (pupil genişlemesi), dar açılı glokomu olanlarda irisi açının içine iterek hümör aköz drenajını tıkar ve glokom krizine yol açar.",
+      "category": "Antikolinerjik İlaçlar"
+    },
+    {
+      "id": 12,
+      "question": "Antikolinerjiklerin emziren annelerde bebek üzerindeki olası etkisi hangisidir?",
+      "options": [
+        "Bebekte uyku hali",
+        "Bebekte irritabilite ve huzursuzluk",
+        "Bebekte kan şekerinde düşme",
+        "Bebekte bradikardi",
+        "Hiçbir yan etki gözlenmez"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Süte geçen antikolinerjikler bebekte santral uyarılma yapabilir.",
+      "category": "Antikolinerjik İlaçlar"
+    },
+    {
+      "id": 13,
+      "question": "Antimuskarinik ajanların kardiyovasküler sistem üzerindeki etkilerinden olmayan hangisidir?",
+      "options": [
+        "Sinoatriyal düğümdeki muskarinik reseptörlerin blokajı taşikardiye neden olur.",
+        "Küçük intravenöz atropin dozlarına (<0.4 mg) yanıt olarak kalp hızında geçici bir yavaşlama bildirilebilir.",
+        "P-R aralığını kısaltarak ve vagal aktivitenin neden olduğu kalp bloğunu antagonize ederek atriyoventriküler düğüm yoluyla iletimi kolaylaştırırlar.",
+        "Antikolinerjiklerin genellikle ventriküler fonksiyon veya periferik damarlar üzerinde çok az etkisi vardır.",
+        "Adrenerjik sinir uçlarındaki presinaptik muskarinik reseptörler norepinefrin salınımını artırabilir."
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Presinaptik muskarinik reseptörler genellikle norepinefrin salınımını artırmaz; antimuskariniklerin temel kardiyak etkisi vagal tonusun kaldırılmasıdır.",
+      "category": "Antikolinerjik İlaçlar"
+    },
+    {
+      "id": 14,
+      "question": "Akut batın nedeniyle acil operasyona alınan hastada, havayolu sekresyonlarını azaltmak ve aspirasyon riskine karşı önlem almak amacıyla antikolinerjik premedikasyonu düşünülüyor. Aşağıdaki ajanlardan hangisi \"antisiyalogog\" (tükürük kurutucu) etkisi en güçlü ve en uzun süreli olandır?",
+      "options": [
+        "Atropin",
+        "Skopolamin",
+        "Glikopirolat",
+        "İpratropiyum",
+        "Fizostigmin"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 4,
+      "explanation": "Glikopirolat, tükürük salgısını baskılama (antisiyalogog) konusunda atropinden hem daha güçlüdür hem de etkisi daha uzun sürer (yaklaşık 2-4 saat).",
+      "category": "Antikolinerjik İlaçlar"
+    },
+    {
+      "id": 15,
+      "question": "Parkinsonda kullanılan biperiden ve benztropin gibi antikolinerjiklerin temel amacı nedir?",
+      "options": [
+        "Dopamin miktarını artırmak",
+        "Bazal ganglionlardaki asetilkolin/dopamin dengesini sağlamak",
+        "Serotonini baskılamak",
+        "Kas spazmını doğrudan çözmek",
+        "Uyku kalitesini artırmak"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Parkinson'da eksik olan dopaminin karşısında aşırı kalan kolinerjik aktiviteyi dengelemek.",
+      "category": "Antikolinerjik İlaçlar"
+    },
+    {
+      "id": 16,
+      "question": "Aşağıdakilerden hangisi antikolinerjik ajanların santral sinir sistemi üzerindeki etkilerinden değildir?",
+      "options": [
+        "Eksitasyon",
+        "Huzursuzluk",
+        "Halüsinasyon",
+        "Amnezi",
+        "Hiçbiri"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Tersiyer antikolinerjikler eksitasyon, huzursuzluk, halüsinasyon, deliryum ve amnezi gibi santral etkiler oluşturabilir.",
+      "category": "Antikolinerjik İlaçlar"
+    },
+    {
+      "id": 17,
+      "question": "Bronşiyal düz kasları gevşeterek hava yolu direncini azaltan ve anatomik ölü boşluğu artıran mekanizma hangisidir?",
+      "options": [
+        "M3 reseptör aktivasyonu",
+        "Nikotinik reseptör blokajı",
+        "Vagal tonusun muskarinik reseptörler üzerinden baskılanması",
+        "Beta-2 agonist etki",
+        "Fosfodiesteraz inhibisyonu"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Antikolinerjikler vagal tonusu bloke ederek bronkodilatasyon sağlarlar.",
+      "category": "Antikolinerjik İlaçlar"
+    },
+    {
+      "id": 18,
+      "question": "Akut dar açılı glokomu olan bir hastada hangi antikolinerjik etki en tehlikelidir?",
+      "options": [
+        "Siklopleji (Akomodasyon felci)",
+        "Midriyazis (Pupil genişlemesi)",
+        "Gözyaşı azalması",
+        "Konjonktival hiperemi",
+        "Lakrimasyon artışı"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 4,
+      "explanation": "Midriyazis, irisi iriterek iridokorneal açıyı kapatır ve göz içi basıncını ani yükseltir.",
+      "category": "Antikolinerjik İlaçlar"
+    },
+    {
+      "id": 19,
+      "question": "Santral antikolinerjik sendromu geri çevirmek için kullanılan \"tek\" antikolinesteraz hangisidir?",
+      "options": [
+        "Neostigmin",
+        "Edrofonyum",
+        "Fizostigmin",
+        "Piridostigmin",
+        "Sugammadeks"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Fizostigmin tersiyer yapıda olduğu için kan-beyin bariyerini geçip merkezi semptomları durdurabilir.",
+      "category": "Antikolinerjik İlaçlar"
+    },
+    {
+      "id": 20,
+      "question": "70 yaşında prostat hipertrofisi olan bir hastada atropin kullanımı sonrası en olası komplikasyon hangisidir?",
+      "options": [
+        "Şiddetli ishal",
+        "Akut idrar retansiyonu",
+        "Hipersalivasyon",
+        "Bradikardi",
+        "Pupil daralması (miyozis)"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 4,
+      "explanation": "Mesane detrusor kası gevşediği için prostat büyümesi olanlarda idrar yapma zorlaşır.",
+      "category": "Antikolinerjik İlaçlar"
+    },
+    {
+      "id": 21,
+      "question": "Aşağıdakilerden hangisi antikolinerjik zehirlenmesinin belirti ve semptomları arasında yer almaz?",
+      "options": [
+        "Bilinç kaybı, halüsinasyon",
+        "Ajitasyon, deliryum",
+        "Ağız kuruluğu",
+        "Hipotermi",
+        "Görme bozukluğu"
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "Antikolinerjik toksidromda terleme azalması nedeniyle hipertermi beklenir; hipotermi tipik değildir.",
+      "category": "Antikolinerjik İlaçlar"
+    },
+    {
+      "id": 22,
+      "question": "Antikolinerjik ilaçların mide-bağırsak sistemi (GİS) üzerindeki etkisi hangisidir?",
+      "options": [
+        "Mide boşalmasını hızlandırırlar.",
+        "Alt özofagus sfinkter basıncını artırırlar.",
+        "Peristaltizmi ve mide asit salgısını azaltırlar.",
+        "İshali tetiklerler.",
+        "Gastrik motiliteyi artırırlar."
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Bu ilaçlar düz kasları gevşeterek motiliteyi yavaşlatır ve asit miktarını azaltır.",
+      "category": "Antikolinerjik İlaçlar"
+    },
+    {
+      "id": 23,
+      "question": "Antikolinerjik ilaçların muskarinik reseptörlerle etkileşimi hakkında hangisi doğrudur?",
+      "options": [
+        "Reseptöre kovalent bağlarla bağlanırlar.",
+        "Asetilkolin ile yarışmalı (kompetitif) bir antagonizma gösterirler.",
+        "Nikotinik reseptörleri seçici olarak bloke ederler.",
+        "Etkileri sadece ekzokrin bezlerle sınırlıdır.",
+        "G proteinlerini doğrudan inhibe ederek cAMP artırırlar."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Antikolinerjikler, asetilkolin ile reseptör seviyesinde yarışan klasik kompetitif antagonistlerdir.",
+      "category": "Antikolinerjik İlaçlar"
+    },
+    {
+      "id": 24,
+      "question": "Antikolinerjik ajanların solunum sistemi üzerindeki etkilerinden olmayan hangisidir?",
+      "options": [
+        "Burundan bronşlara kadar olan solunum yolu salgılarını azaltırlar.",
+        "Bronş düz kaslarında gevşeme sağlarlar.",
+        "Havayolu direncini azaltırlar.",
+        "Anatomik ölü boşluğu azaltırlar.",
+        "KOAH ve astımlı hastalarda uygun şekilde kullanılabilirler."
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "Antikolinerjikler bronkodilatasyonla havayolu direncini azaltırken anatomik ölü boşluğu azaltmaz; bazı kaynaklarda artıştan söz edilir.",
+      "category": "Antikolinerjik İlaçlar"
+    },
+    {
+      "id": 25,
+      "question": "Neostigmin ile geri çevirme (reversiyon) sırasında atropin yerine neden glikopirolat tercih edilir?",
+      "options": [
+        "Daha hızlı taşikardi yaptığı için",
+        "Kan-beyin bariyerini geçmediği için",
+        "Etki başlangıç süresi neostigmin ile daha uyumlu olduğu için",
+        "Daha ucuz olduğu için",
+        "Sadece çocuklarda etkili olduğu için"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Neostigmin ve glikopirolatın etki süreleri birbirine çok yakındır, bu da daha stabil bir kalp hızı sağlar.",
+      "category": "Antikolinerjik İlaçlar"
+    },
+    {
+      "id": 26,
+      "question": "Glikopirolat için verilen bilgilerden hangisi yanlıştır?",
+      "options": [
+        "Kuaterner amin yapısındadır.",
+        "Bileşikte hem siklopentan hem de piridin kısımları bulunur.",
+        "Sentetik bir üründür.",
+        "Dozu atropin dozuna benzer.",
+        "Kan-beyin bariyerini geçemez."
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "Glikopirolatın doz aralığı ve klinik etkisi atropinle birebir aynı değildir; daha güçlü ve uzun antisiyalogog etkiye sahiptir.",
+      "category": "Antikolinerjik İlaçlar"
+    },
+    {
+      "id": 27,
+      "question": "Aşağıdakilerden hangisi/hangileri antikolinerjik ajanların oftalmik etkileri arasında yer alır?\nI. Siklopleji\nII. Midriyazis\nIII. Miyozis\nIV. Açı kapanması glokomu\nV. Anizokori",
+      "options": [
+        "I-II",
+        "III-V",
+        "II-IV",
+        "I-II-IV",
+        "I-II-III-IV-V"
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "Antikolinerjikler siklopleji ve midriyazis yapar; dar açılı glokomda açı kapanması krizini tetikleyebilir.",
+      "category": "Antikolinerjik İlaçlar"
+    },
+    {
+      "id": 28,
+      "question": "Bir anestezi teknikeri, neostigmin ile birlikte yanlışlıkla yüksek doz glikopirolat uyguluyor. Hastada ağız kuruluğu, taşikardi ve görme bulanıklığı dışında bağırsak seslerinin tamamen sustuğu fark ediliyor. Bu GİS etkisi hangi mekanizmayla açıklanır?",
+      "options": [
+        "Gastrik boşalmanın hızlanması",
+        "Peristaltizmin azalması ve intestinal düz kas gevşemesi",
+        "Pankreatik salgıların artması",
+        "Mide asidinin aşırı artması",
+        "Mezenterik arter vazokonstriksiyonu"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 4,
+      "explanation": "Antikolinerjikler parasempatik aktiviteyi durdurarak gastrointestinal motiliteyi (peristaltizm) azaltır ve mide boşalma süresini uzatır. Bu durum postoperatif ileus riskini artırabilir.",
+      "category": "Antikolinerjik İlaçlar"
+    },
+    {
+      "id": 29,
+      "question": "Pediatrik bir hastaya ameliyat öncesi 0.02 mg/kg atropin intramüsküler uygulanıyor. Ameliyathaneye alınan çocuğun yüzünün kıpkırmızı olduğu (flush), ancak terlemediği ve vücut ısısının 38.5°C'ye çıktığı saptanıyor. Bu durumla ilgili en doğru yaklaşım hangisidir?",
+      "options": [
+        "Malign hipertermi şüphesiyle dantrolen başlanmalıdır.",
+        "Bu normal bir atropin etkisidir (atropin ateşi); hasta soğutulmalı ve takip edilmelidir.",
+        "İlaç yanlışlıkla damar yolundan verilmiştir, adrenalin yapılmalıdır.",
+        "Çocukta akut alerjik reaksiyon gelişmiştir, steroid verilmelidir.",
+        "Bu durum sadece skopolamin ile görülür, ilaç hatası vardır."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 4,
+      "explanation": "Çocuklarda terleme bezlerinin inhibisyonu ısı kaybını engeller ve \"atropin ateşi\" ile yüzde \"atropin flush\"una (kızarıklık) yol açar. Bu durum MH ile karışabilir ancak terlemenin olmaması ayırıcıdır.",
+      "category": "Antikolinerjik İlaçlar"
+    },
+    {
+      "id": 30,
+      "question": "Atropin hangi kardiyovasküler durumda en az etkilidir?",
+      "options": [
+        "Sinüs bradikardisi",
+        "Kalp nakli yapılmış (denerve) kalp",
+        "Vagal uyarıya bağlı asistoli",
+        "Birinci derece AV blok",
+        "Hipotermi dışı bradikardiler"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Kalp nakli sonrası vagal sinir kesildiği için vagolitik olan atropin kalp hızını artıramaz.",
+      "category": "Antikolinerjik İlaçlar"
+    },
+    {
+      "id": 31,
+      "question": "75 yaşında, bilinen koroner arter hastalığı ve geçirilmiş MI öyküsü olan bir hastaya transüretral rezeksiyon (TUR-P) planlanıyor. Spinal anestezi sonrası hastada derin bradikardi gelişiyor. Miyokardiyal oksijen tüketimini (MVO2) en az artıracak ve kalp hızını daha kontrollü yükseltecek ajan hangisidir?",
+      "options": [
+        "Atropin 1 mg",
+        "Adrenalin 100 mcg",
+        "Glikopirolat 0.2 mg",
+        "Skopolamin 0.4 mg",
+        "Dopamin infüzyonu"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 4,
+      "explanation": "Glikopirolatın kalp hızı üzerindeki etkisi atropinden daha yavaştır. Koroner arter hastalarında atropinin yapabileceği ani taşikardi, oksijen ihtiyacını artırarak iskemiye yol açabilir; bu nedenle glikopirolat daha güvenli bir profil sunabilir.",
+      "category": "Antikolinerjik İlaçlar"
+    },
+    {
+      "id": 32,
+      "question": "Aşağıdakilerden hangisi bir antikolinerjik ilaç için beklenen bir yan etki değildir?",
+      "options": [
+        "Bulanık görme",
+        "Kabızlık",
+        "Yüzde kızarma (atropin flushu)",
+        "Aşırı tükürük artışı (salivasyon)",
+        "Çarpıntı (taşikardi)"
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "Antikolinerjikler tükürüğü artırmaz, aksine kuruturlar.",
+      "category": "Antikolinerjik İlaçlar"
+    },
+    {
+      "id": 33,
+      "question": "Skopolaminin merkezi sinir sistemi üzerindeki etkileriyle ilgili hangisi yanlıştır?",
+      "options": [
+        "Atropinden daha güçlü sedasyon yapar.",
+        "Belirgin amnezi (hafıza kaybı) oluşturabilir.",
+        "Huzursuzluk ve ajitasyona (santral antikolinerjik sendrom) neden olabilir.",
+        "Kan-beyin bariyerini geçemediği için santral etkisi yoktur.",
+        "Uyuşukluk ve baş dönmesi yapabilir."
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "Skopolamin lipofilik bir tersiyer amindir ve MSS'ye çok kolay geçer.",
+      "category": "Antikolinerjik İlaçlar"
+    },
+    {
+      "id": 34,
+      "question": "Otonomik ganglionlar ve gastrik paryetal hücrelerde bulunan muskarinik reseptör aşağıdakilerden hangisidir?",
+      "options": [
+        "M2",
+        "M1-M2",
+        "M1",
+        "M2-M5",
+        "M4"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "M1 reseptörleri otonomik ganglionlarda ve gastrik paryetal hücrelerle ilişkili yapılarda bulunur.",
+      "category": "Antikolinerjik İlaçlar"
+    },
+    {
+      "id": 35,
+      "question": "Opere edilen bir gebe hastada, kas gevşetici blokajını geri çevirmek (reversiyon) için ilaç seçimi yapılacaktır. Bebeğin (fetusun) kalp hızının ilaçlardan etkilenmemesi istenmektedir. Bu durumda hangi antikolinerjik-antikolinesteraz kombinasyonu en uygundur?",
+      "options": [
+        "Atropin + Neostigmin",
+        "Skopolamin + Edrofonyum",
+        "Glikopirolat + Neostigmin",
+        "Atropin + Edrofonyum",
+        "Fizostigmin + Neostigmin"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 4,
+      "explanation": "Glikopirolat kuaterner amin yapısındadır ve plasentayı geçmez. Atropin ve skopolamin ise tersiyer amindir, plasentayı geçerek fetusta taşikardiye neden olabilir.",
+      "category": "Antikolinerjik İlaçlar"
+    },
+    {
+      "id": 36,
+      "question": "\"Atropin ateşi\" (hipertermi) gelişimindeki temel mekanizma hangisidir?",
+      "options": [
+        "Titremenin artması",
+        "Terleme fonksiyonunun baskılanması",
+        "Hipotalamik ayar noktasının yükselmesi",
+        "Enfeksiyon riskinin artması",
+        "Vazokonstriksiyon"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Terleme durunca evaporatif soğutma engellenir ve özellikle çocuklarda vücut ısısı hızla yükselir.",
+      "category": "Antikolinerjik İlaçlar"
+    },
+    {
+      "id": 37,
+      "question": "Atropin, skopolamin ve glikopirolat hakkında verilen ifadelerden hangileri doğrudur?\nI. Bu ajanlar arasında en çok taşikardi atropin, en az skopolaminde beklenir.\nII. Skopolaminin bronkodilatasyon özelliği daha azdır.\nIII. Glikopirolatın sedatif özelliği yoktur.\nIV. Sedatif özelliği en belirgin olan skopolamindir.\nV. Antisiyalogog etki atropinde en azdır.",
+      "options": [
+        "Yalnız I",
+        "I-II",
+        "I-II-III",
+        "I-II-III-IV",
+        "I-II-III-IV-V"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Atropin daha belirgin taşikardi yapar; skopolamin santral sedasyon/amnezi açısından belirgindir; glikopirolat MSS’ye geçmez ve güçlü antisiyalogog etkiye sahiptir.",
+      "category": "Antikolinerjik İlaçlar"
+    },
+    {
+      "id": 38,
+      "question": "Tersiyer amin yapısındaki antikolinerjiklerin (atropin, skopolamin) doz aşımında gelişen sendrom hangisidir?",
+      "options": [
+        "Kolinerjik kriz",
+        "Malign hipertermi",
+        "Santral antikolinerjik sendrom",
+        "Serotonin sendromu",
+        "Miyastenik kriz"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Konfüzyon, ajitasyon ve deliryum ile karakterize tablodur.",
+      "category": "Antikolinerjik İlaçlar"
+    },
+    {
+      "id": 39,
+      "question": "24 yaşında sağlıklı bir kadın hastaya elektif laparoskopik kolesistektomi planlanıyor. Anestezi indüksiyonu sırasında intravenöz atropin 0.5 mg uygulanıyor. Uygulamadan 1 dakika sonra hastanın kalp hızı 75/dk'dan 55/dk'ya geriliyor. Bu \"paradoksal\" bradikardi etkisinin farmakolojik açıklaması aşağıdakilerden hangisidir?",
+      "options": [
+        "Atropinin kalpteki M2 reseptörlerini doğrudan uyarması.",
+        "Düşük dozlarda presinaptik inhibitör muskarinik reseptörlerin (M1) bloke edilmesi sonucu asetilkolin salınımının artması.",
+        "Atropinin nikotinik reseptörler üzerinden vagal deşarj yapması.",
+        "Hastada gizli bir Wolff-Parkinson-White sendromu olması.",
+        "Atropinin yüksek dozda parasempatolitik etki göstermesi."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 4,
+      "explanation": "Atropin düşük dozlarda (genellikle <0.5 mg) uygulandığında, asetilkolin salınımını baskılayan presinaptik reseptörleri bloke ederek geçici ve paradoksal bir bradikardiye neden olabilir. Doz artırıldığında beklenen taşikardi gelişir.",
+      "category": "Antikolinerjik İlaçlar"
+    },
+    {
+      "id": 40,
+      "question": "Atropinin eliminasyonu temel olarak nerede gerçekleşir?",
+      "options": [
+        "Sadece akciğerde buharlaşma",
+        "Karaciğerde hidroliz ve metabolitlerin idrarla atılması",
+        "%100 oranında dışkı ile",
+        "Plazma esterazları ile",
+        "Sadece terleme ile"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Ana metabolizma yeri karaciğerdir, atılım ise idrar yoluyladır.",
+      "category": "Antikolinerjik İlaçlar"
+    },
+    {
+      "id": 41,
+      "question": "Atropin için verilen bilgilerden hangisi yanlıştır?",
+      "options": [
+        "Atropin bir tersiyer amindir.",
+        "Özellikle kalp ve bronşiyal düz kas üzerinde güçlü etkilere sahiptir ve bradiaritmi tedavisinde en etkili antikolinerjiktir.",
+        "Kuaterner amonyum yapısı, sistemik emilimini önemli ölçüde sınırlar.",
+        "Atropin; dar açılı glokom, prostat hipertrofisi veya mesane boynu obstrüksiyonu olan hastalarda dikkatli kullanılmalıdır.",
+        "Atropin nikotinik reseptör aktivasyonundan kaynaklanan kas zayıflığını tersine çevirir."
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Atropin muskarinik reseptör antagonistidir; nikotinik reseptör kaynaklı kas zayıflığını geri çevirmez.",
+      "category": "Antikolinerjik İlaçlar"
+    },
+    {
+      "id": 42,
+      "question": "Sedasyon etkisi yüksek olan antikolinerjik ajan aşağıdakilerden hangisidir?",
+      "options": [
+        "Glikopirolat",
+        "Atropin",
+        "Benztropin",
+        "Skopolamin",
+        "Biperiden"
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "Skopolamin kan-beyin bariyerini kolay geçer ve belirgin sedatif, amnestik ve vestibüler baskılayıcı etki oluşturur.",
+      "category": "Antikolinerjik İlaçlar"
+    },
+    {
+      "id": 43,
+      "question": "68 yaşında erkek hasta, robotik radikal prostatektomi ameliyatı sonrası derlenme odasına (PACU) alınıyor. Hastaya ameliyat sonunda neostigmin ve glikopirolat ile reversiyon yapılmış. Hasta PACU'da aniden ajite oluyor, halüsinasyonlar görmeye başlıyor ve çevresindekileri tanımıyor. Fizik muayenede pupillerin dilate (midriyatik) olduğu ve cildinin kuru-sıcak olduğu gözleniyor. Bu hastada gelişen tablonun en olası nedeni ve ilk yapılması gereken tedavi hangisidir?",
+      "options": [
+        "Postoperatif deliryum – Haloperidol",
+        "Santral Antikolinerjik Sendrom – Fizostigmin",
+        "Hipoksi – Oksijen desteği",
+        "Neostigmin yan etkisi – Atropin",
+        "Benign prostat hipertrofisi alevlenmesi – Kateterizasyon"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 4,
+      "explanation": "Hastadaki ajitasyon, halüsinasyon, midriyazis ve cilt kuruluğu \"Santral Antikolinerjik Sendrom\"u işaret eder. Glikopirolat beyne geçmese de, hastanın yaşı veya ek ilaçları (veya varsa skopolamin) bu tabloyu tetikleyebilir. Tedavide kan-beyin bariyerini geçen tek antikolinesteraz olan Fizostigmin (0.5-2 mg İV) kullanılır.",
+      "category": "Antikolinerjik İlaçlar"
+    },
+    {
+      "id": 44,
+      "question": "Astım tanısında \"provokatif test\" olarak kullanılan muskarinik agonist hangisidir?",
+      "options": [
+        "Atropin",
+        "Metakolin",
+        "Glikopirolat",
+        "İpratropiyum",
+        "Skopolamin"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Metakolin testi, hava yolu aşırı duyarlılığını ölçmek için kullanılan bir bronkoprovokasyon testidir.",
+      "category": "Antikolinerjik İlaçlar"
+    },
+    {
+      "id": 45,
+      "question": "İpratropiyum bromürün KOAH'da sistemik yan etki yapmadan kullanılabilme nedeni nedir?",
+      "options": [
+        "Sadece akciğerde parçalanması",
+        "Kuaterner yapıda olması ve sistemik emiliminin zayıf olması",
+        "Karaciğerde çok hızlı metabolize olması",
+        "Dozunun çok düşük olması",
+        "Hiç emilmemesi"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Kuaterner bromür tuzu olması sayesinde inhalasyon sonrası sistemik dolaşıma minimal geçer.",
+      "category": "Antikolinerjik İlaçlar"
+    },
+    {
+      "id": 46,
+      "question": "Merkezi sinir sisteminde bulunan muskarinik reseptörler aşağıdakilerden hangisi/hangileridir?",
+      "options": [
+        "M1-M4-M5",
+        "M1-M3",
+        "M2",
+        "M1",
+        "M1-M2-M3-M4-M5"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Merkezi sinir sisteminde özellikle M1, M4 ve M5 reseptörleri önemli rol oynar.",
+      "category": "Antikolinerjik İlaçlar"
+    },
+    {
+      "id": 47,
+      "question": "Aşağıdaki antikolinerjik ajanlardan hangisi kuaterner yapıda olup kan-beyin bariyerini geçemez?",
+      "options": [
+        "Glikopirolat",
+        "Skopolamin",
+        "Atropin",
+        "Benztropin",
+        "Biperiden"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Glikopirolat kuaterner amonyum yapısındadır; bu nedenle lipofilik değildir ve kan-beyin bariyerini geçemez.",
+      "category": "Antikolinerjik İlaçlar"
+    },
+    {
+      "id": 48,
+      "question": "Skopolaminin \"amnezi\" (unutkanlık) yapma gücü atropin ile kıyaslandığında nasıldır?",
+      "options": [
+        "Eşittir.",
+        "Atropin daha güçlüdür.",
+        "Skopolamin çok daha güçlüdür.",
+        "İkisi de amnezi yapmaz.",
+        "Sadece damar yoluyla verilirse amnezi yapar."
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Skopolamin MSS'de çok daha etkindir ve belirgin anterograd amnezi yapar.",
+      "category": "Antikolinerjik İlaçlar"
+    },
+    {
+      "id": 49,
+      "question": "Aşağıdakilerden hangisi antikolinerjik ajanların gastrointestinal sistem üzerindeki etkilerinden değildir?",
+      "options": [
+        "Tükürük salgısı belirgin şekilde azaltılır.",
+        "Gastrik sekresyonları azaltırlar.",
+        "Barsak hareketliliğini ve peristaltizmini azaltırlar.",
+        "Gastrik boşalma süresini uzatırlar.",
+        "Alt özofageal sfinkter basıncını artırırlar."
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Antikolinerjikler alt özofageal sfinkter basıncını artırmaz; azaltabilir ve reflü/aspirasyon riskini artırabilir.",
+      "category": "Antikolinerjik İlaçlar"
+    },
+    {
+      "id": 50,
+      "question": "Antikolinerjiklerin yapısında asetilkolin reseptörleriyle etkileşim açısından hangi bağ tipi bulunur?",
+      "options": [
+        "Ester",
+        "Hidrojen",
+        "Glikozid",
+        "Karbon",
+        "Fosfat"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Klasik antimuskarinik ajanların yapısında çoğunlukla ester bağı içeren bir farmakofor bulunur.",
+      "category": "Antikolinerjik İlaçlar"
+    },
+    {
+      "id": 51,
+      "question": "Kardiyak ve düz kas üzerindeki başlıca muskarinik reseptör aşağıdakilerden hangisidir?",
+      "options": [
+        "M1",
+        "M2",
+        "M3",
+        "M4",
+        "M5"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Düz kas ve bezlerde başlıca M3 reseptörleri etkilidir; bronş ve GİS düz kas etkileri bu reseptör üzerinden belirgindir.",
+      "category": "Antikolinerjik İlaçlar"
+    }
+  ]
+}

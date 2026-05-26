@@ -25,78 +25,112 @@ class TraumaEmergencySurgeryAnesthesiaCategory {
 }
 
 class TraumaEmergencySurgeryAnesthesiaData {
-  static List<TraumaEmergencySurgeryAnesthesiaCategory> getTraumaEmergencySurgeryAnesthesiaData(BuildContext context) {
+  static List<TraumaEmergencySurgeryAnesthesiaCategory>
+      getTraumaEmergencySurgeryAnesthesiaData(BuildContext context) {
     return [
       TraumaEmergencySurgeryAnesthesiaCategory(
         categoryName: 'Primary Survey (ABCDE)',
         items: [
           TraumaEmergencySurgeryAnesthesiaItem(
-            title: 'Airway',
-            description: 'All trauma patients are considered to have a "full stomach."',
-            subtitle: 'Cervical spine injury is assumed until proven otherwise.',
-            additionalInfo: 'Always be prepared for failed intubation.',
+            title: "AIRWAY MANAGEMENT AND FULL STOMACH ASSUMPTION",
+            description: "All trauma patients should be considered to have a 'full stomach' and protected against aspiration until proven otherwise.",
+            subtitle: "In-line stabilization should be maintained at all times against the possibility of cervical spine injury",
+            additionalInfo: "Surgical airway sets must be kept ready against the possibility of failed intubation.",
           ),
           TraumaEmergencySurgeryAnesthesiaItem(
-            title: 'Breathing',
-            description: 'Sudden instability after mechanical ventilation → suspect tension pneumothorax → bilateral needle thoracostomy (2nd ICS, midclavicular line) + chest tube.',
-            subtitle: 'Start 100% O₂.',
+            title: "BREATHING ASSESSMENT AND TENSION PNEUMOTHORAX",
+            description: "Sudden hemodynamic instability developing after the start of mechanical ventilation should primarily suggest tension pneumothorax.",
+            subtitle: "Bilateral needle thoracostomy (2nd ICS, midclavicular line) followed by tube thoracostomy should be applied",
+            additionalInfo: "100% O2 should be started immediately and lung expansion should be monitored.",
           ),
           TraumaEmergencySurgeryAnesthesiaItem(
-            title: 'Circulation',
-            description: 'No pulse + penetrating chest trauma → bilateral chest tubes + 500–1000 mL rapid fluid.',
-            subtitle: 'Emergency thoracotomy only if indicated.',
+            title: "CIRCULATION ASSESSMENT AND EMERGENCY RESUSCITATION",
+            description: "In the presence of pulselessness and penetrating chest injury, rapid fluid replacement (500-1000 mL) and bilateral chest tubes are priority.",
+            subtitle: "Resuscitation should continue until life-threatening bleeding is stopped",
+            additionalInfo: "Thoracotomy is not routinely performed except for life-threatening indications (cardiac tamponade, etc.).",
           ),
           TraumaEmergencySurgeryAnesthesiaItem(
-            title: 'Neurological Function',
-            description: 'Unconscious patient → CNS injury assumed after excluding metabolic/drug causes.',
+            title: "NEUROLOGICAL FUNCTION AND CONSCIOUSNESS LEVEL (AVPU/GCS)",
+            description: "CNS injury should be assumed in trauma patients with loss of consciousness after metabolic causes (sugar, alcohol, drugs) are excluded.",
+            additionalInfo: "Patients with a GCS score below 8 should be intubated for airway protection.",
           ),
           TraumaEmergencySurgeryAnesthesiaItem(
-            title: 'Exposure',
-            description: 'Complete exposure and examination.',
-            subtitle: 'Use warmers and warm fluids to prevent hypothermia.',
+            title: "DISABILITY ASSESSMENT AND PREVENTION OF HYPOTHERMIA",
+            description: "A 'complete exposure' examination should be performed by removing all the patient's clothes, but active warming should be started immediately after.",
+            subtitle: "The patient and fluids must be warmed to break the fatal triad (Acidosis-Coagulopathy-Hypothermia)",
+            additionalInfo: "Hypothermia increases bleeding by directly impairing the coagulation cascade.",
           ),
         ],
       ),
       TraumaEmergencySurgeryAnesthesiaCategory(
-        categoryName: 'Resuscitation',
+        categoryName: 'Hemorrhage Classification',
         items: [
           TraumaEmergencySurgeryAnesthesiaItem(
-            title: 'Hemorrhage Classification - Class I',
-            description: '<15%, stable → no fluids.',
+            title: "CLASS I HEMORRHAGE (<15% VOLUME LOSS)",
+            description: "Loss of less than 15% of body volume; hemodynamics are usually stable and fluid replacement is generally not required.",
+            additionalInfo: "In young patients, the pulse may remain normal thanks to compensation mechanisms.",
           ),
           TraumaEmergencySurgeryAnesthesiaItem(
-            title: 'Hemorrhage Classification - Class II',
-            description: '15–30%, tachycardia + ↑ DBP → crystalloids/colloids, prepare blood.',
+            title: "CLASS II HEMORRHAGE (15-30% VOLUME LOSS)",
+            description: "In this stage, where loss is between 15-30%, tachycardia starts and an increase in diastolic blood pressure (SBP is maintained) is observed.",
+            additionalInfo: "Crystalloid or colloid replacement should be started, and blood preparation should be made.",
           ),
           TraumaEmergencySurgeryAnesthesiaItem(
-            title: 'Hemorrhage Classification - Class III',
-            description: '30–40%, hypotension, acidosis → transient response to fluids, deteriorates again.',
+            title: "CLASS III HEMORRHAGE (30-40% VOLUME LOSS)",
+            description: "Marked hypotension and metabolic acidosis develop; response to fluid boluses is transient and the condition quickly deteriorates again.",
+            additionalInfo: "Blood transfusion (Red blood cell suspension) is required at this stage.",
           ),
           TraumaEmergencySurgeryAnesthesiaItem(
-            title: 'Hemorrhage Classification - Class IV',
-            description: '>40%, life-threatening → massive transfusion + damage control resuscitation.',
+            title: "CLASS IV HEMORRHAGE (>40% VOLUME LOSS)",
+            description: "It is a life-threatening shock condition; massive transfusion and damage control resuscitation should be applied immediately.",
+            additionalInfo: "Vital organ perfusion has come to a standstill and intervention within seconds is mandatory.",
+          ),
+        ],
+      ),
+      TraumaEmergencySurgeryAnesthesiaCategory(
+        categoryName: 'Trauma Coagulopathy',
+        items: [
+          TraumaEmergencySurgeryAnesthesiaItem(
+            title: "TRAUMATIC COAGULOPATHY INCIDENCE AND RISKS",
+            description: "Approximately 25% of patients undergoing major trauma have coagulopathy at the time of arrival at the hospital.",
+            subtitle: "Coagulopathy risk increases by 20% in patients with a base deficit > 6",
+            additionalInfo: "It is the combined effect of hypoperfusion, acidosis, and hemodilution.",
           ),
           TraumaEmergencySurgeryAnesthesiaItem(
-            title: 'Trauma Coagulopathy',
-            description: 'Present in ~25% of major trauma patients.',
-            subtitle: 'Base deficit >6 → 20% risk.',
-            additionalInfo: 'Pathophysiology: hypoperfusion → ↑ thrombomodulin, ↓ fibrin formation, ↑ protein C, hyperfibrinolysis.',
+            title: "TRAUMA COAGULOPATHY PATHOPHYSIOLOGY",
+            description: "Thrombomodulin increases as a result of hypoperfusion; this reduces fibrin formation and leads to hyperfibrinolysis with protein C activation.",
+            additionalInfo: "Platelet dysfunction also accompanies the condition.",
           ),
           TraumaEmergencySurgeryAnesthesiaItem(
-            title: 'TXA',
-            description: 'Within 3 h → 1 g bolus + 1 g/8 h infusion → ↓ mortality.',
+            title: "TRANEXAMIC ACID (TXA) USE PROTOCOL (CRASH-2)",
+            description: "1 g bolus within the first 3 hours and then 1 g infusion in 8 hours significantly reduces mortality in major bleeding trauma.",
+            additionalInfo: "TXA given after 3 hours does not provide benefit, it may even increase mortality.",
+          ),
+        ],
+      ),
+      TraumaEmergencySurgeryAnesthesiaCategory(
+        categoryName: 'Hemostatic Resuscitation',
+        items: [
+          TraumaEmergencySurgeryAnesthesiaItem(
+            title: "TRANSFUSION GOAL: 1:1:1 RATIO (RBC:FFP:PLATELET)",
+            description: "Current guidelines recommend replacement of blood products in a 1:1:1 ratio to mimic whole blood.",
+            subtitle: "If possible, specific product support should be provided under TEG (Thromboelastography) guidance",
+            additionalInfo: "The 'hemostatic balance' should be maintained by avoiding excessive crystalloid loading.",
           ),
           TraumaEmergencySurgeryAnesthesiaItem(
-            title: 'Hemostatic Resuscitation',
-            description: 'Goal: 1:1:1 (RBC:FFP:platelet) mimics whole blood.',
-            subtitle: 'TEG guided: FFP ↓, antifibrinolytics ↑.',
-            additionalInfo: 'If >8 U uncrossmatched transfused → continue with group O.',
+            title: "UNCROSSMATCHED (EMERGENCY) TRANSFÜSİON CHOICE",
+            description: "In very urgent cases, O Negative in women and O Positive blood group in men can be given without waiting for cross-match.",
+            additionalInfo: "If more than 8 units of group O have been given, it should be continued with group O due to reaction risk.",
           ),
           TraumaEmergencySurgeryAnesthesiaItem(
-            title: 'Massive Transfusion Protocol (MTP)',
-            description: 'Not for all, only selected cases.',
-            subtitle: 'Benefits: ↓ mortality, ↓ organ failure.',
-            additionalInfo: 'ABC score ≥2 predicts MTP need:\nPenetrating trauma\nSBP <90\nHR >120\nFAST (+)',
+            title: "MASSIVE TRANSFUSION PROTOCOL (MTP) AND INDICATIONS",
+            description: "MTP is a life-saving logistical protocol; it reduces mortality and the risk of multiple organ failure.",
+            additionalInfo: "A system coordinated with the blood bank must be established for the protocol to go into effect.",
+          ),
+          TraumaEmergencySurgeryAnesthesiaItem(
+            title: "ABC SCORE AND MTP NEED PREDICTION (>=2)",
+            description: "The need for massive transfusion is high if there are 2 or more of penetrating injury, SBP <90 mmHg, HR >120 bpm, and FAST (+) findings.",
+            additionalInfo: "A score of 2 and above predicts an MTP need over 40%.",
           ),
         ],
       ),
@@ -104,20 +138,25 @@ class TraumaEmergencySurgeryAnesthesiaData {
         categoryName: 'Anesthetic Management',
         items: [
           TraumaEmergencySurgeryAnesthesiaItem(
-            title: 'General Principles',
-            description: 'All trauma patients = cervical spine injury + full stomach until proven otherwise.',
+            title: "GENERAL APPROACH AND SAFETY IN TRAUMA ANESTHESIA",
+            description: "Until proven otherwise, all trauma patients should be assumed to have cervical injury, full stomach, and hypovolemia.",
+            additionalInfo: "Rapid sequence induction (RSI) should be applied in cases where preoxygenation cannot be performed.",
           ),
           TraumaEmergencySurgeryAnesthesiaItem(
-            title: 'Induction',
-            description: 'Etomidate or ketamine for unstable patients; scopolamine 0.4 mg may be added.',
+            title: "INDUCTION AGENT CHOICE IN UNSTABLE TRAUMA (KETAMINE/ETOMIDATE)",
+            description: "Etomidate or Ketamine are the safest choices for induction in those with hemodynamic instability.",
+            subtitle: "Low-dose Scopolamine (0.4 mg) can be added to provide amnesia (not remembering) if necessary",
+            additionalInfo: "Propofol and thiopental can lead to severe hypotension and cardiac arrest in these patients.",
           ),
           TraumaEmergencySurgeryAnesthesiaItem(
-            title: 'Monitoring',
-            description: 'Invasive arterial BP monitoring useful but should not delay surgery.',
+            title: "TRAUMA MONITORING AND TIME MANAGEMENT",
+            description: "Invasive arterial monitoring is useful but should not delay entry to surgery and bleeding control.",
+            additionalInfo: "Standard monitors (ECG, SpO2, NIBP) are sufficient in the first stage.",
           ),
           TraumaEmergencySurgeryAnesthesiaItem(
-            title: 'Damage Control Surgery',
-            description: 'Rapid exploration + hemorrhage control.',
+            title: "DAMAGE CONTROL SURGERY",
+            description: "The aim of the operation is not definitive repair; it is to quickly control bleeding foci and stop contamination (bowel injury, etc.).",
+            additionalInfo: "If the patient continues to remain unstable, the abdomen is closed by packing and resuscitation is continued in the intensive care unit.",
           ),
         ],
       ),
@@ -125,26 +164,55 @@ class TraumaEmergencySurgeryAnesthesiaData {
         categoryName: 'Traumatic Brain Injury (TBI)',
         items: [
           TraumaEmergencySurgeryAnesthesiaItem(
-            title: 'Acute Subdural Hematoma',
-            description: 'Bridging veins, high mortality.',
+            title: "ACUTE SUBDURAL HEMATOMA AND VENOUS INJURY",
+            description: "Occurs as a result of tearing of bridging veins; mortality is very high in the elderly with brain atrophy and in major head trauma.",
+            additionalInfo: "Brain parenchyma injury usually accompanies.",
           ),
           TraumaEmergencySurgeryAnesthesiaItem(
-            title: 'Epidural Hematoma',
-            description: 'MCA injury, better prognosis; surgical indication: supratentorial >30 mL, infratentorial >10 mL.',
+            title: "EPIDURAL HEMATOMA (MCA INJURY) AND SURGICAL LIMITS",
+            description: "Usually occurs as a result of A. Meningea Media injury and its prognosis is better than subdural.",
+            subtitle: "Hematomas greater than 30 mL supratentorial and greater than 10 mL infratentorial require emergency surgical evacuation",
+            additionalInfo: "The classic 'lucid interval' (temporary well-being) is seen in these bleedings.",
           ),
           TraumaEmergencySurgeryAnesthesiaItem(
-            title: 'Intraparenchymal',
-            description: 'Frontal/temporal, ↑ ICP → decompression if needed.',
+            title: "INTRAPARENCHYMAL HEMATOMA AND DECOMPRESSION",
+            description: "Decompression can be applied to relieve the inside of the head in bleedings that cause a sudden increase in ICP in the frontal and temporal lobes.",
+            additionalInfo: "Struggle with brain edema is as important as surgery.",
           ),
           TraumaEmergencySurgeryAnesthesiaItem(
-            title: 'Diffuse Axonal Injury',
-            description: 'Severe deceleration, poor prognosis.',
+            title: "DIFFUSE AXONAL INJURY (DAI) AND DECELERATION",
+            description: "It is the tearing of axons at the microscopic level as a result of severe deceleration trauma; clinically it is a high-mortality condition accompanied by deep coma.",
+            additionalInfo: "Findings are usually very mild on tomography but injury can be monitored on MRI.",
+          ),
+        ],
+      ),
+      TraumaEmergencySurgeryAnesthesiaCategory(
+        categoryName: 'ICP Management',
+        items: [
+          TraumaEmergencySurgeryAnesthesiaItem(
+            title: "INTRACRANIAL PRESSURE (ICP) NORMAL VALUES AND LIMITS",
+            description: "Normal ICP is around 10 mmHg; in a patient with head trauma, it is aimed to keep the pressure below 20 mmHg.",
+            additionalInfo: "Increase in pressure can lead to brain death by cutting off cerebral blood flow.",
           ),
           TraumaEmergencySurgeryAnesthesiaItem(
-            title: 'ICP Management',
-            description: 'Normal: ~10 mmHg, should be <20.',
-            subtitle: 'CPP target: 50–70 mmHg.',
-            additionalInfo: 'Hyperventilation → temporary ICP reduction but ↑ ischemia risk\nMannitol: 0.25–1 g/kg (monitor osmolality & electrolytes)\nBarbiturate coma → ↓ cerebral O₂ consumption',
+            title: "CEREBRAL PERFUSION PRESSURE (CPP) GOAL (50-70 MMHG)",
+            description: "Brain nutrition should be provided by keeping the CPP (Mean Arterial Pressure - ICP) value in the 50-70 mmHg range in head trauma.",
+            additionalInfo: "Pressure dropping below 50 can increase ischemic injury, and rising above 70 can increase brain edema.",
+          ),
+          TraumaEmergencySurgeryAnesthesiaItem(
+            title: "EFFECT OF HYPERVENTILATION ON ICP AND ISCHEMIA",
+            description: "Hyperventilation performed by reducing CO2 rapidly lowers ICP by constricting vessels; however, it creates a risk of brain ischemia when done excessively.",
+            additionalInfo: "It should only be used as a short-term 'bridge' treatment in the presence of herniation signs.",
+          ),
+          TraumaEmergencySurgeryAnesthesiaItem(
+            title: "MANNITOL USE AND OSMOLALITY FOLLOW-UP",
+            description: "Mannitol should be given at a dose of 0.25-1 g/kg to lower the pressure; however, serum osmolality and electrolyte breakdown should be monitored.",
+            additionalInfo: "Osmotic diuresis pulls the edema in the brain by dehydrating the patient.",
+          ),
+          TraumaEmergencySurgeryAnesthesiaItem(
+            title: "BARBITURATE COMA AND METABOLIC SUPPRESSION",
+            description: "Barbiturate coma can be applied to reduce brain oxygen consumption and metabolism to a minimum in treatment-resistant ICP increase.",
+            additionalInfo: "It is aimed to stop the metabolism to provide cerebral protection.",
           ),
         ],
       ),
@@ -152,88 +220,102 @@ class TraumaEmergencySurgeryAnesthesiaData {
         categoryName: 'Spinal Cord Injury',
         items: [
           TraumaEmergencySurgeryAnesthesiaItem(
-            title: 'Spine Stability',
-            description: 'Spine = 3 columns (anterior, middle, posterior) → ≥2 column injury = unstable.',
+            title: "ASSESSMENT OF SPINE STABILITY (3 COLUMN RULE)",
+            description: "The spine is divided into 3 columns as anterior, middle, and posterior; damage to at least 2 columns indicates that the spine is 'unstable'.",
+            additionalInfo: "According to Deny's column classification, the middle column (posterior longitudinal ligament, etc.) is the key to stability.",
           ),
           TraumaEmergencySurgeryAnesthesiaItem(
-            title: 'Cervical Fractures',
-            description: '10–15% have additional spinal injuries.',
+            title: "RISK OF MULTIPLE INJURY IN CERVICAL FRACTURES",
+            description: "In 10-15% of patients with a fracture in the cervical region, there is also a simultaneous fracture in another level of the spine.",
+            additionalInfo: "The entire spinal axis should be scanned before the surgical plan.",
           ),
           TraumaEmergencySurgeryAnesthesiaItem(
-            title: 'Thoracolumbar (T11–L3)',
-            description: 'Second fracture risk 40%.',
+            title: "CHARACTERISTICS OF THORACOLUMBAR FRACTURES (T11-L3)",
+            description: "The possibility of seeing a second fracture in fractures developing in the transition zone between T11-L3 can rise up to 40%.",
+            additionalInfo: "This region is a mechanically weak point where mobility changes.",
           ),
           TraumaEmergencySurgeryAnesthesiaItem(
-            title: 'Surgical Indication',
-            description: 'Vertebral body height loss >50% or canal narrowing >30%.',
-          ),
-        ],
-      ),
-      TraumaEmergencySurgeryAnesthesiaCategory(
-        categoryName: 'Burns',
-        items: [
-          TraumaEmergencySurgeryAnesthesiaItem(
-            title: 'Burn Center Referral',
-            description: '20% (2nd–3rd degree) → burn center referral.',
-          ),
-          TraumaEmergencySurgeryAnesthesiaItem(
-            title: '1st Degree',
-            description: 'Epidermis only, no fluids needed.',
-          ),
-          TraumaEmergencySurgeryAnesthesiaItem(
-            title: '2nd Degree',
-            description: 'Epidermis + partial dermis; if >20% → fluid replacement.',
-          ),
-          TraumaEmergencySurgeryAnesthesiaItem(
-            title: '3rd Degree',
-            description: 'Full dermis, insensate, requires graft.',
-          ),
-          TraumaEmergencySurgeryAnesthesiaItem(
-            title: 'Hemodynamics',
-            description: 'Burn shock → ↓ CO 50%, hypoperfusion; corrected within 48 h with adequate fluids.',
-          ),
-          TraumaEmergencySurgeryAnesthesiaItem(
-            title: 'Fluid Therapy - Parkland',
-            description: '4 mL/kg/%TBSA (½ in first 8 h).',
-          ),
-          TraumaEmergencySurgeryAnesthesiaItem(
-            title: 'Fluid Therapy - Brook',
-            description: '2 mL/kg/%TBSA.',
-          ),
-          TraumaEmergencySurgeryAnesthesiaItem(
-            title: 'Urine Output Targets',
-            description: 'Adults: 0.5–1 mL/kg/h',
-            subtitle: '<30 kg child: 1 mL/kg/h (+5% dextrose)',
-            additionalInfo: '<1 yr: 1–2 mL/kg/h',
-          ),
-          TraumaEmergencySurgeryAnesthesiaItem(
-            title: 'Complications - Abdominal Compartment Syndrome',
-            description: '>6 mL/kg/%TBSA, pediatric, abdominal burns → risk.',
-          ),
-          TraumaEmergencySurgeryAnesthesiaItem(
-            title: 'Complications - CO Poisoning',
-            description: 'Unreliable SpO₂; HbCO >20% → intubation/MV; HbCO >60% → fatal.',
-          ),
-          TraumaEmergencySurgeryAnesthesiaItem(
-            title: 'Complications - Pulmonary',
-            description: 'Pneumonia, inhalation injury.',
-          ),
-          TraumaEmergencySurgeryAnesthesiaItem(
-            title: 'Anesthesia',
-            description: 'Difficult airway risk → emergency protocol ready.',
-            subtitle: 'Sch contraindicated after 48 h (risk of hyperkalemia).',
-            additionalInfo: 'Adequate analgesia mandatory.',
+            title: "SPINAL SURGERY INDICATIONS AND HEIGHT LOSS",
+            description: "Loss of more than 50% height in the vertebral body or narrowing more than 30% in the spinal canal is an indication for surgical stabilization.",
+            additionalInfo: "Progression of neurological deficit is the most urgent surgical indicator.",
           ),
         ],
       ),
       TraumaEmergencySurgeryAnesthesiaCategory(
-        categoryName: 'Key Exam Spots',
+        categoryName: 'Burn Management',
         items: [
           TraumaEmergencySurgeryAnesthesiaItem(
-            title: 'SUMMARY SPOT QUESTIONS',
-            description: 'All trauma patients = cervical spine injury + full stomach',
-            subtitle: 'TXA: within 3 h → 1 g bolus + 1 g/8 h infusion',
-            additionalInfo: 'Hemostatic resuscitation: 1:1:1 (RBC:FFP:platelet)\nICP target: <20 mmHg, CPP: 50–70 mmHg\nParkland formula: 4 mL/kg/%TBSA\nSch contraindicated after 48 h in burns',
+            title: "1st DEGREE BURN (EPIDERMAL INJURY)",
+            description: "Only the epidermis, the topmost layer of the skin, is affected; it is painful but does not require systemic fluid replacement.",
+            additionalInfo: "Sunburns are the most typical example.",
+          ),
+          TraumaEmergencySurgeryAnesthesiaItem(
+            title: "2nd DEGREE BURN (DERMIS PARTIALLY DAMAGED)",
+            description: "Epidermis and part of the dermis are damaged; bullae (water blisters) are present and fluid treatment is mandatory if it exceeds 20% of the body surface.",
+            additionalInfo: "Tissue integrity is broken in places, it is open to infection.",
+          ),
+          TraumaEmergencySurgeryAnesthesiaItem(
+            title: "3rd DEGREE BURN (FULL THICKNESS DAMAGE)",
+            description: "Includes all skin layers; it is insensate because nerve endings are damaged and grafting is absolutely required for healing.",
+            additionalInfo: "Dermatological color is in white, smoky, or charred appearance.",
+          ),
+          TraumaEmergencySurgeryAnesthesiaItem(
+            title: "BURN CENTER REFERRAL CRITERIA (>20% SURFACE)",
+            description: "The patient should be referred to a full-fledged burn center if the 2nd or 3rd degree burn surface exceeds 20% of the total body area in adults.",
+            additionalInfo: "Face, hands, feet, and genital area burns are reasons for referral regardless of percentage.",
+          ),
+          TraumaEmergencySurgeryAnesthesiaItem(
+            title: "BURN SHOCK PATHOPHYSIOLOGY AND HEMODYNAMICS",
+            description: "Cardiac output drops by 50% in the first stage as a result of intense plasma loss due to increased capillary permeability (Burn Shock).",
+            subtitle: "This condition resolves in approximately 48 hours if correct fluid replacement is performed",
+            additionalInfo: "Burn shock is a mixed shock with hypovolemic and distributive components.",
+          ),
+          TraumaEmergencySurgeryAnesthesiaItem(
+            title: "PARKLAND FORMULA AND FLUID RESUSCITATION",
+            description: "Calculation: 4 mL x kg x %Burn Surface; half of this amount is given in the first 8 hours, and the remaining half in the next 16 hours.",
+            additionalInfo: "The formula is only valid for 2nd and 3rd degree burns.",
+          ),
+          TraumaEmergencySurgeryAnesthesiaItem(
+            title: "FLUID CALCULATION WITH BROOK FORMULA",
+            description: "The modified Brook formula, aiming for less fluid loading, is calculated over 2 mL x kg x %Burn Surface.",
+            additionalInfo: "This formula can be preferred in patients at risk of pulmonary edema.",
+          ),
+          TraumaEmergencySurgeryAnesthesiaItem(
+            title: "URINE OUTPUT GOALS BY AGE",
+            description: "Urine output of 0.5-1 mL/kg/hour in adults and 1 mL/kg/hour in children should be targeted for the success of fluid treatment.",
+            subtitle: "5% Dextrose should also be given in addition to replacement fluid to children under 30 kg",
+            additionalInfo: "The goal in infants under 1 year is 1-2 mL/kg/hour.",
+          ),
+          TraumaEmergencySurgeryAnesthesiaItem(
+            title: "RISK OF ABDOMINAL COMPARTMENT SYNDROME",
+            description: "Giving more than 6 mL/kg/hour fluid can excessively increase intra-abdominal pressure, especially in children with more than 20% body surface burned.",
+            additionalInfo: "Abdominal wall burns aggravate this condition by reducing flexibility.",
+          ),
+          TraumaEmergencySurgeryAnesthesiaItem(
+            title: "CARBON MONOXIDE (CO) POISONING AND PULSE OXYMETRY",
+            description: "Standard pulse oximeters can erroneously show 100% oxygen saturation in CO poisoning and are deceptive.",
+            subtitle: "The patient must be intubated and connected to mechanical ventilation immediately if the HbCO level exceeds 20%",
+            additionalInfo: "HbCO level reaching 60% is usually fatal; 100% O2 or hyperbaric O2 treatment is required.",
+          ),
+          TraumaEmergencySurgeryAnesthesiaItem(
+            title: "POST-BURN PULMONER COMPLICATIONS",
+            description: "Airway edema developing due to inhalation injury, restrictive chest burns, and late-stage pneumonia are common.",
+            additionalInfo: "Upper airway edema can progress to total obstruction within seconds.",
+          ),
+          TraumaEmergencySurgeryAnesthesiaItem(
+            title: "AIRWAY MANAGEMENT AND EDEMA IN BURNS",
+            description: "Early intubation decisions should be made before edema develops in the presence of facial burns and singed nasal hairs.",
+            additionalInfo: "Delayed intubation may become impossible as a result of loss of anatomical markers due to edema.",
+          ),
+          TraumaEmergencySurgeryAnesthesiaItem(
+            title: "SUCCINYLCHOLINE USE CONTRAINDICATION (48 HOURS+)",
+            description: "The use of Succinylcholine after the first 48 hours following burn leads to fatal hyperkalemia due to receptor up-regulation.",
+            additionalInfo: "Resistance develops against non-depolarizing agents, higher dose is required.",
+          ),
+          TraumaEmergencySurgeryAnesthesiaItem(
+            title: "ANALGESIA MANAGEMENT IN BURN PATIENTS",
+            description: "Burn is one of the most severe causes of pain in the body; a multimodal analgesia and opioid-supported plan must be made.",
+            additionalInfo: "Doses should be increased during dressings and debridements.",
           ),
         ],
       ),

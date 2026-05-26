@@ -24,10 +24,28 @@ class Question {
   });
 
   factory Question.fromJson(Map<String, dynamic> json) {
+    int? difficultyVal;
+    if (json['difficulty'] != null) {
+      if (json['difficulty'] is int) {
+        difficultyVal = json['difficulty'] as int;
+      } else if (json['difficulty'] is String) {
+        final diffStr = (json['difficulty'] as String).toLowerCase();
+        if (diffStr == 'easy' || diffStr == 'kolay') {
+          difficultyVal = 1;
+        } else if (diffStr == 'medium' || diffStr == 'orta') {
+          difficultyVal = 2;
+        } else if (diffStr == 'hard' || diffStr == 'zor') {
+          difficultyVal = 3;
+        } else {
+          difficultyVal = int.tryParse(diffStr);
+        }
+      }
+    }
+
     return Question(
-      question: json['question'] as String,
-      options: List<String>.from(json['options'] as List),
-      correctAnswerIndex: json['correctAnswerIndex'] as int,
+      question: (json['question'] ?? '') as String,
+      options: List<String>.from(json['options'] ?? []),
+      correctAnswerIndex: (json['correctAnswerIndex'] ?? json['correctAnswer'] ?? 0) as int,
       premises:
           json['premises'] != null
               ? List<String>.from(json['premises'] as List)
@@ -39,7 +57,7 @@ class Question {
               : null,
       imageUrl: json['imageUrl'] as String?,
       category: json['category'] as String?,
-      difficulty: json['difficulty'] as int?,
+      difficulty: difficultyVal,
       id: json['id'] as String?,
     );
   }

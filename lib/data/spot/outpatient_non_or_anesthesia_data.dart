@@ -25,22 +25,26 @@ class OutpatientNonOrAnesthesiaCategory {
 }
 
 class OutpatientNonOrAnesthesiaData {
-  static List<OutpatientNonOrAnesthesiaCategory> getOutpatientNonOrAnesthesiaData(BuildContext context) {
+  static List<OutpatientNonOrAnesthesiaCategory>
+      getOutpatientNonOrAnesthesiaData(BuildContext context) {
     return [
       OutpatientNonOrAnesthesiaCategory(
         categoryName: 'Genel İlkeler',
         items: [
           OutpatientNonOrAnesthesiaItem(
-            title: 'Tanım',
-            description: 'Aynı gün anestezi + cerrahi girişim → taburculuk',
+            title: "GÜNÜBİRLİK CERRAHİ VE ANESTEZİ TANIMI",
+            description: "Aynı gün içinde hem anestezi hem de cerrahi girişimin uygulanıp hastanın taburcu edildiği sistemdir.",
+            additionalInfo: "Hastane yatış süresini minimize ederek verimliliği artırmayı hedefler.",
           ),
           OutpatientNonOrAnesthesiaItem(
-            title: 'Avantajlar',
-            description: 'Düşük maliyet, daha hızlı iyileşme, enfeksiyon riskinde azalma',
+            title: "AYNI GÜN TABURCULUK VE CERRAHİ AVANTAJLARI",
+            description: "Düşük maliyet, hastanede kazanılmış enfeksiyon riskinde azalma ve hastanın kendi ortamında hızlı iyileşmesi temel avantajlardır.",
+            additionalInfo: "Hastaların psikolojik olarak daha az etkilenmesini sağlar.",
           ),
           OutpatientNonOrAnesthesiaItem(
-            title: 'Zorluklar',
-            description: 'Hasta seçimi, komplikasyon yönetimi, sınırlı kaynaklar (özellikle hastane dışı)',
+            title: "GÜNÜBİRLİK ANESTEZİ YÖNETİMİNDEKİ TEMEL ZORLUKLAR",
+            description: "Doğru hasta seçimi, komplikasyon yönetimi ve özellikle hastane dışı ünitelerdeki sınırlı kaynaklar en büyük zorluklardır.",
+            additionalInfo: "Beklenmedik yatış oranlarını düşük tutmak için titiz bir planlama gerektirir.",
           ),
         ],
       ),
@@ -48,18 +52,20 @@ class OutpatientNonOrAnesthesiaData {
         categoryName: 'Hasta Seçimi',
         items: [
           OutpatientNonOrAnesthesiaItem(
-            title: 'ASA Sınıflaması',
-            description: 'ASA I–II uygundur, komorbid ASA III seçilmiş olgularda olabilir',
+            title: "ASA SINIFLAMASI VE GÜNÜBİRLİK CERRAHİ UYGUNLUĞU (ASA I-II-III)",
+            description: "ASA I ve II hastalar en uygun adaylardır; komorbiditeleri kontrol altında olan ASA III olguları da seçilerek kabul edilebilir.",
+            additionalInfo: "Hastalık durumundan ziyade hastanın fonksiyonel kapasitesi ön plandadır.",
           ),
           OutpatientNonOrAnesthesiaItem(
-            title: 'Kontrendikasyonlar',
-            description: 'Kontrolsüz DM, HT, ciddi kardiyak/pulmoner hastalık, aktif enfeksiyon',
+            title: "GÜNÜBİRLİK ANESTEZİ İÇİN KESİN KONTRENDİKASYONLAR",
+            description: "Kontrolsüz diyabet, hipertansiyon, ciddi kardiyak/pulmoner yetmezlikler ve aktif enfeksiyonlar günübirlik cerrahiye engel teşkil eder.",
+            additionalInfo: "Evde bakım verecek bir refakatçinin olmaması da bir kontrendikasyondur.",
           ),
           OutpatientNonOrAnesthesiaItem(
-            title: 'Özel Gruplar',
-            description: 'Çocuk → genellikle uygun, özellikle KBB, üroloji girişimleri',
-            subtitle: 'Yaşlı → dikkatli seçimle güvenli olabilir',
-            additionalInfo: 'Obezite → risk ↑ (hava yolu, PONV, OSA)',
+            title: "ÖZEL HASTA GRUPLARI (ÇOCUK, YAŞLI VE OBEZİTE YÖNETİMİ)",
+            description: "Çocuklar genellikle günübirlik cerrahi için idealdir; yaşlı ve obez hastalarda ise yandaş hastalıklar risk faktörüdür.",
+            subtitle: "Obezite durumunda havayolu zorluğu, PONV ve OSA riskleri ciddi oranda artış gösterir",
+            additionalInfo: "KBB ve üroloji küçük cerrahiler çocuklarda en sık günübirlik yapılan işlemlerdir.",
           ),
         ],
       ),
@@ -67,18 +73,19 @@ class OutpatientNonOrAnesthesiaData {
         categoryName: 'Preoperatif Hazırlık',
         items: [
           OutpatientNonOrAnesthesiaItem(
-            title: 'Açlık Kuralları',
-            description: 'Katı gıda → 6–8 saat',
-            subtitle: 'Anne sütü → 4 saat',
-            additionalInfo: 'Açık sıvı → 2 saat',
+            title: "PREOPERATİF AÇLIK KURALLARI VE SIVI-KATI GIDA SINIRLARI",
+            description: "Katı gıdalar için 6-8 saat, anne sütü için 4 saat ve berrak sıvılar için 2 saatlik açlık kuralı uygulanır.",
+            additionalInfo: "Gereksiz uzun açlıklar dehidratasyon ve huzursuzluk yaratabilir.",
           ),
           OutpatientNonOrAnesthesiaItem(
-            title: 'Premedikasyon',
-            description: 'Minimal sedatif → hızlı derlenme, erken taburculuk amaçlanır',
+            title: "PREMEDİKASYON STRATEJİLERİ VE HIZLI DERLENME HEDEFİ",
+            description: "Minimal sedatif dozlar tercih edilerek hastanın hızlı derlenmesi ve erken taburculuğu amaçlanır.",
+            additionalInfo: "Anksiyete düzeyi yüksek hastalarda kısa etkili ajanlar (örn: Midazolam) kullanılabilir.",
           ),
           OutpatientNonOrAnesthesiaItem(
-            title: 'Profilaksi',
-            description: 'PONV riski yüksek hastalarda antiemetik',
+            title: "PONV (BULANTI-KUSMA) PROFİLAKSİSİ VE RİSK YÖNETİMİ",
+            description: "PONV riski yüksek görülen hastalarda operasyon öncesinde veya sırasında mutlaka antiemetik profilaksisi yapılmalıdır.",
+            additionalInfo: "PONV, günübirlik hastaların eve gidişini engelleyen en can sıkıcı faktördür.",
           ),
         ],
       ),
@@ -86,19 +93,21 @@ class OutpatientNonOrAnesthesiaData {
         categoryName: 'İndüksiyon ve İdame',
         items: [
           OutpatientNonOrAnesthesiaItem(
-            title: 'İndüksiyon',
-            description: 'IV ajanlar (propofol en sık, hızlı derlenme avantajı)',
-            subtitle: 'İntranasal/IM seçenekler çocuklarda',
+            title: "İNDÜKSİYON AJANLARI VE PROPOFOLÜN AVANTAJLARI",
+            description: "Propofol, hızlı başlangıç ve hızlı derlenme özellikleri nedeniyle günübirlik vakaların altın standart indüksiyon ajanıdır.",
+            subtitle: "Çocuklarda kooperasyon yoksa intranasal veya IM sedasyon seçenekleri de değerlendirilebilir",
+            additionalInfo: "Anti-emetik özelliği olması propofolü bu grup için paha biçilemez kılar.",
           ),
           OutpatientNonOrAnesthesiaItem(
-            title: 'İdame',
-            description: 'TIVA veya düşük doz inhalasyon ajanları',
-            subtitle: 'Kısa etkili opioidler (fentanil, remifentanil)',
-            additionalInfo: 'Kas gevşetici ihtiyacı minimal → kısa etkili tercih edilir',
+            title: "ANESTEZİ İDAMESİ: TIVA VE İNHALASYON SEÇENEKLERİ",
+            description: "TIVA (Total İntravenöz Anestezi) veya düşük çözünürlüklü inhalasyon ajanları (Sevofluran/Desfluran) ile idame sağlanır.",
+            subtitle: "Kısa etkili opioidler (Fentanil, Remifentanil) peroperatif konforu artırır",
+            additionalInfo: "Kas gevşetici ihtiyacı minimal tutulmalı; gerekirse kısa/orta etkililer tercih edilmelidir.",
           ),
           OutpatientNonOrAnesthesiaItem(
-            title: 'Monitörizasyon',
-            description: 'Standart ASA monitörizasyonu (EKG, SpO₂, NIBP, ETCO₂) her ortamda şart',
+            title: "STANDART ASA MONİTÖRİZASYONU VE GÜVENLİK PROTOKOLLERİ",
+            description: "EKG, SpO2, NIBP ve ETCO2 monitörizasyonu, girişimin yapıldığı her türlü ortamda (hastane dışı dahil) zorunludur.",
+            additionalInfo: "Güvenlik standartları ameliyathane ile aynı seviyede tutulmalıdır.",
           ),
         ],
       ),
@@ -106,20 +115,21 @@ class OutpatientNonOrAnesthesiaData {
         categoryName: 'Ameliyathane Dışı Anestezi (NORA)',
         items: [
           OutpatientNonOrAnesthesiaItem(
-            title: 'Yerler',
-            description: 'Endoskopi üniteleri, radyoloji (MRI/CT), girişimsel kardiyoloji/radyoloji, acil servis',
+            title: "NORA (OPERAHANE DIŞI) UYGULAMA ALANLARI VE LOKASYONLAR",
+            description: "Endoskopi üniteleri, MRI/BT radyoloji kısımları, girişimsel kardiyoloji laboratuvarları ve acil servisler başlıca NORA alanlarıdır.",
+            additionalInfo: "Bu alanlarda anestezistin 'misafir' olduğu ve standart dışı koşullar bulunduğu unutulmamalıdır.",
           ),
           OutpatientNonOrAnesthesiaItem(
-            title: 'Zorluklar',
-            description: 'Ekipman/hasta pozisyonu → erişim kısıtlı',
-            subtitle: 'Oksijen kaynağı sınırlı olabilir',
-            additionalInfo: 'Acil müdahale için geri çağırma (rescue) ekipmanı her zaman hazır olmalı',
+            title: "NORA LOKASYONLARINDAKİ TEKNİK ZORLUKLAR VE EKİPMAN",
+            description: "Dar alanlar, ekipman karmaşası ve hastaya erişimin kısıtlı olması en temel fiziksel zorluklardır.",
+            subtitle: "Yedek oksijen kaynağı ve tam donanımlı resüsitasyon (rescue) ekipmanı her an hazır olmalıdır",
+            additionalInfo: "İletişim kopuklukları bu alanlarda tıbbi hatalara zemin hazırlayabilir.",
           ),
           OutpatientNonOrAnesthesiaItem(
-            title: 'Özel Durumlar',
-            description: 'MRI → manyetik alan uyumlu monitör/ekipman zorunlu',
-            subtitle: 'Endoskopi → hava yolu paylaşımı riski',
-            additionalInfo: 'Radyoloji çocuk hastaları → genellikle derin sedasyon/GA',
+            title: "MRI VE ENDOSKOPI GİBİ ÖZEL ALANLARDAKİ RİSKLER",
+            description: "MRI ünitelerinde manyetik alan uyumlu monitör ve ekipman kullanımı hayati zorunluluktur.",
+            subtitle: "Endoskopik işlemlerde havayolu paylaşımı olması nedeniyle solunum takibi zordur",
+            additionalInfo: "Radyolojide çocuklar için genellikle derin sedasyon (Deep Sedation) veya genel anestezi gerekebilir.",
           ),
         ],
       ),
@@ -127,18 +137,20 @@ class OutpatientNonOrAnesthesiaData {
         categoryName: 'Derlenme ve Taburculuk',
         items: [
           OutpatientNonOrAnesthesiaItem(
-            title: 'Taburculuk Kriterleri',
-            description: 'Vital bulgular stabil',
-            subtitle: 'Yeterli analjezi, bulantı-kusma kontrolü',
-            additionalInfo: 'Oral sıvı alabilme, destek olmadan yürüyebilme/uyanıklık',
+            title: "GÜNÜBİRLİK CERRAHİ TABURCULUK KRİTERLERİ VE STABİLİTE",
+            description: "İdrar yapabilme zorunluluğu modern protokollerde terk edilmiş olsa da vital bulguların stabilitesi esastır.",
+            subtitle: "Oral sıvı alabilme ve destek olmadan güvenli yürüyebilme (uyanıklık) şarttır",
+            additionalInfo: "Analjezi düzeyi eve gönderilmek için yeterli ve ağrı kontrol altında olmalıdır.",
           ),
           OutpatientNonOrAnesthesiaItem(
-            title: 'Aldrete Skoru',
-            description: 'Taburculuk için Aldrete skoru ≥ 9/10',
+            title: "ALDRETE SKORLAMASI VE TABURCULUK EŞİĞİ (>= 9/10)",
+            description: "Hastanın derlenme ünitesinden veya hastaneden çıkışı için modifiye Aldrete skorunun en az 9/10 olması beklenir.",
+            additionalInfo: "Solunum, dolaşım, bilinç, aktivite ve renk ölçütlerine dayanır.",
           ),
           OutpatientNonOrAnesthesiaItem(
-            title: 'Eşlik Eden',
-            description: 'Sorumlu erişkin yanında olmalı',
+            title: "SİSTEMİK TABURCULUK ŞARTLARI VE REFAKATÇİ ZORUNLULUĞU",
+            description: "Günübirlik cerrahide hastanın yanında onu eve götürecek ve ilk gecesinde destek olacak sorumlu bir yetişkin (refakatçi) şarttır.",
+            additionalInfo: "Hasta tek başına araç kullanamaz ve toplu taşıma ile dönemez.",
           ),
         ],
       ),
@@ -146,20 +158,24 @@ class OutpatientNonOrAnesthesiaData {
         categoryName: 'Komplikasyonlar',
         items: [
           OutpatientNonOrAnesthesiaItem(
-            title: 'Hava Yolu Obstrüksiyonu',
-            description: 'Özellikle sedasyon + üst GİS girişimlerinde',
+            title: "HAVA YOLU OBSTRÜKSİYONU VE SEDASYON RİSKLERİ",
+            description: "Özellikle derin sedasyon uygulanan üst GİS endoskopileri gibi işlemlerde hava yolu darlıkları sıktır.",
+            additionalInfo: "Gerekirse havayolu araçları (LMA, entübasyon) hemen devreye alınmalıdır.",
           ),
           OutpatientNonOrAnesthesiaItem(
-            title: 'Hipoventilasyon/Hipoksemi',
-            description: 'Kapalı alanlarda sık',
+            title: "KAPALI ALANLARDA HİPOVENTİLASYON VE HİPOKSEMİ",
+            description: "Radyoloji gibi izlenmesi zor dar alanlarda hipoventilasyon nedeniyle hipoksemi gelişme riski yüksektir.",
+            additionalInfo: "Kapnografi (ETCO2) takibi bu alanlarda hayat kurtarıcıdır.",
           ),
           OutpatientNonOrAnesthesiaItem(
-            title: 'PONV',
-            description: 'Günübirlik cerrahide taburculuğu geciktiren en sık neden',
+            title: "PONV: TABURCULUĞU GECİKTİREN EN SIK NEDEN",
+            description: "Postoperatif bulantı ve kusma (PONV), günübirlik hastaların hastaneden çıkışını en çok öteleyen komplikasyondur.",
+            additionalInfo: "Multimodal antiemetik yaklaşım ile yönetilmelidir.",
           ),
           OutpatientNonOrAnesthesiaItem(
-            title: 'Kanama/Hemodinamik İnstabilite',
-            description: 'Özellikle girişimsel kardiyoloji/radyoloji',
+            title: "HEMODİNAMİK İNSTABİLİTE VE KANAMA RİSKİ",
+            description: "Girişimsel kardiyolojik ve radyolojik işlemler sonrası major kanamalar ve vasküler komplikasyonlar gelişebilir.",
+            additionalInfo: "Hızlı sıvı replasmanı ve stabilzasyon yeteneği NORA alanında da olmalıdır.",
           ),
         ],
       ),
@@ -167,16 +183,19 @@ class OutpatientNonOrAnesthesiaData {
         categoryName: 'İdeal Ajan Özellikleri',
         items: [
           OutpatientNonOrAnesthesiaItem(
-            title: 'Genel Özellikler',
-            description: 'Hızlı başlangıç, kısa etki süresi, tahmin edilebilir eliminasyon',
+            title: "GÜNÜBİRLİK ANESTEZİDE İDEAL AJANIN GENEL ÖZELLİKLERİ",
+            description: "Hızlı başlangıçlı, kısa etkili ve vücutta birikmeyen (tahmin edilebilir eliminasyon) ajanlar idealdir.",
+            additionalInfo: "Hastanın 'hazır ve uyanık' halini çabuk almasını sağlayan ilaçlar tercih edilir.",
           ),
           OutpatientNonOrAnesthesiaItem(
-            title: 'Tercih Edilen Ajanlar',
-            description: 'Propofol (altın standart), remifentanil, sevofluran',
+            title: "KLİNİKTE EN SIK TERCİH EDİLEN GÜNÜBİRLİK AJANLAR",
+            description: "Propofol, Remifentanil, Sevofluran ve Desfluran modern günübirlik anestezi pratiğinin temel taşlarıdır.",
+            additionalInfo: "Genellikle TIVA uygulamaları konfor açısından daha ön plandadır.",
           ),
           OutpatientNonOrAnesthesiaItem(
-            title: 'Antiemetik Kombinasyonu',
-            description: 'Ondansetron + deksametazon',
+            title: "KOMBİNE ANTİEMETİK TEDAVİ VE İLAÇ SEÇENEKLERİ",
+            description: "Ondansetron (5-HT3 inhibitörü) ve Deksametazon kombinasyonu PONV önlemede en güçlü silahlardır.",
+            additionalInfo: "İdeal zamanlama indüksiyon sırasında veya cerrahi bitimine yakındır.",
           ),
         ],
       ),
@@ -184,20 +203,24 @@ class OutpatientNonOrAnesthesiaData {
         categoryName: 'Özetle',
         items: [
           OutpatientNonOrAnesthesiaItem(
-            title: 'Kritik Noktalar',
-            description: 'Günübirlik ve NORA\'da hasta seçimi + monitörizasyon kritik',
+            title: "GÜNÜBİRLİK VE NORA YÖNETİMİNDE KRİTİK NOKTALAR",
+            description: "Doğru hasta seçimi ile yüksek standartlı monitörizasyon, güvenli anestezi yönetiminin temelidir.",
+            additionalInfo: "Ameliyathane dışı binalar, anestezist için güvenlik açıklarına en gebe yerlerdir.",
           ),
           OutpatientNonOrAnesthesiaItem(
-            title: 'En Sık Tercih',
-            description: 'Propofol en sık tercih edilen ajan',
+            title: "EN SIK TERCİH EDİLEN ANESTEZİK AJANLAR",
+            description: "Propofol, hızı ve anti-emetik etkisi nedeniyle klinik pratikte en çok tercih edilen ajandır.",
+            additionalInfo: "Bebek indüksiyonunda ise hala maske/Sevofluran yaygındır.",
           ),
           OutpatientNonOrAnesthesiaItem(
-            title: 'Taburculuk Şartları',
-            description: 'Taburculuk için Aldrete ≥ 9, yanında refakatçi şart',
+            title: "TABURCULUK ŞARTLARI VE ALDRETE SKORU ÖNEMİ",
+            description: "Taburculuk için Aldrete skorunun >= 9 olması ve hastanın yanında mutlaka bir refakatçi bulunması zorunluluktur.",
+            additionalInfo: "Herhangi bir şüphe durumunda hasta hastaneye yatırılmalıdır.",
           ),
           OutpatientNonOrAnesthesiaItem(
-            title: 'En Sık Sorunlar',
-            description: 'PONV ve hava yolu güvenliği en sık karşılaşılan sorunlar',
+            title: "EN SIK KARŞILAŞILAN PEROPERATİF SORUNLAR",
+            description: "Hava yolu güvenliği (obstrüksiyon) ve postoperatif bulantı-kusma en sık karşılaşılan klinik problemlerdir.",
+            additionalInfo: "Bu sorunlara karşı agresif profilaksi hayat kurtarıcıdır.",
           ),
         ],
       ),

@@ -25,232 +25,73 @@ class EndocrineDiseaseAnesthesiaCategory {
 }
 
 class EndocrineDiseaseAnesthesiaData {
-  static List<EndocrineDiseaseAnesthesiaCategory> getEndocrineDiseaseAnesthesiaData(BuildContext context) {
+  static List<EndocrineDiseaseAnesthesiaCategory>
+      getEndocrineDiseaseAnesthesiaData(BuildContext context) {
     return [
       EndocrineDiseaseAnesthesiaCategory(
-        categoryName: 'Pankreas & Diyabet',
+        categoryName: "Diyabet (Şeker Hastalığı) Yönetimi",
         items: [
           EndocrineDiseaseAnesthesiaItem(
-            title: 'Günlük İnsülin Salgısı',
-            description: '≈ 50 U (Langerhans adacıkları)',
+            title: "AMELİYAT SABAHI İLAÇ VE İNSÜLİN YÖNETİMİ",
+            description: "Diyabetli hastalar ameliyat sabahı oral antidiyabetik (OAD) ilaçlarını kesmeli, insülin dozlarını ise doktor görüşüyle düzenlemelidir.",
+            additionalInfo: "Özellikle Metformin gibi ilaçlar anestezi altında laktik asidoz riskini artırabilir; bu nedenle operasyon günü alınmamalıdır. Uzun etkili insülin dozları genellikle hipoglisemi riskine karşı yarıya düşürülür veya kesilir.",
           ),
           EndocrineDiseaseAnesthesiaItem(
-            title: 'Tanı Kriterleri',
-            description: 'Açlık glukoz >126 mg/dL veya HbA1c >6.5%',
+            title: "PERİOPERATİF HİPOGLİSEMİ RİSKİ VE ÖNLEMİ",
+            description: "Genel anestezi altında hipogliseminin çarpıntı ve terleme gibi belirtileri maskelendiği için hayati risk çok yüksektir.",
+            subtitle: "Kan şekerinin 50 mg/dL altına düşmesi kalıcı beyin hasarına yol açabilir",
+            additionalInfo: "Perioperatif dönemde hedef şeker aralığı 140-180 mg/dL olup; en az 1-2 saatte bir glukoz takibi yapılmalıdır.",
           ),
           EndocrineDiseaseAnesthesiaItem(
-            title: 'DKA',
-            description: 'Tip 1 DM\'in ilk bulgusu olabilir',
-          ),
-          EndocrineDiseaseAnesthesiaItem(
-            title: 'DKA Tedavisi',
-            description: 'İnsülin 0.1 U/kg/saat; NaCl 1–2 L ilk saatte → ardından 200–500 mL/saat',
-            subtitle: 'Glukoz <250 mg/dL → D5W başlanır',
-            additionalInfo: 'Hedef düşüş: 75–100 mg/dL/sa veya %10/sa',
-          ),
-          EndocrineDiseaseAnesthesiaItem(
-            title: 'K Düzeyi',
-            description: 'Yakın takip edilmeli',
-          ),
-          EndocrineDiseaseAnesthesiaItem(
-            title: 'Hiperglisemi',
-            description: '>360 mOsm/L → nöbet & mental değişiklik',
-          ),
-          EndocrineDiseaseAnesthesiaItem(
-            title: 'Hipoglisemi',
-            description: '<50 mg/dL ciddi; terleme, taşikardi, sinirlilik katekolamin deşarjına bağlı',
-          ),
-          EndocrineDiseaseAnesthesiaItem(
-            title: 'Preop Değerlendirme',
-            description: 'HbA1c yüksekliği periop komplikasyon riski',
-            subtitle: 'Otonom nöropati → mide boşalması gecikebilir',
-          ),
-          EndocrineDiseaseAnesthesiaItem(
-            title: 'İntraop Glisemik Kontrol',
-            description: 'Glukoz <180 mg/dL tutulmalı',
-            subtitle: '1 Ü kristalize insülin → glukozu 25–30 mg/dL düşürür',
-            additionalInfo: 'İnsülin infüzyonu: 0.1 U/kg/saat veya [Plazma glukozu/150]',
-          ),
-          EndocrineDiseaseAnesthesiaItem(
-            title: 'İlaç Kesimi',
-            description: 'Sülfonilüre/metformin → 24–48 s önce kesilmeli',
-          ),
-          EndocrineDiseaseAnesthesiaItem(
-            title: 'Postop',
-            description: 'Sıkı glisemik kontrol devam etmeli (stres hiperglisemisi riski)',
+            title: "DİYABETİK OTONOM NÖROPATİ VE GASTROPAREZİ",
+            description: "Kronik diyabet mide boşalmasını geciktirerek (gastroparez) ameliyat başında kusma ve mide içeriğinin akciğere kaçması (aspirasyon) riskini artırır.",
+            subtitle: "8 saatlik açlığa rağmen mideleri 'dolu' kabul edilerek anesteziye başlanmalıdır",
+            additionalInfo: "Ayrıca otonom nöropatisi olanlarda tansiyonun ani ve şiddetli düşmesi/yükselmesi sık izlenen bir komplikasyondur.",
           ),
         ],
       ),
       EndocrineDiseaseAnesthesiaCategory(
-        categoryName: 'Hipertiroidi',
+        categoryName: "Tiroid Hastalıkları",
         items: [
           EndocrineDiseaseAnesthesiaItem(
-            title: 'Klinik Bulgular',
-            description: 'Kilo kaybı, diyare, sinirlilik, sıcak intoleransı, aritmi (sinüs taşikardi–AF)',
+            title: "TİROİD FIRTINASI VE AYIRICI TANI",
+            description: "Kontrolsüz hipertiroidide cerrahi stresin tetiklediği aşırı hormon salınımı 'Tiroid Fırtınası' denilen ölümcül tabloya yol açabilir.",
+            subtitle: "Aşırı taşikardi ve hipertermi ile seyreden bu tablo Malign Hipertermi ile karışabilir; ancak fırtınada kas rijidesi görülmez",
+            additionalInfo: "Tedavide acil beta blokerler, PTU (Propiltiourasil) ve steroid desteği kritik öneme sahiptir.",
           ),
           EndocrineDiseaseAnesthesiaItem(
-            title: 'Tedavi',
-            description: 'PTU, metimazol → hormon sentezini bloke eder',
-            subtitle: 'İyodür → salınımı engeller',
-            additionalInfo: 'β-bloker → T4→T3 dönüşümünü azaltır',
-          ),
-          EndocrineDiseaseAnesthesiaItem(
-            title: 'Anestezi',
-            description: 'Preop mutlaka ötiroid hale getirilmeli',
-            subtitle: 'İntraop: Kardiyak fonksiyon ve ısı takibi; Graves hastalarında kornea korunmalı',
-          ),
-          EndocrineDiseaseAnesthesiaItem(
-            title: 'Tiroid Fırtınası',
-            description: 'Postop (6–24 s); hiperpreksi, taşikardi, bilinç değişikliği',
-            subtitle: 'Malign hipertermi ile karışmaz (kas rijiditesi/CK artışı yok)',
-            additionalInfo: 'Tedavi: Soğutma + β-bloker + PTU + iyodür + steroid',
+            title: "HİPOTİROİDİ VE ANESTETİK DUYARLILIĞI",
+            description: "Tiroid fonksiyonları düşük olan hastalar genel anestezi ilaçlarına ve soğuğa karşı aşırı hassastır; uyanma zamanları çok uzayabilir.",
+            subtitle: "Düşük metabolizma hızı nedeniyle ilaç dozları azaltılmalı ve hasta aktif olarak ısıtılmalıdır",
+            additionalInfo: "Hipoterminin derinleşmesi metabolizmayı daha da yavaşlatarak uyanmayı imkansız hale getirebilir.",
           ),
         ],
       ),
       EndocrineDiseaseAnesthesiaCategory(
-        categoryName: 'Hipotiroidi',
+        categoryName: "Böbrek Üstü Bezi Hastalıkları",
         items: [
           EndocrineDiseaseAnesthesiaItem(
-            title: 'Klinik Bulgular',
-            description: 'Yüksek TSH, düşük T4. Periferik VC → soğuk & benekli deri',
+            title: "ADRENAL YETERSİZLİK VE STEROİD DESTEĞİ",
+            description: "Vücudun stres yanıt mekanizması bozuk olan (Addison veya kronik steroid kullanımı) hastalarda peroperatif 'Adrenal Kriz' ve şok riski vardır.",
+            subtitle: "Kronik koritizon kullanımı böbrek üstü bezlerini baskılayarak tembelleştirir",
+            additionalInfo: "Stresle başa çıkabilmesi için bu hastalara ameliyat sabahı ve sırasında mutlaka damardan 'stres dozu' steroid verilmelidir.",
           ),
           EndocrineDiseaseAnesthesiaItem(
-            title: 'Miksödem Koma',
-            description: 'Mental bozukluk, hipoventilasyon, hipotermi, hiponatremi, KKY',
-          ),
-          EndocrineDiseaseAnesthesiaItem(
-            title: 'Anestezi',
-            description: 'Preop: Ötiroid hale getirilmeli. Tek doz levotiroksin eksikliği sorun olmaz (T4 yarı ömrü 8 gün)',
-            subtitle: 'İntraop: Anestezik ihtiyacı ↓, hipoksi & hipotermi riski ↑',
-            additionalInfo: 'Postop: Opioidlere bağlı solunum depresyonuna dikkat',
+            title: "FEOKROMASİTOMA VE PERİOPERATİF TANSİYON KRİZİ",
+            description: "Adrenal tümörden salınan ani katekolamin fırtınası sonucu tansiyonun kontrolsüz şekilde (250-300 mmHg) yükselmesi tablosudur.",
+            subtitle: "En kritik an cerrahın tümörü manipüle ettiği (dokunduğu) andır",
+            additionalInfo: "Anestezist saniyeler içinde vazodilatörlerle tansiyonu düşürmeli; tümör çıkarıldıktan sonra ise gelişen derin hipotansiyonu sıvı ve vazopresörlerle yönetmelidir.",
           ),
         ],
       ),
       EndocrineDiseaseAnesthesiaCategory(
-        categoryName: 'Paratiroid',
+        categoryName: "Obezite ve Anestezi",
         items: [
           EndocrineDiseaseAnesthesiaItem(
-            title: 'PTH Fonksiyonu',
-            description: 'Ca düzeyini ↑ (kemikten mobilizasyon, renal geri emilim), fosfat atılımını ↑',
-          ),
-          EndocrineDiseaseAnesthesiaItem(
-            title: 'Hiperparatiroidizm',
-            description: 'Hiperkalsemi → HT, aritmiler, böbrek taşı',
-            subtitle: 'Tedavi: Salin + furosemid; maligniteye bağlı ise bifosfonat, glukokortikoid, kalsitonin',
-          ),
-          EndocrineDiseaseAnesthesiaItem(
-            title: 'Hipoparatiroidizm',
-            description: 'Hipokalsemi → tetani, Chvostek/Trousseau pozitif',
-            subtitle: 'Tedavi: İv kalsiyum',
-          ),
-          EndocrineDiseaseAnesthesiaItem(
-            title: 'Anestezi',
-            description: 'Hipokalsemi → preop düzeltilmeli',
-            subtitle: 'Albuminli/sitratlı solüsyonlara dikkat',
-          ),
-        ],
-      ),
-      EndocrineDiseaseAnesthesiaCategory(
-        categoryName: 'Glukokortikoid Eksikliği',
-        items: [
-          EndocrineDiseaseAnesthesiaItem(
-            title: 'Addison',
-            description: 'Primer adrenal yetmezlik',
-          ),
-          EndocrineDiseaseAnesthesiaItem(
-            title: 'Akut Adrenal Kriz',
-            description: 'Hipotansiyon, arrest, resüsitasyona yanıtsız',
-          ),
-          EndocrineDiseaseAnesthesiaItem(
-            title: 'Anestezi',
-            description: 'Stres dozu steroid şart → 3×100 mg hidrokortizon',
-            subtitle: 'Alternatif: indüksiyon 25 mg + postop 100 mg/24 s',
-          ),
-        ],
-      ),
-      EndocrineDiseaseAnesthesiaCategory(
-        categoryName: 'Glukokortikoid Fazlalığı',
-        items: [
-          EndocrineDiseaseAnesthesiaItem(
-            title: 'Cushing',
-            description: 'Sarkopeni, osteoporoz, santral obezite, HT',
-          ),
-          EndocrineDiseaseAnesthesiaItem(
-            title: 'Anestezi',
-            description: 'Hipokalemik metabolik alkaloz, kırık riski yüksek',
-          ),
-        ],
-      ),
-      EndocrineDiseaseAnesthesiaCategory(
-        categoryName: 'Katekolamin Fazlalığı',
-        items: [
-          EndocrineDiseaseAnesthesiaItem(
-            title: 'Feokromasitoma',
-            description: 'Paroksismal HT, baş ağrısı, terleme, çarpıntı',
-          ),
-          EndocrineDiseaseAnesthesiaItem(
-            title: 'Preop Hazırlık',
-            description: 'α-blokaj + sıvı replasmanı, sonra β-blokaj',
-          ),
-          EndocrineDiseaseAnesthesiaItem(
-            title: 'İntraop',
-            description: 'İABP monitörizasyon, geniş damar yolu',
-            subtitle: 'HT → fentolamin, nitroprussid, nikardipin',
-            additionalInfo: 'İndirekt katekolamin & histamin salıcı ilaçlardan kaçınılır',
-          ),
-          EndocrineDiseaseAnesthesiaItem(
-            title: 'Postop',
-            description: 'Tm çıkarıldıktan sonra hipotansiyon → sıvı, gerekirse fenilefrin/norepi',
-          ),
-        ],
-      ),
-      EndocrineDiseaseAnesthesiaCategory(
-        categoryName: 'Obezite',
-        items: [
-          EndocrineDiseaseAnesthesiaItem(
-            title: 'Tanım',
-            description: 'BMI >30 obez, >40 morbid obez',
-          ),
-          EndocrineDiseaseAnesthesiaItem(
-            title: 'Fizyoloji',
-            description: 'FRK ↓, OSA, restriktif akciğer patern, CO₂ üretimi ↑',
-          ),
-          EndocrineDiseaseAnesthesiaItem(
-            title: 'Preop',
-            description: 'Aspirasyon profilaksisi, zor havayolu hazırlığı',
-          ),
-          EndocrineDiseaseAnesthesiaItem(
-            title: 'İntraop',
-            description: 'Kısa etkili ajan, ideal vücut ağırlığına göre dozlama',
-            subtitle: 'Epiduralde %20–25 daha az LA',
-          ),
-          EndocrineDiseaseAnesthesiaItem(
-            title: 'Postop',
-            description: 'Kas gücü tam → ekstübasyon; CPAP; opioid dikkatli',
-          ),
-        ],
-      ),
-      EndocrineDiseaseAnesthesiaCategory(
-        categoryName: 'Karsinoid Sendrom',
-        items: [
-          EndocrineDiseaseAnesthesiaItem(
-            title: 'Neden',
-            description: 'Serotonin, histamin, kallikrein salınımı',
-          ),
-          EndocrineDiseaseAnesthesiaItem(
-            title: 'Klinik',
-            description: 'Flushing, bronkospazm, aşırı diyare, ABP dalgalanmaları',
-            subtitle: 'Sağ kalp kapak hastalığı',
-          ),
-          EndocrineDiseaseAnesthesiaItem(
-            title: 'Tanı',
-            description: 'İdrarda 5-HİAA, plazmada kromogranin ↑',
-          ),
-          EndocrineDiseaseAnesthesiaItem(
-            title: 'Anestezi',
-            description: 'Tümör manipülasyonu salınımı artırabilir → kaçınılmalı',
-            subtitle: 'RA ve histamin salmayan ajanlar tercih edilmeli',
-            additionalInfo: 'İABP monitörizasyon, kan şekeri takibi',
+            title: "OBEZİTEDE HAVAYOLU YÖNETİMİ VE RAMPA POZİSYONU",
+            description: "Ciddi obezitesi olanlarda akciğer kapasitesi ve oksijen rezervi çok kısıtlıdır; entübasyon güçlüğü (zor havayolu) sıktır.",
+            subtitle: "Entübasyon sırasında 'Rampa Pozisyonu' (baş-boyun-omuz yükseltilmesi) havayolu güvenliği için hayat kurtarıcıdır",
+            additionalInfo: "İlaçların yağ dokusunda birikmesi nedeniyle uyanma gecikebilir; bu yüzden kısa etkili ajanlar tercih edilmelidir.",
           ),
         ],
       ),

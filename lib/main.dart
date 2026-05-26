@@ -90,15 +90,21 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   // Timezone'ları initialize et (background handler ayrı isolate'de çalışır)
   tz.initializeTimeZones();
   
-  // NotificationService'i kullanarak bildirimi göster
-  final notificationService = NotificationService();
+  // ÖNEMLİ: Eğer mesajın 'notification' alanı doluysa, Android sistemi bunu zaten otomatik gösterir.
+  // Burada tekrar manuel gösterirsek ÇİFT BİLDİRİM oluşur.
+  // Sadece 'notification' alanı boş olan (data-only) mesajları manuel gösteriyoruz.
   if (message.notification != null) {
-    await notificationService.showRemoteNotification(
-      title: message.notification?.title ?? 'Yeni Bildirim',
-      body: message.notification?.body ?? '',
-      data: message.data,
-    );
+    debugPrint('Sistem bildirimi zaten gösterilecek, manuel gösterim iptal edildi.');
+    return;
   }
+  
+  // Data-only mesajlar için gerekirse burada manuel gösterim yapılabilir
+  final notificationService = NotificationService();
+  await notificationService.showRemoteNotification(
+    title: message.data['title'] ?? 'Yeni Bildirim',
+    body: message.data['body'] ?? '',
+    data: message.data,
+  );
 }
 
 void main() async {

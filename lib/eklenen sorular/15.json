@@ -1,0 +1,849 @@
+{
+  "meta": {
+    "title": "Hipotansif Ajanlar Soru Bankası",
+    "language": "tr",
+    "questionCount": 56
+  },
+  "questions": [
+    {
+      "id": 1,
+      "question": "Adenozin’in supraventriküler taşikardilerde (SVT) kullanım amacı nedir?",
+      "options": [
+        "Kalbi hızlandırmak",
+        "AV düğüm iletimini geçici olarak tamamen bloke etmek",
+        "Kan şekerini yükseltmek",
+        "Kas gevşetmek",
+        "Bronkodilatasyon yapmak"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Adenozin, AV düğümde iletimi saniyeler içinde durdurarak taşikardiyi sonlandırır.",
+      "category": "Hipotansif Ajanlar"
+    },
+    {
+      "id": 2,
+      "question": "Nitrogliserin ile ilgili verilen bilgilerden hangisi yanlıştır?",
+      "options": [
+        "Nitrogliserin, karaciğerde ve kanda glutatyon-organik nitrat redüktaz tarafından hızlı indirgeyici hidrolize uğrar.",
+        "Metabolik ürünlerden biri, hemoglobini methemoglobine dönüştürebilen nitrittir.",
+        "Nitrogliserin, çeşitli mekanizmalarla miyokardiyal oksijen ihtiyacını azaltır ve miyokarda oksijen sunumunu artırır.",
+        "Rebound hipertansiyon, nitrogliserin kesildikten sonra, sodyum nitroprussidin kesilmesine kıyasla daha olasıdır.",
+        "Serebral damarların dilatasyonundan kaynaklanan baş ağrısı, nitrogliserinin sık görülen bir yan etkisidir."
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "Rebound hipertansiyon, nitrogliserin kesildikten sonra, sodyum nitroprussidin kesilmesine kıyasla daha az olasıdır.",
+      "category": "Hipotansif Ajanlar"
+    },
+    {
+      "id": 3,
+      "question": "Labetalol’ün alfa/beta blokaj oranı İV kullanımda kaçtır?",
+      "options": [
+        "1 : 1",
+        "1 : 3",
+        "1 : 7",
+        "7 : 1",
+        "10 : 1"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Labetalol İV yolla verildiğinde beta blokaj etkisi alfa blokaj etkisinden yaklaşık 7 kat daha güçlüdür (1:7). Oral yolda bu oran 1:3'tür.",
+      "category": "Hipotansif Ajanlar"
+    },
+    {
+      "id": 4,
+      "question": "Hidralazin'in kan basıncını düşürme mekanizması ve anestezi pratiğindeki önemli dezavantajı hangisidir?",
+      "options": [
+        "Venöz dilatasyon yapar – Hipertansiyonu geri çeviremez.",
+        "Direkt arteriyol gevşemesi yapar – Etki başlangıcının yavaş olması (10-20 dk) nedeniyle titrasyonu zordur.",
+        "Sempatik blokaj yapar – Şiddetli bradikardi oluşturur.",
+        "Renin-anjiyotensin sistemini uyarır – Potasyum yükseltir.",
+        "Alfa reseptörlerini bloke eder – İlk doz senkopu yapar."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Hidralazin arteriyolleri doğrudan gevşetir. Ancak etkisi geç başladığı için akut tansiyon yönetiminde \"overdose\" (aşırı doz) riski ve refleks taşikardi potansiyeli yüksektir.",
+      "category": "Hipotansif Ajanlar"
+    },
+    {
+      "id": 5,
+      "question": "Sodyum nitroprussid çözeltisinin ışığa karşı korunması gerekmesinin nedeni nedir?",
+      "options": [
+        "Işıkta etkisinin artması",
+        "Işıkla temas ettiğinde siyanüre parçalanması",
+        "Işıkta renginin maviye dönerek etkisizleşmesi",
+        "Çözeltinin ısınması",
+        "Işıkta kristalleşmesi"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "SNP ışığa duyarlıdır ve fotodegradasyona uğrayarak siyanür salınımını hızlandırır.",
+      "category": "Hipotansif Ajanlar"
+    },
+    {
+      "id": 6,
+      "question": "Miyofibriler proteinleri hücre içi kalsiyuma karşı daha duyarlı hale getiren ve miyokardiyal kontraktiliteyi artıran bir kalsiyum duyarlılaştırıcı ajan aşağıdakilerden hangisidir?",
+      "options": [
+        "Milrinon",
+        "Enoksimon",
+        "Levosimendan",
+        "İnamrinon",
+        "Olprinon"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Levosimendan, miyofibriler proteinleri hücre içi kalsiyuma karşı daha duyarlı hale getiren ve miyokardiyal kontraktiliteyi artıran bir kalsiyum duyarlılaştırıcı ajandır. Levosimendan ayrıca sistemik vazodilatasyon yapar.",
+      "category": "Hipotansif Ajanlar"
+    },
+    {
+      "id": 7,
+      "question": "Şiddetli konjestif kalp yetmezliği ve akut akciğer ödemi ile acil servise başvuran bir hastada Nitrogliserin (NTG) infüzyonu tercih ediliyor. NTG’nin bu tabloda sağladığı temel terapötik fayda aşağıdakilerden hangisidir?",
+      "options": [
+        "Koroner arterlerde vazokonstriksiyon yaparak kanı iskemik bölgeye yönlendirmek",
+        "Sistemik vasküler direnci (SVR) artırarak beyin perfüzyonunu korumak",
+        "Venöz kapasitansı artırarak sol ventrikül dolum basıncını (ön yük) düşürmek",
+        "Fosfodiesteraz-5 enzimini inhibe ederek pulmoner arter basıncını düşürmek",
+        "Negatif inotropik etkiyle kalp hızını yavaşlatmak"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 4,
+      "explanation": "Nitrogliserin, düşük dozlarda venodilatör etkisi baskın olan bir ilaçtır. Venöz yatağı genişleterek kalbe dönen kan miktarını (preload) azaltır, bu da akciğerdeki konjesyonun hızla gerilemesini sağlar.",
+      "category": "Hipotansif Ajanlar"
+    },
+    {
+      "id": 8,
+      "question": "Kontrollü hipotansiyon endikasyonları arasında hangisi yer almaz?",
+      "options": [
+        "Orta kulak cerrahisi (mikroskobik alan netliği için)",
+        "Büyük ortopedik cerrahiler (kanamayı azaltmak için)",
+        "Şiddetli serebrovasküler stenozu (daralması) olan hastalar",
+        "Skolyoz cerrahisi",
+        "Bazı beyin anevrizması ameliyatları"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Serebrovasküler veya koroner darlığı olanlarda hipotansiyon, bu bölgelerin beslenmesini (perfüzyonunu) tamamen durdurabileceği için kontrendikedir.",
+      "category": "Hipotansif Ajanlar"
+    },
+    {
+      "id": 9,
+      "question": "Hipertansif kriz nedeniyle bir kalsiyum kanal blokerinin (KKB) sürekli infüzyonu planlanıyor. Seçilen ilaç soya ve yumurta bazlı bir lipid emülsiyonu içinde sunulmaktadır. Bu ilacın en önemli özelliği aşağıdakilerden hangisidir?",
+      "options": [
+        "Karaciğerde yoğun şekilde metabolize olması",
+        "Kan ve doku esterazları tarafından hızla hidroliz edilmesi",
+        "Serebral vazospazmda ilk tercih olması",
+        "Şiddetli bradikardiye neden olması",
+        "Etkisinin 24 saat boyunca sürmesi"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Tanımlanan ilaç Klevidipin'dir. Klevidipin, plazma esterazları tarafından çok hızlı yıkıldığı için (yarı ömrü yaklaşık 1 dk) etkisi infüzyon kesildikten hemen sonra kaybolur. Soya/yumurta alerjisi olanlarda bu formülasyon nedeniyle kontrendikedir.",
+      "category": "Hipotansif Ajanlar"
+    },
+    {
+      "id": 10,
+      "question": "Aşağıdaki durumlardan hangisinde vazodilatör kullanımı miyokard iskemisini \"şiddetlendirebilir\"?",
+      "options": [
+        "Koroner arterlerin normal olduğu durumlar",
+        "Koroner çalma fenomeni (Coronary steal)",
+        "Sol ventrikül hipertrofisi",
+        "Mitral yetmezliği",
+        "Stabil anjina"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Sodyum nitroprussid gibi güçlü arteriyel vazodilatörler, iskemik olmayan bölgelerdeki damarları daha çok genişleterek kanın iskemik bölgeden (hırsızlama yoluyla) uzaklaşmasına neden olabilir.",
+      "category": "Hipotansif Ajanlar"
+    },
+    {
+      "id": 11,
+      "question": "Aşağıdakilerden hangisi reversibl pulmoner hipertansiyon tedavisinde kullanılan, selektif inhaler bir pulmoner vazodilatördür?",
+      "options": [
+        "Nitrik oksit",
+        "Nitröz oksit",
+        "Sevofluran",
+        "Desfluran",
+        "İzofluran"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "İnhaler nitrik oksit, reversibl pulmoner hipertansiyon tedavisinde kullanılan, selektif bir pulmoner vazodilatördür.",
+      "category": "Hipotansif Ajanlar"
+    },
+    {
+      "id": 12,
+      "question": "Sodyum nitroprussid için verilen bilgilerden hangisi yanlıştır?",
+      "options": [
+        "Sodyum nitroprussid ile venöz ve arteriyoler vasküler yatağın birlikte dilatasyonu, önyük (preload) ve ardyükte (afterload) azalmaya neden olur. Periferik vasküler direncin azalmasıyla birlikte arteriyel kan basıncı düşer.",
+        "Sodyum nitroprussid serebral damarları dilate eder ve serebral otoregülasyonu bozar.",
+        "Pulmoner vasküler yapılar da sodyum nitroprussid infüzyonu ile dilate olur.",
+        "Pulmoner arter basıncındaki azalma, fizyolojik ölü boşluğu azaltabilir.",
+        "Sodyum nitroprussid, pulmoner damarları dilate ederek pulmoner damarların hipoksiye verdiği normal vazokonstriktif yanıtı (hipoksik pulmoner vazokonstriksiyon) önleyebilir."
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "Pulmoner vasküler yapılar da sodyum nitroprussid infüzyonu ile dilate olur. Pulmoner arter basıncındaki azalma, normal ventile olan bazı alveollerin perfüzyonunu azaltarak fizyolojik ölü boşluğu artırabilir.",
+      "category": "Hipotansif Ajanlar"
+    },
+    {
+      "id": 13,
+      "question": "Soya veya yumurta alerjisi olduğu bilinen ve lipid metabolizması bozuk olan bir hastada hipertansif kriz sırasında hangi kalsiyum kanal blokeri kontrendikedir?",
+      "options": [
+        "Verapamil",
+        "Nikardipin",
+        "Klevidipin",
+        "Diltiazem",
+        "Nimodipin"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 4,
+      "explanation": "Klevidipin, bir lipid emülsiyonu (propofol gibi) içinde sunulur. Bu nedenle soya ve yumurta alerjisi olanlarda kullanılmamalıdır.",
+      "category": "Hipotansif Ajanlar"
+    },
+    {
+      "id": 14,
+      "question": "Kan basıncı kontrolünde kullanılan \"Anjiyotensin Reseptör Blokerleri\" (ARB) hangi reseptörü bloke eder?",
+      "options": [
+        "AT1 reseptörü",
+        "AT2 reseptörü",
+        "Alfa-1 reseptörü",
+        "Beta-2 reseptörü",
+        "Nikotinik reseptör"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "ARB'ler (örn. Losartan), anjiyotensin II'nin vazokonstriktör ve aldosteron salgılatıcı etkilerinden sorumlu olan AT1 reseptörünü seçici olarak bloke eder.",
+      "category": "Hipotansif Ajanlar"
+    },
+    {
+      "id": 15,
+      "question": "Nitrogliserin (NTG) infüzyonu özellikle \"preload\" (ön yük) azaltıcı etkisiyle hangi klinik tabloda ilk tercih edilen ilaçlardan biridir?",
+      "options": [
+        "İzole diyastolik hipertansiyon",
+        "Hipovolemik şok",
+        "Kardiyojenik pulmoner ödem",
+        "Feokromositoma krizi",
+        "Sağ ventrikül enfarktüsü"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "NTG düşük dozlarda venöz dilatör etki yaparak venöz dönüşü azaltır, bu da kalbin ön yükünü düşürerek pulmoner konjesyonu hızla rahatlatır.",
+      "category": "Hipotansif Ajanlar"
+    },
+    {
+      "id": 16,
+      "question": "Fenoldopam ile ilgili verilen bilgilerden hangisi yanlıştır?",
+      "options": [
+        "Fenoldopam sistolik ve diyastolik kan basıncını düşürür.",
+        "Kalp hızı tipik olarak artar.",
+        "Yüksek dozlarda refleks taşikardi daha sık görülür.",
+        "Göz içi basıncını da düşürdüğü için glokomlu hastalarda güvenle kullanılabilir.",
+        "Arteriyel kan basıncındaki düşüşe rağmen, glomerüler filtrasyon hızı iyi korunur."
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "Fenoldopam göz içi basıncında artışa neden olabilir ve glokom veya göz içi hipertansiyon öyküsü olan hastalarda dikkatle kullanılmalı veya kaçınılmalıdır.",
+      "category": "Hipotansif Ajanlar"
+    },
+    {
+      "id": 17,
+      "question": "Aşağıdakilerden hangisi ön yükü azaltarak, kardiyojenik pulmoner ödemin giderilmesi için mükemmel bir ilaçtır?",
+      "options": [
+        "Sodyum nitroprussid",
+        "Hidralazin",
+        "Nitrogliserin",
+        "Fenoldopam",
+        "Kalsiyum kanal blokerleri"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Ön yükü (preload) azaltması, nitrogliserini kardiyojenik pulmoner ödemin giderilmesi için mükemmel bir ilaç yapar.",
+      "category": "Hipotansif Ajanlar"
+    },
+    {
+      "id": 18,
+      "question": "Hidralazin için verilen bilgilerden hangisi yanlıştır?",
+      "options": [
+        "Hidralazin, artan cGMP yoluyla prekapiller rezistans damarların dilatasyonu dahil olmak üzere birçok yolla arteriyoler düz kası gevşetir.",
+        "Hidralazin gebeliğin indüklediği hipertansiyonu kontrol etmek için kullanılabilir.",
+        "Hidralazin karaciğerde asetilasyon ve hidroksilasyona uğrar.",
+        "Vücut, hidralazinin neden olduğu kan basıncı düşüşüne kalp hızını, miyokardiyal kontraktiliteyi ve kalp debisini artırarak tepki verir.",
+        "Hidralazin zayıf etkili bir serebral vazodilatördür."
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Hidralazin potent bir serebral vazodilatördür ve serebral kan akımının otoregülasyonunu inhibe eder. Kan basıncı belirgin bir şekilde düşmedikçe serebral kan akımı ve intrakraniyal basınç artacaktır.",
+      "category": "Hipotansif Ajanlar"
+    },
+    {
+      "id": 19,
+      "question": "Selektif bir \"pulmoner vazodilatör\" olan ve inhaler yolla kullanılan ajan hangisidir?",
+      "options": [
+        "Nitrogliserin",
+        "Sodyum Nitroprussid",
+        "Nitrik Oksit (NO)",
+        "Hidralazin",
+        "Esmolol"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "İnhaler NO, sadece havalanan akciğer bölgelerindeki damarları genişletir, sistemik hipotansiyon yapmadan pulmoner hipertansiyonu tedavi eder.",
+      "category": "Hipotansif Ajanlar"
+    },
+    {
+      "id": 20,
+      "question": "Aşağıdakilerden hangisi/hangileri perioperatif hipertansiyon nedenleri arasında yer alır? Ağrı Anksiyete Hipoksemi Hiperkapni Mesane distansiyonu",
+      "options": [
+        "I-II",
+        "I-II-III",
+        "I-II-III-V",
+        "I-II-V",
+        "I-II-III-IV-V"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Perioperatif hipertansiyon; ağrı, anksiyete, hipoksemi, hiperkapni, mesane distansiyonu ve reçete edilen antihipertansif ilaçlara devam etmemenin bir sonucu olarak meydana gelebilir.",
+      "category": "Hipotansif Ajanlar"
+    },
+    {
+      "id": 21,
+      "question": "Nitroprussid infüzyonu sırasında tiyosiyanat toksisitesinin en belirgin bulgusu nedir?",
+      "options": [
+        "Kas seyirmesi ve hiperrefleksi",
+        "Karaciğer enzimlerinde artış",
+        "Konfüzyon, psikoz ve halsizlik",
+        "Ciltte döküntü",
+        "Poliüri (aşırı idrar)"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Karaciğerde siyanürden oluşan tiyosiyanat, böbrekle atılır. Böbrek yetmezliği olanlarda birikerek santral sinir sistemi disfonksiyonuna (psikoz, konfüzyon) neden olur.",
+      "category": "Hipotansif Ajanlar"
+    },
+    {
+      "id": 22,
+      "question": "Koroner arter baypas cerrahisi (KABG) sonrası hipertansif bir hastaya Sodyum Nitroprussid (SNP) infüzyonu başlanıyor. İnfüzyonun 4. saatinde hastada ani gelişen konfüzyon, ajitasyon ve metabolik asidoz gözleniyor. Kan gazında venöz oksijen satürasyonunun normalden çok yüksek olduğu saptanıyor. Bu klinik tablonun altında yatan temel mekanizma hangisidir?",
+      "options": [
+        "Hemoglobinin oksijen afinitesinin artması",
+        "Mitokondriyal sitokrom oksidaz enziminin inhibisyonu",
+        "Plazma kolinesteraz enziminin tükenmesi",
+        "Renal tübüllerde tiyosiyanat birikimi",
+        "Myokardiyal oksijen tüketiminin azalması"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 4,
+      "explanation": "Sodyum nitroprussid metabolize olduğunda siyanür açığa çıkar. Siyanür, mitokondrideki sitokrom oksidaza bağlanarak elektron transport zincirini durdurur. Hücreler oksijeni kullanamadığı için (histotoksik hipoksi), venöz kan oksijene doymuş kalır (parlak kırmızı venöz kan) ve laktik asidoz gelişir.",
+      "category": "Hipotansif Ajanlar"
+    },
+    {
+      "id": 23,
+      "question": "Nitrik oksit (NO) sentezinde prekürsör (öncü) olarak kullanılan aminoasit hangisidir?",
+      "options": [
+        "L-Sistein",
+        "L-Arginin",
+        "L-Glutamin",
+        "L-Metiyonin",
+        "L-Lizin"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "NO, endotel hücrelerinde nitrik oksit sentaz (NOS) enzimi tarafından L-Arginin'den sentezlenir.",
+      "category": "Hipotansif Ajanlar"
+    },
+    {
+      "id": 24,
+      "question": "Nitrogliserin'e karşı gelişen \"tolerans\" (etkinin azalması) durumunu önlemek için ne yapılmalıdır?",
+      "options": [
+        "Doz sürekli artırılmalıdır.",
+        "Her gün 8-12 saatlik \"nitratsız dönem\" bırakılmalıdır.",
+        "İlaç asla kesilmemelidir.",
+        "Başka bir marka kullanılmalıdır.",
+        "Sadece gece dozları artırılmalıdır."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Sürekli nitrat maruziyeti sülfhidril depolarını tüketir ve tolerans geliştirir. Vücuda dinlenme süresi verilmelidir.",
+      "category": "Hipotansif Ajanlar"
+    },
+    {
+      "id": 25,
+      "question": "ACE inhibitörü (örn. Enalaprilat) kullanan bir hastada genel anestezi indüksiyonu sırasında gelişen dirençli hipotansiyonun (vazopleji) yönetiminde en etkili vazopressör hangisidir?",
+      "options": [
+        "Fenilefrin",
+        "Efedrin",
+        "Vazopressin",
+        "Adrenalin",
+        "Dopamin"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 4,
+      "explanation": "ACE inhibitörü kullananlarda RAAS sistemi baskılanmıştır. Bu hastalardaki \"vazoplejik sendrom\" genellikle anjiyotensin dışı bir yolak olan Vazopressin (V1) reseptör uyarımı ile düzelir.",
+      "category": "Hipotansif Ajanlar"
+    },
+    {
+      "id": 26,
+      "question": "Fenoldopam ile ilgili verilen bilgilerden hangisi yanlıştır?",
+      "options": [
+        "Fenoldopam, D1-dopamin reseptörlerini selektif olarak aktive ederek hızlı vazodilatasyona neden olur.",
+        "Malign hipertansiyonu olan hastalarda sistolik ve diyastolik kan basıncını nitroprussid ile karşılaştırılabilir düzeyde düşürür.",
+        "Rebound hipertansiyon yapmaz.",
+        "Tolerans gelişebilir.",
+        "Fenoldopam, sitokrom P-450 enzimleri ile metabolize olur ve metabolitleri inaktiftir."
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Fenoldopam, sitokrom P-450 enzimlerinin katkısı olmadan konjugasyona uğrar ve metabolitleri inaktiftir. Fenoldopamın klirensi, böbrek veya karaciğer yetmezliğinin varlığına rağmen değişmez ve bu hastalar için herhangi bir doz ayarlaması gerekli değildir.",
+      "category": "Hipotansif Ajanlar"
+    },
+    {
+      "id": 27,
+      "question": "Fosfodiesteraz-3 (PDE-3) inhibitörü olan Milrinon için hangisi doğrudur?",
+      "options": [
+        "Sadece kalbi uyarır, damarları etkilemez.",
+        "Beta-reseptör blokajı olan hastalarda dahi inotropik etki gösterebilir.",
+        "Şiddetli hipertansiyon yapar.",
+        "Kan-beyin bariyerini geçerek nöbet başlatır.",
+        "Sadece böbrek yetmezliğinde ilk tercihtir."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Milrinon etkisini beta reseptörlerinden bağımsız (cAMP yıkımını önleyerek) gösterir. Bu yüzden beta bloker kullananlarda veya reseptör down-regülasyonu olan kalp yetmezliğinde etkilidir.",
+      "category": "Hipotansif Ajanlar"
+    },
+    {
+      "id": 28,
+      "question": "Fenoldopam’ın diğer hipotansif ajanlardan farkı olan önemli avantajı nedir?",
+      "options": [
+        "Kan-beyin bariyerini geçmesi",
+        "Dopamin-1 reseptör agonisti olarak renal kan akımını ve idrar çıkışını artırması",
+        "Sadece venöz sistemi etkilemesi",
+        "Bradikardi yapması",
+        "Uzun süreli (günlerce) etkili olması"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Fenoldopam tansiyonu düşürürken böbrek perfüzyonunu koruyan ve hatta artıran tek ajanlardan biridir.",
+      "category": "Hipotansif Ajanlar"
+    },
+    {
+      "id": 29,
+      "question": "Koroner arteriyollerde dilatasyon yaparak halihazırda maksimum düzeyde dilate olmuş arteriyoller tarafından beslenen iskemik alanlardan intrakoroner kan akımının çalınmasına (intrakoroner çalma) neden olabilen hiptansif ajan aşağıdakilerden hangisidir?",
+      "options": [
+        "Nitrogliserin",
+        "Sodyum nitroprussid",
+        "Esmolol",
+        "Hidralazin",
+        "Kalsiyum kanal blokerleri"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Sodyum nitroprussid ile koroner arteriyollerin dilatasyonu, halihazırda maksimum düzeyde dilate olmuş arteriyoller tarafından beslenen iskemik alanlardan intrakoroner kan akımının çalınmasına (intrakoroner çalma) neden olabilir.",
+      "category": "Hipotansif Ajanlar"
+    },
+    {
+      "id": 30,
+      "question": "Plazma esterazları tarafından çok hızlı metabolize edildiği için yarı ömrü 1 dakika olan ve infüzyon kesildiğinde etkisi hızla kaybolan kalsiyum kanal blokeri hangisidir?",
+      "options": [
+        "Nikardipin",
+        "Klevidipin",
+        "Verapamil",
+        "Nifedipin",
+        "Diltiazem"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Klevidipin ultra kısa etkilidir. Kan esterazları ile yıkıldığı için karaciğer veya böbrek yetmezliğinden etkilenmez.",
+      "category": "Hipotansif Ajanlar"
+    },
+    {
+      "id": 31,
+      "question": "Sodyum nitroprussid için verilen bilgilerden hangisi yanlıştır?",
+      "options": [
+        "Sodyum nitroprussid (ve diğer nitrovazodilatörler) hem arteriyoler hem de venöz düz kasları gevşetir.",
+        "Primer etki mekanizması diğer nitratlarla (örn. hidralazin ve nitrogliserin) farklıdır.",
+        "Nitrovazodilatörler metabolize olurken, guanilat siklazı aktive eden nitrik oksiti serbest bırakırlar.",
+        "Genellikle 100 mcg/mL konsantrasyona seyreltilir ve devamlı intravenöz infüzyon (0.25-5 mcg/kg/dk.) şeklinde uygulanır.",
+        "Metabolizması sonucunda siyanür toksisitesi gelişebilir."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Primer etki mekanizması diğer nitratlarla (örn. hidralazin ve nitrogliserin) ortaktır.",
+      "category": "Hipotansif Ajanlar"
+    },
+    {
+      "id": 32,
+      "question": "\"Miyofibriler proteinleri kalsiyuma karşı duyarlı hale getirerek\" kontraktiliteyi artıran ve aynı zamanda vazodilatasyon yapan (inodilatör) ajan hangisidir?",
+      "options": [
+        "Milrinon",
+        "Dobutamin",
+        "Levosimendan",
+        "Sodyum Nitroprussid",
+        "Digoksin"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Levosimendan, bir kalsiyum duyarlılaştırıcıdır. Hücre içi kalsiyum miktarını artırmadan kontraktiliteyi artırması onu benzersiz kılar.",
+      "category": "Hipotansif Ajanlar"
+    },
+    {
+      "id": 33,
+      "question": "Sodyum nitroprussid metabolizması sırasında oluşan siyanürü bağlayarak \"siyanokobalamin\" oluşturan madde hangisidir?",
+      "options": [
+        "Sodyum Tiyosülfat",
+        "Hidroksikobalamin (Vitamin B12a)",
+        "Metilen Mavisi",
+        "Amil Nitrit",
+        "Kalsiyum EDTA"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Hidroksikobalamin, siyanür ile birleşerek zararsız olan B12 vitaminine (siyanokobalamin) dönüşür.",
+      "category": "Hipotansif Ajanlar"
+    },
+    {
+      "id": 34,
+      "question": "Bir hastada uzun süreli yüksek doz Nitrogliserin kullanımı sonrası siyanoz gelişiyor. Ancak bakılan arteryel kan gazında değeri normal (98 mmHg) olarak saptanıyor. Bu hastada aşağıdakilerden hangisinin seviyesinin arttığı düşünülmelidir?",
+      "options": [
+        "Karboksihemoglobin",
+        "Oksihemoglobin",
+        "Methemoglobin",
+        "Siyanokobalamin",
+        "Deoksihemoglobin"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 4,
+      "explanation": "Nitratlar (NTG), demiri ('den 'e) oksitleyerek methemoglobinemiye neden olabilir. Methemoglobin oksijeni dokulara bırakamaz. PaO2 (çözünmüş oksijen) normal olsa bile hasta siyanotik görünür.",
+      "category": "Hipotansif Ajanlar"
+    },
+    {
+      "id": 35,
+      "question": "Subaraknoid kanama sonrası \"serebral vazospazmı\" önlemek ve tedavi etmek amacıyla kullanılan spesifik kalsiyum kanal blokeri hangisidir?",
+      "options": [
+        "Verapamil",
+        "Diltiazem",
+        "Nimodipin",
+        "Amlodipin",
+        "Klevidipin"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Nimodipin yüksek lipid çözünürlüğü sayesinde kan-beyin bariyerini geçer ve serebral damarlara selektivite göstererek vazospazmı azaltır.",
+      "category": "Hipotansif Ajanlar"
+    },
+    {
+      "id": 36,
+      "question": "Sodyum nitroprussid tedavisi sonrası gelişebilen siyanür toksisitesi tedavisinde aşağıdakilerden hangisi/hangileri yer alır? %100 oksijen tedavisi (mekanik ventilasyon ile) Sodyum tiyosülfat Sodyum nitrit C vit",
+      "options": [
+        "Yalnız I",
+        "I-II",
+        "I-II-III",
+        "I-II-III-IV",
+        "Hepsi"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Siyanür toksisitesi olan hastalar, oksijen mevcudiyetini en üst düzeye çıkarmak için %100 oksijen ile mekanik ventilasyona alınmalıdır. Siyanür toksisitesinin farmakolojik tedavisi, hemoglobini methemoglobine okside eden sodyum tiyosülfat (150 mg/kg, 15 dk.'dan uzun sürede) veya %3 sodyum nitrit (5 mg/kg, 5 dk.'dan uzun sürede) uygulanarak siyanür iyonları için alterna-tif bağlanma bölgelerinin sağlanmasına bağlıdır. B12 vitamini; Hidroksikobalamin deki hidroksi grubunun siyanür ile yer değiştirmesi ile sonuçta nontoksik siyanokobalamin (Vitamin B12) meydana gelmektedir.",
+      "category": "Hipotansif Ajanlar"
+    },
+    {
+      "id": 37,
+      "question": "Diazoksit (Diazoxide) hangi kanal üzerinden vazodilatasyon yapar ve hangi yan etkisiyle bilinir?",
+      "options": [
+        "Kalsiyum kanalı blokajı – Hipoglisemi",
+        "Potasyum kanalı açılması – Hiperglisemi",
+        "Sodyum kanalı blokajı – Aritmi",
+        "Klor kanalı açılması – Sedasyon",
+        "Magnezyum kanalı blokajı – Nöbet"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Diazoksit ATP bağımlı K kanallarını açar. İnsülin salınımını baskıladığı için hiperglisemiye yol açabilir.",
+      "category": "Hipotansif Ajanlar"
+    },
+    {
+      "id": 38,
+      "question": "Anestezi sırasında kontrollü hipotansiyon için kullanılan magnezyum sülfatın etkisi nasıldır?",
+      "options": [
+        "Kan-beyin bariyerini geçerek merkezi baskılama",
+        "Kalsiyum antagonizması ile doğrudan damar düz kas gevşemesi",
+        "Sodyum kanallarını bloke etme",
+        "Adrenalin salınımını artırma",
+        "Sadece böbrekleri etkileme"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Magnezyum doğal bir kalsiyum antagonistidir; damar düz kaslarını gevşeterek ve sempatik deşarjı baskılayarak tansiyonu düşürür.",
+      "category": "Hipotansif Ajanlar"
+    },
+    {
+      "id": 39,
+      "question": "Verapamil'in diltiazem'e göre kardiyovasküler sistem üzerindeki en belirgin etkisi nedir?",
+      "options": [
+        "Daha güçlü negatif inotrop (kalp kasılmasını azaltan) etki",
+        "Taşikardi yapması",
+        "Bronşları genişletmesi",
+        "Sadece böbrek damarlarını etkilemesi",
+        "Potasyumu düşürmesi"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Verapamil, fenilalkilamin sınıfı bir KKB olup kalbin kontraktilitesini ve iletimini (AV nod) diltiazemden daha güçlü baskılar.",
+      "category": "Hipotansif Ajanlar"
+    },
+    {
+      "id": 40,
+      "question": "Aşağıdaki hipotansif ajanlardan hangisi fosfodiesteraz inhibitörüdür?",
+      "options": [
+        "Milrinon",
+        "Levosimendan",
+        "Sodyum nitroprussid",
+        "Diltiazem",
+        "Klevidipinin"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Milrinon, kalp yetmezliği tedavisinde sıklıkla kullanılan bir fosfodiesteraz inhibitörüdür. Milrinon, cAMP konsantrasyonunu artırarak hücre içi kalsiyum konsantrasyonunun artmasına neden olur. Milrinon, miyokardiyal kontraktiliteyi artırmanın yanı sıra sistemik bir vazodilatördür.",
+      "category": "Hipotansif Ajanlar"
+    },
+    {
+      "id": 41,
+      "question": "Kontrollü hipotansiyon sırasında \"optik sinir iskemisine\" bağlı kalıcı görme kaybı riski hangi durumda artar?",
+      "options": [
+        "Kan basıncının çok hızlı yükseltilmesi",
+        "Perfüzyon basıncının hastanın otoregülasyon sınırlarının altına düşürülmesi",
+        "Hastanın trendelenburg pozisyonunda olması",
+        "Atropin kullanımı",
+        "Nazal cerrahi yapılması"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Kontrollü hipotansiyonda en kritik komplikasyon uç organ (beyin, göz, böbrek) perfüzyonunun bozulmasıdır.",
+      "category": "Hipotansif Ajanlar"
+    },
+    {
+      "id": 42,
+      "question": "Aşağıdakilerden hangisi bir direkt renin inhibitörüdür?",
+      "options": [
+        "Aliskiren",
+        "Losartan",
+        "Ramipril",
+        "Kaptopril",
+        "Valsartan"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Aliskiren, anjiyotensinojenin anjiyotensin I'e dönüşümünü sağlayan renin enzimini doğrudan bloke eder.",
+      "category": "Hipotansif Ajanlar"
+    },
+    {
+      "id": 43,
+      "question": "Nitrogliserin (NTG) için hangisi yanlıştır?",
+      "options": [
+        "Koroner arterleri genişletir.",
+        "Trombosit agregasyonunu (pıhtılaşmayı) azaltabilir.",
+        "Kafa içi basıncını (KİB) düşürür.",
+        "Özofagus sfinkterini gevşetir.",
+        "Bronşlarda gevşeme yapabilir."
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "NTG serebral vazodilatasyon yaparak kafa içi basıncını artırır. Bu yüzden kafa içi yer kaplayan lezyonu olanlarda risklidir.",
+      "category": "Hipotansif Ajanlar"
+    },
+    {
+      "id": 44,
+      "question": "Uzun süreli yüksek doz Nitrogliserin kullanımı sonrası hastada siyanoz gelişiyor ancak PaO2 normal saptanıyor. Kan örneğinin \"çikolata renginde\" olduğu fark ediliyor. Bu durumun nedeni ve tedavisi nedir?",
+      "options": [
+        "Siyanür zehirlenmesi – Amil nitrit",
+        "Methemoglobinemi – Metilen mavisi",
+        "Karbondioksit retansiyonu – Mekanik ventilasyon",
+        "Hemoliz – Kan transfüzyonu",
+        "İlaç alerjisi – Adrenalin"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 4,
+      "explanation": "Nitratların (NTG gibi) aşırı dozları hemoglobini methemoglobine oksitler. Bu durum dokulara oksijen sunumunu bozar. Tedavide %1'lik metilen mavisi kullanılır.",
+      "category": "Hipotansif Ajanlar"
+    },
+    {
+      "id": 45,
+      "question": "Nikardipin'in diğer KKB'lere göre (örn. Verapamil) avantajı nedir?",
+      "options": [
+        "Daha güçlü bradikardi yapması",
+        "Serebral ve koroner damarlara yüksek selektivite göstermesi",
+        "Sadece damar dışı yolla verilmesi",
+        "Hiç metabolize olmaması",
+        "Kalp kasını daha çok kasması"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Nikardipin bir dihidropiridindir; kalpten ziyade damar yatağına selektiftir ve perfüzyonu koruma eğilimindedir.",
+      "category": "Hipotansif Ajanlar"
+    },
+    {
+      "id": 46,
+      "question": "Aşağıdakilerden hangisi fenoldopamın beklenen yan etkileri arasında yer almaz?",
+      "options": [
+        "Baş ağrısı",
+        "Flushing",
+        "Taşikardi",
+        "Bulantı",
+        "Hiperkalemi"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Yan etkiler baş ağrısı, kızarıklık (flushing), bulantı, taşikardi, hipokalemi ve hipotansiyondur.",
+      "category": "Hipotansif Ajanlar"
+    },
+    {
+      "id": 47,
+      "question": "50 yaşında tip 2 diyabet ve kronik böbrek yetmezliği olan bir hastaya hipertansif kriz nedeniyle Fenoldopam infüzyonu başlanıyor. Fenoldopam’ın bu hastada diğer vazodilatörlere göre tercih edilme sebebi hangisidir?",
+      "options": [
+        "Alfa-2 reseptörlerini uyararak sempatik deşarjı azaltması",
+        "Dopamin-1 reseptör agonizması ile renal kan akımını artırması",
+        "Karaciğerde esterazlar tarafından yıkılması",
+        "Anjiyotensin reseptörlerini bloke etmesi",
+        "Bradikardi yaparak kalbi koruması"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 4,
+      "explanation": "Fenoldopam selektif bir DA-1 agonistidir. Kan basıncını düşürürken aynı zamanda renal vazodilatasyon yaparak böbrek perfüzyonunu artırır ve sodyum atılımını (natriürez) teşvik eder.",
+      "category": "Hipotansif Ajanlar"
+    },
+    {
+      "id": 48,
+      "question": "Beyin anevrizması cerrahisi sırasında cerrahın görüş alanını iyileştirmek için kontrollü hipotansiyon uygulanıyor. Bu amaçla kullanılan Hidralazin hakkında hangisi doğrudur?",
+      "options": [
+        "Venöz sistemi arteriyel sistemden daha fazla genişletir.",
+        "Etki başlangıcı çok hızlıdır (1-2 dakika).",
+        "Direkt arteriyol vazodilatasyonu yapar ve etkisi 10-20 dakika sonra başlar.",
+        "Refleks bradikardiye neden olur.",
+        "Böbrek kan akımını şiddetli şekilde azaltır."
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 4,
+      "explanation": "Hidralazin direkt bir arteriyel vazodilatördür. Ancak etki başlangıcının yavaş olması (10-20 dk) akut titrasyonu zorlaştırır ve cerrahi sonrasında beklenmedik hipotansiyona yol açabilir.",
+      "category": "Hipotansif Ajanlar"
+    },
+    {
+      "id": 49,
+      "question": "Aşağıdaki ajanlardan hangisi bir lipid emülsiyonu olarak hazırlanır?",
+      "options": [
+        "Diltiazem",
+        "Verapamil",
+        "Nikardipin",
+        "Nitrogliserin",
+        "Klevidipinin"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Bir lipid emülsiyonu olarak hazırlanan klevidipinin, kan esterazları tarafından hızlı metabolize olmasına bağlı olarak kısa bir yarı ömrü vardır ve bu durum hızlı titrasyonunu kolaylaştırır.",
+      "category": "Hipotansif Ajanlar"
+    },
+    {
+      "id": 50,
+      "question": "Siyanür toksisitesi ile acil servise başvuran bir hastada hangi hipotansif ajana karşı akut bir direnç gelişmiş olması beklenir?",
+      "options": [
+        "Nitrogliserin",
+        "Hidralazin",
+        "Sodyum nitroprussid",
+        "Fenoldopam",
+        "Kalsiyum kanal blokerleri"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Akut siyanür toksisitesi, metabolik asidoz, kardiyak aritmi ve venöz oksijen içeriğinin artması (oksijenin kullanılamamasının bir sonucu) ile karakterizedir. Siyanür toksisitesinin bir başka erken bulgusu, sodyum nitroprussidin artırılan dozlarının (taşiflaksi) hipotansif etkilerine karşı akut direnç gelişmesidir.",
+      "category": "Hipotansif Ajanlar"
+    },
+    {
+      "id": 51,
+      "question": "Nitrogliserin kullanımında görülen en yaygın yan etki aşağıdakilerden hangisidir?",
+      "options": [
+        "İshal",
+        "Zonklayıcı tarzda baş ağrısı",
+        "Bradikardi",
+        "Hipoglisemi",
+        "Karaciğer yetmezliği"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Serebral damarlardaki vazodilatasyon kafa içi basıncı artırabilir ve şiddetli baş ağrısına yol açar.",
+      "category": "Hipotansif Ajanlar"
+    },
+    {
+      "id": 52,
+      "question": "Dihidropriridin kalsiyum kanal blokerleri hakkında verilen bilgilerden hangisi yanlıştır?",
+      "options": [
+        "Kardiyotorasik cerrahi geçiren hastalarda perioperatif kan basıncı kontrolü için rutin olarak kullanılan arteriyel selektif vazodilatörlerdir.",
+        "Verapamil ve diltiazemin aksine, dihidropiridin kalsiyum kanal blokerlerinin kalp iletimi ve ventriküler kontraktilite üzerinde minimal etkileri vardır.",
+        "Bu kalsiyum kanal blokerleri, L-tipi kalsiyum kanalına bağlanır ve vasküler düz kasa kalsiyum girişini bozar.",
+        "Dihidropiridin kalsiyum kanal blokerleri kullanılarak vasküler tonus azaldığında, önyük korunurken kalp debisi genellikle artar.",
+        "Kardiyak dolum ve ön yük nitratlara kıyasla daha fazla etkilenir."
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Bu kalsiyum kanal blokerleri, L-tipi kalsiyum kanalına bağlanır ve vasküler düz kasa kalsiyum girişini bozar. L-tipi reseptörler, venöz kapasitans damarlarından ziyade arteriyel damarlarda daha yaygındır. Sonuç olarak, kardiyak dolum ve önyük, hem arteriyel hem de venöz damarları dilate edebilen nitratlara göre bu ajanlardan daha az etkilenir.",
+      "category": "Hipotansif Ajanlar"
+    },
+    {
+      "id": 53,
+      "question": "Siklik guanozin 3',5'-monofosfat yoluyla prekapiller rezistans damarların dilatasyonu dahil olmak üzere birçok yolla arteriyoler düz kası gevşeten ajan aşağıdakilerden hangisidir?",
+      "options": [
+        "Sodyum nitroprussid",
+        "Hidralazin",
+        "Nitrogliserin",
+        "Fenoldopam",
+        "Kalsiyum kanal blokerleri"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Hidralazin, artan siklik guanozin 3',5'-monofosfat yoluyla prekapiller rezistans damarların dilatasyonu dahil olmak üzere birçok yolla arteriyoler düz kası gevşetir.",
+      "category": "Hipotansif Ajanlar"
+    },
+    {
+      "id": 54,
+      "question": "Nitrogliserin ile ilgili verilen bilgilerden hangisi yanlıştır?",
+      "options": [
+        "Nitrogliserin, damar düz kasını gevşetir.",
+        "Venöz dilatasyon, arteriyel dilatasyondan daha belirgindir.",
+        "Nitrik okside metabolize olur, guanilat siklazı aktive ederek cGMP’nin artmasına, hücre içi kalsiyumun azalmasına ve vasküler düz kasın gevşemesine yol açar.",
+        "Nitrogliserin miyokardiyal iskemiyi, hipertansiyonu ve ventriküler yetmezliği düzeltir.",
+        "Nitrogliserin sadece iv kullanılabilir."
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Nitrogliserin ayrıca sublingual (4 dk.’da pik etki) veya transdermal (24 sa. Devamlı salınım) yolla da uygulanabilir.",
+      "category": "Hipotansif Ajanlar"
+    },
+    {
+      "id": 55,
+      "question": "Sodyum nitroprussid (SNP) infüzyonu alan bir hastada, kan basıncı düşüşüne karşı ani bir direnç (taşiflaksi) gelişiyor, metabolik asidoz derinleşiyor ve venöz kanın parlak kırmızı olduğu gözleniyor. Bu hastada ilk şüphelenilmesi gereken durum ve spesifik antidot hangisidir?",
+      "options": [
+        "Malign Hipertermi – Dantrolen",
+        "Siyanür Toksisitesi – Sodyum Tiyosülfat",
+        "Methemoglobinemi – Metilen Mavisi",
+        "Karbonmonoksit Zehirlenmesi – Hiperbarik Oksijen",
+        "Akut Böbrek Yetmezliği – Hemodiyaliz"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 4,
+      "explanation": "SNP metabolize olduğunda siyanür açığa çıkar. Taşiflaksi (direnc), metabolik asidoz ve dokuların oksijeni kullanamamasına bağlı venöz kanın parlaklaşması tipik siyanür toksisitesidir. Tedavide sodyum tiyosülfat kullanılır.",
+      "category": "Hipotansif Ajanlar"
+    },
+    {
+      "id": 56,
+      "question": "Aşağıdaki hipotansif ajanlardan hangisi soya veya yumurta alerjisi olan ve lipid metabolizması bozulmuş hastalarda kontrendikedir?",
+      "options": [
+        "Klevidipinin",
+        "Verapamil",
+        "Nikardipin",
+        "Nitrogliserin",
+        "Diltiazem"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Lipid emülsiyonu şeklindeki formülasyonu nedeniyle, soya veya yumurta alerjisi olan hastalarda ve lipid metabolizması bozulmuş hastalarda kontrendikedir.",
+      "category": "Hipotansif Ajanlar"
+    }
+  ]
+}

@@ -1,0 +1,1164 @@
+{
+  "meta": {
+    "title": "Nöromüsküler Bloke Edici Ajanlar Soru Bankası",
+    "language": "tr",
+    "questionCount": 77
+  },
+  "questions": [
+    {
+      "id": 1,
+      "question": "Sugammadeksin aşağıdaki ilaçlardan hangisine afinitesi en yüksektir?",
+      "options": [
+        "Veküronyum",
+        "Roküronyum",
+        "Panküronyum",
+        "Atraküryum",
+        "Süksinilkolin"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Açıklama: Sugammadeks steroidal ajanları bağlar; afinitesi Roküronyum > Veküronyum > Panküronyum sırasıyla azalır.",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 2,
+      "question": "Aşağıdaki nöromüsküler blokerlerden hangisi kuaterner amonyum yapısında değildir?",
+      "options": [
+        "Veküronyum",
+        "Roküronyum",
+        "Panküronyum",
+        "Süksinilkolin",
+        "Hiçbiri (Hepsi kuaterner amonyumdur)"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Açıklama: ACh’ye benzer şekilde, tüm nöromüsküler bloker ajanlar pozitif yüklü nitrojeni nikotinik ACh reseptörlerine afinite gösteren kuaterner amonyum bileşikleridir.",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 3,
+      "question": "Bir hastada atraküryum kullanımı sonrası geçici hipotansiyon ve taşikardi gözleniyor. Bu yan etkilerin en olası nedeni nedir?",
+      "options": [
+        "Doğrudan miyokardiyal depresyon",
+        "Muskarinik reseptör blokajı",
+        "Mast hücrelerinden histamin salınımı",
+        "Kolinesteraz enziminin geçici aktivasyonu",
+        "Sempatik gangliyon stimülasyonu"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Açıklama: Atraküryum ve mivaküryum gibi benzilizokinolinyumlar, mast hücrelerinden doza ve hıza bağlı olarak histamin salınımına neden olabilir.",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 4,
+      "question": "Aşağıdaki ilaçlardan hangisi psödokolinesteraz enzim aktivitesini azaltmaz?",
+      "options": [
+        "Piridostigmin",
+        "Esmolol",
+        "Fenilefrin",
+        "Panküronyum",
+        "Oral kontraseptifler"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: Fenilefrin",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 5,
+      "question": "Aşağıdaki faktörlerden hangisi nöromüsküler kavşaktaki ACh reseptör sayısını artırarak (up-regülasyon) süksinilkoline bağlı hiperkalemi riskini tetiklemez?",
+      "options": [
+        "1 ay önce geçirilmiş serebrovasküler olay (inme)",
+        "2 hafta önce vücut yüzeyinin %30'unda yanık",
+        "Duchenne müsküler distrofi",
+        "Uzun süreli yatak istirahati ve immobilizasyon",
+        "Parkinson hastalığı"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Açıklama: Yanık, inme, immobilizasyon ve nöromüsküler hastalıklarda (distrofiler) ekstra-junksiyonel reseptör sayısı artar. Parkinson hastalığında bu tip bir up-regülasyon ve hiperkalemi riski beklenmez.",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 6,
+      "question": "\"Malign Hipertermi\" şüphesi olan bir hastada süksinilkolin kullanımı sonrası görülen en spesifik erken işaret nedir?",
+      "options": [
+        "Ciltte kızarıklık",
+        "Yaygın miyalji",
+        "Masseter spazmı (çene kilitlenmesi)",
+        "Hipokalemi",
+        "Hipotansiyon"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Açıklama: Masseter spazmı, süksinilkolin sonrası Malign Hiperterminin (MH) en önemli ve spesifik erken habercilerinden biridir.",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 7,
+      "question": "Miyastenia gravis tanısı olan bir hastada abdominal cerrahi planlanıyor. Bu hastada nöromüsküler bloker seçimi ve dozajı ile ilgili hangisi doğrudur?",
+      "options": [
+        "Süksinilkolin dozu 2 katına çıkarılmalıdır çünkü direnç vardır.",
+        "Non-depolarizan ajanlar standart dozda kullanılmalıdır.",
+        "Roküronyum dozu %50-90 oranında azaltılmalıdır çünkü aşırı duyarlılık vardır.",
+        "Bu hastalarda sadece atraküryum güvenlidir.",
+        "Neostigmin kullanımı bu hastalarda kontrendikedir."
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Açıklama: Miyastenik hastalarda fonksiyonel post-sinaptik reseptör sayısı azaldığı için non-depolarizan ajanlara karşı aşırı bir duyarlılık vardır. Dozlar ciddi şekilde azaltılmalıdır. Süksinilkolin için ise reseptör azlığı nedeniyle direnç görülebilir.",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 8,
+      "question": "Gebelik ve karaciğer hastalığı gibi plazma kolinesteraz aktivitesinin azaldığı durumlarda süksinilkolin farmakokinetiği ile ilgili hangisi doğrudur?",
+      "options": [
+        "Dağılım hacmi arttığı için doz artırılmalıdır.",
+        "Etki süresi klinik olarak anlamlı düzeyde uzamaz.",
+        "Etki başlangıç süresi kısalır.",
+        "Faz II blok gelişme riski tamamen ortadan kalkar.",
+        "Sadece çocuk hastalarda etki süresi uzar."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Açıklama: Gebelik ve karaciğer hastalıklarında psödokolinesteraz düzeyleri %20-40 oranında azalsa da, süksinilkolin etkisi ancak enzim düzeyi %75'ten fazla azaldığında klinik olarak anlamlı düzeyde uzar.",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 9,
+      "question": "Karaciğer yetmezliği olan bir hastada \"başlangıç (entübasyon) dozunun\" artırılması gerekmesinin temel nedeni nedir?",
+      "options": [
+        "İlacın metabolizmasının hızlanması",
+        "Artmış ekstraselüler sıvı hacmi (Vd artışı)",
+        "Reseptörlerin ilaca karşı dirençli olması",
+        "Plazma proteinlerine bağlanmanın artması",
+        "Böbreklerden atılımın hızlanması"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Açıklama: Karaciğer hastalarında (asit vb. nedeniyle) ekstraselüler sıvı hacmi geniştir. Suda çözünen kas gevşeticilerin dağılım hacmi arttığı için, hedeflenen plazma konsantrasyonuna ulaşmak için daha yüksek bir başlangıç dozu gerekebilir.",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 10,
+      "question": "Aşağıdaki ilaçlardan hangisi nöromüsküler blokör ajanların etkisini \"direkt\" olarak artırmaz, ancak nöromüsküler iletimi zayıflatabilir?",
+      "options": [
+        "Aminoglikozidler",
+        "Magnezyum sülfat",
+        "Lityum",
+        "Fenitoin",
+        "Kalsiyum kanal blokörleri"
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "Açıklama: Fenitoin (kronik kullanımda) non-depolarizan blokörlere karşı \"direnç\" oluşturur ve etkiyi kısaltır. Aminoglikozidler, lityum ve magnezyum ise etkiyi artırır.",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 11,
+      "question": "Aşağıdakilerden hangisi hem depolarizan hem de nodepolarizasyon bloğun uzamasına neden olur Aminoglikozidler Magnezyum Kalsiyum kanal blokerleri Kinidin İnhalasyon anestezikleri Kolinesteraz inhibitörleri",
+      "options": [
+        "I-III-V",
+        "II-IV-VI",
+        "II-V-VI",
+        "I-II-III-IV-V",
+        "Hepsi"
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: I-II-III-IV-V",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 12,
+      "question": "Aşağıdaki klinik tablolardan hangisinde süksinilkolin kullanımı \"malign hipertermi\" riski nedeniyle değil, \"rabdomiyoliz ve ani kardiyak arrest\" riski nedeniyle kontrendikedir?",
+      "options": [
+        "Santral çekirdek hastalığı (Central Core Disease).",
+        "Duchenne müsküler distrofi.",
+        "Osteogenezis imperfekta.",
+        "Malign nöroleptik sendrom.",
+        "Hiperkalemik periyodik paralizi."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Açıklama: Duchenne gibi müsküler distrofisi olan çocuklarda süksinilkolin, kas hücre zarı dayanıksızlığı nedeniyle ani rabdomiyoliz ve buna bağlı hiperkalemik kardiyak arreste neden olabilir. Bu, MH'den farklı bir mekanizmadır.",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 13,
+      "question": "Aşağıdaki kas gruplarından hangisi non-depolarizan nöromüsküler bloka karşı en dirençlidir ve en hızlı toparlanır?",
+      "options": [
+        "Adduktor pollicis",
+        "Orbikülaris okuli",
+        "Diyafram",
+        "Gastroknemius",
+        "Farinks konstriktörleri"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Açıklama: Diyafram blokaj için en yüksek doza ihtiyaç duyan ve ilk geri dönen kas grubudur.",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 14,
+      "question": "Aşağıdaki ilaç-etki eşleşmelerinden hangisi doğrudur?",
+      "options": [
+        "Magnezyum - Blok şiddetini azaltır",
+        "Fenitoin - Blok etkisini uzatır",
+        "Aminoglikozid - Blok etkisini artırır",
+        "Hipotermi - Blok etkisini kısaltır",
+        "Karbamazepin - Blok etkisini uzatır"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Açıklama: Aminoglikozidler ACh salınımını azaltarak bloğu güçlendirir. Fenitoin ve karbamazepin ise direnç oluşturur.",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 15,
+      "question": "Nöromüsküler monitörizasyonda \"Train-of-Four\" (TOF) oranı 0.4 saptanan bir hastada ekstübasyon yapılırsa aşağıdaki komplikasyonlardan hangisi en olasıdır?",
+      "options": [
+        "Malign hipertermi atağı",
+        "Üst havayolu obstrüksiyonu ve aspirasyon riski",
+        "Akut böbrek yetmezliği",
+        "Hipertansif kriz",
+        "Jeneralize konvülsiyon"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Açıklama: TOF oranının 0.9'un altında olması rezidüel kürarizasyon (kalıntı blok) anlamına gelir. Bu durumda yutkunma ve öksürme refleksleri zayıftır, havayolu korunamaz ve aspirasyon riski çok yüksektir.",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 16,
+      "question": "Süksinilkolin için verilen bilgilerden hangisi yanlıştır?",
+      "options": [
+        "Hiperkalemi yapabilir.",
+        "Histamin deşarjına neden olabilir.",
+        "Kafa içi basıncı arttırabilir.",
+        "Myoklonus oluşturabilir.",
+        "İntragastrik basıncı düşürdüğü için tok hastalarda güvenle kullanılabilir."
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: İntragastrik basıncı düşürdüğü için tok hastalarda güvenle kullanılabilir.",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 17,
+      "question": "Sugammadeksin nöromüsküler blokerleri geri çevirme (reversiyon) mekanizması ve etkinliği ile ilgili hangisi doğrudur?",
+      "options": [
+        "Asetilkolinesteraz enzimini inhibe ederek çalışır.",
+        "Sadece benzilizokinolyum yapısındaki (atraküryum vb.) ilaçları bağlar.",
+        "Roküronyum ve veküronyum moleküllerini plazmada bire bir oranında enkapsüle ederek uzaklaştırır.",
+        "Veküronyum üzerindeki etkisi, roküronyumdan daha güçlüdür.",
+        "Post-sinaptik reseptörlerdeki ACh miktarını artırarak etki eder."
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Açıklama: Sugammadeks, steroid yapıdaki ajanları (en başta roküronyum, sonra veküronyum) plazmada bağlayarak etkisiz hale getirir. Roküronyuma olan afinitesi veküronyumdan daha yüksektir.",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 18,
+      "question": "Süksinilkolin için verilen bilgilerden hangisi yanlıştır?",
+      "options": [
+        "Süksinilkolin lipidde çözünmediği için küçük bir dağılım hacmine sahiptir.",
+        "Kilogram bazında, pediatrik hastalar için verilmesi gereken doz genellikle yetişkinlerden daha fazladır.",
+        "Süksinilkolin buzdolabında (2-8°C) saklanmalı ve genellikle buzdolabından çıkarıldıktan ve oda sıcaklığına maruz bırakıldıktan sonra 14 gün içinde kullanılmalıdır.",
+        "Çocuklar, süksinilkolin uygulamasını takiben derin bradikardiye özellikle yatkındır.",
+        "Fasikülasyonlar tipik olarak küçük çocuklarda ve yaşlı erişkin hastalarda gözlenir."
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: Fasikülasyonlar tipik olarak küçük çocuklarda ve yaşlı erişkin hastalarda gözlenir.",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 19,
+      "question": "Psödokolinestraz aktivitesini ölçmede kullanılan lokal anestezik ajan aşağıdakilerden hangisidir?",
+      "options": [
+        "Dibukain",
+        "Dilokain",
+        "Prilokain",
+        "Lidokain",
+        "Bupivakain"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: Dibukain",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 20,
+      "question": "45 yaşında siroz hastasında özofagus varis kanaması nedeniyle acil endoskopi planlanıyor. Hızlı ardışık indüksiyonda hangi ajan karaciğer yetmezliğinden bağımsız eliminasyonu nedeniyle en güvenli seçenektir?",
+      "options": [
+        "Veküronyum",
+        "Roküronyum",
+        "Panküronyum",
+        "Sisatraküryum",
+        "Mivaküryum"
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "Açıklama: Sisatraküryum, karaciğer ve böbrek fonksiyonlarından bağımsız olan Hofmann eliminasyonu ile temizlendiği için multiorgan yetmezliği ve sirozda tercih edilen ajandır.",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 21,
+      "question": "Nöromüsküler kavşaktaki ACh reseptörünün hangi alt birimine asetilkolin bağlanabilir?",
+      "options": [
+        "Beta",
+        "Gama",
+        "Delta",
+        "Alfa",
+        "Epsilon"
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "Açıklama: Nikotinik ACh reseptöründe 2 adet alfa alt birimi bulunur ve sadece bu alt birimler ACh bağlayabilir.",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 22,
+      "question": "Nöromusküler Bloke Edici Ajanlar için verilen bilgilerden hangisi yanlıştır? Süksinilkolin asetilkolinesteraz tarafından metabolize edilmediğinden, reseptöre bağlanmaz ve nöromusküler kavşaktan uzaklaşarak plazma ve karaciğerde başka bir enzim olan psödokolinesteraz (nonspesifik kolinesteraz, plazma kolinesteraz veya bütirilkolinesteraz) tarafından hidrolize edilir. Neostigminin süksinilkolinden sonra nöromusküler bloğu geri çevirdiği tek zaman, faz II blok (dörtlü dizi sönmesi) varlığı ve dolaşımdaki süksinilkolin konsantrasyonunun ihmal edilebilir olması için yeterli süre geçtiği zamandır. Sugammadeks, ilk seçici kas gevşetici bağlayıcı ajandır; steroidal nondepolarizan ajanlarla (veküronyum, roküronyum ve daha az oranda panküronyum) 1:1 oranında sıkı kompleksler oluşturarak geri çevirici etkisini gösterir. Uzun süreli veya tekrarlanan sinir uyarımı sırasında uyarılmış yanıtın kademeli olarak azalması olan sönmenin ortaya çıkması, nondepolarizan bir bloğun veya sadece süksinilkolin uygulanmışsa faz II bloğun göstergesidir. Süksinilkolinden kaynaklanan faz I depolarizasyon bloğu tetanus veya dörtlü dizi sırasında sönme ve; posttetanik güçlenme göstermez.",
+      "options": [
+        "I-III-V",
+        "II-IV",
+        "I-III-V",
+        "I-II-IV-V",
+        "I-II-III-IV-V"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: I-II-III-IV-V",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 23,
+      "question": "Sugammadeks-roküronyum kompleksi ile ilgili aşağıdakilerden hangisi yanlıştır?",
+      "options": [
+        "1:1 molar oranda bağlanma gerçekleşir",
+        "Oluşan kompleks biyolojik olarak inaktiftir",
+        "Kompleksin ana eliminasyon yolu böbreklerdir",
+        "Bağlanma nikotinik reseptör üzerinde gerçekleşir",
+        "Steroid halkasını içine hapseden bir \"konuk-konak\" etkileşimidir"
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "Açıklama: Sugammadeks reseptörle etkileşmez; plazmada serbest haldeki roküronyum molekülünü enkapsüle ederek konsantrasyon gradyanı oluşturur ve ilacı reseptörden uzaklaştırır.",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 24,
+      "question": "Nöromusküler Bloke Edici Ajanlar için verilen bilgilerden hangisi yanlıştır?",
+      "options": [
+        "Panküronyum ve veküronyum kısmen böbrekler tarafından atılır ve böbrek yetmezliği olan hastalarda etkileri uzar.",
+        "Karaciğer hastalığı olanlarda daha yüksek başlangıç dozu, ancak daha küçük idame dozları gerekebilir.",
+        "Atraküryum ve sisatraküryum, organdan bağımsız Hofmann eliminasyonu ile plazmada fizyolojik pH ve sıcaklıkta bozunmaya uğrar.",
+        "Panküronyum verilen hastalarda hipotansiyon ve bradikardi oluşabilir.",
+        "Yoğun bakım ünitelerindeki hastalara uzun süreli veküronyum uygulamasından sonra ilaç kesilse bile uzun süreli nöromüsküler blok (birkaç güne kadar) meydana gelebilir."
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: Panküronyum verilen hastalarda hipotansiyon ve bradikardi oluşabilir.",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 25,
+      "question": "Süksinilkolin için verilen bilgilerden hangisi yanlıştır?",
+      "options": [
+        "İki birleşik ACh molekülünden oluşur.",
+        "Süksinilkolin hızlı etki başlangıcı (30-60 sn) ve kısa etki süresi (tipik olarak 10 dakikadan az) nedeniyle popülerliğini korumaktadır.",
+        "Süksinilkolin, tüm nöromüsküler blokerler gibi, çok düşük lipid çözünürlüğü nedeniyle küçük bir dağılım hacmine sahiptir ve bu aynı zamanda hızlı bir etki başlangıcının da temelini oluşturur.",
+        "Psödokolinesteraz tarafından hızla süksinilmonokoline metabolize edilir.",
+        "Gebelik, karaciğer hastalığı, böbrek yetmezliği olanlarda etki süresi değişmez."
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: Gebelik, karaciğer hastalığı, böbrek yetmezliği olanlarda etki süresi değişmez.",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 26,
+      "question": "Atraküryum ve sisatraküryumun Hofmann eliminasyonu ile parçalanmasını hızlandıran klinik durum hangisidir?",
+      "options": [
+        "Hipotermi ve asidoz",
+        "Hipotermi ve alkaloz",
+        "Hipertermi ve asidoz",
+        "Hipertermi ve alkaloz",
+        "Hiponatremi ve hiperkalsemi"
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "Açıklama: Hofmann eliminasyonu spontan, enzimatik olmayan bir süreçtir; fizyolojik pH ve sıcaklığın üzerine çıkıldığında (alkaloz ve hipertermi) parçalanma hızı artar.",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 27,
+      "question": "Aşağıda verilen nondepolarizan kas gevşeticilerden hangisi/hangileri histamin deşarjına neden olur? Gantaküryum Atraküryum Siatraküryum Roküronyum Panküronyum",
+      "options": [
+        "Yalnız II",
+        "I-II",
+        "I-II-III",
+        "I-II-IV-V",
+        "II-IV-V"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: I-II",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 28,
+      "question": "Nöromusküler Bloke Edici Ajanlar için verilen bilgilerden hangisi yanlıştır?",
+      "options": [
+        "ACh’ye benzer şekilde, tüm nöromüsküler bloke edici ajanlar, pozitif yüklü nitrojeni nikotinik ACh reseptörlerine afınite gösteren kuaterner amonyum bileşikleridir.",
+        "Depolarize edici kas gevşeticiler ACh’ye çok benzer ve ACh reseptörlerine kolayca bağlanarak bir kas aksiyon potansiyeli oluşturur.",
+        "Sürekli son-plak depolarizasyonu kas gevşemesine neden olur.",
+        "Depolarizan kas gevşetici ACh reseptörlerine bağlanmaya devam ettiği sürece son-plak repolarize olamaz; buna faz II blok denir.",
+        "Nondepolarizan kas gevşeticiler ACh reseptörlerini bağlar ancak iyon kanalının açılması için gerekli yapısal değişikliğe neden olamaz."
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: Depolarizan kas gevşetici ACh reseptörlerine bağlanmaya devam ettiği sürece son-plak repolarize olamaz; buna faz II blok denir.",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 29,
+      "question": "32 yaşında kadın hasta, akut apandisit nedeniyle acil operasyona alınıyor. İndüksiyonda süksinilkolin kullanıldıktan hemen sonra hastada masif çene sertliği (masseter spazmı) gelişiyor. Bu klinik durumla ilgili en olası mekanizma aşağıdakilerden hangisidir?",
+      "options": [
+        "Plazma kolinesteraz enziminin genetik eksikliği",
+        "Reseptör sonrası sodyum kanallarının sürekli açık kalması",
+        "İskelet kasındaki sarkoplazmik retikulumdan kontrolsüz kalsiyum salınımı",
+        "Sinaptik aralıkta asetilkolin miktarının aşırı artışı",
+        "Nikotinik reseptörlerin gama (γ) alt biriminde mutasyon"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Açıklama: Masseter spazmı, Malign Hiperterminin (MH) erken bir belirtisidir. MH, ryanodin reseptörlerindeki mutasyon sonucu sarkoplazmik retikulumdan intraselüler kalsiyumun kontrolsüz salınmasıyla karakterizedir.",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 30,
+      "question": "Aşağıdaki faktörlerden hangisi nondepolarizan kas gevşeticilerin bloğunu kuvvetlendirmez?",
+      "options": [
+        "Hipotermi",
+        "Asidoz",
+        "Hipokalemi-hipokalsemi",
+        "Hipermagnezmi",
+        "İleri yaş"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: İleri yaş",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 31,
+      "question": "Aşağıdaki nondepolarizan kas gevşeticilerden hangisinin atılımı daha çok böbrek tarafından gerçekleştirilir?",
+      "options": [
+        "Atraküryum",
+        "Sisatraküryum",
+        "Mivaküryum",
+        "Panküronyum",
+        "Roküronyum"
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: Panküronyum",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 32,
+      "question": "Halotan ve trisiklik antidepresanlarla kombine edildiğinde ventriküller üzerinde aritmojenik olduğu bildirilen nondepolarizan kas gevşetici ajandır?",
+      "options": [
+        "Atraküryum",
+        "Sisatraküryum",
+        "Panküronyum",
+        "Veküronyum",
+        "Roküronyum"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: Panküronyum",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 33,
+      "question": "Aşağıdaki hastalıklardan hangisi nondepolarizan kas gevşetici bloğa karşı direnç oluşturmaz?",
+      "options": [
+        "Yanık",
+        "Serebral palsi",
+        "Tetanoz",
+        "Botulizm",
+        "Guillain-Barre sendromu"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: Guillain-Barre sendromu",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 34,
+      "question": "68 yaşında erkek hasta, robotik prostatektomi operasyonu sonunda roküronyum etkisinin geri çevrilmesi için 2 mg/kg sugammadeks alıyor. Beş dakika sonra hastada şiddetli hipotansiyon, bronkospazm ve generalize ürtiker gelişiyor. Bu tablodan sorumlu olan temel mekanizma nedir?",
+      "options": [
+        "Muskarinik reseptörlerin aşırı uyarılması",
+        "Sugammadeks molekülüne karşı gelişen Tip 1 hipersensitivite reaksiyonu",
+        "Plazma kolinesteraz aktivitesinin ani inhibisyonu",
+        "Magnezyum iyonlarının kalsiyum kanallarını bloke etmesi",
+        "Serbest roküronyum miktarının ani artışı"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Açıklama: Sugammadeks, nadir de olsa ciddi anafilaksiye yol açabilir. Bu tablo, sugammadeks-roküronyum kompleksine veya ilacın kendisine karşı gelişen IgE aracılı bir reaksiyondur.",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 35,
+      "question": "Aşağıdakilerden hangisi depolarizan bloğu uzatırken nondepolarizan bloğun azalmasına neden olur?",
+      "options": [
+        "Kolinesteraz inhibitörleri",
+        "Magnezzyum",
+        "Kalsiyum kanal blokerleri",
+        "Kinidin",
+        "Lokal anestezikler"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: Kolinesteraz inhibitörleri",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 36,
+      "question": "Nöromüsküler monitörizasyonda \"Double Burst Stimülasyon (DBS)\"un temel klinik avantajı nedir?",
+      "options": [
+        "Derin blokun seviyesini ölçmek",
+        "Post-tetanik güçlenmeyi tetiklemek",
+        "Rezidüel bloğu manuel olarak fark etmeyi kolaylaştırmak",
+        "Diyaframın kasılma gücünü ölçmek",
+        "Sugammadeks dozunu hesaplamak"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Açıklama: DBS, manuel (el ile) yapılan muayenede TOF’a göre rezidüel bloğu (sönmeyi) fark etmede daha duyarlıdır.",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 37,
+      "question": "Aşağıdaki ilaçlardan hangisi psödokolinesteraz enzim aktivitesini azaltmaz?",
+      "options": [
+        "Ekotiofat",
+        "Neostigmin",
+        "Siklofosfamid",
+        "Metoklopramid",
+        "Metoprolol"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: Metoprolol",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 38,
+      "question": "65 yaşında, bilinen koroner arter hastalığı olan bir hastada, anestezik yönetim sırasında taşikardiden kaçınılması hedeflenmektedir. Bu hastada aşağıdaki ajanlardan hangisinin kullanımı, belirgin \"vagolitik\" etkisi ve sempatik sinir sistemi uyarımı nedeniyle kalp hızını artırarak miyokardiyal iskemi riskini tetikleyebilir?",
+      "options": [
+        "Veküronyum",
+        "Panküronyum",
+        "Sisatraküryum",
+        "Roküronyum",
+        "Süksinilkolin"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Açıklama: Panküronyum, hem muskarinik reseptörler üzerindeki vagolitik etkisi hem de sempatik sinir uçlarından norepinefrin salınımını artırması nedeniyle belirgin taşikardi ve hipertansiyona neden olabilir.",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 39,
+      "question": "Atraküryum için verilen bilgilerden hangisi yanlıştır?",
+      "options": [
+        "Fizyolojik pH ve sıcaklıkta kendiliğinden enzimatik olmayan bir kimyasal parçalanma (Hofmann Eliminasyonu) meydana gelir.",
+        "Doza bağlı bir histamin salınımını tetikler.",
+        "Hipotansiyon veTaşikardi yapabilir",
+        "Bronkospazm yapabilir.",
+        "Oda sıcaklığında, potensini korumak için 2 ay içinde kullanılmalıdır."
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: Oda sıcaklığında, potensini korumak için 2 ay içinde kullanılmalıdır.",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 40,
+      "question": "\"Pre-kürarizasyon\" (fasikülasyonları önlemek için düşük doz non-depolarizan kullanımı) sonrası süksinilkolin dozu nasıl revize edilmelidir?",
+      "options": [
+        "Değiştirilmemelidir",
+        "%20-30 oranında azaltılmalıdır",
+        "%50-100 oranında artırılmalıdır",
+        "Sadece çocuklarda doz artırılmalıdır",
+        "Antikolinesteraz ile kombine edilmelidir"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Açıklama: Non-depolarizan ajanlar, süksinilkolin ile kompetitif yarışmaya gireceği için, etkin bir blok sağlamak amacıyla süksinilkolin dozu artırılmalıdır (genellikle 1.5-2 mg/kg).",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 41,
+      "question": "Aşağıda verilen nondepolarizan kas gevşeticilerden hangisi/hangileri vagal blok nedeni ile taşikardiye neden olur? Panküronyum Roküronyum Veküronyum Atraküryum Sisatraküryum",
+      "options": [
+        "Yalnız I",
+        "I-II",
+        "I-II-III",
+        "I-II-III-IV",
+        "I-II-III-IV-V"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: I-II",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 42,
+      "question": "Trakeal entübasyon için en ideal koşulların sağlanması amacıyla nöromüsküler monitörizasyon hangi kas grubundan yapılmalıdır?",
+      "options": [
+        "Adduktor pollicis (Ulnar sinir).",
+        "Orbikülaris okuli (Fasiyal sinir).",
+        "Flexor hallucis brevis (Posterior tibial sinir).",
+        "Gastroknemius kası.",
+        "Diyafram."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Açıklama: Larinks kasları ve diyaframın blokaj seviyesi, fasiyal kaslara (orbikülaris okuli veya m. corrugator supercilii) ulnar sinir bölgesinden daha çok benzer. Bu nedenle entübasyon zamanlaması için fasiyal sinir monitörizasyonu, cerrahi bitimi (ekstübasyon) için ise ulnar sinir monitörizasyonu önerilir.",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 43,
+      "question": "25 yaşında bir hasta, elektif cerrahi sonrası neostigmin ve atropin ile uyandırılıyor. Ancak hasta kısa süre sonra hipersalivasyon, bradikardi ve karın ağrısından şikayet ediyor. Bu yan etkilerin nedeni nedir?",
+      "options": [
+        "Atropin dozunun yetersiz kalması sonucu muskarinik reseptör aktivasyonu",
+        "Neostigminin nikotinik reseptörleri aşırı uyarması",
+        "Sugammadeksin doz aşımı",
+        "Hastada gizli feokromositoma varlığı",
+        "Psödokolinesteraz enziminin aşırı çalışması"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Açıklama: Neostigmin sadece NM kavşaktaki değil, tüm vücuttaki ACh miktarını artırır. Eğer beraberinde verilen antikolinerjik (atropin) doz olarak yetersiz kalırsa, parasempatik (muskarinik) yan etkiler (bradikardi, salivasyon vb.) baskın hale gelir.",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 44,
+      "question": "Aşağıdaki hastalıklardan hangisi depolarizan kas gevşetici bloğa karşı direnç oluşturur?",
+      "options": [
+        "Miyastenia gravis",
+        "Otoimmün bozukluk",
+        "Serebral palsi",
+        "Miyastenik sendrom",
+        "SLE"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: Miyastenia gravis",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 45,
+      "question": "Aşağıdakilerden hangisi süksinilkoline bağlı hiperkalemi riski taşıyan durumlardan biri değildir?",
+      "options": [
+        "2 haftalık yanık",
+        "1 aylık üst motor nöron hasarı",
+        "Duchenne müsküler distrofi",
+        "Parkinson hastalığı",
+        "Şiddetli intraabdominal enfeksiyon"
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "Açıklama: Parkinson hastalığında ekstrajunksiyonel reseptör artışı ve süksinilkolin hiperkalemisi bildirilmemiştir.",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 46,
+      "question": "Yoğun bakımda uzun süreli mekanik ventilasyon ve roküronyum infüzyonu alan bir hastada, kas gevşeticinin kesilmesine rağmen derin kas güçsüzlüğünün devam etmesi en iyi ne ile açıklanır?",
+      "options": [
+        "Nikotinik reseptör up-regülasyonu",
+        "\"Kritik hastalık miyopatisi\" ve aktif metabolit birikimi",
+        "Psödokolinesteraz enziminin aşırı aktivasyonu",
+        "Kan-beyin bariyerinin steroidal ajanlara geçirgenleşmesi",
+        "Hipomagnezemiye bağlı direnç"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Açıklama: Uzun süreli steroidal kas gevşetici (veküronyum, roküronyum) kullanımı, özellikle kortikosteroidlerle kombine edildiğinde uzun süreli kas güçsüzlüğüne ve miyopatiye yol açabilir.",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 47,
+      "question": "Laudanozin için verilen bilgilerden hangisi yanlıştır?",
+      "options": [
+        "Atraküryumun Hofmann eliminasyonunun bir parçalanma ürünüdür.",
+        "Nöbetlerin presipitasyonu ile sonuçlanan merkezi sinir sistemi uyarımı ile ilişkilendirilmiştir.",
+        "Laudanozin karaciğer tarafından metabolize edilir.",
+        "İdrar ve safra ile atılır.",
+        "Quaterner amin yapısındadır."
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: Quaterner amin yapısındadır.",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 48,
+      "question": "Gebelik nedeniyle psödokolinesteraz aktivitesi %25 oranında azalmış bir hastada süksinilkolin kullanımı sonrası aşağıdakilerden hangisinin gerçekleşmesi beklenir?",
+      "options": [
+        "Etki başlangıç süresinin klinik olarak anlamlı kısalması",
+        "Klinik etki süresinde (apne) belirgin bir değişiklik olmaması",
+        "Faz II blok gelişme riskinin tamamen ortadan kalkması",
+        "Dibukain sayısının otomatik olarak 20’ye düşmesi",
+        "İlacın Hofmann eliminasyonu ile yıkılmaya başlanması"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Açıklama: Plazma kolinesteraz aktivitesi ancak %75 ve üzerinde azaldığında süksinilkolinin klinik etki süresi anlamlı derecede uzar; gebelik ve karaciğer hastalığındaki hafif düşüşler genellikle klinik süreyi değiştirmez.",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 49,
+      "question": "Nöromüsküler kavşakta \"ekstrajunksiyonel\" (fetal tip) nikotinik reseptörlerin up-regülasyonu ile ilgili aşağıdakilerden hangisi yanlıştır?",
+      "options": [
+        "Bu reseptörler γ (gama) alt birimi içerir.",
+        "Süksinilkolin ile uyarıldıklarında iyon kanalları normal reseptörlere göre daha uzun süre açık kalır.",
+        "Alt motor nöron hasarı veya yanık sonrası ilk 24 saat içinde klinik olarak anlamlı sayıya ulaşırlar.",
+        "Bu reseptörlerin artışı, non-depolarizan ajanlara karşı bir \"direnç\" oluşturur.",
+        "Süksinilkolin uygulandığında masif potasyum deşarjından sorumludurlar."
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Açıklama: Ekstrajunksiyonel reseptörlerin klinik olarak anlamlı seviyeye ulaşması ve süksinilkolin sonrası hiperkalemi riski oluşturması için genellikle travma veya denervasyon üzerinden en az 48-72 saat geçmesi gerekir; ilk 24 saatte süksinilkolin kullanımı genellikle güvenli kabul edilir.",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 50,
+      "question": "Bir yoğun bakım hastasında 5 gündür devam eden mekanik ventilasyon ve atraküryum infüzyonu sonrası hastada yeni gelişen jeneralize nöbetler gözleniyor. Hastanın laboratuvarında kreatinin düzeyi 3.5 mg/dL saptanıyor. Bu durumdan sorumlu olan metabolit hangisidir?",
+      "options": [
+        "Dibukain",
+        "Psödokolinesteraz",
+        "Laudanozin",
+        "Süksinilmonokolin",
+        "Neostigmin"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Açıklama: Atraküryumun Hofmann eliminasyonu sonucu oluşan laudanozin, merkezi sinir sistemi uyarımı yaparak nöbet eşiğini düşürür. Böbrek yetmezliğinde klirensi azaldığı için birikme riski artar.",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 51,
+      "question": "Nondepolarizan kas gevşetici ajanlar depolarizan kas gevşetici ajanlar üzerinde nasıl bir etki oluşturur?",
+      "options": [
+        "Faz I-Faz II uzar",
+        "Faz I-Faz II kısalır",
+        "Faz I kısalır -Faz II uzar",
+        "Etkilemez",
+        "Faz I uzar-Faz II kısalır"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: Faz I kısalır -Faz II uzar",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 52,
+      "question": "Nöromusküler blokerler için ED50 ne demektir?",
+      "options": [
+        "Bireylerin %50’sinde %95 twich (seğirme) depresyonu yapan dozdur.",
+        "Herhangi bir ilacın ED95’i, bir ilacın bireylerin %95’inde etkili olan dozudur.",
+        "Bireylerin %95’inde kas hareketsizliği sağlayan dozdur.",
+        "Bireylerin %95’inde güvenle kullanılabilecek dozdur.",
+        "Bir ilacın bireylerin %50’sinde etkili olan dozudur."
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: Bireylerin %50’sinde %95 twich (seğirme) depresyonu yapan dozdur.",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 53,
+      "question": "Fasikülasyonları ve miyaljiyi önlemek için, süksinilkolinden 5 dk. önce nondepolarizan kas gevşeticinin entübasyon dozunun ne kadarı uygulanabilir?",
+      "options": [
+        "%5-10",
+        "%10-15",
+        "%15-20",
+        "%20-25",
+        "%25-30"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: %10-15",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 54,
+      "question": "Süksinilkolin \"apnesi\" (uzamış blok) gelişen bir hastada kesin tanı için hangi test kullanılmalıdır?",
+      "options": [
+        "Kreatin kinaz düzeyi",
+        "Dibukain sayısı ölçümü",
+        "Karaciğer enzim testleri",
+        "TOF sayımı",
+        "EEG"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Açıklama: Dibukain sayısı, plazma kolinesterazının genetik olarak atipik olup olmadığını gösteren bir testtir.",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 55,
+      "question": "Nöromusküler bloğun geri döndürülmesi aşağıdaki faktörlerden hangisi/hangilerine bağlıdır? Reseptörün bağının çözülmesine Gevşeticinin redistribüsyonuna Metabolize edilmesine ve atılmasına Asetilkolinesteraz enzim aktivitesini inhibe eden spesifik geri çevirici ajanların uygulanmasına",
+      "options": [
+        "Yalnız II",
+        "Hepsi",
+        "I-III",
+        "II-IV",
+        "I-II-IV"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: Hepsi",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 56,
+      "question": "24 yaşında erkek hasta, acil laparotomi için süksinilkolin ile entübe ediliyor. Cerrahi bitiminde nöromüsküler monitörizasyonda TOF cevabında belirgin \"fade\" (sönme) ve post-tetanik güçlenme izleniyor. Bu tablo aşağıdakilerden hangisiyle en iyi açıklanır?",
+      "options": [
+        "Psödokolinesteraz eksikliğine bağlı uzamış Faz I blok",
+        "Normal beklenen süksinilkolin yanıtı",
+        "Süksinilkolin dozuna bağlı gelişen Faz II blok",
+        "Hastada eşlik eden gizli Miyastenia Gravis",
+        "Eş zamanlı magnezyum infüzyonu"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Açıklama: Süksinilkolin normalde sönme (fade) yapmaz. Ancak yüksek dozlarda (genellikle >2-4 mg/kg) veya infüzyon sonrası reseptör duyarsızlaşması ile non-depolarizan benzeri bir tablo olan Faz II blok gelişir; bu durumda sönme ve post-tetanik güçlenme görülür.",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 57,
+      "question": "Ağır karaciğer yetmezliği ve eş zamanlı akut böbrek hasarı (multiorgan yetmezliği) olan bir hastada, birikme riski en düşük olan ve eliminasyonu organ fonksiyonlarından tamamen bağımsız olan kas gevşetici hangisidir?",
+      "options": [
+        "Veküronyum",
+        "Roküronyum",
+        "Atraküryum",
+        "Sisatraküryum",
+        "Panküronyum"
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "Açıklama: Sisatraküryum, organ fonksiyonlarından bağımsız olan Hofmann eliminasyonu ile temizlenir. Atraküryum da bu yolu kullanır ancak sisatraküryum daha potenttir ve histamin salınımı yapmadığı için bu tip kritik hastalarda daha çok tercih edilir.",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 58,
+      "question": "Aşağıdaki ajanalardan hangisi/hangileri steroid yapıdadır? Panküronyum Roküronyum Veküronyum Atraküryum Sisatraküryum",
+      "options": [
+        "I-II-III",
+        "I-IV-V",
+        "IV-V",
+        "I-III-V",
+        "Hepsi"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: I-II-III",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 59,
+      "question": "Nöromüsküler İletim için verilen bilgilerden hangisi yanlıştır?",
+      "options": [
+        "Voltaj kapılı kalsiyum kanallarından nöron sitoplazmasına kalsiyum iyonlarının akışı olur ve depolama veziküllerinin terminal plazma zarı ile kaynaşmasına ve içeriklerini [asetilkolin (ACh)] serbest bırakmasına izin verilir.",
+        "ACh molekülleri, kas zarının özel bir kısmına, motor son plak (end plate)’ta nikotinik kolinerjik reseptörlere bağlanırlar.",
+        "Her nöromusküler kavşakta bu reseptörlerden yaklaşık 5 milyon tane bulunur, ancak normal kas kasılması için sadece yaklaşık 500.000 reseptörün aktivasyonu gereklidir.",
+        "Nöromüsküler bileşkedeki her ACh reseptörü, normalde beş protein alt biriminden oluşur: 2 alt ünitesi ve birer , , alt üniteleri.",
+        "Sadece alt birimi ACh moleküllerini bağlayabilir."
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: Nnöromusküler bileşkedeki her ACh reseptörü, normalde beş protein alt biriminden oluşur: 2 alt ünitesi ve birer , , alt üniteleri.",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 60,
+      "question": "Hofmann eliminasyonuna uğrayan nondepolarizan kas gevşetici ajanlar hangileridir?",
+      "options": [
+        "Atraküryum-sisatraküryum",
+        "Atraküryum-mivaküryum",
+        "Sisatraküryum-mivaküryum",
+        "Atraküryum-veküronyum",
+        "Sistraküryum-veküronyum"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: Atraküryum-sisatraküryum",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 61,
+      "question": "Süksinilkolin sonrası gelişen şiddetli bradikardinin profilaksi veya tedavisinde ilk seçenek hangisidir?",
+      "options": [
+        "Adrenalin",
+        "Atropin",
+        "Efedrin",
+        "Neostigmin",
+        "Kalsiyum glukonat"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Açıklama: Süksinilkolin kaynaklı bradikardi muskarinik uyarım sonucudur; antikolinerjik olan atropin ile önlenir veya tedavi edilir.",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 62,
+      "question": "Miyastenia Gravisli bir hastada nöromüsküler bloker yönetimi için hangisi yanlıştır?",
+      "options": [
+        "Süksinilkoline karşı direnç görülür.",
+        "Non-depolarizan ajanlara karşı aşırı duyarlılık görülür.",
+        "Piridostigmin tedavisi plazma kolinesterazını inhibe edebilir.",
+        "Antikolinesteraz verilerek blok geri çevrilemez.",
+        "Non-depolarizan dozları normalin 1/10'u kadar düşük tutulmalıdır."
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "Açıklama: Bu hastalarda blok neostigmin gibi ajanlarla geri çevrilebilir; ancak dozlama ve duyarlılık farkları kritiktir.",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 63,
+      "question": "Aşağıdaki ajanlardan hangisi klorofumarat kimyasal yapısında bir nondepolarizan kas gevşeticidir?",
+      "options": [
+        "Roküronyum",
+        "Veküronyum",
+        "Panküronyum",
+        "Atraküryum",
+        "Gantaküryum"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: Gantaküryum",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 64,
+      "question": "Aşağıdaki ajanalardan hangileri psödokolinesteraz tarafından metabolize edilir?",
+      "options": [
+        "Atraküryum-süksinilkolin",
+        "Süksinilkolin-mivaküryum",
+        "Sisatraküryum-mivaküryum",
+        "Süksinilkolin-sisatraküryum",
+        "Süksinilkolin-veküronyum"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: Süksinilkolin-mivaküryum",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 65,
+      "question": "Aşağıdaki ajanlardan hangisi nondepolarizan kas gevşetici ihtiyacını en aza indirir?",
+      "options": [
+        "Desfluran",
+        "Sevofluran",
+        "N2O",
+        "Halotan",
+        "TİVA (total intravenöz anestezi)"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: Desfluran",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 66,
+      "question": "Süksinilkolin kullanımı sonrası görülen \"masseter spazmı\" ile ilgili en riskli durum hangisidir?",
+      "options": [
+        "Psödokolinesteraz eksikliği",
+        "Malign Hipertermi (MH) duyarlılığı",
+        "Myastenia Gravis varlığı",
+        "Eaton-Lambert Sendromu",
+        "Akut böbrek yetmezliği"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Açıklama: İzole masseter spazmı her zaman MH anlamına gelmese de, çocuklarda MH'nin en spesifik erken işaretlerinden biridir.",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 67,
+      "question": "Aşağıdakilerden hangisi nondepolarizan bloğa direnç gelişimine neden olur?",
+      "options": [
+        "Dantrolen",
+        "Antiaritmikler",
+        "İnhalasyon anestezikleri",
+        "Ketamin",
+        "Antikonvülzanlar"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: Antikonvülzanlar",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 68,
+      "question": "Nöromüsküler blokerlerin eliminasyon yolları düşünüldüğünde, plazma kolinesterazı (psödokolinesteraz) tarafından hidroliz edilerek metabolize edilen tek non-depolarizan ajan aşağıdakilerden hangisidir?",
+      "options": [
+        "Atraküryum",
+        "Roküronyum",
+        "Mivaküryum",
+        "Veküronyum",
+        "Sisatraküryum"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Açıklama: Mivaküryum, kısa etkili bir non-depolarizan ajandır ve süksinilkolin gibi plazma kolinesterazı ile metabolize edilir. Bu nedenle psödokolinesteraz eksikliği olanlarda etkisi uzar.",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 69,
+      "question": "Yoğun bakım ünitesinde akut solunum sıkıntısı nedeniyle 4 gündür atraküryum infüzyonu alan bir böbrek yetmezliği hastasında jeneralize tonik-klonik nöbetler gözleniyor. Bu tablonun en olası nedeni aşağıdakilerden hangisidir?",
+      "options": [
+        "İlaca bağlı direkt nörotoksisite",
+        "Plazma kolinesteraz aktivitesinin artması",
+        "Atraküryumun metaboliti olan \"Laudanozin\" birikimi",
+        "Akut hiponatremi gelişimi",
+        "Süreçte gelişen hipermagnezemi"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Açıklama: Atraküryumun Hofmann eliminasyonu ve ester hidrolizi sonucu oluşan metaboliti olan laudanozin, merkezi sinir sistemi uyarıcı etkisine sahiptir. Böbrek yetmezliğinde birikebilir ve uzun süreli infüzyonlarda nöbet eşiğini düşürebilir.",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 70,
+      "question": "Roküronyum için verilen bilgilerden hangisi yanlıştır?",
+      "options": [
+        "Veküronyumun monokuaterner steroid analoğudur.",
+        "Roküronyum metabolizmaya uğramaz ve öncelikle karaciğer ve az miktarda böbrekler tarafından elimine edilir.",
+        "Yaşlı yetişkin hastalarda karaciğer kütlesinin azalması nedeniyle etki süresi uzayabilir.",
+        "Roküronyum (0.9-1.2 mg/kg dozunda) süksinilkoline (60-90 sn) yaklaşan bir etki başlangıcına sahiptir.",
+        "Güçlü vagolitik eğilime sahiptir."
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: Güçlü vagolitik eğilime sahiptir.",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 71,
+      "question": "Sugammadeks uygulaması sonrası nadir görülen ancak hayati önem taşıyan \"bradikardi\" yan etkisi ile ilgili hangisi doğrudur?",
+      "options": [
+        "Sadece yaşlı hastalarda görülür.",
+        "Uygulamadan 1 saat sonra ortaya çıkan geç bir komplikasyondur.",
+        "Genellikle yüksek doz (16 mg/kg) uygulamalarda daha belirgindir.",
+        "Muskarinik reseptörlerin doğrudan uyarılmasıyla oluşur.",
+        "Atropine dirençlidir, sadece adrenalinle düzelir."
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Açıklama: Sugammadeks sonrası bradikardi, genellikle ilacın verilmesini takip eden ilk dakikalarda görülür ve özellikle yüksek dozlarda (acil reversiyon dozları gibi) riski daha fazladır. Ciddi olgularda asistoli bildirilmiştir.",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 72,
+      "question": "Aşağıdaki hastalıklardan hangisi nondepolarizan kas gevşetici bloğa karşı direnç oluşturmaz?",
+      "options": [
+        "Periferik sinir hasarı",
+        "Hemipleji",
+        "Yanık",
+        "Serebral palsi",
+        "Miyastenia gravis"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: Miyastenia gravis",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 73,
+      "question": "Nöromusküler Bloke Edici Ajanlar için verilen bilgilerden hangisi yanlıştır?",
+      "options": [
+        "Depolarizan kas gevşeticilerasetilkolin (ACh) reseptör agonistleri olarak işlev görürken, nondepolarizan kas gevşeticiler kompetitif antagonistler olarak işlev görür.",
+        "Depolarizan kas gevşeticiler karaciğerde bulunan psödokolinesteraz (spesifik olmayan kolinesteraz, plazma kolinesteraz veya bütirilkolinesteraz) tarafından hidrolize edilirler.",
+        "Kas gevşeticiler paralitik özelliklerini ACh'i taklit etmelerine borçludur.",
+        "Süksinilkolin çocukların ve ergenlerin rutin yönetiminde göreceli olarak kontrendike kabul edilir.",
+        "Normal kas, süksinilkolin kaynaklı depolarizasyon sırasında serum potasyumunu 1 mEq/L yükseltecek miktarda potasyum salar."
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Doğru cevap: Normal kas, süksinilkolin kaynaklı depolarizasyon sırasında serum potasyumunu 1 mEq/L yükseltecek miktarda potasyum salar.",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 74,
+      "question": "Nöromüsküler monitörizasyonda izlenen \"Fade\" (sönme) fenomeninin temel patofizyolojik mekanizması aşağıdakilerden hangisidir?",
+      "options": [
+        "Post-sinaptik nikotinik reseptörlerin tamamen duyarsızlaşması.",
+        "Pre-sinaptik nikotinik reseptörlerin blokajı nedeniyle ACh salınımının azalması.",
+        "Asetilkolinesteraz enziminin aşırı aktivasyonu.",
+        "Kalsiyum kanallarının voltaj duyarlılığını kaybetmesi.",
+        "Magnezyum iyonlarının magnezyum tıkacı oluşturması."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Açıklama: Normalde pre-sinaptik nikotinik reseptörler, yüksek frekanslı uyarım sırasında ACh salınımını mobilize eden bir pozitif geri bildirim (feed-forward) mekanizmasıdır. Non-depolarizan ajanlar bu pre-sinaptik reseptörleri bloke ettiğinde, seri uyarılar sırasında ACh salınımı sürdürülemez ve \"fade\" (sönme) görülür.",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 75,
+      "question": "Bir hastada süksinilkolin sonrası apne (solunum durması) süresi 4 saat uzuyor. Dibukain sayısı 20 olarak saptanıyor. Bu sonuç neyi ifade eder?",
+      "options": [
+        "Hastada normal (homozigot) enzim vardır.",
+        "Hasta heterozigot atipik enzim taşıyıcısıdır.",
+        "Hasta homozigot atipik enzim taşımaktadır ve enzim fonksiyonu düşüktür.",
+        "Dibukain sayısının apne süresiyle ilişkisi yoktur.",
+        "Hastada aşırı miktarda psödokolinesteraz üretimi vardır."
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Açıklama: Normal dibukain sayısı 80'dir. Dibukain sayısı 20, enzimin dibukain tarafından inhibe edilemediğini, yani genetik olarak \"atipik\" olduğunu gösterir. Homozigot atipik hastalarda süksinilkolin etkisi saatlerce uzayabilir.",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 76,
+      "question": "70 yaşında, ağır böbrek yetmezliği olan bir hastada roküronyumun etkisini geri çevirmek için en uygun ajan hangisidir?",
+      "options": [
+        "Neostigmin (Atropin ile birlikte)",
+        "Edrofonyum",
+        "Sugammadeks",
+        "Piridostigmin",
+        "Reversiyon ajanı kullanmadan beklemek"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Açıklama: Sugammadeks, böbrek yetmezliğinde bile roküronyumu bağlayarak etkisini hızla sonlandırır. Her ne kadar kompleksin atılımı böbrek yoluyla olsa da, ilacın geri çevirme hızı böbrek fonksiyonlarından bağımsızdır. Ancak çok ağır vakalarda diyaliz gerekebilir.",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    },
+    {
+      "id": 77,
+      "question": "Travma sonrası 10 gündür yoğun bakımda yatan ve her iki bacağında komplet parapleji olan hastada, cerrahi debridman için süksinilkolin kullanılıyor. Entübasyon sonrası hastada ani ventriküler fibrilasyon gelişiyor. Bu kardiyak arrestin en muhtemel nedeni nedir?",
+      "options": [
+        "Akut miyokard enfarktüsü",
+        "Hipermagnezemi",
+        "Şiddetli hipokalsemi",
+        "Ekstrajunksiyonel reseptörlere bağlı hiperkalemi",
+        "Malign hipertermi"
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "Açıklama: Denervasyon (parapleji) sonrası 48-72 saat içinde kaslarda fetal tip (ekstrajunksiyonel) reseptörler artar. Süksinilkolin bu reseptörleri uyardığında hücre dışına masif potasyum çıkışı olur ve bu da fatal aritmilere yol açar.",
+      "category": "Nöromüsküler Bloke Edici Ajanlar"
+    }
+  ]
+}

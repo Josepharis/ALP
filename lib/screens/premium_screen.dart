@@ -101,11 +101,11 @@ class _PremiumScreenState extends State<PremiumScreen> with TickerProviderStateM
           context: context,
           builder: (context) => AlertDialog(
             backgroundColor: const Color(0xFF1A237E),
-            title: const Row(
+            title: Row(
               children: [
-                Icon(Icons.warning_amber_rounded, color: Colors.orange, size: 28),
-                SizedBox(width: 8),
-                Text('Abonelik Başka Hesaba Ait', style: TextStyle(color: Colors.white)),
+                const Icon(Icons.warning_amber_rounded, color: Colors.orange, size: 28),
+                const SizedBox(width: 8),
+                Text(AppLocalizations.of(context)!.subscriptionBelongsToAnotherAccount, style: const TextStyle(color: Colors.white)),
               ],
             ),
             content: Text(
@@ -240,7 +240,7 @@ class _PremiumScreenState extends State<PremiumScreen> with TickerProviderStateM
         setState(() => _isProcessingPurchase = false);
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('İşlem uzadı. Premium açıldıysa sayfayı kapatıp tekrar açın veya "Satın Alımları Geri Yükle" deneyin.'),
+            content: Text(AppLocalizations.of(context)!.processTimeoutPremium),
             backgroundColor: Colors.orange,
             duration: const Duration(seconds: 4),
           ),
@@ -759,7 +759,7 @@ class _PremiumScreenState extends State<PremiumScreen> with TickerProviderStateM
           // Ürün yüklenmemiş, uyarı göster
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text('Ürün yükleniyor, lütfen birkaç saniye bekleyin...\nProduct ID: $productId'),
+              content: Text(AppLocalizations.of(context)!.productLoadingWait(productId)),
               backgroundColor: Colors.orange,
               duration: const Duration(seconds: 3),
             ),
@@ -1180,7 +1180,7 @@ class _PremiumScreenState extends State<PremiumScreen> with TickerProviderStateM
         });
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Satın alma başlatılamadı'),
+            content: Text(AppLocalizations.of(context)!.purchaseFailed),
             backgroundColor: Colors.orange,
             duration: const Duration(seconds: 2),
           ),

@@ -25,144 +25,141 @@ class CholinesteraseInhibitorsCategory {
 }
 
 class CholinesteraseInhibitorsData {
-  static List<CholinesteraseInhibitorsCategory> getCholinesteraseInhibitorsData(BuildContext context) {
+  static List<CholinesteraseInhibitorsCategory> getCholinesteraseInhibitorsData(
+    BuildContext context,
+  ) {
     return [
       CholinesteraseInhibitorsCategory(
         categoryName: 'Genel Kolinerjik Farmakoloji',
         items: [
           CholinesteraseInhibitorsItem(
-            title: 'Temel Prensipler',
-            description: 'Kolinerjik = adrenerjik etkilerin tersi',
-            subtitle: 'Sentez: Asetil-KoA + Kolin → Asetilkolin (kolin asetiltransferaz ile)',
-            additionalInfo: 'Yıkım: Asetilkolin → Kolin + Asetat (AChE ile)',
+            title: "TEMEL ANTİADRENERJİK PRENSİPLER",
+            description: "Kolinerjik sistem, vücutta genellikle adrenerjik (sempatik) etkilerin tam tersi yönünde fonksiyon gösteren parasempatik sistemi yönetir.",
+            additionalInfo: "Dinlenme ve sindirme (rest and digest) durumlarını kontrol eder. Kalp hızını yavaşlatır, salgıları artırır ve sindirimi hızlandırır. Anestezide bu etkiler genellikle istenmeyen yan etkiler olarak karşımıza çıkar ve yönetilmesi gerekir.",
           ),
           CholinesteraseInhibitorsItem(
-            title: 'Ach Salgısı',
-            description: 'Tüm parasempatik, bazı sempatik (ganglion, adrenal medulla, ter bezi), SSS, iskelet kası',
+            title: "ASETİLKOLİN SENTEZ VE YIKIM DÖNGÜSÜ",
+            description: "Asetilkolin (Ach), sinir uçlarında kolin asetiltransferaz enzimiyle sentezlenir ve asetilkolinesteraz (AChE) ile hızla parçalanır.",
+            subtitle: "Sentez: Asetil-KoA + Kolin → Asetilkolin",
+            additionalInfo: "AChE enzimi doğadaki en hızlı çalışan enzimlerden biridir; Ach molekülünü kolin ve asetata parçalayarak sinyal iletimini milisaniyeler içinde sonlandırır. Kolinesteraz inhibitörleri işte bu yıkım aşamasını bloke ederek ortamdaki Ach miktarını artırır.",
           ),
           CholinesteraseInhibitorsItem(
-            title: 'Reseptörler',
-            description: 'Nikotinik → ganglion, iskelet kası',
-            subtitle: 'Muskarinik → bronş, tükrük bezi, SA nod',
-            additionalInfo: 'KBB: hem nikotinik hem muskarinik reseptör var',
+            title: "SALGILANMA BÖLGELERİ VE SİSTEMLER",
+            description: "Ach; tüm parasempatik sinir uçlarında, sempatik ganglionlarda, adrenal medullada ve iskelet kası motor uç plağında temel mediyatördür.",
+            additionalInfo: "İstisna olarak ter bezleri sempatik sistem kontrolünde olmasına rağmen Ach ile uyarılırlar. Ayrıca merkezi sinir sisteminde (SSS) bilişsel fonksiyonlar ve bellek üzerinde kritik rolleri vardır.",
           ),
           CholinesteraseInhibitorsItem(
-            title: 'Klinik Ajanlar',
-            description: 'Metakolin → astım provokasyon testi',
-            subtitle: 'Betanekol → geniş açılı glokom',
-          ),
-        ],
-      ),
-      CholinesteraseInhibitorsCategory(
-        categoryName: 'Etki Mekanizması',
-        items: [
-          CholinesteraseInhibitorsItem(
-            title: 'Kolinesteraz İnhibitörleri',
-            description: 'Organofosfatlar → AChE ile irreversibl bağ',
-            subtitle: 'Karbamatlar (neostigmin, pridostigmin, fizostigmin) → reversibl',
+            title: "NİKOTİNİK VE MUSKARİNİK RESEPTÖRLER",
+            description: "Kolinerjik reseptörler, yerleşim yerlerine ve bağlandıkları ajanlara göre Nikotinik ve Muskarinik olarak ikiye ayrılırlar.",
+            subtitle: "Nikotinik: Ganglion ve iskelet kası; Muskarinik: Kalp, düz kas ve bezler",
+            additionalInfo: "• Nikotinik Reseptörler: Hızlı iyon kanalları üzerinden çalışır.\n• Muskarinik Reseptörler: G-proteini üzerinden yavaş etki gösterir. M1 nöronal, M2 kardiyak (SA nod), M3 ise bezler ve bronşlarda yoğunlaşmıştır. Kan-beyin bariyeri (KBB) her iki reseptör tipini de içerir.",
           ),
           CholinesteraseInhibitorsItem(
-            title: 'Myastenia Gravis',
-            description: 'Tanı (edrofonyum) & tedavi (neostigmin, pridostigmin)',
-          ),
-          CholinesteraseInhibitorsItem(
-            title: 'Depolarizan Blok',
-            description: 'SC: kolinesteraz inhibitörleri ile uzar',
-            subtitle: 'Neostigmin/pridostigmin: psödokolinesterazı sınırlı bloke eder',
-            additionalInfo: 'Edrofonyum: çok az ya da hiç etkilemez',
+            title: "KLİNİK TANI VE TEST AJANLARI",
+            description: "Bazı kolinerjik ilaçlar, hastalıkların teşhisinde provokasyon veya tedavi amaçlı spesifik olarak kullanılırlar.",
+            additionalInfo: "• Metakolin: Astım teşhisinde havayolu duyarlılığını test etmek için provokasyon testinde kullanılır.\n• Betanekol: Geniş açılı glokom tedavisi ve GİS motilitesini artırmak için tercih edilebilir.",
           ),
         ],
       ),
       CholinesteraseInhibitorsCategory(
-        categoryName: 'Klinik Etkiler',
+        categoryName: 'Kolinesteraz İnhibitör Mekanizmaları',
         items: [
           CholinesteraseInhibitorsItem(
-            title: 'Kardiyovasküler Etkiler',
-            description: 'Muskarinik etki → bradikardi, arrest',
+            title: "İNHİBİTÖRLERİN BAĞLANMA ÖZELLİKLERİ (REVERSİBL/İRREVERSİBL)",
+            description: "AChE enzimini bloke eden ajanlar, bağın gücüne ve süresine göre kalıcı veya geçici etki gösterirler.",
+            subtitle: "Organofosfatlar irreversibl (kalıcı), Karbamatlar reversibl (geçici) bağ yapar",
+            additionalInfo: "Anestezide kas gevşetici geri çevirmede kullanılan Neostigmin, Pridostigmin ve Fizostigmin karbamat yapısındadır. Edrofonyum ise kovalent olmayan zayıf bir bağ kurarak en kısa etkili ajan ünvanını alır.",
           ),
           CholinesteraseInhibitorsItem(
-            title: 'Pulmoner Etkiler',
-            description: 'Bronkospazm, sekresyon artışı',
+            title: "MYASTENİA GRAVİS TANI VE TEDAVİSİ",
+            description: "Nöromüsküler kavşaktaki reseptör azlığı ile seyreden Myastenia Gravis hastalığında bu ajanlar hayati öneme sahiptir.",
+            subtitle: "Edrofonyum (Tanı testi) ve Neostigmin/Pridostigmin (Uzun süreli tedavi)",
+            additionalInfo: "Tensilon testi (Edrofonyum) ile hastanın kas gücünde ani bir düzelme olması tanıyı doğrular. Pridostigmin, yavaş başlangıcı ve uzun etkisi nedeniyle oral idame tedavisinde altın standarttır.",
           ),
           CholinesteraseInhibitorsItem(
-            title: 'Santral Sinir Sistemi',
-            description: 'Fizostigmin KBB\'ni geçer, yaygın aktivasyon yapar',
-          ),
-          CholinesteraseInhibitorsItem(
-            title: 'Gastrointestinal Etkiler',
-            description: 'Peristaltizm ↑, sekresyon ↑ → PONV, fekal inkontinans',
-            subtitle: 'Yan etkiler azaltma: atropin / glikoprolat',
-          ),
-          CholinesteraseInhibitorsItem(
-            title: 'Geri Dönüş Değerlendirmesi',
-            description: 'TOF & tetanik korelasyon; yüksek frekanslı stimülasyona daha duyarlı',
-            subtitle: 'Kas gücü geri gelme sırası: baş ↑ > inspirasyon gücü > VC > TV',
+            title: "DEPOLARİZAN BLOK ETKİLEŞİMİ",
+            description: "Kolinesteraz inhibitörleri, süksinilkolinin (SC) etkisini beklenenin aksine uzatırlar.",
+            additionalInfo: "Çünkü bu ilaçlar psödokolinesteraz enzimini de (sınırlı olsa da) bloke ederek SC'nin vücuttan temizlenmesini yavaşlatırlar. Bu nedenle SC sonrası blok tam dönmeden neostigmin yapılması 'faz II blok' riskini ve felç süresini artırır.",
           ),
         ],
       ),
       CholinesteraseInhibitorsCategory(
-        categoryName: 'Spesifik Ajanlar',
+        categoryName: 'Klinik Organ Sistem Etkileri',
         items: [
           CholinesteraseInhibitorsItem(
-            title: 'Neostigmin',
-            description: 'Yapı: karbamat + kuarterner amonyum (KBB geçmez)',
-            subtitle: 'Doz: 0,04–0,08 mg/kg (max 5 mg)',
-            additionalInfo: 'Başlangıç: 5–10 dk\n\nAntikolinerjik eşleştirme:\n1 mg Neo → 0,2 mg Glikoprolat\n1 mg Neo → 0,4 mg Atropin\n\nGebe: Atropin > Glikoprolat',
+            title: "KARDİYOVASKÜLER VE PULMONER ETKİLER",
+            description: "Artan Ach miktarı kalp hızını düşürür ve havayolu direncini artırarak solunumu güçleştirir.",
+            subtitle: "Muskarinik stimülasyon; bradikardi, asistoli ve yoğun bronkospazma yol açabilir",
+            additionalInfo: "Bu tehlikeli yan etkileri önlemek için kolinesteraz inhibitörleri her zaman bir antikolinerjik (Atropin veya Glikoprolat) ile kombine edilerek uygulanmalıdır.",
           ),
           CholinesteraseInhibitorsItem(
-            title: 'Pridostigmin',
-            description: 'Yapı: kuarterner amonyum + fenol',
-            subtitle: 'Doz: 0,25 mg/kg (Neo\'nun %20 potent)',
-            additionalInfo: 'Başlangıç: 10–15 dk (yavaş)\nSüre: uzun\n\n1 mg Pri → 0,05 mg Glikoprolat veya 0,1 mg Atropin\n\nGlikoprolat tercih edilir (etki başlama hızları uyumlu)',
+            title: "SANTRAL SİNİR SİSTEMİ (SSS) VE FİZOSTİGMİN",
+            description: "Ajanın kimyasal yapısı (tertiyer veya kuarterner amonyum), beyin üzerindeki etkilerini belirler.",
+            subtitle: "Fizostigmin kan-beyin bariyerini (KBB) geçen tek ajandır",
+            additionalInfo: "Kuarterner amonyum yapısındaki Neostigmin beyne giremezken, tersiyer amin yapısındaki Fizostigmin merkezi sinir sistemine hızla girer. Bu özelliğiyle 'santral antikolinerjik sendrom' tedavisinde eşsizdir.",
           ),
           CholinesteraseInhibitorsItem(
-            title: 'Edrofonyum',
-            description: 'Yapı: karbamat yok, kovalent olmayan bağ',
-            subtitle: 'Doz: 0,5–1 mg/kg',
-            additionalInfo: 'Başlangıç: 1–2 dk (en hızlı)\nSüre: en kısa\n\nMuskarinik etkisi en az\nAntikolinerjik ihtiyacı düşük (yarı doz yeterli)',
+            title: "GASTROİNTESTİNAL SİSTEM (GİS) VE YAN ETKİLER",
+            description: "Bağırsak hareketlerini (peristaltizm) ve salgıları artırarak postoperatif bulantı-kusma ve inkontinans riskini tetikler.",
+            additionalInfo: "Salgıların artışı (siyalore) ve mide boşalmasının hızlanması postoperatif konforu etkileyebilir. Modern klinik uygulamada Glikoprolat kullanımı bu etkileri minimize etmede başarılıdır.",
           ),
           CholinesteraseInhibitorsItem(
-            title: 'Fizostigmin',
-            description: 'Yapı: tertiyer amin (KBB geçer)',
-            subtitle: 'Doz: 0,01–0,03 mg/kg',
-            additionalInfo: 'Kullanım: santral antikolinerjik sendrom, volatil/BD deliryum, post-op titreme, morfin depresyonu\n\nYan etkiler: salivasyon, kusma, konvülziyon\nAtropin tercih edilebilir (daha iyi tolere edilir)',
+            title: "KAS GÜCÜ VE GERİ DÖNÜŞ DEĞERLENDİRMESİ",
+            description: "Kas gevşetici etkisinin geri dönmesi (reversal), TOF monitorizasyonu ve klinik kriterlerle titizlikle izlenmelidir.",
+            subtitle: "Kas gücü dönüş sırası: Baş kaldırma > İnspirasyon gücü > VC > TV",
+            additionalInfo: "Baş kaldırma (5 sn) ve dili dışarı çıkarma yeteneği en güvenilir klinik göstergelerdir. Tidal hacim (TV) ise duyarlılığı en düşük kriterdir ve blok tam çözülmese de normal görünebilir.",
           ),
         ],
       ),
       CholinesteraseInhibitorsCategory(
-        categoryName: 'Sugammadeks',
+        categoryName: 'Spesifik Klinik Ajanlar',
         items: [
           CholinesteraseInhibitorsItem(
-            title: 'Yapı ve Mekanizma',
-            description: 'Yapı: gama-siklodekstrin',
-            subtitle: 'Steroid yapıdaki kas gevşeticileri (ro, ve, pa) 1:1 oranında bağlar',
-            additionalInfo: 'Atılım: değişmeden böbreklerden',
+            title: "NEOSTİGMİN (KUARTERNER AMONYUM)",
+            description: "Anestezide en sık kullanılan, kuarterner amonyum yapısı nedeniyle beyne girmeyen standart reversal ajandır.",
+            subtitle: "Doz: 0,04–0,08 mg/kg; Atropin veya Glikoprolat ile eşleştirilir",
+            additionalInfo: "Etkisi 5-10 dakikada başlar. 1 mg Neostigmin için genellikle 0.2 mg Glikoprolat veya 0.4 mg Atropin gereklidir. Gebelerde atropinle eşleştirilmesi, plasentadan geçiş dengesi açısından daha uygundur.",
           ),
           CholinesteraseInhibitorsItem(
-            title: 'Klinik Özellikler',
-            description: 'Doz: 1–16 mg/kg',
-            subtitle: 'Etkisi hızlı, selektif',
+            title: "PRİDOSTİGMİN (YAVAŞ VE UZUN ETKİLİ)",
+            description: "Neostigmine göre daha yavaş etki gösteren (%20 potent) ancak etkisi daha uzun süren bir ajandır.",
+            additionalInfo: "Etkisi 10-15 dakikada başlar. Etki başlama hızı uyumlu olduğu için genellikle Glikoprolat ile kombine edilir. Kronik Myastenia Gravis tedavisinde birincil tercihtir.",
+          ),
+          CholinesteraseInhibitorsItem(
+            title: "EDROFONYUM (HIZLI VE KISA ETKİLİ)",
+            description: "Kovalent olmayan zayıf bağlanması sayesinde etkisi en hızlı başlayan ve en kısa süren ajandır.",
+            additionalInfo: "1-2 dakikada etki gösterir. Muskarinik yan etkileri en az olan ajandır, bu yüzden daha düşük doz antikolinerjik gerektirir. Enzimle kurduğu bağ 'hidrojen bağı' düzeyindedir.",
+          ),
+          CholinesteraseInhibitorsItem(
+            title: "FİZOSTİGMİN (TERSİYER AMİN - KBB GEÇER)",
+            description: "Beyne girebilme özelliği sayesinde santral yan etkileri ve deliryumu geri çevirmek için kullanılan tek inhibitördür.",
+            additionalInfo: "Santral antikolinerjik sendrom, morfin kaynaklı solunum depresyonu ve postoperatif titreme gibi durumlarda tercih edilir. Hızlı uygulandığında salivasyon, kusma ve nöbet gibi ciddi muskarinik krizlere yol açabilir.",
           ),
         ],
       ),
       CholinesteraseInhibitorsCategory(
-        categoryName: 'L-Sistein',
+        categoryName: 'Modern Antagonizma: Sugammadeks',
         items: [
           CholinesteraseInhibitorsItem(
-            title: 'Gantaküryum Antagonizması',
-            description: 'Gantaküryum (fumarat grubu) blokajını hızla çözer (2–3 dk\'da)',
-            subtitle: 'Mekanizma: sistein ile birleşip inaktif metabolit oluşturur',
+            title: "SUGAMMADEKS MEKANİZMASI VE YAPI",
+            description: "Gama-siklodekstrin yapısında olan bu ajan, steroid yapılı kas gevşeticileri fiziksel olarak hapsederek etkisiz hale getirir.",
+            subtitle: "Roküronyum, Veküronyum ve Panküronyum'u 1:1 oranında bağlar",
+            additionalInfo: "Asetilkolin miktarını artırmaz, yani muskarinik yan etki (bradikardi vb.) yapmaz. Bu nedenle atropin kullanımı gerektirmez. İlaç-sugammadeks kompleksi esas olarak böbrekler yoluyla değişmeden atılır.",
+          ),
+          CholinesteraseInhibitorsItem(
+            title: "KLİNİK DOZ VE SELEKTİVİTE",
+            description: "Bloğun derinliğine göre 2 mg/kg ile 16 mg/kg arasında değişen dozlarda uygulanır.",
+            additionalInfo: "En hızlı geri dönüşü (reversal) Roküronyum üzerinde sağlar. Çok derin blokları bile (saniyeler içinde) geri çevirebilme özelliği ile 'entübe edilemeyen-havalandırılamayan' senaryolarda hayat kurtarıcıdır.",
           ),
         ],
       ),
       CholinesteraseInhibitorsCategory(
-        categoryName: 'Altın Spotlar',
+        categoryName: 'Alternatif Yöntemler: L-Sistein',
         items: [
           CholinesteraseInhibitorsItem(
-            title: 'Özet',
-            description: 'Neostigmin: en sık, KBB geçmez',
-            subtitle: 'Pridostigmin: daha yavaş, uzun etkili',
-            additionalInfo: 'Edrofonyum: en hızlı, en kısa\nFizostigmin: KBB geçer → santral kullanım\nSugammadeks: steroid yapılılara özel\nSC blok: kolinesteraz inhibitörleri ile uzar',
+            title: "GANTAKÜRİUM ANTAGONİZMASI (L-SİSTEİN)",
+            description: "Ultra kısa etkili yeni ajan Gantaküryum'un blokajını moleküler düzeyde hızlıca sonlandıran özel bir yöntemdir.",
+            additionalInfo: "Gantaküryumun fumarat grubuna bağlanan L-Sistein, ilacı dakikalar içinde inaktif metabolitlere dönüştürür. Klasik kolinesteraz inhibitörlerine ihtiyacı ortadan kaldırır.",
           ),
         ],
       ),

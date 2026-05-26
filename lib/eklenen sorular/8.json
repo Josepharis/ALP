@@ -1,0 +1,1060 @@
+{
+  "meta": {
+    "title": "İnhalasyon Anestezikleri Soru Bankası",
+    "language": "tr",
+    "totalQuestions": 70,
+    "category": "İnhalasyon Anestezikleri"
+  },
+  "questions": [
+    {
+      "id": 1,
+      "question": "Doğal bir element olduğu için ozon tabakası üzerinde etkisi olmayan inhalasyon ajanı hangisidir?",
+      "options": [
+        "Xenon",
+        "Sevofluran",
+        "Desfluran",
+        "Nitröz oksit",
+        "İzofluran"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Xenon doğal ve inert bir elementtir; ozon tabakası üzerinde klinik olarak anlamlı etkisi yoktur.",
+      "category": "İnhalasyon Anestezikleri"
+    },
+    {
+      "id": 2,
+      "question": "Alveoler ventilasyon sabitken, aşağıdaki ajanlardan hangisinin indüksiyon hızı kalp debisi artışından en fazla etkilenerek yavaşlar?",
+      "options": [
+        "Desfluran",
+        "Sevofluran",
+        "Nitröz oksit",
+        "Halotan",
+        "Xenon"
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "Kan/gaz çözünürlüğü yüksek olan halotan, artmış kardiyak output ile alveolden kana daha fazla alınır ve indüksiyon daha çok yavaşlar.",
+      "category": "İnhalasyon Anestezikleri"
+    },
+    {
+      "id": 3,
+      "question": "Aşağıdaki inhalasyon anesteziklerinden hangisi vitamin B12'deki kobaltı geri dönüşümsüz okside edebilir?",
+      "options": [
+        "Sevofluran",
+        "Desfluran",
+        "İzofluran",
+        "Halotan",
+        "Nitröz oksit"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Nitröz oksit vitamin B12 içindeki kobaltı okside ederek metiyonin sentazı inhibe eder.",
+      "category": "İnhalasyon Anestezikleri"
+    },
+    {
+      "id": 4,
+      "question": "Uzun cerrahide 1 L/dk düşük akım sevofluran sonrası hafif poliüri ve proteinüri saptanmıştır. Bu tabloya neden olan yan ürün hangisidir?",
+      "options": [
+        "İnorganik florür",
+        "Trifloroasetik asit",
+        "Compound A",
+        "Karbonmonoksit",
+        "Metan gazı"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Sevofluran alkali absorbanlarla Compound A'ya parçalanabilir; düşük akımda birikerek deneysel nefrotoksisiteyle ilişkilendirilmiştir.",
+      "category": "İnhalasyon Anestezikleri"
+    },
+    {
+      "id": 5,
+      "question": "Desfluran konsantrasyonunun %4'ten %12'ye ani çıkarılması sonrası taşikardi ve hipertansiyon gelişmiştir. Nedeni nedir?",
+      "options": [
+        "Desfluranın direkt miyokard stimülan etkisi",
+        "Desfluranın havayolu irritasyonu yoluyla sempatik deşarja neden olması",
+        "Malign hipertermi başlangıcı",
+        "Desfluranın baroreseptörleri bloke etmesi",
+        "Karbonmonoksit zehirlenmesi"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Desfluranın hızlı artırılması üst hava yolu irritasyonu ve sempatik deşarjla katekolamin artışı, taşikardi ve hipertansiyon yapabilir.",
+      "category": "İnhalasyon Anestezikleri"
+    },
+    {
+      "id": 6,
+      "question": "Sevofluranın soda kireciyle reaksiyonu sonucu oluşan Compound A'nın temel toksik etkisi hangi organ üzerindedir?",
+      "options": [
+        "Karaciğer",
+        "Kalp",
+        "Böbrek",
+        "Akciğer",
+        "Kemik iliği"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Compound A deneysel çalışmalarda proksimal tübüler nekroz ve nefrotoksisite ile ilişkilendirilmiştir.",
+      "category": "İnhalasyon Anestezikleri"
+    },
+    {
+      "id": 7,
+      "question": "Aşağıdaki faktörlerden hangisi halotan hepatiti riskini artırmaz?",
+      "options": [
+        "Kilo",
+        "Cinsiyet",
+        "Yaş",
+        "Aile öyküsü",
+        "Uzun aralıklarla fazla halotana maruz kalmak"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Halotan hepatiti riski tekrarlayan ve kısa aralıklarla maruziyette artar; uzun aralıklarla maruziyet tipik risk artırıcı faktör değildir.",
+      "category": "İnhalasyon Anestezikleri"
+    },
+    {
+      "id": 8,
+      "question": "Aşağıdakilerden hangisi MAK değerini etkileyen fizyolojik ve farmakolojik değişkenlerden değildir?",
+      "options": [
+        "Hiperkalsemi",
+        "Hiponatremi",
+        "Hipernatremi",
+        "Gebelik",
+        "BMI"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Vücut kitle indeksinin zayıf veya obez olması tek başına MAK değerini değiştirmez.",
+      "category": "İnhalasyon Anestezikleri"
+    },
+    {
+      "id": 9,
+      "question": "Gebelikte MAK değerinin %25-40 azalmasına neden olan temel hormon hangisidir?",
+      "options": [
+        "Östrojen",
+        "Progesteron",
+        "Oksitosin",
+        "Prolaktin",
+        "TSH"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Progesteron santral sinir sistemi depresyonu yaparak inhalasyon anesteziği gereksinimini azaltır.",
+      "category": "İnhalasyon Anestezikleri"
+    },
+    {
+      "id": 10,
+      "question": "İzofluran için verilen bilgilerden hangisi yanlıştır?",
+      "options": [
+        "Yanıcı olmayan keskin eter kokulu bir volatil anesteziktir",
+        "Minimal sol ventrikül depresyonu yapar",
+        "Kalp hızını artırarak kardiyak debiyi koruyabilir",
+        "Arteriyel kan basıncında ve plazma norepinefrin düzeylerinde artışa sebep olur",
+        "Koroner arterlerde vazokonstriksiyona neden olabilir"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "İzofluran koroner damarlarda vazodilatasyon yapabilir; vazokonstriksiyon beklenen temel etki değildir.",
+      "category": "İnhalasyon Anestezikleri"
+    },
+    {
+      "id": 11,
+      "question": "Aşağıdakilerden hangisi nitröz oksidin kardiyovasküler sistem üzerindeki etkilerinden biri değildir?",
+      "options": [
+        "Sempatik sinir sistemini uyarıcı etkisi vardır",
+        "Miyokardiyal kontraktiliteyi doğrudan deprese edebilir",
+        "Katekolaminleri uyarır",
+        "Arteriyel kan basıncı, kardiyak debi ve kalp hızı değişmez ya da hafif artar",
+        "Pulmoner vasküler rezistansı azaltır"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Nitröz oksit pulmoner vasküler rezistansı azaltmaz; artırabilir.",
+      "category": "İnhalasyon Anestezikleri"
+    },
+    {
+      "id": 12,
+      "question": "Aşağıdaki volatil anesteziklerden 37°C'de kan/gaz partisyon katsayısı en düşük olan hangisidir?",
+      "options": [
+        "Nitröz oksit",
+        "Desfluran",
+        "Sevofluran",
+        "İzofluran",
+        "Halotan"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Desfluranın kan/gaz partisyon katsayısı çok düşüktür ve bu nedenle indüksiyon-derlenme hızlıdır.",
+      "category": "İnhalasyon Anestezikleri"
+    },
+    {
+      "id": 13,
+      "question": "Aşağıdaki inhalasyon ajanlarından hangisi koroner çalma fenomeni riski nedeniyle koroner arter hastalığı olanlarda teorik olarak riskli kabul edilir?",
+      "options": [
+        "Halotan",
+        "Nitröz oksit",
+        "Sevofluran",
+        "İzofluran",
+        "Desfluran"
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "İzofluran güçlü koroner vazodilatör etkisiyle kan akımını iskemik alandan normal alanlara yönlendirebilir.",
+      "category": "İnhalasyon Anestezikleri"
+    },
+    {
+      "id": 14,
+      "question": "Periferik nöropati yapma riski olan inhalasyon anesteziği hangisidir?",
+      "options": [
+        "Halotan",
+        "Xenon",
+        "Sevofluran",
+        "Nitröz oksit",
+        "Desfluran"
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "Nitröz oksit B12/metiyonin sentaz yolunu etkileyerek miyelin metabolizmasını bozabilir ve periferik nöropatiye yol açabilir.",
+      "category": "İnhalasyon Anestezikleri"
+    },
+    {
+      "id": 15,
+      "question": "İnhalasyon anestezikleri ile ilgili verilen bilgilerden hangisi/hangileri doğrudur? I. Anestezik ajanın uptake'i ne kadar fazlaysa, solunan ve alveoler konsantrasyonlar arasındaki fark o kadar büyük ve indüksiyon hızı o kadar yavaştır. II. Anesteziklerin dokuya alınması; kandaki çözünürlük, alveoler kan akımı ve alveoler-venöz parsiyel basınç farkına bağlıdır. III. Kardiyak debinin düşük olduğu hastalarda alveoler konsantrasyon belirgin artacağından kanda çözünür ajanlarla doz aşımı gelişebilir. IV. Nitröz okside uzun süreli maruziyet kemik iliği depresyonu ve nörolojik defisitlere yol açabilir. V. İzofluran koroner arterleri dilate eder.",
+      "options": [
+        "Yalnız I",
+        "I-III-V",
+        "II-IV",
+        "I-II-III-IV-V",
+        "IV-V"
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "Verilen tüm ifadeler doğrudur. Uptake arttıkça indüksiyon yavaşlar; kardiyak debi, N2O toksisitesi ve izofluranın koroner vazodilatör etkisi doğru verilmiştir.",
+      "category": "İnhalasyon Anestezikleri"
+    },
+    {
+      "id": 16,
+      "question": "En çok ozon tüketen volatil anestezik ajan hangisidir?",
+      "options": [
+        "Halotan",
+        "Xenon",
+        "Nitröz oksit",
+        "Sevofluran",
+        "Desfluran"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Desfluran inhalasyon anestezikleri içinde çevresel etki ve ozon tüketimi açısından en olumsuz ajanlardan biridir.",
+      "category": "İnhalasyon Anestezikleri"
+    },
+    {
+      "id": 17,
+      "question": "Bağlam-duyarlı yarı ömür kavramı düşünüldüğünde, uzun süreli infüzyon sonrası derlenme hızı en öngörülebilir olan opioid hangisidir?",
+      "options": [
+        "Fentanil",
+        "Sufentanil",
+        "Alfentanil",
+        "Remifentanil",
+        "Morfin"
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "Remifentanil plazma ve doku esterazlarıyla hızla yıkılır; infüzyon süresinden bağımsız olarak derlenmesi öngörülebilir kalır.",
+      "category": "İnhalasyon Anestezikleri"
+    },
+    {
+      "id": 18,
+      "question": "Kardiyak debinin artması alveoler parsiyel basınç artışını ve indüksiyonu nasıl etkiler?",
+      "options": [
+        "Artırır / hızlandırır",
+        "Yavaşlatır / geciktirir",
+        "Artırır / geciktirir",
+        "Yavaşlatır / hızlandırır",
+        "Değiştirmez / değiştirmez"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Kardiyak debi arttığında ajanın alveolden kana alımı artar; alveoler parsiyel basınç yükselişi yavaşlar ve indüksiyon gecikir.",
+      "category": "İnhalasyon Anestezikleri"
+    },
+    {
+      "id": 19,
+      "question": "Sevofluran metabolizması sırasında açığa çıkan hangi iyon teorik nefrotoksisite riski taşır?",
+      "options": [
+        "Klorür",
+        "Bromür",
+        "Florür",
+        "İyodür",
+        "Sodyum"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Sevofluran metabolizması sonucu inorganik florür iyonları ortaya çıkabilir ve teorik renal tübüler hasar riski taşır.",
+      "category": "İnhalasyon Anestezikleri"
+    },
+    {
+      "id": 20,
+      "question": "Aşağıdaki ajanlardan hangisi intrakraniyal cerrahide en az serebral vazodilatasyon yaparak kafa içi basıncını koruduğu için tercih edilir?",
+      "options": [
+        "Halotan",
+        "Desfluran",
+        "Sevofluran",
+        "İzofluran",
+        "Enfluran"
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "İzofluran 1 MAK altındaki dozlarda serebral kan akımını diğer volatil ajanlara göre daha az artırır.",
+      "category": "İnhalasyon Anestezikleri"
+    },
+    {
+      "id": 21,
+      "question": "Uzun süreli inhalasyon anesteziği maruziyetinin Alzheimer hastalığı riskini artırabileceği hipotezi hangi proteinin hiperfosforilasyonu ile ilişkilendirilmiştir?",
+      "options": [
+        "Amiloid beta",
+        "Tau proteini",
+        "Alfa-sinüklein",
+        "Myelin basic protein",
+        "Albümin"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Bazı çalışmalar inhaler ajanların tau hiperfosforilasyonu yoluyla nörodejenerasyona katkıda bulunabileceğini ileri sürmüştür.",
+      "category": "İnhalasyon Anestezikleri"
+    },
+    {
+      "id": 22,
+      "question": "Bir inhalasyon anesteziği uygulaması sırasında, \"birincil gaz\" olarak kullanılan nitröz oksit (N2O) ortamdan hızla kana geçerken alveolde kalan diğer volatil ajanın konsantrasyonunu artırır. Bu durum aşağıdakilerden hangisi ile tanımlanır?",
+      "options": [
+        "Konsantrasyon etkisi",
+        "İkincil gaz etkisi",
+        "Difüzyonel hipoksi",
+        "Meyer-Overton kuralı",
+        "Çözünürlük katsayısı"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "N2O yüksek konsantrasyonda alveolden kana hızla geçtiğinde alveol hacmini küçültür ve ikinci ajanın parsiyel basıncını artırır; bu ikincil gaz etkisidir.",
+      "category": "İnhalasyon Anestezikleri"
+    },
+    {
+      "id": 23,
+      "question": "Meyer-Overton kuralına göre inhalasyon anesteziğinin lipofilikliği ile anestezik potensi arasındaki ilişki nasıldır?",
+      "options": [
+        "Doğru orantılıdır",
+        "Ters orantılıdır",
+        "İlişki yoktur",
+        "Sadece N2O için geçerlidir",
+        "Sadece düşük dozlarda geçerlidir"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Lipit çözünürlüğü arttıkça potensi artar ve MAK değeri düşer.",
+      "category": "İnhalasyon Anestezikleri"
+    },
+    {
+      "id": 24,
+      "question": "Anestezik ajanlar hangi proteinin hiperfosforilasyonunu artırarak Alzheimer hastalığı ile ilişkilendirilebilir?",
+      "options": [
+        "Tau",
+        "Amiloid",
+        "Prolin",
+        "Titin",
+        "Valin"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Tau proteini hiperfosforilasyonu nörodejenerasyon ve Alzheimer patofizyolojisiyle ilişkilidir.",
+      "category": "İnhalasyon Anestezikleri"
+    },
+    {
+      "id": 25,
+      "question": "Yüksek konsantrasyonlarda kas rijiditesi yapmasına rağmen malign hipertermiyi tetiklemeyen inhalasyon anesteziği hangisidir?",
+      "options": [
+        "Nitröz oksit",
+        "Halotan",
+        "İzofluran",
+        "Desfluran",
+        "Sevofluran"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Nitröz oksit yüksek konsantrasyonlarda kas rijiditesiyle ilişkilendirilebilir ancak malign hipertermi tetikleyicisi değildir.",
+      "category": "İnhalasyon Anestezikleri"
+    },
+    {
+      "id": 26,
+      "question": "Halotan ile maske indüksiyonu yapılan 5 yaşındaki çocukta adrenalinli lokal anestezik sonrası ventriküler ekstrasistoller gelişmiştir. Aritminin patofizyolojik sorumlusu nedir?",
+      "options": [
+        "Halotanın miyokardı katekolaminlere duyarlı hale getirmesi",
+        "Halotanın koroner çalma fenomeni yapması",
+        "Halotanın direkt sempatomimetik etkisi",
+        "Halotanın intrakraniyal basıncı düşürmesi",
+        "Halotanın vagolitik etkisi"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Halotan miyokardı epinefrin gibi katekolaminlere duyarlı hale getirir ve ventriküler aritmi eşiğini düşürür.",
+      "category": "İnhalasyon Anestezikleri"
+    },
+    {
+      "id": 27,
+      "question": "Halotan ile ilgili verilen bilgilerden hangisi yanlıştır?",
+      "options": [
+        "Halojenli bir alkandır",
+        "Karbon-flor bağları halotanın yanıcı ve patlayıcı olmayan yapısından sorumludur",
+        "Arteriyel kan basıncının doz bağımlı düşüşü doğrudan miyokardiyal depresyona bağlıdır",
+        "Sodyum-kalsiyum değişimi ve intraselüler kalsiyum kullanımındaki değişiklikler kardiyak depresyona katkı sağlar",
+        "Koroner kan akımı artar"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Halotan miyokardiyal oksijen tüketimini ve sistemik basıncı düşürdüğü için koroner kan akımı genellikle artmaz, azalabilir.",
+      "category": "İnhalasyon Anestezikleri"
+    },
+    {
+      "id": 28,
+      "question": "Desfluran ile ilgili verilen bilgilerden hangisi yanlıştır?",
+      "options": [
+        "Desfluranın yapısı izoflurana oldukça benzer; izoflurandaki klor atomu flor atomu ile değişmiştir",
+        "Yüksek rakımlarda oda ısısında kaynar",
+        "Kan ve dokulardaki düşük çözünürlüğü hızlı indüksiyon ve derlenme sağlar",
+        "Yüksek buhar basıncı, kısa etki süresi ve orta dereceli potensi tipik özelliklerindendir",
+        "Desfluran konsantrasyonunda hızlı artışlar kalp hızı, kan basıncı ve katekolamin seviyelerinde azalmaya sebep olur"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Desfluran konsantrasyonunun hızlı artırılması sempatik aktiviteyi artırarak taşikardi, hipertansiyon ve katekolamin artışına neden olabilir.",
+      "category": "İnhalasyon Anestezikleri"
+    },
+    {
+      "id": 29,
+      "question": "Nitröz oksit kullanılan bir hastada aşağıdaki kapalı boşluklardan hangisinin hacminde genişleme beklenmez?",
+      "options": [
+        "Pnömotoraks",
+        "Barsak lümeni",
+        "Orta kulak",
+        "Mesane",
+        "Hava embolisi"
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "N2O hava içeren kapalı boşluklara difüze olarak hacmi artırır; mesane sıvı içerdiği için bu etki beklenmez.",
+      "category": "İnhalasyon Anestezikleri"
+    },
+    {
+      "id": 30,
+      "question": "75 yaşında, VKİ 38 olan bir hastaya 8 saat süren batın cerrahisinde izofluran verilmiş; ajan kesilmesine rağmen uyanma beklenenden uzun sürmüştür. Temel farmakokinetik neden nedir?",
+      "options": [
+        "İzofluranın düşük yağ/kan çözünürlüğü",
+        "Uzun uygulamada kas ve yağ dokusunun ajanla doygunlaşması",
+        "İzofluranın yüksek hepatik metabolizması",
+        "Yaşlılık nedeniyle artmış MAK gereksinimi",
+        "İzofluranın yüksek buhar basıncı"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Uzun süreli uygulamada özellikle yağ dokusu ajanla doygunlaşır; obez hastalarda geri salınım yavaş olduğu için uyanma gecikir.",
+      "category": "İnhalasyon Anestezikleri"
+    },
+    {
+      "id": 31,
+      "question": "Keskin olmayan kokusu ve alveoler anestezik konsantrasyonlarındaki hızlı artış nedeniyle indüksiyonda tercih edilen inhaler ajan hangisidir?",
+      "options": [
+        "Sevofluran",
+        "Desfluran",
+        "İzofluran",
+        "Halotan",
+        "Xenon"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Sevofluran hoş/keskin olmayan kokusu ve hızlı alveoler yükselişi nedeniyle inhalasyon indüksiyonunda tercih edilir.",
+      "category": "İnhalasyon Anestezikleri"
+    },
+    {
+      "id": 32,
+      "question": "İnhalasyon anestezikleri genel olarak kalp hızını nasıl etkiler?",
+      "options": [
+        "Hepsi belirgin bradikardi yapar",
+        "Sadece nitröz oksit taşikardi yapar",
+        "İzofluran ve desfluran baroreseptör refleks veya sempatik uyarı ile taşikardi yapabilir",
+        "Sevofluran kalp hızını en çok artırır",
+        "Kalp hızı üzerinde etkileri yoktur"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "İzofluran vazodilatasyonla refleks taşikardi yapabilir; desfluranın hızlı artırılması sempatik aktivasyonla taşikardiye yol açabilir.",
+      "category": "İnhalasyon Anestezikleri"
+    },
+    {
+      "id": 33,
+      "question": "Aşağıdakilerden hangisi MAK değerini etkileyen fizyolojik ve farmakolojik değişkenlerden değildir?",
+      "options": [
+        "Yaş",
+        "Isı",
+        "Alkol",
+        "Anemi",
+        "Hipokalsemi"
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "Yaş, vücut ısısı ve alkol kullanımı MAK değerini etkileyebilir; anemi MAK üzerinde belirgin ve klasik bir belirleyici değildir.",
+      "category": "İnhalasyon Anestezikleri"
+    },
+    {
+      "id": 34,
+      "question": "Hafta sonu taze gaz akımı açık kalmış ve soda lime kurumuşken desfluran kullanılan hastada CO-Hb yüksek bulunmuştur. Sorumlu kimyasal reaksiyon hangisidir?",
+      "options": [
+        "Sevofluran-Compound A etkileşimi",
+        "Halotan-immün hepatit oluşumu",
+        "Desfluranın kuru alkali absorbanla reaksiyona girerek karbonmonoksit üretmesi",
+        "Nitröz oksit-metiyonin sentaz inhibisyonu",
+        "İzofluranın florür iyonu açığa çıkarması"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Desfluran kuru alkali CO2 absorbanlarıyla reaksiyona girerek karbonmonoksit oluşturabilir.",
+      "category": "İnhalasyon Anestezikleri"
+    },
+    {
+      "id": 35,
+      "question": "Keskin olmayan kokusu ve alveoler konsantrasyonun hızlı artışıyla yumuşak ve hızlı inhalasyon indüksiyonu sağlayan ajan hangisidir?",
+      "options": [
+        "Sevofluran",
+        "Desfluran",
+        "Nitröz oksit",
+        "Xenon",
+        "İzofluran"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Sevofluran özellikle pediatrik inhalasyon indüksiyonunda sık tercih edilen, hoş kokulu ve hızlı etki başlangıçlı bir ajandır.",
+      "category": "İnhalasyon Anestezikleri"
+    },
+    {
+      "id": 36,
+      "question": "Kardiyovasküler, hepatik ve renal sistemler üzerinde minimal etkisi olan ve nöral iskemiye karşı koruyucu olduğu bildirilen inhalasyon ajanı hangisidir?",
+      "options": [
+        "Sevofluran",
+        "Desfluran",
+        "Xenon",
+        "Halotan",
+        "Nitröz oksit"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Xenon metabolize olmayan inert bir gazdır; kardiyovasküler stabilitesi ve NMDA antagonizmasıyla nöroprotektif özellikleri öne çıkar.",
+      "category": "İnhalasyon Anestezikleri"
+    },
+    {
+      "id": 37,
+      "question": "Megaloblastik anemi yapma riski olan inhalasyon anesteziği hangisidir?",
+      "options": [
+        "Nitröz oksit",
+        "Sevofluran",
+        "Desfluran",
+        "Halotan",
+        "Xenon"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Nitröz oksit metiyonin sentazı inhibe ederek DNA sentezini bozabilir ve megaloblastik anemiye yol açabilir.",
+      "category": "İnhalasyon Anestezikleri"
+    },
+    {
+      "id": 38,
+      "question": "Postoperatif hepatik disfonksiyonun sebepleri arasında hangisi yoktur?",
+      "options": [
+        "Viral hepatitler",
+        "Hepatik perfüzyonun bozulması",
+        "Hepatosit hipoksisi",
+        "Hemoliz",
+        "İmmobilizasyon"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "İmmobilizasyon tromboembolik riskleri artırabilir; ancak postoperatif hepatik disfonksiyonun doğrudan klasik nedenlerinden biri değildir.",
+      "category": "İnhalasyon Anestezikleri"
+    },
+    {
+      "id": 39,
+      "question": "İntrakraniyal kitle operasyonunda EEG'de burst suppression oluşturarak CMRO2'yi en etkili düşüren ajan hangisidir?",
+      "options": [
+        "Halotan",
+        "Sevofluran",
+        "İzofluran",
+        "Desfluran",
+        "Nitröz oksit"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "İzofluran serebral metabolik hızı belirgin düşürür ve burst suppression oluşturabilir.",
+      "category": "İnhalasyon Anestezikleri"
+    },
+    {
+      "id": 40,
+      "question": "Aşağıdaki volatil ajanlardan hangisi kuru CO2 absorbanları ile en fazla karbon monoksit oluşturur?",
+      "options": [
+        "İzofluran",
+        "Sevofluran",
+        "Desfluran",
+        "Halotan",
+        "Xenon"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Kuru alkali CO2 absorbanlarıyla en fazla karbon monoksit oluşumu desfluranla ilişkilidir.",
+      "category": "İnhalasyon Anestezikleri"
+    },
+    {
+      "id": 41,
+      "question": "Aşağıdakilerden hangisi Xenon (Xe) anestezisinin avantajlarından değildir?",
+      "options": [
+        "İnert olması ve metabolize olmaması",
+        "Minimal kardiyovasküler etki",
+        "Potensinin düşük olması (MAK yaklaşık %70)",
+        "Kanda düşük çözünürlük",
+        "Hızlı indüksiyon ve derlenme"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Xenonun düşük potensi ve yüksek MAC gereksinimi avantaj değil dezavantajdır.",
+      "category": "İnhalasyon Anestezikleri"
+    },
+    {
+      "id": 42,
+      "question": "Keskin kokusu ve havayoluna irritan etkisi nedeniyle indüksiyonda tercih edilmeyen volatil ajan hangisidir?",
+      "options": [
+        "Desfluran",
+        "İzofluran",
+        "Sevofluran",
+        "Halotan",
+        "Xenon"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Desfluran keskin kokulu ve irritandır; tükürük artışı, nefes tutma, öksürük ve laringospazm yapabilir.",
+      "category": "İnhalasyon Anestezikleri"
+    },
+    {
+      "id": 43,
+      "question": "Sevofluranın pediatrik ajitasyon veya epileptiform EEG aktivitesi riski hangi durumda artar?",
+      "options": [
+        "Düşük dozlarda",
+        "Hipokarbi ve yüksek dozlarda",
+        "Opioid eşliğinde",
+        "İleri yaşta",
+        "Hipotermi varlığında"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Sevofluran özellikle çocuklarda yüksek konsantrasyon ve hipokarbi ile epileptiform EEG aktivitesine yol açabilir.",
+      "category": "İnhalasyon Anestezikleri"
+    },
+    {
+      "id": 44,
+      "question": "Hangi volatil anestezik ajan serebral otoregülasyon yanıtını en fazla köreltir?",
+      "options": [
+        "Halotan",
+        "Desfluran",
+        "İzofluran",
+        "Sevofluran",
+        "Xenon"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Halotan serebral vazodilatasyon ve otoregülasyon bozulması açısından en belirgin ajanlardan biridir.",
+      "category": "İnhalasyon Anestezikleri"
+    },
+    {
+      "id": 45,
+      "question": "CO2 absorbanları kuruduğunda hangi ajanın kullanılması karbonmonoksit zehirlenmesi riskini en üst düzeye çıkarır?",
+      "options": [
+        "Halotan",
+        "Sevofluran",
+        "Desfluran",
+        "Nitröz oksit",
+        "Xenon"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Desfluran ve izofluran kuru soda kireciyle temas ettiğinde CO üretebilir; risk desfluranda belirgindir.",
+      "category": "İnhalasyon Anestezikleri"
+    },
+    {
+      "id": 46,
+      "question": "Ağır bronşiyal astımı olan hastada inhalasyon indüksiyonu planlanmaktadır. Hava yolu irritasyonu yapmayan ve güçlü bronkodilatör etkisi nedeniyle en güvenli tercih hangisidir?",
+      "options": [
+        "Desfluran",
+        "İzofluran",
+        "Sevofluran",
+        "Nitröz oksit",
+        "Halotan"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Sevofluran hoş kokulu, nonirritan ve bronkodilatördür; astımlı hastalarda indüksiyon için uygundur.",
+      "category": "İnhalasyon Anestezikleri"
+    },
+    {
+      "id": 47,
+      "question": "QT uzaması yapabilen volatil anestezik ajan hangisidir?",
+      "options": [
+        "Xenon",
+        "Sevofluran",
+        "Desfluran",
+        "İzofluran",
+        "Nitröz oksit"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Sevofluran ventriküler repolarizasyonu etkileyerek QT aralığını uzatabilir.",
+      "category": "İnhalasyon Anestezikleri"
+    },
+    {
+      "id": 48,
+      "question": "Renksiz, kokusuz olup güldürücü gaz olarak bilinen, yanıcı olmamasına rağmen yanmayı destekleyebilen inhalasyon anesteziği hangisidir?",
+      "options": [
+        "Sevofluran",
+        "Desfluran",
+        "Nitröz oksit",
+        "İzofluran",
+        "Xenon"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Nitröz oksit güldürücü gazdır; yanıcı değildir ancak oksitleyici özelliği nedeniyle yanmayı destekleyebilir.",
+      "category": "İnhalasyon Anestezikleri"
+    },
+    {
+      "id": 49,
+      "question": "Pediatrik maske indüksiyonunda sevofluranın halotana tercih edilmesinin en önemli nedeni nedir?",
+      "options": [
+        "Daha ucuz olması",
+        "Daha güçlü analjezik olması",
+        "Miyokardı katekolaminlere daha az duyarlı hale getirmesi",
+        "Kan/gaz çözünürlüğünün daha yüksek olması",
+        "Karaciğerde hiç metabolize olmaması"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Halotan miyokardı katekolaminlere duyarlı hale getirerek aritmi riskini artırır; sevofluran bu açıdan daha güvenlidir.",
+      "category": "İnhalasyon Anestezikleri"
+    },
+    {
+      "id": 50,
+      "question": "Aşağıdakilerden hangisi derlenmeyi hızlandıran faktörlerden biri değildir?",
+      "options": [
+        "Geri solumanın engellenmesi",
+        "Yüksek taze gaz akımı",
+        "Çözünürlüğün azalması",
+        "Serebral kan akımının artması",
+        "Anestezi devresi hacminin yüksek olması"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Anestezi devresi hacminin büyük olması ajanın sistemden uzaklaşmasını yavaşlatır ve derlenmeyi hızlandırmaz.",
+      "category": "İnhalasyon Anestezikleri"
+    },
+    {
+      "id": 51,
+      "question": "Aşağıdakilerden hangisi MAK değerini etkileyen fizyolojik ve farmakolojik değişkenlerden değildir?",
+      "options": [
+        "PaO2",
+        "PaCO2",
+        "Tiroid durumu",
+        "Kan basıncı",
+        "Hiponatremi"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Hipotiroidi veya hipertiroidi MAK değerini belirgin şekilde değiştirmez.",
+      "category": "İnhalasyon Anestezikleri"
+    },
+    {
+      "id": 52,
+      "question": "Wake-up test yapılacak bir skolyoz vakasında en hızlı ve öngörülebilir uyanma için hangi ajan seçilmelidir?",
+      "options": [
+        "Halotan",
+        "Sevofluran",
+        "İzofluran",
+        "Desfluran",
+        "Enfluran"
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "Desfluran düşük kan/gaz çözünürlüğü nedeniyle çok hızlı ve öngörülebilir uyanma sağlar.",
+      "category": "İnhalasyon Anestezikleri"
+    },
+    {
+      "id": 53,
+      "question": "Nöroşirürji vakalarında intrakraniyal basınç kontrolü için volatil ajan seçilirken, serebral metabolizmayı (CMRO2) en fazla baskılayan ajan hangisidir?",
+      "options": [
+        "Halotan",
+        "Sevofluran",
+        "İzofluran",
+        "Nitröz oksit",
+        "Desfluran"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "İzofluran CMRO2'yi belirgin azaltır ve EEG'de burst suppression oluşturabilir.",
+      "category": "İnhalasyon Anestezikleri"
+    },
+    {
+      "id": 54,
+      "question": "Vücut yüzeyinin %40'ında ikinci derece yanık olan hastada standart doz inhalasyon anesteziğine rağmen derinlik yetersizdir. Yanıklı hastalarda MAK artışının nedeni nedir?",
+      "options": [
+        "Plazma proteinlerine bağlanmanın artması",
+        "Hipertermi ve artmış katekolamin deşarjı",
+        "Hipotermi gelişmesi",
+        "Kronik alkol kullanımı",
+        "Yaşın ilerlemiş olması"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Akut yanık, travma ve sepsis katekolamin artışı ve hipertermiyle santral uyarılabilirliği artırarak MAK gereksinimini yükseltebilir.",
+      "category": "İnhalasyon Anestezikleri"
+    },
+    {
+      "id": 55,
+      "question": "Aşağıdaki volatil ajanlardan hangisi NMDA reseptörleri üzerinden etki gösterir?",
+      "options": [
+        "İzofluran",
+        "Desfluran",
+        "Sevofluran",
+        "Halotan",
+        "Nitröz oksit"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Nitröz oksit önemli ölçüde NMDA reseptör antagonizması üzerinden etki gösterir.",
+      "category": "İnhalasyon Anestezikleri"
+    },
+    {
+      "id": 56,
+      "question": "Timpanoplasti öyküsü olan hastada nitröz oksit sonrası greft yerinden oynamıştır. Bu komplikasyona neden olan fiziksel prensip nedir?",
+      "options": [
+        "N2O'nun kanda azottan yaklaşık 34 kat daha fazla çözünmesi",
+        "N2O'nun serbest radikal oluşturması",
+        "N2O'nun antiemetik etkisi",
+        "N2O'nun MAK değerinin 104 olması",
+        "N2O'nun difüzyonel hipoksi yapması"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "N2O azottan daha hızlı kapalı hava boşluklarına geçer; orta kulak basıncını artırarak timpanoplasti greftini bozabilir.",
+      "category": "İnhalasyon Anestezikleri"
+    },
+    {
+      "id": 57,
+      "question": "Aşağıdakilerden hangisi anesteziklerin etki gösterdiği bir bölge değildir?",
+      "options": [
+        "GABA",
+        "NMDA",
+        "Glisin alfa-1",
+        "Nikotinik asetilkolin",
+        "Glisin beta-1"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Genel anestezikler GABA, NMDA, glisin alfa-1 ve nikotinik asetilkolin sistemleriyle ilişkilidir; glisin beta-1 tipik hedef olarak kabul edilmez.",
+      "category": "İnhalasyon Anestezikleri"
+    },
+    {
+      "id": 58,
+      "question": "Aşağıdakilerden hangisi volatil anestezik eliminasyonunu yavaşlatır?",
+      "options": [
+        "Yüksek taze gaz akımı",
+        "Düşük çözünürlük katsayısı",
+        "Uzun anestezi süresi ve doku doygunluğu",
+        "Artmış alveoler ventilasyon",
+        "Küçük devre hacmi"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Anestezi süresi uzadıkça ajan kas ve yağ dokusunda birikir; dokulardan yavaş geri salınım derlenmeyi geciktirir.",
+      "category": "İnhalasyon Anestezikleri"
+    },
+    {
+      "id": 59,
+      "question": "Serebral kan akımını ve intrakraniyal basıncı aşağıdaki volatil anesteziklerden hangisi en fazla artırır?",
+      "options": [
+        "Halotan",
+        "İzofluran",
+        "Sevofluran",
+        "Desfluran",
+        "Nitröz oksit"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Halotan serebral vazodilatasyonu en belirgin olan ajanlardan biridir ve CBF ile ICP'yi artırabilir.",
+      "category": "İnhalasyon Anestezikleri"
+    },
+    {
+      "id": 60,
+      "question": "Karaciğerde %15-20 oranında metabolize edilen ve trifloroasetil protein kompleksleri oluşturarak immünolojik hepatite yol açabilen volatil ajan hangisidir?",
+      "options": [
+        "Sevofluran",
+        "Desfluran",
+        "Halotan",
+        "İzofluran",
+        "Nitröz oksit"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Halotan yüksek oranda metabolize olur; TFA haptenleri tekrarlayan maruziyetlerde immün aracılı hepatite neden olabilir.",
+      "category": "İnhalasyon Anestezikleri"
+    },
+    {
+      "id": 61,
+      "question": "Halotanın temel metaboliti aşağıdakilerden hangisidir?",
+      "options": [
+        "Trifloroasetik asit",
+        "Amatoksin",
+        "İbotenik asit",
+        "Muskimol",
+        "Muskazon"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Halotanın karaciğer metabolizması sonucunda trifloroasetik asit ve TFA protein kompleksleri oluşabilir.",
+      "category": "İnhalasyon Anestezikleri"
+    },
+    {
+      "id": 62,
+      "question": "Pulmoner şant yoksa alveoler kan akımı aşağıdakilerden hangisine eşittir?",
+      "options": [
+        "Sağ atriyum volümü",
+        "Sağ ventrikül volümü",
+        "Sol atriyum volümü",
+        "Sol ventrikül volümü",
+        "Kalp debisi"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Pulmoner şant yokluğunda alveoler kan akımı kalp debisine eşittir.",
+      "category": "İnhalasyon Anestezikleri"
+    },
+    {
+      "id": 63,
+      "question": "Aşağıdakilerden hangisi volatil anesteziklerin ilk olarak karşılaştıkları damardan zengin doku grubu içinde yer almaz?",
+      "options": [
+        "Beyin",
+        "Kalp",
+        "Karaciğer",
+        "Böbrek",
+        "Kas"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Damardan zengin grup beyin, kalp, karaciğer ve böbrekleri içerir; kas daha geç etkilenen daha büyük bir doku kompartmanıdır.",
+      "category": "İnhalasyon Anestezikleri"
+    },
+    {
+      "id": 64,
+      "question": "28 haftalık gebe hastaya genel anestezi uygulanacaktır. Gebelikte inhalasyon anestezikleriyle ilgili hangisi doğrudur?",
+      "options": [
+        "MAK değeri progesteron etkisiyle %25-40 azalır",
+        "MAK değeri artar",
+        "İnspiratuar rezerv hacmi arttığı için indüksiyon yavaştır",
+        "Gebelik inhaler ajanların çözünürlüğünü artırır",
+        "İnhaler ajanlar gebelikte kesin kontrendikedir"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Gebelikte progesteronun sedatif etkisiyle MAK değeri yaklaşık %25-40 azalır.",
+      "category": "İnhalasyon Anestezikleri"
+    },
+    {
+      "id": 65,
+      "question": "İstirahatte ve cerrahi uyarı altında PaCO2'yi en çok artıran volatil anestezik ajan hangisidir?",
+      "options": [
+        "İzofluran",
+        "Desfluran",
+        "Halotan",
+        "Sevofluran",
+        "Nitröz oksit"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Desfluran solunum merkezini belirgin deprese edebilir ve PaCO2 artışına yol açabilir.",
+      "category": "İnhalasyon Anestezikleri"
+    },
+    {
+      "id": 66,
+      "question": "Desfluran anestezisi sonlandırıldıktan sonra hastanın hızla oda havası solumasına izin verilirse alveollerde oksijen parsiyel basıncı düşebilir. Bu olayın temel nedeni nedir?",
+      "options": [
+        "Metabolik asidoz",
+        "Şant miktarında artış",
+        "Difüzyonel hipoksi",
+        "Hipoventilasyon",
+        "Karbonmonoksit birikimi"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Çözünürlüğü düşük ajanlar veya N2O kandan alveole hızla çıkıp alveoldeki oksijeni seyreltirse difüzyonel hipoksi gelişebilir.",
+      "category": "İnhalasyon Anestezikleri"
+    },
+    {
+      "id": 67,
+      "question": "Serebral metabolik hızı artırabilen inhalasyon anesteziği hangisidir?",
+      "options": [
+        "İzofluran",
+        "Desfluran",
+        "Sevofluran",
+        "Halotan",
+        "Nitröz oksit"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Diğer volatil ajanlar genellikle CMRO2'yi azaltırken nitröz oksit serebral metabolik hızı artırabilir.",
+      "category": "İnhalasyon Anestezikleri"
+    },
+    {
+      "id": 68,
+      "question": "Koroner çalma fenomeni yapabilen volatil anestezik ajan hangisidir?",
+      "options": [
+        "Halotan",
+        "İzofluran",
+        "Desfluran",
+        "Sevofluran",
+        "Xenon"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "İzofluran sağlıklı koroner damarları genişleterek kanı stenotik/iskemik alanlardan normal alanlara yönlendirebilir.",
+      "category": "İnhalasyon Anestezikleri"
+    },
+    {
+      "id": 69,
+      "question": "Hızla artan desfluran seviyelerine verilen kardiyovasküler cevap hangi ilaç/ilaçlarla azaltılabilir? I. Fentanil II. Esmolol III. Klonidin IV. Efedrin V. Adrenalin",
+      "options": [
+        "Yalnız IV",
+        "I-II-III",
+        "IV-V",
+        "III-V",
+        "I-II-V"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Fentanil, esmolol ve klonidin desfluranın hızlı artışına bağlı sempatik yanıtı baskılayabilir.",
+      "category": "İnhalasyon Anestezikleri"
+    },
+    {
+      "id": 70,
+      "question": "Aşağıdaki volatil anesteziklerden hangisi hepatik arter vazospazmı yapabilir?",
+      "options": [
+        "İzofluran",
+        "Desfluran",
+        "Sevofluran",
+        "Halotan",
+        "Xenon"
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "Halotan hepatik arter vazospazmı ve hepatik perfüzyon bozukluğu ile ilişkilendirilebilir.",
+      "category": "İnhalasyon Anestezikleri"
+    }
+  ]
+}

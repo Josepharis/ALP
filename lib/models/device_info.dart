@@ -5,6 +5,7 @@ class DeviceInfo {
   final String fcmToken;
   final String deviceName;
   final String platform;
+  final String language;
   final DateTime registeredAt;
   final DateTime lastLoginAt;
 
@@ -13,6 +14,7 @@ class DeviceInfo {
     required this.fcmToken,
     required this.deviceName,
     required this.platform,
+    required this.language,
     required this.registeredAt,
     required this.lastLoginAt,
   });
@@ -24,6 +26,7 @@ class DeviceInfo {
       fcmToken: map['fcmToken'] ?? '',
       deviceName: map['deviceName'] ?? '',
       platform: map['platform'] ?? '',
+      language: map['language'] ?? 'tr',
       registeredAt: (map['registeredAt'] as Timestamp?)?.toDate() ?? DateTime.now(),
       lastLoginAt: (map['lastLoginAt'] as Timestamp?)?.toDate() ?? DateTime.now(),
     );
@@ -36,6 +39,7 @@ class DeviceInfo {
       'fcmToken': fcmToken,
       'deviceName': deviceName,
       'platform': platform,
+      'language': language,
       'registeredAt': Timestamp.fromDate(registeredAt),
       'lastLoginAt': Timestamp.fromDate(lastLoginAt),
     };
@@ -47,6 +51,7 @@ class DeviceInfo {
     String? fcmToken,
     String? deviceName,
     String? platform,
+    String? language,
     DateTime? registeredAt,
     DateTime? lastLoginAt,
   }) {
@@ -55,6 +60,7 @@ class DeviceInfo {
       fcmToken: fcmToken ?? this.fcmToken,
       deviceName: deviceName ?? this.deviceName,
       platform: platform ?? this.platform,
+      language: language ?? this.language,
       registeredAt: registeredAt ?? this.registeredAt,
       lastLoginAt: lastLoginAt ?? this.lastLoginAt,
     );

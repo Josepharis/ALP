@@ -25,105 +25,40 @@ class NoncardiovascularMonitoringCategory {
 }
 
 class NoncardiovascularMonitoringData {
-  static List<NoncardiovascularMonitoringCategory> getNoncardiovascularMonitoringData(BuildContext context) {
+  static List<NoncardiovascularMonitoringCategory>
+  getNoncardiovascularMonitoringData(BuildContext context) {
     return [
       NoncardiovascularMonitoringCategory(
         categoryName: 'Respiratory Gas Exchange Monitors',
         items: [
           NoncardiovascularMonitoringItem(
-            title: 'Precordial and Esophageal Stethoscope - Indication',
-            description: 'If no gas monitor is available; follow-up of intubation with ETCO₂',
+            title: "STETHOSCOPE (PRECORDIAL AND ESOPHAGEAL)",
+            description: "The primary method for continuous monitoring of breath sounds and heart rhythm in the absence of advanced gas monitors.",
+            subtitle: "Contraindications: Presence of esophageal stricture and varices",
+            additionalInfo: "Precordial stethoscopy is applied by placing it over the chest wall or suprasternal notch. Esophageal stethoscopy (8-24F) provides listening from the points closest to the heart and lungs by placing a ballooned catheter into the esophagus. It is particularly valuable for monitoring intubation and ventilation in pediatric patients.",
           ),
           NoncardiovascularMonitoringItem(
-            title: 'Precordial and Esophageal Stethoscope - Contraindication',
-            description: 'Esophageal stricture, varices',
+            title: "PULSE OXIMETER",
+            description: "A mandatory non-invasive device for every anesthesia application that measures blood oxygen saturation (SpO2) and pulse rate.",
+            subtitle: "Operates on the principle of the Lambert-Beer Law",
+            additionalInfo: "It measures light absorption at 660 nm (deoxyhemoglobin) and 940 nm (oxyhemoglobin) wavelengths via a light source and sensor. Carbon monoxide poisoning (COHb), methemoglobinemia, methylene blue use, and low perfusion states can mislead the measurement. An SpO2 measurement of 90% corresponds to a PaO2 value of approximately 60-65 mmHg.",
           ),
           NoncardiovascularMonitoringItem(
-            title: 'Precordial Technique',
-            description: 'Placed on the chest or suprasternal notch',
+            title: "CAPNOGRAPHY (ETCO2)",
+            description: "The gold standard providing momentary information about the adequacy of ventilation and metabolic state by monitoring the amount of carbon dioxide in exhaled air.",
+            subtitle: "Infrared (IR) light absorption technique is used",
+            additionalInfo: "It is mandatory for confirming endotracheal placement in every patient under general anesthesia. A sudden increase in ETCO2 seen on the capnograph may be the first sign of Malignant Hyperthermia. Normally, the difference between arterial CO2 and ETCO2 (PaCO2-ETCO2) is approximately 2-5 mmHg; an increase in this difference indicates increased dead space ventilation.",
           ),
           NoncardiovascularMonitoringItem(
-            title: 'Esophageal Technique',
-            description: 'Ballooned plastic catheter (8–24F)',
+            title: "ANESTHETIC GAS ANALYSIS",
+            description: "Advanced measurement technologies that determine the concentrations of oxygen, nitrous oxide, and volatile agents in inspired and fresh gas lines.",
+            subtitle: "Oxygen and nitrogen do not absorb IR rays; they require special sensors",
+            additionalInfo: "Analysis methods include:\n• Infrared spectrophotometry: The most common method; able to differentiate between agents.\n• Piezoelectric oscillation: Operates on an acoustic principle but cannot differentiate between agents.\n• Galvanic cell: Measures oxygen by chemically consuming it; has a limited life span.\n• Paramagnetic analysis: Uses the magnetic properties of oxygen and provides a fast response.",
           ),
           NoncardiovascularMonitoringItem(
-            title: 'Clinical Use',
-            description: 'Assessment of breath sounds and heart rhythm',
-          ),
-          NoncardiovascularMonitoringItem(
-            title: 'Pulse Oximeter - Indication',
-            description: 'Should be applied to every anesthesia patient',
-          ),
-          NoncardiovascularMonitoringItem(
-            title: 'Pulse Oximeter - Technique',
-            description: 'Light source + sensor + detector; Lambert–Beer\'s law',
-          ),
-          NoncardiovascularMonitoringItem(
-            title: 'Pulse Oximeter - Wavelengths',
-            description: 'OxyHb 940 nm, DeoxyHb 660 nm',
-          ),
-          NoncardiovascularMonitoringItem(
-            title: 'Pulse Oximeter - False Readings',
-            description: 'COHb, MetHb, low PaO₂, motion, low perfusion, optical shunt, methylene blue, etc.',
-          ),
-          NoncardiovascularMonitoringItem(
-            title: 'Pulse Oximeter - Normal Values',
-            description: 'SpO₂ ~90% → PaO₂ 65 mmHg',
-          ),
-          NoncardiovascularMonitoringItem(
-            title: 'Pulse Oximeter - Other Applications',
-            description: 'SjvO₂ via jugular bulb and NIRS for cerebral oxygen monitoring',
-            subtitle: 'Normal rSO₂ ≈ 70%',
-          ),
-          NoncardiovascularMonitoringItem(
-            title: 'Capnography - Indication',
-            description: 'General anesthesia',
-          ),
-          NoncardiovascularMonitoringItem(
-            title: 'Capnography - Contraindication',
-            description: 'None',
-          ),
-          NoncardiovascularMonitoringItem(
-            title: 'Capnography - Technique',
-            description: 'Infrared light absorption by CO₂',
-          ),
-          NoncardiovascularMonitoringItem(
-            title: 'Capnography - Non-diverting',
-            description: 'Measured directly from the breathing circuit',
-          ),
-          NoncardiovascularMonitoringItem(
-            title: 'Capnography - Diverting',
-            description: 'Sample aspirated from the system',
-          ),
-          NoncardiovascularMonitoringItem(
-            title: 'Capnography - Clinical Use',
-            description: 'Malignant hyperthermia → ETCO₂ increases',
-            subtitle: 'Alveolar dead space: PaCO₂ – ETCO₂ = 2–5 mmHg',
-            additionalInfo: 'Pressure–time waveform: Phases I–IV\nVolume–time waveform: Alveolar dead space, PEEP optimization',
-          ),
-          NoncardiovascularMonitoringItem(
-            title: 'Anesthetic Gas Analysis - Techniques',
-            description: 'Infrared spectrophotometry, piezoelectric oscillation, galvanic cell, paramagnetic analysis',
-          ),
-          NoncardiovascularMonitoringItem(
-            title: 'Anesthetic Gas Analysis - O₂ and N₂',
-            description: 'Do not absorb IR',
-          ),
-          NoncardiovascularMonitoringItem(
-            title: 'Anesthetic Gas Analysis - Piezoelectric',
-            description: 'Cannot differentiate anesthetics',
-          ),
-          NoncardiovascularMonitoringItem(
-            title: 'Anesthetic Gas Analysis - Galvanic',
-            description: 'Consumes oxygen; placed in inspiratory limb',
-          ),
-          NoncardiovascularMonitoringItem(
-            title: 'Anesthetic Gas Analysis - Paramagnetic',
-            description: 'Relies on oxygen paramagnetism; measures expansion',
-          ),
-          NoncardiovascularMonitoringItem(
-            title: 'Spirometry',
-            description: 'Flow–volume–pressure measurement to evaluate lung function',
+            title: "SPIROMETRY",
+            description: "Evaluates lung compliance and airway resistance by monitoring flow, volume, and pressure changes in the breathing circuit.",
+            additionalInfo: "Conditions such as flow limitation, over-distention, or secretion accumulation can be visually detected via pressure-volume loops. It guides the clinician in PEEP optimization and atelectasis monitoring.",
           ),
         ],
       ),
@@ -131,60 +66,22 @@ class NoncardiovascularMonitoringData {
         categoryName: 'Neurological Monitors',
         items: [
           NoncardiovascularMonitoringItem(
-            title: 'EEG (Electroencephalography) - Indication',
-            description: 'Monitoring cerebral oxygenation and activity',
+            title: "ELECTROENCEPHALOGRAPHY (EEG) AND BIS",
+            description: "Used to assess the depth of anesthesia and prevent awareness by monitoring the electrical activity of the brain.",
+            subtitle: "BIS (Bispectral Index): A range of 40-60 indicates ideal general anesthesia depth",
+            additionalInfo: "EEG wave types are classified by their frequencies:\n• Alpha (8-13 Hz): Distant resting state.\n• Beta (13-30 Hz): Active thinking or light anesthesia.\n• Delta (0.5-4 Hz): Deep sleep or deep anesthesia.\n• Theta (4-7 Hz): Drowsy state.\nBIS value varies between 100 (fully awake) and 0 (isoelectric EEG). Additionally, the Entropy module (SE and RE) monitors both brain and muscle activity.",
           ),
           NoncardiovascularMonitoringItem(
-            title: 'EEG - Technique',
-            description: 'Records 1–30 Hz electrical potentials',
+            title: "EVOKED POTENTIALS (EP)",
+            description: "Monitoring that reduces the risk of paralysis in neurosurgery and spinal surgeries by measuring the central nervous system responses to stimuli given to nerve pathways.",
+            subtitle: "SEP monitors sensory (cortex), MEP monitors motor transmission (muscle)",
+            additionalInfo: "MEP is contraindicated in those with implanted devices (pacemakers), metal skull defects, or severe brain damage. Anesthetic agents (especially inhalation agents) can make monitoring difficult by decreasing the amplitude and increasing the latency of EP waves. Neuromuscular blockers (NMB) have no effect on SEP, but muscle relaxation must be reversed for MEP measurement.",
           ),
           NoncardiovascularMonitoringItem(
-            title: 'EEG Wave Types - α',
-            description: '8–13 Hz → rest',
-          ),
-          NoncardiovascularMonitoringItem(
-            title: 'EEG Wave Types - β',
-            description: '13–30 Hz → concentration/anesthesia',
-          ),
-          NoncardiovascularMonitoringItem(
-            title: 'EEG Wave Types - δ',
-            description: '0.5–4 Hz → deep sleep/anesthesia',
-          ),
-          NoncardiovascularMonitoringItem(
-            title: 'EEG Wave Types - θ',
-            description: '4–7 Hz → sleep/anesthesia',
-          ),
-          NoncardiovascularMonitoringItem(
-            title: 'EEG Derived Values - BIS',
-            description: '40–65 → general anesthesia; 65–85 → sedation',
-          ),
-          NoncardiovascularMonitoringItem(
-            title: 'EEG Derived Values - Entropy',
-            description: 'SE (EEG), RE (EMG)',
-          ),
-          NoncardiovascularMonitoringItem(
-            title: 'Evoked Potentials (EP) - SEP',
-            description: 'Sensory stimulation → cortical potential',
-          ),
-          NoncardiovascularMonitoringItem(
-            title: 'Evoked Potentials (EP) - MEP',
-            description: 'Cortical stimulation → muscle potential',
-          ),
-          NoncardiovascularMonitoringItem(
-            title: 'Evoked Potentials (EP) - Contraindications',
-            description: 'MEP contraindicated with skull defects, implanted devices, major cerebral lesions',
-          ),
-          NoncardiovascularMonitoringItem(
-            title: 'Anesthetic Effects on EP',
-            description: 'Volatile agents → ↓ amplitude, ↑ latency',
-            subtitle: 'Barbiturates → ↓ amplitude, ↑ latency',
-            additionalInfo: 'Propofol → ↓ amplitude, ↑ latency\nKetamine → ↑ amplitude or unchanged\nOpioids → slight ↓ amplitude\nNeuromuscular blockers → no significant effect',
-          ),
-          NoncardiovascularMonitoringItem(
-            title: 'Cerebral Oximetry (NIRS)',
-            description: 'Focuses on venous Hb absorption, no pulsatile component',
-            subtitle: 'rSO₂ <40% or >25% decrease from baseline → neurological injury risk',
-            additionalInfo: 'Jugular venous oxygen used to estimate cerebral oxygenation\nTissue O₂ pressure <20 mmHg → SBP ↑ 60 mmHg, ICP ↓ 20 mmHg',
+            title: "CEREBRAL OXIMETRY (NIRS)",
+            description: "Continuously and non-invasively monitors regional oxygen saturation (rSO2) in the frontal region of the brain using near-infrared light technology.",
+            subtitle: "Values below 40% or a 25% change from baseline are risky",
+            additionalInfo: "Since it does not have pulsatile flow, it can provide information even in cases of low cardiac output or hypothermia. Normal values are generally in the range of 60-70%. It is of vital importance for detecting cerebral ischemia in procedures where brain perfusion is at risk, such as cardiac surgery and carotid surgery.",
           ),
         ],
       ),
@@ -192,68 +89,22 @@ class NoncardiovascularMonitoringData {
         categoryName: 'Other Monitors',
         items: [
           NoncardiovascularMonitoringItem(
-            title: 'Temperature Monitoring - Phase I',
-            description: 'Redistribution (central → peripheral)',
+            title: "BODY TEMPERATURE MONITORING",
+            description: "Mandatory for the detection of hypothermia or malignant hyperthermia that may develop as heat regulation mechanisms are suppressed under general anesthesia.",
+            subtitle: "Core temperature monitoring is the gold standard",
+            additionalInfo: "Heat loss occurs in three phases: I- Redistribution (central to peripheral), II- Net heat loss, III- Thermal balance. Among measurement sites, the esophagus, nasopharynx, tympanic membrane, and urinary bladder are regions that most accurately reflect core temperature. Perioperative hypothermia increases the risk of infection and impairs clotting.",
           ),
           NoncardiovascularMonitoringItem(
-            title: 'Temperature Monitoring - Phase II',
-            description: 'Linear heat loss > metabolic production',
+            title: "URINE OUTPUT (OLIGURIA MONITORING)",
+            description: "One of the most objective indicators of vital organ perfusion and fluid balance.",
+            subtitle: "Values below 0.5 mL/kg/hour are considered oliguria",
+            additionalInfo: "Monitored via a Foley catheter. Oliguria may develop due to inadequate fluid intake, renal failure, or excessive ADH secretion. It is a fundamental monitoring method for the preservation of renal functions, especially in long-duration operations, major surgeries, and cardiovascular surgery.",
           ),
           NoncardiovascularMonitoringItem(
-            title: 'Temperature Monitoring - Phase III',
-            description: 'Balance (heat loss = metabolic production)',
-          ),
-          NoncardiovascularMonitoringItem(
-            title: 'Temperature Monitoring - Measurement',
-            description: 'Thermistor/thermocouple; tympanic, rectal, nasopharyngeal, esophageal, bladder, skin',
-          ),
-          NoncardiovascularMonitoringItem(
-            title: 'Urine Output - Indication',
-            description: 'Renal perfusion, fluid status',
-          ),
-          NoncardiovascularMonitoringItem(
-            title: 'Urine Output - Oliguria',
-            description: '<0.5 mL/kg/hr → oliguria',
-          ),
-          NoncardiovascularMonitoringItem(
-            title: 'Urine Output - Technique',
-            description: 'Foley catheter',
-          ),
-          NoncardiovascularMonitoringItem(
-            title: 'Urine Output - Complications',
-            description: 'UTI, urethral trauma',
-          ),
-          NoncardiovascularMonitoringItem(
-            title: 'Peripheral Nerve Stimulation - Indication',
-            description: 'Monitoring neuromuscular blockade (NMB)',
-          ),
-          NoncardiovascularMonitoringItem(
-            title: 'Peripheral Nerve Stimulation - Technique',
-            description: '60–80 mA stimulus; applied to adductor pollicis/ulnar nerve or orbicularis oculi',
-          ),
-          NoncardiovascularMonitoringItem(
-            title: 'TOF (Train-of-Four)',
-            description: '4 stimuli in 2 seconds. With non-depolarizing block → progressively decreasing responses',
-            subtitle: '4th twitch at 75% → blockade 75–95%',
-          ),
-          NoncardiovascularMonitoringItem(
-            title: 'DBS (Double-Burst Stimulation)',
-            description: 'More sensitive than TOF',
-          ),
-          NoncardiovascularMonitoringItem(
-            title: 'Clinical Reversal',
-            description: 'TOF ratio >0.7 → adequate muscle function',
-          ),
-        ],
-      ),
-      NoncardiovascularMonitoringCategory(
-        categoryName: 'Key Exam Spots',
-        items: [
-          NoncardiovascularMonitoringItem(
-            title: 'SUMMARY SPOT QUESTIONS',
-            description: 'Pulse oximeter: OxyHb 940 nm, DeoxyHb 660 nm',
-            subtitle: 'SpO₂ ~90% → PaO₂ 65 mmHg',
-            additionalInfo: 'Alveolar dead space: PaCO₂ – ETCO₂ = 2–5 mmHg\nBIS: 40–65 general anesthesia\nrSO₂ <40% → neurological injury risk\nOliguria: <0.5 mL/kg/hr',
+            title: "PERIPHERAL NERVE STIMULATION (TOF)",
+            description: "Used to measure the effect of neuromuscular blockers, determine intubation time, and ensure safe emergence of the patient from anesthesia (extubation).",
+            subtitle: "A TOF (Train-of-Four) ratio above 0.9 is targeted for complete recovery",
+            additionalInfo: "Usually, the response of the adductor pollicis muscle is measured over the ulnar nerve. In the TOF test, 4 stimuli are given within 2 seconds; in non-depolarizing blocks, these responses progressively weaken. Obtaining only one of the 4 responses indicates that muscle relaxation continues at a rate of 90%. The orbicularis oculi muscle is more resistant to muscle relaxation and shows recovery earlier, similar to the diaphragm.",
           ),
         ],
       ),

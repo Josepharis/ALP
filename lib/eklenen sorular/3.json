@@ -1,0 +1,670 @@
+{
+  "meta": {
+    "title": "Solunum Sistemleri Soru Bankası",
+    "language": "tr",
+    "category": "Solunum Sistemleri",
+    "totalQuestions": 44
+  },
+  "questions": [
+    {
+      "question": "Uzun süren bir vakada, CO₂ absorban haznesinin dış yüzeyinin el yakacak kadar ısındığı fark ediliyor. Aynı zamanda kapnografide EtCO₂ değerleri kademeli olarak yükselmeye başlıyor. Bu klinik tabloya göre aşağıdakilerden hangisi kesinlikle doğrudur?",
+      "options": [
+        "Reaksiyon ekzotermiktir, ısınma normaldir; müdahale gerekmez.",
+        "Soda-lime kapasitesi dolmuştur ve ekzotermik reaksiyonun hızı artmıştır; absorban derhal değiştirilmelidir.",
+        "Taze gaz akımı çok yüksek olduğu için sürtünme ısısı oluşmuştur.",
+        "Tek yönlü valfler açık kalmıştır; nem yoğunlaşmıştır.",
+        "Sevofluran, Compound A oluşturduğu için sistem soğutulmalıdır."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 4,
+      "explanation": "CO₂ absorpsiyonu ısı üreten (ekzotermik) bir reaksiyondur. Ancak hem aşırı ısınma hem de EtCO₂ yükselmesi bir aradaysa, bu durum absorbanın artık doygunluğa ulaştığını ve CO₂'yi verimli tutamadığını gösterir.",
+      "category": "Solunum Sistemleri",
+      "id": 1
+    },
+    {
+      "question": "Soda-lime’ın bileşikleri içinde en çok bulunan, yaklaşık %80 oranındaki madde hangisidir?",
+      "options": [
+        "Kalsiyum hidroksit",
+        "Sodyum hidroksit",
+        "H₂O",
+        "Potasyum hidroksit",
+        "Sodyum peroksit"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 2,
+      "explanation": "Soda-lime esas olarak yaklaşık %80 kalsiyum hidroksit, sodyum hidroksit, su ve az miktarda potasyum hidroksitten oluşur.",
+      "category": "Solunum Sistemleri",
+      "id": 2
+    },
+    {
+      "question": "Mekanik ventilatörde izlenen bir hastada, inspiratuar tek yönlü valfin bir parçasının kırıldığı ve valfin \"sürekli açık\" pozisyonda takılı kaldığı fark edilmiyor. Bu mekanik arıza sonucunda hastada oluşacak kapnografi bulgusu ve klinik tablo aşağıdakilerden hangisidir?",
+      "options": [
+        "EtCO₂ aniden 0'a düşer; apne gelişir.",
+        "Bazal hat (inspiratuar faz) 0 mmHg'nin üzerinde kalır; hasta ekshale ettiği gazı geri solur.",
+        "Devre basıncı aniden yükselir; barotravma oluşur.",
+        "Vaporizatörden gelen anestezik gaz miktarı artar; derin anestezi oluşur.",
+        "Hiçbir değişiklik olmaz; absorban CO₂'yi temizlemeye devam eder."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 4,
+      "explanation": "Halka sisteminde valflerden biri açık kalırsa, sistem \"tek yönlü\" olma özelliğini kaybeder. Hasta nefes verirken gaz inspiratuar kola kaçar; bir sonraki nefeste bu CO₂'li gazı (absorbandan geçmeden) geri alır. Bu durum kapnografide bazal hattın yükselmesiyle (rebreathing) kendini gösterir.",
+      "category": "Solunum Sistemleri",
+      "id": 3
+    },
+    {
+      "question": "5 kg ağırlığındaki bir bebekte Mapleson A (Magill) devresi kullanılarak spontan solunumda anestezi idamesi planlanmaktadır. Operasyon sırasında cerrahi ekip, hastanın solunum eforunun (iş yükünün) çok arttığını fark ediyor. Devre direnci bilgileri ışığında, bu durumun en olası nedeni aşağıdakilerden hangisidir?",
+      "options": [
+        "Mapleson A devresinin hortum çapının (22 mm) bebek için çok dar olması.",
+        "Taze gaz akımının (TGA) yetersiz kalması sonucu karbondioksit birikmesi.",
+        "APL valfinin hastaya yakın konumu ve valf direncinin küçük bir bebek için fazla olması.",
+        "Rezervuar balonunun çok büyük olması.",
+        "Devrenin koaksiyel yapıda olması nedeniyle ısınan gazın rezistans oluşturması."
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 4,
+      "explanation": "Mapleson A, yetişkinlerde spontan solunum için çok verimlidir ancak APL valfinin hastaya yakınlığı ve valfin ekspiratuar direnci, solunum kasları henüz zayıf olan küçük bebeklerde solunum iş yükünü (work of breathing) belirgin şekilde artırabilir.",
+      "category": "Solunum Sistemleri",
+      "id": 4
+    },
+    {
+      "question": "Draw-over (çek-al) cihazları taşıyıcı gaz olarak ne kullanır?",
+      "options": [
+        "Sadece saf oksijen",
+        "Ortam havası",
+        "Sadece N₂O",
+        "Karbondioksit",
+        "Helyum"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Draw-over cihazları ortam havasını kullanarak geri solumasız devrelerle çalışır.",
+      "category": "Solunum Sistemleri",
+      "id": 5
+    },
+    {
+      "question": "Mapleson F (Jackson-Rees) devresinde rebreathing'i önlemek için gereken minimum taze gaz akımı (TGA) nedir?",
+      "options": [
+        "Dakika ventilasyonuna eşit",
+        "Dakika ventilasyonunun 2-3 katı",
+        "Sabit 70 mL/kg/dk",
+        "Sabit 10 L/dk",
+        "Dakika ventilasyonunun yarısı"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Mapleson F, CO₂ absorbanı içermez; CO₂'yi uzaklaştırmak için dakika ventilasyonunun 2-3 katı akım gerekir.",
+      "category": "Solunum Sistemleri",
+      "id": 6
+    },
+    {
+      "question": "Bain devresinde içteki taze gaz hortumunun yerinden çıkması veya delinmesi klinik olarak neye yol açar?",
+      "options": [
+        "FiO₂ artışı",
+        "Tidal volüm artışı",
+        "Şiddetli rebreathing ve hiperkapni",
+        "Devre direncinin sıfırlanması",
+        "Oksijen toksisitesi"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "İçteki boru delinirse taze gaz hastaya ulaşmadan dış hortuma karışır; tüm dış hortum ölü boşluğa dönüşür ve hasta ekshale ettiği gazı geri solur.",
+      "category": "Solunum Sistemleri",
+      "id": 7
+    },
+    {
+      "question": "Compound A hangisinin absorban tarafından parçalanmasının yan ürünüdür?",
+      "options": [
+        "İzofluran",
+        "Desfluran",
+        "Sevofluran",
+        "Halotan",
+        "Eter"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 2,
+      "explanation": "Compound A, sevofluranın CO₂ absorbanları tarafından parçalanması sonucunda oluşabilen bir yan üründür.",
+      "category": "Solunum Sistemleri",
+      "id": 8
+    },
+    {
+      "question": "Amsorb'un soda-lime'a göre en önemli avantajı nedir?",
+      "options": [
+        "Daha ucuz olması",
+        "CO₂ kapasitesinin daha yüksek olması",
+        "Volatil ajanların parçalanmasına daha az neden olması",
+        "Isı üretmemesi",
+        "Her zaman beyaz kalması"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Amsorb kuvvetli alkalleri içermez, bu da toksik yan ürün oluşumunu azaltır.",
+      "category": "Solunum Sistemleri",
+      "id": 9
+    },
+    {
+      "question": "Solunum sisteminde yangın riskinde artış olasılığı nedeniyle artık kullanılmayan absorban hangisidir?",
+      "options": [
+        "Baryum hidroksit",
+        "Kalsiyum hidroksit",
+        "Potasyum hidroksit",
+        "Sodyum hidroksit",
+        "Sodyum peroksit"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 2,
+      "explanation": "Baryum hidroksit lime, solunum sisteminde yangın riskini artırma olasılığı nedeniyle artık kullanılmamaktadır.",
+      "category": "Solunum Sistemleri",
+      "id": 10
+    },
+    {
+      "question": "Absorbanlarla ilgili verilen bilgilerden hangisi/hangileri doğrudur? I. Soda-lime ne kadar kuru olursa, volatil anestezik ajanı o kadar fazla absorbe eder ve parçalar. II. Karbon monoksit oluşumu desfluran ile en fazla orandadır; sevofluran ile ise daha yüksek sıcaklıklarda oluşur. III. Amsorb, kalsiyum hidroksit ve kalsiyum klorürden oluşan bir CO₂ absorbanıdır. IV. Amsorb, soda-lime’a göre daha inerttir ve volatil anesteziklerin parçalanma reaksiyonlarına daha az neden olur.",
+      "options": [
+        "I-II-III",
+        "I-II-III-IV",
+        "I-II",
+        "I-IV",
+        "II-III"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Verilen tüm önermeler absorbanların kimyasal özellikleri ve volatil ajanlarla etkileşimleri açısından doğrudur.",
+      "category": "Solunum Sistemleri",
+      "id": 11
+    },
+    {
+      "question": "Bain devresi (koaksiyel Mapleson D) ile ventile edilen 70 kg ağırlığındaki bir hastada, operasyonun 30. dakikasında kapnografi trasesinde inspiratuar kolun (bazal hattın) kademeli olarak yükseldiği (EtCO₂ bazalinin 0'dan 10 mmHg'ye çıktığı) gözleniyor. Taze gaz akımı (TGA) 10 L/dk olarak ayarlanmış olmasına rağmen bu tablo düzelmiyor. Bu durumun en olası nedeni ve yapılması gereken ilk müdahale nedir?",
+      "options": [
+        "Soda-lime tükenmiştir; absorban değiştirilmelidir.",
+        "Taze gaz akımı yetersizdir; akım 15 L/dk'ya çıkarılmalıdır.",
+        "İçteki taze gaz hortumu yerinden çıkmış veya delinmiştir; Pethick testi yapılmalı veya devre değiştirilmelidir.",
+        "APL valfi açık kalmıştır; valf kapatılmalıdır.",
+        "Hastada malign hipertermi gelişmektedir; %100 oksijene geçilmelidir."
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 4,
+      "explanation": "Bain devresinde yüksek TGA'ya rağmen rebreathing (bazal hat yükselmesi) varsa, bu genellikle \"koaksiyel iç hortumun\" bütünlüğünün bozulduğunu gösterir. Bu durumda tüm dış hortum ölü boşluğa dönüşür ve TGA artsa bile CO₂ temizlenemez.",
+      "category": "Solunum Sistemleri",
+      "id": 12
+    },
+    {
+      "question": "Soda-lime tepkimesinin son ürünleri nelerdir?",
+      "options": [
+        "Isı - H₂O - NaOH",
+        "Isı - NaOH - H₂CO₃",
+        "H₂O - NaOH - H₂CO₃",
+        "Isı - H₂O - CaCO₃",
+        "CaCO₃ - NaOH - Isı"
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 2,
+      "explanation": "Soda-lime ile CO₂ absorpsiyonunun son ürünleri ısı, su ve kalsiyum karbonattır.",
+      "category": "Solunum Sistemleri",
+      "id": 13
+    },
+    {
+      "question": "Halka sisteminde, APL valfi tamamen kapatılarak ve taze gaz akımı hastanın sadece oksijen tüketimine (VO2) eşitlenerek \"kapalı devre\" anestezi uygulanmaktadır. Bir süre sonra hastanın inspiratuar oksijen konsantrasyonunun (FiO₂) beklenenden daha hızlı düştüğü gözleniyor. Bu durumun temel sebebi ve göre çözümü nedir?",
+      "options": [
+        "Soda-lime'ın oksijen tüketmesi; taze gaz akımı artırılmalıdır.",
+        "Hastanın dokularından devreye azot sızması; devre belirli aralıklarla yüksek akımla temizlenmelidir (flushing).",
+        "Tek yönlü valflerin donması; devre ısıtılmalıdır.",
+        "Vaporizatörün kapanması; ajan konsantrasyonu artırılmalıdır.",
+        "Kalsiyum karbonat birikmesi; absorban haznesi sallanmalıdır."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 4,
+      "explanation": "Tam kapalı sistemlerde, hastanın kanında çözünmüş olan azot (N2) solunum devresine sızar. Sistem dışarıya kapalı olduğu için bu azot devrede birikir ve oksijeni dilüe ederek (seyrelterek) FiO₂'yi düşürür. Bu yüzden sistemin periyodik olarak yüksek akımla boşaltılması gerekir.",
+      "category": "Solunum Sistemleri",
+      "id": 14
+    },
+    {
+      "question": "Mapleson A devresinde APL valfi ile taze gaz girişinin yerleri değiştirilirse hangi devre elde edilir?",
+      "options": [
+        "Mapleson B",
+        "Mapleson C",
+        "Mapleson D",
+        "Mapleson F",
+        "Circle sistem"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "TGG ve APL valf yerlerinin değişimi tasarımı Mapleson D'ye çevirir.",
+      "category": "Solunum Sistemleri",
+      "id": 15
+    },
+    {
+      "question": "Halka sisteminin bileşenleri içerisinde yer almayan hangisidir?",
+      "options": [
+        "CO₂ absorbanı",
+        "Taze gaz girişi",
+        "İnspiratuar tek yönlü valf ve inspiratuar solunum hortumu",
+        "Ekspiratuar tek yönlü valf ve ekspiratuar solunum hortumu",
+        "Maske"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Halka sistemi; CO₂ absorbanı, taze gaz girişi, inspiratuar ve ekspiratuar tek yönlü valfler, Y konnektörü, APL valfi ve rezervuar balonundan oluşur. Maske temel bileşenler arasında sayılmaz.",
+      "category": "Solunum Sistemleri",
+      "id": 16
+    },
+    {
+      "question": "Solunum sistemlerinde nemi ve ısıyı korumak için en verimli devre tipi hangisidir?",
+      "options": [
+        "Açık damla sistemi",
+        "Mapleson D",
+        "Halka (Circle) sistemi",
+        "Mapleson E",
+        "İnsüflasyon tekniği"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Halka sistemleri rebreathing sağladığı için nem ve ısı kaybını en aza indirir.",
+      "category": "Solunum Sistemleri",
+      "id": 17
+    },
+    {
+      "question": "Piyasada bulunan soda-lime'ın normal su içeriği hangi aralıktadır?",
+      "options": [
+        "%5-10",
+        "%14-19",
+        "%20-25",
+        "%30-35",
+        "%0 (Kuru olmalıdır)"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Soda-lime reaksiyon için %14-19 oranında su içermelidir.",
+      "category": "Solunum Sistemleri",
+      "id": 18
+    },
+    {
+      "question": "Hafta sonu boyunca anestezi cihazının taze gaz akımı (O₂) açık unutulmuştur. Pazartesi sabahı ilk vakada desfluran ile anestezi indüksiyonu yapıldıktan kısa süre sonra hastanın SpO₂ değerinin düştüğü ancak kapnografinin normal olduğu görülüyor. Kan gazında \"karboksihemoglobin\" seviyesi yüksek saptanıyor. Bu tablonun patofizyolojik açıklaması aşağıdakilerden hangisidir?",
+      "options": [
+        "Sevofluranın Compound A'ya dönüşmesi.",
+        "Soda-lime'ın CO₂'yi tutamaması sonucu hiperkapni gelişmesi.",
+        "Kuru absorbanın desfluran ile reaksiyona girerek Karbon Monoksit (CO) üretmesi.",
+        "Tek yönlü valflerin donması sonucu ölü boşluğun artması.",
+        "Oksijen flowmetresinin yanlış kalibre edilmesi."
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 4,
+      "explanation": "Absorbanın (soda-lime/Baralyme) taze gaz akımıyla kuruması (su içeriğinin %14-19 altına düşmesi), özellikle desfluran ve izofluran gibi ajanlarla reaksiyona girerek toksik Karbon Monoksit",
+      "category": "Solunum Sistemleri",
+      "id": 19
+    },
+    {
+      "question": "Piyasada bulunan soda-lime’ın içeriğinde hangi oranda su vardır?",
+      "options": [
+        "%14-19",
+        "%18-23",
+        "%21-26",
+        "%25-30",
+        "%30-35"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 2,
+      "explanation": "Ticari soda-lime normalde yaklaşık %14-19 oranında su içerir.",
+      "category": "Solunum Sistemleri",
+      "id": 20
+    },
+    {
+      "question": "Solunum sistemleri ile ilgili verilen bilgilerden hangisi yanlıştır?",
+      "options": [
+        "İnsüflasyon tekniği doğrudan hasta temasını önlediğinden, akım yeterince yüksekse ekshale edilen gazların yeniden solunması söz konusu olmaz.",
+        "Açık damla sisteminde buharlaştırma maske sıcaklığını düşürerek nemin yoğuşmasına ve anestezik buhar basıncında düşüşe neden olur.",
+        "Draw-over cihazlarında taşıyıcı gaz olarak ortam havasını kullanan, geri solumaya izin veren devreler bulunur.",
+        "Mapleson sistemlerinin bileşenleri arasında solunum hortumu, taze gaz girişi, APL valfi ve rezervuar balonu bulunur.",
+        "Anestezi derinliğinin kontrolünün zayıf olması Mapleson devreleri için bir dezavantajdır."
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Draw-over cihazları ortam havasını, varsa oksijeni de, taşıyıcı gaz olarak kullanır; ancak geri solumasız devrelerle çalışırlar.",
+      "category": "Solunum Sistemleri",
+      "id": 21
+    },
+    {
+      "question": "Absorbanın renginin yaklaşık yüzde kaç oranında değişmesi, yenilenmesi gerektiğini gösterir?",
+      "options": [
+        "%10-20",
+        "%30-40",
+        "%50-70",
+        "%90-100",
+        "Renk değişimi önemli değildir"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Absorban kapasitesinin %50-70'i tükendiğinde indikatör renk değiştirir ve değiştirilmelidir.",
+      "category": "Solunum Sistemleri",
+      "id": 22
+    },
+    {
+      "question": "Mapleson A (Magill) devresi için en verimli kullanım modu aşağıdakilerden hangisidir?",
+      "options": [
+        "Kontrollü ventilasyon",
+        "Spontan solunum",
+        "Pediatrik transport",
+        "Yüksek akımlı anestezi",
+        "Kapalı devre"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Taze gaz girişi (TGG) arkada, APL valfi hastaya yakındır; bu yapı spontan solunumda CO₂'yi en düşük taze gaz akımıyla temizler.",
+      "category": "Solunum Sistemleri",
+      "id": 23
+    },
+    {
+      "question": "Yangın riski oluşturma olasılığı nedeniyle günümüzde kullanımı önerilmeyen absorban hangisidir?",
+      "options": [
+        "Soda-lime",
+        "Baryum hidroksit lime",
+        "Amsorb",
+        "Kalsiyum hidroksit",
+        "Lityum hidroksit"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Baryum hidroksit lime, volatil ajanlarla reaksiyonda yüksek ısı üreterek yangın riskini artırır.",
+      "category": "Solunum Sistemleri",
+      "id": 24
+    },
+    {
+      "question": "APL valfi ile taze gaz girişinin yerlerinin değiştirilmesi Mapleson A devresini hangi devreye çevirir?",
+      "options": [
+        "Mapleson B",
+        "Mapleson C",
+        "Mapleson D",
+        "Mapleson E",
+        "Mapleson F"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 2,
+      "explanation": "APL valfi ile taze gaz girişinin yerleri değiştirildiğinde Mapleson A devresi Mapleson D devresine dönüşür.",
+      "category": "Solunum Sistemleri",
+      "id": 25
+    },
+    {
+      "question": "Spontan solunumda oldukça verimli olan bir Mapleson A (Magill) devresiyle vakaya başlanan bir hastada, kas gevşetici yapılarak mekanik ventilasyona (kontrollü solunum) geçiliyor. Dakika ventilasyonu 6 L/dk olan hastada, rebreathing oluşmaması için taze gaz akımı (TGA) ayarlanmak isteniyor. Bu devreyle kontrollü ventilasyonda rebreathing'i önlemek için gereken yaklaşık TGA ne olmalıdır?",
+      "options": [
+        "4.2 L/dk (70 mL/kg/dk).",
+        "6 L/dk (Dakika ventilasyonuna eşit).",
+        "18 L/dk (Dakika ventilasyonunun 3 katı).",
+        "2 L/dk (Düşük akım).",
+        "1 L/dk (Bazal metabolizma)."
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 4,
+      "explanation": "Mapleson A, spontan solunumda çok tasarrufludur (TGA < MV); ancak kontrollü solunumda APL valfinin çalışma dinamiği değiştiği için rebreathing'i önlemek adına dakika ventilasyonunun yaklaşık 3 katı akım gerekir, bu da sistemi oldukça verimsiz kılar.",
+      "category": "Solunum Sistemleri",
+      "id": 26
+    },
+    {
+      "question": "Absorban yaklaşık hangi oranda renk değiştirdiğinde yenilenmelidir?",
+      "options": [
+        "%30-50",
+        "%40-60",
+        "%50-70",
+        "%60-80",
+        "%70-90"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 2,
+      "explanation": "Absorban yaklaşık %50-70 oranında renk değiştirdiğinde kapasitesi önemli ölçüde tükenmiş kabul edilir ve yenilenmelidir.",
+      "category": "Solunum Sistemleri",
+      "id": 27
+    },
+    {
+      "question": "Solunum sistemleri ile ilgili verilen bilgilerden hangisi yanlıştır?",
+      "options": [
+        "Kompliyansı yüksek uzun solunum devreleri, devreye iletilen gaz hacmi ile hastaya iletilen gaz hacmi arasındaki farkı artırır.",
+        "Adjustable pressure-limiting (APL) valvi spontan ventilasyon sırasında tamamen açık olmalıdır.",
+        "Mapleson A tasarımı spontan ventilasyon için en verimli Mapleson devresidir.",
+        "Sodyum hidroksit tozunun solunma riskini en aza indirmek ve gaz akım direncini azaltmak için soda-lime’a sodyum hidroksit eklenmelidir.",
+        "Halka sistemindeki tek yönlü valflerden herhangi birinin arızalanması hiperkapniye neden olabilir."
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "Soda-lime granüllerinin sertliği silika eklenerek artırılır; bu, toz solunması riskini ve gaz akım direncini azaltır. Sodyum hidroksit bu amaçla eklenen madde değildir.",
+      "category": "Solunum Sistemleri",
+      "id": 28
+    },
+    {
+      "question": "Acil durumlarda kullanılan, Mapleson B ile aynı yapıda ama daha kompakt olan devre hangisidir?",
+      "options": [
+        "Mapleson A",
+        "Mapleson C (Waters)",
+        "Mapleson E",
+        "Mapleson F",
+        "Bain"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Mapleson C, kısa ve kompakt yapısı nedeniyle acil çantalarında ve transportta tercih edilir.",
+      "category": "Solunum Sistemleri",
+      "id": 29
+    },
+    {
+      "question": "Pediatrik bir vakada Jackson-Rees devresiyle manuel solutulan bir hastada, anestezi uzmanı rezervuar balonunun ucundaki tahliye valfini/açıklığı (tail) parmağıyla çok fazla kapalı tuttuğunu fark ediyor. Bu durumun hastadaki ilk fizyolojik sonucu ne olur?",
+      "options": [
+        "Karbondioksit retansiyonu (hiperkapni).",
+        "İntratorasik basınç artışı ve venöz dönüşün azalması (kardiyak debi düşüşü).",
+        "Oksijenizasyonun hızla bozulması.",
+        "Soda-lime'ın hızla tükenmesi.",
+        "Negatif basınçlı akciğer ödemi."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 4,
+      "explanation": "Mapleson F devresinde balonun ucundaki açıklık APL görevi görür. Buranın tamamen kapatılması, taze gazın devrede birikmesine ve yüksek basınç (barotravma riski) oluşturarak göğüs içi basıncı artırmasına, dolayısıyla kalbe kan dönüşünün engellenmesine yol açar.",
+      "category": "Solunum Sistemleri",
+      "id": 30
+    },
+    {
+      "question": "Soda-lime reaksiyonunun temel son ürünleri aşağıdakilerden hangisidir?",
+      "options": [
+        "Isı - Su - NaOH",
+        "Isı - NaOH – H₂CO₃",
+        "Isı – H₂O - CaCO₃",
+        "CaCO₃ - NaOH - Isı",
+        "NaOH – H₂O - CO"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "CO₂ absorpsiyonu sonucunda nötralizasyon ısısı, su ve kalsiyum karbonat açığa çıkar.",
+      "category": "Solunum Sistemleri",
+      "id": 31
+    },
+    {
+      "question": "Mapleson devreleri için verilen bilgilerden hangisi/hangileri doğrudur? I. Solunum hortum çapının geniş olması (22 mm) düşük dirençli bir yol oluşturur. II. Taze gaz akımı gereksinimini azaltmak için çoğu Mapleson devresinde solunum hortumu içindeki gaz hacmi en az hastanın tidal volümü kadar olmalıdır. III. Kompliyans, basınç değişikliği sonucu oluşan hacim değişikliği olarak tanımlanır. IV. Taze gaz girişinin göreceli konumu, Mapleson devrelerini birbirinden ayıran önemli bir faktördür.",
+      "options": [
+        "Yalnız I",
+        "I-II-III",
+        "II-IV",
+        "I-III",
+        "I-II-III-IV"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Verilen tüm önermeler Mapleson devrelerinin yapısı ve çalışma prensipleri açısından doğrudur.",
+      "category": "Solunum Sistemleri",
+      "id": 32
+    },
+    {
+      "question": "Mapleson devrelerinin sınıflandırılmasında en temel ayırt edici faktör nedir?",
+      "options": [
+        "Rezervuar balonunun boyutu",
+        "Hortumun uzunluğu",
+        "Taze gaz girişinin ve APL valfinin konumu",
+        "Kullanılan tek yönlü valf sayısı",
+        "Absorbanın tipi"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Mapleson A'dan F'ye kadar olan ayrım, bu bileşenlerin yerleşimine dayanır.",
+      "category": "Solunum Sistemleri",
+      "id": 33
+    },
+    {
+      "question": "Bain devresiyle kontrollü ventilasyon uygulanan bir hastada, ventilatör körüğünün (bellows) dolmadığı ve devre basıncının yükselmediği fark ediliyor. Taze gaz akımı normaldir. Bain devresinin yapısı düşünüldüğünde, bu kaçak veya arıza noktası neresi olamaz?",
+      "options": [
+        "Hasta ile Y konnektör arasındaki bağlantı.",
+        "Rezervuar balonunun bağlantı noktası.",
+        "İçteki taze gaz hortumunun ana makineye bağlandığı giriş noktası.",
+        "APL valfinin kendisi.",
+        "Solunum hortumunun dış katmanındaki bir delik."
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 4,
+      "explanation": "İçteki taze gaz hortumu koptuğunda veya sızdırdığında \"basınç kaybı\" (körüğün dolmaması) yaşanmaz; aksine gaz doğrudan dış hortuma dolar. Körüğün dolmaması için sistemde dışarıya doğru bir kaçak (A, B, D veya E şıklarındaki gibi) olması gerekir.",
+      "category": "Solunum Sistemleri",
+      "id": 34
+    },
+    {
+      "question": "Soda-lime granüllerinin sertliğini artırmak ve tozlaşmayı önlemek için eklenen madde hangisidir?",
+      "options": [
+        "Sodyum hidroksit",
+        "Kalsiyum klorür",
+        "Silika",
+        "Potasyum hidroksit",
+        "Sodyum peroksit"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Silika eklenmesi granüllerin sertliğini artırarak toz solunması riskini ve gaz akım direncini azaltır.",
+      "category": "Solunum Sistemleri",
+      "id": 35
+    },
+    {
+      "question": "Karbon monoksit (CO) oluşumu en fazla hangi durumda gözlenir?",
+      "options": [
+        "Nemli soda-lime ve sevofluran",
+        "Kuru soda-lime ve desfluran",
+        "Amsorb kullanımı",
+        "Yüksek taze gaz akımı",
+        "Spontan solunum"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Kurumuş soda-lime, desfluran ile karşılaştığında en yüksek oranda CO üretir.",
+      "category": "Solunum Sistemleri",
+      "id": 36
+    },
+    {
+      "question": "Compound A hakkında verilen bilgilerden hangisi/hangileri doğrudur? I. Sevofluran parçalanmasının yan ürünüdür. II. Yüksek sevofluran konsantrasyonu, uzamış maruziyet ve düşük akım anestezisi ile oluşumu artar. III. Hayvanlarda nefrotoksik olduğu gösterilmiştir. IV. Amsorb ile görülme sıklığı daha fazladır.",
+      "options": [
+        "Yalnız IV",
+        "II-IV",
+        "I-III",
+        "I-II-III",
+        "Hepsi"
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "Compound A sevofluranın parçalanma ürünüdür; yüksek sevofluran konsantrasyonu, uzun maruziyet ve düşük akım anestezisi oluşumunu artırır. Hayvanlarda nefrotoksisite gösterilmiştir. Amsorb ile görülme sıklığı daha fazla değildir.",
+      "category": "Solunum Sistemleri",
+      "id": 37
+    },
+    {
+      "question": "Aşağıdakilerden hangisi halka sisteminin temel bileşenlerinden biri değildir?",
+      "options": [
+        "CO₂ absorbanı",
+        "Taze gaz girişi",
+        "Y konnektör",
+        "Vaporizatör (devre dışında ise)",
+        "Çek-al (Draw-over) ünitesi"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Draw-over cihazları geri solumasız sistemlerdir ve halka sisteminin parçası değildir.",
+      "category": "Solunum Sistemleri",
+      "id": 38
+    },
+    {
+      "question": "Aşağıdakilerden hangisi Mapleson D devresinin koaksiyel bir versiyonudur?",
+      "options": [
+        "Mapleson E",
+        "Mapleson F",
+        "Mapleson C",
+        "Bain devresi",
+        "Halka sistemi"
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 2,
+      "explanation": "Bain devresi, taze gaz giriş hortumunun solunum hortumunun içine yerleştirildiği Mapleson D sisteminin koaksiyel versiyonudur.",
+      "category": "Solunum Sistemleri",
+      "id": 39
+    },
+    {
+      "question": "Bir anestezist, taze gaz tasarrufu sağlamak amacıyla halka sisteminde sevofluran kullanarak 0.5 L/dk akımla \"kapalı devreye yakın\" anestezi uygulamaktadır. Soda-lime haznesinin sıcaklığının normalden fazla arttığı ve hastanın 4 saattir bu sistemle ventile edildiği biliniyor. Bu senaryoda \"Compound A\" birikimini minimize etmek için klinisyen hangisini yapmalıydı?",
+      "options": [
+        "Taze gaz akımını en az 1-2 L/dk düzeyinde tutmalıydı.",
+        "Soda-lime yerine Baralyme kullanmalıydı.",
+        "Sevofluran konsantrasyonunu %4'ün üzerine çıkarmalıydı.",
+        "Absorbanın tamamen kurumasını beklemeliydi.",
+        "Nitröz oksit kullanımını durdurmalıydı."
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 4,
+      "explanation": "Sevofluran, bazik absorbanlarla (özellikle yüksek sıcaklıkta) etkileşime girerek Compound A üretir. Bunu önlemek için düşük akımlı anestezide TGA'nın 1-2 L/dk'nın altına düşürülmemesi önerilir.",
+      "category": "Solunum Sistemleri",
+      "id": 40
+    },
+    {
+      "question": "Halka (Circle) sisteminde tek yönlü valflerin arızalanması neye neden olur?",
+      "options": [
+        "Hipoksi",
+        "Hiperkapni",
+        "Hipotermi",
+        "Havayolu basıncında azalma",
+        "Alkaloz"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Valf arızası gazın tek yönde akışını bozar; hasta ekshale ettiği CO₂'yi geri solur (hiperkapni).",
+      "category": "Solunum Sistemleri",
+      "id": 41
+    },
+    {
+      "question": "Mapleson sistemlerinde taze gaz hortum çapının 22 mm olması neyi sağlar?",
+      "options": [
+        "Ölü boşluğun artmasını",
+        "Düşük dirençli bir yol oluşmasını",
+        "Kompliyansın artmasını",
+        "Isı kaybının önlenmesini",
+        "Gazların birbirine karışmasını"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Geniş çap, gaz akım direncini minimize eder.",
+      "category": "Solunum Sistemleri",
+      "id": 42
+    },
+    {
+      "question": "Kapalı sistem (Closed-circuit) anestezi uygulaması için taze gaz akımı nasıl ayarlanmalıdır?",
+      "options": [
+        "10 L/dk sabit",
+        "Sadece hastanın oksijen tüketimine eşit",
+        "Dakika ventilasyonunun yarısı",
+        "Vaporizatör ayarına bağlı olmaksızın 5 L/dk",
+        "APL valfi tamamen açıkken 2 L/dk"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Kapalı sistemde sadece hastanın metabolik oksijen ihtiyacı kadar gaz verilir.",
+      "category": "Solunum Sistemleri",
+      "id": 43
+    },
+    {
+      "question": "Kompliyansı yüksek uzun solunum devrelerinin kullanımı neye sebep olur?",
+      "options": [
+        "Hastaya giden gerçek tidal volümün artmasına",
+        "Ölü boşluğun azalmasına",
+        "İletilen gaz hacmi ile hastaya ulaşan hacim arasındaki farkın artmasına",
+        "Taze gaz ihtiyacının azalmasına",
+        "Direncin azalmasına"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Yüksek kompliyans, devrenin basınçla genişlemesine ve gazın devrede hapsolmasına neden olur.",
+      "category": "Solunum Sistemleri",
+      "id": 44
+    }
+  ]
+}

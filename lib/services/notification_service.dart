@@ -1,7 +1,5 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:timezone/timezone.dart' as tz;
-import 'package:timezone/data/latest.dart' as tz;
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -14,31 +12,10 @@ class NotificationService {
   final FlutterLocalNotificationsPlugin _notifications = FlutterLocalNotificationsPlugin();
   final FirebaseMessaging _fcm = FirebaseMessaging.instance;
   
+  // Artik sunucu tarafi yonetimi oldugu icin schedule key'e ihtiyac yok ama uyumluluk icin kalsin
   static const String NOTIFICATION_SCHEDULED_KEY = 'notification_scheduled';
 
-  // Bildirim saatleri için getter'lar
-  List<tz.TZDateTime> get _notificationTimes {
-    final turkeyTime = tz.getLocation('Europe/Istanbul');
-    final now = tz.TZDateTime.now(turkeyTime);
-    
-    // Normal bildirim: 19:00
-    final normalTime = tz.TZDateTime(turkeyTime, now.year, now.month, now.day, 19, 0);
-    
-    final scheduledTimes = [normalTime].map((time) {
-      if (time.isBefore(now)) {
-        final nextDay = time.add(const Duration(days: 1));
-        return nextDay;
-      } else {
-        return time;
-      }
-    }).toList();
-
-    return scheduledTimes;
-  }
-
   Future<void> initialize() async {
-    tz.initializeTimeZones();
-
     const androidSettings = AndroidInitializationSettings('@mipmap/launcher_icon');
     
     const iosSettings = DarwinInitializationSettings(
@@ -60,6 +37,23 @@ class NotificationService {
         }
       },
     );
+
+    // Android bildirim kanalını sisteme kaydet (Arka plan bildirimleri için kritik)
+    final AndroidFlutterLocalNotificationsPlugin? androidImplementation =
+        _notifications.resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>();
+    
+    if (androidImplementation != null) {
+      const AndroidNotificationChannel channel = AndroidNotificationChannel(
+        'remote_notifications',
+        'Duyurular',
+        description: 'Uygulama yöneticisinden gelen bildirimler',
+        importance: Importance.max,
+        playSound: true,
+        enableVibration: true,
+        showBadge: true,
+      );
+      await androidImplementation.createNotificationChannel(channel);
+    }
     
     // İzinleri iste
     await requestPermissions();
@@ -67,28 +61,17 @@ class NotificationService {
     // FCM Kurulumu
     await _setupFCM();
     
-    // Bildirimlerin planlanıp planlanmadığını kontrol et
-    final prefs = await SharedPreferences.getInstance();
-    final isScheduled = prefs.getBool(NOTIFICATION_SCHEDULED_KEY) ?? false;
-    
-    if (!isScheduled) {
-      await scheduleDailyNotification();
-      await prefs.setBool(NOTIFICATION_SCHEDULED_KEY, true);
-    } else {
-      final pendingNotifications = await _notifications.pendingNotificationRequests();
-      if (pendingNotifications.isEmpty) {
-        await scheduleDailyNotification();
-      }
-    }
+    // Yerel planlamalari temizle (Sunucu tarafına geçildi)
+    await cancelAllNotifications();
   }
 
   Future<void> _setupFCM() async {
     try {
-      // Genel duyurular için konuya abone ol
+      // Genel duyurular için konuya abone ol (Sadece all_users yeterli, diğerleri dile göre)
       await _fcm.subscribeToTopic('all_users');
-      await _fcm.subscribeToTopic('announcements');
 
       // Ön planda bildirim ayarları (iOS)
+      // Burada sadece alert ve sound bırakıyoruz, badge'i sistem yönetsin
       await _fcm.setForegroundNotificationPresentationOptions(
         alert: true,
         badge: true,
@@ -97,6 +80,13 @@ class NotificationService {
 
       // Ön planda mesaj geldiğinde
       FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+        // iOS'ta setForegroundNotificationPresentationOptions zaten gösterdiği için 
+        // burada tekrar manuel gösterirsek ÇİFT BİLDİRİM olur.
+        if (defaultTargetPlatform == TargetPlatform.iOS) {
+          debugPrint('iOS foreground notification handled by system presentation options');
+          return;
+        }
+
         if (message.notification != null) {
           showRemoteNotification(
             title: message.notification?.title ?? '',
@@ -116,20 +106,43 @@ class NotificationService {
       if (initialMessage != null) {
         debugPrint('Notification opened from terminated state: ${initialMessage.notification?.title}');
       }
+
+      // Mevcut dile göre abonelikleri ayarla
+      await updateSubscriptionsByLanguage();
     } catch (e) {
       debugPrint('Error setting up FCM: $e');
     }
   }
 
+  Future<void> updateSubscriptionsByLanguage() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final language = prefs.getString('selected_language') ?? 'tr';
+      
+      // Temizlik: Eskiden kalmış olabilecek genel abonelikleri temizle
+      await _fcm.unsubscribeFromTopic('announcements');
+      
+      if (language == 'tr') {
+        await _fcm.subscribeToTopic('all_users_tr');
+        await _fcm.unsubscribeFromTopic('all_users_en');
+        debugPrint('Subscribed to all_users_tr');
+      } else {
+        await _fcm.subscribeToTopic('all_users_en');
+        await _fcm.unsubscribeFromTopic('all_users_tr');
+        debugPrint('Subscribed to all_users_en');
+      }
+    } catch (e) {
+      debugPrint('Error updating language subscriptions: $e');
+    }
+  }
+
   Future<bool> requestPermissions() async {
-    // Firebase Messaging izni iste
     NotificationSettings settings = await _fcm.requestPermission(
       alert: true,
       badge: true,
       sound: true,
     );
     
-    // iOS yerel bildirim izni
     if (await _notifications.resolvePlatformSpecificImplementation<IOSFlutterLocalNotificationsPlugin>() != null) {
       await _notifications.resolvePlatformSpecificImplementation<IOSFlutterLocalNotificationsPlugin>()
           ?.requestPermissions(
@@ -139,7 +152,6 @@ class NotificationService {
       );
     }
 
-    // Android 13 ve üzeri için izinleri iste
     final AndroidFlutterLocalNotificationsPlugin? androidImplementation =
         _notifications.resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>();
     
@@ -150,60 +162,7 @@ class NotificationService {
     return settings.authorizationStatus == AuthorizationStatus.authorized;
   }
 
-  Future<void> scheduleDailyNotification() async {
-    try {
-      const androidDetails = AndroidNotificationDetails(
-        'daily_reminder',
-        'Günlük Hatırlatıcı',
-        channelDescription: 'Günlük quiz hatırlatıcısı',
-        importance: Importance.max,
-        priority: Priority.high,
-        enableVibration: true,
-        playSound: true,
-        showWhen: true,
-        autoCancel: false,
-        ongoing: false,
-        channelShowBadge: true,
-        icon: '@mipmap/launcher_icon',
-        enableLights: true,
-        ledColor: Colors.blue,
-        ledOnMs: 1000,
-        ledOffMs: 500,
-      );
-
-      const iosDetails = DarwinNotificationDetails(
-        presentAlert: true,
-        presentBadge: true,
-        presentSound: true,
-      );
-
-      const details = NotificationDetails(
-        android: androidDetails,
-        iOS: iosDetails,
-      );
-
-      final scheduledTimes = _notificationTimes;
-      
-      for (int i = 0; i < scheduledTimes.length; i++) {
-        final scheduledTime = scheduledTimes[i];
-        final notificationId = 1000 + i;
-        
-        await _notifications.zonedSchedule(
-          notificationId,
-          'Günlük Quiz Zamanı! 📚',
-          'Bugünkü anestezi sorularını çözmeyi unutmayın!',
-          scheduledTime,
-          details,
-          androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
-          uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
-          matchDateTimeComponents: DateTimeComponents.time,
-        );
-      }
-    } catch (e) {
-      debugPrint('Bildirim planlama hatası: $e');
-    }
-  }
-
+  // Yerel planlama metodu sunucu tarafına geçildiği için devre dışı
   Future<void> cancelAllNotifications() async {
     await _notifications.cancelAll();
     final prefs = await SharedPreferences.getInstance();

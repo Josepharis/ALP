@@ -25,47 +25,52 @@ class OphthalmicSurgeryAnesthesiaCategory {
 }
 
 class OphthalmicSurgeryAnesthesiaData {
-  static List<OphthalmicSurgeryAnesthesiaCategory> getOphthalmicSurgeryAnesthesiaData(BuildContext context) {
+  static List<OphthalmicSurgeryAnesthesiaCategory>
+      getOphthalmicSurgeryAnesthesiaData(BuildContext context) {
     return [
       OphthalmicSurgeryAnesthesiaCategory(
         categoryName: 'Intraocular Pressure (IOP) Dynamics',
         items: [
           OphthalmicSurgeryAnesthesiaItem(
-            title: 'Normal IOP',
-            description: '12–20 mmHg',
+            title: "NORMAL IOP VALUES AND RANGE (12-20 MMHG)",
+            description: "In a healthy individual, intraocular pressure (IOP) normally remains stable between 12 and 20 mmHg.",
+            additionalInfo: "Maintenance of this pressure is critical for retinal perfusion and the anatomical integrity of the eye.",
           ),
           OphthalmicSurgeryAnesthesiaItem(
-            title: 'Blinking Effect',
-            description: '+5 mmHg',
+            title: "EFFECT OF EYE MOVEMENTS ON IOP",
+            description: "A simple blink increases pressure by +5 mmHg, while severe squinting or squeezing can raise it up to 50 mmHg.",
+            additionalInfo: "Contraction of extraocular muscles directly increases pressure on the globe.",
           ),
           OphthalmicSurgeryAnesthesiaItem(
-            title: 'Squinting Effect',
-            description: 'Up to +50 mmHg',
+            title: "EFFECT OF VOLATILE AGENTS ON IOP",
+            description: "Inhalational agents reduce IOP both by lowering systemic blood pressure and by relaxing extraocular muscles.",
+            additionalInfo: "These agents are advantageous for providing low IOP during eye surgery.",
           ),
           OphthalmicSurgeryAnesthesiaItem(
-            title: 'Volatile Agents',
-            description: '↓ IOP (lower BP + extraocular muscle relaxation)',
+            title: "IV AGENTS AND THE SPECIAL CASE OF KETAMINE",
+            description: "While most intravenous anesthetics lower IOP, Ketamine may increase it due to sympathetic activation and increased eye muscle tone.",
+            subtitle: "Caution should be exercised against pressure increases in inductions with Ketamine",
+            additionalInfo: "Propofol, thiopental, and etomidate significantly lower IOP.",
           ),
           OphthalmicSurgeryAnesthesiaItem(
-            title: 'IV Agents',
-            description: 'Except ketamine → ↓ IOP',
-            subtitle: 'Ketamine → ↑ IOP (use with caution)',
+            title: "SUCCINYLCHOLINE AND IOP INCREASE (+5-10 MMHG)",
+            description: "Following the use of Succinylcholine, an increase in pressure is observed for 5-10 minutes due to tonic contraction in extraocular muscles.",
+            additionalInfo: "Extracellular calcium influx and choroidal vasodilation also play a role in this increase.",
           ),
           OphthalmicSurgeryAnesthesiaItem(
-            title: 'Succinylcholine',
-            description: '+5–10 mmHg for 5–10 min',
+            title: "SAFETY OF NON-DEPOLARIZING NMB AGENTS",
+            description: "Non-depolarizing neuromuscular blockers like Rocuronium and Vecuronium do not affect intraocular pressure.",
+            additionalInfo: "They are preferred in open-eye injuries where pressure increase is undesirable.",
           ),
           OphthalmicSurgeryAnesthesiaItem(
-            title: 'Non-depolarizing NMBs',
-            description: 'No effect on IOP',
+            title: "TOPICAL ANTICHOLINERGICS AND GLAUCOMA RISK",
+            description: "Atropine drops applied to the eye can cause mydriasis and raise pressure to dangerous levels in patients with closed-angle glaucoma.",
+            additionalInfo: "They can trigger an acute glaucoma crisis by impairing the drainage of aqueous humor.",
           ),
           OphthalmicSurgeryAnesthesiaItem(
-            title: 'Topical Anticholinergics',
-            description: 'Atropine drops → mydriasis → may trigger angle-closure glaucoma',
-          ),
-          OphthalmicSurgeryAnesthesiaItem(
-            title: 'Systemic Anticholinergics',
-            description: 'Atropine/glycopyrrolate → not associated with ↑ IOP',
+            title: "SYSTEMIC ANTICHOLINERGICS AND IOP RELATIONSHIP",
+            description: "Systemic doses of agents like Atropine or Glycopyrrolate given intravenously have not been associated with an increase in IOP.",
+            additionalInfo: "These agents can be safely used to protect against the oculocardiac reflex.",
           ),
         ],
       ),
@@ -73,27 +78,31 @@ class OphthalmicSurgeryAnesthesiaData {
         categoryName: 'Oculocardiac Reflex (OCR)',
         items: [
           OphthalmicSurgeryAnesthesiaItem(
-            title: 'Mechanism',
-            description: 'Trigeminal (V1) afferent → vagal efferent',
+            title: "OCR MECHANISM: TRIGEMINAL (AFF) - VAGAL (EFF)",
+            description: "The afferent pathway of the reflex triggered by pressure on the globe or traction of extraocular muscles is Trigeminal (V1), and the efferent pathway is Vagus.",
+            additionalInfo: "It creates a parasympathetic activation similar to the 'Bezold-Jarisch-like' reflex.",
           ),
           OphthalmicSurgeryAnesthesiaItem(
-            title: 'Most Common In',
-            description: 'Pediatric strabismus surgery',
+            title: "OPERATIONS WHERE OCR IS MOST COMMONLY SEEN (PEDIATRIC STRABISMUS)",
+            description: "The reflex is most commonly seen in strabismus surgeries performed in the pediatric age group and during retrobulbar block applications.",
+            additionalInfo: "Especially traction of the medial rectus muscle is the strongest trigger.",
           ),
           OphthalmicSurgeryAnesthesiaItem(
-            title: 'Clinical Manifestations',
-            description: 'Bradycardia, AV block, asystole, arrhythmias',
+            title: "OCR CLINICAL FINDINGS AND ARRHYTHMIAS",
+            description: "Its classic finding is bradycardia; it can also lead to AV block, ventricular ectopies, asystole, and other serious arrhythmias.",
+            additionalInfo: "Continuous ECG monitoring is of vital importance in these surgeries.",
           ),
           OphthalmicSurgeryAnesthesiaItem(
-            title: 'Prevention',
-            description: 'Anticholinergic premedication (atropine/glycopyrrolate), deep anesthesia, retrobulbar block',
-            subtitle: 'Retrobulbar block itself may trigger OCR',
+            title: "PREVENTION OF OCR AND PREMEDICATION STRATEGIES",
+            description: "Anticholinergic premedication (atropine), maintenance of deep anesthesia, and sometimes retrobulbar block can reduce the risk of OCR.",
+            subtitle: "However, it should be remembered that the application of retrobulbar block itself can trigger OCR",
+            additionalInfo: "IV Atropine can be used prophylactically at a dose of 10 mcg/kg.",
           ),
           OphthalmicSurgeryAnesthesiaItem(
-            title: 'Management Steps',
-            description: 'Stop surgical manipulation',
-            subtitle: 'Ensure ventilation + oxygenation',
-            additionalInfo: 'Atropine 10 mcg/kg IV\nResistant cases → local anesthetic injection into rectus muscle',
+            title: "OCR TREATMENT STEPS AND EMERGENCY INTERVENTION",
+            description: "The first step when arrhythmia develops is immediate cessation of surgical manipulation and checking the patient's ventilation/oxygenation.",
+            subtitle: "In resistant cases, IV Atropine and local anesthetic injection into the rectus muscle are applied",
+            additionalInfo: "The surgeon should be warned to proceed carefully when arrhythmia stops; the reflex is fatiguable in nature.",
           ),
         ],
       ),
@@ -101,25 +110,21 @@ class OphthalmicSurgeryAnesthesiaData {
         categoryName: 'Intraocular Gas Expansion',
         items: [
           OphthalmicSurgeryAnesthesiaItem(
-            title: 'Use',
-            description: 'Retinal/vitreous surgery',
+            title: "GAS INJECTION IN VITREORETINAL SURGERY",
+            description: "In retinal detachment or vitreous surgeries, air or gases like SF6/C3F8 are injected into the globe for tamponade purposes.",
+            additionalInfo: "These gases act as a bubble to keep retinal layers in place.",
           ),
           OphthalmicSurgeryAnesthesiaItem(
-            title: 'Mechanism',
-            description: 'N₂O diffuses into bubble → expansion → ↑ IOP',
+            title: "N2O (NITROUS OXIDE) AND GAS BUBBLE INTERACTION",
+            description: "Nitrous oxide (N2O) diffuses rapidly into the gas bubble in the eye due to the gas pressure difference in the blood, increasing bubble volume.",
+            subtitle: "In the case of 70% N2O use, the bubble volume triples within 30 minutes and increases IOP uncontrollably",
+            additionalInfo: "This situation can lead to vision loss by impairing retinal perfusion.",
           ),
           OphthalmicSurgeryAnesthesiaItem(
-            title: 'Volume Expansion',
-            description: 'With 70% N₂O → bubble volume triples within 30 min',
-          ),
-          OphthalmicSurgeryAnesthesiaItem(
-            title: 'Timing',
-            description: 'N₂O must be stopped ≥15 min before air injection',
-          ),
-          OphthalmicSurgeryAnesthesiaItem(
-            title: 'Post-op Considerations',
-            description: 'Contraindicated postop until gas is absorbed',
-            subtitle: 'Risk of retinal detachment → caution',
+            title: "N2O DISCONTINUATION TIME AND PRECAUTIONS (>=15 MIN)",
+            description: "N2O must be stopped at least 15 minutes before intraocular gas injection and its use is contraindicated until the gas is absorbed in the postoperative period.",
+            subtitle: "N2O should be avoided for 5 days for air, 10 days for SF6, and 30 days for C3F8",
+            additionalInfo: "Attaching warning bracelets to patients regarding this issue is a safe approach.",
           ),
         ],
       ),
@@ -127,20 +132,24 @@ class OphthalmicSurgeryAnesthesiaData {
         categoryName: 'Systemic Effects of Ophthalmic Drugs',
         items: [
           OphthalmicSurgeryAnesthesiaItem(
-            title: 'Phenylephrine (2.5%)',
-            description: 'HT, tachycardia, arrhythmia in children/elderly',
+            title: "PHENYLEPHRINE (2.5%) AND SYSTEMIC BLOOD PRESSURE EFFECT",
+            description: "Topically applied Phenylephrine can cause severe hypertension, tachycardia, and arrhythmia, especially in children and the elderly.",
+            additionalInfo: "Cardiac patients should be monitored closely due to its systemic vasoconstrictor effects.",
           ),
           OphthalmicSurgeryAnesthesiaItem(
-            title: 'Echothiophate',
-            description: 'Irreversible cholinesterase inhibitor → prolongs succinylcholine t½ (3–7 weeks)',
+            title: "ECHOTHIOPHATE AND PSEUDOCHOLINESTERASE INHIBITION",
+            description: "Echothiophate, an irreversible cholinesterase inhibitor, causes severe pseudocholinesterase deficiency that can prolong the Succinylcholine effect up to 3-7 weeks.",
+            additionalInfo: "The use of Succinylcholine in those using this drug prolongs apnea to a dangerous extent.",
           ),
           OphthalmicSurgeryAnesthesiaItem(
-            title: 'Epinephrine Drops',
-            description: 'HT, tachycardia, dysrhythmia (systemic absorption)',
+            title: "EPINEPHRINE DROPS AND DYSRHYTHMIA RISK",
+            description: "There is a risk of hypertension, tachycardia, and dysrhythmia developing depending on systemic absorption in intraocular surgery.",
+            additionalInfo: "Sensitivity to epinephrine may increase if halogenated anesthetics are used.",
           ),
           OphthalmicSurgeryAnesthesiaItem(
-            title: 'Timolol',
-            description: '↓ IOP but systemic absorption → bradycardia, AV block',
+            title: "TIMOLOL AND BETA-BLOCKER SIDE EFFECTS (BRADYCARDIA)",
+            description: "Systemic absorption of Timolol, used to lower eye pressure, can lead to cardiac complications like bradycardia and AV block.",
+            additionalInfo: "It can also trigger bronchospasm in asthmatic patients.",
           ),
         ],
       ),
@@ -148,96 +157,128 @@ class OphthalmicSurgeryAnesthesiaData {
         categoryName: 'General Anesthesia for Ophthalmic Surgery',
         items: [
           OphthalmicSurgeryAnesthesiaItem(
-            title: 'Premedication',
-            description: 'Consider age + comorbidities',
+            title: "PREOPERATIVE PREPARATION AND COMORBIDITY FOLLOW-UP",
+            description: "Since patients undergoing eye surgery are usually in advanced age, their cardiac and diabetic status should be optimized beforehand.",
+            additionalInfo: "Hypertension and coronary artery disease often accompany these patients.",
           ),
           OphthalmicSurgeryAnesthesiaItem(
-            title: 'Induction',
-            description: 'Deep anesthesia during intubation → prevents IOP rise',
+            title: "IOP CONTROL DURING INDUCTION",
+            description: "Intubation should be performed after deep anesthesia is provided to suppress the IOP increase created by laryngoscopy.",
+            subtitle: "Although the use of sch in open-eye injuries is controversial, practically no vitreous loss is observed",
+            additionalInfo: "Agents that lower IOP (Propofol etc.) should be preferred in induction.",
           ),
           OphthalmicSurgeryAnesthesiaItem(
-            title: 'Succinylcholine in Open-globe Surgery',
-            description: 'Controversial; vitreous loss not proven',
+            title: "INTRAOPERATIVE MONITORING AND DIFF. FROM MH",
+            description: "While OCR follow-up is done with ECG, End-tidal CO2 follow-up is important against the possibility of Malignant Hyperthermia (MH).",
+            additionalInfo: "Temperature monitoring should also be part of standard monitoring.",
           ),
           OphthalmicSurgeryAnesthesiaItem(
-            title: 'Monitoring',
-            description: 'ECG (for OCR)',
-            subtitle: 'End-tidal CO₂ (differentiate from MH)',
-            additionalInfo: 'Temperature',
+            title: "ANESTHESIA MAINTENANCE AND EYE AKINESIA",
+            description: "For successful surgery, absolute immobility of the eye is targeted by providing sufficient NMB levels with volatile agents and opioids.",
+            additionalInfo: "The 'upward gaze' of the eye during surgery (Bell's phenomenon) must be controlled.",
           ),
           OphthalmicSurgeryAnesthesiaItem(
-            title: 'Maintenance',
-            description: 'Volatile agents, opioids, sufficient NMB to prevent eye movement',
+            title: "PONV PROPHYLAXIS AND COMBINED TREATMENT",
+            description: "The risk of Postoperative Nausea and Vomiting (PONV) is high in eye surgeries; 5-HT3 antagonists and dexamethasone are frequently used.",
+            subtitle: "Ondansetron/Granisetron ± 8–10 mg Dexamethasone is standard prophylaxis",
+            additionalInfo: "Nausea must absolutely be controlled to prevent secondary increase in intraocular pressure.",
           ),
           OphthalmicSurgeryAnesthesiaItem(
-            title: 'PONV Prophylaxis',
-            description: 'Ondansetron/granisetron (5-HT3 antagonists) ± dexamethasone (8–10 mg)',
-          ),
-          OphthalmicSurgeryAnesthesiaItem(
-            title: 'Extubation',
-            description: 'At intermediate depth → avoids coughing/straining',
-            subtitle: 'Lidocaine 1.5 mg/kg IV 1–2 min before extubation may help',
-          ),
-        ],
-      ),
-      OphthalmicSurgeryAnesthesiaCategory(
-        categoryName: 'Regional Anesthesia for Ophthalmic Surgery',
-        items: [
-          OphthalmicSurgeryAnesthesiaItem(
-            title: 'Retrobulbar Block - Technique',
-            description: 'Lower eyelid, lateral 1/3 → 25G needle 3.5 cm → 2–5 mL LA',
-          ),
-          OphthalmicSurgeryAnesthesiaItem(
-            title: 'Retrobulbar Block - LA',
-            description: '2% lidocaine, 0.75% bupivacaine',
-          ),
-          OphthalmicSurgeryAnesthesiaItem(
-            title: 'Retrobulbar Block - Success',
-            description: 'Akinesia + OCR abolished',
-          ),
-          OphthalmicSurgeryAnesthesiaItem(
-            title: 'Retrobulbar Block - Complications',
-            description: 'Nerve injury, seizures, intravascular injection, apnea (onset 20 min, recovery ~1 h)',
-          ),
-          OphthalmicSurgeryAnesthesiaItem(
-            title: 'Retrobulbar Block - Contraindications',
-            description: 'Coagulopathy, high myopia, open-globe injury',
-          ),
-          OphthalmicSurgeryAnesthesiaItem(
-            title: 'Peribulbar Block',
-            description: 'Safer (↓ risk of optic nerve/artery injury)',
-            subtitle: 'Disadvantage: slower onset',
-            additionalInfo: 'Applied along lateral canthus–limbus line',
-          ),
-          OphthalmicSurgeryAnesthesiaItem(
-            title: 'Sub-Tenon (Episcleral) Block',
-            description: 'LA into sub-Tenon space',
-            subtitle: 'Lower complication risk',
-          ),
-          OphthalmicSurgeryAnesthesiaItem(
-            title: 'Facial Nerve Block',
-            description: 'Prevents eyelid movement',
-            subtitle: 'Nadbath technique: may block glossopharyngeal + vagus → airway risk',
-          ),
-          OphthalmicSurgeryAnesthesiaItem(
-            title: 'Topical Anesthesia',
-            description: 'For superficial procedures (e.g., cataract)',
-          ),
-          OphthalmicSurgeryAnesthesiaItem(
-            title: 'IV Sedation',
-            description: 'Deep sedation not recommended',
-            subtitle: 'Light sedation: midazolam 1–2 mg + low-dose opioid ± propofol/etomidate',
+            title: "EXTUBATION MANAGEMENT AND USE OF LIDOCAINE",
+            description: "Since coughing-straining (valsalva) increases IOP excessively, extubation should be done at intermediate depth and with lidocaine support.",
+            subtitle: "Airway reflexes can be softened by giving 1.5 mg/kg lidocaine IV 1–2 minutes before extubation",
+            additionalInfo: "A smooth emergence is critical for the stability of surgical sutures.",
           ),
         ],
       ),
       OphthalmicSurgeryAnesthesiaCategory(
-        categoryName: 'Key Exam Spots',
+        categoryName: 'Retrobulbar Block',
         items: [
           OphthalmicSurgeryAnesthesiaItem(
-            title: 'SUMMARY SPOT QUESTIONS',
-            description: 'Normal IOP: 12–20 mmHg',
-            subtitle: 'Succinylcholine → +5–10 mmHg for 5–10 min',
-            additionalInfo: 'OCR: Trigeminal (V1) afferent → vagal efferent\nN₂O with 70% → bubble volume triples within 30 min\nEchothiophate → prolongs succinylcholine t½ (3–7 weeks)\nRetrobulbar block: 25G needle 3.5 cm → 2–5 mL LA',
+            title: "RETROBULBAR BLOCK TECHNIQUE AND APPLICATION (25G NEEDLE)",
+            description: "2-5 mL of local anesthetic is injected starting from the lateral 1/3 of the lower eyelid to a depth of 3.5 cm with a 25G needle.",
+            additionalInfo: "Local anesthetic is given into the muscle cone to provide sensory and motor block.",
+          ),
+          OphthalmicSurgeryAnesthesiaItem(
+            title: "LOCAL ANESTHETICS PREFERRED IN THE BLOCK",
+            description: "Usually combinations of 2% lidocaine and 0.75% bupivacaine are used; adrenaline can be added to slow down absorption.",
+            additionalInfo: "Hyaluronidase can also be added to increase block quality.",
+          ),
+          OphthalmicSurgeryAnesthesiaItem(
+            title: "SUCCESSFUL BLOCK CRITERIA AND AKINESIA",
+            description: "Provision of complete motor akinesia in the eye and loss of oculocardiac reflex after the block indicate the success of the block.",
+            additionalInfo: "Sense of pain is completely eliminated in the patient.",
+          ),
+          OphthalmicSurgeryAnesthesiaItem(
+            title: "RETROBULBAR BLOCK COMPLICATIONS AND APNEA",
+            description: "The most feared complications are nerve injury, intravascular injection, and late apnea that can develop after 20 minutes.",
+            subtitle: "The apnea picture usually resolves spontaneously within 1 hour",
+            additionalInfo: "Surgical canthotomy may be required in case of retrobulbar hemorrhage.",
+          ),
+          OphthalmicSurgeryAnesthesiaItem(
+            title: "BLOCK CONTRAINDICATIONS AND MYOPIA RISK",
+            description: "Block should be avoided in coagulopathy, advanced axial myopia (globe length is long), and open-eye injury.",
+            additionalInfo: "Risk of globe perforation is significantly increased in those with myopia.",
+          ),
+        ],
+      ),
+      OphthalmicSurgeryAnesthesiaCategory(
+        categoryName: 'Other Regional Techniques',
+        items: [
+          OphthalmicSurgeryAnesthesiaItem(
+            title: "PERIBULBAR BLOCK AND SAFETY ADVANTAGE",
+            description: "Since the needle is applied outside the muscle cone, the risk of optic nerve and vessel injury is lower compared to retrobulbar block.",
+            additionalInfo: "It is considered a less invasive method.",
+          ),
+          OphthalmicSurgeryAnesthesiaItem(
+            title: "DISADVANTAGE OF PERIBULBAR BLOCK (LATENT EFFECT)",
+            description: "LA diffusion takes time due to injection outside the muscle cone and block effect starts later.",
+            additionalInfo: "Usually requires higher volume of LA.",
+          ),
+          OphthalmicSurgeryAnesthesiaItem(
+            title: "PERIBULBAR BLOCK APPLICATION LINE",
+            description: "Application is done from the lateral canthus-limbus line; two separate injection points can be preferred.",
+            additionalInfo: "Facial nerve blockade is usually provided together with this technique.",
+          ),
+          OphthalmicSurgeryAnesthesiaItem(
+            title: "SUB-TENON (EPISCLERAL) BLOCK TECHNIQUE",
+            description: "Administration of local anesthetic into the peribulbar space with the help of a blunt cannula placed under Tenon's fascia.",
+            additionalInfo: "Applied by entering from under the conjunctiva.",
+          ),
+          OphthalmicSurgeryAnesthesiaItem(
+            title: "ADVANTAGES OF SUB-TENON BLOCK",
+            description: "It is considered one of the safest regional techniques as it does not carry a risk of needle perforation.",
+            additionalInfo: "Ideal for minimally invasive surgeries.",
+          ),
+          OphthalmicSurgeryAnesthesiaItem(
+            title: "FACIAL NERVE BLOCK AND LID AKINESIA",
+            description: "Prevents sudden closure of the eyelid (blinking) during surgery by paralyzing the orbicularis oculi muscle.",
+            additionalInfo: "Retrobulbar block alone may not stop lid movements.",
+          ),
+          OphthalmicSurgeryAnesthesiaItem(
+            title: "NADBATH TECHNIQUE AND AIRWAY RISK",
+            description: "A technique for blocking the facial nerve at its exit from the stylomastoid foramen; however, it carries a risk of glossopharyngeal and vagus nerve blockade.",
+            additionalInfo: "Not frequently preferred due to the risk of airway obstruction.",
+          ),
+        ],
+      ),
+      OphthalmicSurgeryAnesthesiaCategory(
+        categoryName: 'Topical and Sedation',
+        items: [
+          OphthalmicSurgeryAnesthesiaItem(
+            title: "USES OF TOPICAL ANESTHESIA",
+            description: "In non-invasive superficial procedures like cataract (phacoemulsification), anesthesia can be provided with drops dripped onto the cornea.",
+            additionalInfo: "Patient cooperation is of vital importance in this technique.",
+          ),
+          OphthalmicSurgeryAnesthesiaItem(
+            title: "RISKS OF DEEP SEDATION AND THINGS TO AVOID",
+            description: "Deep sedation is not recommended in eye surgery due to sudden awakening, movement, or snoring (shakes the eye) of the patient.",
+            additionalInfo: "Sudden movements in intraocular surgery can lead to permanent vision loss.",
+          ),
+          OphthalmicSurgeryAnesthesiaItem(
+            title: "LIGHT SEDATION AND AGENT COMBINATIONS",
+            description: "Midazolam 1-2 mg and low-dose opioid combinations (remifentanil etc.) can be preferred for comfort.",
+            additionalInfo: "Light 'conscious sedation' techniques supported with Propofol or Etomidate can be applied.",
           ),
         ],
       ),

@@ -1,0 +1,731 @@
+{
+  "meta": {
+    "title": "Anestezi İş İstasyonu Soru Bankası",
+    "language": "tr",
+    "category": "Anestezi İş İstasyonu",
+    "questionCount": 48,
+    "randomized": true
+  },
+  "questions": [
+    {
+      "question": "Halka sisteminde tek yönlü valflerden birinin açık pozisyonda takılı kalması kapnografide neye neden olur?",
+      "options": [
+        "EtCO₂ değerinin aniden 0’a düşmesine",
+        "Kapnogram dalga boyunun kısalmasına",
+        "İnspiratuar kolda bazal hattın yükselmesine",
+        "Solunum hızının düşük ölçülmesine",
+        "Plato fazının uzamasına"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Tek yönlü valf bozulduğunda hasta ekshale ettiği CO₂ içeren gazı tekrar inhale eder. Bu durum kapnografide bazal hattın 0’a inmemesiyle, yani rebreathing ile sonuçlanır.",
+      "category": "Anestezi İş İstasyonu",
+      "id": 1
+    },
+    {
+      "question": "Ameliyathanede elektrik kesintisi sonrası cihaz batarya moduna geçiyor ve desfluran vaporizatörü Low Agent ve No Heat alarmları vererek çalışmayı durduruyor. Bu durumun temel sebebi nedir?",
+      "options": [
+        "Desfluranın kaynama noktasının 39°C olması",
+        "Cihazın sadece elektrikli ısıtma ve basınçlandırma ile gaz fazı üretebilmesi",
+        "Batarya modunda sadece oksijen akışına izin verilmesi",
+        "Desfluranın yerçekimi prensibiyle çalışmaması",
+        "Elektronik flowmeterların bataryayı korumak için kapanması"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 4,
+      "explanation": "Tec 6 gibi desfluran vaporizatörleri elektrikle ısıtılır ve desfluranı basınçlı bir haznede tutar. Isıtma durduğunda güvenlik nedeniyle cihaz devre dışı kalır.",
+      "category": "Anestezi İş İstasyonu",
+      "id": 2
+    },
+    {
+      "question": "Ameliyathane havasındaki N₂O oda konsantrasyonu en fazla kaç ppm ile sınırlandırılmalıdır?",
+      "options": [
+        "0.5 ppm",
+        "2 ppm",
+        "10 ppm",
+        "25 ppm",
+        "50 ppm"
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 2,
+      "explanation": "Personel güvenliği için ameliyathane havasındaki N₂O konsantrasyonunun 25 ppm değerini aşmaması önerilir.",
+      "category": "Anestezi İş İstasyonu",
+      "id": 3
+    },
+    {
+      "question": "Ameliyathane odasında N₂O oda konsantrasyonunun en fazla kaç ppm ile sınırlandırılması gerekir?",
+      "options": [
+        "5",
+        "10",
+        "15",
+        "20",
+        "25"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 2,
+      "explanation": "Personel güvenliği için nitröz oksit oda konsantrasyonunun 25 ppm ile, halojenli ajanların ise genellikle 2 ppm ile sınırlandırılması önerilir.",
+      "category": "Anestezi İş İstasyonu",
+      "id": 4
+    },
+    {
+      "question": "Pik inspirasyon basıncı (Ppeak) ile plato basıncı (Pplateau) arasındaki farkın artması öncelikle hangi durumu yansıtır?",
+      "options": [
+        "Akciğer kompliyansının arttığını",
+        "Statik kompliyansın bozulduğunu",
+        "Havayolu direncinin arttığını",
+        "Tidal hacmin gereksiz yüksek ayarlandığını",
+        "PEEP seviyesinin yetersiz olduğunu"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Pik basınç dinamik özelliklerden, plato basıncı ise statik kompliyanstan etkilenir. Aradaki farkın artması genellikle havayolu direncindeki artışı, örneğin bronkospazm veya sekresyonu düşündürür.",
+      "category": "Anestezi İş İstasyonu",
+      "id": 5
+    },
+    {
+      "question": "Solunum devresinin ayrılması en sık nerede görülür?",
+      "options": [
+        "Y parçası",
+        "Dik açılı konnektör ile trakeal tüp arası",
+        "İnspiratuar hortum",
+        "Ekspiratuar hortum",
+        "İnspiratuar hortumun makineye bağlandığı yer"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 2,
+      "explanation": "Açık ayrılmalar en sık dik açılı konnektör ile trakeal tüp arasında meydana gelir.",
+      "category": "Anestezi İş İstasyonu",
+      "id": 6
+    },
+    {
+      "question": "Solunum devresindeki kaçak en sık nerede görülür?",
+      "options": [
+        "Y parçası",
+        "Dik açılı konnektör ile trakeal tüp arası",
+        "İnspiratuar hortum",
+        "Ekspiratuar hortum",
+        "CO₂ absorbanının taban plakası"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 2,
+      "explanation": "Solunum devresi kaçakları en sık CO₂ absorbanının taban plakasında görülür.",
+      "category": "Anestezi İş İstasyonu",
+      "id": 7
+    },
+    {
+      "question": "Modern anestezi makinelerine duvar prizlerinden gelen O₂ Kuzey Amerika standartlarında hangi renkle kodlanır?",
+      "options": [
+        "Sarı",
+        "Mavi",
+        "Beyaz",
+        "Yeşil",
+        "Siyah"
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 2,
+      "explanation": "Kuzey Amerika standartlarında duvar prizlerinden gelen oksijen yeşil renkle kodlanır.",
+      "category": "Anestezi İş İstasyonu",
+      "id": 8
+    },
+    {
+      "question": "Gaz silindirleri için verilen Kuzey Amerika renk kodlarından hangisi yanlıştır?",
+      "options": [
+        "O₂ - yeşil",
+        "N₂O - mavi",
+        "CO₂ - gri",
+        "Hava - sarı",
+        "Helyum - siyah"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 2,
+      "explanation": "Kuzey Amerika renk kodlamasında oksijen yeşil, nitröz oksit mavi, karbondioksit gri, hava sarı, helyum kahverengi ve nitrojen siyahtır. Bu nedenle helyumun siyah olarak verilmesi yanlıştır.",
+      "category": "Anestezi İş İstasyonu",
+      "id": 9
+    },
+    {
+      "question": "Anestezi makinesine merkezi gaz sistemiyle iletilen gazların yaklaşık boru hattı basıncı kaç psig’dir?",
+      "options": [
+        "20",
+        "30",
+        "40",
+        "50",
+        "60"
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 2,
+      "explanation": "Merkezi gaz sistemlerinde standart boru hattı basıncı yaklaşık 50 psig, yani yaklaşık 3.5 bar’dır.",
+      "category": "Anestezi İş İstasyonu",
+      "id": 10
+    },
+    {
+      "question": "Hangisi/hangileri ısıtılmış nemlendiricilerin tehlikeleri arasında yer alır?\nI. Termal akciğer hasarı\nII. Nazokomiyal enfeksiyon\nIII. Artan havayolu direnci\nIV. Akımölçer işlevi ile etkileşim\nV. Devre bağlantısının kesilme olasılığı",
+      "options": [
+        "I-III-IV",
+        "II-IV",
+        "III-IV",
+        "I-II-III-IV",
+        "Hepsi"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Isıtılmış nemlendiriciler termal akciğer hasarı, nazokomiyal enfeksiyon, su yoğunlaşmasına bağlı artmış havayolu direnci, akımölçer işleviyle etkileşim ve devre bağlantısının kesilme riskini artırabilir. Solunan gaz sıcaklığı 41°C’yi geçmemelidir.",
+      "category": "Anestezi İş İstasyonu",
+      "id": 11
+    },
+    {
+      "question": "Anestezi makinesinde oksijen tüpü açık unutulmuş, merkezi sistem de bağlıdır. Operasyon sırasında merkezi sistem basıncı düşüyor; cihaz alarm vermeden çalışıyor ve bir süre sonra oksijen tüpü bitiyor. Bu durum neyle açıklanır?",
+      "options": [
+        "Tüp basıncının regülatör tarafından merkezi sistem basıncından biraz daha düşük ayarlanması",
+        "Cihazın her zaman önce tüpü bitirmeye programlanmış olması",
+        "Fail-safe valfinin tüp gazını öncelikli görmesi",
+        "Oksijen analizörünün basınç düşüşünü algılayamaması",
+        "Çek-valf mekanizmasının tüpten boru hattına kaçışı engellemesi"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 4,
+      "explanation": "Silindir regülatörü tüp basıncını yaklaşık 45 psig’ye düşürür. Merkezi sistem 50 psig iken tüpten gaz çekilmez; ancak merkezi basınç 45 psig’nin altına düşerse tüp otomatik olarak devreye girer.",
+      "category": "Anestezi İş İstasyonu",
+      "id": 12
+    },
+    {
+      "question": "Soda-lime tükenmeye başladığında görülen etil moru renk değişiminin temel sebebi nedir?",
+      "options": [
+        "Absorbanın kuruması",
+        "CO₂ ile reaksiyon sonucu pH’ın düşmesi",
+        "Granüllerin aşırı ısınması",
+        "Ajanlarla girilen kimyasal reaksiyon",
+        "Silika içeriğinin oksitlenmesi"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "CO₂ emildikçe absorban içindeki hidroksitler tükenir, pH düşer ve renk indikatörü değişir.",
+      "category": "Anestezi İş İstasyonu",
+      "id": 13
+    },
+    {
+      "question": "Düşük akım anestezisinde taze gaz akımının en belirgin avantajı nedir?",
+      "options": [
+        "Havayolunun daha nemli ve sıcak kalmasını sağlaması",
+        "CO₂ absorbanının ömrünü uzatması",
+        "FiO₂ değerini hızla artırması",
+        "Azot akümülasyonunu engellemesi",
+        "Scavenging sistemine olan ihtiyacı ortadan kaldırması"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Düşük akım anestezisi gazın sistemde yeniden dolaşımını artırır; böylece nem ve ısı daha iyi korunur ve gaz tüketimi azalır.",
+      "category": "Anestezi İş İstasyonu",
+      "id": 14
+    },
+    {
+      "question": "Bir operasyonda düşük tepe inspirasyon basıncı, düşük ekshale edilen tidal hacim ve düşük ekshale edilen CO₂ alarmları aynı anda alınıyorsa bu üçlü ayrılma alarmı neyi işaret eder?",
+      "options": [
+        "Havayolunda tıkanıklık olduğunu",
+        "Devrede bir ayrılma meydana geldiğini",
+        "Soda-lime’ın tamamen tükendiğini",
+        "Ventilatörün taze gaz akımını kestiğini",
+        "Vaporizatörün boş olduğunu"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Devre ayrıldığında inspirasyon basıncı düşer, hasta gazı geri veremediği için tidal hacim ölçülemez ve CO₂ trasesi kaybolur.",
+      "category": "Anestezi İş İstasyonu",
+      "id": 15
+    },
+    {
+      "question": "Ameliyathanede hacim kontrollü ventilasyon sırasında ayarlanan tidal hacim ile hastaya iletilen tidal hacim arasında büyük fark oluşmasına hangisi/hangileri neden olabilir?\nI. Solunum devresi kompliyansı\nII. Gaz kompresyonu\nIII. Ventilatör-taze gaz akımı birlikteliği\nIV. Solunum devresi veya hastanın havayolundaki kaçaklar",
+      "options": [
+        "Yalnız IV",
+        "II-IV",
+        "I-III",
+        "I-II-III",
+        "I-II-III-IV"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Ayarlanan ve hastaya ulaşan tidal hacim arasındaki fark; devre kompliyansı, gaz kompresyonu, ventilatör-taze gaz akımı etkileşimi ve devre ya da havayolu kaçaklarından kaynaklanabilir.",
+      "category": "Anestezi İş İstasyonu",
+      "id": 16
+    },
+    {
+      "question": "Pediatrik bir vakada Mapleson F (Jackson-Rees) devresi kullanılırken taze gaz giriş hortumu bükülerek tıkanıyor. Bu durumda hastada gelişecek ilk ve en tehlikeli fiziksel olay hangisidir?",
+      "options": [
+        "Devre basıncının hızla artarak barotravma yapması",
+        "Gaz akışı durduğu için rezervuar balonun sönmesi ve asfiksi",
+        "Soda-lime’ın ısınarak Compound A üretmesi",
+        "APL valfinin otomatik olarak açılması",
+        "Negatif basınçlı akciğer ödemi gelişmesi"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 4,
+      "explanation": "Mapleson devrelerinde CO₂ temizliği taze gaz akımına bağlıdır. Taze gaz akımı kesilirse rezervuar balon söner, hasta hızla hipoksi ve asfiksi riskiyle karşılaşır.",
+      "category": "Anestezi İş İstasyonu",
+      "id": 17
+    },
+    {
+      "question": "Oksijen analizörlerinden hangisi hem inspiratuar hem de ekspiratuar gaz değişimlerini izleyebilecek kadar hızlı yanıt süresine sahiptir?",
+      "options": [
+        "Polarografik",
+        "Clark elektrodu",
+        "Galvanik yakıt hücresi",
+        "Paramanyetik analizör",
+        "Selenyum hücresi"
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "Paramanyetik analizörler hızlı yanıt süreleri nedeniyle her soluktaki oksijen değişimini anlık olarak izleyebilir.",
+      "category": "Anestezi İş İstasyonu",
+      "id": 18
+    },
+    {
+      "question": "Torasik cerrahide yükselen tip körüklü ventilatörde körük inspirasyon sırasında tam yükselmiyor ve Low Tidal Volume alarmı veriyor. Kaçak testi negatifse en olası sebep nedir?",
+      "options": [
+        "Hastanın kompliyansının çok yüksek olması",
+        "Taze gaz akımının çok yüksek olması",
+        "Körükteki delikten gazın sürücü gaza sızması",
+        "Oksijen silindirinin boşalması",
+        "Scavenging sistemindeki vakumun aşırı güçlü olması"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 4,
+      "explanation": "Aşırı güçlü scavenging vakumu solunum devresindeki gazı emerek körüğün tam dolmasını engelleyebilir ve düşük tidal hacim alarmına yol açabilir.",
+      "category": "Anestezi İş İstasyonu",
+      "id": 19
+    },
+    {
+      "question": "Thorpe tüpü olarak bilinen akımölçer tüpündeki şamandıranın yükselmesi hangi fiziksel prensiple açıklanır?",
+      "options": [
+        "Sabit basınç, sabit hacim",
+        "Değişken orifis, sabit basınç farkı",
+        "Değişken basınç, sabit orifis",
+        "Sabit yoğunluk, değişken viskozite",
+        "Manyetik çekim kuvveti"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Akımölçerler, gaz akışı arttıkça tüp çapının genişlemesiyle değişken orifis oluşturur ve basınç farkını sabit tutarak akımı gösterir.",
+      "category": "Anestezi İş İstasyonu",
+      "id": 20
+    },
+    {
+      "question": "Aşağıdakilerden hangisi dinamik kompliyansın bir göstergesidir?",
+      "options": [
+        "PEEP",
+        "Plato basıncı",
+        "Pik inspirasyon basıncı",
+        "Pik ekspirasyon basıncı",
+        "Hiçbiri"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 2,
+      "explanation": "Pik inspirasyon basıncı, inspirasyon sırasında oluşturulan en yüksek devre basıncıdır ve dinamik kompliyansı yansıtır.",
+      "category": "Anestezi İş İstasyonu",
+      "id": 21
+    },
+    {
+      "question": "Isıtılmış nemlendiricilerde solunan gaz sıcaklığı kaç dereceyi geçmemelidir?",
+      "options": [
+        "37°C",
+        "39°C",
+        "41°C",
+        "43°C",
+        "45°C"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 2,
+      "explanation": "Termal akciğer hasarını önlemek için solunan gaz sıcaklığının 41°C’yi aşmaması gerekir.",
+      "category": "Anestezi İş İstasyonu",
+      "id": 22
+    },
+    {
+      "question": "Aktif bir scavenging sisteminde vakum kontrol valfi yaklaşık hangi akış hızına ayarlanmalıdır?",
+      "options": [
+        "1-5 L/dk",
+        "10-15 L/dk",
+        "25-30 L/dk",
+        "40-50 L/dk",
+        "100 L/dk"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 2,
+      "explanation": "Atık anestezik gazların verimli temizlenmesi için aktif scavenging sisteminin genellikle 10-15 L/dk vakum akışına ayarlanması gerekir.",
+      "category": "Anestezi İş İstasyonu",
+      "id": 23
+    },
+    {
+      "question": "Düşük akımlı anestezi uygulanan bir hastada O₂ flush valfine basıldıktan sonra High Pressure alarmı veriliyor ve Ppeak 60 cmH₂O’ya çıkıyor. Bu barotravma riskinin temel mekanizması nedir?",
+      "options": [
+        "Flush valfinin dakikada 35-75 L gibi yüksek debili gaz vermesi",
+        "Flush gazının vaporizatörden geçerek ajan konsantrasyonunu artırması",
+        "Oksijenin azot protoksit ile reaksiyona girmesi",
+        "APL valfinin flush sırasında otomatik kapanması",
+        "Ekspiratuar valfin yüksek basınçla kilitlenmesi"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 4,
+      "explanation": "Oksijen flush valfi akımölçerleri bypass ederek sisteme 35-75 L/dk gibi yüksek debide ve yüksek basınçta oksijen verir. İnspirasyon sırasında kullanılması kontrolsüz basınç artışına yol açabilir.",
+      "category": "Anestezi İş İstasyonu",
+      "id": 24
+    },
+    {
+      "question": "Modern anestezi iş istasyonlarında gaz silindirleri için Kuzey Amerika standart renk kodlaması hangisinde yanlıştır?",
+      "options": [
+        "O₂ - Yeşil",
+        "N₂O - Mavi",
+        "Hava - Sarı",
+        "CO₂ - Gri",
+        "Helyum - Siyah"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 2,
+      "explanation": "Kuzey Amerika standartlarında helyum kahverengi, nitrojen ise siyah renkle kodlanır. Helyumun siyah olarak verilmesi yanlıştır.",
+      "category": "Anestezi İş İstasyonu",
+      "id": 25
+    },
+    {
+      "question": "Karbondioksit absorbanının, özellikle soda-lime’ın, %14-19 oranında su içermesi neden kritiktir?",
+      "options": [
+        "Compound A oluşumunu tamamen durdurmak için",
+        "Reaksiyonun ekzotermik ısısını soğutmak için",
+        "Granüllerin sertleşmesini sağlamak için",
+        "Kurumanın neden olduğu karbon monoksit üretimini önlemek için",
+        "Renk değişimini hızlandırmak için"
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "Absorban kurursa özellikle desfluran ve izofluran ile reaksiyona girerek toksik karbon monoksit üretebilir.",
+      "category": "Anestezi İş İstasyonu",
+      "id": 26
+    },
+    {
+      "question": "Anestezi iş istasyonlarında muhakkak bulunması gereken üç ayrılma alarmı hangileridir?",
+      "options": [
+        "Düşük tepe inspirasyon basıncı - düşük ekshale edilen tidal hacim - düşük ekshale edilen karbondioksit",
+        "Düşük tepe inspirasyon basıncı - düşük ekshale edilen tidal hacim - düşük inspire edilen tidal hacim",
+        "Düşük ekshale edilen tidal hacim - düşük ekshale edilen karbondioksit - düşük PEEP",
+        "Düşük PEEP - düşük tepe inspirasyon basıncı - düşük ekshale edilen tidal hacim",
+        "Düşük frekans sayısı - düşük tepe inspirasyon basıncı - düşük ekshale edilen tidal hacim"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Devre ayrılması durumunda ventilatör hastaya gaz veremez. Bu durumda tepe inspirasyon basıncı düşer, ekshale tidal hacim azalır ve ekshale CO₂ düşer ya da kapnogram kaybolur. Bu üç alarm ayrılmayı en iyi gösterir.",
+      "category": "Anestezi İş İstasyonu",
+      "id": 27
+    },
+    {
+      "question": "20°C’de, dolu bir E-silindiri 745 psig basınçta yaklaşık kaç litre N₂O içerir?",
+      "options": [
+        "1200",
+        "1590",
+        "1780",
+        "1900",
+        "375"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 2,
+      "explanation": "20°C’de dolu bir E-silindiri 745 psig basınçta yaklaşık 1590 L nitröz oksit içerir.",
+      "category": "Anestezi İş İstasyonu",
+      "id": 28
+    },
+    {
+      "question": "Silindirden anestezi makinesine verilen gazın basıncı yaklaşık kaç psig’dir?",
+      "options": [
+        "20",
+        "25",
+        "30",
+        "35",
+        "45"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 2,
+      "explanation": "Silindir regülatörü, silindirden anestezi makinesine verilen gaz basıncını yaklaşık 45 psig’ye düşürür.",
+      "category": "Anestezi İş İstasyonu",
+      "id": 29
+    },
+    {
+      "question": "20°C sıcaklıkta, dolu bir E-silindirinde 745 psig basınçta 1590 L N₂O bulunduğu bilinmektedir. Basınç 745 psig altına düşmeye başladığında silindirin durumu için hangisi doğrudur?",
+      "options": [
+        "Silindir hâlâ %75 doludur.",
+        "Silindir içindeki sıvı faz tamamen tükenmiştir.",
+        "Silindir içindeki gaz fazı %50 oranındadır.",
+        "Basınç regülatörü arızalanmıştır.",
+        "Silindirdeki sıvı N₂O miktarı 400 L kalmıştır."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "N₂O silindirlerinde basınç, içeride sıvı faz bulunduğu sürece yaklaşık 745 psig’de sabit kalır. Basınç düşmeye başladığında sıvı fazın tükendiği ve silindirin son bölümüne girildiği anlaşılır.",
+      "category": "Anestezi İş İstasyonu",
+      "id": 30
+    },
+    {
+      "question": "Mekanik ventilasyon sırasında Ppeak 25 mmHg’den 40 mmHg’ye yükselirken Pplateau 20 mmHg’de sabit kalıyor. Bu tabloyu en iyi hangisi açıklar?",
+      "options": [
+        "Akciğer kompliyansında azalma",
+        "Karın içi basınç artışı",
+        "Havayolu direncinde artış",
+        "Ventilatör devresinde büyük kaçak",
+        "Soda-lime granüllerinin yolu tıkaması"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 4,
+      "explanation": "Plato basıncı sabitken yalnızca pik basıncın artması dinamik bir sorunu, yani havayolu direncinde artışı düşündürür. Endotrakeal tüp bükülmesi veya bronkospazm buna neden olabilir.",
+      "category": "Anestezi İş İstasyonu",
+      "id": 31
+    },
+    {
+      "question": "Solunum devresindeki gaz karışımı aşağıdakilerden hangisinden/hangilerinden etkilenir?\nI. Volatil anestezik konsantrasyonu\nII. Akciğerlerdeki anestezik alım\nIII. Dakika ventilasyonu\nIV. Toplam taze gaz akımı\nV. Solunum devresinin toplam hacmi\nVI. Gaz kaçakları",
+      "options": [
+        "I-III-VI",
+        "II-IV-V",
+        "I-III-IV",
+        "I-III-V-VI",
+        "I-II-III-IV-V-VI"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Solunum devresindeki gaz karışımı volatil anestezik konsantrasyonu, akciğerlerdeki anestezik alım, dakika ventilasyonu, toplam taze gaz akımı, devre hacmi ve gaz kaçaklarından etkilenir.",
+      "category": "Anestezi İş İstasyonu",
+      "id": 32
+    },
+    {
+      "question": "KOAH tanılı 65 yaşında bir hastada laparoskopik kolesistektomi sırasında EtCO₂ 45 mmHg’den 55 mmHg’ye yükseliyor ve kapnografi bazal hattı 0’dan 8 mmHg’ye çıkıyor. Taze gaz akımı 1 L/dk’dır. Bu hastada öncelikle hangi mekanik arıza ekarte edilmelidir?",
+      "options": [
+        "Oksijen flush valfinin açık kalması",
+        "Ekspiratuar tek yönlü valfin açık pozisyonda takılı kalması",
+        "Soda-lime’ın tamamen kuruması",
+        "Vaporizatörün manifolddan sızdırması",
+        "Ventilatör körüğünde yırtılma olması"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 4,
+      "explanation": "Kapnografide bazal hattın yükselmesi rebreathing’i gösterir. En önemli teknik nedenlerden biri tek yönlü valflerin açık pozisyonda takılı kalmasıdır.",
+      "category": "Anestezi İş İstasyonu",
+      "id": 33
+    },
+    {
+      "question": "Sevofluran ile düşük akımlı uzun süreli anestezi sırasında soda-lime kabı çok ısınıyor ve kapnografide inspiratuar CO₂ yükseliyor. Bu durumda hangi toksik maddenin oluşma riski en yüksektir?",
+      "options": [
+        "Karbon monoksit",
+        "Compound A",
+        "Nitrik oksit",
+        "Formaldehit",
+        "Hidrojen siyanür"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 4,
+      "explanation": "Sevofluran, güçlü bazik CO₂ absorbanlarıyla özellikle ısınmış ve düşük akımlı sistemlerde reaksiyona girerek nefrotoksik Compound A oluşturabilir.",
+      "category": "Anestezi İş İstasyonu",
+      "id": 34
+    },
+    {
+      "question": "Plato basıncı ölçümü sırasında gaz akımı nasıl olmalıdır?",
+      "options": [
+        "Maksimum düzeyde olmalıdır",
+        "Sürekli ekspiratuar akım olmalıdır",
+        "Gaz akımı tamamen durmuş olmalıdır",
+        "Sadece taze gaz akımı ölçülmelidir",
+        "İnspiratuar tepe akıma eşit olmalıdır"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Plato basıncı, inspiratuar duraklama sırasında gaz akımının olmadığı statik koşulda ölçülür ve alveol basıncını yansıtır.",
+      "category": "Anestezi İş İstasyonu",
+      "id": 35
+    },
+    {
+      "question": "Aktif bir scavenging sistemindeki vakum kontrol valfi, dakikada kaç litre atık gaz temizlenmesine izin verecek şekilde ayarlanmalıdır?",
+      "options": [
+        "1-5",
+        "5-10",
+        "10-15",
+        "15-25",
+        "25-50"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 2,
+      "explanation": "Aktif scavenging sistemlerinde vakum kontrol valfi genellikle dakikada 10-15 L atık gaz temizlenecek şekilde ayarlanmalıdır.",
+      "category": "Anestezi İş İstasyonu",
+      "id": 36
+    },
+    {
+      "question": "Standart yetişkin solunum devrelerinin kompliyansı yaklaşık ne kadardır?",
+      "options": [
+        "1.5 mL/cmH₂O",
+        "2.5 mL/cmH₂O",
+        "5 mL/cmH₂O",
+        "10 mL/cmH₂O",
+        "20 mL/cmH₂O"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 2,
+      "explanation": "Standart yetişkin solunum devrelerinde kompliyans yaklaşık 5 mL/cmH₂O’dur ve bu değer hastaya iletilen gerçek tidal hacmi etkileyebilir.",
+      "category": "Anestezi İş İstasyonu",
+      "id": 37
+    },
+    {
+      "question": "20°C’de, dolu bir E-silindiri 1900 psig basınçta yaklaşık kaç litre O₂ içerir?",
+      "options": [
+        "375",
+        "450",
+        "600",
+        "750",
+        "1540"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 2,
+      "explanation": "20°C’de dolu bir E-silindiri yaklaşık 1900 psig basınçta 600 L oksijen içerir.",
+      "category": "Anestezi İş İstasyonu",
+      "id": 38
+    },
+    {
+      "question": "Kaynama noktası en düşük olan inhalasyon ajanı aşağıdakilerden hangisidir?",
+      "options": [
+        "Desfluran",
+        "Sevofluran",
+        "İzofluran",
+        "Halotan",
+        "Eter"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 2,
+      "explanation": "Desfluran, 760 mmHg’de yaklaşık 22.8°C kaynama noktasıyla verilen ajanlar içinde en düşük kaynama noktasına sahiptir.",
+      "category": "Anestezi İş İstasyonu",
+      "id": 39
+    },
+    {
+      "question": "Anestezi devresindeki oksijen analizörü %18 gösteriyor ve Low O₂ alarmı veriyor. Oksijen yüzdesi %50’ye çıkarılmasına rağmen analizör değeri düşmeye devam ediyor. İlk ve en güvenli yaklaşım hangisidir?",
+      "options": [
+        "Oksijen analizörünü yeni bir hücreyle değiştirmek",
+        "Oksijen flush valfine basarak devreyi doldurmak",
+        "Hastayı devreden ayırıp yedek oksijen kaynağıyla manuel solutmak",
+        "N₂O akışını kapatmak",
+        "Silindir valfini açıp merkezi sistemi kapatmak"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 4,
+      "explanation": "Hipoksik karışım şüphesinde en güvenli hareket hastayı makineden ayırıp bağımsız oksijen kaynağı ve manuel ventilasyonla desteklemektir.",
+      "category": "Anestezi İş İstasyonu",
+      "id": 40
+    },
+    {
+      "question": "İnspiratuar ve ekspiratuar basınçların en doğru ölçümü nereden elde edilir?",
+      "options": [
+        "Y parçası",
+        "Y parçasının distali",
+        "Y parçasının proksimali",
+        "Entübasyon tüpü",
+        "Hepsi"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 2,
+      "explanation": "Hem inspiratuar hem de ekspiratuar basınçların en doğru ölçümü Y bağlantısından elde edilir.",
+      "category": "Anestezi İş İstasyonu",
+      "id": 41
+    },
+    {
+      "question": "Bir anestezi makinesinde boru hattı basıncı genellikle kaç psig’ye ayarlanır?",
+      "options": [
+        "20 psig",
+        "35 psig",
+        "45 psig",
+        "50 psig",
+        "60 psig"
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 2,
+      "explanation": "Merkezi gaz sistemlerinden gelen basınç standart olarak yaklaşık 50 psig, yani yaklaşık 3.5 bar’dır.",
+      "category": "Anestezi İş İstasyonu",
+      "id": 42
+    },
+    {
+      "question": "Modern bir anestezi makinesinde, boru hattındaki oksijen basıncı 30 psig altına düştüğünde azot protoksit akışını kesen veya azaltan fail-safe valfi tam olarak nerede konumlanmıştır?",
+      "options": [
+        "Silindir regülatörünün çıkışında",
+        "Oksijen flush valfi ile vaporizatör arasında",
+        "Taze gaz çıkışından hemen önce",
+        "Akımölçerlerin girişindeki orta basınç sisteminde",
+        "Karbondioksit absorbanının hemen girişinde"
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "Fail-safe sistemi, oksijen basıncı kritik eşiğin altına indiğinde hipoksik karışımı önlemek için diğer gazların akışını kontrol eder. Bu valfler akımölçerlerin girişindeki orta basınç sisteminde yer alır.",
+      "category": "Anestezi İş İstasyonu",
+      "id": 43
+    },
+    {
+      "question": "Aşağıdakilerden hangisi oksijen analizörü tiplerinden biri değildir?",
+      "options": [
+        "Polarografik",
+        "Clark elektrodu",
+        "Galvanik",
+        "Paramanyetik",
+        "Selenyum"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 2,
+      "explanation": "Oksijen analizörlerinin temel tipleri polarografik/Clark elektrodu, galvanik yakıt hücresi ve paramanyetik analizörlerdir. Selenyum oksijen analizörü tipi değildir.",
+      "category": "Anestezi İş İstasyonu",
+      "id": 44
+    },
+    {
+      "question": "Anestezi asistanı, merkezi sistemden gelen oksijen hortumunun yanlışlıkla N₂O prizine takıldığını fark ediyor; ancak oksijen analizörü hâlâ %100 oksijen göstermektedir. Bu durumun en olası açıklaması nedir?",
+      "options": [
+        "Oksijen analizörü kalibrasyonu bozulmuştur",
+        "PISS sistemi yanlış bağlantıyı engellemiştir",
+        "DISS sistemi hortumların yanlış prizlere girmesini engellemiştir",
+        "Fail-safe valfi N₂O akışını durdurmuştur",
+        "Analizör sadece vaporizatör çıkışını ölçmektedir"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 4,
+      "explanation": "DISS, çap endeksli güvenlik sistemi olup duvar prizleri ve hortum uçlarının çaplarını farklı yaparak yanlış gaz bağlantısını fiziksel olarak engeller.",
+      "category": "Anestezi İş İstasyonu",
+      "id": 45
+    },
+    {
+      "question": "Standart yetişkin solunum devreleri için kompliyans yaklaşık ne kadar olmalıdır?",
+      "options": [
+        "5 mL/cmH₂O",
+        "10 mL/cmH₂O",
+        "15 mL/cmH₂O",
+        "20 mL/cmH₂O",
+        "25 mL/cmH₂O"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 2,
+      "explanation": "Standart yetişkin solunum devrelerinde kompliyans yaklaşık 5 mL/cmH₂O’dur.",
+      "category": "Anestezi İş İstasyonu",
+      "id": 46
+    },
+    {
+      "question": "Standart pediatrik solunum devreleri için kompliyans yaklaşık ne kadar olmalıdır?",
+      "options": [
+        "1.5-2.5 mL/cmH₂O",
+        "2.5-3.5 mL/cmH₂O",
+        "4.5-5 mL/cmH₂O",
+        "5-10 mL/cmH₂O",
+        "20 mL/cmH₂O"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 2,
+      "explanation": "Pediatrik solunum devreleri, yaklaşık 1.5-2.5 mL/cmH₂O gibi düşük kompliyanslı ve daha sert yapıda tasarlanır.",
+      "category": "Anestezi İş İstasyonu",
+      "id": 47
+    },
+    {
+      "question": "Aşağıdakilerden hangisi statik kompliyansın bir göstergesidir?",
+      "options": [
+        "Plato basıncı",
+        "PEEP",
+        "Pik inspirasyon basıncı",
+        "Pik ekspirasyon basıncı",
+        "Hiçbiri"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 2,
+      "explanation": "Plato basıncı, inspiratuar duraklama sırasında gaz akımı yokken ölçülen basınçtır ve statik kompliyansı yansıtır.",
+      "category": "Anestezi İş İstasyonu",
+      "id": 48
+    }
+  ]
+}

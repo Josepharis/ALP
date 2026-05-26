@@ -38,10 +38,9 @@ android {
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = 23
         targetSdk = 35
-        // Must be strictly higher than any previous versionCode used (closed testing: 9 (1.0.7))
-        // Flutter pubspec: 1.1.0+26
-        versionCode = 26
-        versionName = "1.1.0"
+        // Flutter pubspec: 1.1.4+29
+        versionCode = 29
+        versionName = "1.1.4"
         
         // NDK optimizasyonları
         ndk {

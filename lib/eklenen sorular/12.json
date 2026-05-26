@@ -1,0 +1,864 @@
+{
+  "meta": {
+    "title": "Kolinesteraz İnhibitörleri ve Nöromüsküler Antagonistler Soru Bankası",
+    "language": "tr",
+    "totalQuestions": 57
+  },
+  "questions": [
+    {
+      "id": 1,
+      "question": "Sugammadeks aşağıdaki ilaçlardan hangisinin oluşturduğu blokajı geri çeviremez?",
+      "options": [
+        "Roküronyum.",
+        "Veküronyum.",
+        "Atraküryum.",
+        "Panküronyum.",
+        "Hepsi steroidal olduğu için hepsini çevirir."
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Sugammadeks sadece steroidal yapılı (ro-, ve-, pan-) ajanları bağlar. Atraküryum benzilizokinolinyum yapısındadır ve bağlanmaz.",
+      "category": "Kolinesteraz İnhibitörleri ve Nöromüsküler Antagonistler"
+    },
+    {
+      "id": 2,
+      "question": "Aşağıdakilerden hangisi aminosteroid kaynaklı nöromüsküler blokajı geri çevirebilen bir -siklodekstrindir?",
+      "options": [
+        "L-sistein",
+        "Kalabadion",
+        "Edrofonyum",
+        "Sugammadeks",
+        "Glutatyon"
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "Sugammadeks steroidal nöromüsküler blokerleri kapsülleyerek geri çeviren modifiye gama-siklodekstrindir.",
+      "category": "Kolinesteraz İnhibitörleri ve Nöromüsküler Antagonistler"
+    },
+    {
+      "id": 3,
+      "question": "Miyastenia Gravis teşhisinde kullanılan \"Tensilon Testi\" hangi ilaçla yapılır?",
+      "options": [
+        "Neostigmin.",
+        "Edrofonyum.",
+        "Piridostigmin.",
+        "Atropin.",
+        "Sugammadeks."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Edrofonyumun etkisi çok hızlı başlayıp kısa sürdüğü (Tensilon testi) için teşhis amaçlı kullanımı uygundur.",
+      "category": "Kolinesteraz İnhibitörleri ve Nöromüsküler Antagonistler"
+    },
+    {
+      "id": 4,
+      "question": "Astımda provokatif test olarak kullanılan muskarinik agonist ajan aşağıdakilerden hangisidir?",
+      "options": [
+        "Betanekol",
+        "Karbakol",
+        "Metakolin",
+        "Salbutamol",
+        "Albuterol"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Metakolin bronş hiperreaktivitesini göstermek için provokasyon testinde kullanılan muskarinik agonisttir.",
+      "category": "Kolinesteraz İnhibitörleri ve Nöromüsküler Antagonistler"
+    },
+    {
+      "id": 5,
+      "question": "Ameliyat sonunda neostigmin/glikopirolat ile uyandırılan bir hastada, post-operatif derlenme odasında dilde geriye kaçma ve sığ solunum gözleniyor. Yapılan TOF ölçümünde oran 0.65 çıkıyor. Bu tablo neyi ifade eder?",
+      "options": [
+        "Tam iyileşme; solunum sıkıntısı cerrahiden kaynaklıdır.",
+        "Rezidüel (kalıntı) nöromüsküler blokaj; reversiyon yetersizdir.",
+        "Kolinerjik kriz; çok fazla neostigmin verilmiştir.",
+        "Antimuskarinik doz aşımı.",
+        "Sugammadeks alerjisi."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 4,
+      "explanation": "TOF oranının 0.9'un altında olması \"rezidüel blok\" olarak tanımlanır ve hastanın havayolu koruyucu reflekslerinin (yutkunma, öksürme) hala risk altında olduğunu gösterir.",
+      "category": "Kolinesteraz İnhibitörleri ve Nöromüsküler Antagonistler"
+    },
+    {
+      "id": 6,
+      "question": "Aşağıdaki antikolinesterazlardan hangisi kan-beyin bariyerini geçebilir?",
+      "options": [
+        "Neostigmin",
+        "Piridostigmin",
+        "Edrofonyum",
+        "Fizostigmin",
+        "Glikopirolat"
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "Fizostigmin tersiyer amin yapısındadır ve kan-beyin bariyerini geçer. Diğerleri kuaterner yapıda olduğu için geçemez.",
+      "category": "Kolinesteraz İnhibitörleri ve Nöromüsküler Antagonistler"
+    },
+    {
+      "id": 7,
+      "question": "Neostigmin için verilen bilgilerden hangisi yanlıştır?",
+      "options": [
+        "Önerilen maksimum neostigmin dozu 0.08 mg/kg’dır (yetişkinlerde 5 mg’a kadar).",
+        "Kan-beyin bariyerini geçemez.",
+        "Neostigminin (0.04 mg/kg) etkileri genellikle 5 dk. içinde ortaya çıkar, 10 dk.’da doruğa ulaşır ve 1 sa.’den fazla sürer.",
+        "Geriatrik hastalarda etki süresi uzar.",
+        "Muskarinik yan etkiler, antikolinerjik bir ajanın önceden veya birlikte uygulanmasıyla ortadan kaldırılır."
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Neostigminin muskarinik yan etkileri antikolinerjikle azaltılır ancak tamamen ortadan kaldırılır demek doğru değildir.",
+      "category": "Kolinesteraz İnhibitörleri ve Nöromüsküler Antagonistler"
+    },
+    {
+      "id": 8,
+      "question": "Gantakuryum ve diğer fumaratların nöromüsküler blokaj etkilerini geri çevirdiği gösterilen aminoasit aşağıdakilerden hangisidir?",
+      "options": [
+        "Lesitin",
+        "L-sistein",
+        "Alanin",
+        "Glutatyon",
+        "Metiyonin"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "L-sistein gantaküryum ve fumarat ajanların etkisini kimyasal olarak sonlandırabilir.",
+      "category": "Kolinesteraz İnhibitörleri ve Nöromüsküler Antagonistler"
+    },
+    {
+      "id": 9,
+      "question": "Gantakuryumun inaktivasyonuna neden olan aminoasit aşağıdakilerden hangisidir?",
+      "options": [
+        "Lesitin",
+        "Sistein",
+        "Alanin",
+        "Glutatyon",
+        "Metiyonin"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Gantaküryum ve benzeri fumarat ajanlar L-sistein ile kimyasal olarak inaktive edilebilir.",
+      "category": "Kolinesteraz İnhibitörleri ve Nöromüsküler Antagonistler"
+    },
+    {
+      "id": 10,
+      "question": "Aşağıdakilerden hangisi kan beyin bariyerini geçen ve merkezi sinir sistemi içindeki muskarinik ve nikotinik reseptörleri uyararak skopolamin veya yüksek doz atropinin beyin üzerindeki etkilerini geri çeviren bir kolinesteraz inhibitörüdür?",
+      "options": [
+        "Fizostigmin",
+        "Rivastigmin",
+        "Edrofonyum",
+        "Neostigmin",
+        "Piridostigmin"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Fizostigmin tersiyer amin yapısı nedeniyle kan-beyin bariyerini geçebilir.",
+      "category": "Kolinesteraz İnhibitörleri ve Nöromüsküler Antagonistler"
+    },
+    {
+      "id": 11,
+      "question": "Sugammadeks kullanımı sonrası emilimi veya etkinliği azalabileceği için hastaya uyarısı yapılması gereken ilaç grubu hangisidir?",
+      "options": [
+        "Antihipertansifler",
+        "Oral kontraseptifler",
+        "Antiepileptikler",
+        "Antibiyotikler",
+        "Non-steroid antiinflamatuarlar"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Sugammadeks, steroid yapılı olan östrojen ve progesteron türevlerini bağlayabilir; bu nedenle 7 gün ek korunma önerilir.",
+      "category": "Kolinesteraz İnhibitörleri ve Nöromüsküler Antagonistler"
+    },
+    {
+      "id": 12,
+      "question": "Derin nöromüsküler blokajın (TOF: 0) acil geri çevrilmesi gerektiğinde en etkili seçenek hangisidir?",
+      "options": [
+        "Yüksek doz Neostigmin.",
+        "Edrofonyum + Atropin.",
+        "16 mg/kg dozunda Sugammadeks.",
+        "Fizostigmin.",
+        "Plazma değişimi."
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Sugammadeks 16 mg/kg dozda, roküronyum uygulamasından hemen sonra bile derin bloğu hızla geri çevirebilir.",
+      "category": "Kolinesteraz İnhibitörleri ve Nöromüsküler Antagonistler"
+    },
+    {
+      "id": 13,
+      "question": "Ameliyat sonunda neostigmin verilmesi planlanan bir hastada, kalp hızının çok düşmemesi için hangi antimuskarinik tercih edilmelidir ve neden?",
+      "options": [
+        "Atropin; çünkü neostigmine göre çok daha yavaş etki eder.",
+        "Glikopirolat; çünkü etki başlangıcı neostigmine benzer ve kalp hızı daha stabil kalır.",
+        "Skopolamin; çünkü en güçlü taşikardiyi o yapar.",
+        "Atropin; çünkü kan-beyin bariyerini geçmez.",
+        "Glikopirolat; çünkü nikotinik reseptörleri bloke eder."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Glikopirolat ve neostigminin etki başlangıç zamanları birbirine yakındır (yaklaşık 7-10 dk); bu sayede neostigminin kalbi yavaşlatıcı etkisi başladığında glikopirolat da kalbi hızlandırıcı etkisini gösterir.",
+      "category": "Kolinesteraz İnhibitörleri ve Nöromüsküler Antagonistler"
+    },
+    {
+      "id": 14,
+      "question": "Muskarinik kolinerjik reseptörler nerelerde bulunur?\nI. Bronş\nII. Tükrük bezi\nIII. Sinoatriyal düğüm\nIV. Merkezi sinir sistemi\nV. İskelet kası",
+      "options": [
+        "I-II",
+        "I-II-III",
+        "III-IV-V",
+        "I-II-III-IV",
+        "I-II-III-IV-V"
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "Muskarinik reseptörler bronş, tükrük bezi, sinoatriyal düğüm ve merkezi sinir sisteminde bulunur; iskelet kasındaki temel kolinerjik reseptör nikotiniktir.",
+      "category": "Kolinesteraz İnhibitörleri ve Nöromüsküler Antagonistler"
+    },
+    {
+      "id": 15,
+      "question": "Piridostigmin için verilen bilgilerden hangisi yanlıştır?",
+      "options": [
+        "Neostigmine göre %20 daha güçlüdür.",
+        "Piridostigminin etki başlangıcı neostigmine göre daha hızlıdır.",
+        "Antikolinerjik olarak Glikopirolat tercih edilir.",
+        "Piridostigmin, neostigminin asetilkolinesteraza kovalent bağlanma özelliğini ve lipid çözünmezliğini paylaşır.",
+        "Piridostigmin, kuaterner amonyumun fenol halkasına dahil olması dışında yapısal olarak neostigmine benzer."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Piridostigminin etki başlangıcı neostigmine göre daha yavaş olup daha uzun etkilidir.",
+      "category": "Kolinesteraz İnhibitörleri ve Nöromüsküler Antagonistler"
+    },
+    {
+      "id": 16,
+      "question": "Aşağıdakilerden hangisi Kolinesteraz inhibitörlerinin muskarinik yan etkileri arasında yer almaz?",
+      "options": [
+        "Bradikardi",
+        "Bronkospazm",
+        "İntestinal spazm",
+        "Mesane tonusunda artış",
+        "Serebral inhibisyon"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Kolinesteraz inhibitörlerinin tipik muskarinik yan etkileri bradikardi, bronkospazm, intestinal spazm ve mesane tonusunda artıştır; serebral inhibisyon tipik muskarinik yan etki değildir.",
+      "category": "Kolinesteraz İnhibitörleri ve Nöromüsküler Antagonistler"
+    },
+    {
+      "id": 17,
+      "question": "Kolinerjik kriz ve Miyastenik kriz ayrımında kullanılan edrofonyum (Tensilon) testi ile ilgili hangisi doğrudur?",
+      "options": [
+        "Kas gücünde artış olması kolinerjik krizi gösterir",
+        "Kas gücünde artış olması miyastenik krizi gösterir",
+        "Edrofonyum kan-beyin bariyerini geçerek merkezi etkileri değerlendirir",
+        "Test sırasında mutlaka adrenalin hazır bulundurulmalıdır",
+        "Yan etki olarak şiddetli taşikardi beklenir"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Edrofonyum sonrası kas gücünde düzelme, hastanın yetersiz ACh'ye sahip olduğunu (Miyastenik kriz) gösterir. Gücün azalması ise aşırı ACh varlığını (Kolinerjik kriz) işaret eder.",
+      "category": "Kolinesteraz İnhibitörleri ve Nöromüsküler Antagonistler"
+    },
+    {
+      "id": 18,
+      "question": "Aşağıdakilerden hangisi bir hastada antikolinesteraz dozunun yetersiz kaldığını gösterir?",
+      "options": [
+        "Hastanın aşırı terlemesi.",
+        "TOF simülasyonunda sönme (fade) izlenmesi.",
+        "Kalp hızının 120/dk olması.",
+        "Pupillerin nokta kadar olması.",
+        "İdrar çıkışının artması."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Sönme (fade), hala reseptörlerin önemli bir kısmının blokör tarafından işgal edildiğini ve reversiyonun tamamlanmadığını gösterir.",
+      "category": "Kolinesteraz İnhibitörleri ve Nöromüsküler Antagonistler"
+    },
+    {
+      "id": 19,
+      "question": "Aşağıdaki antimuskariniklerden hangisi daha belirgin taşikardi yapar?",
+      "options": [
+        "Glikopirolat",
+        "Atropin",
+        "Skopolamin",
+        "Fizostigmin",
+        "Hiçbiri"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Atropin, glikopirolata göre daha güçlü kronotropik etkiye sahiptir.",
+      "category": "Kolinesteraz İnhibitörleri ve Nöromüsküler Antagonistler"
+    },
+    {
+      "id": 20,
+      "question": "Geniş açılı glokom için topikal olarak kullanılabilen, hem muskarinik hem de nikotinik agonist aktiviteye sahip ajan aşağıdakilerden hangisidir?",
+      "options": [
+        "Karbakol",
+        "Betanekol",
+        "Metakolin",
+        "Salbutamol",
+        "Albuterol"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Karbakol hem muskarinik hem nikotinik agonist aktivitesi gösterebilir ve topikal glokom tedavisinde kullanılabilir.",
+      "category": "Kolinesteraz İnhibitörleri ve Nöromüsküler Antagonistler"
+    },
+    {
+      "id": 21,
+      "question": "Asetilkolinesteraz inhibitörleri aşırı dozda verildiğinde ne tür bir blokaj gelişebilir?",
+      "options": [
+        "Faz I Depolarizan blok (Kolinerjik kriz).",
+        "Hiçbir blok oluşmaz.",
+        "Sadece alerjik reaksiyon görülür.",
+        "Osmotik diürez.",
+        "Hiperkalsemik kriz."
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Aşırı asetilkolin birikimi, süksinilkolin gibi davranarak reseptörü sürekli depolarize halde tutar ve kas güçsüzlüğüne (kolinerjik kriz) yol açar.",
+      "category": "Kolinesteraz İnhibitörleri ve Nöromüsküler Antagonistler"
+    },
+    {
+      "id": 22,
+      "question": "Aşağıdakilerden hangisi nöromüsküler blokajı arttıran faktörler arasında yer almaz?",
+      "options": [
+        "Hipokalsemi",
+        "Hipokalemii",
+        "Hipomagnezemi",
+        "Hipotermi",
+        "Furosemid"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Hipomagnezemi blokajı artırmaz; hipermagnezemi nöromüsküler iletimi zayıflatır.",
+      "category": "Kolinesteraz İnhibitörleri ve Nöromüsküler Antagonistler"
+    },
+    {
+      "id": 23,
+      "question": "Atropin hangi durumda kontrendikedir veya çok dikkatli kullanılmalıdır?",
+      "options": [
+        "Bradikardi.",
+        "Dar açılı glokom.",
+        "İshal.",
+        "Hipotermi.",
+        "Hiperkalemi."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Antimuskarinikler göz içi basıncını artırabileceği için dar açılı glokomu olan hastalarda tehlikelidir.",
+      "category": "Kolinesteraz İnhibitörleri ve Nöromüsküler Antagonistler"
+    },
+    {
+      "id": 24,
+      "question": "70 yaşında, kronik böbrek yetmezliği olan bir hastaya batın cerrahisi sonrası kas gevşekliğini geri çevirmek için neostigmin uygulanıyor. Bu hastada ilacın farmakokinetiği ile ilgili ne beklenir?",
+      "options": [
+        "Neostigmin böbrekten atılmadığı için etki süresi değişmez.",
+        "Böbrek yetmezliği neostigminin klirensini azaltır ve etki süresini uzatır.",
+        "İlaç hızla karaciğerde metabolize edilerek etkisizleşir.",
+        "Böbrek yetmezliği olanlarda neostigmin \"tavan etkisi\" göstermez.",
+        "İlaç diyaliz ile tamamen temizlendiği için reversiyon başarısız olur."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 4,
+      "explanation": "Neostigmin %50-70 oranında böbreklerden atılır. Böbrek yetmezliğinde klirensi düşer ve etki süresi belirgin şekilde uzar.",
+      "category": "Kolinesteraz İnhibitörleri ve Nöromüsküler Antagonistler"
+    },
+    {
+      "id": 25,
+      "question": "Antikolinesteraz zehirlenmesinde (Organofosfat) enzim reaktivasyonu sağlayan spesifik ajan hangisidir?",
+      "options": [
+        "Atropin",
+        "Glikopirolat",
+        "Pralidoksim",
+        "Neostigmin",
+        "Edrofonyum"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Atropin sadece muskarinik semptomları tedavi eder; pralidoksim ise enzime bağlanan fosfat grubunu uzaklaştırarak asetilkolinesterazı reaktive eder.",
+      "category": "Kolinesteraz İnhibitörleri ve Nöromüsküler Antagonistler"
+    },
+    {
+      "id": 26,
+      "question": "Böbrek yetmezliği olan bir hastada Neostigmin kullanımıyla ilgili hangisi doğrudur?",
+      "options": [
+        "İlacın etkisi çok kısalır.",
+        "Böbrek yetmezliği ilacın atılımını geciktirir, bu nedenle etkisi uzar.",
+        "Böbrek yetmezliğinde kullanımı kesinlikle yasaktır.",
+        "Sadece karaciğerden atıldığı için doz değişikliği gerekmez.",
+        "Nöbet geçirme riskini %100 artırır."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Neostigmin %50-70 oranında böbrekten atılır; yetmezlikte etki süresi uzar, bu aslında kas gevşeticinin de etkisinin uzadığı durumlarda koruyucudur.",
+      "category": "Kolinesteraz İnhibitörleri ve Nöromüsküler Antagonistler"
+    },
+    {
+      "id": 27,
+      "question": "Sugammadeks uygulaması sonrası en sık bildirilen kardiyak yan etki hangisidir?",
+      "options": [
+        "Ventriküler fibrilasyon",
+        "Sinüs taşikardisi",
+        "Bradikardi",
+        "Atriyal flutter",
+        "Birinci derece AV blok"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Sugammadeks sonrası bradikardi en sık görülen ve bazen asistoliye kadar ilerleyebilen ciddi bir yan etkidir.",
+      "category": "Kolinesteraz İnhibitörleri ve Nöromüsküler Antagonistler"
+    },
+    {
+      "id": 28,
+      "question": "Kolinesteraz inhibitörlerinin nöromüsküler kavşakta asetilkolin miktarını artırarak blokajı geri çevirme mekanizmasıyla ilgili hangisi doğrudur?",
+      "options": [
+        "Nikotinik reseptör sayısını artırırlar.",
+        "Asetilkolini parçalayan enzimi inhibe ederek dolaylı yoldan etki ederler.",
+        "Reseptördeki kalsiyum kanallarını doğrudan açarlar.",
+        "Kas gevşetici molekülü parçalayarak yok ederler.",
+        "Sadece pre-sinaptik uçtan asetilkolin salınımını durdururlar."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Bu ilaçlar asetilkolinesteraz enzimini inhibe eder; böylece yıkılamayan asetilkolin birikir ve kas gevşetici ile yarışarak onu reseptörden uzaklaştırır.",
+      "category": "Kolinesteraz İnhibitörleri ve Nöromüsküler Antagonistler"
+    },
+    {
+      "id": 29,
+      "question": "Neredeyse tamamen plazma esterazları tarafından metabolize edilen, bu nedenle renal atılım önemli olmayan kolinesteraz inhibitörü aşağıdakilerden hangisidir?",
+      "options": [
+        "Fizostigmin",
+        "Neostigmin",
+        "Piridostigmin",
+        "Edrofonyum",
+        "Kalabadion"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Fizostigmin büyük ölçüde plazma esterazlarıyla metabolize edilir.",
+      "category": "Kolinesteraz İnhibitörleri ve Nöromüsküler Antagonistler"
+    },
+    {
+      "id": 30,
+      "question": "Faz II blok gelişmiş bir hastada neostigmin uygulanması ile ilgili en doğru ifade hangisidir?",
+      "options": [
+        "Bloku her zaman tamamen geri çevirir",
+        "Etkisi öngörülemez; bloku uzatabilir veya kısmen açabilir",
+        "Kesinlikle kontrendikedir",
+        "Sadece atropin ile verilirse güvenlidir",
+        "TOF oranını hızla 1.0 yapar"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Faz II blokta kolinesteraz inhibitörlerinin etkisi değişkendir; Faz I bileşeni baskınsa blok derinleşebilir.",
+      "category": "Kolinesteraz İnhibitörleri ve Nöromüsküler Antagonistler"
+    },
+    {
+      "id": 31,
+      "question": "Myastenia Gravis şüphesi olan bir hastada, 2 mg edrofonyum sonrası 30 saniye içinde kas gücünde belirgin artış gözleniyor. Bu test (Tensilon Testi) için hangisi doğrudur?",
+      "options": [
+        "Test pozitif kabul edilir ve tanı Miyastenik Kriz yönündedir.",
+        "Test negatif kabul edilir, hasta Kolinerjik Krizdedir.",
+        "Edrofonyum kalıcı olarak asetilkolinesterazı inhibe etmiştir.",
+        "Hastaya acilen Fizostigmin başlanmalıdır.",
+        "Bu yanıt sadece çocuk hastalarda tanısal değer taşır."
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Edrofonyum sonrası kas gücünde düzelme (pozitif test), hastada yetersiz asetilkolin aktivitesi olduğunu ve durumun Miyastenik Kriz olduğunu kanıtlar.",
+      "category": "Kolinesteraz İnhibitörleri ve Nöromüsküler Antagonistler"
+    },
+    {
+      "id": 32,
+      "question": "Neostigmin ile kombine edilen Glikopirolatın atropine göre avantajı nedir?",
+      "options": [
+        "Daha hızlı taşikardi yapması.",
+        "Kan-beyin bariyerini geçmemesi ve daha az santral yan etki yapması.",
+        "Sadece çocuklarda etkili olması.",
+        "Göz içi basıncını aşırı artırması.",
+        "Kas gücünü doğrudan artırması."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Glikopirolat kuaterner amonyum yapısındadır, kan-beyin bariyerini geçmez ve neostigmin ile daha stabil bir kalp hızı sağlar.",
+      "category": "Kolinesteraz İnhibitörleri ve Nöromüsküler Antagonistler"
+    },
+    {
+      "id": 33,
+      "question": "Piridostigmin en çok hangi hastalığın kronik tedavisinde tercih edilir?",
+      "options": [
+        "Alzheimer.",
+        "Parkinson.",
+        "Miyastenia Gravis.",
+        "Multipl Skleroz.",
+        "Epilepsi."
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Uzun etki süresi nedeniyle Miyastenia Gravis'in oral idame tedavisinde piridostigmin standarttır.",
+      "category": "Kolinesteraz İnhibitörleri ve Nöromüsküler Antagonistler"
+    },
+    {
+      "id": 34,
+      "question": "Sugammadeks molekülünün yapısı aşağıdakilerden hangisidir?",
+      "options": [
+        "Protein.",
+        "Modifiye gama-siklodekstrin (şeker molekülü halkası).",
+        "Sentetik lipid.",
+        "Ağır metal şelatörü.",
+        "Monoklonal antikor."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Sugammadeks, 8 şeker ünitesinden oluşan halka şeklinde bir siklodekstrindir.",
+      "category": "Kolinesteraz İnhibitörleri ve Nöromüsküler Antagonistler"
+    },
+    {
+      "id": 35,
+      "question": "Kas gevşeticilerin etkilerini geri çevirmek için kullanılmayan kolinesteraz inhibitörü hangisidir?",
+      "options": [
+        "Neostigmin",
+        "Fizostigmin",
+        "Edrofonyum",
+        "Piridostigmin",
+        "L-sistein"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Fizostigmin merkezi antikolinerjik sendromda kullanılır; kas gevşetici reversiyonunda tercih edilen rutin ajan değildir.",
+      "category": "Kolinesteraz İnhibitörleri ve Nöromüsküler Antagonistler"
+    },
+    {
+      "id": 36,
+      "question": "Bir hastada süksinilkolin sonrası \"faz II blok\" geliştiği şüpheleniliyor. Anesteziyolog neostigmin uygulamaya karar veriyor. Bu uygulama ile ilgili en riskli durum nedir?",
+      "options": [
+        "Blokajın tamamen açılması.",
+        "Plazma kolinesterazının inhibe edilmesi sonucu süksinilkolin yıkımının durması ve blokun aşırı uzaması.",
+        "Hastada ani hipertansif atak gelişmesi.",
+        "Sugammadeksin etkisiz kalması.",
+        "Glikopirolatın etkisinin kısalması."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Neostigmin, sadece gerçek asetilkolinesterazı (AChE) değil, aynı zamanda psödokolinesteraz (bütirilkolinesteraz) enzimini de inhibe eder. Süksinilkolin bloğunda antikolinesteraz verilirse, hem ortamda daha fazla ACh birikir hem de süksinilkolini yıkan psödokolinesteraz inhibe olur; bu da bloğu (özellikle faz I kısmını) daha da derinleştirip uzatabilir.",
+      "category": "Kolinesteraz İnhibitörleri ve Nöromüsküler Antagonistler"
+    },
+    {
+      "id": 37,
+      "question": "Skopolamin veya aşırı dozda atropinin merkezi antikolinerjik etkilerinin tedavisinde etkili olan kolinesteraz inhibitörü aşağıdakilerden hangisidir?",
+      "options": [
+        "Edrofonyum",
+        "Fizostigmin",
+        "Neostigmin",
+        "Piridostigmin",
+        "Kalabadion"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Fizostigmin merkezi antikolinerjik etkileri geri çevirebilir.",
+      "category": "Kolinesteraz İnhibitörleri ve Nöromüsküler Antagonistler"
+    },
+    {
+      "id": 38,
+      "question": "Edrofonyumun neostigmine göre en belirgin farkı nedir?",
+      "options": [
+        "Enzime kovalent bağlanması.",
+        "Enzime iyonik (elektrostatik) ve hidrojen bağlarıyla zayıf/kısa süreli bağlanması.",
+        "Sadece karaciğerde yıkılması.",
+        "Kan-beyin bariyerini çok hızlı geçmesi.",
+        "Sadece çocuklarda kullanılması."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Edrofonyum enzime çok kısa süreli bağlanır, bu yüzden etkisi neostigmine göre çok daha kısadır.",
+      "category": "Kolinesteraz İnhibitörleri ve Nöromüsküler Antagonistler"
+    },
+    {
+      "id": 39,
+      "question": "Aşağıdakilerden hangisi antikolinesterazların muskarinik etkilerinden (DUMBELS) biri değildir?",
+      "options": [
+        "Miyozis (Pupil daralması).",
+        "Bronkokonstriksiyon.",
+        "Hipersalivasyon (Tükürük artışı).",
+        "Midriyazis (Pupil genişlemesi).",
+        "Diyare."
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "Antikolinesterazlar kolinerjik etkiyle pupili daraltır (miyozis); genişletme (midriyazis) antimuskariniklerin etkisidir.",
+      "category": "Kolinesteraz İnhibitörleri ve Nöromüsküler Antagonistler"
+    },
+    {
+      "id": 40,
+      "question": "45 yaşında kadın hasta, roküronyum ile kas gevşetilmesi sonrası ameliyat sonunda TOF (Four-of-Train) sayımı 2 olarak saptanıyor. Anesteziyolog neostigmin ve glikopirolat uyguluyor. Ancak 5 dakika sonra hastada şiddetli bradikardi (35/dk) ve aşırı ağız sekresyonu gelişiyor. Bu klinik tablonun en muhtemel nedeni nedir?",
+      "options": [
+        "Neostigminin nikotinik etkilerinin baskın gelmesi.",
+        "Glikopirolat dozunun, neostigminin muskarinik etkilerini karşılamada yetersiz kalması.",
+        "Hastada gizli bir Malign Hipertermi tablosunun başlaması.",
+        "Neostigminin kan-beyin bariyerini geçerek merkezi vagal uyarı yapması.",
+        "Sugammadeks ile neostigmin arasında ilaç etkileşimi oluşması."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 4,
+      "explanation": "Neostigmin gibi antikolinesterazlar, asetilkolini artırarak sadece kaslarda değil, kalpte ve salgı bezlerinde de muskarinik etkiler (bradikardi, sekresyon) yapar. Bu etkileri engellemek için verilen antimuskarinik (glikopirolat) dozunun yetersiz kalması bu tabloya yol",
+      "category": "Kolinesteraz İnhibitörleri ve Nöromüsküler Antagonistler"
+    },
+    {
+      "id": 41,
+      "question": "Sugammadeksin etki mekanizması için aşağıdakilerden hangisi en doğru tanımdır?",
+      "options": [
+        "Asetilkolinesteraz enzimini geri dönüşümsüz bağlar.",
+        "Steroidal nöromüsküler blokörleri (roküronyum gibi) plazmada kapsül içine alarak hapseder.",
+        "Kan-beyin bariyerini geçerek merkezi sinir sistemini uyarır.",
+        "Benzilizokinolinyum yapısındaki ilaçları (atraküryum) parçalar.",
+        "Potasyum kanallarını bloke ederek asetilkolin salınımını artırır."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Sugammadeks bir şelasyon ajanıdır; roküronyum ve veküronyum gibi steroidal ajanları bağlayarak etkisizleştirir.",
+      "category": "Kolinesteraz İnhibitörleri ve Nöromüsküler Antagonistler"
+    },
+    {
+      "id": 42,
+      "question": "\"Santral Antikolinerjik Sendrom\" (skopolamin veya atropin zehirlenmesi) tedavisinde neden Neostigmin değil de Fizostigmin tercih edilir?",
+      "options": [
+        "Fizostigmin daha güçlü bir kas gevşetici antagonisti olduğu için.",
+        "Fizostigmin tersiyer amin yapısında olup kan-beyin bariyerini geçebildiği için.",
+        "Neostigmin çok hızlı metabolize olduğu için.",
+        "Fizostigmin sadece nikotinik reseptörlere etki ettiği için.",
+        "Neostigmin daha fazla bradikardi yaptığı için."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Fizostigmin lipofilik (tersiyer amin) yapısı sayesinde MSS'ye geçer ve oradaki antikolinerjik etkileri geri çevirir.",
+      "category": "Kolinesteraz İnhibitörleri ve Nöromüsküler Antagonistler"
+    },
+    {
+      "id": 43,
+      "question": "Antikolinesterazların neden olduğu bradikardi ve sekresyon artışı gibi yan etkileri önlemek için eklenen antimuskarinik ajanların seçiminde hangisi en uygun eşleşmedir?",
+      "options": [
+        "Neostigmin - Atropin (Etki başlangıç süreleri uyumsuzdur).",
+        "Edrofonyum - Glikopirolat (Glikopirolat çok yavaş kalır).",
+        "Neostigmin - Glikopirolat (Etki başlangıç süreleri birbirine yakındır).",
+        "Fizostigmin - Sugammadeks (Birlikte kullanılmazlar).",
+        "Piridostigmin - Atropin (Piridostigmin çok hızlıdır)."
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Neostigminin muskarinik etkileriyle glikopirolatın antimuskarinik etkisi benzer sürede başlar, bu da kalp hızı stabilitesi için idealdir.",
+      "category": "Kolinesteraz İnhibitörleri ve Nöromüsküler Antagonistler"
+    },
+    {
+      "id": 44,
+      "question": "Aşağıdaki durumlardan hangisi asetilkolinesteraz inhibitörlerinin nöromüsküler blokajı geri çevirme başarısını (reversiyon kapasitesini) potansiyel olarak azaltır?",
+      "options": [
+        "Solunumsal alkaloz",
+        "Hipermagnezemi",
+        "Hiperkalemi",
+        "Hiperkalsemi",
+        "Hipertermi"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Magnezyum, pre-sinaptik kalsiyum kanallarını antagonize ederek ACh salınımını azaltır ve post-sinaptik membran duyarlılığını düşürerek antikolinesterazların etkinliğini azaltır.",
+      "category": "Kolinesteraz İnhibitörleri ve Nöromüsküler Antagonistler"
+    },
+    {
+      "id": 45,
+      "question": "Ameliyat sonrası titremeyi önlemede etkili olduğu gösterilen kolinesteraz inhibitörü aşağıdakilerden hangisidir?",
+      "options": [
+        "Kalabadion",
+        "Neostigmin",
+        "Edrofonyum",
+        "Piridostigmin",
+        "Fizostigmin"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Fizostigminin postoperatif titremeyi azaltabildiği bildirilmiştir.",
+      "category": "Kolinesteraz İnhibitörleri ve Nöromüsküler Antagonistler"
+    },
+    {
+      "id": 46,
+      "question": "\"Recurarization\" (yeniden kürarizasyon) riski en çok hangi eşleşmede görülür?",
+      "options": [
+        "Roküronyum - Yüksek doz Sugammadeks",
+        "Atraküryum - Neostigmin",
+        "Uzun etkili NMB (Panküronyum) - Kısa etkili Antikolinesteraz (Edrofonyum)",
+        "Sisatraküryum - Glikopirolat",
+        "Süksinilkolin - Psödokolinesteraz"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Geri çevirici ajanın (antagonist) etki süresi, bloke edici ajanın etki süresinden daha kısa olduğunda ilaç eliminasyonu bitmeden blok yeniden başlayabilir.",
+      "category": "Kolinesteraz İnhibitörleri ve Nöromüsküler Antagonistler"
+    },
+    {
+      "id": 47,
+      "question": "Neostigminin doz aşımında (Kolinerjik kriz) görülen kas güçsüzlüğünün nedeni nedir?",
+      "options": [
+        "Reseptörlerin kalıcı olarak hasar görmesi",
+        "Aşırı ACh nedeniyle post-sinaptik membranın sürekli depolarize kalması ve sodyum kanallarının inaktivasyonu",
+        "Kalsiyumun hücre içine girişinin engellenmesi",
+        "Magnezyumun ACh ile yarışmaya girmesi",
+        "Pre-sinaptik vezikül sentezinin durması"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Aşırı ACh, nikotinik reseptörleri sürekli uyararak depolarizan blok benzeri bir tablo (akomodasyon/inaktivasyon) oluşturur.",
+      "category": "Kolinesteraz İnhibitörleri ve Nöromüsküler Antagonistler"
+    },
+    {
+      "id": 48,
+      "question": "Sugammadeks sonrası en sık görülen ve ciddi olabilen yan etki hangisidir?",
+      "options": [
+        "Hipertansiyon.",
+        "Hipersalivasyon.",
+        "Bradikardi.",
+        "Nöbet.",
+        "Görme kaybı."
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Sugammadeks sonrası ciddi bradikardi ve nadiren asistoli bildirilmiştir.",
+      "category": "Kolinesteraz İnhibitörleri ve Nöromüsküler Antagonistler"
+    },
+    {
+      "id": 49,
+      "question": "Neostigmin uygulanan bir hastada \"tavan etkisi\" (ceiling effect) neyi ifade eder?",
+      "options": [
+        "İlaç dozunun 5 mg'ı geçemeyeceğini.",
+        "Enzimlerin tamamı inhibe edildikten sonra doz artırılsa bile daha fazla asetilkolin birikmeyeceğini.",
+        "Hastanın bilincinin açılmayacağını.",
+        "İlacın sadece diyaframa etki edeceğini.",
+        "Kan basıncının çok yükseleceğini."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Asetilkolinesteraz enzimi tamamen inhibe olduğunda, daha fazla neostigmin vermek blokajın daha hızlı açılmasını sağlamaz.",
+      "category": "Kolinesteraz İnhibitörleri ve Nöromüsküler Antagonistler"
+    },
+    {
+      "id": 50,
+      "question": "Bir hastada atropin aşırı dozuna bağlı \"Santral Antikolinerjik Sendrom\" (konfüzyon, ajitasyon, halüsinasyon) gelişiyor. Tedavide hangisinin kullanımı en uygundur?",
+      "options": [
+        "Neostigmin.",
+        "Edrofonyum.",
+        "Fizostigmin.",
+        "Glikopirolat.",
+        "Sugammadeks."
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Fizostigmin tersiyer amin yapısında olduğu için kan-beyin bariyerini geçer ve merkezi antikolinerjik semptomları tedavi edebilir. Diğer antikolinesterazlar kuaterner yapıda olup beyne geçemezler.",
+      "category": "Kolinesteraz İnhibitörleri ve Nöromüsküler Antagonistler"
+    },
+    {
+      "id": 51,
+      "question": "Aşağıdaki ajanlardan hangisi hem benzilizokinolinyum hem de steroidal nondepolarizan kas gevşeticilerin nikotinik reseptörüne bağlanmasını önler?",
+      "options": [
+        "L-sistein",
+        "Kalabadion",
+        "Edrofonyum",
+        "Sugammadeks",
+        "Glutatyon"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Kalabadion hem steroidal hem benzilizokinolinyum ajanları bağlayabilen geniş spektrumlu deneysel bağlayıcıdır.",
+      "category": "Kolinesteraz İnhibitörleri ve Nöromüsküler Antagonistler"
+    },
+    {
+      "id": 52,
+      "question": "Myastenia gravis, idrar kesesi atonisi ve paralitik ileus tedavisinde de kullanılabilen Kolinesteraz inhibitörü aşağıdakilerden hangisidir?",
+      "options": [
+        "Neostigmin",
+        "Piridostigmin",
+        "Fizostigmin",
+        "Edrofonyum",
+        "Kalabadion"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Neostigmin hem nöromüsküler iletim hem de mesane/bağırsak tonusu üzerinde klinik kullanıma sahiptir.",
+      "category": "Kolinesteraz İnhibitörleri ve Nöromüsküler Antagonistler"
+    },
+    {
+      "id": 53,
+      "question": "Neostigmin uygulanan bir hastada DUMBELS (Diyare, Ürinasyon, Miyozis, Bronkospazm, Emesis, Lakrimasyon, Salivasyon) tablosu görülüyor. Bu tablo aşağıdakilerden hangisinin aşırı uyarılmasıyla oluşur?",
+      "options": [
+        "Nikotinik reseptörler.",
+        "Muskarinik reseptörler.",
+        "Alfa-1 adrenerjik reseptörler.",
+        "GABA reseptörleri.",
+        "Dopaminerjik reseptörler."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 4,
+      "explanation": "Antikolinesterazların yan etkileri, parasempatik sistemin (muskarinik reseptörlerin) aşırı uyarılması sonucu ortaya çıkar. Bu etkileri durdurmak için atropin veya glikopirolat gibi antimuskarinikler kullanılır.",
+      "category": "Kolinesteraz İnhibitörleri ve Nöromüsküler Antagonistler"
+    },
+    {
+      "id": 54,
+      "question": "Sugammadeks için yüksek bir afiniteye sahip olan ve nöromüsküler bloğun geri çevrilmesini geciktirebilen östrojen antagonisti aşağıdakilerden hangisidir?",
+      "options": [
+        "Toremifen",
+        "Klomifen",
+        "Fulvestrant",
+        "Formestan",
+        "Anastrozol"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Toremifen sugammadekse yüksek afinitesi nedeniyle reversiyonu geciktirebilir.",
+      "category": "Kolinesteraz İnhibitörleri ve Nöromüsküler Antagonistler"
+    },
+    {
+      "id": 55,
+      "question": "Mesane atonisi için kullanılan muskarinik agonist ajan aşağıdakilerden hangisidir?",
+      "options": [
+        "Metakolin",
+        "Karbakol",
+        "Salbutamol",
+        "Albuterol",
+        "Betanekol"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Betanekol muskarinik agonist etkisiyle mesane detrusor aktivitesini artırabilir.",
+      "category": "Kolinesteraz İnhibitörleri ve Nöromüsküler Antagonistler"
+    },
+    {
+      "id": 56,
+      "question": "Morfine bağlı solunum depresyonunu kısmen önlediği bildirilen kolinesteraz inhibitörü aşağıdakilerden hangisidir?",
+      "options": [
+        "Fizostigmin",
+        "Neostigmin",
+        "Piridostigmin",
+        "Edrofonyum",
+        "Kalabadion"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Fizostigminin morfine bağlı solunum depresyonunu kısmen azaltabildiği bildirilmiştir.",
+      "category": "Kolinesteraz İnhibitörleri ve Nöromüsküler Antagonistler"
+    },
+    {
+      "id": 57,
+      "question": "Kolinesteraz inhibitörleri arasında en hızlı etki başlangıcına (1-2 dk.) ve en kısa etki süresine sahip olan aşağıdakilerden hangisidir?",
+      "options": [
+        "Neostigmin",
+        "Fizostigmin",
+        "Piridostigmin",
+        "Edrofonyum",
+        "Kalabadion"
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "Edrofonyum hızlı başlayan ve kısa süren bir antikolinesterazdır.",
+      "category": "Kolinesteraz İnhibitörleri ve Nöromüsküler Antagonistler"
+    }
+  ]
+}

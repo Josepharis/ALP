@@ -1,0 +1,730 @@
+{
+  "meta": {
+    "title": "Kardiyovasküler Dışı Monitörizasyon Soru Bankası",
+    "language": "tr",
+    "totalQuestions": 48,
+    "category": "Kardiyovasküler Dışı Monitörizasyon"
+  },
+  "questions": [
+    {
+      "id": 1,
+      "question": "Nöromüsküler bloktan geri dönüşte ekstübasyon için güncel yaklaşımlarda en güvenilir TOF oranı eşiği kaçtır?",
+      "options": [
+        "> 0.40",
+        "> 0.60",
+        "> 0.70",
+        "> 0.90",
+        "%100 (1.0)"
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "Rezidüel kürarizasyonu ve postoperatif solunum komplikasyonlarını azaltmak için ekstübasyon öncesi TOF oranının 0.90’ın üzerinde olması hedeflenir.",
+      "category": "Kardiyovasküler Dışı Monitörizasyon"
+    },
+    {
+      "id": 2,
+      "question": "Septik şok nedeniyle yoğun bakımda takip edilen bir hastada, koldan ölçülen non-invaziv kan basıncı 105/60 mmHg iken aynı koldaki pulse oksimetre perfüzyon indeksi çok düşük olduğu için sinyal alamıyor. Oksijenasyon takibi için en güvenilir alternatif uygulama yeri hangisidir?",
+      "options": [
+        "Ayak başparmağı",
+        "Kulak memesi",
+        "Dil",
+        "Alın",
+        "Elmacık kemiği üzeri"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 4,
+      "explanation": "Şok ve periferik vazokonstriksiyonda el-ayak parmakları sinyali erken kaybeder. Dil gibi santral ve iyi perfüze bölgeler daha güvenilir ölçüm sağlayabilir.",
+      "category": "Kardiyovasküler Dışı Monitörizasyon"
+    },
+    {
+      "id": 3,
+      "question": "Serebral fonksiyon monitörizasyonunda EEG’de izlenen burst supresyon paterni neyi ifade eder?",
+      "options": [
+        "Yüzeyel anesteziyi",
+        "Nöbet aktivitesini",
+        "Çok derin anesteziyi veya ciddi serebral hipoksiyi",
+        "Normal uykuyu",
+        "Ketamin anestezisini"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Burst supresyon, izoelektrik dönemler arasında yüksek voltajlı aktivite patlamaları ile karakterizedir; beyin aktivitesinin ciddi baskılandığını gösterir.",
+      "category": "Kardiyovasküler Dışı Monitörizasyon"
+    },
+    {
+      "id": 4,
+      "question": "Kapnografi trasesinde Faz III (alveoler plato) sonunda ölçülen EtCO₂ değerinin PaCO₂’den normalde 2-5 mmHg düşük olmasının temel fizyolojik nedeni nedir?",
+      "options": [
+        "Alveoler ölü boşluk ventilasyonu",
+        "Şant fraksiyonunun artması",
+        "Difüzyon kapasitesinin yüksekliği",
+        "Metabolik hızın düşüklüğü",
+        "Mukozal CO₂ emilimi"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "PaCO₂-EtCO₂ farkı, CO₂ içermeyen ölü boşluk gazının alveoler gazı seyreltmesini yansıtır.",
+      "category": "Kardiyovasküler Dışı Monitörizasyon"
+    },
+    {
+      "id": 5,
+      "question": "Kapnografide EtCO₂ değerinin aniden sıfıra düşmesi ancak ventilatörün çalışmaya devam etmesi durumunda ilk yapılması gereken müdahale nedir?",
+      "options": [
+        "Soda-lime’ı değiştirmek.",
+        "Hastayı manuel solutarak entübasyonun doğruluğunu ve devre bütünlüğünü kontrol etmek.",
+        "Kan gazı örneği almak.",
+        "Taze gaz akımını artırmak.",
+        "Oksijen analizörünü kalibre etmek."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 4,
+      "explanation": "EtCO₂’nin ani kaybı tüp çıkması, devre ayrılması veya tıkanma gibi kritik durumları düşündürür. İlk yaklaşım manuel ventilasyonla havayolu ve devre bütünlüğünü hızla doğrulamaktır.",
+      "category": "Kardiyovasküler Dışı Monitörizasyon"
+    },
+    {
+      "id": 6,
+      "question": "Aşağıdaki monitörizasyon yöntemlerinden hangisi Lambert-Beer yasası prensibini kullanmaz?",
+      "options": [
+        "Pulse oksimetri",
+        "Kapnografi (kızılötesi absorbsiyon)",
+        "Serebral oksimetri (NIRS)",
+        "Anestezik gaz analizi (infrared spektrofotometri)",
+        "Oksijen analizi (paramanyetik yöntem)"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Oksijen molekülü kızılötesi ışığı belirgin şekilde absorbe etmez; oksijen ölçümü paramanyetik veya elektrokimyasal yöntemlerle yapılır.",
+      "category": "Kardiyovasküler Dışı Monitörizasyon"
+    },
+    {
+      "id": 7,
+      "question": "Kapnografi eğrisinde 'shark-fin' (köpekbalığı yüzgeci) görünümü Faz II ve Faz III’te hangi patofizyolojik değişikliği yansıtır?",
+      "options": [
+        "Hızlı alveoler boşalma",
+        "Devre ayrılması",
+        "Obstrüktif akciğer hastalığı veya bronkospazm",
+        "Malign hipertermi başlangıcı",
+        "Özofageal entübasyon"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Bronkospazm veya obstrüksiyonda alveoller eş zamanlı boşalmaz; ekspiratuar yükseliş yavaşlar ve kapnogram shark-fin görünümü alır.",
+      "category": "Kardiyovasküler Dışı Monitörizasyon"
+    },
+    {
+      "id": 8,
+      "question": "Pulse oksimetri için verilen aşağıdaki bilgilerden hangisi/hangileri doğrudur?\nI. Oksimetre ve pletismografi prensiplerini birleştirir.\nII. Oksimetri, oksijenlenmiş ve indirgenmiş hemoglobinin kırmızı ve kızılötesi ışığı farklı absorbe etmesi gözlemine dayanır (Lambert-Beer yasası).\nIII. Oksihemoglobin daha fazla kızılötesi ışığı (940 nm), deoksihemoglobin daha fazla kırmızı ışığı (660 nm) absorbe eder.\nIV. Kırmızı ve kızılötesi dalga boylarındaki absorbsiyonların oranı mikroişlemci tarafından analiz edilerek SpO₂ hesaplanır.\nV. Kırmızı ışığın kızılötesi ışığa absorbsiyon oranı ne kadar büyükse arteriyel hemoglobin oksijen satürasyonu o kadar düşüktür.",
+      "options": [
+        "I-IV-V",
+        "II-III",
+        "III-V",
+        "I-II-V",
+        "I-II-III-IV-V"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Tüm ifadeler pulse oksimetrenin çalışma prensibini doğru açıklar: pletismografi, Lambert-Beer yasası, dalga boyu farklılıkları ve oran analizi birlikte kullanılır.",
+      "category": "Kardiyovasküler Dışı Monitörizasyon"
+    },
+    {
+      "id": 9,
+      "question": "Pulse oksimetre artefaktının nedenleri arasında olmayan hangisidir?",
+      "options": [
+        "Hareket",
+        "Metilen mavisi",
+        "Venöz pulsasyonlar",
+        "Düşük perfüzyon",
+        "Karanlık ortam"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 2,
+      "explanation": "Hareket, metilen mavisi gibi boyalar, venöz pulsasyon ve düşük perfüzyon artefakta neden olabilir. Karanlık ortam tipik bir pulse oksimetre artefakt nedeni değildir.",
+      "category": "Kardiyovasküler Dışı Monitörizasyon"
+    },
+    {
+      "id": 10,
+      "question": "Pulse oksimetri için verilen aşağıdaki bilgilerden hangisi/hangileri doğrudur?\nI. Pulse oksimetreler SpO₂’ye ek olarak doku perfüzyonu/nabız genliği hakkında bilgi verir ve kalp hızını ölçer.\nII. %90’lık satürasyon PaO₂’nin 65 mmHg’den düşük olduğunu gösterebilir.\nIII. Klinik olarak saptanabilen siyanoz genellikle SpO₂’nin %80’den az olduğu duruma karşılık gelir.\nIV. COHb ve HbO₂ 660 nm ışığı benzer absorbe ettiğinden, iki dalga boylu pulse oksimetre karbon monoksit zehirlenmesinde hatalı yüksek değer gösterebilir.\nV. Methemoglobinemi, gerçek SaO₂ %85’ten büyükse hatalı düşük; gerçek SaO₂ %85’ten düşükse hatalı yüksek ölçüme neden olabilir.",
+      "options": [
+        "I-V",
+        "I-II-III",
+        "IV-V",
+        "I-III-V",
+        "I-II-III-IV-V"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "Tüm ifadeler doğrudur. Pulse oksimetre nabız ve perfüzyon hakkında bilgi verir; karbon monoksit zehirlenmesi ve methemoglobinemi ölçüm doğruluğunu bozabilir.",
+      "category": "Kardiyovasküler Dışı Monitörizasyon"
+    },
+    {
+      "id": 11,
+      "question": "Near-infrared spectroscopy (NIRS) için verilen bilgilerden hangisi yanlıştır?",
+      "options": [
+        "Yansıma spektroskopisi kullanan yakın kızılötesi ışın kafa derisindeki bir prob tarafından yayılır.",
+        "Reseptörler hem derin hem de yüzeysel yapılardan yansıyan ışınları saptayacak şekilde konumlandırılmıştır.",
+        "NIRS satürasyonu, pulsatil arteriyel bileşeni ayırma yeteneği sınırlı olduğu için büyük ölçüde venöz hemoglobin absorbsiyonunu yansıtır.",
+        "NIRS ölçümlerinde %40’tan az bölgesel satürasyonlar veya bazale göre %25’ten büyük düşüşler düşük serebral oksijenasyonun habercisi olabilir.",
+        "Oksijenli ve oksijensiz hemoglobin ışığı aynı frekansta absorbe ettiği için yanlış sonuçlar verebilir."
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 3,
+      "explanation": "NIRS’te oksijenli ve oksijensiz hemoglobin farklı dalga boylarında farklı absorbsiyon gösterir; aynı frekansta aynı şekilde absorbe ettikleri ifadesi yanlıştır.",
+      "category": "Kardiyovasküler Dışı Monitörizasyon"
+    },
+    {
+      "id": 12,
+      "question": "İnfrared spektrofotometri prensibiyle çalışan bir gaz analizörü aşağıdaki gazlardan hangisini direkt olarak ölçme yeteneğine sahip değildir?",
+      "options": [
+        "Sevofluran",
+        "Nitröz oksit (N₂O)",
+        "Karbondioksit (CO₂)",
+        "Oksijen (O₂)",
+        "Desfluran"
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "Oksijen molekülü infrared ışığı absorbe etmez. Bu nedenle O₂ ölçümü için paramanyetik veya elektrokimyasal sensörler kullanılır.",
+      "category": "Kardiyovasküler Dışı Monitörizasyon"
+    },
+    {
+      "id": 13,
+      "question": "Ameliyathanede pulse oksimetre sensörü parmak ucuna takıldığında SpO₂ ölçümü güvenilir alınamıyor. Hastanın ekstremitesi soğuk ve soluk görünüyor. En mantıklı yaklaşım nedir?",
+      "options": [
+        "Probun bozuk olduğuna karar verip yeni prob takmak.",
+        "Sensörü kulak memesi veya dil gibi daha iyi perfüze olan bir bölgeye taşımak.",
+        "Hastaya vazopressör ilaç vermek.",
+        "Ölçümü iptal edip yalnız arteriyel kan gazına güvenmek.",
+        "Parmaktaki tırnağı kazımak."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Periferik vazokonstriksiyon ve düşük perfüzyonda parmak probu güvenilir sinyal alamayabilir. Kulak, burun veya dil gibi daha santral bölgeler tercih edilebilir.",
+      "category": "Kardiyovasküler Dışı Monitörizasyon"
+    },
+    {
+      "id": 14,
+      "question": "Aşağıdaki boyalardan hangisi pulse oksimetrede en şiddetli ve uzun süreli yanlış düşük SpO₂ ölçümüne neden olur?",
+      "options": [
+        "İndosiyanin yeşili",
+        "Metilen mavisi",
+        "Floresan",
+        "İndigo karmin",
+        "Hiçbiri SpO₂’yi etkilemez"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Metilen mavisi 660 nm dalga boyunda yoğun ışık absorbe eder ve pulse oksimetrede belirgin, yanlış düşük SpO₂ ölçümüne yol açabilir.",
+      "category": "Kardiyovasküler Dışı Monitörizasyon"
+    },
+    {
+      "id": 15,
+      "question": "Nöromüsküler monitörizasyonda Train-of-Four (TOF) uyarısı sonrası elde edilen cevapların T4/T1 oranında sönme (fade) göstermesi hangi blok tipinin karakteristik özelliğidir?",
+      "options": [
+        "Faz I depolarizan blok",
+        "Non-depolarizan blok",
+        "Narkotik doz aşımı",
+        "Hipermagnezemi",
+        "Hipotermik blok"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Non-depolarizan kas gevşeticiler presinaptik nikotinik reseptörleri de etkileyerek ardışık uyarılarda asetilkolin salınımını azaltır ve TOF fade oluşturur.",
+      "category": "Kardiyovasküler Dışı Monitörizasyon"
+    },
+    {
+      "id": 16,
+      "question": "Pulse oksimetrenin çalışma prensibi olan Lambert-Beer yasasına göre, kırmızı ışığın (660 nm) kızılötesi ışığa (940 nm) absorbsiyon oranı (R/IR) arttıkça arteriyel hemoglobin satürasyonu (SpO₂) nasıl değişir?",
+      "options": [
+        "Lineer olarak artar.",
+        "Üstel olarak artar.",
+        "Değişmez, sadece nabız genliği artar.",
+        "Belirlenmiş normlara göre düşer.",
+        "Sadece venöz pulsasyon varsa artar."
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "Kırmızı/kızılötesi absorbsiyon oranı arttıkça deoksihemoglobin oranı artmış kabul edilir ve mikroişlemci bunu daha düşük SpO₂ olarak yorumlar.",
+      "category": "Kardiyovasküler Dışı Monitörizasyon"
+    },
+    {
+      "id": 17,
+      "question": "Torasik cerrahi sırasında tek akciğer ventilasyonu uygulanan bir hastada pulse oksimetre aniden %100’den %82’ye düşüyor. Cerrah akciğeri manipüle etmiyor, pleth dalga formu düzgün izleniyor ve %100 O₂ verilmesine rağmen SpO₂ yükselmiyor. Bu tablonun en olası nedeni hangisidir?",
+      "options": [
+        "Akut pulmoner emboli",
+        "Methemoglobinemi tetiklenmesi",
+        "Hipotermi ve vazokonstriksiyon",
+        "Endotrakeal tüpün yerinden çıkması",
+        "Malign hipertermi başlangıcı"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 4,
+      "explanation": "Methemoglobinemi varlığında pulse oksimetre gerçek satürasyondan bağımsız olarak çoğunlukla %80-85 bandına yakın sabitlenir ve %100 O₂’ye beklenen yanıt alınmayabilir.",
+      "category": "Kardiyovasküler Dışı Monitörizasyon"
+    },
+    {
+      "id": 18,
+      "question": "NIRS monitörizasyonunda bazal değerden yüzde kaçlık bir düşüş ciddi serebral hipoperfüzyonun habercisi kabul edilir?",
+      "options": [
+        "%5",
+        "%10",
+        "%25",
+        "%50",
+        "%80"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Bazal rSO₂ değerine göre %25’ten fazla düşüş veya mutlak değerin %40’ın altına inmesi ciddi serebral hipoperfüzyon/hipoksi açısından uyarıcı kabul edilir.",
+      "category": "Kardiyovasküler Dışı Monitörizasyon"
+    },
+    {
+      "id": 19,
+      "question": "Ameliyat sırasında nazofaringeal ısı probunun yanlışlıkla çok derine yerleştirilerek üst özofagusa kaçtığı fark ediliyor. Bu durum ısı ölçümünü nasıl etkiler?",
+      "options": [
+        "Ölçülen değer gerçek santral ısıdan daha yüksek çıkar.",
+        "Ölçülen değer soluk borusundaki soğuk gazlara yakınlık nedeniyle hatalı düşük çıkabilir.",
+        "Ölçüm etkilenmez.",
+        "Probun yeri değişse de beyin ısısını yansıtmaya devam eder.",
+        "Sadece cilt ısısını ölçer."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 4,
+      "explanation": "Nazofaringeal prob ventile edilen soğuk gazların geçtiği hava yoluna çok yakın konumlanırsa gerçek santral ısıdan daha düşük değer okuyabilir.",
+      "category": "Kardiyovasküler Dışı Monitörizasyon"
+    },
+    {
+      "id": 20,
+      "question": "Malign hipertermi krizinde kapnografide izlenen ilk ve en duyarlı bulgu hangisidir?",
+      "options": [
+        "Isı artışı",
+        "Metabolik hız artışına bağlı EtCO₂’de hızlı ve belirgin yükselme",
+        "SpO₂’de ani düşüş",
+        "Bradikardi",
+        "Trasenin shark-fin görünümü alması"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 4,
+      "explanation": "Malign hipertermide hipermetabolizma CO₂ üretimini hızla artırır; EtCO₂ yükselişi çoğu kez ateşten önce ortaya çıkar.",
+      "category": "Kardiyovasküler Dışı Monitörizasyon"
+    },
+    {
+      "id": 21,
+      "question": "Hipoterminin ilişkili olduğu riskler arasında olmayan hangisidir?",
+      "options": [
+        "Hipoglisemi",
+        "Gecikmiş ilaç metabolizması",
+        "Vazokonstriksiyon",
+        "Bozulmuş koagülasyon",
+        "Taşikardi ve hipertansiyonun eşlik ettiği postoperatif titreme"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 2,
+      "explanation": "Hipotermi vazokonstriksiyon, koagülasyon bozukluğu, ilaç metabolizmasında gecikme ve titreme ile ilişkilidir; hipoglisemi tipik bir sonuç değildir.",
+      "category": "Kardiyovasküler Dışı Monitörizasyon"
+    },
+    {
+      "id": 22,
+      "question": "Hava embolisi gelişen bir hastada kapnogramda ne görülmesi beklenir?",
+      "options": [
+        "EtCO₂ değerinde ani ve belirgin düşüş",
+        "Alveoler platonun tamamen kaybolması",
+        "EtCO₂ değerinde basamaklı artış",
+        "Trasede kardiyojenik osilasyonların görülmesi",
+        "Bazal hattın yükselmesi"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 4,
+      "explanation": "Hava embolisi pulmoner perfüzyonu azaltır ve alveoler ölü boşluğu artırır. Akciğere taşınan CO₂ azaldığı için EtCO₂ hızla düşer.",
+      "category": "Kardiyovasküler Dışı Monitörizasyon"
+    },
+    {
+      "id": 23,
+      "question": "Özofageal stetoskop yerleştirilirken stetoskop ucunun en iyi ses alacağı akustik pencere hangi anatomik seviyededir?",
+      "options": [
+        "Üst özofagus (krikoid seviyesi)",
+        "Orta özofagus (karina seviyesi)",
+        "Distal özofagus (kalbin arkası)",
+        "Mide girişi",
+        "Farenks"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Kalp ve solunum sesleri en iyi, kalbin arkasına komşu distal özofagus seviyesinde duyulur.",
+      "category": "Kardiyovasküler Dışı Monitörizasyon"
+    },
+    {
+      "id": 24,
+      "question": "Genel anestezi altında laparoskopik kolesistektomi yapılan bir hastada EtCO₂ 38 mmHg’den 55 mmHg’ye yükseliyor. Aynı sırada kapnografi eğrisinin bazal hattı 0 mmHg’den 12 mmHg’ye çıkıyor. Bu monitörizasyon bulgusu aşağıdakilerden hangisini kesin olarak gösterir?",
+      "options": [
+        "Malign hipertermi başlangıcı",
+        "Karbondioksit embolisi",
+        "Soda-lime’ın/CO₂ absorbanının tükenmesi ve geri soluma",
+        "Pnömotoraks gelişimi",
+        "Yetersiz taze gaz akımı"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 4,
+      "explanation": "Kapnogramın inspiratuar fazında bazal hattın sıfıra dönmemesi rebreathing göstergesidir. En sık nedenler arasında CO₂ absorbanının tükenmesi veya tek yönlü valf arızası yer alır.",
+      "category": "Kardiyovasküler Dışı Monitörizasyon"
+    },
+    {
+      "id": 25,
+      "question": "Aşağıdaki durumlardan hangisi PaCO₂ ile EtCO₂ arasındaki farkın azalmasına hatta negatifleşmesine (EtCO₂ > PaCO₂) neden olabilir?",
+      "options": [
+        "Pulmoner emboli",
+        "Düşük kardiyak çıktı",
+        "Çocuklarda taze gaz akımının çok düşük olması veya inspiratuar valf kaçağı",
+        "Gebelik",
+        "Hava embolisi"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 4,
+      "explanation": "Rebreathing veya teknik hatalarda EtCO₂ ölçümü PaCO₂’ye yaklaşabilir veya onu aşabilir. Çocuklarda düşük taze gaz akımı veya inspiratuar valf kaçağı buna yol açabilir.",
+      "category": "Kardiyovasküler Dışı Monitörizasyon"
+    },
+    {
+      "id": 26,
+      "question": "Pulse oksimetrede tırnak cilası kullanımının etkisi hakkında hangisi doğrudur?",
+      "options": [
+        "Sadece kırmızı oje SpO₂’yi yükseltir.",
+        "Siyah, mavi ve yeşil ojeler SpO₂’yi yanlış düşük gösterebilir.",
+        "Oje sadece nabız sayısını etkiler.",
+        "Şeffaf parlatıcılar ölçümü tamamen engeller.",
+        "Oje methemoglobinemi ile aynı etkiyi yaratır."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 2,
+      "explanation": "Koyu renkli ojeler ışık absorbsiyonunu artırarak sensöre ulaşan ışığı azaltabilir ve SpO₂’nin yanlış düşük ölçülmesine neden olabilir.",
+      "category": "Kardiyovasküler Dışı Monitörizasyon"
+    },
+    {
+      "id": 27,
+      "question": "Aşağıdakilerden hangisi prekordiyal veya özefageal stetoskop tarafından sağlanan bilgiler arasında değildir?",
+      "options": [
+        "Ventilasyonun teyidi",
+        "Solunum seslerinin kalitesi",
+        "Kalp hızının düzenliliği",
+        "Kalp seslerinin ton kalitesi",
+        "Ejeksiyon fraksiyonunun kalitesi"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 2,
+      "explanation": "Prekordiyal veya özefageal stetoskop ile ventilasyon, solunum sesleri, kalp ritmi ve kalp seslerinin kalitesi değerlendirilebilir; ancak ejeksiyon fraksiyonu ölçülemez.",
+      "category": "Kardiyovasküler Dışı Monitörizasyon"
+    },
+    {
+      "id": 28,
+      "question": "EEG dalgaları için verilen bilgilerden hangisi yanlıştır?",
+      "options": [
+        "Alfa dalgası istirahat halinde gözler kapalı durumda görülür.",
+        "Beta dalgası konsantre durumda görülür.",
+        "Delta dalgası beyin hasarını gösterebilir.",
+        "Teta dalgası derin anestezi veya derin uykuda görülebilir.",
+        "Nöbet bozukluklarında beta dalgası görülür."
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 2,
+      "explanation": "Nöbetlerde tipik olarak beta dalgası değil, spike, sharp wave veya spike-wave gibi epileptiform aktiviteler görülür.",
+      "category": "Kardiyovasküler Dışı Monitörizasyon"
+    },
+    {
+      "id": 29,
+      "question": "Kapnografi için verilen aşağıdaki bilgilerden hangisi/hangileri doğrudur?\nI. EtCO₂’deki hızlı düşüş, ölü boşluk ventilasyonunda artış ve kalp debisinde düşüş oluşturabilen hava embolisinin hassas bir göstergesidir.\nII. Kapnograflar kızılötesi ışığın CO₂ tarafından absorbsiyonuna dayanır ve bu absorbsiyon Lambert-Beer yasasına tabidir.\nIII. Kapnografi özofagus entübasyonunu hızlı ve güvenilir biçimde saptar ancak ana bronş entübasyonunu güvenilir biçimde saptayamaz.\nIV. Malign hipertermiye bağlı metabolik hız artışı EtCO₂’de belirgin artışa neden olur.\nV. PaCO₂ ve EtCO₂ arasındaki normal 2-5 mmHg fark alveolar ölü boşluğu yansıtır.",
+      "options": [
+        "I-II-III-IV-V",
+        "I-II-V",
+        "II-III-IV",
+        "I-IV-V",
+        "I-III-V"
+      ],
+      "correctAnswerIndex": 0,
+      "difficulty": 3,
+      "explanation": "Kapnografi hava embolisi, özofagus entübasyonu, malign hipertermi ve alveolar ölü boşluk hakkında önemli bilgi verir; CO₂ ölçümü infrared absorbsiyon prensibine dayanır.",
+      "category": "Kardiyovasküler Dışı Monitörizasyon"
+    },
+    {
+      "id": 30,
+      "question": "Aşağıdaki ısı ölçüm bölgelerinden hangisi santral vücut ısısını en az güvenilir şekilde yansıtır?",
+      "options": [
+        "Pulmoner arter",
+        "Distal özofagus",
+        "Timpanik membran",
+        "Nazofarinks",
+        "Cilt (deri yüzeyi)"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 2,
+      "explanation": "Cilt ısısı çevre sıcaklığı ve periferik vazokonstriksiyondan çok etkilenir; bu nedenle santral ısıyı en zayıf yansıtan bölgedir.",
+      "category": "Kardiyovasküler Dışı Monitörizasyon"
+    },
+    {
+      "id": 31,
+      "question": "Beyin cerrahisi sırasında NIRS ile izlenen bir hastada tek taraflı rSO₂ değeri bazal 70’ten 45’e ani düşüş gösteriyor. Bu klinik durumda atılması gereken en öncelikli adım nedir?",
+      "options": [
+        "Anestezi derinliğini artırmak",
+        "Vazodilatör vermek",
+        "Serebral perfüzyon basıncını ve PaO₂ düzeyini kontrol etmek",
+        "BIS değerine bakıp ameliyatı sonlandırmak",
+        "SpO₂ %95 olduğu için beklemek"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 4,
+      "explanation": "Bazale göre %25’ten fazla rSO₂ düşüşü ciddi serebral hipoperfüzyon/hipoksi uyarısıdır. Öncelikle oksijen sunumu ve serebral perfüzyon basıncı değerlendirilip düzeltilmelidir.",
+      "category": "Kardiyovasküler Dışı Monitörizasyon"
+    },
+    {
+      "id": 32,
+      "question": "Nörolojik sistem monitörizasyonu için verilen bilgilerden hangisi yanlıştır?",
+      "options": [
+        "BIS için anestezi değerinin önerilen sınırları 40-60’tır.",
+        "Hasta durum indeksi (PSI) için anestezi değerinin önerilen sınırları 40-60’tır.",
+        "Narkotrend indeksi için anestezi değerinin önerilen sınırları 40-60’tır.",
+        "Entropi için anestezi değerinin önerilen sınırları tüm diğer indekslerle birebir 40-60 kabul edilir.",
+        "Serebral durum indeksi (CSI) için anestezi değerinin önerilen sınırları 40-60’tır."
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "Entropi, BIS gibi diğer indekslerle benzer klinik amaçla kullanılsa da ölçek ve alt bileşenleri birebir aynı kabul edilmez; bu nedenle genelleme hatalıdır.",
+      "category": "Kardiyovasküler Dışı Monitörizasyon"
+    },
+    {
+      "id": 33,
+      "question": "MRI ünitesinde genel anestezi altındaki bir hastada vücut ısısı takibi yapılırken neden özel fiber optik veya cıva içermeyen problar kullanılmalıdır?",
+      "options": [
+        "Manyetik alanın cıvayı buharlaştırması nedeniyle",
+        "Metal içeren kabloların indüksiyon akımı ile ısınarak hastada yanıklara neden olabilmesi nedeniyle",
+        "Standart termometrelerin radyasyon yayması nedeniyle",
+        "Standart probların görüntü kalitesini artırması nedeniyle",
+        "Klasik kabloların hastada aritmi yapması nedeniyle"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "MRI ortamında metal içeren kablolar radyofrekans enerjisiyle ısınabilir ve yanığa neden olabilir. Bu nedenle MRI uyumlu fiber optik veya metal içermeyen problar tercih edilir.",
+      "category": "Kardiyovasküler Dışı Monitörizasyon"
+    },
+    {
+      "id": 34,
+      "question": "Özofagus varisleri olduğu bilinen bir hastada genel anestezi indüksiyonu sonrası ventilasyon ve kalp seslerini izlemek amacıyla monitörizasyon planlanıyor. Bu hastada aşağıdakilerden hangisinin kullanımı kontrendikedir?",
+      "options": [
+        "Prekordiyal stetoskop",
+        "Pulse oksimetre kulak probu",
+        "Özofageal stetoskop",
+        "Kapnografi",
+        "BIS monitörü"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 4,
+      "explanation": "Özofageal varis veya striktür varlığında özofageal stetoskop/prob mukozal travma ve ciddi kanama riski nedeniyle kullanılmamalıdır.",
+      "category": "Kardiyovasküler Dışı Monitörizasyon"
+    },
+    {
+      "id": 35,
+      "question": "Anestezi sırasında kullanılan Entropi monitörizasyonu (State ve Response Entropy) hakkında hangisi doğrudur?",
+      "options": [
+        "Sadece kas gevşemesini ölçer.",
+        "EEG ve EMG sinyallerinin düzensizliğini/karmaşıklığını analiz eder.",
+        "BIS’ten farklı olarak sadece kalp hızına bakar.",
+        "0 uyanıklık, 100 derin anestezi demektir.",
+        "Uçucu ajanlardan etkilenmez."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Entropi monitörizasyonu EEG ve frontal EMG sinyallerindeki karmaşıklığı analiz eder; anestezi derinleştikçe sinyal düzenlenir ve entropi değeri düşer.",
+      "category": "Kardiyovasküler Dışı Monitörizasyon"
+    },
+    {
+      "id": 36,
+      "question": "EEG temelli anestezi derinliği monitörlerinden BIS için genel anestezi sırasında uyanıklığı önlemek ve ideal cerrahi derinliği sağlamak amacıyla önerilen hedef aralık nedir?",
+      "options": [
+        "85-100",
+        "60-80",
+        "40-60",
+        "10-25",
+        "0-5"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 2,
+      "explanation": "BIS’in 40-60 aralığında tutulması yeterli cerrahi anestezi derinliği sağlar ve intraoperatif farkındalık riskini azaltır.",
+      "category": "Kardiyovasküler Dışı Monitörizasyon"
+    },
+    {
+      "id": 37,
+      "question": "Anestezik gaz analizörlerinde Raman spektroskopisi yönteminin kütle spektrometresine göre temel avantajı nedir?",
+      "options": [
+        "Daha ucuz ve taşınabilir olması.",
+        "Argon ve helyum gibi inert gazları ölçebilmesi.",
+        "Moleküllerin lazer ışığıyla saçılma prensibini kullanarak çok hızlı analiz yapabilmesi.",
+        "Sadece oksijen ölçümü yapması.",
+        "Hiçbir kalibrasyon gerektirmemesi."
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "Raman spektroskopisi, moleküllerin lazer ışığı ile uyarılması sonucu oluşan saçılımı analiz eder; hızlı ve spesifik gaz analizi sağlayabilir.",
+      "category": "Kardiyovasküler Dışı Monitörizasyon"
+    },
+    {
+      "id": 38,
+      "question": "Anestezik gaz analizinde kullanılan tekniklerden olmayan hangisidir?",
+      "options": [
+        "Kütle spektrometresi",
+        "Raman spektroskopisi",
+        "Kızılötesi spektrofotometri",
+        "Piezoelektrik kristal (kuartz) salınımı",
+        "Kapnografi"
+      ],
+      "correctAnswerIndex": 4,
+      "difficulty": 2,
+      "explanation": "Kapnografi temel olarak CO₂ ölçümü için kullanılır; anestezik gaz analizi için kullanılan temel yöntemlerden biri değildir.",
+      "category": "Kardiyovasküler Dışı Monitörizasyon"
+    },
+    {
+      "id": 39,
+      "question": "BIS monitörlerinin EEG’de anestezik durumla ilişkili incelediği bileşenlerden olmayan hangisidir?",
+      "options": [
+        "Derin anestezi sırasında bulunan düşük frekans",
+        "Yüzeyel anestezi sırasında bulunan yüksek frekanslı beta aktivasyonu",
+        "Baskılanmış EEG dalgaları",
+        "Normal anestezi sırasında normal frekans",
+        "Burst supresyon"
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 3,
+      "explanation": "BIS belirli EEG özelliklerini ve burst supresyon gibi paternleri analiz eder; 'normal frekans' şeklindeki genel ifade özgül bir BIS bileşeni değildir.",
+      "category": "Kardiyovasküler Dışı Monitörizasyon"
+    },
+    {
+      "id": 40,
+      "question": "Bir hastada PaCO₂ 40 mmHg iken EtCO₂ 15 mmHg ölçülüyor. Kapnografi dalga formu normaldir ancak amplitüdü düşüktür. Bu belirgin gradient artışının en olası nedeni hangisidir?",
+      "options": [
+        "Malign hipertermi",
+        "Akut kanama ve düşük kardiyak output",
+        "Hipoventilasyon",
+        "Soda-lime tükenmesi",
+        "Hipertermi"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 4,
+      "explanation": "Düşük kardiyak output veya akut kanamada pulmoner perfüzyon azalır, alveoler ölü boşluk artar ve EtCO₂ PaCO₂’ye göre belirgin düşük ölçülür.",
+      "category": "Kardiyovasküler Dışı Monitörizasyon"
+    },
+    {
+      "id": 41,
+      "question": "Genel anestezi için önerilen BIS değeri aşağıdakilerden hangisidir?",
+      "options": [
+        "25-45",
+        "35-55",
+        "40-60",
+        "65-85",
+        "75-80"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 2,
+      "explanation": "Genel anestezi sırasında uyanıklık riskini azaltmak ve yeterli derinliği sağlamak için BIS genellikle 40-60 aralığında hedeflenir.",
+      "category": "Kardiyovasküler Dışı Monitörizasyon"
+    },
+    {
+      "id": 42,
+      "question": "Nöromüsküler stimülasyon modlarından Double Burst Stimulation (DBS) kullanımının temel amacı nedir?",
+      "options": [
+        "Bloğun başlangıcını hızlandırmak.",
+        "Rezidüel bloğu manuel/dokunsal olarak TOF’tan daha hassas saptamak.",
+        "Süksinilkolin dozunu hesaplamak.",
+        "Derin bloğu TOF 0 iken ölçmek.",
+        "Sadece çocuk hastalarda kullanılmak."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "DBS iki kısa tetanik uyarı verir ve fade’in elle algılanmasını klasik TOF’a göre kolaylaştırır; rezidüel blok taramasında yararlıdır.",
+      "category": "Kardiyovasküler Dışı Monitörizasyon"
+    },
+    {
+      "id": 43,
+      "question": "Methemoglobinemi varlığında gerçek arteriyel satürasyon %100 olsa bile pulse oksimetrenin yaklaşık %85 değerinde sabitlenmesinin nedeni nedir?",
+      "options": [
+        "Methemoglobinin sadece kızılötesi ışığı absorbe etmesi.",
+        "Methemoglobinin hem 660 nm hem de 940 nm dalga boylarını eşit oranda absorbe etmesi.",
+        "Probun ısınarak ölçümü bozması.",
+        "Methemoglobinin ışığı yansıtmayıp tamamen geçirmesi.",
+        "Kan akımının pulsatif özelliğini yitirmesi."
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "Methemoglobin 660 ve 940 nm dalga boylarını benzer oranda absorbe eder. Bu oran cihaz tarafından yaklaşık %85 satürasyon olarak yorumlanır.",
+      "category": "Kardiyovasküler Dışı Monitörizasyon"
+    },
+    {
+      "id": 44,
+      "question": "Sedasyon için önerilen BIS değeri aşağıdakilerden hangisidir?",
+      "options": [
+        "45-55",
+        "55-65",
+        "65-85",
+        "40-65",
+        "25-55"
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 2,
+      "explanation": "Sedasyonda BIS hedefi genel anesteziden daha yüksektir; 65-85 aralığı hafif-orta sedasyon ile uyumludur.",
+      "category": "Kardiyovasküler Dışı Monitörizasyon"
+    },
+    {
+      "id": 45,
+      "question": "Roküronyum verilen bir hastada periferik sinir stimülatörü ile yapılan TOF uyarısında 4 cevap alınmaktadır ancak T4/T1 oranı 0.50 ölçülmektedir. Bu hasta için hangisi doğrudur?",
+      "options": [
+        "Klinik olarak blokaj tamamen çözülmüştür.",
+        "Ekstübasyon için güvenli sınırdadır.",
+        "Cerrahi gevşeme için ek doza ihtiyaç yoktur.",
+        "Rezidüel nöromüsküler blok mevcuttur ve ekstübasyon için oran >0.90 olmalıdır.",
+        "Süksinilkolin etkisi altındadır."
+      ],
+      "correctAnswerIndex": 3,
+      "difficulty": 4,
+      "explanation": "Dört yanıt görülse bile TOF oranı 0.90’ın altındaysa rezidüel nöromüsküler blok vardır. Güvenli ekstübasyon için genellikle TOF ratio >0.90 hedeflenir.",
+      "category": "Kardiyovasküler Dışı Monitörizasyon"
+    },
+    {
+      "id": 46,
+      "question": "NIRS ile serebral oksimetri takibi yapılan bir hastada ölçülen rejyonal satürasyonun (rSO₂) büyük oranda hangi vasküler yataktaki hemoglobin absorbsiyonunu yansıttığı kabul edilir?",
+      "options": [
+        "%100 arteriyel",
+        "%70 venöz - %30 arteriyel",
+        "%50 kapiller - %50 venöz",
+        "%90 arteriyel - %10 venöz",
+        "%100 serebrospinal sıvı"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 3,
+      "explanation": "NIRS pulsatil arteriyel bileşeni pulse oksimetri kadar ayıramaz; sinyalin yaklaşık %70’i venöz, %30’u arteriyel yataktan gelir.",
+      "category": "Kardiyovasküler Dışı Monitörizasyon"
+    },
+    {
+      "id": 47,
+      "question": "Karbon monoksit zehirlenmesi şüphesi olan bir hastada pulse oksimetre ve arteriyel kan gazı sonuçları karşılaştırıldığında hangi tablo beklenir?",
+      "options": [
+        "Hem SpO₂ hem de arteriyel kan gazı satürasyonu düşük çıkar.",
+        "SpO₂ normalden düşük, SaO₂ normal çıkar.",
+        "SpO₂ hatalı olarak yüksek çıkarken gerçek oksijen içeriği düşüktür.",
+        "Arteriyel kan gazında PaO₂ çok düşük ölçülür.",
+        "Pulse oksimetre ölçüm yapamaz ve düz çizgi gösterir."
+      ],
+      "correctAnswerIndex": 2,
+      "difficulty": 3,
+      "explanation": "COHb, 660 nm ışığı HbO₂’ye benzer absorbe ettiği için pulse oksimetre COHb’yi oksihemoglobin gibi algılar ve SpO₂ hatalı yüksek görünebilir.",
+      "category": "Kardiyovasküler Dışı Monitörizasyon"
+    },
+    {
+      "id": 48,
+      "question": "Aşağıda verilen ısı ölçme yöntemlerinden hangisi vücut iç ısısını ve beyin ısısını en iyi yansıtır?",
+      "options": [
+        "Nazofarinks",
+        "Timpanik",
+        "Özefagus",
+        "Rektum",
+        "Mesane"
+      ],
+      "correctAnswerIndex": 1,
+      "difficulty": 2,
+      "explanation": "Timpanik membran ısısı, karotid dolaşıma yakınlığı nedeniyle santral vücut ısısı ve beyin ısısını iyi yansıtabilir; ancak ölçüm tekniğinin doğru olması gerekir.",
+      "category": "Kardiyovasküler Dışı Monitörizasyon"
+    }
+  ]
+}

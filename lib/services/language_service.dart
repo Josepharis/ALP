@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'device_service.dart';
+import 'notification_service.dart';
 
 class LanguageService extends ChangeNotifier {
   static const String _languageKey = 'selected_language';
+  
+  final DeviceService _deviceService = DeviceService();
+  final NotificationService _notificationService = NotificationService();
   
   Locale _currentLocale = const Locale('tr'); // Varsayılan Türkçe
   
@@ -91,6 +96,12 @@ class LanguageService extends ChangeNotifier {
       
       // Sonra state'i güncelle
       _currentLocale = locale;
+      
+      // Firestore'u güncelle
+      await _deviceService.updateDeviceLanguage(locale.languageCode);
+      
+      // Bildirim aboneliklerini güncelle
+      await _notificationService.updateSubscriptionsByLanguage();
       
       notifyListeners();
     } catch (e) {

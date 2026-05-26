@@ -5,6 +5,7 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../models/device_info.dart';
 
 // Custom exception for device limit exceeded
@@ -289,11 +290,16 @@ class DeviceService {
     final userId = _auth.currentUser?.uid;
     if (userId == null) throw Exception('Kullanıcı giriş yapmamış');
 
+    // SharedPreferences'tan mevcut dili al
+    final prefs = await SharedPreferences.getInstance();
+    final language = prefs.getString('selected_language') ?? 'tr';
+
     final deviceInfo = DeviceInfo(
       deviceId: deviceId,
       fcmToken: fcmToken,
       deviceName: deviceName,
       platform: platform,
+      language: language,
       registeredAt: DateTime.now(),
       lastLoginAt: DateTime.now(),
     );
@@ -355,6 +361,25 @@ class DeviceService {
     await _firestore.collection('users').doc(userId).update({
       'registeredDevices.$deviceId': deviceData,
     });
+  }
+
+  // Cihazın dil tercihini güncelle
+  Future<void> updateDeviceLanguage(String languageCode) async {
+    final userId = _auth.currentUser?.uid;
+    if (userId == null) return;
+
+    try {
+      final deviceId = await _generateDeviceId();
+      
+      // Firestore'da sadece ilgili cihazın dilini güncelle
+      await _firestore.collection('users').doc(userId).update({
+        'registeredDevices.$deviceId.language': languageCode,
+      });
+      
+      debugPrint('Firestore cihaz dili güncellendi: $languageCode');
+    } catch (e) {
+      debugPrint('Firestore cihaz dili güncelleme hatası: $e');
+    }
   }
 
   // Cihazı manuel olarak kaldır (kullanıcı profil ayarlarından)
