@@ -106,10 +106,12 @@ class _QuizScreenState extends State<QuizScreen>
       EventBus().fireMistakesUpdated(true);
 
       // Başarılı mesajı (opsiyonel)
-      SnackBarUtils.showSuccessSnackBar(
-        context,
-        AppLocalizations.of(context)!.quizProgressSaved,
-      );
+      if (context.mounted) {
+        SnackBarUtils.showSuccessSnackBar(
+          context,
+          AppLocalizations.of(context)!.quizProgressSaved,
+        );
+      }
     } catch (e) {
     }
   }
@@ -288,8 +290,10 @@ class _QuizScreenState extends State<QuizScreen>
 
     // Kullanıcı çıkmak istiyorsa ilerlemeyi kaydet ve profili güncelle
     if (result == true) {
-      // Quiz ilerlemesini kaydet (puanlar ve diğer veriler)
-      await _saveQuizProgress();
+      // Quiz ilerlemesini sayfa geçiş animasyonu başladıktan sonra (300ms) arka planda kaydet
+      Future.delayed(const Duration(milliseconds: 300), () {
+        _saveQuizProgress();
+      });
 
       // Doğru cevapların puanlarını ve profil güncellemesini yap
       try {

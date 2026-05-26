@@ -717,7 +717,7 @@ class _QuizListScreenState extends State<QuizListScreen> {
                 borderRadius: BorderRadius.circular(20),
                 boxShadow: [
                   BoxShadow(
-                    color: (isCompleted ? Colors.green : (category['color'] as Color)).withOpacity(0.06),
+                    color: (category['color'] as Color).withOpacity(0.06),
                     blurRadius: 10,
                     offset: const Offset(0, 4),
                   ),
@@ -727,156 +727,201 @@ class _QuizListScreenState extends State<QuizListScreen> {
                 borderRadius: BorderRadius.circular(19),
                 child: BackdropFilter(
                   filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.04),
-                      borderRadius: BorderRadius.circular(20),
-                      border: Border.all(
-                        color: _getReadableColor(isCompleted ? Colors.green : (category['color'] as Color)).withOpacity(0.25),
-                        width: 1,
-                      ),
-                    ),
-                    child: IntrinsicHeight(
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          // Left Visual Image
-                          SizedBox(
-                            width: isSmallScreen ? 64.0 : 80.0,
-                            child: Image.asset(
-                              _getQuizImagePath(category['title'] as String),
-                              fit: BoxFit.cover,
-                              errorBuilder: (context, error, stackTrace) {
-                                return Container(
-                                  color: _getReadableColor(isCompleted ? Colors.green : (category['color'] as Color)).withOpacity(0.15),
-                                  child: Center(
-                                    child: Icon(
-                                      isCompleted ? Icons.check_circle_rounded : category['icon'] as IconData,
-                                      color: Colors.white,
-                                      size: isSmallScreen ? 20 : 24,
-                                    ),
-                                  ),
-                                );
-                              },
-                            ),
+                  child: Stack(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white.withOpacity(0.04),
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(
+                            color: _getReadableColor(category['color'] as Color).withOpacity(0.25),
+                            width: 1,
                           ),
-                          // Content details
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          category['title'] as String,
-                                          style: const TextStyle(
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.white,
-                                          ),
-                                          maxLines: 2,
-                                          overflow: TextOverflow.ellipsis,
+                        ),
+                        child: IntrinsicHeight(
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              // Left Visual Image
+                              SizedBox(
+                                width: isSmallScreen ? 64.0 : 80.0,
+                                child: Image.asset(
+                                  _getQuizImagePath(category['title'] as String),
+                                  fit: BoxFit.cover,
+                                  errorBuilder: (context, error, stackTrace) {
+                                    return Container(
+                                      color: _getReadableColor(category['color'] as Color).withOpacity(0.15),
+                                      child: Center(
+                                        child: Icon(
+                                          category['icon'] as IconData,
+                                          color: Colors.white,
+                                          size: isSmallScreen ? 20 : 24,
                                         ),
-                                        const SizedBox(height: 4),
-                                        if (isRetaking && ongoingQuiz != null) ...[
-                                          Text(
-                                            '${ongoingQuiz.currentQuestionIndex ?? 0}/${ongoingQuiz.totalQuestions} ${AppLocalizations.of(context)!.questions}',
-                                            style: TextStyle(
-                                              fontSize: 11,
-                                              color: Colors.white.withOpacity(0.6),
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                          ),
-                                        ] else if (isCompleted) ...[
-                                          Row(
-                                            children: [
-                                              Icon(
-                                                Icons.check_circle_outline_rounded,
-                                                size: 13,
-                                                color: Colors.green.shade300,
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                              // Content details
+                              Expanded(
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
+                                  child: Row(
+                                    children: [
+                                      Expanded(
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              category['title'] as String,
+                                              style: const TextStyle(
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.white,
                                               ),
-                                              const SizedBox(width: 4),
+                                              maxLines: 2,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                            const SizedBox(height: 4),
+                                            if (isRetaking && ongoingQuiz != null) ...[
                                               Text(
-                                                'Tamamlandı',
+                                                '${ongoingQuiz.currentQuestionIndex ?? 0}/${ongoingQuiz.totalQuestions} ${AppLocalizations.of(context)!.questions}',
                                                 style: TextStyle(
                                                   fontSize: 11,
-                                                  color: Colors.green.shade300,
-                                                  fontWeight: FontWeight.w600,
+                                                  color: Colors.white.withOpacity(0.6),
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                              ),
+                                            ] else if (isCompleted) ...[
+                                              Row(
+                                                children: [
+                                                  Icon(
+                                                    Icons.check_circle_outline_rounded,
+                                                    size: 13,
+                                                    color: Colors.green.shade300,
+                                                  ),
+                                                  const SizedBox(width: 4),
+                                                  Text(
+                                                    'Tamamlandı',
+                                                    style: TextStyle(
+                                                      fontSize: 11,
+                                                      color: Colors.green.shade300,
+                                                      fontWeight: FontWeight.w600,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ] else if (isOngoing && ongoingQuiz != null) ...[
+                                              Text(
+                                                '${ongoingQuiz.currentQuestionIndex ?? 0}/${ongoingQuiz.totalQuestions} ${AppLocalizations.of(context)!.questions}',
+                                                style: TextStyle(
+                                                  fontSize: 11,
+                                                  color: Colors.white.withOpacity(0.6),
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                              ),
+                                            ] else ...[
+                                              Text(
+                                                '$questionCount ${AppLocalizations.of(context)!.questions}',
+                                                style: TextStyle(
+                                                  fontSize: 11,
+                                                  color: Colors.white.withOpacity(0.6),
                                                 ),
                                               ),
                                             ],
-                                          ),
-                                        ] else if (isOngoing && ongoingQuiz != null) ...[
-                                          Text(
-                                            '${ongoingQuiz.currentQuestionIndex ?? 0}/${ongoingQuiz.totalQuestions} ${AppLocalizations.of(context)!.questions}',
-                                            style: TextStyle(
-                                              fontSize: 11,
-                                              color: Colors.white.withOpacity(0.6),
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                          ),
-                                        ] else ...[
-                                          Text(
-                                            '$questionCount ${AppLocalizations.of(context)!.questions}',
-                                            style: TextStyle(
-                                              fontSize: 11,
-                                              color: Colors.white.withOpacity(0.6),
-                                            ),
-                                          ),
-                                        ],
-                                      ],
-                                    ),
-                                  ),
-                                  const SizedBox(width: 8),
-                                  // Right action button
-                                  Container(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 10,
-                                      vertical: 6,
-                                    ),
-                                    decoration: BoxDecoration(
-                                      color: _getReadableColor(isCompleted ? Colors.green : (category['color'] as Color)).withOpacity(0.18),
-                                      borderRadius: BorderRadius.circular(16),
-                                      border: Border.all(
-                                        color: _getReadableColor(isCompleted ? Colors.green : (category['color'] as Color)).withOpacity(0.3),
-                                        width: 1,
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        Text(
-                                          isRetaking 
-                                              ? 'Devam Et'
-                                              : (isCompleted 
-                                                  ? 'Tekrar Et' 
-                                                  : (isOngoing ? 'Devam Et' : 'Başla')),
-                                          style: TextStyle(
-                                            color: _getReadableColor(isCompleted ? Colors.green : (category['color'] as Color)),
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 11,
+                                      const SizedBox(width: 8),
+                                      // Right action button
+                                      Container(
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: 10,
+                                          vertical: 6,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          color: _getReadableColor(category['color'] as Color).withOpacity(0.18),
+                                          borderRadius: BorderRadius.circular(16),
+                                          border: Border.all(
+                                            color: _getReadableColor(category['color'] as Color).withOpacity(0.3),
+                                            width: 1,
                                           ),
                                         ),
-                                        const SizedBox(width: 2),
-                                        Icon(
-                                          isCompleted ? Icons.refresh_rounded : Icons.play_arrow_rounded,
-                                          color: _getReadableColor(isCompleted ? Colors.green : (category['color'] as Color)),
-                                          size: 13,
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Text(
+                                              isRetaking 
+                                                  ? 'Devam Et'
+                                                  : (isCompleted 
+                                                      ? 'Tekrar Et' 
+                                                      : (isOngoing ? 'Devam Et' : 'Başla')),
+                                              style: TextStyle(
+                                                color: _getReadableColor(category['color'] as Color),
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 11,
+                                              ),
+                                            ),
+                                            const SizedBox(width: 2),
+                                            Icon(
+                                              isCompleted ? Icons.refresh_rounded : Icons.play_arrow_rounded,
+                                              color: _getReadableColor(category['color'] as Color),
+                                              size: 13,
+                                            ),
+                                          ],
                                         ),
-                                      ],
-                                    ),
+                                      ),
+                                    ],
                                   ),
-                                ],
+                                ),
                               ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      if (isCompleted)
+                        Positioned(
+                          top: 0,
+                          left: 0,
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                            decoration: BoxDecoration(
+                              color: Colors.green.shade600.withOpacity(0.9),
+                              borderRadius: const BorderRadius.only(
+                                bottomRight: Radius.circular(10),
+                              ),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.1),
+                                  blurRadius: 4,
+                                  offset: const Offset(1, 1),
+                                ),
+                              ],
+                            ),
+                            child: const Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Icon(
+                                  Icons.check_circle_outline_rounded,
+                                  color: Colors.white,
+                                  size: 10,
+                                ),
+                                SizedBox(width: 3),
+                                Text(
+                                  'Çözüldü',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 8.5,
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 0.3,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                        ],
-                      ),
-                    ),
+                        ),
+                    ],
                   ),
                 ),
               ),
@@ -1827,7 +1872,7 @@ class _HomeContentState extends State<HomeContent> {
               ),
               borderRadius: BorderRadius.circular(isVerySmallScreen ? 12 : 16),
               border: Border.all(
-                color: Colors.white.withOpacity(0.15),
+                color: Colors.orange.shade400.withOpacity(0.45),
                 width: 1.2,
               ),
             ),
@@ -1964,9 +2009,9 @@ class _HomeContentState extends State<HomeContent> {
         borderRadius: BorderRadius.circular(isVerySmallScreen ? 12 : 16),
         boxShadow: [
           BoxShadow(
-            color: Colors.deepOrange.withOpacity(0.25),
+            color: Colors.black.withOpacity(0.2),
             blurRadius: isVerySmallScreen ? 12 : 16,
-            spreadRadius: 2,
+            spreadRadius: 1,
           ),
         ],
       ),
@@ -1981,13 +2026,13 @@ class _HomeContentState extends State<HomeContent> {
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
                 colors: [
-                  Colors.deepOrange.withOpacity(0.3),
-                  Colors.amber.withOpacity(0.1),
+                  Colors.white.withOpacity(0.07),
+                  Colors.white.withOpacity(0.02),
                 ],
               ),
               borderRadius: BorderRadius.circular(isVerySmallScreen ? 12 : 16),
               border: Border.all(
-                color: Colors.amber.shade500,
+                color: Colors.amber.shade500.withOpacity(0.75),
                 width: 1.5,
               ),
             ),
@@ -1999,10 +2044,10 @@ class _HomeContentState extends State<HomeContent> {
                     Container(
                       padding: EdgeInsets.all(isVerySmallScreen ? 4 : 5),
                       decoration: BoxDecoration(
-                        color: Colors.orange.withOpacity(0.2),
+                        color: Colors.amber.withOpacity(0.12),
                         borderRadius: BorderRadius.circular(isVerySmallScreen ? 6 : 8),
                         border: Border.all(
-                          color: Colors.orange.withOpacity(0.3),
+                          color: Colors.amber.withOpacity(0.25),
                           width: 1,
                         ),
                       ),
@@ -2031,13 +2076,13 @@ class _HomeContentState extends State<HomeContent> {
                         ),
                         decoration: BoxDecoration(
                           color: _dailyQuestion?.isCorrect == true
-                              ? Colors.green.withOpacity(0.15)
-                              : Colors.red.withOpacity(0.15),
+                              ? Colors.green.withOpacity(0.12)
+                              : Colors.red.withOpacity(0.12),
                           borderRadius: BorderRadius.circular(12),
                           border: Border.all(
                             color: _dailyQuestion?.isCorrect == true
-                                ? Colors.green.withOpacity(0.3)
-                                : Colors.red.withOpacity(0.3),
+                                ? Colors.green.withOpacity(0.25)
+                                : Colors.red.withOpacity(0.25),
                             width: 1,
                           ),
                         ),
@@ -2076,10 +2121,10 @@ class _HomeContentState extends State<HomeContent> {
                           vertical: isVerySmallScreen ? 2 : 3
                         ),
                         decoration: BoxDecoration(
-                          color: Colors.amber.withOpacity(0.15),
+                          color: Colors.amber.withOpacity(0.12),
                           borderRadius: BorderRadius.circular(12),
                           border: Border.all(
-                            color: Colors.amber.withOpacity(0.3),
+                            color: Colors.amber.withOpacity(0.25),
                             width: 1,
                           ),
                         ),
@@ -2117,40 +2162,59 @@ class _HomeContentState extends State<HomeContent> {
                       }
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: _dailyQuestion?.isAnswered == true
-                          ? Colors.green.withOpacity(0.2)
-                          : Colors.orange.withOpacity(0.2),
-                      foregroundColor: Colors.white,
+                      backgroundColor: Colors.transparent,
+                      shadowColor: Colors.transparent,
                       padding: EdgeInsets.zero,
                       minimumSize: Size(double.infinity, isShortScreen ? 24 : (isVerySmallScreen ? 26 : 28)),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
-                        side: BorderSide(
+                      ),
+                    ),
+                    child: Ink(
+                      decoration: BoxDecoration(
+                        gradient: _dailyQuestion?.isAnswered == true
+                            ? LinearGradient(
+                                colors: [
+                                  Colors.green.withOpacity(0.15),
+                                  Colors.green.withOpacity(0.08),
+                                ],
+                              )
+                            : LinearGradient(
+                                colors: [
+                                  Colors.amber.shade600.withOpacity(0.85),
+                                  Colors.orange.shade500.withOpacity(0.85),
+                                ],
+                              ),
+                        borderRadius: BorderRadius.circular(8),
+                        border: Border.all(
                           color: _dailyQuestion?.isAnswered == true
-                              ? Colors.green.withOpacity(0.4)
-                              : Colors.orange.withOpacity(0.4),
+                              ? Colors.green.withOpacity(0.25)
+                              : Colors.amber.withOpacity(0.25),
                           width: 1,
                         ),
                       ),
-                      elevation: 0,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        if (_dailyQuestion?.isAnswered == true)
-                          Icon(Icons.check_circle_outline_rounded, size: isVerySmallScreen ? 12 : (isSmallScreen ? 13 : 14))
-                        else
-                          Icon(Icons.play_circle_outline_rounded, size: isVerySmallScreen ? 12 : (isSmallScreen ? 13 : 14)),
-                        SizedBox(width: isVerySmallScreen ? 4 : 6),
-                        Text(
-                          _dailyQuestion?.isAnswered == true ? AppLocalizations.of(context)!.checkAgain : AppLocalizations.of(context)!.answer,
-                          style: TextStyle(
-                            fontSize: buttonFontSize + 1,
-                            fontWeight: FontWeight.bold,
-                            letterSpacing: 0.3,
-                          ),
+                      child: Container(
+                        alignment: Alignment.center,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            if (_dailyQuestion?.isAnswered == true)
+                              Icon(Icons.check_circle_outline_rounded, size: isVerySmallScreen ? 12 : (isSmallScreen ? 13 : 14), color: Colors.white)
+                            else
+                              Icon(Icons.play_circle_outline_rounded, size: isVerySmallScreen ? 12 : (isSmallScreen ? 13 : 14), color: Colors.white),
+                            SizedBox(width: isVerySmallScreen ? 4 : 6),
+                            Text(
+                              _dailyQuestion?.isAnswered == true ? AppLocalizations.of(context)!.checkAgain : AppLocalizations.of(context)!.answer,
+                              style: TextStyle(
+                                fontSize: buttonFontSize + 1,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                                letterSpacing: 0.3,
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
                   ),
                 ),
