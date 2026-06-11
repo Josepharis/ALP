@@ -1854,7 +1854,7 @@ class _AdminScreenState extends State<AdminScreen>
                           items: _organizedCategories
                               .where((c) =>
                                   (c['language'] as String? ?? 'turkish') ==
-                                  'turkish')
+                                  _selectedLanguage)
                               .map((cat) {
                             return DropdownMenuItem<String>(
                               value: cat['collectionName'] as String,
@@ -2272,9 +2272,11 @@ class _AdminScreenState extends State<AdminScreen>
     int sixMonthCount = 0;
     int yearlyCount = 0;
     int lifetimeCount = 0;
-    int totalCount = filteredList.length;
+    int totalCount = 0;
 
     for (var p in filteredList) {
+      if (p['isRestored'] == true) continue; // Restore işlemlerini satış sayılarına dahil etme
+      
       final pid = p['productId'] as String;
       if (pid.contains('monthly'))
         monthlyCount++;
@@ -2284,6 +2286,8 @@ class _AdminScreenState extends State<AdminScreen>
         yearlyCount++;
       else if (pid.contains('lifetime'))
         lifetimeCount++;
+      
+      totalCount++;
     }
 
     return Container(
@@ -3933,7 +3937,7 @@ class _AdminScreenState extends State<AdminScreen>
         ),
         const SizedBox(height: 16),
         SizedBox(
-          height: 120,
+          height: 135,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             itemCount: currentTemplates.length,
@@ -3954,7 +3958,7 @@ class _AdminScreenState extends State<AdminScreen>
                 child: Container(
                   width: 170,
                   margin: const EdgeInsets.only(right: 16),
-                  padding: const EdgeInsets.all(16),
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                       begin: Alignment.topLeft,
@@ -3992,17 +3996,21 @@ class _AdminScreenState extends State<AdminScreen>
                           size: 26,
                         ),
                       ),
-                      const SizedBox(height: 12),
-                      Text(
-                        template['title'] as String,
-                        style: TextStyle(
-                          color: Colors.white.withOpacity(0.9),
-                          fontSize: 12,
-                          fontWeight: FontWeight.w600,
+                      const SizedBox(height: 8),
+                      Expanded(
+                        child: Center(
+                          child: Text(
+                            template['title'] as String,
+                            style: TextStyle(
+                              color: Colors.white.withOpacity(0.9),
+                              fontSize: 12,
+                              fontWeight: FontWeight.w600,
+                            ),
+                            textAlign: TextAlign.center,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          ),
                         ),
-                        textAlign: TextAlign.center,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
                       ),
                     ],
                   ),

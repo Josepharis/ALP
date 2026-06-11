@@ -42,23 +42,42 @@ class Question {
       }
     }
 
+    final rawCorrectAnswer = json['correctAnswerIndex'] ?? json['correctAnswer'];
+    int correctAnswerIndexVal = 0;
+    if (rawCorrectAnswer != null) {
+      if (rawCorrectAnswer is int) {
+        correctAnswerIndexVal = rawCorrectAnswer;
+      } else if (rawCorrectAnswer is String) {
+        correctAnswerIndexVal = int.tryParse(rawCorrectAnswer) ?? 0;
+      }
+    }
+
+    List<String> optionsList = [];
+    if (json['options'] is List) {
+      optionsList = (json['options'] as List).map((e) => e.toString()).toList();
+    }
+
+    List<String>? premisesList;
+    if (json['premises'] is List) {
+      premisesList = (json['premises'] as List).map((e) => e.toString()).toList();
+    }
+
+    List<String>? referencesList;
+    if (json['references'] is List) {
+      referencesList = (json['references'] as List).map((e) => e.toString()).toList();
+    }
+
     return Question(
-      question: (json['question'] ?? '') as String,
-      options: List<String>.from(json['options'] ?? []),
-      correctAnswerIndex: (json['correctAnswerIndex'] ?? json['correctAnswer'] ?? 0) as int,
-      premises:
-          json['premises'] != null
-              ? List<String>.from(json['premises'] as List)
-              : null,
-      explanation: json['explanation'] as String?,
-      references:
-          json['references'] != null
-              ? List<String>.from(json['references'] as List)
-              : null,
-      imageUrl: json['imageUrl'] as String?,
-      category: json['category'] as String?,
+      question: (json['question'] ?? '').toString(),
+      options: optionsList,
+      correctAnswerIndex: correctAnswerIndexVal,
+      premises: premisesList,
+      explanation: json['explanation']?.toString(),
+      references: referencesList,
+      imageUrl: json['imageUrl']?.toString(),
+      category: json['category']?.toString(),
       difficulty: difficultyVal,
-      id: json['id'] as String?,
+      id: json['id']?.toString(),
     );
   }
 

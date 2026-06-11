@@ -1745,6 +1745,94 @@ class AppLocalizationsEn extends AppLocalizations {
   String get searchQuizzes => 'Search quizzes...';
 
   @override
+  String get solved => 'Solved';
+
+  @override
+  String get premiumScreenSubtitle =>
+      'Access to all questions, unlimited quiz retakes,\nviewing your incorrect questions, and studying your deficiencies';
+
+  @override
+  String get freeQuestionsTrial => 'First 2 questions are free';
+
+  @override
+  String get cancelAnytimeSubtitle => 'You can cancel anytime';
+
+  @override
+  String get twoMonthsFree => '2 months free';
+
+  @override
+  String get unlimitedAccessAllCategories =>
+      'Unlimited access in all categories';
+
+  @override
+  String get solveAsManyQuizzes => 'You can solve as many quizzes as you want';
+
+  @override
+  String get seeDetailedExplanation =>
+      'See the detailed explanation of each question';
+
+  @override
+  String get retakeWrongQuestions =>
+      'Solve the incorrect questions you made again';
+
+  @override
+  String get focusOnWeakTopics => 'Focus on the topics you are weak in';
+
+  @override
+  String get startPremium => 'Start Premium';
+
+  @override
+  String get productLoadingError =>
+      'Product could not be loaded. Please check your internet connection and try again.';
+
+  @override
+  String get resetPasswordInstructions =>
+      '• Check your email inbox\n• Check spam/junk folder\n• Click the link in the email\n• Set your new password\n• Return to the app';
+
+  @override
+  String get optionsLabel => 'Options:';
+
+  @override
+  String get explanationLabel => 'Explanation:';
+
+  @override
+  String get questionRemovedFromMistakes => 'Question removed from mistakes';
+
+  @override
+  String get questionRemoveError =>
+      'An error occurred while removing the question';
+
+  @override
+  String minutesAgo(int count) {
+    return '${count}m ago';
+  }
+
+  @override
+  String hoursAgo(int count) {
+    return '${count}h ago';
+  }
+
+  @override
+  String daysAgo(int count) {
+    return '${count}d ago';
+  }
+
+  @override
+  String get expiredLabel => 'Expired';
+
+  @override
+  String daysLeftLabel(int count) {
+    return '$count days left';
+  }
+
+  @override
+  String get logoutFromThisDeviceConfirm =>
+      'Are you sure you want to logout from this device?';
+
+  @override
+  String get copy => 'Copy';
+
+  @override
   String get defaultDailyQuestion =>
       'In anesthesia, through which receptor does propofol act?';
 }

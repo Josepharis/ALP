@@ -258,6 +258,7 @@ class _AddSpotInfoScreenState extends State<AddSpotInfoScreen> {
         const SizedBox(height: 8),
         DropdownButtonFormField<String>(
           value: currentValue,
+          isExpanded: true,
           dropdownColor: Colors.grey.shade900,
           style: const TextStyle(color: Colors.white),
           decoration: InputDecoration(
@@ -271,11 +272,19 @@ class _AddSpotInfoScreenState extends State<AddSpotInfoScreen> {
           items: [
             const DropdownMenuItem<String>(
               value: null,
-              child: Text('Seçilmedi (Varsayılan)', style: TextStyle(color: Colors.white60)),
+              child: Text(
+                'Seçilmedi (Varsayılan)',
+                style: TextStyle(color: Colors.white60),
+                overflow: TextOverflow.ellipsis,
+              ),
             ),
             ...units.map((unit) => DropdownMenuItem(
               value: unit,
-              child: Text(unit, style: const TextStyle(color: Colors.white)),
+              child: Text(
+                unit,
+                style: const TextStyle(color: Colors.white),
+                overflow: TextOverflow.ellipsis,
+              ),
             )),
           ],
           onChanged: (val) {

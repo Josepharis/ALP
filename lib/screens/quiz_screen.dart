@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'dart:convert';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import '../l10n/app_localizations.dart';
 import 'package:flutter/services.dart';
@@ -50,7 +52,9 @@ class _QuizScreenState extends State<QuizScreen>
   late Animation<double> _animation;
   final QuizService _quizService = QuizService();
   final AuthService _authService = AuthService();
-  bool _isCompletingQuiz = false; // Quiz tamamlanma durumunu takip et
+  bool _isCompletingQuiz = false;
+  bool _accessStateInitialized = false;
+  Future<_AccessState> _accessStateFuture = Future.value(_AccessState(isPremium: false, maxFreeQuestions: 2));
 
   @override
   void initState() {
@@ -73,6 +77,21 @@ class _QuizScreenState extends State<QuizScreen>
         });
       });
     _animationController.forward();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // Sadece ilk açılışta bir kez çalış
+    if (!_accessStateInitialized) {
+      _accessStateInitialized = true;
+      final premiumService = context.read<PremiumService>();
+      final languageService = context.read<LanguageService>();
+      _accessStateFuture = _loadAccessState(
+        premiumService,
+        languageService.currentLocale.languageCode,
+      );
+    }
   }
 
   @override
@@ -314,10 +333,7 @@ class _QuizScreenState extends State<QuizScreen>
         return Consumer<PremiumService>(
           builder: (context, premiumService, child) {
             return FutureBuilder<_AccessState>(
-              future: _loadAccessState(
-                premiumService,
-                languageService.currentLocale.languageCode,
-              ),
+              future: _accessStateFuture,
               builder: (context, snapshot) {
                 final accessState = snapshot.data;
 
@@ -1212,13 +1228,45 @@ class _QuizScreenState extends State<QuizScreen>
     String languageCode,
   ) async {
     try {
-      // Firestore'dan ücretsiz soru ayarlarını çek
-      final doc = await FirebaseFirestore.instance
-          .collection('systemSettings')
-          .doc('freeQuestionConfig')
-          .get();
+      final prefs = await SharedPreferences.getInstance();
+      final cacheKey = 'freeQuestionConfig';
+      final cacheTimeKey = 'freeQuestionConfig_time';
+      
+      final cachedString = prefs.getString(cacheKey);
+      final cachedTime = prefs.getInt(cacheTimeKey) ?? 0;
+      final now = DateTime.now().millisecondsSinceEpoch;
+      
+      Map<String, dynamic> data = <String, dynamic>{};
+      
+      // Cache 12 hours (43200000 ms)
+      if (cachedString != null && cachedString.isNotEmpty && (now - cachedTime < 43200000)) {
+        data = jsonDecode(cachedString);
+      } else {
+        debugPrint('[QuizSystem] Fetching freeQuestionConfig from Firestore...');
+        // Firestore'dan ücretsiz soru ayarlarını çek
+        final doc = await FirebaseFirestore.instance
+            .collection('systemSettings')
+            .doc('freeQuestionConfig')
+            .get()
+            .timeout(const Duration(seconds: 3), onTimeout: () {
+              debugPrint('[QuizSystem] Timeout fetching freeQuestionConfig! Using local fallback.');
+              throw TimeoutException('Fetching freeQuestionConfig timed out');
+            });
 
-      final data = doc.data() ?? <String, dynamic>{};
+        data = doc.data() ?? <String, dynamic>{};
+        
+        // Timestamp gibi JSON'a dönüştürülemeyen alanları filtrele,
+        // sadece sayısal config değerlerini kaydet
+        final cacheableData = <String, dynamic>{
+          'firstTopicsCount': (data['firstTopicsCount'] as int?) ?? 10,
+          'firstTopicsFreeQuestions': (data['firstTopicsFreeQuestions'] as int?) ?? 20,
+          'otherTopicsFreeQuestions': (data['otherTopicsFreeQuestions'] as int?) ?? 2,
+        };
+        
+        // Save to cache
+        prefs.setString(cacheKey, jsonEncode(cacheableData));
+        prefs.setInt(cacheTimeKey, now);
+      }
 
       final firstTopicsCount = (data['firstTopicsCount'] as int?) ?? 10;
       final firstTopicsFreeQuestions =
@@ -1243,9 +1291,9 @@ class _QuizScreenState extends State<QuizScreen>
       }
 
       return otherTopicsFreeQuestions;
-    } catch (_) {
-      // Herhangi bir hata durumunda varsayılan değere dön
-      return PremiumAccessService.maxFreeQuestions;
+    } catch (e) {
+      debugPrint('[QuizScreen] ❌ Free limit error: $e');
+      return 2;
     }
   }
 }

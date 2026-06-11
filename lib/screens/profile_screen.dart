@@ -576,7 +576,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
     final size = MediaQuery.of(context).size;
     final bottomPadding = MediaQuery.of(context).viewPadding.bottom;
     final topPadding = MediaQuery.of(context).viewPadding.top;
-    final bottomNavBarHeight = 80.0; // Alt navigasyon çubuğu yüksekliği
+    final isTablet = size.shortestSide >= 600;
+    final isLandscape = size.width > size.height;
+
+    // Alt navigasyon barı yüksekliği ve modal marjları dinamik hesaplanır
+    final bottomNavBarHeight = isLandscape ? 0.0 : 80.0;
+    final double bottomMargin =
+        isLandscape
+            ? 12.0
+            : (isTablet ? 32.0 + bottomPadding : bottomNavBarHeight + 16.0);
 
     showModalBottomSheet(
       context: context,
@@ -586,331 +594,335 @@ class _ProfileScreenState extends State<ProfileScreen> {
         // Kullanılabilir ekran yüksekliğini hesapla
         final availableHeight = size.height - topPadding - bottomPadding;
 
-        // Modal yüksekliğini hesapla - ekranın %85'i veya maksimum 700px
-        // Daha fazla alan ver ki tüm içerik gözüksün
-        final modalHeight = math.min(availableHeight * 0.85, 700.0);
-
-        // Minimum yükseklik garantisi - küçük ekranlar için
-        final finalHeight = math.max(modalHeight, 500.0);
-
-        return Container(
-          height: finalHeight,
-          margin: EdgeInsets.only(
-            bottom:
-                bottomNavBarHeight + 20, // Alt navigasyon çubuğundan uzaklaştır
-            left: 16,
-            right: 16,
-          ),
-          decoration: BoxDecoration(
-            color: const Color(0xFF0F172A).withOpacity(0.95), // deep obsidian
-            borderRadius: BorderRadius.circular(24),
-            border: Border.all(
-              color: Colors.white.withOpacity(0.08),
-              width: 1.5,
+        return Align(
+          alignment: Alignment.bottomCenter,
+          child: Container(
+            width: isTablet ? 480.0 : size.width,
+            constraints: BoxConstraints(
+              maxHeight: availableHeight * (isLandscape ? 0.90 : 0.85),
             ),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.4),
-                blurRadius: 24,
-                offset: const Offset(0, -4),
+            margin: EdgeInsets.only(
+              bottom: bottomMargin,
+              left: isTablet ? 0 : 16,
+              right: isTablet ? 0 : 16,
+            ),
+            decoration: BoxDecoration(
+              color: const Color(0xFF0F172A).withOpacity(0.95), // deep obsidian
+              borderRadius: BorderRadius.circular(24),
+              border: Border.all(
+                color: Colors.white.withOpacity(0.08),
+                width: 1.5,
               ),
-            ],
-          ),
-          child: SafeArea(
-            child: Column(
-              children: [
-                // Başlık kısmı
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 20,
-                    vertical: 16,
-                  ),
-                  decoration: BoxDecoration(
-                    border: Border(
-                      bottom: BorderSide(
-                        color: Colors.white.withOpacity(0.08),
-                        width: 1,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.4),
+                  blurRadius: 24,
+                  offset: const Offset(0, -4),
+                ),
+              ],
+            ),
+            child: SafeArea(
+              top: false,
+              bottom: false,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  // Başlık kısmı
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 16,
+                    ),
+                    decoration: BoxDecoration(
+                      border: Border(
+                        bottom: BorderSide(
+                          color: Colors.white.withOpacity(0.08),
+                          width: 1,
+                        ),
                       ),
                     ),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        AppLocalizations.of(context)!.settings,
-                        style: const TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                          letterSpacing: 0.5,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          AppLocalizations.of(context)!.settings,
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            letterSpacing: 0.5,
+                          ),
                         ),
-                      ),
-                      IconButton(
-                        icon: const Icon(
-                          Icons.close,
-                          color: Colors.white,
-                          size: 20,
+                        IconButton(
+                          icon: const Icon(
+                            Icons.close,
+                            color: Colors.white,
+                            size: 20,
+                          ),
+                          onPressed: () => Navigator.pop(context),
+                          padding: EdgeInsets.zero,
+                          constraints: const BoxConstraints(),
                         ),
-                        onPressed: () => Navigator.pop(context),
-                        padding: EdgeInsets.zero,
-                        constraints: const BoxConstraints(),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
 
-                // İçerik kısmı - tüm modalın geri kalanını kaplar
-                Expanded(
-                  child: SingleChildScrollView(
-                    physics: const BouncingScrollPhysics(),
-                    child: Padding(
-                      padding: EdgeInsets.fromLTRB(
-                        12,
-                        8,
-                        12,
-                        bottomPadding +
-                            20, // Alt padding + navigation bar için ekstra alan
-                      ),
-                      child: Column(
-                        children: [
-                          _buildSettingItem(
-                            AppLocalizations.of(context)!.editProfile,
-                            Icons.edit,
-                            context,
-                            onTap: () => _showEditProfileModal(context),
-                          ),
+                  // İçerik kısmı - tüm modalın geri kalanını kaplar
+                  Flexible(
+                    child: SingleChildScrollView(
+                      physics: const BouncingScrollPhysics(),
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(
+                          12,
+                          8,
+                          12,
+                          20, // Alt padding (artık bottomPadding eklemeye gerek yok çünkü zaten havada)
+                        ),
+                        child: Column(
+                          children: [
+                            _buildSettingItem(
+                              AppLocalizations.of(context)!.editProfile,
+                              Icons.edit,
+                              context,
+                              onTap: () => _showEditProfileModal(context),
+                            ),
 
-                          // Abonelik durumu bölümü
-                          _buildSubscriptionStatusItem(context),
+                            // Abonelik durumu bölümü
+                            _buildSubscriptionStatusItem(context),
 
-                          _buildSettingItem(
-                            AppLocalizations.of(context)!.myDevices,
-                            Icons.devices,
-                            context,
-                            onTap: () => _showDeviceManagementModal(context),
-                          ),
-                          _buildSettingItem(
-                            AppLocalizations.of(context)!.privacy,
-                            Icons.lock,
-                            context,
-                            onTap: () => _showPrivacySettingsModal(context),
-                          ),
-                          _buildSettingItem(
-                            AppLocalizations.of(context)!.help,
-                            Icons.help,
-                            context,
-                            onTap: () => _showHelpModal(context),
-                          ),
-                          _buildSettingItem(
-                            AppLocalizations.of(context)!.deleteAccount,
-                            Icons.delete_forever,
-                            context,
-                            onTap: () => _showDeleteAccountDialog(context),
-                          ),
-                          _buildSettingItem(
-                            AppLocalizations.of(context)!.logOut,
-                            Icons.exit_to_app,
-                            context,
-                            onTap: () async {
-                              // Çıkış onay dialogu göster
-                              final shouldSignOut = await showDialog<bool>(
-                                context: context,
-                                builder:
-                                    (context) => AlertDialog(
-                                      backgroundColor: Colors.transparent,
-                                      content: Container(
-                                        decoration: BoxDecoration(
-                                          gradient: LinearGradient(
-                                            begin: Alignment.topLeft,
-                                            end: Alignment.bottomRight,
-                                            colors: [
-                                              Colors.indigo.shade900,
-                                              Colors.black,
+                            _buildSettingItem(
+                              AppLocalizations.of(context)!.myDevices,
+                              Icons.devices,
+                              context,
+                              onTap: () => _showDeviceManagementModal(context),
+                            ),
+                            _buildSettingItem(
+                              AppLocalizations.of(context)!.privacy,
+                              Icons.lock,
+                              context,
+                              onTap: () => _showPrivacySettingsModal(context),
+                            ),
+                            _buildSettingItem(
+                              AppLocalizations.of(context)!.help,
+                              Icons.help,
+                              context,
+                              onTap: () => _showHelpModal(context),
+                            ),
+                            _buildSettingItem(
+                              AppLocalizations.of(context)!.deleteAccount,
+                              Icons.delete_forever,
+                              context,
+                              onTap: () => _showDeleteAccountDialog(context),
+                            ),
+                            _buildSettingItem(
+                              AppLocalizations.of(context)!.logOut,
+                              Icons.exit_to_app,
+                              context,
+                              onTap: () async {
+                                // Çıkış onay dialogu göster
+                                final shouldSignOut = await showDialog<bool>(
+                                  context: context,
+                                  builder:
+                                      (context) => AlertDialog(
+                                        backgroundColor: Colors.transparent,
+                                        content: Container(
+                                          decoration: BoxDecoration(
+                                            gradient: LinearGradient(
+                                              begin: Alignment.topLeft,
+                                              end: Alignment.bottomRight,
+                                              colors: [
+                                                Colors.indigo.shade900,
+                                                Colors.black,
+                                              ],
+                                            ),
+                                            borderRadius: BorderRadius.circular(
+                                              20,
+                                            ),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Colors.black.withOpacity(
+                                                  0.3,
+                                                ),
+                                                blurRadius: 20,
+                                                spreadRadius: 5,
+                                              ),
                                             ],
                                           ),
-                                          borderRadius: BorderRadius.circular(
-                                            20,
-                                          ),
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: Colors.black.withOpacity(
-                                                0.3,
-                                              ),
-                                              blurRadius: 20,
-                                              spreadRadius: 5,
-                                            ),
-                                          ],
-                                        ),
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(24),
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: [
-                                              // İkon
-                                              Container(
-                                                padding: const EdgeInsets.all(
-                                                  16,
-                                                ),
-                                                decoration: BoxDecoration(
-                                                  color: Colors.red.withOpacity(
-                                                    0.2,
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(24),
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                // İkon
+                                                Container(
+                                                  padding: const EdgeInsets.all(
+                                                    16,
                                                   ),
-                                                  shape: BoxShape.circle,
+                                                  decoration: BoxDecoration(
+                                                    color: Colors.red
+                                                        .withOpacity(0.2),
+                                                    shape: BoxShape.circle,
+                                                  ),
+                                                  child: const Icon(
+                                                    Icons.logout,
+                                                    color: Colors.red,
+                                                    size: 32,
+                                                  ),
                                                 ),
-                                                child: const Icon(
-                                                  Icons.logout,
-                                                  color: Colors.red,
-                                                  size: 32,
+                                                const SizedBox(height: 16),
+                                                // Başlık
+                                                Text(
+                                                  AppLocalizations.of(
+                                                    context,
+                                                  )!.logOutTitle,
+                                                  style: const TextStyle(
+                                                    fontSize: 20,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Colors.white,
+                                                  ),
                                                 ),
-                                              ),
-                                              const SizedBox(height: 16),
-                                              // Başlık
-                                              Text(
-                                                AppLocalizations.of(
-                                                  context,
-                                                )!.logOutTitle,
-                                                style: const TextStyle(
-                                                  fontSize: 20,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Colors.white,
+                                                const SizedBox(height: 12),
+                                                // İçerik
+                                                Text(
+                                                  AppLocalizations.of(
+                                                    context,
+                                                  )!.logOutMessage,
+                                                  style: const TextStyle(
+                                                    color: Colors.white70,
+                                                    fontSize: 16,
+                                                  ),
+                                                  textAlign: TextAlign.center,
                                                 ),
-                                              ),
-                                              const SizedBox(height: 12),
-                                              // İçerik
-                                              Text(
-                                                AppLocalizations.of(
-                                                  context,
-                                                )!.logOutMessage,
-                                                style: const TextStyle(
-                                                  color: Colors.white70,
-                                                  fontSize: 16,
-                                                ),
-                                                textAlign: TextAlign.center,
-                                              ),
-                                              const SizedBox(height: 24),
-                                              // Butonlar
-                                              Row(
-                                                children: [
-                                                  Expanded(
-                                                    child: TextButton(
-                                                      onPressed:
-                                                          () => Navigator.pop(
-                                                            context,
-                                                            false,
-                                                          ),
-                                                      style: TextButton.styleFrom(
-                                                        padding:
-                                                            const EdgeInsets.symmetric(
-                                                              vertical: 12,
+                                                const SizedBox(height: 24),
+                                                // Butonlar
+                                                Row(
+                                                  children: [
+                                                    Expanded(
+                                                      child: TextButton(
+                                                        onPressed:
+                                                            () => Navigator.pop(
+                                                              context,
+                                                              false,
                                                             ),
-                                                      ),
-                                                      child: Text(
-                                                        AppLocalizations.of(
-                                                          context,
-                                                        )!.cancel,
-                                                        style: const TextStyle(
-                                                          color: Colors.white70,
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.w500,
+                                                        style: TextButton.styleFrom(
+                                                          padding:
+                                                              const EdgeInsets.symmetric(
+                                                                vertical: 12,
+                                                              ),
+                                                        ),
+                                                        child: Text(
+                                                          AppLocalizations.of(
+                                                            context,
+                                                          )!.cancel,
+                                                          style: const TextStyle(
+                                                            color:
+                                                                Colors.white70,
+                                                            fontSize: 16,
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                          ),
                                                         ),
                                                       ),
                                                     ),
-                                                  ),
-                                                  const SizedBox(width: 12),
-                                                  Expanded(
-                                                    child: ElevatedButton(
-                                                      onPressed:
-                                                          () => Navigator.pop(
-                                                            context,
-                                                            true,
-                                                          ),
-                                                      style: ElevatedButton.styleFrom(
-                                                        backgroundColor:
-                                                            Colors.red,
-                                                        padding:
-                                                            const EdgeInsets.symmetric(
-                                                              vertical: 12,
+                                                    const SizedBox(width: 12),
+                                                    Expanded(
+                                                      child: ElevatedButton(
+                                                        onPressed:
+                                                            () => Navigator.pop(
+                                                              context,
+                                                              true,
                                                             ),
-                                                        shape: RoundedRectangleBorder(
-                                                          borderRadius:
-                                                              BorderRadius.circular(
-                                                                8,
+                                                        style: ElevatedButton.styleFrom(
+                                                          backgroundColor:
+                                                              Colors.red,
+                                                          padding:
+                                                              const EdgeInsets.symmetric(
+                                                                vertical: 12,
+                                                              ),
+                                                          shape: RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius.circular(
+                                                                  8,
+                                                                ),
+                                                          ),
+                                                        ),
+                                                        child: Text(
+                                                          AppLocalizations.of(
+                                                            context,
+                                                          )!.logOut,
+                                                          style:
+                                                              const TextStyle(
+                                                                color:
+                                                                    Colors
+                                                                        .white,
+                                                                fontSize: 16,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
                                                               ),
                                                         ),
                                                       ),
-                                                      child: Text(
-                                                        AppLocalizations.of(
-                                                          context,
-                                                        )!.logOut,
-                                                        style: const TextStyle(
-                                                          color: Colors.white,
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                        ),
-                                                      ),
                                                     ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                              );
+                                );
 
-                              if (shouldSignOut == true) {
-                                // 1. ÖNCE stream'leri iptal et
-                                try {
-                                  if (_rankSubscription != null) {
-                                    await _rankSubscription!.cancel();
-                                    _rankSubscription = null;
-                                  }
-                                  if (_mistakesSubscription != null) {
-                                    await _mistakesSubscription!.cancel();
-                                    _mistakesSubscription = null;
-                                  }
-                                } catch (e) {
-                                  // Stream iptal hatası (devam ediliyor)
-                                }
-
-                                // 2. SONRA Firebase çıkış yap (bu işlem tüm stream'leri temizler)
-                                try {
-                                  await _authService.signOut();
-                                } catch (e) {
-                                  // Çıkış hatası olsa bile devam et
-                                }
-
-                                // 3. EN SON login sayfasına yönlendir
-                                if (mounted) {
+                                if (shouldSignOut == true) {
+                                  // 1. ÖNCE stream'leri iptal et
                                   try {
-                                    Navigator.of(
-                                      context,
-                                      rootNavigator: true,
-                                    ).pushNamedAndRemoveUntil(
-                                      '/login',
-                                      (route) => false,
-                                    );
+                                    if (_rankSubscription != null) {
+                                      await _rankSubscription!.cancel();
+                                      _rankSubscription = null;
+                                    }
+                                    if (_mistakesSubscription != null) {
+                                      await _mistakesSubscription!.cancel();
+                                      _mistakesSubscription = null;
+                                    }
                                   } catch (e) {
-                                    // Alternatif navigasyon yöntemi
-                                    if (mounted) {
+                                    // Stream iptal hatası (devam ediliyor)
+                                  }
+
+                                  // 2. SONRA Firebase çıkış yap (bu işlem tüm stream'leri temizler)
+                                  try {
+                                    await _authService.signOut();
+                                  } catch (e) {
+                                    // Çıkış hatası olsa bile devam et
+                                  }
+
+                                  // 3. EN SON login sayfasına yönlendir
+                                  if (mounted) {
+                                    try {
                                       Navigator.of(
                                         context,
-                                      ).pushReplacementNamed('/login');
+                                        rootNavigator: true,
+                                      ).pushNamedAndRemoveUntil(
+                                        '/login',
+                                        (route) => false,
+                                      );
+                                    } catch (e) {
+                                      // Alternatif navigasyon yöntemi
+                                      if (mounted) {
+                                        Navigator.of(
+                                          context,
+                                        ).pushReplacementNamed('/login');
+                                      }
                                     }
                                   }
                                 }
-                              }
-                            },
-                          ),
-                        ],
+                              },
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         );
@@ -2375,8 +2387,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             onPressed: () async {
               Navigator.pop(context); // Modal'ı kapat
               // Premium ekranını full screen dialog olarak aç
-              await Navigator.push(
-                context,
+              await Navigator.of(context, rootNavigator: true).push(
                 MaterialPageRoute(
                   builder: (context) => const PremiumScreen(),
                   fullscreenDialog:
@@ -2970,7 +2981,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ),
                               content: Text(
                                 isCurrentDevice
-                                    ? 'Bu cihazdan çıkış yapmak istediğinizden emin misiniz?'
+                                    ? AppLocalizations.of(
+                                      context,
+                                    )!.logoutFromThisDeviceConfirm
                                     : AppLocalizations.of(
                                       context,
                                     )!.logoutFromDeviceMessage,
@@ -3178,13 +3191,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
   String _formatDate(DateTime date) {
     final now = DateTime.now();
     final difference = now.difference(date);
+    final localizations = AppLocalizations.of(context)!;
 
     if (difference.inMinutes < 60) {
-      return '${difference.inMinutes} dk önce';
+      return localizations.minutesAgo(difference.inMinutes);
     } else if (difference.inHours < 24) {
-      return '${difference.inHours} saat önce';
+      return localizations.hoursAgo(difference.inHours);
     } else if (difference.inDays < 7) {
-      return '${difference.inDays} gün önce';
+      return localizations.daysAgo(difference.inDays);
     } else {
       return '${date.day}/${date.month}/${date.year}';
     }
@@ -3194,13 +3208,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
     // Abonelik bitiş tarihi için daha detaylı format
     final now = DateTime.now();
     final difference = date.difference(now);
+    final localizations = AppLocalizations.of(context)!;
 
     if (difference.isNegative) {
       // Tarih geçmişte
-      return '${date.day}/${date.month}/${date.year} (Süresi Doldu)';
+      return '${date.day}/${date.month}/${date.year} (${localizations.expiredLabel})';
     } else if (difference.inDays < 30) {
       // 30 günden az kaldı
-      return '${date.day}/${date.month}/${date.year} (${difference.inDays} gün kaldı)';
+      return '${date.day}/${date.month}/${date.year} (${localizations.daysLeftLabel(difference.inDays)})';
     } else {
       // Normal format
       return '${date.day}/${date.month}/${date.year}';
@@ -3212,120 +3227,123 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void _showDeleteAccountDialog(BuildContext context) {
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        backgroundColor: Colors.transparent,
-        content: Container(
-          decoration: BoxDecoration(
-            color: const Color(0xFF0F172A).withOpacity(0.95), // deep obsidian
-            borderRadius: BorderRadius.circular(24),
-            border: Border.all(
-              color: Colors.red.withOpacity(0.3),
-              width: 1.5,
-            ),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.4),
-                blurRadius: 24,
-                offset: const Offset(0, 4),
+      builder:
+          (context) => AlertDialog(
+            backgroundColor: Colors.transparent,
+            content: Container(
+              decoration: BoxDecoration(
+                color: const Color(
+                  0xFF0F172A,
+                ).withOpacity(0.95), // deep obsidian
+                borderRadius: BorderRadius.circular(24),
+                border: Border.all(
+                  color: Colors.red.withOpacity(0.3),
+                  width: 1.5,
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.4),
+                    blurRadius: 24,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
               ),
-            ],
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(24),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                // İkon
-                Container(
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: Colors.red.withOpacity(0.12),
-                    shape: BoxShape.circle,
-                  ),
-                  child: const Icon(
-                    Icons.delete_forever_rounded,
-                    color: Colors.red,
-                    size: 32,
-                  ),
-                ),
-                const SizedBox(height: 16),
-                // Başlık
-                Text(
-                  AppLocalizations.of(context)!.deleteAccountTitle,
-                  style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                    letterSpacing: 0.5,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 12),
-                // İçerik
-                Text(
-                  AppLocalizations.of(context)!.deleteAccountMessage,
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.white.withOpacity(0.7),
-                    height: 1.4,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 24),
-                // Butonlar
-                Row(
+              child: Padding(
+                padding: const EdgeInsets.all(24),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
-                    Expanded(
-                      child: TextButton(
-                        onPressed: () => Navigator.pop(context),
-                        style: TextButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(vertical: 12),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                        ),
-                        child: Text(
-                          AppLocalizations.of(context)!.cancel,
-                          style: TextStyle(
-                            color: Colors.white.withOpacity(0.7),
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
+                    // İkon
+                    Container(
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: Colors.red.withOpacity(0.12),
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Icon(
+                        Icons.delete_forever_rounded,
+                        color: Colors.red,
+                        size: 32,
                       ),
                     ),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                          _openDeleteAccountPage();
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.red,
-                          padding: const EdgeInsets.symmetric(vertical: 12),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          elevation: 0,
-                        ),
-                        child: Text(
-                          AppLocalizations.of(context)!.deleteAccount,
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
+                    const SizedBox(height: 16),
+                    // Başlık
+                    Text(
+                      AppLocalizations.of(context)!.deleteAccountTitle,
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                        letterSpacing: 0.5,
                       ),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 12),
+                    // İçerik
+                    Text(
+                      AppLocalizations.of(context)!.deleteAccountMessage,
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Colors.white.withOpacity(0.7),
+                        height: 1.4,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 24),
+                    // Butonlar
+                    Row(
+                      children: [
+                        Expanded(
+                          child: TextButton(
+                            onPressed: () => Navigator.pop(context),
+                            style: TextButton.styleFrom(
+                              padding: const EdgeInsets.symmetric(vertical: 12),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                            ),
+                            child: Text(
+                              AppLocalizations.of(context)!.cancel,
+                              style: TextStyle(
+                                color: Colors.white.withOpacity(0.7),
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: ElevatedButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                              _openDeleteAccountPage();
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.red,
+                              padding: const EdgeInsets.symmetric(vertical: 12),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              elevation: 0,
+                            ),
+                            child: Text(
+                              AppLocalizations.of(context)!.deleteAccount,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
-              ],
+              ),
             ),
           ),
-        ),
-      ),
     );
   }
 
@@ -3340,7 +3358,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       SnackBar(
         content: Text(AppLocalizations.of(context)!.accountDeletionPage(url)),
         action: SnackBarAction(
-          label: 'Kopyala',
+          label: AppLocalizations.of(context)!.copy,
           onPressed: () {
             // Clipboard'a kopyala
             // Clipboard.setData(ClipboardData(text: url));

@@ -146,6 +146,17 @@ class OrganizedDataService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
+  // Son değişiklik zamanını güncelleyen yardımcı metod
+  Future<void> updateQuestionsVersion() async {
+    try {
+      await _firestore.collection('systemSettings').doc('questionsVersion').set({
+        'version': FieldValue.serverTimestamp(),
+      }, SetOptions(merge: true));
+    } catch (e) {
+      debugPrint('Error updating questions version: $e');
+    }
+  }
+
   // Tüm soruları ve kategorileri toplu sil (Batch limit aşımı ile)
   Future<void> clearAllData() async {
     try {
@@ -889,6 +900,29 @@ class OrganizedDataService {
 
       // Kategori dokümanının questionCount'unu güncelle
       if (imported > 0) {
+        final collectionNameLower = collectionName.toLowerCase();
+        final displayNameLower = displayName.toLowerCase();
+        final isEnglish = collectionNameLower.startsWith('english-') || 
+                          collectionNameLower.startsWith('english_') ||
+                          collectionNameLower.endsWith('-english') || 
+                          collectionNameLower.endsWith('_english') || 
+                          displayNameLower.contains('english') ||
+                          displayNameLower.contains('ingilizce') ||
+                          displayNameLower.contains('anesthesia') ||
+                          displayNameLower.contains('monitoring') ||
+                          displayNameLower.contains('physiology') ||
+                          displayNameLower.contains('management') ||
+                          displayNameLower.contains('resuscitation') ||
+                          displayNameLower.contains('principles') ||
+                          displayNameLower.contains('protocols') ||
+                          displayNameLower.contains('care') ||
+                          displayNameLower.contains('guidelines') ||
+                          displayNameLower.contains('agents') ||
+                          displayNameLower.contains('block') ||
+                          displayNameLower.contains('disease') ||
+                          displayNameLower.contains('systems') ||
+                          displayNameLower.contains('surgery');
+
         await _firestore
             .collection('quizCategories')
             .doc(collectionName)
@@ -898,7 +932,10 @@ class OrganizedDataService {
           'questionCount': FieldValue.increment(imported),
           'updatedAt': FieldValue.serverTimestamp(),
           'isActive': true,
+          'language': isEnglish ? 'english' : 'turkish',
         }, SetOptions(merge: true));
+        
+        await updateQuestionsVersion();
       }
 
       return {
@@ -1002,17 +1039,37 @@ class OrganizedDataService {
       // Collection name'e göre filtrele
       final filteredDocs = snapshot.docs.where((doc) {
         final data = doc.data();
-        final collectionName = data['collectionName'] as String? ?? '';
-        final displayName = data['displayName'] as String? ?? '';
+        final collectionName = (data['collectionName'] as String? ?? '').toLowerCase();
+        final displayName = (data['displayName'] as String? ?? '').toLowerCase();
+        final docLanguage = (data['language'] as String? ?? '').toLowerCase();
         
+        bool isEnglish = docLanguage == 'english' || 
+                         docLanguage == 'en' ||
+                         collectionName.startsWith('english_') || 
+                         collectionName.startsWith('english-') || 
+                         collectionName.endsWith('_english') || 
+                         collectionName.endsWith('-english') || 
+                         displayName.contains('english') ||
+                         displayName.contains('ingilizce') ||
+                         displayName.contains('anesthesia') ||
+                         displayName.contains('monitoring') ||
+                         displayName.contains('physiology') ||
+                         displayName.contains('management') ||
+                         displayName.contains('resuscitation') ||
+                         displayName.contains('principles') ||
+                         displayName.contains('protocols') ||
+                         displayName.contains('care') ||
+                         displayName.contains('guidelines') ||
+                         displayName.contains('agents') ||
+                         displayName.contains('block') ||
+                         displayName.contains('disease') ||
+                         displayName.contains('systems') ||
+                         displayName.contains('surgery');
+
         if (language == 'english') {
-          return collectionName.startsWith('english_') || 
-                 displayName.toLowerCase().contains('english') ||
-                 displayName.toLowerCase().contains('ingilizce');
+          return isEnglish;
         } else {
-          return !collectionName.startsWith('english_') && 
-                 !displayName.toLowerCase().contains('english') &&
-                 !displayName.toLowerCase().contains('ingilizce');
+          return !isEnglish;
         }
       }).toList();
 
@@ -1080,6 +1137,7 @@ class OrganizedDataService {
           .collection('items')
           .doc(questionId)
           .delete();
+      await updateQuestionsVersion();
       return true;
     } catch (e) {
       return false;
@@ -1103,6 +1161,7 @@ class OrganizedDataService {
             'updatedAt': FieldValue.serverTimestamp(),
             'updatedBy': _auth.currentUser?.uid,
           });
+      await updateQuestionsVersion();
       return true;
     } catch (e) {
       return false;

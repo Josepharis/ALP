@@ -645,8 +645,13 @@ class InAppPurchaseService {
       
       if (currentUserPurchase.docs.isNotEmpty) {
         debugPrint('   ✅ Purchase belongs to current user - reactivating premium');
+        
+        final subDetails = _getSubscriptionDetails(productId, purchaseDetails.transactionDate);
+        final String premiumType = subDetails['premiumType'];
+        final DateTime endDate = subDetails['endDate'];
+        
         // Reactivate premium for this user
-        await _reactivatePremiumForUser(userId);
+        await _reactivatePremiumForUser(userId, premiumType, endDate);
         
         // Complete transaction after reactivating premium
         if (purchaseDetails.pendingCompletePurchase) {
@@ -750,14 +755,60 @@ class InAppPurchaseService {
     }
   }
   
+  // Helper to calculate subscription details
+  Map<String, dynamic> _getSubscriptionDetails(String productId, String? transactionDateStr) {
+    DateTime purchaseDate = DateTime.now();
+    if (transactionDateStr != null) {
+      try {
+        final parsed = int.tryParse(transactionDateStr);
+        if (parsed != null) {
+          final asMs = parsed > 1000000000000 ? parsed : parsed * 1000;
+          final parsedDate = DateTime.fromMillisecondsSinceEpoch(asMs);
+          final minDate = DateTime(2010);
+          final maxDate = DateTime(2099);
+          if (parsedDate.isAfter(minDate) && parsedDate.isBefore(maxDate)) {
+            purchaseDate = parsedDate;
+            debugPrint('ℹ️ [IAP] Parsed transaction date: $purchaseDate');
+          } else {
+            debugPrint('⚠️ [IAP] transactionDate out of range ($parsedDate), using now');
+          }
+        }
+      } catch (e) {
+        debugPrint('❌ [IAP] Error parsing transactionDate: $e');
+      }
+    }
+
+    int durationDays = 30; // Default 30 days
+    String premiumType = 'monthly';
+
+    if (productId == sixMonthSubscriptionId) {
+      durationDays = 180;
+      premiumType = 'sixmonth';
+    } else if (productId == yearlySubscriptionId) {
+      durationDays = 365;
+      premiumType = 'yearly';
+    } else if (productId == lifetimePurchaseId) {
+      durationDays = 99999;
+      premiumType = 'lifetime';
+    }
+
+    final endDate = purchaseDate.add(Duration(days: durationDays));
+    return {
+      'premiumType': premiumType,
+      'endDate': endDate,
+    };
+  }
+
   // Reactivate premium for existing user (during manual restore)
-  Future<void> _reactivatePremiumForUser(String userId) async {
+  Future<void> _reactivatePremiumForUser(String userId, String premiumType, DateTime endDate) async {
     try {
-      debugPrint('🔄 Reactivating premium for user: $userId');
+      debugPrint('🔄 Reactivating premium for user: $userId, type: $premiumType, endDate: $endDate');
       
       // Update user premium status
       await _firestore.collection('users').doc(userId).set({
         'isPremium': true,
+        'premiumType': premiumType,
+        'premiumEndDate': Timestamp.fromDate(endDate),
         'premiumUpdatedAt': FieldValue.serverTimestamp(),
       }, SetOptions(merge: true));
       
@@ -801,6 +852,10 @@ class InAppPurchaseService {
           ? purchaseId 
           : 'sandbox_${DateTime.now().millisecondsSinceEpoch}_${productId.hashCode}';
       
+      final subDetails = _getSubscriptionDetails(productId, purchaseDetails.transactionDate);
+      final String premiumType = subDetails['premiumType'];
+      final DateTime endDate = subDetails['endDate'];
+
       final purchaseData = {
         'productId': productId,
         'purchaseId': purchaseId,
@@ -828,13 +883,15 @@ class InAppPurchaseService {
       final userRef = _firestore.collection('users').doc(userId);
       batch.set(userRef, {
         'isPremium': true,
+        'premiumType': premiumType,
+        'premiumEndDate': Timestamp.fromDate(endDate),
         'premiumUpdatedAt': FieldValue.serverTimestamp(),
       }, SetOptions(merge: true));
       
       // Tümünü birlikte commit et
       await batch.commit();
       
-      debugPrint('✅ Purchase saved and premium activated for user: $userId');
+      debugPrint('✅ Purchase saved and premium activated for user: $userId (Type: $premiumType, EndDate: $endDate)');
       
       // Cache'i güncelle (atomik şekilde)
       _cachedPremiumStatus = true;
@@ -1020,7 +1077,27 @@ class InAppPurchaseService {
       final userDoc = await _firestore.collection('users').doc(userId).get();
       if (userDoc.exists) {
         final data = userDoc.data();
-        final isPremium = data?['isPremium'] as bool? ?? false;
+        bool isPremium = data?['isPremium'] as bool? ?? false;
+        
+        if (isPremium) {
+          final timestamp = data?['premiumEndDate'] as Timestamp?;
+          if (timestamp != null) {
+            final endDate = timestamp.toDate();
+            if (endDate.isBefore(DateTime.now())) {
+              // Süresi dolmuş! Veritabanını güncelle ve premium'u kapat
+              isPremium = false;
+              await _firestore.collection('users').doc(userId).set({
+                'isPremium': false,
+                'premiumUpdatedAt': FieldValue.serverTimestamp(),
+              }, SetOptions(merge: true));
+              debugPrint('⚠️ [IAP] Subscription expired! Revoked premium access for user: $userId');
+            }
+          } else {
+            // premiumEndDate alanı yok - geriye dönük migration (eski kullanıcı kontrolü)
+            debugPrint('🔍 [IAP] premiumEndDate not found for premium user $userId. Initiating migration...');
+            isPremium = await _migrateLegacyUserSubscription(userId);
+          }
+        }
         
         // Cache'i güncelle
         _cachedPremiumStatus = isPremium;
@@ -1040,6 +1117,78 @@ class InAppPurchaseService {
         return _cachedPremiumStatus!;
       }
       return false;
+    }
+  }
+
+  // Migrate a user who has isPremium: true but no premiumEndDate (Legacy user)
+  Future<bool> _migrateLegacyUserSubscription(String userId) async {
+    try {
+      final purchasesSnapshot = await _firestore
+          .collection('users')
+          .doc(userId)
+          .collection('purchases')
+          .get();
+
+      if (purchasesSnapshot.docs.isEmpty) {
+        // Hiç satın alma yoksa premium'u kapat
+        await _firestore.collection('users').doc(userId).set({
+          'isPremium': false,
+          'premiumUpdatedAt': FieldValue.serverTimestamp(),
+        }, SetOptions(merge: true));
+        debugPrint('⚠️ [IAP Migration] No purchases found for legacy user $userId. Revoking premium.');
+        return false;
+      }
+
+      DateTime? latestEndDate;
+      String? latestPremiumType;
+
+      for (var doc in purchasesSnapshot.docs) {
+        final data = doc.data();
+        final productId = data['productId'] as String? ?? '';
+        final transactionDateStr = data['transactionDate'] as String?;
+        
+        final subDetails = _getSubscriptionDetails(productId, transactionDateStr);
+        final DateTime endDate = subDetails['endDate'];
+        final String type = subDetails['premiumType'];
+
+        if (latestEndDate == null || endDate.isAfter(latestEndDate)) {
+          latestEndDate = endDate;
+          latestPremiumType = type;
+        }
+      }
+
+      if (latestEndDate != null) {
+        if (latestEndDate.isBefore(DateTime.now())) {
+          // Bitiş tarihi geçmiş
+          await _firestore.collection('users').doc(userId).set({
+            'isPremium': false,
+            'premiumEndDate': Timestamp.fromDate(latestEndDate),
+            'premiumType': latestPremiumType,
+            'premiumUpdatedAt': FieldValue.serverTimestamp(),
+          }, SetOptions(merge: true));
+          debugPrint('⚠️ [IAP Migration] Legacy user $userId subscription expired on $latestEndDate. Revoking premium.');
+          return false;
+        } else {
+          // Hala aktif
+          await _firestore.collection('users').doc(userId).set({
+            'premiumEndDate': Timestamp.fromDate(latestEndDate),
+            'premiumType': latestPremiumType,
+            'premiumUpdatedAt': FieldValue.serverTimestamp(),
+          }, SetOptions(merge: true));
+          debugPrint('✅ [IAP Migration] Legacy user $userId subscription is active until $latestEndDate. Saved details.');
+          return true;
+        }
+      }
+
+      // Herhangi bir şekilde tarih hesaplanamadıysa kapat
+      await _firestore.collection('users').doc(userId).set({
+        'isPremium': false,
+        'premiumUpdatedAt': FieldValue.serverTimestamp(),
+      }, SetOptions(merge: true));
+      return false;
+    } catch (e) {
+      debugPrint('❌ [IAP Migration] Error migrating legacy user $userId: $e');
+      return true; // Hata durumunda kullanıcıyı mağdur etmemek için geçici olarak true dönebiliriz.
     }
   }
   

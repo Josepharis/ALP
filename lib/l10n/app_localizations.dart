@@ -3344,6 +3344,150 @@ abstract class AppLocalizations {
   /// **'Search quizzes...'**
   String get searchQuizzes;
 
+  /// Solved label for completed quiz badge
+  ///
+  /// In en, this message translates to:
+  /// **'Solved'**
+  String get solved;
+
+  /// Subtitle for the premium screen
+  ///
+  /// In en, this message translates to:
+  /// **'Access to all questions, unlimited quiz retakes,\nviewing your incorrect questions, and studying your deficiencies'**
+  String get premiumScreenSubtitle;
+
+  /// Free trial badge text
+  ///
+  /// In en, this message translates to:
+  /// **'First 2 questions are free'**
+  String get freeQuestionsTrial;
+
+  /// Helper text stating subscription can be cancelled anytime
+  ///
+  /// In en, this message translates to:
+  /// **'You can cancel anytime'**
+  String get cancelAnytimeSubtitle;
+
+  /// Badge text for yearly savings
+  ///
+  /// In en, this message translates to:
+  /// **'2 months free'**
+  String get twoMonthsFree;
+
+  /// Feature subtitle for access to all questions
+  ///
+  /// In en, this message translates to:
+  /// **'Unlimited access in all categories'**
+  String get unlimitedAccessAllCategories;
+
+  /// Feature subtitle for unlimited quiz retakes
+  ///
+  /// In en, this message translates to:
+  /// **'You can solve as many quizzes as you want'**
+  String get solveAsManyQuizzes;
+
+  /// Feature subtitle for detailed explanations
+  ///
+  /// In en, this message translates to:
+  /// **'See the detailed explanation of each question'**
+  String get seeDetailedExplanation;
+
+  /// Feature subtitle for viewing incorrect questions
+  ///
+  /// In en, this message translates to:
+  /// **'Solve the incorrect questions you made again'**
+  String get retakeWrongQuestions;
+
+  /// Feature subtitle for studying deficiencies
+  ///
+  /// In en, this message translates to:
+  /// **'Focus on the topics you are weak in'**
+  String get focusOnWeakTopics;
+
+  /// CTA button text to start premium subscription
+  ///
+  /// In en, this message translates to:
+  /// **'Start Premium'**
+  String get startPremium;
+
+  /// Error message when product loading fails
+  ///
+  /// In en, this message translates to:
+  /// **'Product could not be loaded. Please check your internet connection and try again.'**
+  String get productLoadingError;
+
+  /// Instructions shown after requesting password reset
+  ///
+  /// In en, this message translates to:
+  /// **'• Check your email inbox\n• Check spam/junk folder\n• Click the link in the email\n• Set your new password\n• Return to the app'**
+  String get resetPasswordInstructions;
+
+  /// Label for options section
+  ///
+  /// In en, this message translates to:
+  /// **'Options:'**
+  String get optionsLabel;
+
+  /// Label for explanation section
+  ///
+  /// In en, this message translates to:
+  /// **'Explanation:'**
+  String get explanationLabel;
+
+  /// Success message when question is removed from mistakes
+  ///
+  /// In en, this message translates to:
+  /// **'Question removed from mistakes'**
+  String get questionRemovedFromMistakes;
+
+  /// Error message when question removal fails
+  ///
+  /// In en, this message translates to:
+  /// **'An error occurred while removing the question'**
+  String get questionRemoveError;
+
+  /// Minutes ago text
+  ///
+  /// In en, this message translates to:
+  /// **'{count}m ago'**
+  String minutesAgo(int count);
+
+  /// Hours ago text
+  ///
+  /// In en, this message translates to:
+  /// **'{count}h ago'**
+  String hoursAgo(int count);
+
+  /// Days ago text
+  ///
+  /// In en, this message translates to:
+  /// **'{count}d ago'**
+  String daysAgo(int count);
+
+  /// Expired label for subscriptions
+  ///
+  /// In en, this message translates to:
+  /// **'Expired'**
+  String get expiredLabel;
+
+  /// Days left label for subscriptions
+  ///
+  /// In en, this message translates to:
+  /// **'{count} days left'**
+  String daysLeftLabel(int count);
+
+  /// Confirmation message to logout from current device
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to logout from this device?'**
+  String get logoutFromThisDeviceConfirm;
+
+  /// Copy action button
+  ///
+  /// In en, this message translates to:
+  /// **'Copy'**
+  String get copy;
+
   /// Default daily question text
   ///
   /// In en, this message translates to:

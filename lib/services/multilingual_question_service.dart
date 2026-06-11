@@ -921,4 +921,65 @@ class MultilingualQuestionService {
       },
     ];
   }
+
+  /// Verilen başlığın Türkçe karşılığını bulur (Veritabanındaki eşleşme için)
+  static String getTurkishTitleFor(String title) {
+    // Türkçe karakterleri normalize et (Cihaz diline göre I/ı -> i dönüşüm hatalarını önlemek için)
+    String normalize(String text) {
+      return text.toLowerCase()
+          .replaceAll('ı', 'i')
+          .replaceAll('ş', 's')
+          .replaceAll('ğ', 'g')
+          .replaceAll('ü', 'u')
+          .replaceAll('ö', 'o')
+          .replaceAll('ç', 'c')
+          .trim();
+    }
+
+    final cleanTitle = normalize(title).replaceAll(' (english)', '');
+    
+    // Kelime varyasyonlarını canonical (yerel Türkçe liste) başlığa eşitle
+    if (cleanTitle == 'anesthesia application' || 
+        cleanTitle == 'anesthesia history' ||
+        cleanTitle == 'anestezi uygulamasi' || 
+        cleanTitle == 'anestezi uygulamalari' ||
+        cleanTitle == 'anestezi') {
+      return 'Anestezi Uygulaması';
+    }
+    if (cleanTitle == 'anestezi istasyonu' || 
+        cleanTitle == 'anestezi is istasyonu' || 
+        cleanTitle == 'anesthesia workstation') {
+      return 'Anestezi İş İstasyonu';
+    }
+    if (cleanTitle == 'non-kardiyovaskuler monitorizasyon' || 
+        cleanTitle == 'kardiyovaskuler disi monitorizasyon' || 
+        cleanTitle == 'non-cardiovascular monitoring' ||
+        cleanTitle == 'non-kardiyovaskuler monitoring') {
+      return 'Kardiyovasküler Dışı Monitörizasyon';
+    }
+    if (cleanTitle == 'kardiyovaskuler monitorizasyon' || 
+        cleanTitle == 'kardiyovaskuler monitoring' || 
+        cleanTitle == 'cardiovascular monitoring') {
+      return 'Kardiyovasküler Monitörizasyon';
+    }
+
+    final trCategories = _getTurkishQuizCategories();
+    final enCategories = _getEnglishQuizCategories();
+    
+    // Zaten Türkçe listede varsa direkt döndür
+    for (var cat in trCategories) {
+      if (cat['title'] == title) return title;
+    }
+    
+    // İngilizce listedeki indeksini bulup Türkçe karşılığını döndür
+    for (int i = 0; i < enCategories.length; i++) {
+      if (enCategories[i]['title'] == title) {
+        if (i < trCategories.length) {
+          return trCategories[i]['title'] as String;
+        }
+      }
+    }
+    
+    return title;
+  }
 }

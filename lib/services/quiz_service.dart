@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'dart:math';
+import 'dart:convert';
  
 import 'package:anestezi/models/daily_question.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
@@ -1657,6 +1659,216 @@ class QuizService {
     final selectedQuestions = allQuestions.take(count).toList();
     
     return _translationService.translateQuestions(selectedQuestions, languageCode);
+  }
+
+  // Hibrit soru sistemi: Yerel soruları Firestore'daki yeni sorularla birleştirir
+  Future<List<Question>> getHybridQuestions(String categoryName, List<Question> localQuestions) async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      
+      // 1. Firestore'dan mevcut güncel versiyon zaman damgasını çek (hızlı ve küçük)
+      final versionSnapshot = await _firestore
+          .collection('systemSettings')
+          .doc('questionsVersion')
+          .get()
+          .timeout(const Duration(seconds: 2), onTimeout: () {
+            throw TimeoutException('Version check timeout');
+          });
+          
+      int serverVersion = 0;
+      if (versionSnapshot.exists && versionSnapshot.data()!.containsKey('version')) {
+        final timestamp = versionSnapshot.data()!['version'] as Timestamp?;
+        serverVersion = timestamp?.millisecondsSinceEpoch ?? 0;
+      }
+      
+      final cacheKeyVersion = 'hybrid_version_$categoryName';
+      final cacheKeyData = 'hybrid_data_$categoryName';
+      final cacheKeyTime = 'hybrid_time_$categoryName';
+      
+      final localVersion = prefs.getInt(cacheKeyVersion) ?? 0;
+      
+      // 2. Cache kontrolü:
+      //    - questionsVersion belgesi varsa (admin güncelledi): versiyon eşleşmesi lazım
+      //    - questionsVersion belgesi yoksa (hiç güncelleme yok): cache süresiz geçerli
+      final cachedDataString = prefs.getString(cacheKeyData);
+      final hasCachedData = cachedDataString != null && cachedDataString.isNotEmpty;
+      
+      final shouldUseCache = hasCachedData &&
+          (serverVersion == 0 || localVersion == serverVersion);
+      
+      if (shouldUseCache) {
+        debugPrint('[HybridSystem] ✅ CACHE: "$categoryName"');
+        final List<dynamic> decodedList = jsonDecode(cachedDataString!);
+        return decodedList.map((q) => Question.fromJson(Map<String, dynamic>.from(q))).toList();
+      }
+      
+      debugPrint('[HybridSystem] 🔄 FIRESTORE: "$categoryName"');
+      List<Question> mergedQuestions = List.from(localQuestions);
+      
+      // 3. Kategoriye ait collectionName'i bulmak için Firestore'da quizCategories'i tara
+      String? collectionName;
+      final categorySnapshot = await _firestore
+          .collection('quizCategories')
+          .get()
+          .timeout(const Duration(seconds: 3), onTimeout: () {
+            throw TimeoutException('Fetching quizCategories timed out');
+          });
+      
+      final normalizedTarget = categoryName.toLowerCase().replaceAll(' (english)', '').trim();
+      
+      for (var doc in categorySnapshot.docs) {
+        final data = doc.data();
+        final displayName = (data['displayName'] as String? ?? '').toLowerCase().replaceAll(' (english)', '').trim();
+        final cName = data['collectionName'] as String? ?? '';
+        
+        if (displayName == normalizedTarget) {
+          collectionName = cName;
+          break;
+        }
+      }
+      
+      if (collectionName == null) {
+        for (var doc in categorySnapshot.docs) {
+          final data = doc.data();
+          final displayName = (data['displayName'] as String? ?? '').toLowerCase();
+          final cName = data['collectionName'] as String? ?? '';
+          if (displayName.contains(normalizedTarget) || normalizedTarget.contains(displayName)) {
+            collectionName = cName;
+            break;
+          }
+        }
+      }
+      
+      if (collectionName != null && collectionName.isNotEmpty) {
+        // 4. Firestore'dan soruları çek
+        final questionsSnapshot = await _firestore
+            .collection('questions')
+            .doc(collectionName)
+            .collection('items')
+            .orderBy('questionNumber')
+            .get()
+            .timeout(const Duration(seconds: 4), onTimeout: () {
+              throw TimeoutException('Fetching questions timed out');
+            });
+            
+        final List<Question> firestoreQuestions = [];
+        for (var doc in questionsSnapshot.docs) {
+          final data = doc.data();
+          final questionMap = Map<String, dynamic>.from(data);
+          questionMap['id'] = doc.id;
+          firestoreQuestions.add(Question.fromJson(questionMap));
+        }
+        
+        // 5. Soruları birleştir
+        final Set<String> localQuestionsSet = localQuestions.map((q) => q.question.trim().toLowerCase()).toSet();
+        
+        for (var fq in firestoreQuestions) {
+          if (!localQuestionsSet.contains(fq.question.trim().toLowerCase())) {
+            mergedQuestions.add(fq);
+          }
+        }
+        
+        // 6. Sonucu cache'e kaydet (her zaman kaydet)
+        final encodedList = mergedQuestions.map((q) => q.toJson()).toList();
+        prefs.setString(cacheKeyData, jsonEncode(encodedList));
+        prefs.setInt(cacheKeyTime, DateTime.now().millisecondsSinceEpoch);
+        if (serverVersion > 0) {
+          prefs.setInt(cacheKeyVersion, serverVersion);
+        }
+      }
+      
+      return mergedQuestions;
+    } catch (e) {
+      debugPrint('[HybridSystem] Error loading hybrid questions: $e');
+      
+      // Fallback: Check if we have any cached data despite error
+      try {
+        final prefs = await SharedPreferences.getInstance();
+        final cacheKeyData = 'hybrid_data_$categoryName';
+        final cachedDataString = prefs.getString(cacheKeyData);
+        if (cachedDataString != null && cachedDataString.isNotEmpty) {
+          debugPrint('[HybridSystem] Fallback to cached data after error for "$categoryName".');
+          final List<dynamic> decodedList = jsonDecode(cachedDataString);
+          return decodedList.map((q) => Question.fromJson(Map<String, dynamic>.from(q))).toList();
+        }
+      } catch (cacheErr) {
+         // ignore
+      }
+      
+      return localQuestions; // Safe fallback
+    }
+  }
+  // Tüm kategorilerin güncel soru sayılarını topluca getirir (Önbellekli)
+  Future<Map<String, int>> getGlobalQuestionCounts() async {
+    final Map<String, int> counts = {};
+    
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      
+      // 1. Firestore'dan mevcut güncel versiyon zaman damgasını çek
+      final versionSnapshot = await _firestore
+          .collection('systemSettings')
+          .doc('questionsVersion')
+          .get()
+          .timeout(const Duration(seconds: 2));
+          
+      int serverVersion = 0;
+      if (versionSnapshot.exists && versionSnapshot.data()!.containsKey('version')) {
+        final timestamp = versionSnapshot.data()!['version'] as Timestamp?;
+        serverVersion = timestamp?.millisecondsSinceEpoch ?? 0;
+      }
+      
+      final cacheKeyVersion = 'global_counts_version';
+      final cacheKeyData = 'global_counts_data';
+      
+      final localVersion = prefs.getInt(cacheKeyVersion) ?? 0;
+      
+      // 2. Cache geçerliyse kullan
+      if (serverVersion > 0 && localVersion == serverVersion) {
+        final cachedDataString = prefs.getString(cacheKeyData);
+        if (cachedDataString != null && cachedDataString.isNotEmpty) {
+          final Map<String, dynamic> decodedMap = jsonDecode(cachedDataString);
+          return decodedMap.map((key, value) => MapEntry(key, value as int));
+        }
+      }
+      
+      // 3. Cache geçersizse Firestore'dan çek
+      final categorySnapshot = await _firestore
+          .collection('quizCategories')
+          .get()
+          .timeout(const Duration(seconds: 4));
+          
+      for (var doc in categorySnapshot.docs) {
+        final data = doc.data();
+        final displayName = data['displayName'] as String? ?? '';
+        final count = data['questionCount'] as int? ?? 0;
+        
+        if (displayName.isNotEmpty && count > 0) {
+          counts[displayName] = count;
+        }
+      }
+      
+      // 4. Yeni veriyi cache'e kaydet
+      if (serverVersion > 0 && counts.isNotEmpty) {
+        prefs.setInt(cacheKeyVersion, serverVersion);
+        prefs.setString(cacheKeyData, jsonEncode(counts));
+      }
+      
+      return counts;
+    } catch (e) {
+      debugPrint('[QuizService] Error loading global question counts: $e');
+      // Fallback to cache if exists
+      try {
+        final prefs = await SharedPreferences.getInstance();
+        final cachedDataString = prefs.getString('global_counts_data');
+        if (cachedDataString != null && cachedDataString.isNotEmpty) {
+          final Map<String, dynamic> decodedMap = jsonDecode(cachedDataString);
+          return decodedMap.map((key, value) => MapEntry(key, value as int));
+        }
+      } catch (_) {}
+      
+      return counts;
+    }
   }
 
   // Çevrilmiş kategorileri al

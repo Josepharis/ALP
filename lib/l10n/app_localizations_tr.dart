@@ -1747,6 +1747,91 @@ class AppLocalizationsTr extends AppLocalizations {
   String get searchQuizzes => 'Quizlerde ara...';
 
   @override
+  String get solved => 'Çözüldü';
+
+  @override
+  String get premiumScreenSubtitle =>
+      'Tüm sorulara erişim, sınırsız quiz tekrarı,\nyanlış sorularınızı görüntüleme ve eksiklerinizi çalışma';
+
+  @override
+  String get freeQuestionsTrial => 'İlk 2 soru ücretsiz';
+
+  @override
+  String get cancelAnytimeSubtitle => 'İstediğiniz zaman iptal edebilirsiniz';
+
+  @override
+  String get twoMonthsFree => '2 ay ücretsiz';
+
+  @override
+  String get unlimitedAccessAllCategories =>
+      'Tüm kategorilerde sınırsız erişim';
+
+  @override
+  String get solveAsManyQuizzes => 'İstediğiniz kadar quiz çözebilirsiniz';
+
+  @override
+  String get seeDetailedExplanation => 'Her sorunun detaylı açıklamasını görün';
+
+  @override
+  String get retakeWrongQuestions => 'Yaptığınız yanlış soruları tekrar çözün';
+
+  @override
+  String get focusOnWeakTopics => 'Zayıf olduğunuz konulara odaklanın';
+
+  @override
+  String get startPremium => 'Premium\'a Başla';
+
+  @override
+  String get productLoadingError =>
+      'Ürün yüklenemedi. Lütfen internet bağlantınızı kontrol edip tekrar deneyin.';
+
+  @override
+  String get resetPasswordInstructions =>
+      '• E-posta kutunuzu kontrol edin\n• Spam/önemsiz klasörünü kontrol edin\n• E-postadaki linke tıklayın\n• Yeni şifrenizi belirleyin\n• Uygulamaya geri dönün';
+
+  @override
+  String get optionsLabel => 'Seçenekler:';
+
+  @override
+  String get explanationLabel => 'Açıklama:';
+
+  @override
+  String get questionRemovedFromMistakes => 'Soru eksiklerden kaldırıldı';
+
+  @override
+  String get questionRemoveError => 'Soru kaldırılırken hata oluştu';
+
+  @override
+  String minutesAgo(int count) {
+    return '$count dk önce';
+  }
+
+  @override
+  String hoursAgo(int count) {
+    return '$count saat önce';
+  }
+
+  @override
+  String daysAgo(int count) {
+    return '$count gün önce';
+  }
+
+  @override
+  String get expiredLabel => 'Süresi Doldu';
+
+  @override
+  String daysLeftLabel(int count) {
+    return '$count gün kaldı';
+  }
+
+  @override
+  String get logoutFromThisDeviceConfirm =>
+      'Bu cihazdan çıkış yapmak istediğinizden emin misiniz?';
+
+  @override
+  String get copy => 'Kopyala';
+
+  @override
   String get defaultDailyQuestion =>
       'Anestezide propofol hangi reseptör üzerinden etki eder?';
 }

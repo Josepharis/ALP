@@ -3,6 +3,7 @@ import 'package:in_app_purchase/in_app_purchase.dart';
 import 'dart:async';
 import '../services/in_app_purchase_service.dart';
 import '../services/premium_service.dart';
+import '../l10n/app_localizations.dart';
 
 class SubscriptionScreen extends StatefulWidget {
   const SubscriptionScreen({super.key});
@@ -299,7 +300,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> with TickerProv
         ),
         const SizedBox(height: 8),
         Text(
-          'ALP Premium\'a Geçin',
+          '${AppLocalizations.of(context)!.appTitle} ${AppLocalizations.of(context)!.goToPremium}',
           style: TextStyle(
             fontSize: isTablet ? 24 : 20,
             fontWeight: FontWeight.bold,
@@ -309,7 +310,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> with TickerProv
         ),
         const SizedBox(height: 6),
         Text(
-          'Tüm sorulara erişim, sınırsız quiz tekrarı,\nyanlış sorularınızı görüntüleme ve eksiklerinizi çalışma',
+          AppLocalizations.of(context)!.premiumScreenSubtitle,
           style: TextStyle(
             fontSize: isTablet ? 13 : 12,
             color: Colors.white70,
@@ -326,9 +327,9 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> with TickerProv
             ),
             borderRadius: BorderRadius.circular(12),
           ),
-          child: const Text(
-            'İlk 2 soru ücretsiz',
-            style: TextStyle(
+          child: Text(
+            AppLocalizations.of(context)!.freeQuestionsTrial,
+            style: const TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.bold,
               fontSize: 11,
@@ -344,7 +345,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> with TickerProv
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Paket Seçenekleri',
+          AppLocalizations.of(context)!.packageOptions,
           style: TextStyle(
             fontSize: isTablet ? 20 : 18,
             fontWeight: FontWeight.bold,
@@ -368,9 +369,9 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> with TickerProv
             children: [
               _buildPricingCard(
                 index: 0,
-                title: 'Aylık',
+                title: AppLocalizations.of(context)!.monthly,
                 price: '\$10.00',
-                period: 'ay',
+                period: AppLocalizations.of(context)!.month,
                 originalPrice: null,
                 isPopular: false,
                 productId: InAppPurchaseService.premiumMonthlyId,
@@ -379,9 +380,9 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> with TickerProv
               const SizedBox(height: 8),
               _buildPricingCard(
                 index: 1,
-                title: '6 Aylık',
+                title: AppLocalizations.of(context)!.sixMonthly,
                 price: '\$50.00',
-                period: '6 ay',
+                period: '6 ${AppLocalizations.of(context)!.months}',
                 originalPrice: '\$60.00',
                 isPopular: true,
                 productId: InAppPurchaseService.premiumSixMonthId,
@@ -390,9 +391,9 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> with TickerProv
               const SizedBox(height: 8),
               _buildPricingCard(
                 index: 2,
-                title: 'Yıllık',
+                title: AppLocalizations.of(context)!.yearly,
                 price: '\$90.00',
-                period: 'yıl',
+                period: AppLocalizations.of(context)!.year,
                 originalPrice: '\$120.00',
                 isPopular: false,
                 productId: InAppPurchaseService.premiumYearlyId,
@@ -481,9 +482,9 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> with TickerProv
                             color: Colors.orange,
                             borderRadius: BorderRadius.circular(8),
                           ),
-                          child: const Text(
-                            'POPÜLER',
-                            style: TextStyle(
+                          child: Text(
+                            AppLocalizations.of(context)!.popular,
+                            style: const TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
                               fontSize: 9,
@@ -542,8 +543,8 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> with TickerProv
                   border: Border.all(color: Colors.green.withOpacity(0.5)),
                 ),
                 child: Text(
-                  '2 ay ücretsiz',
-                  style: TextStyle(
+                  AppLocalizations.of(context)!.twoMonthsFree,
+                  style: const TextStyle(
                     color: Colors.green,
                     fontSize: 10,
                     fontWeight: FontWeight.bold,
@@ -558,18 +559,18 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> with TickerProv
   
   Widget _buildFeaturesSection(bool isTablet) {
     final features = [
-      {'icon': Icons.all_inclusive, 'title': 'Tüm Sorulara Erişim', 'subtitle': 'Tüm kategorilerde sınırsız erişim'},
-      {'icon': Icons.quiz, 'title': 'Sınırsız Quiz Tekrarı', 'subtitle': 'İstediğiniz kadar quiz çözebilirsiniz'},
-      {'icon': Icons.visibility, 'title': 'Detaylı Açıklamalar', 'subtitle': 'Her sorunun detaylı açıklamasını görün'},
-      {'icon': Icons.error_outline, 'title': 'Yanlış Soruları Görüntüle', 'subtitle': 'Yaptığınız yanlış soruları tekrar çözün'},
-      {'icon': Icons.assignment_turned_in, 'title': 'Eksiklerinizi Çalışın', 'subtitle': 'Zayıf olduğunuz konulara odaklanın'},
+      {'icon': Icons.all_inclusive, 'title': AppLocalizations.of(context)!.accessAllQuestions, 'subtitle': AppLocalizations.of(context)!.unlimitedAccessAllCategories},
+      {'icon': Icons.quiz, 'title': AppLocalizations.of(context)!.unlimitedQuiz, 'subtitle': AppLocalizations.of(context)!.solveAsManyQuizzes},
+      {'icon': Icons.visibility, 'title': AppLocalizations.of(context)!.detailedExplanations, 'subtitle': AppLocalizations.of(context)!.seeDetailedExplanation},
+      {'icon': Icons.error_outline, 'title': AppLocalizations.of(context)!.viewWrongQuestions, 'subtitle': AppLocalizations.of(context)!.retakeWrongQuestions},
+      {'icon': Icons.assignment_turned_in, 'title': AppLocalizations.of(context)!.workOnDeficiencies, 'subtitle': AppLocalizations.of(context)!.focusOnWeakTopics},
     ];
     
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Premium Özellikler',
+          AppLocalizations.of(context)!.premiumFeatures,
           style: TextStyle(
             fontSize: isTablet ? 18 : 16,
             fontWeight: FontWeight.bold,
@@ -740,7 +741,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> with TickerProv
                       const Icon(Icons.star, color: Colors.black, size: 20),
                       const SizedBox(width: 8),
                       Text(
-                        'Premium\'a Başla',
+                        AppLocalizations.of(context)!.startPremium,
                         style: TextStyle(
                           fontSize: isTablet ? 16 : 15,
                           fontWeight: FontWeight.bold,
@@ -770,22 +771,22 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> with TickerProv
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.security, color: Colors.green, size: 16),
+                  const Icon(Icons.security, color: Colors.green, size: 16),
                   const SizedBox(width: 8),
                   Text(
-                    'Güvenli Ödeme',
-                    style: TextStyle(
+                    AppLocalizations.of(context)!.securePayment,
+                    style: const TextStyle(
                       fontSize: 12,
                       color: Colors.white70,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
                   const SizedBox(width: 24),
-                  Icon(Icons.refresh, color: Colors.blue, size: 16),
+                  const Icon(Icons.refresh, color: Colors.blue, size: 16),
                   const SizedBox(width: 8),
                   Text(
-                    'İlk 2 soru ücretsiz',
-                    style: TextStyle(
+                    AppLocalizations.of(context)!.freeQuestionsTrial,
+                    style: const TextStyle(
                       fontSize: 12,
                       color: Colors.white70,
                       fontWeight: FontWeight.w500,
@@ -795,7 +796,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> with TickerProv
               ),
               const SizedBox(height: 8),
               Text(
-                'İstediğiniz zaman iptal edebilirsiniz',
+                AppLocalizations.of(context)!.cancelAnytimeSubtitle,
                 style: TextStyle(
                   fontSize: 11,
                   color: Colors.white.withOpacity(0.6),
@@ -818,7 +819,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> with TickerProv
                 await _purchaseService.restorePurchases();
               },
               child: Text(
-                'Satın Almaları Geri Yükle',
+                AppLocalizations.of(context)!.restorePurchases,
                 style: TextStyle(
                   color: Colors.blue,
                   fontSize: isTablet ? 12 : 11,
@@ -829,7 +830,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> with TickerProv
             TextButton(
               onPressed: () => _showTermsAndConditions(),
               child: Text(
-                'Şartlar ve Koşullar',
+                AppLocalizations.of(context)!.termsAndConditions,
                 style: TextStyle(
                   color: Colors.blue,
                   fontSize: isTablet ? 12 : 11,
@@ -876,10 +877,10 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> with TickerProv
             _isProcessingPurchase = false;
           });
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Ürün yüklenemedi. Lütfen internet bağlantınızı kontrol edip tekrar deneyin.'),
+            SnackBar(
+              content: Text(AppLocalizations.of(context)!.productLoadingError),
               backgroundColor: Colors.orange,
-              duration: Duration(seconds: 3),
+              duration: const Duration(seconds: 3),
             ),
           );
         }
@@ -904,10 +905,10 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> with TickerProv
             _isProcessingPurchase = false;
           });
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Satın alma işlemi başlatılamadı. Lütfen tekrar deneyin.'),
+            SnackBar(
+              content: Text(AppLocalizations.of(context)!.purchaseFailed),
               backgroundColor: Colors.orange,
-              duration: Duration(seconds: 2),
+              duration: const Duration(seconds: 2),
             ),
           );
         }
@@ -920,7 +921,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> with TickerProv
         });
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Bir hata oluştu. Lütfen tekrar deneyin.\n\nHata: ${e.toString()}'),
+            content: Text(AppLocalizations.of(context)!.errorOccurred(e.toString())),
             backgroundColor: Colors.red,
             duration: const Duration(seconds: 3),
           ),
@@ -934,20 +935,20 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> with TickerProv
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: const Color(0xFF1A237E),
-        title: const Text(
-          'Şartlar ve Koşullar',
-          style: TextStyle(color: Colors.white),
+        title: Text(
+          AppLocalizations.of(context)!.termsAndConditions,
+          style: const TextStyle(color: Colors.white),
         ),
-        content: const SingleChildScrollView(
+        content: SingleChildScrollView(
           child: Text(
-            'Bu uygulama içi satın alım hizmeti Apple App Store ve Google Play Store şartlarına tabidir. Satın alımlar iade edilemez. Premium özellikler aktif olduğu sürece kullanılabilir.',
-            style: TextStyle(color: Colors.white70),
+            AppLocalizations.of(context)!.termsContent,
+            style: const TextStyle(color: Colors.white70),
           ),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Tamam', style: TextStyle(color: Colors.cyan)),
+            child: Text(AppLocalizations.of(context)!.ok, style: const TextStyle(color: Colors.cyan)),
           ),
         ],
       ),

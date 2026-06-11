@@ -70,27 +70,28 @@ class _LoginScreenState extends State<LoginScreen>
     
     // Eğer error bir exception ise, string'e çevir ve kontrol et
     final errorString = error.toString().toLowerCase();
+    final localizations = AppLocalizations.of(context)!;
     
     if (errorString.contains('user-not-found')) {
-      return '❌ Bu e-posta adresi ile kayıtlı bir hesap bulunamadı.\n\n💡 Lütfen e-posta adresinizi kontrol edin veya yeni bir hesap oluşturun.';
+      return '❌ ${localizations.userNotFoundMessage}';
     } else if (errorString.contains('wrong-password')) {
-      return '❌ Girdiğiniz şifre hatalı.\n\n💡 Şifrenizi kontrol edin. Eğer şifrenizi unuttuysanız "Şifremi Unuttum" seçeneğini kullanabilirsiniz.';
+      return '❌ ${localizations.wrongPasswordMessage}';
     } else if (errorString.contains('invalid-credential')) {
-      return '❌ Geçersiz giriş bilgileri.\n\n💡 E-posta ve şifrenizi kontrol edip tekrar deneyin.';
+      return '❌ ${localizations.invalidCredentialMessage}';
     } else if (errorString.contains('too-many-requests')) {
-      return '❌ Çok fazla deneme yapıldı.\n\n💡 Bir süre bekleyin ve tekrar deneyin.';
+      return '❌ ${localizations.tooManyRequestsMessage}';
     } else if (errorString.contains('account-disabled') || errorString.contains('user-disabled')) {
-      return '❌ Bu hesap devre dışı bırakılmış.\n\n💡 Destek ekibi ile iletişime geçin.';
+      return '❌ ${localizations.accountDisabledMessage}';
     } else if (errorString.contains('network')) {
-      return '❌ İnternet Bağlantısı Sorunu\n\n💡 İnternet bağlantınızı kontrol edin ve tekrar deneyin.\n\nWi-Fi veya mobil verilerinizin açık olduğundan emin olun.';
+      return '❌ ${localizations.networkErrorMessage}';
     } else if (errorString.contains('server')) {
-      return '❌ Sunucu Hatası\n\n💡 Sunucuya bağlanılamıyor. Lütfen daha sonra tekrar deneyin.';
+      return '❌ ${localizations.serverErrorMessage}';
     } else if (errorString.contains('invalid-email')) {
-      return '❌ Geçersiz e-posta adresi formatı.\n\n💡 Lütfen geçerli bir e-posta adresi girin (örnek: kullanici@email.com)';
+      return '❌ ${localizations.invalidEmailFormatMessage}';
     } else if (errorString.contains('email-already-in-use')) {
-      return '❌ Bu e-posta adresi zaten başka bir hesap tarafından kullanılıyor.\n\n💡 Farklı bir e-posta adresi deneyin veya mevcut hesabınızla giriş yapın.';
+      return '❌ ${localizations.emailAlreadyInUseMessage}';
     } else {
-      return '❌ Giriş İşlemi Başarısız\n\n💡 Beklenmeyen bir hata oluştu. Lütfen:\n• E-posta ve şifrenizi kontrol edin\n• İnternet bağlantınızı kontrol edin\n• Birkaç dakika sonra tekrar deneyin\n\nSorun devam ederse destek ekibi ile iletişime geçin.';
+      return '❌ ${localizations.generalError}';
     }
   }
 
@@ -287,8 +288,8 @@ class _LoginScreenState extends State<LoginScreen>
                       ),
                       SizedBox(height: 8),
                       Text(
-                        '• E-posta kutunuzu kontrol edin\n• Spam/önemsiz klasörünü kontrol edin\n• E-postadaki linke tıklayın\n• Yeni şifrenizi belirleyin\n• Uygulamaya geri dönün',
-                        style: TextStyle(color: Colors.white70),
+                        AppLocalizations.of(context)!.resetPasswordInstructions,
+                        style: const TextStyle(color: Colors.white70),
                       ),
                     ],
                   ),
@@ -301,12 +302,12 @@ class _LoginScreenState extends State<LoginScreen>
                 style: TextButton.styleFrom(
                   backgroundColor: Colors.green,
                   foregroundColor: Colors.white,
-                  padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
                 ),
-                child: Text('Anladım', style: TextStyle(fontWeight: FontWeight.bold)),
+                child: Text(AppLocalizations.of(context)!.understood, style: const TextStyle(fontWeight: FontWeight.bold)),
               ),
             ],
           ),

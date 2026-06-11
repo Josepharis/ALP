@@ -280,4 +280,119 @@ exports.scheduledDailyNotification = functions.pubsub
         return null;
     });
 
+/**
+ * Her gün gece 02:00'de çalışan ve süresi dolmuş premium abonelikleri iptal eden zamanlanmış görev.
+ * Eski sürüm kullanıcıları için de purchases alt koleksiyonunu tarayarak geriye dönük doğrulama yapar.
+ */
+exports.cleanupExpiredSubscriptions = functions.pubsub
+    .schedule('0 2 * * *')
+    .timeZone('Europe/Istanbul')
+    .onRun(async (context) => {
+        const db = admin.firestore();
+        const usersSnapshot = await db.collection('users').where('isPremium', '==', true).get();
+        const now = new Date();
+        const batchLimit = 500;
+        let batch = db.batch();
+        let count = 0;
+
+        console.log(`[Subscription Cleanup] Found ${usersSnapshot.size} active premium users to check.`);
+
+        for (const userDoc of usersSnapshot.docs) {
+            const userId = userDoc.id;
+            const userData = userDoc.data();
+            let shouldRevoke = false;
+            let premiumEndDate = userData.premiumEndDate ? userData.premiumEndDate.toDate() : null;
+
+            if (premiumEndDate) {
+                // Tarih kontrolü yap
+                if (premiumEndDate < now) {
+                    shouldRevoke = true;
+                    console.log(`[Subscription Cleanup] User ${userId} premium expired on ${premiumEndDate}.`);
+                }
+            } else {
+                // Eski sistem kullanıcıları: purchases alt koleksiyonunu sorgula
+                console.log(`[Subscription Cleanup] Legacy user ${userId} has no premiumEndDate. Checking purchases subcollection...`);
+                const purchasesSnapshot = await db.collection('users').doc(userId).collection('purchases').get();
+                
+                if (purchasesSnapshot.empty) {
+                    shouldRevoke = true;
+                    console.log(`[Subscription Cleanup] Legacy user ${userId} has no purchase records. Revoking premium.`);
+                } else {
+                    let latestEndDate = null;
+                    let latestPremiumType = 'monthly';
+
+                    purchasesSnapshot.forEach(purchaseDoc => {
+                        const pData = purchaseDoc.data();
+                        const productId = pData.productId || '';
+                        let transactionDateMs = null;
+                        
+                        if (pData.transactionDate) {
+                            transactionDateMs = parseInt(pData.transactionDate);
+                        } else if (pData.purchasedAt) {
+                            transactionDateMs = pData.purchasedAt.toMillis();
+                        }
+
+                        if (transactionDateMs) {
+                            const purchaseDate = new Date(transactionDateMs);
+                            let durationDays = 30; // Varsayılan 30 gün
+                            let type = 'monthly';
+                            
+                            if (productId.includes('6month') || productId.includes('sixmonth')) {
+                                durationDays = 180;
+                                type = 'sixmonth';
+                            } else if (productId.includes('year') || productId.includes('yearly')) {
+                                durationDays = 365;
+                                type = 'yearly';
+                            } else if (productId.includes('lifetime')) {
+                                durationDays = 99999; // Lifetime
+                                type = 'lifetime';
+                            }
+                            
+                            const endDate = new Date(purchaseDate.getTime() + durationDays * 24 * 60 * 60 * 1000);
+                            if (!latestEndDate || endDate > latestEndDate) {
+                                latestEndDate = endDate;
+                                latestPremiumType = type;
+                            }
+                        }
+                    });
+
+                    if (latestEndDate && latestEndDate < now) {
+                        shouldRevoke = true;
+                        console.log(`[Subscription Cleanup] Legacy user ${userId} calculated expiry date was ${latestEndDate} which is in the past. Revoking premium.`);
+                    } else if (latestEndDate) {
+                        // Eğer hala aktifse, yeni alanları veritabanına yazarak güncelle (Yeni sisteme geçir)
+                        batch.set(userDoc.ref, { 
+                            premiumEndDate: admin.firestore.Timestamp.fromDate(latestEndDate),
+                            premiumType: latestPremiumType
+                        }, { merge: true });
+                        console.log(`[Subscription Cleanup] Legacy user ${userId} migrated to new structure. Active until ${latestEndDate}.`);
+                    } else {
+                        shouldRevoke = true;
+                        console.log(`[Subscription Cleanup] Legacy user ${userId} has purchases but couldn't parse transaction dates. Revoking premium.`);
+                    }
+                }
+            }
+
+            if (shouldRevoke) {
+                batch.set(userDoc.ref, { 
+                    isPremium: false,
+                    premiumUpdatedAt: admin.firestore.FieldValue.serverTimestamp()
+                }, { merge: true });
+                count++;
+            }
+
+            if (count >= batchLimit) {
+                await batch.commit();
+                batch = db.batch();
+                count = 0;
+            }
+        }
+
+        if (count > 0) {
+            await batch.commit();
+        }
+        console.log(`[Subscription Cleanup] Daily check completed.`);
+        return null;
+    });
+
 

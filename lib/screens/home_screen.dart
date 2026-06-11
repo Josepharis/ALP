@@ -417,6 +417,17 @@ class _QuizListScreenState extends State<QuizListScreen> {
 
   // Tüm quiz kategorileri
   List<Map<String, dynamic>> _allQuizCategories = [];
+  Map<String, int> _globalQuestionCounts = {};
+
+  // Tüm kategorilerin gerçek soru sayılarını yükle
+  Future<void> _loadGlobalQuestionCounts() async {
+    final counts = await _quizService.getGlobalQuestionCounts();
+    if (mounted) {
+      setState(() {
+        _globalQuestionCounts = counts;
+      });
+    }
+  }
 
   // Quiz kategorilerini yükle
   void _loadQuizCategories() {
@@ -428,6 +439,7 @@ class _QuizListScreenState extends State<QuizListScreen> {
   void initState() {
     super.initState();
     _loadQuizCategories();
+    _loadGlobalQuestionCounts();
     _loadOngoingQuizzes();
     _loadCompletedQuizzes();
     
@@ -484,8 +496,9 @@ class _QuizListScreenState extends State<QuizListScreen> {
 
   // Quiz'in devam eden olup olmadığını kontrol et
   Quiz? _getOngoingQuiz(String categoryTitle) {
+    final trCategoryTitle = MultilingualQuestionService.getTurkishTitleFor(categoryTitle).toLowerCase();
     return _ongoingQuizzes.firstWhere(
-      (quiz) => quiz.name == categoryTitle,
+      (quiz) => MultilingualQuestionService.getTurkishTitleFor(quiz.name).toLowerCase() == trCategoryTitle,
       orElse: () => Quiz(
         id: '',
         name: '',
@@ -496,14 +509,16 @@ class _QuizListScreenState extends State<QuizListScreen> {
 
   // Quiz'in tamamlanıp tamamlanmadığını kontrol et
   bool _isQuizCompleted(String categoryTitle) {
-    return _completedQuizzes.any((quiz) => quiz.name == categoryTitle);
+    final trCategoryTitle = MultilingualQuestionService.getTurkishTitleFor(categoryTitle).toLowerCase();
+    return _completedQuizzes.any((quiz) => MultilingualQuestionService.getTurkishTitleFor(quiz.name).toLowerCase() == trCategoryTitle);
   }
 
   // Quiz'in tekrar çözülmeye başlanıp başlanmadığını kontrol et
   bool _isQuizRetaking(String categoryTitle) {
     // Hem tamamlanmış hem de devam eden quizlerde varsa tekrar çözülüyor demektir
-    final isCompleted = _completedQuizzes.any((quiz) => quiz.name == categoryTitle);
-    final isOngoing = _ongoingQuizzes.any((quiz) => quiz.name == categoryTitle);
+    final trCategoryTitle = MultilingualQuestionService.getTurkishTitleFor(categoryTitle).toLowerCase();
+    final isCompleted = _completedQuizzes.any((quiz) => MultilingualQuestionService.getTurkishTitleFor(quiz.name).toLowerCase() == trCategoryTitle);
+    final isOngoing = _ongoingQuizzes.any((quiz) => MultilingualQuestionService.getTurkishTitleFor(quiz.name).toLowerCase() == trCategoryTitle);
     return isCompleted && isOngoing;
   }
 
@@ -649,8 +664,28 @@ class _QuizListScreenState extends State<QuizListScreen> {
       itemBuilder: (context, index) {
         final category = _filteredQuizCategories[index];
         final questions = category['questions'] as List<dynamic>;
-        final questionCount =
-            questions is List<Question> ? questions.length : 0;
+        final String categoryTitle = category['title'] as String;
+        
+        // Gerçek global soru sayısını kontrol et, yoksa lokal sayıyı kullan
+        int questionCount = questions is List<Question> ? questions.length : 0;
+        
+        // Kategori adını standardize edip eşleştir
+        final dbTitle = MultilingualQuestionService.getTurkishTitleFor(categoryTitle);
+        final normalizedTitle = dbTitle.toLowerCase().replaceAll(' (english)', '').trim();
+        for (final entry in _globalQuestionCounts.entries) {
+          final mappedDbKey = MultilingualQuestionService.getTurkishTitleFor(entry.key);
+          final dbName = mappedDbKey.toLowerCase().replaceAll(' (english)', '').trim();
+          if (dbName == normalizedTitle || 
+              dbName.contains(normalizedTitle) || 
+              normalizedTitle.contains(dbName) ||
+              (dbName.contains('anestezi uygulama') && normalizedTitle.contains('anestezi uygulama')) ||
+              (dbName.contains('anestezi istasyon') && normalizedTitle.contains('anestezi istasyon')) ||
+              (dbName.contains('monitoring') && normalizedTitle.contains('monitörizasyon')) ||
+              (dbName.contains('monitörizasyon') && normalizedTitle.contains('monitoring'))) {
+            questionCount = entry.value;
+            break;
+          }
+        }
         
         // Bu kategoride devam eden quiz var mı kontrol et
         final ongoingQuiz = _getOngoingQuiz(category['title'] as String);
@@ -667,48 +702,31 @@ class _QuizListScreenState extends State<QuizListScreen> {
           child: GestureDetector(
             onTap: () {
               if (isRetaking && ongoingQuiz != null) {
-                // Tekrar çözülmeye başlanan quiz varsa, mevcut ilerlemeyle devam et
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => QuizScreen(
-                      categoryName: category['title'] as String,
-                      questions: category['questions'] as List<Question>,
-                      initialQuestionIndex: ongoingQuiz.currentQuestionIndex ?? 0,
-                      initialScore: ongoingQuiz.score ?? 0,
-                      quizId: ongoingQuiz.id,
-                    ),
-                  ),
+                _startQuiz(
+                  categoryName: category['title'] as String,
+                  localQuestions: category['questions'] as List<Question>,
+                  initialQuestionIndex: ongoingQuiz.currentQuestionIndex ?? 0,
+                  initialScore: ongoingQuiz.score ?? 0,
+                  quizId: ongoingQuiz.id,
                 );
               } else if (isCompleted) {
-                // Tamamlanan quiz için tekrar çöz
-                _retakeQuiz(category['title'] as String, category['questions'] as List<Question>);
+                _startQuiz(
+                  categoryName: category['title'] as String,
+                  localQuestions: category['questions'] as List<Question>,
+                  isRetakeFlow: true,
+                );
               } else if (isOngoing && ongoingQuiz != null) {
-                // Devam eden quiz varsa, mevcut ilerlemeyle devam et
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => QuizScreen(
-                      categoryName: category['title'] as String,
-                      questions: category['questions'] as List<Question>,
-                      initialQuestionIndex: ongoingQuiz.currentQuestionIndex ?? 0,
-                      initialScore: ongoingQuiz.score ?? 0,
-                      quizId: ongoingQuiz.id,
-                    ),
-                  ),
+                _startQuiz(
+                  categoryName: category['title'] as String,
+                  localQuestions: category['questions'] as List<Question>,
+                  initialQuestionIndex: ongoingQuiz.currentQuestionIndex ?? 0,
+                  initialScore: ongoingQuiz.score ?? 0,
+                  quizId: ongoingQuiz.id,
                 );
               } else {
-                // Yeni quiz başlat
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return QuizScreen(
-                        categoryName: category['title'] as String,
-                        questions: category['questions'] as List<Question>,
-                      );
-                    },
-                  ),
+                _startQuiz(
+                  categoryName: category['title'] as String,
+                  localQuestions: category['questions'] as List<Question>,
                 );
               }
             },
@@ -786,7 +804,7 @@ class _QuizListScreenState extends State<QuizListScreen> {
                                             const SizedBox(height: 4),
                                             if (isRetaking && ongoingQuiz != null) ...[
                                               Text(
-                                                '${ongoingQuiz.currentQuestionIndex ?? 0}/${ongoingQuiz.totalQuestions} ${AppLocalizations.of(context)!.questions}',
+                                                '${ongoingQuiz.currentQuestionIndex ?? 0}/$questionCount ${AppLocalizations.of(context)!.questions}',
                                                 style: TextStyle(
                                                   fontSize: 11,
                                                   color: Colors.white.withOpacity(0.6),
@@ -803,7 +821,7 @@ class _QuizListScreenState extends State<QuizListScreen> {
                                                   ),
                                                   const SizedBox(width: 4),
                                                   Text(
-                                                    'Tamamlandı',
+                                                    AppLocalizations.of(context)!.completed,
                                                     style: TextStyle(
                                                       fontSize: 11,
                                                       color: Colors.green.shade300,
@@ -814,7 +832,7 @@ class _QuizListScreenState extends State<QuizListScreen> {
                                               ),
                                             ] else if (isOngoing && ongoingQuiz != null) ...[
                                               Text(
-                                                '${ongoingQuiz.currentQuestionIndex ?? 0}/${ongoingQuiz.totalQuestions} ${AppLocalizations.of(context)!.questions}',
+                                                '${ongoingQuiz.currentQuestionIndex ?? 0}/$questionCount ${AppLocalizations.of(context)!.questions}',
                                                 style: TextStyle(
                                                   fontSize: 11,
                                                   color: Colors.white.withOpacity(0.6),
@@ -853,10 +871,10 @@ class _QuizListScreenState extends State<QuizListScreen> {
                                           children: [
                                             Text(
                                               isRetaking 
-                                                  ? 'Devam Et'
+                                                  ? AppLocalizations.of(context)!.continueQuiz
                                                   : (isCompleted 
-                                                      ? 'Tekrar Et' 
-                                                      : (isOngoing ? 'Devam Et' : 'Başla')),
+                                                      ? AppLocalizations.of(context)!.retakeQuiz 
+                                                      : (isOngoing ? AppLocalizations.of(context)!.continueQuiz : AppLocalizations.of(context)!.startQuiz)),
                                               style: TextStyle(
                                                 color: _getReadableColor(category['color'] as Color),
                                                 fontWeight: FontWeight.bold,
@@ -899,18 +917,18 @@ class _QuizListScreenState extends State<QuizListScreen> {
                                 ),
                               ],
                             ),
-                            child: const Row(
+                            child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                Icon(
+                                const Icon(
                                   Icons.check_circle_outline_rounded,
                                   color: Colors.white,
                                   size: 10,
                                 ),
-                                SizedBox(width: 3),
+                                const SizedBox(width: 3),
                                 Text(
-                                  'Çözüldü',
-                                  style: TextStyle(
+                                  AppLocalizations.of(context)!.solved,
+                                  style: const TextStyle(
                                     color: Colors.white,
                                     fontSize: 8.5,
                                     fontWeight: FontWeight.bold,
@@ -932,61 +950,97 @@ class _QuizListScreenState extends State<QuizListScreen> {
     );
   }
 
-  // Tamamlanan quizi tekrar çözme işlevi
-  void _retakeQuiz(String categoryName, List<Question> questions) async {
+  // Soru yükleme ve quize başlama (Hibrit Sistem)
+  void _startQuiz({
+    required String categoryName,
+    required List<Question> localQuestions,
+    int initialQuestionIndex = 0,
+    int initialScore = 0,
+    String? quizId,
+    bool isRetakeFlow = false,
+  }) async {
+    // Yüklenme göstergesini göster
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => const Center(
+        child: CircularProgressIndicator(),
+      ),
+    );
+
     try {
-      // Eski sonucu al
-      final completedQuiz = _completedQuizzes.firstWhere(
-        (quiz) => quiz.name == categoryName,
-        orElse: () => Quiz(id: '', name: '', totalQuestions: 0),
-      );
+      final hybridQuestions = await _quizService.getHybridQuestions(categoryName, localQuestions);
       
-      final oldScore = completedQuiz.score ?? 0;
-      final oldTotalQuestions = completedQuiz.totalQuestions;
-      final oldSuccessRate = completedQuiz.successRate ?? 0;
-
-      // Quiz ID'sini oluştur (kategori adından)
-      final quizId = '${categoryName.toLowerCase().replaceAll(' ', '_')}_${DateTime.now().millisecondsSinceEpoch}';
-      
-      // Yeni quiz başlat (tekrar çözme için) - attemptCount ile birlikte
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => QuizScreen(
-            categoryName: categoryName,
-            questions: questions,
-            quizId: quizId,
-          ),
-        ),
-      ).then((result) async {
-        // Quiz tamamlandıktan sonra sonuçları karşılaştır
-        if (result != null && result is Map<String, dynamic>) {
-          final newScore = result['score'] ?? 0;
-          final newTotalQuestions = result['totalQuestions'] ?? 0;
-          final newSuccessRate = newTotalQuestions > 0 ? (newScore / newTotalQuestions) * 100 : 0;
-
-          // Sonuçları karşılaştır ve kullanıcıya bilgi ver
-          _showRetakeComparison(
-            categoryName,
-            oldScore,
-            oldTotalQuestions,
-            oldSuccessRate,
-            newScore,
-            newTotalQuestions,
-            newSuccessRate,
-          );
-        }
+      if (mounted) {
+        Navigator.of(context, rootNavigator: true).pop(); // Dialog'u kapat
         
-        // Verileri yenile
-        _loadOngoingQuizzes();
-        _loadCompletedQuizzes();
-      });
+        if (isRetakeFlow) {
+          final completedQuiz = _completedQuizzes.firstWhere(
+            (quiz) => MultilingualQuestionService.getTurkishTitleFor(quiz.name).toLowerCase() == 
+                      MultilingualQuestionService.getTurkishTitleFor(categoryName).toLowerCase(),
+            orElse: () => Quiz(id: '', name: '', totalQuestions: 0),
+          );
+          final oldScore = completedQuiz.score ?? 0;
+          final oldTotalQuestions = completedQuiz.totalQuestions;
+          final oldSuccessRate = completedQuiz.successRate ?? 0;
+          
+          final retakeQuizId = '${categoryName.toLowerCase().replaceAll(' ', '_')}_${DateTime.now().millisecondsSinceEpoch}';
+          
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => QuizScreen(
+                categoryName: categoryName,
+                questions: hybridQuestions,
+                quizId: retakeQuizId,
+              ),
+            ),
+          ).then((result) async {
+            if (result != null && result is Map<String, dynamic>) {
+              final newScore = result['score'] ?? 0;
+              final newTotalQuestions = result['totalQuestions'] ?? 0;
+              final newSuccessRate = newTotalQuestions > 0 ? (newScore / newTotalQuestions) * 100 : 0;
+
+              _showRetakeComparison(
+                categoryName,
+                oldScore,
+                oldTotalQuestions,
+                oldSuccessRate,
+                newScore,
+                newTotalQuestions,
+                newSuccessRate,
+              );
+            }
+            _loadOngoingQuizzes();
+            _loadCompletedQuizzes();
+          });
+        } else {
+          final finalQuizId = quizId ?? '${categoryName.toLowerCase().replaceAll(' ', '_')}_${DateTime.now().millisecondsSinceEpoch}';
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => QuizScreen(
+                categoryName: categoryName,
+                questions: hybridQuestions,
+                initialQuestionIndex: initialQuestionIndex,
+                initialScore: initialScore,
+                quizId: finalQuizId,
+              ),
+            ),
+          ).then((_) {
+            _loadOngoingQuizzes();
+            _loadCompletedQuizzes();
+          });
+        }
+      }
     } catch (e) {
-      // Quiz tekrar çözme hatası
-      SnackBarUtils.showErrorSnackBar(
-        context,
-        'Quiz tekrar çözülürken bir hata oluştu',
-      );
+      if (mounted) {
+        Navigator.of(context, rootNavigator: true).pop();
+        SnackBarUtils.showErrorSnackBar(
+          context,
+          'Soru yükleme hatası: $e',
+        );
+      }
     }
   }
 
@@ -1103,7 +1157,7 @@ class _QuizListScreenState extends State<QuizListScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    'Quiz Karşılaştırması',
+                                    AppLocalizations.of(context)!.quizComparison,
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 18,
@@ -1150,7 +1204,7 @@ class _QuizListScreenState extends State<QuizListScreen> {
                               child: Column(
                                 children: [
                                   Text(
-                                    'Önceki',
+                                    AppLocalizations.of(context)!.previousScore,
                                     style: TextStyle(
                                       color: Colors.white.withOpacity(0.7),
                                       fontSize: 12,
@@ -1236,7 +1290,7 @@ class _QuizListScreenState extends State<QuizListScreen> {
                               child: Column(
                                 children: [
                                   Text(
-                                    'Yeni',
+                                    AppLocalizations.of(context)!.newScore,
                                     style: TextStyle(
                                       color: Colors.white.withOpacity(0.9),
                                       fontSize: 12,
@@ -1310,8 +1364,8 @@ class _QuizListScreenState extends State<QuizListScreen> {
                             Expanded(
                               child: Text(
                                 isImproved 
-                                  ? 'Harika! %${difference.toStringAsFixed(0)} daha iyi performans! 🎉'
-                                  : 'Sonuçlar benzer. Tekrar deneyebilirsiniz! 💪',
+                                  ? AppLocalizations.of(context)!.improvementMessage(difference.toStringAsFixed(0))
+                                  : AppLocalizations.of(context)!.similarityMessage,
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 14,
@@ -1344,7 +1398,7 @@ class _QuizListScreenState extends State<QuizListScreen> {
                             elevation: 0,
                           ),
                           child: Text(
-                            'Tamam',
+                            AppLocalizations.of(context)!.ok,
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w600,
@@ -2785,11 +2839,43 @@ class _HomeContentState extends State<HomeContent> {
     return colors[index % colors.length];
   }
 
-  // Quiz'e devam etme işlevi
+  // Quiz'e devam etme işlevi (Hibrit Sistem)
   void _continueQuiz(Quiz quiz) async {
     try {
-      // Gerçek soruları almak için veritabanında quiz kategorisini ara
-      final questions = await _quizService.getCategoryQuestions(quiz.name, context: context);
+      // 1. Önce local soruları al (dil bazlı)
+      final languageService = Provider.of<LanguageService>(context, listen: false);
+      final categories = MultilingualQuestionService.getQuizCategories(languageService.currentLocale.languageCode);
+      
+      List<Question> localQuestions = [];
+      for (var category in categories) {
+        final title = category['title'] as String;
+        if (MultilingualQuestionService.getTurkishTitleFor(title).toLowerCase() == 
+            MultilingualQuestionService.getTurkishTitleFor(quiz.name).toLowerCase()) {
+          localQuestions = List<Question>.from(category['questions']);
+          break;
+        }
+      }
+      
+      // Fallback
+      if (localQuestions.isEmpty) {
+        localQuestions = await _quizService.getCategoryQuestions(quiz.name, context: context);
+      }
+
+      // Yükleme göstergesi
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) => const Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+
+      // 2. Hibrit soruları yükle
+      final questions = await _quizService.getHybridQuestions(quiz.name, localQuestions);
+
+      if (mounted) {
+        Navigator.of(context, rootNavigator: true).pop(); // Yüklemeyi kapat
+      }
 
       if (questions.isNotEmpty) {
         // Kaldığı noktadan başlat
@@ -2817,6 +2903,9 @@ class _HomeContentState extends State<HomeContent> {
         );
       }
     } catch (e) {
+      if (mounted) {
+        Navigator.of(context, rootNavigator: true).pop();
+      }
       SnackBarUtils.showErrorSnackBar(
         context,
         'Quiz devam ederken bir hata oluştu: ${e.toString()}',

@@ -67,68 +67,36 @@ class AdminService {
       final oneWeekAgo = now.subtract(const Duration(days: 7));
       final oneDayAgo = now.subtract(const Duration(days: 1));
 
-      // Toplam kullanıcı sayısı
-      final totalUsersSnapshot = await _firestore.collection('users').get();
-      final totalUsers = totalUsersSnapshot.docs.length;
+      // Tüm sayımları paralel olarak gerçekleştirelim (Aggregate queries)
+      final results = await Future.wait([
+        _firestore.collection('users').count().get(),
+        _firestore.collection('users').where('createdAt', isGreaterThan: oneWeekAgo).count().get(),
+        _firestore.collection('userActivities').where('lastLoginAt', isGreaterThan: oneDayAgo).count().get(),
+        _firestore.collection('users').where('lastLoginAt', isGreaterThan: oneDayAgo).count().get(),
+        _firestore.collection('quiz_attempts').count().get(),
+        _firestore.collection('user_completed_quizzes').count().get(),
+        _firestore.collection('user_ongoing_quizzes').count().get(),
+        _firestore.collection('quiz_attempts').where('date', isGreaterThan: oneWeekAgo).count().get(),
+        _firestore.collection('user_completed_quizzes').where('completedAt', isGreaterThan: oneWeekAgo).count().get(),
+      ]);
 
-      // Son 7 günde kayıt olan kullanıcılar
-      final newUsersSnapshot =
-          await _firestore
-              .collection('users')
-              .where('createdAt', isGreaterThan: oneWeekAgo)
-              .get();
-      final newUsersLastWeek = newUsersSnapshot.docs.length;
+      final totalUsers = results[0].count ?? 0;
+      final newUsersLastWeek = results[1].count ?? 0;
+      
+      final activeUsersFromActivities = results[2].count ?? 0;
+      final activeUsersFromUsers = results[3].count ?? 0;
+      final activeUsersToday = activeUsersFromActivities > activeUsersFromUsers 
+          ? activeUsersFromActivities 
+          : activeUsersFromUsers;
 
-      // Son 24 saatte aktif kullanıcılar - hem users hem userActivities'den kontrol et
-      final activeUsersFromActivitiesSnapshot =
-          await _firestore
-              .collection('userActivities')
-              .where('lastLoginAt', isGreaterThan: oneDayAgo)
-              .get();
+      final quizAttempts = results[4].count ?? 0;
+      final userCompletedQuizzes = results[5].count ?? 0;
+      final userOngoingQuizzes = results[6].count ?? 0;
+      final totalQuizzes = quizAttempts + userCompletedQuizzes + userOngoingQuizzes;
 
-      final activeUsersFromUsersSnapshot =
-          await _firestore
-              .collection('users')
-              .where('lastLoginAt', isGreaterThan: oneDayAgo)
-              .get();
-
-      // İki sonuçtan daha yüksek olanı al
-      final activeUsersToday = [
-        activeUsersFromActivitiesSnapshot.docs.length,
-        activeUsersFromUsersSnapshot.docs.length,
-      ].reduce((a, b) => a > b ? a : b);
-
-      // Quiz istatistikleri - farklı collection'lardan topla
-      final quizAttemptsSnapshot =
-          await _firestore.collection('quiz_attempts').get();
-      final userCompletedQuizzesSnapshot =
-          await _firestore.collection('user_completed_quizzes').get();
-      final userOngoingQuizzesSnapshot =
-          await _firestore.collection('user_ongoing_quizzes').get();
-
-      // Toplam quiz sayısı - tüm kaynaklardan
-      final totalQuizzes =
-          quizAttemptsSnapshot.docs.length +
-          userCompletedQuizzesSnapshot.docs.length +
-          userOngoingQuizzesSnapshot.docs.length;
-
-      // Son 7 günde yapılan quizler
-      final recentQuizAttemptsSnapshot =
-          await _firestore
-              .collection('quiz_attempts')
-              .where('date', isGreaterThan: oneWeekAgo)
-              .get();
-
-      final recentCompletedQuizzesSnapshot =
-          await _firestore
-              .collection('user_completed_quizzes')
-              .where('completedAt', isGreaterThan: oneWeekAgo)
-              .get();
-
-      final recentQuizzes =
-          recentQuizAttemptsSnapshot.docs.length +
-          recentCompletedQuizzesSnapshot.docs.length;
-
+      final recentQuizAttempts = results[7].count ?? 0;
+      final recentCompletedQuizzes = results[8].count ?? 0;
+      final recentQuizzes = recentQuizAttempts + recentCompletedQuizzes;
 
       return {
         'totalUsers': totalUsers,
@@ -138,6 +106,7 @@ class AdminService {
         'recentQuizzes': recentQuizzes,
       };
     } catch (e) {
+      debugPrint('Error in getUserStatistics: $e');
       return {
         'totalUsers': 0,
         'newUsersLastWeek': 0,
@@ -223,6 +192,17 @@ class AdminService {
     }
   }
 
+  // Son değişiklik zamanını güncelleyen yardımcı metod
+  Future<void> updateQuestionsVersion() async {
+    try {
+      await _firestore.collection('systemSettings').doc('questionsVersion').set({
+        'version': FieldValue.serverTimestamp(),
+      }, SetOptions(merge: true));
+    } catch (e) {
+      debugPrint('Error updating questions version: $e');
+    }
+  }
+
   // Soru ekle
   Future<bool> addQuestion(Map<String, dynamic> questionData) async {
     try {
@@ -231,6 +211,7 @@ class AdminService {
         'createdAt': FieldValue.serverTimestamp(),
         'createdBy': _auth.currentUser?.uid,
       });
+      await updateQuestionsVersion();
       return true;
     } catch (e) {
       return false;
@@ -248,6 +229,7 @@ class AdminService {
         'updatedAt': FieldValue.serverTimestamp(),
         'updatedBy': _auth.currentUser?.uid,
       });
+      await updateQuestionsVersion();
       return true;
     } catch (e) {
       return false;
@@ -258,6 +240,7 @@ class AdminService {
   Future<bool> deleteQuestion(String questionId) async {
     try {
       await _firestore.collection('questions').doc(questionId).delete();
+      await updateQuestionsVersion();
       return true;
     } catch (e) {
       return false;
@@ -283,38 +266,25 @@ class AdminService {
         organizedQuestions += questionCount;
       }
 
-      // Sonra eski questions collection'ından istatistikleri al
-      final legacyQuestionsSnapshot =
-          await _firestore.collection('questions').get();
-      int legacyQuestions = legacyQuestionsSnapshot.docs.length;
-      Map<String, int> legacyQuestionsByCategory = {};
-
-      for (var doc in legacyQuestionsSnapshot.docs) {
-        final category = doc.data()['category'] as String? ?? 'Diğer';
-        legacyQuestionsByCategory[category] =
-            (legacyQuestionsByCategory[category] ?? 0) + 1;
-      }
+      // Sonra eski questions collection'ından istatistikleri count() ile hızlıca al
+      final legacyCountSnapshot =
+          await _firestore.collection('questions').count().get();
+      int legacyQuestions = legacyCountSnapshot.count ?? 0;
 
       // Toplam hesaplamalar
       final totalQuestions = organizedQuestions + legacyQuestions;
-      final totalCategories =
-          organizedCategories + legacyQuestionsByCategory.length;
-
-      // Kategorileri birleştir
-      final Map<String, int> allQuestionsByCategory = {};
-      allQuestionsByCategory.addAll(organizedQuestionsByCategory);
-      allQuestionsByCategory.addAll(legacyQuestionsByCategory);
-
+      final totalCategories = organizedCategories;
 
       return {
         'totalQuestions': totalQuestions,
         'totalCategories': totalCategories,
         'organizedQuestions': organizedQuestions,
         'legacyQuestions': legacyQuestions,
-        'questionsByCategory': allQuestionsByCategory,
+        'questionsByCategory': organizedQuestionsByCategory,
         'organizedCategories': organizedCategories,
       };
     } catch (e) {
+      debugPrint('Error in getQuizStatistics: $e');
       return {
         'totalQuestions': 0,
         'totalCategories': 0,
@@ -354,10 +324,13 @@ class AdminService {
       }
 
       // Mükerrer kayıtları temizle ama AKILLICA:
-      // Eğer bir işlem hem "Purchased" hem "Restore" olarak varsa, "Purchased" olanı tutalım ki kazanç görünsün.
+      // Eğer aynı işlem hem "Purchased" hem "Restore" olarak varsa, "Purchased" olanı tutalım ki kazanç görünsün.
       final Map<String, Map<String, dynamic>> filteredMap = {};
       for (var r in allRecords) {
-        final key = '${r['userId']}_${r['productId']}';
+        final purchaseId = r['purchaseId']?.toString() ?? '';
+        final key = purchaseId.isNotEmpty && purchaseId != '0'
+            ? purchaseId
+            : (r['id'] ?? r['uniqueId'] ?? '');
         final isNewRestored = r['isRestored'] == true;
         
         if (!filteredMap.containsKey(key)) {
@@ -386,11 +359,11 @@ class AdminService {
 
       final purchases = filteredMap.values.toList();
 
-      // Fetch user names for filtered list
+      // Fetch user names for filtered list in parallel
       final uniqueUserIds = purchases.map((p) => p['userId'] as String).where((uid) => uid.isNotEmpty).toSet();
       final userNames = <String, String>{};
       
-      for (final uid in uniqueUserIds) {
+      await Future.wait(uniqueUserIds.map((uid) async {
         try {
           final userDoc = await _firestore.collection('users').doc(uid).get();
           if (userDoc.exists) {
@@ -401,7 +374,7 @@ class AdminService {
         } catch (e) {
           userNames[uid] = 'Hata: $uid';
         }
-      }
+      }));
 
       // Add user names to purchases list
       for (var p in purchases) {

@@ -37,15 +37,40 @@ class _PdfViewerScreenState extends State<PdfViewerScreen> {
   }
 
   Future<String> _getDownloadUrlForSubject(int index) async {
-    final possiblePaths = [
-      'konu anlatımı/$index',
-      'konu nalatımı/$index', // Typo fallback
-      'konu_anlatimi/$index',
-      'konu anlatimi/$index',
-      'Konu Anlatımları/$index',
-      'Konu Anlatımı/$index',
-      'konu anlatimlari/$index',
-    ];
+    String languageCode = 'tr';
+    try {
+      languageCode = Localizations.localeOf(context).languageCode;
+    } catch (_) {}
+    final isEnglish = languageCode == 'en';
+
+    final possiblePaths = isEnglish
+        ? [
+            'konu anlatımı ingilizce/$index',
+            'konu anlatimi ingilizce/$index',
+            'konu_anlatimi_ingilizce/$index',
+            'Konu Anlatımı İngilizce/$index',
+            'Konu Anlatımı Ingilizce/$index',
+            'Konu Anlatimi Ingilizce/$index',
+            'English Lecture Notes/$index',
+            'english lecture notes/$index',
+            'english_lecture_notes/$index',
+            'konu anlatımı/$index',
+            'konu nalatımı/$index',
+            'konu_anlatimi/$index',
+            'konu anlatimi/$index',
+            'Konu Anlatımları/$index',
+            'Konu Anlatımı/$index',
+            'konu anlatimlari/$index',
+          ]
+        : [
+            'konu anlatımı/$index',
+            'konu nalatımı/$index', // Typo fallback
+            'konu_anlatimi/$index',
+            'konu anlatimi/$index',
+            'Konu Anlatımları/$index',
+            'Konu Anlatımı/$index',
+            'konu anlatimlari/$index',
+          ];
 
     for (final path in possiblePaths) {
       try {
@@ -64,16 +89,39 @@ class _PdfViewerScreenState extends State<PdfViewerScreen> {
       }
     }
 
-    final fallbackPaths = [
-      'konu anlatımı/$index/$index.pdf',
-      'konu anlatımı/$index.pdf',
-      'konu nalatımı/$index/$index.pdf',
-      'konu nalatımı/$index.pdf',
-      'konu_anlatimi/$index/$index.pdf',
-      'konu_anlatimi/$index.pdf',
-      'Konu Anlatımları/$index/$index.pdf',
-      'Konu Anlatımı/$index/$index.pdf',
-    ];
+    final fallbackPaths = isEnglish
+        ? [
+            'konu anlatımı ingilizce/$index/$index.pdf',
+            'konu anlatımı ingilizce/$index.pdf',
+            'konu anlatimi ingilizce/$index/$index.pdf',
+            'konu anlatimi ingilizce/$index.pdf',
+            'konu_anlatimi_ingilizce/$index/$index.pdf',
+            'konu_anlatimi_ingilizce/$index.pdf',
+            'English Lecture Notes/$index/$index.pdf',
+            'English Lecture Notes/$index.pdf',
+            'english lecture notes/$index/$index.pdf',
+            'english lecture notes/$index.pdf',
+            'english_lecture_notes/$index/$index.pdf',
+            'english_lecture_notes/$index.pdf',
+            'konu anlatımı/$index/$index.pdf',
+            'konu anlatımı/$index.pdf',
+            'konu nalatımı/$index/$index.pdf',
+            'konu nalatımı/$index.pdf',
+            'konu_anlatimi/$index/$index.pdf',
+            'konu_anlatimi/$index.pdf',
+            'Konu Anlatımları/$index/$index.pdf',
+            'Konu Anlatımı/$index/$index.pdf',
+          ]
+        : [
+            'konu anlatımı/$index/$index.pdf',
+            'konu anlatımı/$index.pdf',
+            'konu nalatımı/$index/$index.pdf',
+            'konu nalatımı/$index.pdf',
+            'konu_anlatimi/$index/$index.pdf',
+            'konu_anlatimi/$index.pdf',
+            'Konu Anlatımları/$index/$index.pdf',
+            'Konu Anlatımı/$index/$index.pdf',
+          ];
 
     for (final filePath in fallbackPaths) {
       try {

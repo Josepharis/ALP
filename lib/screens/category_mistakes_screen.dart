@@ -327,9 +327,9 @@ class _CategoryMistakesScreenState extends State<CategoryMistakesScreen> {
                             ),
                           ),
                           const SizedBox(height: 24),
-                          const Text(
-                            'Seçenekler:',
-                            style: TextStyle(
+                          Text(
+                            AppLocalizations.of(context)!.optionsLabel,
+                            style: const TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
                               color: Colors.white70,
@@ -405,9 +405,9 @@ class _CategoryMistakesScreenState extends State<CategoryMistakesScreen> {
                           if (question.explanation != null &&
                               question.explanation!.isNotEmpty) ...[
                             const SizedBox(height: 24),
-                            const Text(
-                              'Açıklama:',
-                              style: TextStyle(
+                            Text(
+                              AppLocalizations.of(context)!.explanationLabel,
+                              style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white70,
@@ -518,7 +518,7 @@ class _CategoryMistakesScreenState extends State<CategoryMistakesScreen> {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: const Text('Soru eksiklerden kaldırıldı'),
+              content: Text(AppLocalizations.of(context)!.questionRemovedFromMistakes),
               backgroundColor: Colors.green.shade600,
               duration: const Duration(seconds: 2),
             ),
@@ -529,7 +529,7 @@ class _CategoryMistakesScreenState extends State<CategoryMistakesScreen> {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: const Text('Soru kaldırılırken hata oluştu'),
+              content: Text(AppLocalizations.of(context)!.questionRemoveError),
               backgroundColor: Colors.red.shade600,
               duration: const Duration(seconds: 2),
             ),
@@ -540,7 +540,7 @@ class _CategoryMistakesScreenState extends State<CategoryMistakesScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: const Text('Soru kaldırılırken hata oluştu'),
+            content: Text(AppLocalizations.of(context)!.questionRemoveError),
             backgroundColor: Colors.red.shade600,
             duration: const Duration(seconds: 2),
           ),
